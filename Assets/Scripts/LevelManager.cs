@@ -1,72 +1,97 @@
+using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using System.IO;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
     public enum ObjectTypes { Box }
-    
+
     // Basic //
+    [HideInInspector] public static LevelManager Instance;
     private Grid levelGrid;
     private Tilemap tilemapCollideable;
     private Tilemap tilemapObjects;
     private TileBase basicTile;
-    private TileBase boxTile;
+    private GameTile boxTile;
 
     // Level data //
-    private List<TileBase> levelObjects;
+    private List<GameTile> levelObjects = new();
 
-    void Start()
+    void Awake()
     {
+        // Singleton
+        if (!Instance) { Instance = this; }
+        else { Destroy(gameObject); return; }
+
         // Getting grids and tilemap references
         Transform gridObject = transform.Find("Level Grid");
         levelGrid = gridObject.GetComponent<Grid>();
         tilemapCollideable = gridObject.Find("Collideable").GetComponent<Tilemap>();
         tilemapObjects = gridObject.Find("Objects").GetComponent<Tilemap>();
 
-
         // Getting tile references
         basicTile = Resources.Load<TileBase>("Tiles/Default");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
-        Debug.Log(basicTile.name);
 
-        // Set default tile at 0,0 (testing)
+
+        // TESTING
         tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
-        Debug.Log(tilemapObjects.GetTile<BoxTile>(new Vector3Int(5, -5, 0)).GetTileType());
 
-        // SaveLevel("test");
+        GameTile tile1 = Instantiate(boxTile);
+        GameTile tile2 = Instantiate(boxTile);
+
+        // Tile 1 (5, -5)
+        tile1.position = new Vector3Int(5, -5, 0);
+        tilemapObjects.SetTile(tile1.position, tile1);
+        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile1.position));
+
+        // Tile 2 (5, -7)
+        tile2.position = new Vector3Int(5, -7, 0);
+        tilemapObjects.SetTile(tile2.position, tile2);
+        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile2.position));
+
+        SaveLevel("test");
     }
 
-    public void SaveLevel(string level)
+    public void AddToObjectList(GameTile tile) { levelObjects.Add(tile); }
+
+    // Saves a level to the game's persistent path
+    private void SaveLevel(string level)
     {
         // Default status
         // var data = JsonUtility.FromJson(Resources.Load<TextAsset>("MainData").text);
         var test = new { a = "a", b = 1 };
+        Debug.Log($"{test.a}, {test.b}, {test.GetType()}");
         File.WriteAllText($"{Application.persistentDataPath}/{level}.level", JsonUtility.ToJson(test));
     }
 
     // Load and build a level
-    public void LoadLevel(string level)
+    private void LoadLevel(string level)
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
         Debug.LogWarning(Resources.Load($"Levels/{level}").name);
     }
 
     // Moves a tile (or multiple)
-    public bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition)
+    protected bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition)
     {
         if (CheckObjectCollision(ObjectTypes.Box, newPosition)) return false; // Migrate ObjectType later
 
         // Moves the tile if all collision checks pass
-        tilemapObjects.SetTile(newPosition, tilemapObjects.GetTile(startingPosition));
+        GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
+        tilemapObjects.SetTile(newPosition, tile);
         tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
+
+        // Updates new current position of the tile
+        tile.position = newPosition;
         return true;
     }
 
     // Checks colissions between collideables and objects
-    public bool CheckObjectCollision(ObjectTypes objectType, Vector3Int checkPosition)
+    protected bool CheckObjectCollision(ObjectTypes objectType, Vector3Int checkPosition)
     {
         // Get the collissions
         bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
@@ -82,11 +107,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnMove(InputValue ctx)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MoveTile(new Vector3Int(0, 0, 0), new Vector3Int(1, 0, 0));
-        }
+        Vector2Int movement = Vector2Int.RoundToInt(ctx.Get<Vector2>());
+        if (movement == Vector2Int.zero) return;
+
+        // 
+        levelObjects.ForEach(
+            tile =>
+                MoveTile(tile.position, tile.position + (Vector3Int)movement)
+            );
     }
 }
