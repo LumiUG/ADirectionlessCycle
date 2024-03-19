@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class LevelManager : MonoBehaviour
 
     // Level data //
     private List<GameTile> levelObjects = new();
+    private List<GameTile> movementBlacklist = new();
 
     // Player //
     private bool canMove = true;
@@ -45,6 +47,7 @@ public class LevelManager : MonoBehaviour
 
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
+        GameTile tile3 = Instantiate(boxTile);
 
         // Tile 1 (5, -5)
         tile1.position = new Vector3Int(5, -5, 0);
@@ -55,6 +58,11 @@ public class LevelManager : MonoBehaviour
         tile2.position = new Vector3Int(5, -7, 0);
         tilemapObjects.SetTile(tile2.position, tile2);
         levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile2.position));
+
+        // Tile 3 (5, -8)
+        tile3.position = new Vector3Int(5, -8, 0);
+        tilemapObjects.SetTile(tile3.position, tile3);
+        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile3.position));
 
         SaveLevel("test");
     }
@@ -79,17 +87,22 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile (or multiple)
-    protected bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction)
+    protected bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
     {
         if (CheckObjectCollision(ObjectTypes.Box, newPosition, direction)) return false; // Migrate ObjectType later
 
         // Moves the tile if all collision checks pass
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
+        if (tile == null) return false;
+
         tilemapObjects.SetTile(newPosition, tile);
         tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
 
         // Updates new current position of the tile
         tile.position = newPosition;
+
+        // Removes from movement queue
+        if (removeFromQueue) { movementBlacklist.Add(tile); }
         return true;
     }
 
@@ -103,9 +116,9 @@ public class LevelManager : MonoBehaviour
         // Different collision handler for all objects
         switch (objectType)
         {
-            case ObjectTypes.Box: // Check for other objects infront! Recursion!
+            case ObjectTypes.Box: // Check for other objects infront! Recursion! (wont work with other mechanics)
                 if (collideableCollision) return true;
-                else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction);
+                else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
                 return false;
             default:
                 return false;
@@ -119,7 +132,13 @@ public class LevelManager : MonoBehaviour
 
         // Moves all boxes in a direction
         if (!canMove) return;
-        levelObjects.ForEach(tile => MoveTile(tile.position, tile.position + (Vector3Int)movement, (Vector3Int)movement));
+
+        movementBlacklist.Clear();
+        levelObjects.ForEach(tile => {
+            if (!movementBlacklist.Contains(tile))
+                MoveTile(tile.position, tile.position + (Vector3Int)movement, (Vector3Int)movement, true);
+            }
+        );
         canMove = false;
     }
 }
