@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
     // Level data //
     private List<GameTile> levelObjects = new();
 
+    // Player //
+    private bool canMove = true;
+
     void Awake()
     {
         // Singleton
@@ -110,12 +113,11 @@ public class LevelManager : MonoBehaviour
     private void OnMove(InputValue ctx)
     {
         Vector2Int movement = Vector2Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector2Int.zero) return;
+        if (movement == Vector2Int.zero) { canMove = true; return; };
 
-        // 
-        levelObjects.ForEach(
-            tile =>
-                MoveTile(tile.position, tile.position + (Vector3Int)movement)
-            );
+        // Moves all boxes in a direction
+        if (!canMove) return;
+        levelObjects.ForEach(tile =>MoveTile(tile.position, tile.position + (Vector3Int)movement));
+        canMove = false;
     }
 }
