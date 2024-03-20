@@ -90,6 +90,15 @@ public class LevelManager : MonoBehaviour
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
 
+        // up: (0, 1, 0)
+        // down: (0, -1, 0)
+        // left: (-1, 0, 0)
+        // right: (1, 0, 0)
+        if (direction.y > 0 && !tile.directions.up ||
+            direction.y < 0 && !tile.directions.down ||
+            direction.x < 0 && !tile.directions.left ||
+            direction.x > 0 && !tile.directions.right) return false;
+
         // Moves the tile if all collision checks pass
         if (CheckObjectCollision(GameTile.ObjectTypes.Box, newPosition, direction)) return false; // Migrate ObjectType later
         tilemapObjects.SetTile(newPosition, tile);
@@ -121,7 +130,6 @@ public class LevelManager : MonoBehaviour
                 return false;
         }
     }
-
 
     // Player Input //
     private void OnMove(InputValue ctx)
