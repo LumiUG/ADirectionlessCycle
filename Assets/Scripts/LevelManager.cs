@@ -16,8 +16,8 @@ public class LevelManager : MonoBehaviour
     private GameTile boxTile;
 
     // Level data //
-    private List<GameTile> levelObjects = new();
-    private List<GameTile> movementBlacklist = new();
+    private readonly List<GameTile> levelObjects = new();
+    private readonly List<GameTile> movementBlacklist = new();
 
     // Player //
     private bool canMove = true;
@@ -60,10 +60,13 @@ public class LevelManager : MonoBehaviour
         tile3.position = new Vector3Int(5, -8, 0);
         tilemapObjects.SetTile(tile3.position, tile3);
         levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile3.position));
-
-        SaveLevel("test");
+        
+        // Probably unused forever, level saving and loading. //
+        // LoadLevel("test");
+        // SaveLevel("test");
     }
 
+    // Adds a tile to the private objects list
     public void AddToObjectList(GameTile tile) { levelObjects.Add(tile); }
 
     // Saves a level to the game's persistent path
@@ -122,7 +125,7 @@ public class LevelManager : MonoBehaviour
         // Different collision handler for all objects
         switch (objectType)
         {
-            case GameTile.ObjectTypes.Box: // Check for other objects infront! Recursion! (wont work with other mechanics)
+            case GameTile.ObjectTypes.Box: // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
                 if (collideableCollision) return true;
                 else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
                 return false;
