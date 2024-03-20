@@ -4,5 +4,5 @@ using UnityEngine;
 public class BoxTile : GameTile
 {
     // Returns the tile type
-    public override LevelManager.ObjectTypes GetTileType() { return LevelManager.ObjectTypes.Box; }
+    public override ObjectTypes GetTileType() { return ObjectTypes.Box; }
 }

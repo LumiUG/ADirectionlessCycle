@@ -4,12 +4,9 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
-    public enum ObjectTypes { Box }
-
     // Basic //
     [HideInInspector] public static LevelManager Instance;
     private Grid levelGrid;
@@ -89,12 +86,12 @@ public class LevelManager : MonoBehaviour
     // Moves a tile (or multiple)
     protected bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
     {
-        if (CheckObjectCollision(ObjectTypes.Box, newPosition, direction)) return false; // Migrate ObjectType later
+        // Check if the tile is allowed to move
+        GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
+        if (!tile) return false;
 
         // Moves the tile if all collision checks pass
-        GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
-        if (tile == null) return false;
-
+        if (CheckObjectCollision(GameTile.ObjectTypes.Box, newPosition, direction)) return false; // Migrate ObjectType later
         tilemapObjects.SetTile(newPosition, tile);
         tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
 
@@ -107,7 +104,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Checks colissions between collideables and objects
-    protected bool CheckObjectCollision(ObjectTypes objectType, Vector3Int checkPosition, Vector3Int direction)
+    protected bool CheckObjectCollision(GameTile.ObjectTypes objectType, Vector3Int checkPosition, Vector3Int direction)
     {
         // Get the collissions
         bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
@@ -116,7 +113,7 @@ public class LevelManager : MonoBehaviour
         // Different collision handler for all objects
         switch (objectType)
         {
-            case ObjectTypes.Box: // Check for other objects infront! Recursion! (wont work with other mechanics)
+            case GameTile.ObjectTypes.Box: // Check for other objects infront! Recursion! (wont work with other mechanics)
                 if (collideableCollision) return true;
                 else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
                 return false;
@@ -125,20 +122,21 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    // Player Input //
     private void OnMove(InputValue ctx)
     {
         Vector2Int movement = Vector2Int.RoundToInt(ctx.Get<Vector2>());
         if (movement == Vector2Int.zero) { canMove = true; return; };
+        if (!canMove) return;
+        canMove = false;
 
         // Moves all boxes in a direction
-        if (!canMove) return;
-
         movementBlacklist.Clear();
         levelObjects.ForEach(tile => {
             if (!movementBlacklist.Contains(tile))
                 MoveTile(tile.position, tile.position + (Vector3Int)movement, (Vector3Int)movement, true);
             }
         );
-        canMove = false;
     }
 }
