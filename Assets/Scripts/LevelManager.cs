@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
+using static GameTile;
 
 public class LevelManager : MonoBehaviour
 {
@@ -48,26 +49,28 @@ public class LevelManager : MonoBehaviour
 
         // Tile 1 (5, -5)
         tile1.position = new Vector3Int(5, -5, 0);
+        tile1.directions.SetNewDirections(true, true, false, false);
         tilemapObjects.SetTile(tile1.position, tile1);
-        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile1.position));
 
         // Tile 2 (5, -7)
         tile2.position = new Vector3Int(5, -7, 0);
         tilemapObjects.SetTile(tile2.position, tile2);
-        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile2.position));
 
         // Tile 3 (5, -8)
         tile3.position = new Vector3Int(5, -8, 0);
         tilemapObjects.SetTile(tile3.position, tile3);
-        levelObjects.Add(tilemapObjects.GetTile<GameTile>(tile3.position));
         
-        // Probably unused forever, level saving and loading. //
+        // Unused FOR NOW, level saving and loading. //
         // LoadLevel("test");
         // SaveLevel("test");
     }
 
     // Adds a tile to the private objects list
-    public void AddToObjectList(GameTile tile) { levelObjects.Add(tile); }
+    public void AddToObjectList(GameTile tile)
+    {
+        if (!levelObjects.Contains(tile) && tile.GetTileType() == ObjectTypes.Box)
+            levelObjects.Add(tile);
+    }
 
     // Saves a level to the game's persistent path
     private void SaveLevel(string level)

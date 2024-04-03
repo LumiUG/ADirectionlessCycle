@@ -1,4 +1,5 @@
 using System.Collections;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,9 +10,12 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Box }
+    public enum ObjectTypes { Box, Area }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
+
+    // Tile Privates //
+    private LevelManager LocalInstance;
 
     // Sets the default tile data
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
@@ -20,7 +24,18 @@ public abstract class GameTile : TileBase
         tileData.sprite = tileSprite;
         tileData.gameObject = tileObject;
 
+        // Get our own reference of LevelManager for couroutine purposes.
+        if (LevelManager.Instance) LevelManager.Instance.AddToObjectList(this);
+
+        // Debug.LogWarning(LevelManager.Instance);
+        //if (!LevelManager.Instance)
+        //{
+        //    LocalInstance = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        //    LocalInstance.StartCoroutine(NotifyLevelManager());
+        // }
+
         // Find object's custom properties references
+        if (!tileData.gameObject) return;
         directions.GetSpriteReferences(tileObject);
 
         // Updates the sprites for the first time
@@ -30,14 +45,13 @@ public abstract class GameTile : TileBase
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
 
-    // Adds itself to the level manager's level list (won't work)
+    // Adds itself to the level manager's level list (WILL work)
     private IEnumerator NotifyLevelManager()
     {
         while (!LevelManager.Instance) { yield return new WaitForSecondsRealtime(0.1f); }
 
         // Pings the level manager with its own object for addition to the object list.
         LevelManager.Instance.AddToObjectList(this);
-        Debug.Log("added");
     }
 
     // Tile's avaliable directions
@@ -60,10 +74,20 @@ public abstract class GameTile : TileBase
         // Constructors //
         public Directions(bool upMovement = true, bool downMovement = true, bool leftMovement = true, bool rightMovement = true)
         {
+            // We don't call for SetNewDirection's UpdateSprites as we have no references.
+            SetNewDirections(upMovement, downMovement, leftMovement, rightMovement);
+        }
+
+        // Sets new directions for the tile
+        public void SetNewDirections(bool upMovement = true, bool downMovement = true, bool leftMovement = true, bool rightMovement = true)
+        {
             up = upMovement;
             down = downMovement;
             left = leftMovement;
             right = rightMovement;
+
+            // Update sprites if at least one object reference is set
+            if (allDir) UpdateSprites();
         }
 
         // Returns if horizontal movement is available
@@ -75,6 +99,8 @@ public abstract class GameTile : TileBase
         // Sets private sprites
         public void GetSpriteReferences(GameObject parent)
         {
+            if (!parent) return;
+
             // directions.voided = tileObject.transform.Find("Voided").GetComponent<SpriteRenderer>();
             allDir = parent.transform.Find("AllDirection").GetComponent<SpriteRenderer>();
             upDir = parent.transform.Find("UpDirection").GetComponent<SpriteRenderer>();
