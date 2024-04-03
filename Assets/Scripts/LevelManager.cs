@@ -13,11 +13,14 @@ public class LevelManager : MonoBehaviour
     private Grid levelGrid;
     private Tilemap tilemapCollideable;
     private Tilemap tilemapObjects;
+    private Tilemap tilemapOverlaps;
     private TileBase basicTile;
     private GameTile boxTile;
+    private GameTile areaTile;
 
     // Level data //
     private readonly List<GameTile> levelObjects = new();
+    private readonly List<GameTile> levelAreas = new();
     private readonly List<GameTile> movementBlacklist = new();
 
     // Player //
@@ -34,18 +37,21 @@ public class LevelManager : MonoBehaviour
         levelGrid = gridObject.GetComponent<Grid>();
         tilemapCollideable = gridObject.Find("Collideable").GetComponent<Tilemap>();
         tilemapObjects = gridObject.Find("Objects").GetComponent<Tilemap>();
+        tilemapOverlaps = gridObject.Find("Overlaps").GetComponent<Tilemap>();
 
         // Getting tile references
         basicTile = Resources.Load<TileBase>("Tiles/Default");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
+        areaTile = Resources.Load<AreaTile>("Tiles/Area");
 
 
         // TESTING
-        tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
-
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
         GameTile tile3 = Instantiate(boxTile);
+
+        GameTile area1 = Instantiate(areaTile);
+        GameTile area2 = Instantiate(areaTile);
 
         // Tile 1 (5, -5)
         tile1.position = new Vector3Int(5, -5, 0);
@@ -59,7 +65,15 @@ public class LevelManager : MonoBehaviour
         // Tile 3 (5, -8)
         tile3.position = new Vector3Int(5, -8, 0);
         tilemapObjects.SetTile(tile3.position, tile3);
-        
+
+        // Area 1 (6, -6)
+        area1.position = new Vector3Int(6, -6, 0);
+        tilemapOverlaps.SetTile(area1.position, area1);
+
+        // Area 2 (7, -6)
+        area2.position = new Vector3Int(7, -6, 0);
+        tilemapOverlaps.SetTile(area2.position, area2);
+
         // Unused FOR NOW, level saving and loading. //
         // LoadLevel("test");
         // SaveLevel("test");
@@ -68,8 +82,15 @@ public class LevelManager : MonoBehaviour
     // Adds a tile to the private objects list
     public void AddToObjectList(GameTile tile)
     {
-        if (!levelObjects.Contains(tile) && tile.GetTileType() == ObjectTypes.Box)
-            levelObjects.Add(tile);
+        if (tile.GetTileType() != ObjectTypes.Box) return;
+        else if (!levelObjects.Contains(tile)) levelObjects.Add(tile);
+    }
+
+    // Adds a tile to the private areas list
+    public void AddToAreaList(GameTile tile)
+    {
+        if (tile.GetTileType() != ObjectTypes.Area) return;
+        else if (!levelAreas.Contains(tile)) levelAreas.Add(tile);
     }
 
     // Saves a level to the game's persistent path
@@ -106,7 +127,7 @@ public class LevelManager : MonoBehaviour
             direction.x > 0 && !tile.directions.right) return false;
 
         // Moves the tile if all collision checks pass
-        if (CheckObjectCollision(GameTile.ObjectTypes.Box, newPosition, direction)) return false; // Migrate ObjectType later
+        if (CheckObjectCollision(tile.GetTileType(), newPosition, direction)) return false;
         tilemapObjects.SetTile(newPosition, tile);
         tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
 
@@ -119,19 +140,21 @@ public class LevelManager : MonoBehaviour
     }
 
     // Checks colissions between collideables and objects
-    protected bool CheckObjectCollision(GameTile.ObjectTypes objectType, Vector3Int checkPosition, Vector3Int direction)
+    protected bool CheckObjectCollision(ObjectTypes objectType, Vector3Int checkPosition, Vector3Int direction)
     {
         // Get the collissions
+        GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
         bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
-        bool objectCollision = tilemapObjects.GetTile(checkPosition) != null;
+        bool objectCollision = objectCollidedWith != null;
 
         // Different collision handler for all objects
         switch (objectType)
         {
-            case GameTile.ObjectTypes.Box: // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
-                if (collideableCollision) return true;
+            case ObjectTypes.Box: // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
+                if (collideableCollision || (objectCollision && !objectCollidedWith.canBePushed)) return true;
                 else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
                 return false;
+
             default:
                 return false;
         }
@@ -152,5 +175,9 @@ public class LevelManager : MonoBehaviour
                 MoveTile(tile.position, tile.position + (Vector3Int)movement, (Vector3Int)movement, true);
             }
         );
+
+        // Areas check for overlaps
+        if (levelAreas.All(area => { return tilemapObjects.GetTile<GameTile>(area.position) != null; }))
+            Debug.LogWarning("Win!");
     }
 }

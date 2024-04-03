@@ -1,5 +1,3 @@
-using System.Collections;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,9 +11,7 @@ public abstract class GameTile : TileBase
     public enum ObjectTypes { Box, Area }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
-
-    // Tile Privates //
-    private LevelManager LocalInstance;
+    public bool canBePushed = true;
 
     // Sets the default tile data
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
@@ -24,15 +20,10 @@ public abstract class GameTile : TileBase
         tileData.sprite = tileSprite;
         tileData.gameObject = tileObject;
 
-        // Get our own reference of LevelManager for couroutine purposes.
-        if (LevelManager.Instance) LevelManager.Instance.AddToObjectList(this);
-
-        // Debug.LogWarning(LevelManager.Instance);
-        //if (!LevelManager.Instance)
-        //{
-        //    LocalInstance = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        //    LocalInstance.StartCoroutine(NotifyLevelManager());
-        // }
+        // Adds itself to the level manager's level objects/areas/etc list
+        if (!LevelManager.Instance) return;
+        LevelManager.Instance.AddToObjectList(this);
+        LevelManager.Instance.AddToAreaList(this);
 
         // Find object's custom properties references
         if (!tileData.gameObject) return;
@@ -44,15 +35,6 @@ public abstract class GameTile : TileBase
 
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
-
-    // Adds itself to the level manager's level list (WILL work)
-    private IEnumerator NotifyLevelManager()
-    {
-        while (!LevelManager.Instance) { yield return new WaitForSecondsRealtime(0.1f); }
-
-        // Pings the level manager with its own object for addition to the object list.
-        LevelManager.Instance.AddToObjectList(this);
-    }
 
     // Tile's avaliable directions
     public class Directions
