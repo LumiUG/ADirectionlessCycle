@@ -10,6 +10,9 @@ public class LevelManager : MonoBehaviour
 {
     // Basic //
     [HideInInspector] public static LevelManager Instance;
+    public int boundsX = 19;
+    public int boundsY = -11;
+
     private Grid levelGrid;
     private Tilemap tilemapCollideable;
     private Tilemap tilemapObjects;
@@ -117,6 +120,9 @@ public class LevelManager : MonoBehaviour
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
 
+        // Scene bounds (x,y always at 0)
+        if (newPosition.x < 0 || newPosition.x > boundsX || newPosition.y > 0 || newPosition.y < boundsY) return false;
+ 
         // up: (0, 1, 0)
         // down: (0, -1, 0)
         // left: (-1, 0, 0)
@@ -125,6 +131,7 @@ public class LevelManager : MonoBehaviour
             direction.y < 0 && !tile.directions.down ||
             direction.x < 0 && !tile.directions.left ||
             direction.x > 0 && !tile.directions.right) return false;
+
 
         // Moves the tile if all collision checks pass
         if (CheckObjectCollision(tile.GetTileType(), newPosition, direction)) return false;
