@@ -35,11 +35,14 @@ public abstract class GameTile : TileBase
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
 
+    // Checks colisions between collideables and objects
+    public abstract bool CollisionHandler(GameTile tile, Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable);
+
     // Tile's avaliable directions
     public class Directions
     {
         // Tile values //
-        public bool pushable = true;
+        public bool pushable = true; // Slight bugs with this property!
         public bool up;
         public bool down;
         public bool left;

@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
     private Tilemap tilemapOverlaps;
     private TileBase basicTile;
     private GameTile boxTile;
+    private GameTile circleTile;
     private GameTile areaTile;
 
     // Level data //
@@ -45,6 +46,7 @@ public class LevelManager : MonoBehaviour
         // Getting tile references
         basicTile = Resources.Load<TileBase>("Tiles/Default");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
+        circleTile = Resources.Load<CircleTile>("Tiles/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
 
 
@@ -54,6 +56,8 @@ public class LevelManager : MonoBehaviour
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
         GameTile tile3 = Instantiate(boxTile);
+
+        GameTile circle1 = Instantiate(circleTile);
 
         GameTile area1 = Instantiate(areaTile);
         GameTile area2 = Instantiate(areaTile);
@@ -72,6 +76,10 @@ public class LevelManager : MonoBehaviour
         tile3.position = new Vector3Int(5, -8, 0);
         tilemapObjects.SetTile(tile3.position, tile3);
 
+        // Circle 1 (6, -2)
+        circle1.position = new Vector3Int(6, -2, 0);
+        tilemapObjects.SetTile(circle1.position, circle1);
+
         // Area 1 (6, -6)
         area1.position = new Vector3Int(6, -6, 0);
         tilemapOverlaps.SetTile(area1.position, area1);
@@ -88,7 +96,7 @@ public class LevelManager : MonoBehaviour
     // Adds a tile to the private objects list
     public void AddToObjectList(GameTile tile)
     {
-        if (tile.GetTileType() != ObjectTypes.Box) return;
+        if (tile.GetTileType() == ObjectTypes.Area) return;
         else if (!levelObjects.Contains(tile)) levelObjects.Add(tile);
     }
 
@@ -117,7 +125,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile (or multiple)
-    protected bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
+    public bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
     {
         // Check if the tile is allowed to move
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
@@ -137,7 +145,7 @@ public class LevelManager : MonoBehaviour
 
 
         // Moves the tile if all collision checks pass
-        if (CheckObjectCollision(tile.GetTileType(), newPosition, direction)) return false;
+        if (tile.CollisionHandler(tile, newPosition, direction, tilemapObjects, tilemapCollideable)) return false;
         tilemapObjects.SetTile(newPosition, tile);
         tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
 
@@ -149,32 +157,11 @@ public class LevelManager : MonoBehaviour
         return true;
     }
 
-    // Checks colissions between collideables and objects
-    protected bool CheckObjectCollision(ObjectTypes objectType, Vector3Int checkPosition, Vector3Int direction)
-    {
-        // Get the collissions
-        GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
-        bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
-        bool objectCollision = objectCollidedWith != null;
-
-        // Different collision handler for all objects
-        switch (objectType)
-        {
-            case ObjectTypes.Box: // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
-                if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return true;
-                else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
-                return false;
-
-            default:
-                return false;
-        }
-    }
-
     // Player Input //
     private void OnMove(InputValue ctx)
     {
-        Vector2Int movement = Vector2Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector2Int.zero) { canMove = true; return; };
+        Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
+        if (movement == Vector3Int.zero) { canMove = true; return; };
         if (!canMove) return;
         canMove = false;
 
@@ -182,7 +169,7 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         levelObjects.ForEach(tile => {
             if (!movementBlacklist.Contains(tile))
-                MoveTile(tile.position, tile.position + (Vector3Int)movement, (Vector3Int)movement, true);
+                MoveTile(tile.position, tile.position + movement, movement, true);
             }
         );
 
