@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton
+        // Singleton (LevelManager has no persistence)
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
 
@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
         tilemapObjects.SetTile(tile1.position, tile1);
 
         // Tile 2 (5, -7)
+        tile2.directions.pushable = false;
         tile2.position = new Vector3Int(5, -7, 0);
         tilemapObjects.SetTile(tile2.position, tile2);
 
@@ -160,7 +161,7 @@ public class LevelManager : MonoBehaviour
         switch (objectType)
         {
             case ObjectTypes.Box: // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
-                if (collideableCollision || (objectCollision && !objectCollidedWith.canBePushed)) return true;
+                if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return true;
                 else if (objectCollision) return !MoveTile(checkPosition, checkPosition + direction, direction, true);
                 return false;
 

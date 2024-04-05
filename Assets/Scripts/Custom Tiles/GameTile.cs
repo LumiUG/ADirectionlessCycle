@@ -8,10 +8,9 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Box, Area }
+    public enum ObjectTypes { Box, Area, Circle }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
-    public bool canBePushed = true;
 
     // Sets the default tile data
     public override void GetTileData(Vector3Int location, ITilemap tilemap, ref TileData tileData)
@@ -40,6 +39,7 @@ public abstract class GameTile : TileBase
     public class Directions
     {
         // Tile values //
+        public bool pushable = true;
         public bool up;
         public bool down;
         public bool left;
@@ -47,6 +47,7 @@ public abstract class GameTile : TileBase
 
         // Direction tile sprite references //
         private SpriteRenderer voided;
+        private SpriteRenderer pushableSprite;
         private SpriteRenderer allDir;
         private SpriteRenderer upDir;
         private SpriteRenderer downDir;
@@ -85,6 +86,7 @@ public abstract class GameTile : TileBase
 
             // directions.voided = tileObject.transform.Find("Voided").GetComponent<SpriteRenderer>();
             allDir = parent.transform.Find("AllDirection").GetComponent<SpriteRenderer>();
+            // directions.pushableSprite = tileObject.transform.Find("Pushable").GetComponent<SpriteRenderer>();
             upDir = parent.transform.Find("UpDirection").GetComponent<SpriteRenderer>();
             downDir = parent.transform.Find("DownDirection").GetComponent<SpriteRenderer>();
             leftDir = parent.transform.Find("LeftDirection").GetComponent<SpriteRenderer>();
@@ -96,6 +98,7 @@ public abstract class GameTile : TileBase
         {
             // voided.gameObject.SetActive(!(up && down && left && right));
             allDir.gameObject.SetActive(up && down && left && right);
+            // voided.gameObject.SetActive(canBePushed);
             upDir.gameObject.SetActive(up && !(up && down && left && right));
             downDir.gameObject.SetActive(down && !(up && down && left && right));
             leftDir.gameObject.SetActive(left && !(up && down && left && right));
