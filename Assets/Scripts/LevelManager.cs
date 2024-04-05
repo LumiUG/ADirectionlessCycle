@@ -49,6 +49,8 @@ public class LevelManager : MonoBehaviour
 
 
         // TESTING
+        tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
+
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
         GameTile tile3 = Instantiate(boxTile);
