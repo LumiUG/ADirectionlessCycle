@@ -5,7 +5,6 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
 using static GameTile;
-using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class LevelManager : MonoBehaviour
     private Tilemap tilemapOverlaps;
     private TileBase basicTile;
     private GameTile boxTile;
+    private GameTile hexahedronTile;
     private GameTile circleTile;
     private GameTile areaTile;
 
@@ -47,16 +47,19 @@ public class LevelManager : MonoBehaviour
         // Getting tile references
         basicTile = Resources.Load<TileBase>("Tiles/Default");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
+        hexahedronTile = Resources.Load<HexahedronTile>("Tiles/Hexahedron");
         circleTile = Resources.Load<CircleTile>("Tiles/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
 
 
         // TESTING
-        // tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
+        tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
 
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
         GameTile tile3 = Instantiate(boxTile);
+
+        GameTile hex1 = Instantiate(hexahedronTile);
 
         GameTile circle1 = Instantiate(circleTile);
 
@@ -65,7 +68,6 @@ public class LevelManager : MonoBehaviour
 
         // Tile 1 (5, -5)
         tile1.position = new Vector3Int(5, -5, 0);
-        tile1.directions.SetNewDirections(true, true, false, false);
         tilemapObjects.SetTile(tile1.position, tile1);
 
         // Tile 2 (5, -7)
@@ -76,6 +78,11 @@ public class LevelManager : MonoBehaviour
         // Tile 3 (5, -8)
         tile3.position = new Vector3Int(5, -8, 0);
         tilemapObjects.SetTile(tile3.position, tile3);
+
+        // Hex 1 (8, -2)
+        hex1.position = new Vector3Int(8, -2, 0);
+        hex1.directions.SetNewDirections(true, true, false, false);
+        tilemapObjects.SetTile(hex1.position, hex1);
 
         // Circle 1 (6, -2)
         circle1.position = new Vector3Int(6, -2, 0);

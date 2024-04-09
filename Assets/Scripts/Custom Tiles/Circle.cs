@@ -10,16 +10,14 @@ public class CircleTile : GameTile
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
     {
-        // Get the collissions
+        // Collision checks
         bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
         bool objectCollision = tilemapObjects.GetTile<GameTile>(checkPosition) != null;
 
-        // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
-        if (collideableCollision || objectCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition))
-        { 
-            return checkPosition - direction;
-        }
+        // Check if the position is valid, if not, return the same tile you're at
+        if (collideableCollision || objectCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition)) return checkPosition - direction;
 
+        // Find next jump spot. Recursion...
         return CollisionHandler(checkPosition + direction, direction, tilemapObjects, tilemapCollideable);
     }
 }

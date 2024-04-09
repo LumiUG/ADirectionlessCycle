@@ -8,7 +8,7 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Box, Area, Circle }
+    public enum ObjectTypes { Box, Area, Circle, Hexahedron }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
 
@@ -35,8 +35,21 @@ public abstract class GameTile : TileBase
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
 
-    // Checks colisions between collideables and objects
-    public abstract Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable);
+    // DEFAULT // Checks colisions between collideables and objects // DEFAULT //
+    public virtual Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
+    {
+        // Get the collissions
+        GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
+        bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
+        bool objectCollision = objectCollidedWith != null;
+
+        // Checks if it is able to move
+        if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return Vector3Int.back;
+
+        // "Pushes" objects infront. Recursion!
+        else if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
+        return checkPosition;
+    }
 
     // Tile's avaliable directions
     public class Directions
