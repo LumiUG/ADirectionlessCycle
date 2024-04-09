@@ -164,7 +164,7 @@ public class LevelManager : MonoBehaviour
         return true;
     }
 
-    // Just moves a tile, no other cases
+    // Moves a tile, no other cases
     public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
     {
         // Sets the new tile and removes the old one
@@ -172,6 +172,7 @@ public class LevelManager : MonoBehaviour
         tilemapObjects.SetTile(startingPos, null);
     }
 
+    // Returns if a position is inside or outside the level bounds
     public bool CheckSceneInbounds(Vector3Int position)
     {
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
@@ -185,11 +186,13 @@ public class LevelManager : MonoBehaviour
         if (!canMove) return;
         canMove = false;
 
-        // Moves all boxes in a direction
+        // Moves all tiles in a direction
         movementBlacklist.Clear();
-        levelObjects.ForEach(tile => {
-            if (!movementBlacklist.Contains(tile))
-                TryMove(tile.position, tile.position + movement, movement, true);
+        
+        levelObjects.ForEach(
+            tile => {
+                if (!movementBlacklist.Contains(tile))
+                    TryMove(tile.position, tile.position + movement, movement, true);
             }
         );
 
