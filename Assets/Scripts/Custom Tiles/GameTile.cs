@@ -36,7 +36,7 @@ public abstract class GameTile : TileBase
     public abstract ObjectTypes GetTileType();
 
     // Checks colisions between collideables and objects
-    public abstract bool CollisionHandler(GameTile tile, Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable);
+    public abstract Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable);
 
     // Tile's avaliable directions
     public class Directions

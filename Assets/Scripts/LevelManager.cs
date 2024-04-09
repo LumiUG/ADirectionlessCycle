@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
 using static GameTile;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -51,7 +52,7 @@ public class LevelManager : MonoBehaviour
 
 
         // TESTING
-        tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
+        // tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
 
         GameTile tile1 = Instantiate(boxTile);
         GameTile tile2 = Instantiate(boxTile);
@@ -125,15 +126,15 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile (or multiple)
-    public bool MoveTile(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
+    public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
     {
         // Check if the tile is allowed to move
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
 
         // Scene bounds (x,y always at 0)
-        if (newPosition.x < 0 || newPosition.x > boundsX || newPosition.y > 0 || newPosition.y < boundsY) return false;
- 
+        if (!CheckSceneInbounds(newPosition)) return false;
+
         // up: (0, 1, 0)
         // down: (0, -1, 0)
         // left: (-1, 0, 0)
@@ -143,11 +144,10 @@ public class LevelManager : MonoBehaviour
             direction.x < 0 && !tile.directions.left ||
             direction.x > 0 && !tile.directions.right) return false;
 
-
         // Moves the tile if all collision checks pass
-        if (tile.CollisionHandler(tile, newPosition, direction, tilemapObjects, tilemapCollideable)) return false;
-        tilemapObjects.SetTile(newPosition, tile);
-        tilemapObjects.SetTile(startingPosition, null); // Deletes the old tile
+        newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable);
+        if (newPosition == Vector3.back || newPosition == startingPosition) return false;
+        MoveTile(startingPosition, newPosition, tile);
 
         // Updates new current position of the tile
         tile.position = newPosition;
@@ -155,6 +155,19 @@ public class LevelManager : MonoBehaviour
         // Removes from movement queue
         if (removeFromQueue) { movementBlacklist.Add(tile); }
         return true;
+    }
+
+    // Just moves a tile, no other cases
+    public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
+    {
+        // Sets the new tile and removes the old one
+        tilemapObjects.SetTile(newPos, tile);
+        tilemapObjects.SetTile(startingPos, null);
+    }
+
+    public bool CheckSceneInbounds(Vector3Int position)
+    {
+        return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
 
     // Player Input //
@@ -169,7 +182,7 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         levelObjects.ForEach(tile => {
             if (!movementBlacklist.Contains(tile))
-                MoveTile(tile.position, tile.position + movement, movement, true);
+                TryMove(tile.position, tile.position + movement, movement, true);
             }
         );
 

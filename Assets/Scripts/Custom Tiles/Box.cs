@@ -8,7 +8,7 @@ public class BoxTile : GameTile
     public override ObjectTypes GetTileType() { return ObjectTypes.Box; }
 
     // Checks colisions between collideables and objects
-    public override bool CollisionHandler(GameTile tile, Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
+    public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
     {
         // Get the collissions
         GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
@@ -16,8 +16,8 @@ public class BoxTile : GameTile
         bool objectCollision = objectCollidedWith != null;
 
         // Check for other objects infront! Recursion! (needs changes to work with other mechanics)
-        if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return true;
-        else if (objectCollision) return !LevelManager.Instance.MoveTile(checkPosition, checkPosition + direction, direction, true);
-        return false;
+        if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return Vector3Int.back;
+        else if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
+        return checkPosition;
     }
 }

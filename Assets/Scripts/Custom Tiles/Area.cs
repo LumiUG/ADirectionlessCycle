@@ -8,8 +8,8 @@ public class AreaTile : GameTile
     public override ObjectTypes GetTileType() { return ObjectTypes.Area; }
 
     // Checks colisions between collideables and objects
-    public override bool CollisionHandler(GameTile tile, Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
+    public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
     {
-        return false;
+        return Vector3Int.back;
     }
 }
