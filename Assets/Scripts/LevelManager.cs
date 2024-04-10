@@ -143,10 +143,7 @@ public class LevelManager : MonoBehaviour
         // Scene bounds (x,y always at 0)
         if (!CheckSceneInbounds(newPosition)) return false;
 
-        // up: (0, 1, 0)
-        // down: (0, -1, 0)
-        // left: (-1, 0, 0)
-        // right: (1, 0, 0)
+        // Checks if directions are null
         if (direction.y > 0 && !tile.directions.up ||
             direction.y < 0 && !tile.directions.down ||
             direction.x < 0 && !tile.directions.left ||
@@ -202,14 +199,17 @@ public class LevelManager : MonoBehaviour
     }
 
     // Player Input //
+
     // Movement
     private void OnMove(InputValue ctx)
     {
-        // Bad input logic
+        // Bad input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
         if (movement == Vector3Int.zero) { canMove = true; return; };
         if (!canMove) return;
 
+        // Checks if you can actually move in that direction
+        if (latestMovement == movement * -1) return;
         latestMovement = movement;
         canMove = false;
 
