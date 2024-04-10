@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
 
     // Player //
     private bool canMove = true;
+    private Vector3Int latestMovement = Vector3Int.zero;
 
     void Awake()
     {
@@ -178,26 +179,52 @@ public class LevelManager : MonoBehaviour
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
 
-    // Player Input //
-    private void OnMove(InputValue ctx)
+    // Applies gravity using a direction
+    private void ApplyGravity(Vector3Int movement)
     {
-        Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero) { canMove = true; return; };
-        if (!canMove) return;
-        canMove = false;
-
-        // Moves all tiles in a direction
+        // Clears blacklist
         movementBlacklist.Clear();
-        
+
+        // Moves every object
         levelObjects.ForEach(
             tile => {
                 if (!movementBlacklist.Contains(tile))
                     TryMove(tile.position, tile.position + movement, movement, true);
             }
         );
+    }
 
-        // Areas check for overlaps
+    // Checks if you've won
+    private void CheckCompletion()
+    {
         if (levelAreas.All(area => { return tilemapObjects.GetTile<GameTile>(area.position) != null; }))
             Debug.LogWarning("Win!");
+    }
+
+    // Player Input //
+    // Movement
+    private void OnMove(InputValue ctx)
+    {
+        // Bad input logic
+        Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
+        if (movement == Vector3Int.zero) { canMove = true; return; };
+        if (!canMove) return;
+
+        latestMovement = movement;
+        canMove = false;
+
+        // Moves tiles and checks for a win
+        ApplyGravity(movement);
+        CheckCompletion();
+    }
+
+    // Wait
+    private void OnWait()
+    {
+        if (latestMovement == Vector3Int.zero) return;
+
+        // Moves tiles using the user's latest movement
+        ApplyGravity(latestMovement);
+        CheckCompletion();
     }
 }
