@@ -32,6 +32,13 @@ public abstract class GameTile : TileBase
         directions.UpdateSprites();
     }
 
+    // Tile refreshing
+    // public override void RefreshTile(Vector3Int position, ITilemap tilemap)
+    // {
+    //     directions.UpdateSprites();
+    //     tilemap.RefreshTile(position);
+    // }
+
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
 

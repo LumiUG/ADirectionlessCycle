@@ -61,6 +61,8 @@ public class Directions
     // Updates direction sprites
     public void UpdateSprites()
     {
+        if (!allDir) return;
+
         // voided.gameObject.SetActive(!(up && down && left && right));
         allDir.gameObject.SetActive(up && down && left && right);
         // voided.gameObject.SetActive(canBePushed);

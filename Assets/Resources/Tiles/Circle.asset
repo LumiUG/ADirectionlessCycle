@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Circle
   m_EditorClassIdentifier: 
   tileSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  tileObject: {fileID: 0}
+  tileObject: {fileID: 7852494226514332356, guid: 65c7471d94d81e640aefc5d5af75f397, type: 3}
   position: {x: 0, y: 0, z: 0}

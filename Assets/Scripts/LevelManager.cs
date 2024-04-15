@@ -119,17 +119,14 @@ public class LevelManager : MonoBehaviour
     }
 
     // Saves a level to the game's persistent path
-    private void SaveLevel(string level)
+    public void SaveLevel(string levelName)
     {
-        // Default status
-        // var data = JsonUtility.FromJson(Resources.Load<TextAsset>("MainData").text);
-        var test = new { a = "a", b = 1 };
-        Debug.Log($"{test.a}, {test.b}, {test.GetType()}");
-        File.WriteAllText($"{Application.persistentDataPath}/{level}.level", JsonUtility.ToJson(test));
+        // Hell yeah.
+        File.WriteAllText($"{Application.persistentDataPath}/{levelName}.level", JsonUtility.ToJson(levelName));
     }
 
     // Load and build a level
-    private void LoadLevel(string level)
+    public void LoadLevel(string level)
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
         Debug.LogWarning(Resources.Load<TextAsset>($"Levels/{level}.json").text);
