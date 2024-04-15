@@ -4,24 +4,26 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static GameTile;
 
 public class LevelManager : MonoBehaviour
 {
     // Basic //
     [HideInInspector] public static LevelManager Instance;
+    [HideInInspector] public GameTile wallTile;
+    [HideInInspector] public GameTile boxTile;
+    [HideInInspector] public GameTile hexahedronTile;
+    [HideInInspector] public GameTile circleTile;
+    [HideInInspector] public GameTile areaTile;
     public int boundsX = 19;
     public int boundsY = -11;
 
+    // Grids and tilemaps //
     private Grid levelGrid;
-    private Tilemap tilemapCollideable;
-    private Tilemap tilemapObjects;
-    private Tilemap tilemapOverlaps;
-    private TileBase basicTile;
-    private GameTile boxTile;
-    private GameTile hexahedronTile;
-    private GameTile circleTile;
-    private GameTile areaTile;
+    [HideInInspector] public Tilemap tilemapCollideable;
+    [HideInInspector] public Tilemap tilemapObjects;
+    [HideInInspector] public Tilemap tilemapOverlaps;
 
     // Level data //
     private readonly List<GameTile> levelObjects = new();
@@ -46,7 +48,7 @@ public class LevelManager : MonoBehaviour
         tilemapOverlaps = gridObject.Find("Overlaps").GetComponent<Tilemap>();
 
         // Getting tile references
-        basicTile = Resources.Load<TileBase>("Tiles/Default");
+        wallTile = Resources.Load<WallTile>("Tiles/Wall");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
         hexahedronTile = Resources.Load<HexahedronTile>("Tiles/Hexahedron");
         circleTile = Resources.Load<CircleTile>("Tiles/Circle");
@@ -54,52 +56,52 @@ public class LevelManager : MonoBehaviour
 
 
         // TESTING
-        tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), basicTile);
+        // tilemapCollideable.SetTile(new Vector3Int(0, 0, 0), wallTile);
 
-        GameTile tile1 = Instantiate(boxTile);
-        GameTile tile2 = Instantiate(boxTile);
-        GameTile tile3 = Instantiate(boxTile);
+        // GameTile tile1 = Instantiate(boxTile);
+        // GameTile tile2 = Instantiate(boxTile);
+        // GameTile tile3 = Instantiate(boxTile);
 
-        GameTile hex1 = Instantiate(hexahedronTile);
+        // GameTile hex1 = Instantiate(hexahedronTile);
 
-        GameTile circle1 = Instantiate(circleTile);
+        // GameTile circle1 = Instantiate(circleTile);
 
-        GameTile area1 = Instantiate(areaTile);
-        GameTile area2 = Instantiate(areaTile);
+        // GameTile area1 = Instantiate(areaTile);
+        // GameTile area2 = Instantiate(areaTile);
 
-        // Tile 1 (5, -5)
-        tile1.position = new Vector3Int(5, -5, 0);
-        tilemapObjects.SetTile(tile1.position, tile1);
+        // // Tile 1 (5, -5)
+        // tile1.position = new Vector3Int(5, -5, 0);
+        // tilemapObjects.SetTile(tile1.position, tile1);
 
-        // Tile 2 (5, -7)
-        tile2.directions.pushable = false;
-        tile2.position = new Vector3Int(5, -7, 0);
-        tilemapObjects.SetTile(tile2.position, tile2);
+        // // Tile 2 (5, -7)
+        // tile2.directions.pushable = false;
+        // tile2.position = new Vector3Int(5, -7, 0);
+        // tilemapObjects.SetTile(tile2.position, tile2);
 
-        // Tile 3 (5, -8)
-        tile3.position = new Vector3Int(5, -8, 0);
-        tilemapObjects.SetTile(tile3.position, tile3);
+        // // Tile 3 (5, -8)
+        // tile3.position = new Vector3Int(5, -8, 0);
+        // tilemapObjects.SetTile(tile3.position, tile3);
 
-        // Hex 1 (8, -2)
-        hex1.position = new Vector3Int(8, -2, 0);
-        hex1.directions.SetNewDirections(true, true, false, false);
-        tilemapObjects.SetTile(hex1.position, hex1);
+        // // Hex 1 (8, -2)
+        // hex1.position = new Vector3Int(8, -2, 0);
+        // hex1.directions.SetNewDirections(true, true, false, false);
+        // tilemapObjects.SetTile(hex1.position, hex1);
 
-        // Circle 1 (6, -2)
-        circle1.position = new Vector3Int(6, -2, 0);
-        tilemapObjects.SetTile(circle1.position, circle1);
+        // // Circle 1 (6, -2)
+        // circle1.position = new Vector3Int(6, -2, 0);
+        // tilemapObjects.SetTile(circle1.position, circle1);
 
-        // Area 1 (6, -6)
-        area1.position = new Vector3Int(6, -6, 0);
-        tilemapOverlaps.SetTile(area1.position, area1);
+        // // Area 1 (6, -6)
+        // area1.position = new Vector3Int(6, -6, 0);
+        // tilemapOverlaps.SetTile(area1.position, area1);
 
-        // Area 2 (7, -6)
-        area2.position = new Vector3Int(7, -6, 0);
-        tilemapOverlaps.SetTile(area2.position, area2);
+        // // Area 2 (7, -6)
+        // area2.position = new Vector3Int(7, -6, 0);
+        // tilemapOverlaps.SetTile(area2.position, area2);
 
-        // Unused FOR NOW, level saving and loading. //
+        // // Unused FOR NOW, level saving and loading. //
         // LoadLevel("test");
-        // SaveLevel("test");
+        // // SaveLevel("test");
     }
 
     // Adds a tile to the private objects list
@@ -130,7 +132,7 @@ public class LevelManager : MonoBehaviour
     private void LoadLevel(string level)
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
-        Debug.LogWarning(Resources.Load($"Levels/{level}").name);
+        Debug.LogWarning(Resources.Load<TextAsset>($"Levels/{level}.json").text);
     }
 
     // Moves a tile (or multiple)
@@ -198,11 +200,16 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Win!");
     }
 
+    // Returns if currently in editor
+    public bool IsInEditor() { return SceneManager.GetActiveScene().name == "Level Editor"; }
+
     // Player Input //
 
     // Movement
     private void OnMove(InputValue ctx)
     {
+        if (IsInEditor()) return;
+
         // Bad input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
         if (movement == Vector3Int.zero) { canMove = true; return; };
@@ -221,7 +228,7 @@ public class LevelManager : MonoBehaviour
     // Wait
     private void OnWait()
     {
-        if (latestMovement == Vector3Int.zero) return;
+        if (latestMovement == Vector3Int.zero || IsInEditor()) return;
 
         // Moves tiles using the user's latest movement
         ApplyGravity(latestMovement);
