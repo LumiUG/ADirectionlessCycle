@@ -102,14 +102,19 @@ public class Editor : MonoBehaviour
         switch (selectedTile.GetTileType())
         {
             case ObjectTypes.Wall:
+                if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToCollideableList(tileToCreate);
                 break;
+
             case ObjectTypes.Area:
+                if (LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapOverlaps.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToAreaList(tileToCreate);
                 break;
+
             default:
+                if (LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToObjectList(tileToCreate);
                 break;

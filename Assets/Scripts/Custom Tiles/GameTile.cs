@@ -20,12 +20,12 @@ public abstract class GameTile : TileBase
         tileData.gameObject = tileObject;
 
         // Adds itself to the level manager's level objects/areas/etc list
-        if (!LevelManager.Instance) return;
-        LevelManager.Instance.AddToObjectList(this);
-        LevelManager.Instance.AddToAreaList(this);
+        // if (!LevelManager.Instance) return;
+        // LevelManager.Instance.AddToObjectList(this);
+        // LevelManager.Instance.AddToAreaList(this);
 
         // Find object's custom properties references
-        if (!tileData.gameObject) return;
+        if (!tileData.gameObject || !LevelManager.Instance) return;
         directions.GetSpriteReferences(tileData.gameObject);
 
         // Updates the sprites for the first time

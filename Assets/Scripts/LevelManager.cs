@@ -135,12 +135,16 @@ public class LevelManager : MonoBehaviour
 
         // Populate the level
         level.levelName = name;
-        levelSolids.ForEach(tile => level.tiles.solidTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
-        levelObjects.ForEach(tile => level.tiles.objectTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
-        levelAreas.ForEach(tile => level.tiles.overlapTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelSolids.ForEach(tile => { Debug.Log($"{tile} 1"); level.tiles.solidTiles = level.tiles.solidTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
+        levelObjects.ForEach(tile => { Debug.Log($"{tile} 2"); level.tiles.objectTiles = level.tiles.objectTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
+        levelAreas.ForEach(tile => { Debug.Log($"{tile} 3"); level.tiles.overlapTiles = level.tiles.overlapTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
+
+        // Remove empty populated tiles (?????)
+        Debug.LogWarning(JsonUtility.ToJson(level, true));
 
         // Save the level locally
         File.WriteAllText($"{Application.persistentDataPath}/{name}.level", JsonUtility.ToJson(level, true));
+        Debug.LogWarning("Saved!");
     }
 
     // Load and build a level

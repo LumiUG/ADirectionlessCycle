@@ -8,7 +8,7 @@ public class Serializables
     public class SerializableLevel
     {
         public string levelName;
-        [SerializeField] public Tiles tiles;
+        public Tiles tiles;
 
         // Constructor
         public SerializableLevel(int solidSize, int objectSize, int overlapSize)
@@ -20,13 +20,14 @@ public class Serializables
     [Serializable]
     public class Tiles
     {
-        [SerializeField] public SerializableTile[] solidTiles;
-        [SerializeField] public SerializableTile[] objectTiles;
-        [SerializeField] public SerializableTile[] overlapTiles;
+        public SerializableTile[] solidTiles;
+        public SerializableTile[] objectTiles;
+        public SerializableTile[] overlapTiles;
 
         // Constructor
         public Tiles(int solidSize, int objectSize, int overlapSize)
         {
+            // Debug.LogError($"{solidSize}, {objectSize}, {overlapSize}");
             solidTiles = new SerializableTile[solidSize];
             objectTiles = new SerializableTile[objectSize];
             overlapTiles = new SerializableTile[overlapSize];
@@ -37,7 +38,7 @@ public class Serializables
     public class SerializableTile
     {
         public string type;
-        [SerializeField] public BootlegDirections directions;
+        public BootlegDirections directions;
         public Vector3 position;
 
         // Constructor
