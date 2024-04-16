@@ -26,7 +26,7 @@ public abstract class GameTile : TileBase
 
         // Find object's custom properties references
         if (!tileData.gameObject) return;
-        directions.GetSpriteReferences(tileObject);
+        directions.GetSpriteReferences(tileData.gameObject);
 
         // Updates the sprites for the first time
         directions.UpdateSprites();

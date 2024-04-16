@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static Serializables;
 using static GameTile;
 
 public class LevelManager : MonoBehaviour
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapOverlaps;
 
     // Level data //
+    private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
     private readonly List<GameTile> levelAreas = new();
     private readonly List<GameTile> movementBlacklist = new();
@@ -118,11 +120,27 @@ public class LevelManager : MonoBehaviour
         else if (!levelAreas.Contains(tile)) levelAreas.Add(tile);
     }
 
-    // Saves a level to the game's persistent path
-    public void SaveLevel(string levelName)
+    // Adds a tile to the private collideable list
+    public void AddToCollideableList(GameTile tile)
     {
-        // Hell yeah.
-        File.WriteAllText($"{Application.persistentDataPath}/{levelName}.level", JsonUtility.ToJson(levelName));
+        if (tile.GetTileType() != ObjectTypes.Wall) return;
+        else if (!levelSolids.Contains(tile)) levelSolids.Add(tile);
+    }
+
+    // Saves a level to the game's persistent path
+    public void SaveLevel(string name)
+    {
+        // Create the level object
+        SerializableLevel level = new(levelSolids.Count, levelObjects.Count, levelAreas.Count);
+
+        // Populate the level
+        level.levelName = name;
+        levelSolids.ForEach(tile => level.tiles.solidTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelObjects.ForEach(tile => level.tiles.objectTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelAreas.ForEach(tile => level.tiles.overlapTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)));
+
+        // Save the level locally
+        File.WriteAllText($"{Application.persistentDataPath}/{name}.level", JsonUtility.ToJson(level, true));
     }
 
     // Load and build a level

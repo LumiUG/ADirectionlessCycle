@@ -103,12 +103,15 @@ public class Editor : MonoBehaviour
         {
             case ObjectTypes.Wall:
                 LevelManager.Instance.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToCollideableList(tileToCreate);
                 break;
             case ObjectTypes.Area:
                 LevelManager.Instance.tilemapOverlaps.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToAreaList(tileToCreate);
                 break;
             default:
                 LevelManager.Instance.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToObjectList(tileToCreate);
                 break;
         }
     }

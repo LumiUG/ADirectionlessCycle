@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 // Tile's avaliable directions
+[Serializable]
 public class Directions
 {
     // Tile values //
