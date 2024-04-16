@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static GameTile;
 
@@ -8,30 +9,15 @@ public class Serializables
     public class SerializableLevel
     {
         public string levelName;
-        public Tiles tiles;
-
-        // Constructor
-        public SerializableLevel(int solidSize, int objectSize, int overlapSize)
-        {
-            tiles = new Tiles(solidSize, objectSize, overlapSize);
-        }
+        public Tiles tiles = new();
     }
 
     [Serializable]
     public class Tiles
     {
-        public SerializableTile[] solidTiles;
-        public SerializableTile[] objectTiles;
-        public SerializableTile[] overlapTiles;
-
-        // Constructor
-        public Tiles(int solidSize, int objectSize, int overlapSize)
-        {
-            // Debug.LogError($"{solidSize}, {objectSize}, {overlapSize}");
-            solidTiles = new SerializableTile[solidSize];
-            objectTiles = new SerializableTile[objectSize];
-            overlapTiles = new SerializableTile[overlapSize];
-        }
+        public List<SerializableTile> solidTiles = new();
+        public List<SerializableTile> objectTiles = new();
+        public List<SerializableTile> overlapTiles = new();
     }
 
     [Serializable]

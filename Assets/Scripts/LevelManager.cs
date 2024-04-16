@@ -131,13 +131,13 @@ public class LevelManager : MonoBehaviour
     public void SaveLevel(string name)
     {
         // Create the level object
-        SerializableLevel level = new(levelSolids.Count, levelObjects.Count, levelAreas.Count);
+        SerializableLevel level = new();
 
         // Populate the level
         level.levelName = name;
-        levelSolids.ForEach(tile => { Debug.Log($"{tile} 1"); level.tiles.solidTiles = level.tiles.solidTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
-        levelObjects.ForEach(tile => { Debug.Log($"{tile} 2"); level.tiles.objectTiles = level.tiles.objectTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
-        levelAreas.ForEach(tile => { Debug.Log($"{tile} 3"); level.tiles.overlapTiles = level.tiles.overlapTiles.Append(new(tile.GetTileType(), tile.directions, tile.position)).ToArray(); });
+        levelSolids.ForEach(tile => { Debug.Log($"{tile} 1"); level.tiles.solidTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)); });
+        levelObjects.ForEach(tile => { Debug.Log($"{tile} 2"); level.tiles.objectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)); });
+        levelAreas.ForEach(tile => { Debug.Log($"{tile} 3"); level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)); });
 
         // Remove empty populated tiles (?????)
         Debug.LogWarning(JsonUtility.ToJson(level, true));
