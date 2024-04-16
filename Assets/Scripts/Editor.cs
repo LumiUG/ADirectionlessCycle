@@ -9,9 +9,14 @@ public class Editor : MonoBehaviour
     private (bool, bool, bool, bool) directionSet;
     private bool waitingForDirections = false;
     private bool isShiftHeld = false;
-    private InputField inputField;
+    private InputField exportField;
+    private InputField importField;
 
-    private void Start() { inputField = transform.Find("Input Field").GetComponent<InputField>(); }
+    private void Start()
+    {
+        exportField = transform.Find("Export Field").GetComponent<InputField>();
+        importField = transform.Find("Import Field").GetComponent<InputField>();
+    }
 
     // Player Input //
 
@@ -79,7 +84,10 @@ public class Editor : MonoBehaviour
     private void OnConfirm() { if (waitingForDirections) waitingForDirections = false; }
 
     // Toggles the export input field
-    private void OnExport() { inputField.gameObject.SetActive(true); }
+    private void OnExport() { exportField.gameObject.SetActive(!exportField.gameObject.activeSelf); }
+
+    // Toggles the import input field
+    private void OnImport() { importField.gameObject.SetActive(!importField.gameObject.activeSelf); }
 
     // Returns the mouse position on the playable grid
     private Vector3Int GetMousePositionOnGrid()

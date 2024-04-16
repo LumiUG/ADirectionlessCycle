@@ -24,35 +24,15 @@ public class Serializables
     public class SerializableTile
     {
         public string type;
-        public BootlegDirections directions;
-        public Vector3 position;
+        public Directions directions;
+        public Vector3Int position;
 
         // Constructor
         public SerializableTile(ObjectTypes tileType, Directions tileDirections, Vector3Int tilePosition)
         {
             type = tileType.ToString();
-            directions = new(tileDirections);
+            directions = tileDirections;
             position = tilePosition;
-        }
-    }
-
-    [Serializable]
-    public class BootlegDirections
-    {
-        public bool pushable;
-        public bool up;
-        public bool down;
-        public bool left;
-        public bool right;
-
-        // Constructor
-        public BootlegDirections(Directions directions)
-        {
-            pushable = directions.pushable;
-            up = directions.up;
-            down = directions.down;
-            left = directions.left;
-            right = directions.right;
         }
     }
 }

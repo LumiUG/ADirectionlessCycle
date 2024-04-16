@@ -885,6 +885,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Import",
+                    "type": "Button",
+                    "id": "892315ca-594c-40e6-9e64-d3bb526ff15d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -990,11 +999,22 @@
                 {
                     "name": "",
                     "id": "e2f95821-2be7-4743-98c4-1a94614b3b24",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/o",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Export",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8db42d53-09bf-41c5-b1fd-295e0e51d9fa",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Import",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
