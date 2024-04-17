@@ -5,6 +5,7 @@ using static GameTile;
 
 public class Serializables
 {
+    // Level as a serializable class
     [Serializable]
     public class SerializableLevel
     {
@@ -12,6 +13,7 @@ public class Serializables
         public Tiles tiles = new();
     }
 
+    // Collection of tiles in a level
     [Serializable]
     public class Tiles
     {
@@ -20,6 +22,7 @@ public class Serializables
         public List<SerializableTile> overlapTiles = new();
     }
 
+    // Similar to a GameTile, but able to serialize to json
     [Serializable]
     public class SerializableTile
     {
@@ -27,7 +30,7 @@ public class Serializables
         public Directions directions;
         public Vector3Int position;
 
-        // Constructor
+        // Tile constructor
         public SerializableTile(ObjectTypes tileType, Directions tileDirections, Vector3Int tilePosition)
         {
             type = tileType.ToString();

@@ -11,12 +11,16 @@ using static GameTile;
 public class LevelManager : MonoBehaviour
 {
     // Basic //
+    private readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
+    private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexahedron };
+    private readonly ObjectTypes[] typesOverlapsList = { ObjectTypes.Area, ObjectTypes.Hazard };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
     [HideInInspector] public GameTile hexahedronTile;
     [HideInInspector] public GameTile circleTile;
     [HideInInspector] public GameTile areaTile;
+    [HideInInspector] public GameTile hazardTile;
     public int boundsX = 19;
     public int boundsY = -11;
 
@@ -44,7 +48,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Getting grids and tilemap references
-        GetSceneReferences();
+        TryGetSceneReferences();
 
         // Getting tile references
         wallTile = Resources.Load<WallTile>("Tiles/Wall");
@@ -52,45 +56,48 @@ public class LevelManager : MonoBehaviour
         hexahedronTile = Resources.Load<HexahedronTile>("Tiles/Hexahedron");
         circleTile = Resources.Load<CircleTile>("Tiles/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
+        hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
 
-        // Loads a level //
-        //LoadLevel("level");
+        // LoadLevel("hazards");
     }
 
     // Gets the scene references for later use (should be called every time on scene change)
-    private void GetSceneReferences()
+    private void TryGetSceneReferences()
     {
         Transform gridObject = transform.Find("Level Grid");
-        levelGrid = gridObject.GetComponent<Grid>();
-        tilemapCollideable = gridObject.Find("Collideable").GetComponent<Tilemap>();
-        tilemapObjects = gridObject.Find("Objects").GetComponent<Tilemap>();
-        tilemapOverlaps = gridObject.Find("Overlaps").GetComponent<Tilemap>();
+        levelGrid = gridObject != null ? gridObject.GetComponent<Grid>() : null;
+        tilemapCollideable = gridObject != null ? gridObject.Find("Collideable").GetComponent<Tilemap>() : null;
+        tilemapObjects = gridObject != null ? gridObject.Find("Objects").GetComponent<Tilemap>() : null;
+        tilemapOverlaps = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
     }
 
     // Adds a tile to the private objects list
     public void AddToObjectList(GameTile tile)
     {
-        if (tile.GetTileType() == ObjectTypes.Area) return;
+        if (!typesObjectList.Contains(tile.GetTileType())) return;
         else if (!levelObjects.Contains(tile)) levelObjects.Add(tile);
     }
 
     // Adds a tile to the private overlaps list
-    public void AddToAreaList(GameTile tile)
+    public void AddToOverlapList(GameTile tile)
     {
-        if (tile.GetTileType() != ObjectTypes.Area) return;
+        if (!typesOverlapsList.Contains(tile.GetTileType())) return;
         else if (!levelOverlaps.Contains(tile)) levelOverlaps.Add(tile);
     }
 
     // Adds a tile to the private collideable list
     public void AddToCollideableList(GameTile tile)
     {
-        if (tile.GetTileType() != ObjectTypes.Wall) return;
+        if (!typesSolidsList.Contains(tile.GetTileType())) return;
         else if (!levelSolids.Contains(tile)) levelSolids.Add(tile);
     }
 
     // Saves a level to the game's persistent path
     public void SaveLevel(string levelName)
     {
+        if (IsStringEmptyOfNull(levelName)) return;
+        levelName = levelName.Trim();
+        
         // Create the level object
         SerializableLevel level = new();
 
@@ -108,6 +115,9 @@ public class LevelManager : MonoBehaviour
     // Load and build a level
     public void LoadLevel(string levelName)
     {
+        if (IsStringEmptyOfNull(levelName)) return;
+        levelName = levelName.Trim();
+
         // Clears the current level
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
         latestMovement = Vector3Int.zero;
@@ -121,9 +131,9 @@ public class LevelManager : MonoBehaviour
         if (level == null) return;
 
         // Loads the level
-        level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable));
-        level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects));
-        level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps));
+        level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
+        level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
+        level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps, levelOverlaps));
     }
 
     // Moves a tile (or multiple)
@@ -152,6 +162,10 @@ public class LevelManager : MonoBehaviour
 
         // Removes from movement queue
         if (removeFromQueue) { movementBlacklist.Add(tile); }
+
+        // Checks if the tile must be destroyed (evil)
+        GameTile hazard = tilemapOverlaps.GetTile<GameTile>(newPosition);
+        if (hazard != null) if (hazard.GetTileType() == ObjectTypes.Hazard) { } 
         return true;
     }
 
@@ -164,36 +178,25 @@ public class LevelManager : MonoBehaviour
     }
 
     // Places a tile using its own position
-    public void PlaceTile(GameTile tile, Tilemap tilemap) { tilemap.SetTile(tile.position, tile); }
+    public void PlaceTile(GameTile tile, Tilemap tilemap, List<GameTile> tileList = null)
+    {
+        tilemap.SetTile(tile.position, tile);
+        tileList.Add(tile);
+    }
 
     // Creates a gametile
     public GameTile CreateTile(string type, Directions defaultDirections, Vector3Int defaultPosition)
     {
         // Instantiate correct tile
-        GameTile tile;
-        switch (type)
+        GameTile tile = type switch
         {
-            default:
-            case "Box":
-                tile = Instantiate(boxTile);
-                break;
-
-            case "Circle":
-                tile = Instantiate(circleTile);
-                break;
-
-            case "Hexahedron":
-                tile = Instantiate(hexahedronTile);
-                break;
-
-            case "Wall":
-                tile = Instantiate(wallTile);
-                break;
-
-            case "Area":
-                tile = Instantiate(areaTile);
-                break;
-        }
+            "Circle" => Instantiate(circleTile),
+            "Hexahedron" => Instantiate(hexahedronTile),
+            "Wall" => Instantiate(wallTile),
+            "Area" => Instantiate(areaTile),
+            "Hazard" => Instantiate(hazardTile),
+            _ => Instantiate(boxTile) // Default, also covers box types
+        };
 
         // Apply tile defaults
         tile.directions = defaultDirections;
@@ -225,11 +228,10 @@ public class LevelManager : MonoBehaviour
     // Checks if you've won
     private void CheckCompletion()
     {
+        // Condition: All area tiles have some object overlapping them, at least 1 exists
         bool winCondition = levelOverlaps.All(area =>
-        { 
-            if (area.GetTileType() != ObjectTypes.Area) return true;
-            return tilemapObjects.GetTile<GameTile>(area.position) != null;
-        });
+            { return area.GetTileType() != ObjectTypes.Area || tilemapObjects.GetTile<GameTile>(area.position) != null; })
+            && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area);
 
         if (winCondition) Debug.LogWarning("Win!");
     }
@@ -237,14 +239,18 @@ public class LevelManager : MonoBehaviour
     // Returns if currently in editor
     public bool IsInEditor() { return SceneManager.GetActiveScene().name == "Level Editor"; }
 
+    // Is string empty or null
+    public bool IsStringEmptyOfNull(string str) { return str == null || str == string.Empty; }
+
     // Gets a level and returns it as a serialized object
     private SerializableLevel GetLevel(string levelName)
     {
-        // Debug.LogWarning(Resources.Load<TextAsset>($"Levels/{levelName.ToLower().Trim()}").text);
-        string levelJson = File.ReadAllText($"{Application.persistentDataPath}/{levelName.ToLower().Trim()}.level");
-        if (levelJson == string.Empty) { Debug.LogError($"Invalid level! ({levelName})"); return null; }
-        return JsonUtility.FromJson<SerializableLevel>(levelJson);
+        string levelPath = $"{Application.persistentDataPath}/{levelName}.level";
+        if (!File.Exists(levelPath)) { Debug.LogError($"Invalid level! ({levelName})"); return null; }
 
+        // Resources.Load<TextAsset>($"Levels/{levelName}").text;
+        string levelJson = File.ReadAllText(levelPath);
+        return JsonUtility.FromJson<SerializableLevel>(levelJson);
     }
 
     // Player Input //

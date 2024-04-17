@@ -12,6 +12,7 @@ public class Editor : MonoBehaviour
     private InputField exportField;
     private InputField importField;
 
+    // Get input fields references
     private void Start()
     {
         exportField = transform.Find("Export Field").GetComponent<InputField>();
@@ -46,6 +47,7 @@ public class Editor : MonoBehaviour
     }
 
     private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
+    private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
 
     // Places a tile
     private void OnClickGrid()
@@ -84,10 +86,20 @@ public class Editor : MonoBehaviour
     private void OnConfirm() { if (waitingForDirections) waitingForDirections = false; }
 
     // Toggles the export input field
-    private void OnExport() { exportField.gameObject.SetActive(!exportField.gameObject.activeSelf); }
+    private void OnExport()
+    {
+        exportField.gameObject.SetActive(!exportField.gameObject.activeSelf);
+        importField.gameObject.SetActive(false);
+        exportField.ActivateInputField();
+    }
 
     // Toggles the import input field
-    private void OnImport() { importField.gameObject.SetActive(!importField.gameObject.activeSelf); }
+    private void OnImport()
+    {
+        importField.gameObject.SetActive(!importField.gameObject.activeSelf);
+        exportField.gameObject.SetActive(false);
+        importField.ActivateInputField();
+    }
 
     // Returns the mouse position on the playable grid
     private Vector3Int GetMousePositionOnGrid()
@@ -116,9 +128,10 @@ public class Editor : MonoBehaviour
                 break;
 
             case ObjectTypes.Area:
+            case ObjectTypes.Hazard:
                 if (LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapOverlaps.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToAreaList(tileToCreate);
+                LevelManager.Instance.AddToOverlapList(tileToCreate);
                 break;
 
             default:

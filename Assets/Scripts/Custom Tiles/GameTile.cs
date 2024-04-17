@@ -8,7 +8,7 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Wall, Box, Circle, Hexahedron, Area }
+    public enum ObjectTypes { Wall, Box, Circle, Hexahedron, Area, Hazard }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
 
@@ -19,11 +19,6 @@ public abstract class GameTile : TileBase
         tileData.sprite = tileSprite;
         tileData.gameObject = tileObject;
 
-        // Adds itself to the level manager's level objects/areas/etc list
-        // if (!LevelManager.Instance) return;
-        // LevelManager.Instance.AddToObjectList(this);
-        // LevelManager.Instance.AddToAreaList(this);
-
         // Find object's custom properties references
         if (!tileData.gameObject || !LevelManager.Instance) return;
         directions.GetSpriteReferences(tileData.gameObject);
@@ -31,13 +26,6 @@ public abstract class GameTile : TileBase
         // Updates the sprites for the first time
         directions.UpdateSprites();
     }
-
-    // Tile refreshing
-    // public override void RefreshTile(Vector3Int position, ITilemap tilemap)
-    // {
-    //     directions.UpdateSprites();
-    //     tilemap.RefreshTile(position);
-    // }
 
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();

@@ -15,3 +15,9 @@ MonoBehaviour:
   tileSprite: {fileID: 21300000, guid: 91e5a018b28b46a44b2c9e734e7b0ff6, type: 3}
   tileObject: {fileID: 7852494226514332356, guid: 7bca9b99ef97e7b4b83237f0c50416e7, type: 3}
   position: {x: 0, y: 0, z: 0}
+  directions:
+    pushable: 1
+    up: 1
+    down: 1
+    left: 1
+    right: 1

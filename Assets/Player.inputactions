@@ -842,6 +842,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectHazard",
+                    "type": "Button",
+                    "id": "e81f6b1d-e025-4d95-829a-58f9ea133542",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ClickGrid",
                     "type": "Button",
                     "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
@@ -1015,6 +1024,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Import",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "981a4f52-4699-4914-8e89-60dd101c8360",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectHazard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
