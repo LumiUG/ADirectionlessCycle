@@ -46,8 +46,10 @@ public class LevelManager : MonoBehaviour
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(GameObject.Find("Game View")); // maybe?
 
         // Getting grids and tilemap references
+        // SceneManager.sceneLoaded += TryGetSceneReferences;
         TryGetSceneReferences();
 
         // Getting tile references
@@ -61,7 +63,7 @@ public class LevelManager : MonoBehaviour
         // LoadLevel("hazards");
     }
 
-    // Gets the scene references for later use (should be called every time on scene change)
+    // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
     private void TryGetSceneReferences()
     {
         Transform gridObject = transform.Find("Level Grid");
@@ -97,19 +99,19 @@ public class LevelManager : MonoBehaviour
     {
         if (IsStringEmptyOfNull(levelName)) return;
         levelName = levelName.Trim();
-        
+
         // Create the level object
-        SerializableLevel level = new();
+        SerializableLevel level = new() { levelName = levelName };
 
         // Populate the level
-        level.levelName = levelName;
         levelSolids.ForEach(tile => level.tiles.solidTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelObjects.ForEach(tile => level.tiles.objectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelOverlaps.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
-        File.WriteAllText($"{Application.persistentDataPath}/{levelName}.level", JsonUtility.ToJson(level, true));
-        Debug.LogWarning("Saved!");
+        string levelPath = $"{Application.persistentDataPath}/{levelName}.level";
+        File.WriteAllText(levelPath, JsonUtility.ToJson(level, true));
+        Debug.Log($"Saved level \"{levelName}\" to {levelPath}.");
     }
 
     // Load and build a level
@@ -134,6 +136,7 @@ public class LevelManager : MonoBehaviour
         level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
         level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
         level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps, levelOverlaps));
+        Debug.Log($"Loaded level \"{levelName}\"!");
     }
 
     // Moves a tile (or multiple)
@@ -165,7 +168,7 @@ public class LevelManager : MonoBehaviour
 
         // Checks if the tile must be destroyed (evil)
         GameTile hazard = tilemapOverlaps.GetTile<GameTile>(newPosition);
-        if (hazard != null) if (hazard.GetTileType() == ObjectTypes.Hazard) { } 
+        if (hazard != null) if (hazard.GetTileType() == ObjectTypes.Hazard) Debug.LogWarning("Owie");
         return true;
     }
 

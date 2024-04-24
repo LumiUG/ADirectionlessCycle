@@ -9,15 +9,6 @@ public class Editor : MonoBehaviour
     private (bool, bool, bool, bool) directionSet;
     private bool waitingForDirections = false;
     private bool isShiftHeld = false;
-    private InputField exportField;
-    private InputField importField;
-
-    // Get input fields references
-    private void Start()
-    {
-        exportField = transform.Find("Export Field").GetComponent<InputField>();
-        importField = transform.Find("Import Field").GetComponent<InputField>();
-    }
 
     // Player Input //
 
@@ -56,7 +47,7 @@ public class Editor : MonoBehaviour
 
         // Checks mouse position
         Vector3Int gridPos = GetMousePositionOnGrid();
-        if (gridPos == Vector3.back) return;
+        if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         // Places the tile (add shift support)
         PlaceTile(gridPos);
@@ -67,7 +58,7 @@ public class Editor : MonoBehaviour
     {
         // Checks mouse position
         Vector3Int gridPos = GetMousePositionOnGrid();
-        if (gridPos == Vector3.back) return;
+        if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         // Selects the tile
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
@@ -84,22 +75,6 @@ public class Editor : MonoBehaviour
 
     // Confirm directions
     private void OnConfirm() { if (waitingForDirections) waitingForDirections = false; }
-
-    // Toggles the export input field
-    private void OnExport()
-    {
-        exportField.gameObject.SetActive(!exportField.gameObject.activeSelf);
-        importField.gameObject.SetActive(false);
-        exportField.ActivateInputField();
-    }
-
-    // Toggles the import input field
-    private void OnImport()
-    {
-        importField.gameObject.SetActive(!importField.gameObject.activeSelf);
-        exportField.gameObject.SetActive(false);
-        importField.ActivateInputField();
-    }
 
     // Returns the mouse position on the playable grid
     private Vector3Int GetMousePositionOnGrid()
@@ -159,4 +134,7 @@ public class Editor : MonoBehaviour
         LevelManager.Instance.tilemapObjects.RefreshTile(tile.position);
         Debug.Log("Set new tile directions.");
     }
+
+    // Toggles menu
+    private void OnEscape() { if (UI.Instance) UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf); }
 }

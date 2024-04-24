@@ -105,6 +105,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 7931077653251743037}
+    - target: {fileID: 1074847204001815753, guid: 56fc4d816b9c5f94baa33e7c46c096b0, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3273298960951477495, guid: 56fc4d816b9c5f94baa33e7c46c096b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

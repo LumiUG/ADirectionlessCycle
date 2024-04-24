@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.adamgryu.inspectorhistory": {
+      "version": "https://github.com/adamgryu/InspectorHistory-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3e7f8c52eb46548aa6c55db054112fab4ec48211"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,
