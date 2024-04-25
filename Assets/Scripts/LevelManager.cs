@@ -248,11 +248,10 @@ public class LevelManager : MonoBehaviour
     // Gets a level and returns it as a serialized object
     private SerializableLevel GetLevel(string levelName)
     {
-        string levelPath = $"{Application.persistentDataPath}/{levelName}.level";
-        if (!File.Exists(levelPath)) { Debug.LogError($"Invalid level! ({levelName})"); return null; }
+        TextAsset level = Resources.Load<TextAsset>($"Levels/{levelName}");
+        if (!level) { Debug.LogError($"Invalid level! ({levelName})"); return null; }
 
-        // Resources.Load<TextAsset>($"Levels/{levelName}").text;
-        string levelJson = File.ReadAllText(levelPath);
+        string levelJson = level.text;
         return JsonUtility.FromJson<SerializableLevel>(levelJson);
     }
 
