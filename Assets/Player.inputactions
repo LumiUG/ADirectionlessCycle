@@ -903,7 +903,7 @@
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectWall",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -914,7 +914,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "ClickGrid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -925,7 +925,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "RightClickGrid",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -936,7 +936,7 @@
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectCircle",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -947,7 +947,7 @@
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectHex",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -958,7 +958,7 @@
                     "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectArea",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -969,7 +969,7 @@
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectBox",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -980,7 +980,7 @@
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Shift",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -991,7 +991,7 @@
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Confirm",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1002,7 +1002,7 @@
                     "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SelectHazard",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1013,7 +1013,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false

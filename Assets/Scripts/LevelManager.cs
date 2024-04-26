@@ -12,12 +12,12 @@ public class LevelManager : MonoBehaviour
 {
     // Basic //
     private readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
-    private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexahedron };
+    private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
     private readonly ObjectTypes[] typesOverlapsList = { ObjectTypes.Area, ObjectTypes.Hazard };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
-    [HideInInspector] public GameTile hexahedronTile;
+    [HideInInspector] public GameTile hexagonTile;
     [HideInInspector] public GameTile circleTile;
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile hazardTile;
@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
         // Getting tile references
         wallTile = Resources.Load<WallTile>("Tiles/Wall");
         boxTile = Resources.Load<BoxTile>("Tiles/Box");
-        hexahedronTile = Resources.Load<HexahedronTile>("Tiles/Hexahedron");
+        hexagonTile = Resources.Load<HexagonTile>("Tiles/Hexagon");
         circleTile = Resources.Load<CircleTile>("Tiles/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
@@ -194,7 +194,7 @@ public class LevelManager : MonoBehaviour
         GameTile tile = type switch
         {
             "Circle" => Instantiate(circleTile),
-            "Hexahedron" => Instantiate(hexahedronTile),
+            "Hexagon" => Instantiate(hexagonTile),
             "Wall" => Instantiate(wallTile),
             "Area" => Instantiate(areaTile),
             "Hazard" => Instantiate(hazardTile),

@@ -15,7 +15,6 @@ public class Directions
     // Direction tile sprite references //
     private SpriteRenderer voided;
     private SpriteRenderer pushableSprite;
-    private SpriteRenderer allDir;
     private SpriteRenderer upDir;
     private SpriteRenderer downDir;
     private SpriteRenderer leftDir;
@@ -37,7 +36,7 @@ public class Directions
         right = rightMovement;
 
         // Update sprites if at least one object reference is set
-        if (allDir) UpdateSprites();
+        if (upDir) UpdateSprites();
     }
 
     // Returns if horizontal movement is available
@@ -51,9 +50,8 @@ public class Directions
     {
         if (!parent) return;
 
-        // directions.voided = tileObject.transform.Find("Voided").GetComponent<SpriteRenderer>();
-        allDir = parent.transform.Find("AllDirection").GetComponent<SpriteRenderer>();
-        // directions.pushableSprite = tileObject.transform.Find("Pushable").GetComponent<SpriteRenderer>();
+        // voided = parent.transform.Find("Voided").GetComponent<SpriteRenderer>();
+        pushableSprite = parent.transform.Find("Pushable").GetComponent<SpriteRenderer>();
         upDir = parent.transform.Find("UpDirection").GetComponent<SpriteRenderer>();
         downDir = parent.transform.Find("DownDirection").GetComponent<SpriteRenderer>();
         leftDir = parent.transform.Find("LeftDirection").GetComponent<SpriteRenderer>();
@@ -63,14 +61,13 @@ public class Directions
     // Updates direction sprites
     public void UpdateSprites()
     {
-        if (!allDir) return;
+        if (!upDir) return;
 
         // voided.gameObject.SetActive(!(up && down && left && right));
-        allDir.gameObject.SetActive(up && down && left && right);
-        // voided.gameObject.SetActive(canBePushed);
-        upDir.gameObject.SetActive(up && !(up && down && left && right));
-        downDir.gameObject.SetActive(down && !(up && down && left && right));
-        leftDir.gameObject.SetActive(left && !(up && down && left && right));
-        rightDir.gameObject.SetActive(right && !(up && down && left && right));
+        pushableSprite.gameObject.SetActive(pushable);
+        upDir.gameObject.SetActive(up);
+        downDir.gameObject.SetActive(down);
+        leftDir.gameObject.SetActive(left);
+        rightDir.gameObject.SetActive(right);
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using static GameTile;
 
 public class Editor : MonoBehaviour
@@ -34,7 +33,7 @@ public class Editor : MonoBehaviour
     private void OnSelectHex() 
     {
         if (waitingForDirections) directionSet = (directionSet.Item1, directionSet.Item2, directionSet.Item3, !directionSet.Item4);
-        else selectedTile = LevelManager.Instance.hexahedronTile;
+        else selectedTile = LevelManager.Instance.hexagonTile;
     }
 
     private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
@@ -67,7 +66,7 @@ public class Editor : MonoBehaviour
         // Changes directions
         if (waitingForDirections) { Debug.LogWarning("Already waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
-        else tile.directions.pushable = !tile.directions.pushable;
+        else { tile.directions.pushable = !tile.directions.pushable; tile.directions.UpdateSprites(); }
     }
 
     // Toggles if the shift key is currently being held (passthrough value)
