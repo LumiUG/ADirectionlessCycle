@@ -842,6 +842,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectInverseArea",
+                    "type": "Button",
+                    "id": "c14f0cc8-825d-4500-92c2-85fd3be374a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SelectHazard",
                     "type": "Button",
                     "id": "e81f6b1d-e025-4d95-829a-58f9ea133542",
@@ -890,6 +899,24 @@
                     "name": "Escape",
                     "type": "Button",
                     "id": "5b60dd27-5aea-4ced-8cbd-c21d0bce847f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Delete",
+                    "type": "Button",
+                    "id": "f36c9748-47b6-4168-8102-206cbd19caea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Place",
+                    "type": "Button",
+                    "id": "1ea9e152-c343-4753-ae25-db643c3898a5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -999,7 +1026,7 @@
                 {
                     "name": "",
                     "id": "981a4f52-4699-4914-8e89-60dd101c8360",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/7",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -1015,6 +1042,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd24c558-aafa-4335-9761-26708714fce2",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectInverseArea",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09b5c983-d431-43b7-9273-1c0eb70c5882",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a0b69ad-16e8-4009-b121-e56b5173690c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,0 +1,71 @@
+{
+    "levelName": "death",
+    "tiles": {
+        "solidTiles": [
+            {
+                "type": "Wall",
+                "directions": {
+                    "pushable": false,
+                    "up": false,
+                    "down": false,
+                    "left": false,
+                    "right": false
+                },
+                "position": {
+                    "x": 6,
+                    "y": -3,
+                    "z": 0
+                }
+            }
+        ],
+        "objectTiles": [
+            {
+                "type": "Box",
+                "directions": {
+                    "pushable": true,
+                    "up": true,
+                    "down": true,
+                    "left": true,
+                    "right": true
+                },
+                "position": {
+                    "x": 10,
+                    "y": -6,
+                    "z": 0
+                }
+            }
+        ],
+        "overlapTiles": [
+            {
+                "type": "Area",
+                "directions": {
+                    "pushable": false,
+                    "up": false,
+                    "down": false,
+                    "left": false,
+                    "right": false
+                },
+                "position": {
+                    "x": 12,
+                    "y": -3,
+                    "z": 0
+                }
+            },
+            {
+                "type": "Hazard",
+                "directions": {
+                    "pushable": false,
+                    "up": false,
+                    "down": false,
+                    "left": false,
+                    "right": false
+                },
+                "position": {
+                    "x": 10,
+                    "y": -3,
+                    "z": 0
+                }
+            }
+        ]
+    }
+}

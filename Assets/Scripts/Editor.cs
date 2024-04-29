@@ -8,6 +8,7 @@ public class Editor : MonoBehaviour
     private (bool, bool, bool, bool) directionSet;
     private bool waitingForDirections = false;
     private bool isShiftHeld = false;
+    private bool isPlacing = true;
 
     // Player Input //
 
@@ -37,6 +38,7 @@ public class Editor : MonoBehaviour
     }
 
     private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
+    private void OnSelectInverseArea() { selectedTile = LevelManager.Instance.inverseAreaTile; }
     private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
 
     // Places a tile
@@ -49,7 +51,9 @@ public class Editor : MonoBehaviour
         if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         // Places the tile (add shift support)
-        PlaceTile(gridPos);
+        if (isPlacing) EditorPlaceTile(gridPos);
+        else EditorDeleteTile(gridPos);
+
     }
 
     // Changes a tile's properties (objects only)
@@ -86,8 +90,10 @@ public class Editor : MonoBehaviour
     }
 
     // Places a tile on the corresponding grid
-    private void PlaceTile(Vector3Int position)
+    private void EditorPlaceTile(Vector3Int position)
     {
+        // GameTile isThereATileThere = null;
+
         // Creates the tile
         GameTile tileToCreate = Instantiate(selectedTile);
         tileToCreate.position = position;
@@ -102,6 +108,7 @@ public class Editor : MonoBehaviour
                 break;
 
             case ObjectTypes.Area:
+            case ObjectTypes.InverseArea:
             case ObjectTypes.Hazard:
                 if (LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapOverlaps.SetTile(tileToCreate.position, tileToCreate);
@@ -114,6 +121,15 @@ public class Editor : MonoBehaviour
                 LevelManager.Instance.AddToObjectList(tileToCreate);
                 break;
         }
+    }
+
+    // Deletes a tile from the corresponding grid (holy shit kill me)
+    private void EditorDeleteTile(Vector3Int position)
+    {
+        GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position);
+        if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 
     // Waits for a direction to be set
@@ -136,4 +152,10 @@ public class Editor : MonoBehaviour
 
     // Toggles menu
     private void OnEscape() { if (UI.Instance) UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf); }
+
+    // Select deleting tiles
+    private void OnDelete() { isPlacing = false; }
+
+    // Select placing tiles
+    private void OnPlace() { isPlacing = true; }
 }

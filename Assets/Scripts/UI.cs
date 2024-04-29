@@ -38,6 +38,8 @@ public class UI : MonoBehaviour
     // Export level (move to LevelEditorUI?)
     public void LevelEditorExportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.SaveLevel(levelName); }
 
+    // Playtest level (move to LevelEditorUI?)
+    public void LevelEditorPlaytest() { editor.Toggle(false); ChangeScene("Game"); }
 
     // Object classes
     public abstract class UIObject

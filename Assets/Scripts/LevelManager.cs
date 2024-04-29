@@ -7,19 +7,22 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Serializables;
 using static GameTile;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
     // Basic //
     private readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
     private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
-    private readonly ObjectTypes[] typesOverlapsList = { ObjectTypes.Area, ObjectTypes.Hazard };
+    private readonly ObjectTypes[] typesOverlapsList = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.Hazard };
+    private readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
     [HideInInspector] public GameTile hexagonTile;
     [HideInInspector] public GameTile circleTile;
     [HideInInspector] public GameTile areaTile;
+    [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile hazardTile;
     public int boundsX = 19;
     public int boundsY = -11;
@@ -35,6 +38,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> levelObjects = new();
     private readonly List<GameTile> levelOverlaps = new();
     private readonly List<GameTile> movementBlacklist = new();
+    private readonly List<GameTile> toDestroy = new();
 
     // Player //
     private bool canMove = true;
@@ -46,7 +50,6 @@ public class LevelManager : MonoBehaviour
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
-        // DontDestroyOnLoad(GameObject.Find("Game View")); // maybe?
 
         // Getting grids and tilemap references
         // SceneManager.sceneLoaded += TryGetSceneReferences;
@@ -58,9 +61,10 @@ public class LevelManager : MonoBehaviour
         hexagonTile = Resources.Load<HexagonTile>("Tiles/Hexagon");
         circleTile = Resources.Load<CircleTile>("Tiles/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
+        inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
 
-        // LoadLevel("hazards");
+        // LoadLevel("death2");
     }
 
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
@@ -94,6 +98,12 @@ public class LevelManager : MonoBehaviour
         else if (!levelSolids.Contains(tile)) levelSolids.Add(tile);
     }
 
+    // Adds a tile to the private to destroy queue
+    public void AddToDestroyQueue(GameTile tile)
+    {
+        if (!toDestroy.Contains(tile)) toDestroy.Add(tile);
+    }
+
     // Saves a level to the game's persistent path
     public void SaveLevel(string levelName)
     {
@@ -109,9 +119,9 @@ public class LevelManager : MonoBehaviour
         levelOverlaps.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
-        string levelPath = $"{Application.persistentDataPath}/{levelName}.level";
+        string levelPath = $"{Application.persistentDataPath}/{levelName}.bytes";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, true));
-        Debug.Log($"Saved level \"{levelName}\" to {levelPath}.");
+        Debug.Log($"Saved level \"{levelName}\" to \"{levelPath}\".");
     }
 
     // Load and build a level
@@ -140,7 +150,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile (or multiple)
-    public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false)
+    public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false, bool beingPushed = false)
     {
         // Check if the tile is allowed to move
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
@@ -150,10 +160,10 @@ public class LevelManager : MonoBehaviour
         if (!CheckSceneInbounds(newPosition)) return false;
 
         // Checks if directions are null
-        if (direction.y > 0 && !tile.directions.up ||
+        if ((direction.y > 0 && !tile.directions.up ||
             direction.y < 0 && !tile.directions.down ||
             direction.x < 0 && !tile.directions.left ||
-            direction.x > 0 && !tile.directions.right) return false;
+            direction.x > 0 && !tile.directions.right) && !beingPushed) return false;
 
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable);
@@ -166,9 +176,10 @@ public class LevelManager : MonoBehaviour
         // Removes from movement queue
         if (removeFromQueue) { movementBlacklist.Add(tile); }
 
-        // Checks if the tile must be destroyed (evil)
-        GameTile hazard = tilemapOverlaps.GetTile<GameTile>(newPosition);
-        if (hazard != null) if (hazard.GetTileType() == ObjectTypes.Hazard) Debug.LogWarning("Owie");
+        // Marks all the objects that should be deleted
+        HazardTile hazard = tilemapOverlaps.GetTile<HazardTile>(tile.position);
+        if (hazard) AddToDestroyQueue(tile);
+
         return true;
     }
 
@@ -187,6 +198,30 @@ public class LevelManager : MonoBehaviour
         tileList.Add(tile);
     }
 
+    // Removes a tile from a tilemap
+    public void RemoveTile(GameTile tile)
+    {
+        switch (tile.GetTileType())
+        {
+            case ObjectTypes.Wall:
+                tilemapCollideable.SetTile(tile.position, null);
+                levelSolids.Remove(tile);
+                break;
+
+            case ObjectTypes.Area:
+            case ObjectTypes.InverseArea:
+            case ObjectTypes.Hazard:
+                tilemapOverlaps.SetTile(tile.position, null);
+                levelOverlaps.Remove(tile);
+                break;
+
+            default:
+                tilemapObjects.SetTile(tile.position, null);
+                levelObjects.Remove(tile);
+                break;
+        }
+    }
+
     // Creates a gametile
     public GameTile CreateTile(string type, Directions defaultDirections, Vector3Int defaultPosition)
     {
@@ -197,6 +232,7 @@ public class LevelManager : MonoBehaviour
             "Hexagon" => Instantiate(hexagonTile),
             "Wall" => Instantiate(wallTile),
             "Area" => Instantiate(areaTile),
+            "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
             _ => Instantiate(boxTile) // Default, also covers box types
         };
@@ -218,23 +254,40 @@ public class LevelManager : MonoBehaviour
     {
         // Clears blacklist
         movementBlacklist.Clear();
+        toDestroy.Clear();
 
         // Moves every object
-        levelObjects.ForEach(
-            tile => {
-                if (!movementBlacklist.Contains(tile))
-                    TryMove(tile.position, tile.position + movement, movement, true);
+        foreach (var tile in levelObjects)
+        {
+            if (!movementBlacklist.Contains(tile))
+            {
+                // Tries to move a tile
+                TryMove(tile.position, tile.position + movement, movement, true);
             }
-        );
+        }
+
+        // Destroys all marked object tiles.
+        foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
     }
 
     // Checks if you've won
     private void CheckCompletion()
     {
-        // Condition: All area tiles have some object overlapping them, at least 1 exists
-        bool winCondition = levelOverlaps.All(area =>
-            { return area.GetTileType() != ObjectTypes.Area || tilemapObjects.GetTile<GameTile>(area.position) != null; })
-            && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area);
+        // Condition:
+        // All area tiles have some object overlapping them and at least 1 exists,
+        // no inverse areas are being overlapped.
+        bool winCondition = 
+            levelOverlaps.All(overlap =>
+                {
+                    if (!typesAreas.Contains(overlap.GetTileType())) return true;
+
+                    GameTile objectOverlap = tilemapObjects.GetTile<GameTile>(overlap.position);
+                    ObjectTypes type = overlap.GetTileType();
+
+                    return (objectOverlap != null && type == ObjectTypes.Area) ||
+                    (objectOverlap == null && type == ObjectTypes.InverseArea);
+                }
+            ) && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
         if (winCondition) Debug.LogWarning("Win!");
     }
@@ -268,7 +321,7 @@ public class LevelManager : MonoBehaviour
         if (!canMove) return;
 
         // Checks if you can actually move in that direction
-        if (latestMovement == movement * -1) return;
+        // if (latestMovement == movement * -1) return;
         latestMovement = movement;
         canMove = false;
 
