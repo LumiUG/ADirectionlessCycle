@@ -1043,7 +1043,7 @@ Canvas:
   m_GameObject: {fileID: 1634448438}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1763499854}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1103,12 +1103,12 @@ GameObject:
   - component: {fileID: 1763499855}
   - component: {fileID: 1763499854}
   m_Layer: 0
-  m_Name: Menu Camera (For locally testing)
+  m_Name: Menu Camera (for testing)
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1763499854
 Camera:
   m_ObjectHideFlags: 0

@@ -363,7 +363,7 @@ Canvas:
   m_GameObject: {fileID: 293672303}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 791655426}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 93ca9b5a-a29a-48d7-b1b8-8a3cbd9f2f60
+  m_DefaultActionMap: Editor
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!20 &791655426 stripped
@@ -6464,7 +6464,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4878074149633007580, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
       propertyPath: m_Name
-      value: LevelManager
+      value: LevelManager (for testing)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4878074149633007580, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902010995914690598, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4902010995914690598, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -8513,6 +8521,14 @@ PrefabInstance:
     - target: {fileID: 7207713962028709537, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
       propertyPath: m_Tiles.Array.data[147].second.m_TileObjectToInstantiateIndex
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8154904859770503957, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8155656350238074042, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8155656350238074042, guid: 79aad633b266ed8479d0d4f761e95df4, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
@@ -14873,7 +14889,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5221626477692765289, guid: 13286846226f4e44ba7833ffb00bb2e5, type: 3}
       propertyPath: m_Name
-      value: Game View
+      value: Game View (for testing)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221626477692765289, guid: 13286846226f4e44ba7833ffb00bb2e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

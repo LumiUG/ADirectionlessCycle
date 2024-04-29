@@ -5,6 +5,8 @@ public class UI : MonoBehaviour
 {
     [HideInInspector] public static UI Instance;
     [HideInInspector] public LevelEditorUI editor;
+    [HideInInspector] public PauseUI pause;
+    [HideInInspector] public WinUI win;
 
     private void Awake()
     {
@@ -14,10 +16,14 @@ public class UI : MonoBehaviour
         DontDestroyOnLoad(transform.parent.gameObject);
 
         // UI References!
-        editor = new();
-        editor.self = transform.Find("Level Editor Menu").gameObject;
+        editor = new() { self = transform.Find("Level Editor Menu").gameObject };
         editor.importMenu = editor.self.transform.Find("Import").gameObject;
         editor.exportMenu = editor.self.transform.Find("Export").gameObject;
+
+        win = new() { self = transform.Find("Win Screen").gameObject };
+
+        // Preload?
+        if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
     }
 
     // Change scenes
@@ -32,6 +38,18 @@ public class UI : MonoBehaviour
     // SFX Slider
     public void UpdateSFXSlider(float value) { Debug.Log($"SFX: {value}"); }
 
+    // Goes to main menu (scary)
+    public void GoMainMenu()
+    {
+        editor.Toggle(false);
+        //pause.Toggle(false);
+        win.Toggle(false);
+
+        LevelManager.Instance.ClearLevel();
+
+        ChangeScene("Main Menu");
+    }
+
     // Import level (move to LevelEditorUI?)
     public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName); }
 
@@ -45,13 +63,22 @@ public class UI : MonoBehaviour
     public abstract class UIObject
     {
         public GameObject self;
+
+        public void Toggle(bool status) { if (self) self.SetActive(status); }
     }
 
     public class LevelEditorUI : UIObject
     {
         public GameObject importMenu;
         public GameObject exportMenu;
+    }
+    public class WinUI : UIObject
+    {
 
-        public void Toggle(bool status) { self.SetActive(status); }
+    }
+
+    public class PauseUI : UIObject
+    {
+
     }
 }

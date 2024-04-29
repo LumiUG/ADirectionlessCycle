@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Serializables;
 using static GameTile;
-using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -131,12 +130,7 @@ public class LevelManager : MonoBehaviour
         levelName = levelName.Trim();
 
         // Clears the current level
-        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
-        latestMovement = Vector3Int.zero;
-        movementBlacklist.Clear();
-        levelSolids.Clear();
-        levelObjects.Clear();
-        levelOverlaps.Clear();
+        ClearLevel();
 
         // Loads the new level
         SerializableLevel level = GetLevel(levelName);
@@ -147,6 +141,17 @@ public class LevelManager : MonoBehaviour
         level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
         level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps, levelOverlaps));
         Debug.Log($"Loaded level \"{levelName}\"!");
+    }
+
+    // Clears the current level
+    public void ClearLevel()
+    {
+        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
+        latestMovement = Vector3Int.zero;
+        movementBlacklist.Clear();
+        levelSolids.Clear();
+        levelObjects.Clear();
+        levelOverlaps.Clear();
     }
 
     // Moves a tile (or multiple)
@@ -289,11 +294,11 @@ public class LevelManager : MonoBehaviour
                 }
             ) && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
-        if (winCondition) Debug.LogWarning("Win!");
+        if (winCondition) UI.Instance.win.Toggle(true);
     }
 
     // Returns if currently in editor
-    public bool IsInEditor() { return SceneManager.GetActiveScene().name == "Level Editor"; }
+    public bool IsAllowedToPlay() { return SceneManager.GetActiveScene().name == "Level Editor" || SceneManager.GetActiveScene().name == "Main Menu"; }
 
     // Is string empty or null
     public bool IsStringEmptyOfNull(string str) { return str == null || str == string.Empty; }
@@ -313,7 +318,7 @@ public class LevelManager : MonoBehaviour
     // Movement
     private void OnMove(InputValue ctx)
     {
-        if (IsInEditor()) return;
+        if (IsAllowedToPlay()) return;
 
         // Bad input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
@@ -333,7 +338,7 @@ public class LevelManager : MonoBehaviour
     // Wait
     private void OnWait()
     {
-        if (latestMovement == Vector3Int.zero || IsInEditor()) return;
+        if (latestMovement == Vector3Int.zero || IsAllowedToPlay()) return;
 
         // Moves tiles using the user's latest movement
         ApplyGravity(latestMovement);
