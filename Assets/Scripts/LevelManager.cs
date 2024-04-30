@@ -281,8 +281,11 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         toDestroy.Clear();
 
+        // Sort by move "priority"
+        List<GameTile> moveList = levelObjects.OrderBy(tile => tile.GetTileType() != ObjectTypes.Hexagon).ToList();
+
         // Moves every object
-        foreach (var tile in levelObjects)
+        foreach (var tile in moveList)
         {
             if (!movementBlacklist.Contains(tile))
             {
