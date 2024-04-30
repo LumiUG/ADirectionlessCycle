@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,6 +5,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     [HideInInspector] public static UI Instance;
+    [HideInInspector] public GlobalUI global;
     [HideInInspector] public LevelEditorUI editor;
     [HideInInspector] public PauseUI pause;
     [HideInInspector] public WinUI win;
@@ -18,17 +18,22 @@ public class UI : MonoBehaviour
         DontDestroyOnLoad(transform.parent.gameObject);
 
         // UI References!
+        global = new() { self = gameObject };
+        global.debugger = global.self.transform.Find("Debugger").GetComponent<Text>();
+        global.debugger.CrossFadeAlpha(0, 0, true);
+
+        // Editor menu
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
         editor.importMenu = editor.self.transform.Find("Import").gameObject;
         editor.exportMenu = editor.self.transform.Find("Export").gameObject;
-        editor.editorMessage = transform.Find("Editor Debug Message").GetComponent<Text>();
-        editor.editorMessage.CrossFadeAlpha(0, 0, true);
 
+        // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
 
+        // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
 
-        // Preload scene?
+        // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
     }
 
@@ -72,26 +77,26 @@ public class UI : MonoBehaviour
         public void Toggle(bool status) { if (self) self.SetActive(status); }
     }
 
+    public class GlobalUI : UIObject
+    {
+        public Text debugger;
+
+        // Sends a message log to the editor UI
+        public void SendMessage(string message, float duration = 1.0f)
+        {
+            debugger.text = message;
+            debugger.CrossFadeAlpha(1, 0, true);
+            debugger.CrossFadeAlpha(0, duration, true);
+        }
+    }
+
     public class LevelEditorUI : UIObject
     {
         public GameObject importMenu;
         public GameObject exportMenu;
-        public Text editorMessage;
-
-        public void SendMessage(string message, float duration = 1.5f)
-        {
-            editorMessage.text = message;
-            editorMessage.CrossFadeAlpha(1, 0, true);
-            editorMessage.CrossFadeAlpha(0, duration, true);
-        }
-    }
-    public class WinUI : UIObject
-    {
-
     }
 
-    public class PauseUI : UIObject
-    {
+    public class WinUI : UIObject { }
 
-    }
+    public class PauseUI : UIObject { }
 }

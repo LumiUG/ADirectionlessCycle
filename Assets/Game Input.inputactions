@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "Game Input",
     "maps": [
         {
             "name": "Game",
@@ -267,7 +267,7 @@
                 },
                 {
                     "name": "ClickGrid",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
                     "expectedControlType": "Button",
                     "processors": "",

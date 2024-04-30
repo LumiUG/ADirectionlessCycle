@@ -9,6 +9,7 @@ public class Editor : MonoBehaviour
     private bool waitingForDirections = false;
     private bool isShiftHeld = false;
     private bool isPlacing = true;
+    private Coroutine multiClick = null;
 
     // Player Input //
 
@@ -43,17 +44,19 @@ public class Editor : MonoBehaviour
 
     // Places a tile
     private void OnClickGrid()
-    { 
+    {
         if (selectedTile == null) return;
+        
+        // Checks if you are already multi-placing
+        if (multiClick != null)
+        {
+            StopCoroutine(multiClick);
+            multiClick = null;
+            return;
+        }
 
-        // Checks mouse position
-        Vector3Int gridPos = GetMousePositionOnGrid();
-        if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
-
-        // Places the tile (add shift support)
-        if (isPlacing) EditorPlaceTile(gridPos);
-        else EditorDeleteTile(gridPos);
-
+        // Multi placing tiles !!
+        multiClick = StartCoroutine(MultiPlace());
     }
 
     // Changes a tile's properties (objects only)
@@ -65,10 +68,10 @@ public class Editor : MonoBehaviour
 
         // Selects the tile
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!tile) { UI.Instance.editor.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
+        if (!tile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Changes directions
-        if (waitingForDirections) { UI.Instance.editor.SendMessage($"Already Waiting!"); return; }
+        if (waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
         else { tile.directions.pushable = !tile.directions.pushable; tile.directions.UpdateSprites(); }
     }
@@ -87,6 +90,24 @@ public class Editor : MonoBehaviour
 
         if (!LevelManager.Instance.CheckSceneInbounds(gridPos)) return Vector3Int.back;
         return gridPos;
+    }
+
+    // Places multiple tiles
+    private IEnumerator MultiPlace()
+    {
+        while (true)
+        {
+            // Checks mouse position
+            Vector3Int gridPos = GetMousePositionOnGrid();
+            if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) yield break;
+
+            // Places the tile (add shift support)
+            if (isPlacing) EditorPlaceTile(gridPos);
+            else EditorDeleteTile(gridPos);
+
+            // Waits and does another loop
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 
     // Places a tile on the corresponding grid
@@ -135,7 +156,7 @@ public class Editor : MonoBehaviour
     // Waits for a direction to be set
     private IEnumerator WaitForDirection(GameTile tile)
     {
-        UI.Instance.editor.SendMessage($"Selected {tile.name}!");
+        UI.Instance.global.SendMessage($"Selected {tile.name}!");
         directionSet = (false, false, false, false);
         waitingForDirections = true;
 
@@ -144,10 +165,8 @@ public class Editor : MonoBehaviour
 
         // Sets the new tile directions (why do i have to refresh it???)
         tile.directions.SetNewDirections(directionSet.Item1, directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        LevelManager.Instance.tilemapObjects.SetTile(tile.position, null);
-        LevelManager.Instance.tilemapObjects.SetTile(tile.position, tile);
-        LevelManager.Instance.tilemapObjects.RefreshTile(tile.position);
-        UI.Instance.editor.SendMessage("Set new tile directions.");
+        LevelManager.Instance.RefreshObjectTile(tile);
+        UI.Instance.global.SendMessage("Set new tile directions.");
     }
 
     // Toggles menu

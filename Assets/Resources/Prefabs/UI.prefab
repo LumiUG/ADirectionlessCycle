@@ -2181,7 +2181,7 @@ GameObject:
   - component: {fileID: 8960866247935509483}
   - component: {fileID: 5860307599092613875}
   m_Layer: 0
-  m_Name: Editor Debug Message
+  m_Name: Debugger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

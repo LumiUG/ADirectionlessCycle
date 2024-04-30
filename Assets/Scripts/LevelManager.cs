@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Serializables;
 using static GameTile;
 
@@ -42,7 +43,7 @@ public class LevelManager : MonoBehaviour
     private Vector3Int latestMovement = Vector3Int.zero;
     private bool canMove = true;
     private bool isPaused = false;
-    private bool hasWon = false;
+    public bool hasWon = false;
 
     void Awake()
     {
@@ -52,6 +53,7 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Getting grids and tilemap references
+        SceneManager.sceneLoaded += RefreshGameOnSceneLoad;
         TryGetSceneReferences();
 
         // Getting tile references
@@ -120,7 +122,7 @@ public class LevelManager : MonoBehaviour
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/{levelName}.bytes";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, true));
-        Debug.Log($"Saved level \"{levelName}\" to \"{levelPath}\".");
+        UI.Instance.global.SendMessage($"Saved level \"{levelName}\" to \"{levelPath}\".");
     }
 
     // Load and build a level
@@ -130,8 +132,6 @@ public class LevelManager : MonoBehaviour
         levelName = levelName.Trim();
 
         // Clears the current level
-        isPaused = false;
-        hasWon = false;
         ClearLevel();
 
         // Loads the new level
@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
         level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
         level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
         level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps, levelOverlaps));
-        Debug.Log($"Loaded level \"{levelName}\"!");
+        UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"!");
     }
 
     // Clears the current level
@@ -315,7 +315,7 @@ public class LevelManager : MonoBehaviour
     private SerializableLevel GetLevel(string levelName)
     {
         TextAsset level = Resources.Load<TextAsset>($"Levels/{levelName}");
-        if (!level) { Debug.LogError($"Invalid level! ({levelName})"); return null; }
+        if (!level) { UI.Instance.global.SendMessage($"Invalid level! ({levelName})"); return null; }
 
         string levelJson = level.text;
         return JsonUtility.FromJson<SerializableLevel>(levelJson);
@@ -326,6 +326,21 @@ public class LevelManager : MonoBehaviour
     {
         UI.Instance.pause.Toggle(status);
         isPaused = status;
+    }
+
+    // Refreshes an object tile
+    public void RefreshObjectTile(GameTile tile)
+    {
+        tilemapObjects.SetTile(tile.position, null);
+        tilemapObjects.SetTile(tile.position, tile);
+    }
+
+    // Gets called whenever you change scenes
+    private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
+    {
+        if (scene.name != "Game") return;
+        isPaused = false;
+        hasWon = false;
     }
 
     // Player Input //

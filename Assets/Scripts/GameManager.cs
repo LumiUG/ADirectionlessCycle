@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (IsBadScene()) return;
+        if (IsBadScene() || LevelManager.Instance.hasWon) return;
         LevelManager.Instance.PauseResumeGame(true);
     }
 
