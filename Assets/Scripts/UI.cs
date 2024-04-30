@@ -22,7 +22,9 @@ public class UI : MonoBehaviour
 
         win = new() { self = transform.Find("Win Screen").gameObject };
 
-        // Preload?
+        pause = new() { self = transform.Find("Pause Menu").gameObject };
+
+        // Preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
     }
 
@@ -42,11 +44,10 @@ public class UI : MonoBehaviour
     public void GoMainMenu()
     {
         editor.Toggle(false);
-        //pause.Toggle(false);
+        pause.Toggle(false);
         win.Toggle(false);
 
         LevelManager.Instance.ClearLevel();
-
         ChangeScene("Main Menu");
     }
 

@@ -153,9 +153,6 @@ public class Editor : MonoBehaviour
     // Toggles menu
     private void OnEscape() { if (UI.Instance) UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf); }
 
-    // Select deleting tiles
-    private void OnDelete() { isPlacing = false; }
-
-    // Select placing tiles
-    private void OnPlace() { isPlacing = true; }
+    // Select deleting/placing tiles
+    private void OnDelete() { isPlacing = !isPlacing; }
 }

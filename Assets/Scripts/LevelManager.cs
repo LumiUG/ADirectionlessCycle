@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using static Serializables;
 using static GameTile;
 
@@ -40,8 +39,10 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> toDestroy = new();
 
     // Player //
-    private bool canMove = true;
     private Vector3Int latestMovement = Vector3Int.zero;
+    private bool canMove = true;
+    private bool isPaused = false;
+    private bool hasWon = false;
 
     void Awake()
     {
@@ -51,7 +52,6 @@ public class LevelManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Getting grids and tilemap references
-        // SceneManager.sceneLoaded += TryGetSceneReferences;
         TryGetSceneReferences();
 
         // Getting tile references
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
         else if (!levelSolids.Contains(tile)) levelSolids.Add(tile);
     }
 
-    // Adds a tile to the private to destroy queue
+    // Adds a tile to the private to destroy queue (hazards use this)
     public void AddToDestroyQueue(GameTile tile)
     {
         if (!toDestroy.Contains(tile)) toDestroy.Add(tile);
@@ -130,6 +130,8 @@ public class LevelManager : MonoBehaviour
         levelName = levelName.Trim();
 
         // Clears the current level
+        isPaused = false;
+        hasWon = false;
         ClearLevel();
 
         // Loads the new level
@@ -157,9 +159,12 @@ public class LevelManager : MonoBehaviour
     // Moves a tile (or multiple)
     public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false, bool beingPushed = false)
     {
-        // Check if the tile is allowed to move
+        // Check if the tile exists
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
+
+        // Disallows MOVING a tile that has already moved
+        if (movementBlacklist.Contains(tile) && !beingPushed) return false;
 
         // Scene bounds (x,y always at 0)
         if (!CheckSceneInbounds(newPosition)) return false;
@@ -294,11 +299,14 @@ public class LevelManager : MonoBehaviour
                 }
             ) && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
-        if (winCondition) UI.Instance.win.Toggle(true);
+        if (winCondition) {
+            UI.Instance.win.Toggle(true);
+            hasWon = true;
+        }
     }
 
     // Returns if currently in editor
-    public bool IsAllowedToPlay() { return SceneManager.GetActiveScene().name == "Level Editor" || SceneManager.GetActiveScene().name == "Main Menu"; }
+    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon); }
 
     // Is string empty or null
     public bool IsStringEmptyOfNull(string str) { return str == null || str == string.Empty; }
@@ -313,12 +321,19 @@ public class LevelManager : MonoBehaviour
         return JsonUtility.FromJson<SerializableLevel>(levelJson);
     }
 
+    // Pauses or resumes the game.
+    public void PauseResumeGame(bool status)
+    {
+        UI.Instance.pause.Toggle(status);
+        isPaused = status;
+    }
+
     // Player Input //
 
     // Movement
     private void OnMove(InputValue ctx)
     {
-        if (IsAllowedToPlay()) return;
+        if (!IsAllowedToPlay()) return;
 
         // Bad input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
@@ -338,7 +353,7 @@ public class LevelManager : MonoBehaviour
     // Wait
     private void OnWait()
     {
-        if (latestMovement == Vector3Int.zero || IsAllowedToPlay()) return;
+        if (latestMovement == Vector3Int.zero || !IsAllowedToPlay()) return;
 
         // Moves tiles using the user's latest movement
         ApplyGravity(latestMovement);
