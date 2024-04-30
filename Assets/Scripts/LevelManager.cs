@@ -356,7 +356,6 @@ public class LevelManager : MonoBehaviour
         if (!canMove) return;
 
         // Checks if you can actually move in that direction
-        // if (latestMovement == movement * -1) return;
         latestMovement = movement;
         canMove = false;
 

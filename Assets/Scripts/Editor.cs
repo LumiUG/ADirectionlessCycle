@@ -5,11 +5,11 @@ using static GameTile;
 public class Editor : MonoBehaviour
 {
     private GameTile selectedTile;
+    private Coroutine multiClick = null;
     private (bool, bool, bool, bool) directionSet;
     private bool waitingForDirections = false;
     private bool isShiftHeld = false;
     private bool isPlacing = true;
-    private Coroutine multiClick = null;
 
     // Player Input //
 
@@ -45,8 +45,6 @@ public class Editor : MonoBehaviour
     // Places a tile
     private void OnClickGrid()
     {
-        if (selectedTile == null) return;
-        
         // Checks if you are already multi-placing
         if (multiClick != null)
         {
@@ -113,6 +111,8 @@ public class Editor : MonoBehaviour
     // Places a tile on the corresponding grid
     private void EditorPlaceTile(Vector3Int position)
     {
+        if (selectedTile == null) return;
+
         // GameTile isThereATileThere = null;
 
         // Creates the tile

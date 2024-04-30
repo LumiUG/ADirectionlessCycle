@@ -40,6 +40,13 @@ public class UI : MonoBehaviour
     // Change scenes
     public void ChangeScene(string sceneName) { SceneManager.LoadScene(sceneName); }
 
+    // Clear UI Change scene
+    public void CleanChangeScene(string sceneName)
+    {
+        ChangeScene(sceneName);
+        ClearUI();
+    }
+
     // Exit application
     public void ExitApplication() { Application.Quit(); }
 
@@ -52,12 +59,18 @@ public class UI : MonoBehaviour
     // Goes to main menu (scary)
     public void GoMainMenu()
     {
+        LevelManager.Instance.ClearLevel();
+        ClearUI();
+
+        ChangeScene("Main Menu");
+    }
+
+    // Clears the UI (disables everything)
+    private void ClearUI()
+    {
         editor.Toggle(false);
         pause.Toggle(false);
         win.Toggle(false);
-
-        LevelManager.Instance.ClearLevel();
-        ChangeScene("Main Menu");
     }
 
     // Import level (move to LevelEditorUI?)
