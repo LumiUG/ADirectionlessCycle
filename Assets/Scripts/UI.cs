@@ -1,5 +1,7 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class UI : MonoBehaviour
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
         editor.importMenu = editor.self.transform.Find("Import").gameObject;
         editor.exportMenu = editor.self.transform.Find("Export").gameObject;
+        editor.editorMessage = transform.Find("Editor Debug Message").GetComponent<Text>();
+        editor.editorMessage.CrossFadeAlpha(0, 0, true);
 
         win = new() { self = transform.Find("Win Screen").gameObject };
 
@@ -72,6 +76,14 @@ public class UI : MonoBehaviour
     {
         public GameObject importMenu;
         public GameObject exportMenu;
+        public Text editorMessage;
+
+        public void SendMessage(string message, float duration = 1.5f)
+        {
+            editorMessage.text = message;
+            editorMessage.CrossFadeAlpha(1, 0, true);
+            editorMessage.CrossFadeAlpha(0, duration, true);
+        }
     }
     public class WinUI : UIObject
     {

@@ -65,10 +65,10 @@ public class Editor : MonoBehaviour
 
         // Selects the tile
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!tile) { Debug.LogWarning($"Invalid tile at position \"{gridPos}\""); return; }
+        if (!tile) { UI.Instance.editor.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Changes directions
-        if (waitingForDirections) { Debug.LogWarning("Already waiting!"); return; }
+        if (waitingForDirections) { UI.Instance.editor.SendMessage($"Already Waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
         else { tile.directions.pushable = !tile.directions.pushable; tile.directions.UpdateSprites(); }
     }
@@ -135,7 +135,7 @@ public class Editor : MonoBehaviour
     // Waits for a direction to be set
     private IEnumerator WaitForDirection(GameTile tile)
     {
-        Debug.Log($"Selected {tile.name}!");
+        UI.Instance.editor.SendMessage($"Selected {tile.name}!");
         directionSet = (false, false, false, false);
         waitingForDirections = true;
 
@@ -147,7 +147,7 @@ public class Editor : MonoBehaviour
         LevelManager.Instance.tilemapObjects.SetTile(tile.position, null);
         LevelManager.Instance.tilemapObjects.SetTile(tile.position, tile);
         LevelManager.Instance.tilemapObjects.RefreshTile(tile.position);
-        Debug.Log("Set new tile directions.");
+        UI.Instance.editor.SendMessage("Set new tile directions.");
     }
 
     // Toggles menu
