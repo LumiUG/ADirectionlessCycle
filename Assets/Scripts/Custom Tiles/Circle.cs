@@ -15,7 +15,10 @@ public class CircleTile : GameTile
         bool objectCollision = tilemapObjects.GetTile<GameTile>(checkPosition) != null;
 
         // Check if the position is valid, if not, return the same tile you're at
-        if (collideableCollision || objectCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition)) return checkPosition - direction;
+        if (collideableCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition)) return checkPosition - direction;
+
+        // Moves the tile infront if able, this DOES NOT PUSH.
+        else if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return checkPosition - direction;
 
         // Find next jump spot. Recursion...
         return CollisionHandler(checkPosition + direction, direction, tilemapObjects, tilemapCollideable);
