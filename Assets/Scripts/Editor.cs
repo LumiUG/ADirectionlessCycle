@@ -130,10 +130,15 @@ public class Editor : MonoBehaviour
 
             case ObjectTypes.Area:
             case ObjectTypes.InverseArea:
+                if (LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position)) break;
+                LevelManager.Instance.tilemapWinAreas.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToWinAreasList(tileToCreate);
+                break;
+
             case ObjectTypes.Hazard:
-                if (LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapOverlaps.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToOverlapList(tileToCreate);
+                if (LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position)) break;
+                LevelManager.Instance.tilemapHazards.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToHazardsList(tileToCreate);
                 break;
 
             default:
@@ -149,7 +154,8 @@ public class Editor : MonoBehaviour
     {
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapOverlaps.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position);
         if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 

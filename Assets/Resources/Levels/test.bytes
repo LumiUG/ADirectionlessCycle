@@ -1,0 +1,57 @@
+{
+    "levelName": "test",
+    "tiles": {
+        "solidTiles": [],
+        "objectTiles": [
+            {
+                "type": "Box",
+                "directions": {
+                    "pushable": true,
+                    "up": true,
+                    "down": true,
+                    "left": true,
+                    "right": true
+                },
+                "position": {
+                    "x": 9,
+                    "y": -7,
+                    "z": 0
+                }
+            }
+        ],
+        "overlapTiles": [
+            {
+                "type": "InverseArea",
+                "directions": {
+                    "pushable": false,
+                    "up": false,
+                    "down": false,
+                    "left": false,
+                    "right": false
+                },
+                "position": {
+                    "x": 7,
+                    "y": -5,
+                    "z": 0
+                }
+            }
+        ],
+        "hazardTiles": [
+            {
+                "type": "Hazard",
+                "directions": {
+                    "pushable": false,
+                    "up": false,
+                    "down": false,
+                    "left": false,
+                    "right": false
+                },
+                "position": {
+                    "x": 8,
+                    "y": -5,
+                    "z": 0
+                }
+            }
+        ]
+    }
+}

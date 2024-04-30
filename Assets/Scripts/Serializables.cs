@@ -20,6 +20,7 @@ public class Serializables
         public List<SerializableTile> solidTiles = new();
         public List<SerializableTile> objectTiles = new();
         public List<SerializableTile> overlapTiles = new();
+        public List<SerializableTile> hazardTiles = new();
     }
 
     // Similar to a GameTile, but able to serialize to json

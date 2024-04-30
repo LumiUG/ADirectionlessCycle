@@ -13,8 +13,8 @@ public class LevelManager : MonoBehaviour
     // Basic //
     private readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
     private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
-    private readonly ObjectTypes[] typesOverlapsList = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.Hazard };
     private readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
+    private readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
@@ -30,12 +30,14 @@ public class LevelManager : MonoBehaviour
     private Grid levelGrid;
     [HideInInspector] public Tilemap tilemapCollideable;
     [HideInInspector] public Tilemap tilemapObjects;
-    [HideInInspector] public Tilemap tilemapOverlaps;
+    [HideInInspector] public Tilemap tilemapWinAreas;
+    [HideInInspector] public Tilemap tilemapHazards;
 
     // Level data //
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
-    private readonly List<GameTile> levelOverlaps = new();
+    private readonly List<GameTile> levelWinAreas = new();
+    private readonly List<GameTile> levelHazards = new();
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<GameTile> toDestroy = new();
 
@@ -64,8 +66,6 @@ public class LevelManager : MonoBehaviour
         areaTile = Resources.Load<AreaTile>("Tiles/Area");
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
-
-        // LoadLevel("death2");
     }
 
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
@@ -75,7 +75,8 @@ public class LevelManager : MonoBehaviour
         levelGrid = gridObject != null ? gridObject.GetComponent<Grid>() : null;
         tilemapCollideable = gridObject != null ? gridObject.Find("Collideable").GetComponent<Tilemap>() : null;
         tilemapObjects = gridObject != null ? gridObject.Find("Objects").GetComponent<Tilemap>() : null;
-        tilemapOverlaps = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
+        tilemapWinAreas = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
+        tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
     }
 
     // Adds a tile to the private objects list
@@ -85,11 +86,11 @@ public class LevelManager : MonoBehaviour
         else if (!levelObjects.Contains(tile)) levelObjects.Add(tile);
     }
 
-    // Adds a tile to the private overlaps list
-    public void AddToOverlapList(GameTile tile)
+    // Adds a tile to the private win areas list
+    public void AddToWinAreasList(GameTile tile)
     {
-        if (!typesOverlapsList.Contains(tile.GetTileType())) return;
-        else if (!levelOverlaps.Contains(tile)) levelOverlaps.Add(tile);
+        if (!typesAreas.Contains(tile.GetTileType())) return;
+        else if (!levelWinAreas.Contains(tile)) levelWinAreas.Add(tile);
     }
 
     // Adds a tile to the private collideable list
@@ -97,6 +98,13 @@ public class LevelManager : MonoBehaviour
     {
         if (!typesSolidsList.Contains(tile.GetTileType())) return;
         else if (!levelSolids.Contains(tile)) levelSolids.Add(tile);
+    }
+
+    // Adds a tile to the private hazards list
+    public void AddToHazardsList(GameTile tile)
+    {
+        if (!typesHazardsList.Contains(tile.GetTileType())) return;
+        else if (!levelHazards.Contains(tile)) levelHazards.Add(tile);
     }
 
     // Adds a tile to the private to destroy queue (hazards use this)
@@ -117,7 +125,8 @@ public class LevelManager : MonoBehaviour
         // Populate the level
         levelSolids.ForEach(tile => level.tiles.solidTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelObjects.ForEach(tile => level.tiles.objectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
-        levelOverlaps.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelWinAreas.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelHazards.ForEach(tile => level.tiles.hazardTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/{levelName}.bytes";
@@ -141,7 +150,8 @@ public class LevelManager : MonoBehaviour
         // Loads the level
         level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
         level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
-        level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapOverlaps, levelOverlaps));
+        level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
+        level.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
         UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"!");
     }
 
@@ -153,7 +163,8 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         levelSolids.Clear();
         levelObjects.Clear();
-        levelOverlaps.Clear();
+        levelWinAreas.Clear();
+        levelHazards.Clear();
     }
 
     // Moves a tile (or multiple)
@@ -187,7 +198,7 @@ public class LevelManager : MonoBehaviour
         if (removeFromQueue) { movementBlacklist.Add(tile); }
 
         // Marks all the objects that should be deleted
-        HazardTile hazard = tilemapOverlaps.GetTile<HazardTile>(tile.position);
+        HazardTile hazard = tilemapHazards.GetTile<HazardTile>(tile.position);
         if (hazard) AddToDestroyQueue(tile);
 
         return true;
@@ -220,9 +231,13 @@ public class LevelManager : MonoBehaviour
 
             case ObjectTypes.Area:
             case ObjectTypes.InverseArea:
+                tilemapWinAreas.SetTile(tile.position, null);
+                levelWinAreas.Remove(tile);
+                break;
+
             case ObjectTypes.Hazard:
-                tilemapOverlaps.SetTile(tile.position, null);
-                levelOverlaps.Remove(tile);
+                tilemapHazards.SetTile(tile.position, null);
+                levelHazards.Remove(tile);
                 break;
 
             default:
@@ -244,7 +259,7 @@ public class LevelManager : MonoBehaviour
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
-            _ => Instantiate(boxTile) // Default, also covers box types
+            _ => Instantiate(boxTile) // Default, covers box types
         };
 
         // Apply tile defaults
@@ -287,7 +302,7 @@ public class LevelManager : MonoBehaviour
         // All area tiles have some object overlapping them and at least 1 exists,
         // no inverse areas are being overlapped.
         bool winCondition = 
-            levelOverlaps.All(overlap =>
+            levelWinAreas.All(overlap =>
                 {
                     if (!typesAreas.Contains(overlap.GetTileType())) return true;
 
@@ -297,7 +312,7 @@ public class LevelManager : MonoBehaviour
                     return (objectOverlap != null && type == ObjectTypes.Area) ||
                     (objectOverlap == null && type == ObjectTypes.InverseArea);
                 }
-            ) && levelOverlaps.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
+            ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
         if (winCondition) {
             UI.Instance.win.Toggle(true);
