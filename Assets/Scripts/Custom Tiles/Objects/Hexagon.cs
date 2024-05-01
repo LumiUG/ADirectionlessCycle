@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Game Tiles/Hexagon Tile")]
+[CreateAssetMenu(menuName = "Game Tiles/Objects/Hexagon Tile")]
 public class HexagonTile : GameTile
 {
     // Returns the tile type

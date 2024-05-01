@@ -1,8 +1,23 @@
 {
-    "levelName": "test",
+    "levelName": "moveParity",
     "tiles": {
         "solidTiles": [],
         "objectTiles": [
+            {
+                "type": "Box",
+                "directions": {
+                    "pushable": false,
+                    "up": true,
+                    "down": true,
+                    "left": true,
+                    "right": true
+                },
+                "position": {
+                    "x": 6,
+                    "y": -4,
+                    "z": 0
+                }
+            },
             {
                 "type": "Box",
                 "directions": {
@@ -13,45 +28,28 @@
                     "right": true
                 },
                 "position": {
-                    "x": 9,
-                    "y": -7,
-                    "z": 0
-                }
-            }
-        ],
-        "overlapTiles": [
-            {
-                "type": "InverseArea",
-                "directions": {
-                    "pushable": false,
-                    "up": false,
-                    "down": false,
-                    "left": false,
-                    "right": false
-                },
-                "position": {
                     "x": 7,
-                    "y": -5,
+                    "y": -4,
                     "z": 0
                 }
-            }
-        ],
-        "hazardTiles": [
+            },
             {
-                "type": "Hazard",
+                "type": "Hexagon",
                 "directions": {
                     "pushable": false,
-                    "up": false,
-                    "down": false,
-                    "left": false,
-                    "right": false
+                    "up": true,
+                    "down": true,
+                    "left": true,
+                    "right": true
                 },
                 "position": {
                     "x": 8,
-                    "y": -5,
+                    "y": -4,
                     "z": 0
                 }
             }
-        ]
+        ],
+        "overlapTiles": [],
+        "hazardTiles": []
     }
 }

@@ -59,12 +59,12 @@ public class LevelManager : MonoBehaviour
         TryGetSceneReferences();
 
         // Getting tile references
-        wallTile = Resources.Load<WallTile>("Tiles/Wall");
-        boxTile = Resources.Load<BoxTile>("Tiles/Box");
-        hexagonTile = Resources.Load<HexagonTile>("Tiles/Hexagon");
-        circleTile = Resources.Load<CircleTile>("Tiles/Circle");
-        areaTile = Resources.Load<AreaTile>("Tiles/Area");
-        inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Inverse Area");
+        wallTile = Resources.Load<WallTile>("Tiles/Solids/Wall");
+        boxTile = Resources.Load<BoxTile>("Tiles/Objects/Box");
+        hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
+        circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
+        areaTile = Resources.Load<AreaTile>("Tiles/Areas/Area");
+        inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
     }
 

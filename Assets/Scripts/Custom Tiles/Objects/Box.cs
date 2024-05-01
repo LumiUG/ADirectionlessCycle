@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game Tiles/Box Tile")]
+[CreateAssetMenu(menuName = "Game Tiles/Objects/Box Tile")]
 public class BoxTile : GameTile
 {
     // Returns the tile type

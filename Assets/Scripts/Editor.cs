@@ -11,6 +11,12 @@ public class Editor : MonoBehaviour
     private bool isShiftHeld = false;
     private bool isPlacing = true;
 
+    // Preview
+    void FixedUpdate()
+    {
+
+    }
+
     // Player Input //
 
     // Changing tiles

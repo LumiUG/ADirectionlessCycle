@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Game Tiles/Circle Tile")]
+[CreateAssetMenu(menuName = "Game Tiles/Objects/Circle Tile")]
 public class CircleTile : GameTile
 {
     // Returns the tile type
