@@ -776,8 +776,8 @@ MonoBehaviour:
   areaTile: {fileID: 0}
   inverseAreaTile: {fileID: 0}
   hazardTile: {fileID: 0}
-  boundsX: 19
-  boundsY: -11
+  boundsX: 13
+  boundsY: -7
   tilemapCollideable: {fileID: 0}
   tilemapObjects: {fileID: 0}
   tilemapWinAreas: {fileID: 0}
@@ -809,7 +809,7 @@ Transform:
   m_GameObject: {fileID: 8281402582060590101}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 0}
+  m_LocalPosition: {x: -6.5, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -827,7 +827,7 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8281402582060590101}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellSize: {x: 1.5, y: 1.5, z: 1.5}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
