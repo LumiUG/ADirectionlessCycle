@@ -1,9 +1,13 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using static GameTile;
 
 public class Editor : MonoBehaviour
 {
+    // Editor Default Settings //
+    private Image previewImage;
     private GameTile selectedTile;
     private Coroutine multiClick = null;
     private (bool, bool, bool, bool) directionSet;
@@ -11,11 +15,11 @@ public class Editor : MonoBehaviour
     private bool isShiftHeld = false;
     private bool isPlacing = true;
 
-    // Preview
-    void FixedUpdate()
-    {
+    // Find preview image
+    void Awake() { previewImage = transform.Find("Preview").GetComponent<Image>(); }
 
-    }
+    // Set the preview image
+    void FixedUpdate() { if (selectedTile) previewImage.sprite = selectedTile.tileSprite; }
 
     // Player Input //
 
@@ -47,6 +51,7 @@ public class Editor : MonoBehaviour
     private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
     private void OnSelectInverseArea() { selectedTile = LevelManager.Instance.inverseAreaTile; }
     private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
+    private void OnSelectEffect() { selectedTile = LevelManager.Instance.invertTile; }
 
     // Places a tile
     private void OnClickGrid()
@@ -77,7 +82,11 @@ public class Editor : MonoBehaviour
         // Changes directions
         if (waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
-        else { tile.directions.pushable = !tile.directions.pushable; tile.directions.UpdateSprites(); }
+        else {
+            UI.Instance.global.SendMessage("Pushable updated.");
+            tile.directions.pushable = !tile.directions.pushable;
+            tile.directions.UpdateSprites();
+        }
     }
 
     // Toggles if the shift key is currently being held (passthrough value)
@@ -128,23 +137,28 @@ public class Editor : MonoBehaviour
         // Sets the tile
         switch (selectedTile.GetTileType())
         {
-            case ObjectTypes.Wall:
+            case ObjectTypes t when LevelManager.Instance.typesSolidsList.Contains(t):
                 if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToCollideableList(tileToCreate);
                 break;
 
-            case ObjectTypes.Area:
-            case ObjectTypes.InverseArea:
+            case ObjectTypes t when LevelManager.Instance.typesAreas.Contains(t):
                 if (LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapWinAreas.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToWinAreasList(tileToCreate);
                 break;
 
-            case ObjectTypes.Hazard:
+            case ObjectTypes t when LevelManager.Instance.typesHazardsList.Contains(t):
                 if (LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapHazards.SetTile(tileToCreate.position, tileToCreate);
                 LevelManager.Instance.AddToHazardsList(tileToCreate);
+                break;
+
+            case ObjectTypes t when LevelManager.Instance.typesEffectsList.Contains(t):
+                if (LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position)) break;
+                LevelManager.Instance.tilemapEffects.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToEffectsList(tileToCreate);
                 break;
 
             default:
@@ -162,6 +176,7 @@ public class Editor : MonoBehaviour
         if (!tile) tile = LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position);
         if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 

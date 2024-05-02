@@ -8,7 +8,7 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Wall, Box, Circle, Hexagon, Area, InverseArea, Hazard, Reverse }
+    public enum ObjectTypes { Wall, Box, Circle, Hexagon, Area, InverseArea, Hazard, Invert }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
 
@@ -41,10 +41,10 @@ public abstract class GameTile : TileBase
         bool objectCollision = objectCollidedWith != null;
 
         // Checks if it is able to move
-        if (collideableCollision || (objectCollision && !objectCollidedWith.directions.pushable)) return Vector3Int.back;
+        if (collideableCollision) return Vector3Int.back;
 
         // "Pushes" objects infront. Recursion!
-        else if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, true)) return Vector3Int.back;
+        if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, objectCollidedWith.directions.pushable)) return Vector3Int.back;
         return checkPosition;
     }
 }

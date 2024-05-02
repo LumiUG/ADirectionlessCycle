@@ -7,14 +7,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static Serializables;
 using static GameTile;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
     // Basic //
-    private readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
-    private readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
-    private readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
-    private readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
+    internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
+    internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
+    internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
+    internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
+    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
@@ -23,6 +25,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile hazardTile;
+    [HideInInspector] public GameTile invertTile;
     public int boundsX = 19;
     public int boundsY = -11;
 
@@ -32,12 +35,14 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapObjects;
     [HideInInspector] public Tilemap tilemapWinAreas;
     [HideInInspector] public Tilemap tilemapHazards;
+    [HideInInspector] public Tilemap tilemapEffects;
 
     // Level data //
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
     private readonly List<GameTile> levelWinAreas = new();
     private readonly List<GameTile> levelHazards = new();
+    private readonly List<GameTile> levelEffects = new();
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<GameTile> toDestroy = new();
 
@@ -65,7 +70,8 @@ public class LevelManager : MonoBehaviour
         circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
         areaTile = Resources.Load<AreaTile>("Tiles/Areas/Area");
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
-        hazardTile = Resources.Load<HazardTile>("Tiles/Hazard");
+        hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
+        invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
     }
 
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
@@ -77,6 +83,7 @@ public class LevelManager : MonoBehaviour
         tilemapObjects = gridObject != null ? gridObject.Find("Objects").GetComponent<Tilemap>() : null;
         tilemapWinAreas = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
         tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
+        tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
     }
 
     // Adds a tile to the private objects list
@@ -107,6 +114,13 @@ public class LevelManager : MonoBehaviour
         else if (!levelHazards.Contains(tile)) levelHazards.Add(tile);
     }
 
+    // Adds a tile to the private effects list
+    public void AddToEffectsList(GameTile tile)
+    {
+        if (!typesEffectsList.Contains(tile.GetTileType())) return;
+        else if (!levelEffects.Contains(tile)) levelEffects.Add(tile);
+    }
+
     // Adds a tile to the private to destroy queue (hazards use this)
     public void AddToDestroyQueue(GameTile tile)
     {
@@ -127,6 +141,7 @@ public class LevelManager : MonoBehaviour
         levelObjects.ForEach(tile => level.tiles.objectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelWinAreas.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelHazards.ForEach(tile => level.tiles.hazardTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/{levelName}.bytes";
@@ -152,6 +167,7 @@ public class LevelManager : MonoBehaviour
         level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
         level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
         level.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
+        level.tiles.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
         UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"!");
     }
 
@@ -165,9 +181,10 @@ public class LevelManager : MonoBehaviour
         levelObjects.Clear();
         levelWinAreas.Clear();
         levelHazards.Clear();
+        levelEffects.Clear();
     }
 
-    // Moves a tile (or multiple)
+    // Moves a tile (needs optimizing)
     public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false, bool beingPushed = false)
     {
         // Check if the tile exists
@@ -201,6 +218,10 @@ public class LevelManager : MonoBehaviour
         HazardTile hazard = tilemapHazards.GetTile<HazardTile>(tile.position);
         if (hazard) AddToDestroyQueue(tile);
 
+        // Tile effect?
+        EffectTile effect = tilemapEffects.GetTile<EffectTile>(tile.position);
+        if (effect) effect.Effect(tile);
+
         return true;
     }
 
@@ -224,20 +245,24 @@ public class LevelManager : MonoBehaviour
     {
         switch (tile.GetTileType())
         {
-            case ObjectTypes.Wall:
+            case ObjectTypes t when typesSolidsList.Contains(t):
                 tilemapCollideable.SetTile(tile.position, null);
                 levelSolids.Remove(tile);
                 break;
 
-            case ObjectTypes.Area:
-            case ObjectTypes.InverseArea:
+            case ObjectTypes t when typesAreas.Contains(t):
                 tilemapWinAreas.SetTile(tile.position, null);
                 levelWinAreas.Remove(tile);
                 break;
 
-            case ObjectTypes.Hazard:
+            case ObjectTypes t when typesHazardsList.Contains(t):
                 tilemapHazards.SetTile(tile.position, null);
                 levelHazards.Remove(tile);
+                break;
+
+            case ObjectTypes t when typesEffectsList.Contains(t):
+                tilemapEffects.SetTile(tile.position, null);
+                levelEffects.Remove(tile);
                 break;
 
             default:
@@ -259,6 +284,7 @@ public class LevelManager : MonoBehaviour
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
+            "Invert" => Instantiate(invertTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 

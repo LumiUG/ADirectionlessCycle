@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Game Tiles/Effects/Reverse Tile")]
-public class ReverseTile : GameTile
+[CreateAssetMenu(menuName = "Game Tiles/Hazards/Hazard Tile")]
+public class HazardTile : GameTile
 {
     // Returns the tile type
-    public override ObjectTypes GetTileType() { return ObjectTypes.Reverse; }
+    public override ObjectTypes GetTileType() { return ObjectTypes.Hazard; }
 
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)

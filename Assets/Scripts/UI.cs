@@ -65,6 +65,9 @@ public class UI : MonoBehaviour
         ChangeScene("Main Menu");
     }
 
+    // Pause/Unpause game
+    public void PauseUnpauseGame(bool status) { LevelManager.Instance.PauseResumeGame(status); }
+
     // Clears the UI (disables everything)
     private void ClearUI()
     {
@@ -72,6 +75,7 @@ public class UI : MonoBehaviour
         pause.Toggle(false);
         win.Toggle(false);
     }
+
 
     // Import level (move to LevelEditorUI?)
     public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName); }

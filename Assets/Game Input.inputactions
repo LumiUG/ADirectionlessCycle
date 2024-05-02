@@ -266,6 +266,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectEffect",
+                    "type": "Button",
+                    "id": "c7c6f807-70f6-4516-8f70-8068ae9d5e82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ClickGrid",
                     "type": "PassThrough",
                     "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
@@ -461,6 +470,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3762a7fb-8159-476c-85e0-d4761af9cdbb",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectEffect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

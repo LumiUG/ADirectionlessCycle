@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Game Tiles/Hazard Tile")]
-public class HazardTile : GameTile
+public abstract class EffectTile : GameTile
 {
-    // Returns the tile type
-    public override ObjectTypes GetTileType() { return ObjectTypes.Hazard; }
-
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
     {
         return Vector3Int.back;
     }
+
+    // Tile's effect
+    public abstract void Effect(GameTile tile);
 }
