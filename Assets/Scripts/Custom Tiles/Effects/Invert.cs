@@ -8,7 +8,7 @@ public class InvertTile : EffectTile
     public override ObjectTypes GetTileType() { return ObjectTypes.Invert; }
 
     // Checks colisions between collideables and objects
-    public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
+    public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable, bool beingPushed = false)
     {
         return Vector3Int.back;
     }

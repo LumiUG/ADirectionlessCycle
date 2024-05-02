@@ -33,18 +33,26 @@ public abstract class GameTile : TileBase
     // DEFAULT //
 
     // Checks colisions between collideables and objects
-    public virtual Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable)
+    public virtual Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable, bool beingPushed = false)
     {
         // Get the collissions
         GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
         bool collideableCollision = tilemapCollideable.GetTile(checkPosition) != null;
         bool objectCollision = objectCollidedWith != null;
 
-        // Checks if it is able to move
+        // Wall? Stop.
         if (collideableCollision) return Vector3Int.back;
 
-        // "Pushes" objects infront. Recursion!
-        if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, objectCollidedWith.directions.pushable)) return Vector3Int.back;
+        // Object? uh.
+        if (objectCollision)
+        {
+            // Allow the object infront to move first (if they can)
+            if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, false))
+            {
+                // Has the object moved? Fucking yes. Try to push the object infront.
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+            }
+        }
         return checkPosition;
     }
 }

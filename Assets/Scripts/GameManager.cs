@@ -25,4 +25,12 @@ public class GameManager : MonoBehaviour
     {
         return SceneManager.GetActiveScene().name == "Level Editor" || SceneManager.GetActiveScene().name == "Main Menu";
     }
+
+    // Normalize direction vector
+    public Vector3Int NormalizeVector(Vector3Int vector)
+    {
+        Vector3Int newVector = vector;
+        newVector.Clamp(new Vector3Int(-1, -1, -1), new Vector3Int(1, 1, 1));
+        return newVector;
+    }
 }

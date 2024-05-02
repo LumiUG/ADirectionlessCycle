@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> levelHazards = new();
     private readonly List<GameTile> levelEffects = new();
     private readonly List<GameTile> movementBlacklist = new();
+    private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
 
     // Player //
@@ -127,6 +128,12 @@ public class LevelManager : MonoBehaviour
         if (!toDestroy.Contains(tile)) toDestroy.Add(tile);
     }
 
+    // Late moving a tile
+    public void AddToLateMove(HexagonTile tile)
+    {
+        if (!lateMove.Contains(tile)) lateMove.Add(tile);
+    }
+
     // Saves a level to the game's persistent path
     public void SaveLevel(string levelName)
     {
@@ -191,6 +198,9 @@ public class LevelManager : MonoBehaviour
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
 
+        // Is the tile pushable?
+        if (!tile.directions.pushable && beingPushed) return false;
+
         // Disallows MOVING a tile that has already moved
         if (movementBlacklist.Contains(tile) && !beingPushed) return false;
 
@@ -204,7 +214,7 @@ public class LevelManager : MonoBehaviour
             direction.x > 0 && !tile.directions.right) && !beingPushed) return false;
 
         // Moves the tile if all collision checks pass
-        newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable);
+        newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
         if (newPosition == Vector3.back || newPosition == startingPosition) return false;
         MoveTile(startingPosition, newPosition, tile);
 
@@ -306,12 +316,23 @@ public class LevelManager : MonoBehaviour
         // Clears blacklist
         movementBlacklist.Clear();
         toDestroy.Clear();
+        lateMove.Clear();
 
         // Sort by move "priority"
         List<GameTile> moveList = levelObjects.OrderBy(tile => tile.GetTileType() != ObjectTypes.Hexagon).ToList();
 
         // Moves every object
         foreach (var tile in moveList)
+        {
+            if (!movementBlacklist.Contains(tile))
+            {
+                // Tries to move a tile
+                TryMove(tile.position, tile.position + movement, movement, true);
+            }
+        }
+
+        // Late moves (stupid...)
+        foreach (var tile in lateMove)
         {
             if (!movementBlacklist.Contains(tile))
             {
