@@ -90,6 +90,7 @@ public class UI : MonoBehaviour
     {
         LevelManager.Instance.SaveLevel(LevelManager.Instance.levelEditorName);
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
+        LevelManager.Instance.currentLevelRealName = LevelManager.Instance.levelEditorName;
         editor.Toggle(false);
         ChangeScene("Game");
     }

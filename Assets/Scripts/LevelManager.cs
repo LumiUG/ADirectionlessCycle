@@ -48,6 +48,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
     public SerializableLevel currentLevel = null;
+    public string currentLevelRealName = null;
     public string levelEditorName = null;
 
     // Player //
@@ -79,6 +80,8 @@ public class LevelManager : MonoBehaviour
 
         // Editor (with file persistence per session)
         levelEditorName = "EditorSession";
+        currentLevelRealName = null;
+        currentLevel = null;
     }
 
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
@@ -176,6 +179,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == null) return;
 
         // Loads the level
+        currentLevelRealName = levelName;
         BuildLevel();
 
         // Yay! UI!
@@ -186,12 +190,14 @@ public class LevelManager : MonoBehaviour
     // Load and build a level
     public void ReloadLevel()
     {
+        if (currentLevel == null) return;
+
         // Clears the current level
         ClearLevel();
 
         // Loads the new level
         UI.Instance.global.SendMessage("Reloaded level.");
-        if (currentLevel == null) return;
+        currentLevel = GetLevel(currentLevelRealName, true);
         BuildLevel();
     }
 
@@ -406,7 +412,17 @@ public class LevelManager : MonoBehaviour
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelName, bool external)
     {
-        string level = external ? File.ReadAllText($"{Application.persistentDataPath}/{levelName}.bytes") : Resources.Load<TextAsset>($"Levels/{levelName}").text;
+        string externalPath = $"{Application.persistentDataPath}/{levelName}.bytes";
+        string level = null;
+
+        // Internal/external level import.
+        if (external && File.Exists(externalPath)) level = File.ReadAllText(externalPath);
+        else {
+            TextAsset internalCheck = Resources.Load<TextAsset>($"Levels/{levelName}");
+            if (internalCheck) level = internalCheck.text;
+        }
+
+        // Invalid level!
         if (level == null) { UI.Instance.global.SendMessage($"Invalid level! ({levelName})"); return null; }
 
         return JsonUtility.FromJson<SerializableLevel>(level);

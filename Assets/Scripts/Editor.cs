@@ -119,7 +119,7 @@ public class Editor : MonoBehaviour
             else EditorDeleteTile(gridPos);
 
             // Waits and does another loop
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
