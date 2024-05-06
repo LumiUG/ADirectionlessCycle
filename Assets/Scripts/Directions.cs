@@ -6,7 +6,7 @@ using UnityEngine;
 public class Directions
 {
     // Tile values //
-    public bool pushable = true; // Slight bugs with this property!
+    public bool pushable = true;
     public bool up;
     public bool down;
     public bool left;

@@ -5,9 +5,9 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 using static Serializables;
 using static GameTile;
-using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -46,6 +46,13 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
+
+    // Stored level data (Restarting, etc. very innefective.) //
+    private List<GameTile> storedLevelSolids = new();
+    private List<GameTile> storedLevelObjects = new();
+    private List<GameTile> storedLevelWinAreas = new();
+    private List<GameTile> storedLevelHazards = new();
+    private List<GameTile> storedLevelEffects = new();
 
     // Player //
     private Vector3Int latestMovement = Vector3Int.zero;
@@ -175,7 +182,39 @@ public class LevelManager : MonoBehaviour
         level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
         level.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
         level.tiles.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
-        UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"!");
+
+        // Store level data
+        StoreLevel();
+
+        // Yay! UI!
+        UI.Instance.pause.SetLevelName(levelName);
+        UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"");
+    }
+
+    // Stores the current level data for reloading, slow, don't call often!
+    private void StoreLevel()
+    {
+        storedLevelSolids = new List<GameTile>(levelSolids);
+        storedLevelObjects = new List<GameTile>(levelObjects);
+        storedLevelWinAreas = new List<GameTile>(levelWinAreas);
+        storedLevelHazards = new List<GameTile>(levelHazards);
+        storedLevelSolids = new List<GameTile>(levelSolids);
+        storedLevelEffects = new List<GameTile>(levelEffects);
+    }
+
+    // Load and build a level
+    public void ReloadLevel()
+    {
+        // Clears the current level
+        ClearLevel();
+
+        // Reloads the level
+        storedLevelSolids.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapCollideable, levelSolids));
+        storedLevelObjects.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapObjects, levelObjects));
+        storedLevelWinAreas.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
+        storedLevelHazards.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapHazards, levelHazards));
+        storedLevelEffects.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapEffects, levelEffects));
+        UI.Instance.global.SendMessage("Reloaded level.");
     }
 
     // Clears the current level
@@ -438,4 +477,7 @@ public class LevelManager : MonoBehaviour
         ApplyGravity(latestMovement);
         CheckCompletion();
     }
+
+    // Restart
+    private void OnRestart() { ReloadLevel(); }
 }

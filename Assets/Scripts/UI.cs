@@ -32,6 +32,8 @@ public class UI : MonoBehaviour
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
+        pause.levelInfo = pause.self.transform.Find("Level Info");
+        pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
 
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
@@ -84,7 +86,11 @@ public class UI : MonoBehaviour
     public void LevelEditorExportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.SaveLevel(levelName); }
 
     // Playtest level (move to LevelEditorUI?)
-    public void LevelEditorPlaytest() { editor.Toggle(false); ChangeScene("Game"); }
+    public void LevelEditorPlaytest()
+    {
+        editor.Toggle(false);
+        ChangeScene("Game");
+    }
 
     // Object classes
     public abstract class UIObject
@@ -115,5 +121,11 @@ public class UI : MonoBehaviour
 
     public class WinUI : UIObject { }
 
-    public class PauseUI : UIObject { }
+    public class PauseUI : UIObject
+    {
+        public Transform levelInfo;
+        public Text levelName;
+
+        public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
+    }
 }
