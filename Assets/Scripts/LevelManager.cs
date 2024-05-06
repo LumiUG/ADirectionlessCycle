@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using static Serializables;
 using static GameTile;
-using UnityEditor.PackageManager;
 
 public class LevelManager : MonoBehaviour
 {
@@ -482,5 +481,5 @@ public class LevelManager : MonoBehaviour
     }
 
     // Restart
-    private void OnRestart() { ReloadLevel(); }
+    private void OnRestart() { if (IsAllowedToPlay()) ReloadLevel(); }
 }
