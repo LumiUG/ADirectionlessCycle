@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using static Serializables;
 using static GameTile;
+using UnityEditor.PackageManager;
 
 public class LevelManager : MonoBehaviour
 {
@@ -46,13 +47,8 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
-
-    // Stored level data (Restarting, etc. very innefective.) //
-    private List<GameTile> storedLevelSolids = new();
-    private List<GameTile> storedLevelObjects = new();
-    private List<GameTile> storedLevelWinAreas = new();
-    private List<GameTile> storedLevelHazards = new();
-    private List<GameTile> storedLevelEffects = new();
+    public SerializableLevel currentLevel = null;
+    public string levelEditorName = null;
 
     // Player //
     private Vector3Int latestMovement = Vector3Int.zero;
@@ -80,6 +76,9 @@ public class LevelManager : MonoBehaviour
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
+
+        // Editor (with file persistence per session)
+        levelEditorName = "EditorSession";
     }
 
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
@@ -159,12 +158,12 @@ public class LevelManager : MonoBehaviour
 
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/{levelName}.bytes";
-        File.WriteAllText(levelPath, JsonUtility.ToJson(level, true));
+        File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
         UI.Instance.global.SendMessage($"Saved level \"{levelName}\" to \"{levelPath}\".");
     }
 
     // Load and build a level
-    public void LoadLevel(string levelName)
+    public void LoadLevel(string levelName, bool external = false)
     {
         if (IsStringEmptyOfNull(levelName)) return;
         levelName = levelName.Trim();
@@ -173,33 +172,15 @@ public class LevelManager : MonoBehaviour
         ClearLevel();
 
         // Loads the new level
-        SerializableLevel level = GetLevel(levelName);
-        if (level == null) return;
+        currentLevel = GetLevel(levelName, external);
+        if (currentLevel == null) return;
 
         // Loads the level
-        level.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
-        level.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
-        level.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
-        level.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
-        level.tiles.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
-
-        // Store level data
-        StoreLevel();
+        BuildLevel();
 
         // Yay! UI!
         UI.Instance.pause.SetLevelName(levelName);
         UI.Instance.global.SendMessage($"Loaded level \"{levelName}\"");
-    }
-
-    // Stores the current level data for reloading, slow, don't call often!
-    private void StoreLevel()
-    {
-        storedLevelSolids = new List<GameTile>(levelSolids);
-        storedLevelObjects = new List<GameTile>(levelObjects);
-        storedLevelWinAreas = new List<GameTile>(levelWinAreas);
-        storedLevelHazards = new List<GameTile>(levelHazards);
-        storedLevelSolids = new List<GameTile>(levelSolids);
-        storedLevelEffects = new List<GameTile>(levelEffects);
     }
 
     // Load and build a level
@@ -208,13 +189,20 @@ public class LevelManager : MonoBehaviour
         // Clears the current level
         ClearLevel();
 
-        // Reloads the level
-        storedLevelSolids.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapCollideable, levelSolids));
-        storedLevelObjects.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapObjects, levelObjects));
-        storedLevelWinAreas.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
-        storedLevelHazards.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapHazards, levelHazards));
-        storedLevelEffects.ForEach(tile => PlaceTile(CreateTile(tile.GetTileType().ToString(), tile.directions, tile.position), tilemapEffects, levelEffects));
+        // Loads the new level
         UI.Instance.global.SendMessage("Reloaded level.");
+        if (currentLevel == null) return;
+        BuildLevel();
+    }
+
+    // Builds the level
+    private void BuildLevel()
+    {
+        currentLevel.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
+        currentLevel.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
+        currentLevel.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
+        currentLevel.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
+        currentLevel.tiles.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
     }
 
     // Clears the current level
@@ -416,13 +404,12 @@ public class LevelManager : MonoBehaviour
     public bool IsStringEmptyOfNull(string str) { return str == null || str == string.Empty; }
 
     // Gets a level and returns it as a serialized object
-    private SerializableLevel GetLevel(string levelName)
+    public SerializableLevel GetLevel(string levelName, bool external)
     {
-        TextAsset level = Resources.Load<TextAsset>($"Levels/{levelName}");
-        if (!level) { UI.Instance.global.SendMessage($"Invalid level! ({levelName})"); return null; }
+        string level = external ? File.ReadAllText($"{Application.persistentDataPath}/{levelName}.bytes") : Resources.Load<TextAsset>($"Levels/{levelName}").text;
+        if (level == null) { UI.Instance.global.SendMessage($"Invalid level! ({levelName})"); return null; }
 
-        string levelJson = level.text;
-        return JsonUtility.FromJson<SerializableLevel>(levelJson);
+        return JsonUtility.FromJson<SerializableLevel>(level);
     }
 
     // Pauses or resumes the game.

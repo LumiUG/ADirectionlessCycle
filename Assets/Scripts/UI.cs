@@ -88,6 +88,8 @@ public class UI : MonoBehaviour
     // Playtest level (move to LevelEditorUI?)
     public void LevelEditorPlaytest()
     {
+        LevelManager.Instance.SaveLevel(LevelManager.Instance.levelEditorName);
+        LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         editor.Toggle(false);
         ChangeScene("Game");
     }
