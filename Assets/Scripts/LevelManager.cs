@@ -46,9 +46,9 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
-    public SerializableLevel currentLevel = null;
-    public string currentLevelRealName = null;
-    public string levelEditorName = null;
+    [HideInInspector] public SerializableLevel currentLevel = null;
+    [HideInInspector] public string currentLevelRealName = null;
+    [HideInInspector] public string levelEditorName = null;
 
     // Player //
     private Vector3Int latestMovement = Vector3Int.zero;

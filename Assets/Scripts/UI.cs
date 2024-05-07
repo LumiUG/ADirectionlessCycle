@@ -21,6 +21,7 @@ public class UI : MonoBehaviour
         global = new() { self = gameObject };
         global.debugger = global.self.transform.Find("Debugger").GetComponent<Text>();
         global.debugger.CrossFadeAlpha(0, 0, true);
+        global.camera = Camera.main;
 
         // Editor menu
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
@@ -99,6 +100,7 @@ public class UI : MonoBehaviour
 
     public class GlobalUI : UIObject
     {
+        public Camera camera;
         public Text debugger;
 
         // Sends a message log to the editor UI
