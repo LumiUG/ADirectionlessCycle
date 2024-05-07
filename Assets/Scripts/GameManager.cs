@@ -5,6 +5,8 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
+    [HideInInspector] public AudioSource musicBox;
+
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings" };
 
     void Awake()

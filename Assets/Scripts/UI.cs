@@ -52,12 +52,6 @@ public class UI : MonoBehaviour
     // Exit application
     public void ExitApplication() { Application.Quit(); }
 
-    // Master Slider
-    public void UpdateMasterSlider(float value) { Debug.Log($"Master: {value}"); }
-
-    // SFX Slider
-    public void UpdateSFXSlider(float value) { Debug.Log($"SFX: {value}"); }
-
     // Goes to main menu (scary)
     public void GoMainMenu()
     {
