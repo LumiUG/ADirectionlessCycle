@@ -26,8 +26,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
-    public int boundsX = 19;
-    public int boundsY = -11;
+    public int boundsX = 13; // Recommended not to change!
+    public int boundsY = -7; // Recommended not to change!
 
     // Grids and tilemaps //
     private Grid levelGrid;

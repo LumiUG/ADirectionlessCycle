@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
     public Dropdown resolutionDropdown;
+    public Slider masterSlider;
+    public Slider SFXSlider;
+    public Text version;
 
     private Resolution[] resolutions;
 
@@ -20,6 +22,13 @@ public class SettingsMenu : MonoBehaviour
         options.Add("NATIVE");
         foreach (Resolution resolution in resolutions) { options.Add($"{resolution.width}x{resolution.height}"); }
         resolutionDropdown.AddOptions(options);
+
+        // Update sliders (change from GameManager in the future)
+        // masterSlider.value = 1;
+        // SFXSlider.value = 1;
+
+        // Version text
+        version.text = $"Running v{Application.version}";
     }
 
     // Changes the game resolution
@@ -43,7 +52,7 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    // Toggle fullscreen
+    // Toggle fullscreen (disabled for now)
     public void ToggleFullscreen(bool toggle)
     {
         //Screen.fullScreen = toggle;

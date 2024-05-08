@@ -73,9 +73,8 @@ public class UI : MonoBehaviour
         win.Toggle(false);
     }
 
-
     // Import level
-    public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName); }
+    public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName, true); }
 
     // Export level
     public void LevelEditorExportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.SaveLevel(levelName); }

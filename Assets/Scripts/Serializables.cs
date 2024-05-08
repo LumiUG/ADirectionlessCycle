@@ -5,6 +5,8 @@ using static GameTile;
 
 public class Serializables
 {
+    // Level serializing //
+
     // Level as a serializable class
     [Serializable]
     public class SerializableLevel
@@ -39,5 +41,14 @@ public class Serializables
             directions = tileDirections;
             position = tilePosition;
         }
+    }
+
+    // Savedata stuff //
+
+    // Main game's save
+    [Serializable]
+    public class Savedata
+    {
+
     }
 }

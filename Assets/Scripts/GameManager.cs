@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
+using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,10 +39,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Normalize direction vector
-    public Vector3Int NormalizeVector(Vector3Int vector)
-    {
-        Vector3Int newVector = vector;
-        newVector.Clamp(new Vector3Int(-1, -1, -1), new Vector3Int(1, 1, 1));
-        return newVector;
-    }
+    // public Vector3Int NormalizeVector(Vector3Int vector)
+    // {
+    //     Vector3Int newVector = vector;
+    //     newVector.Clamp(new Vector3Int(-1, -1, -1), new Vector3Int(1, 1, 1));
+    //     return newVector;
+    // }
+
+    // Stuff with savedata //
+
 }

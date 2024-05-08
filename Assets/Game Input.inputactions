@@ -527,6 +527,34 @@
             ]
         },
         {
+            "name": "Hub",
+            "id": "e58540c9-f719-4259-8667-79267202508b",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "77171403-7fb0-43c4-8ec3-6407db57bc92",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "49591e59-f4b2-4541-8285-974fe4b6262b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "UI",
             "id": "f471712c-a782-4869-99fa-1d0098a55ad9",
             "actions": [
