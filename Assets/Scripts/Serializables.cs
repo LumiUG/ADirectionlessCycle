@@ -49,6 +49,32 @@ public class Serializables
     [Serializable]
     public class Savedata
     {
+        public GameData game;
+        public Preferences preferences;
+    }
 
+    // Game data
+    [Serializable]
+    public class GameData
+    {
+        public List<Level> levels;
+
+        // A level.
+        [Serializable]
+        public class Level
+        {
+            public int levelID;
+        }
+    }
+
+
+    // User settings
+    [Serializable]
+    public class Preferences
+    {
+        public Resolution resolution;
+        public FullScreenMode fullScreenMode;
+        public float masterVolume;
+        public float SFXVolume;
     }
 }
