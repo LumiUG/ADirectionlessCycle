@@ -1,12 +1,17 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
+using System.IO;
 using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
     [HideInInspector] public AudioSource musicBox;
+    
+    // Game data // 
+    public static Savedata save;
+    private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings" };
 
@@ -16,7 +21,22 @@ public class GameManager : MonoBehaviour
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
+
+        // Game data
+        dataPath = $"{Application.persistentDataPath}/userdata.save";
+
+        // Create a savefile if none exist
+        string levelDir = $"{Application.persistentDataPath}/Custom Levels";
+        if (!File.Exists(dataPath)) SaveDataJSON(new Savedata());
+        if (!Directory.Exists(levelDir)) Directory.CreateDirectory(levelDir);
+
+        // Load the savefile
+        LoadDataJSON();
+        // UpdateSavedLevel("1234", new(true, 255f, 85));
     }
+
+    // Save game on leaving
+    void OnDisable() { SaveDataJSON(save); }
 
     // Pause event
     private void OnPause()
@@ -38,14 +58,28 @@ public class GameManager : MonoBehaviour
         return badScenes.Contains(SceneManager.GetActiveScene().name);
     }
 
-    // Normalize direction vector
-    // public Vector3Int NormalizeVector(Vector3Int vector)
-    // {
-    //     Vector3Int newVector = vector;
-    //     newVector.Clamp(new Vector3Int(-1, -1, -1), new Vector3Int(1, 1, 1));
-    //     return newVector;
-    // }
-
     // Stuff with savedata //
+    
+    // Save user data
+    public void SaveDataJSON(Savedata save) { File.WriteAllText(dataPath, JsonUtility.ToJson(save)); }
 
+    // Load user data
+    public void LoadDataJSON() { save = JsonUtility.FromJson<Savedata>(File.ReadAllText(dataPath)); }
+
+    // Mark level
+    public void UpdateSavedLevel(string levelID, GameData.LevelChanges changes)
+    {
+        // Get the level
+        GameData.Level level = save.game.levels.Find(l => l.levelID == levelID);
+        if (level == null)
+        {
+            level = new(levelID);
+            save.game.levels.Add(level);
+        }
+
+        // Update the level
+        level.completed = changes.completed;
+        if (changes.time != -1 ) level.stats.bestTime = changes.time;
+        if (changes.moves != -1 ) level.stats.totalMoves = changes.moves;
+    }
 }

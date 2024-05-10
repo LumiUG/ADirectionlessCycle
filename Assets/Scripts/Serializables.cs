@@ -57,13 +57,46 @@ public class Serializables
     [Serializable]
     public class GameData
     {
-        public List<Level> levels;
+        public List<Level> levels = new();
 
-        // A level.
+        // A level
         [Serializable]
         public class Level
         {
-            public int levelID;
+            public string levelID = null;
+            public bool completed = false;
+            public LevelStats stats;
+
+            // Constructor
+            public Level(string id)
+            {
+                levelID = id;
+                stats = new();
+            }
+        }
+
+        // A level's stats
+        [Serializable]
+        public class LevelStats
+        {
+            public float bestTime = 0.0f;
+            public int totalMoves = 0;
+        }
+
+        // Not serializable!!
+        public class LevelChanges
+        {
+            public bool completed;
+            public float time = -1f;
+            public int moves = -1;
+
+            // Constructor
+            public LevelChanges(bool completed, float time, int moves)
+            {
+                this.completed = completed;
+                this.time = time;
+                this.moves = moves;
+            }
         }
     }
 
@@ -73,8 +106,8 @@ public class Serializables
     public class Preferences
     {
         public Resolution resolution;
-        public FullScreenMode fullScreenMode;
-        public float masterVolume;
-        public float SFXVolume;
+        public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
+        public float masterVolume = 1f;
+        public float SFXVolume = 1f;
     }
 }

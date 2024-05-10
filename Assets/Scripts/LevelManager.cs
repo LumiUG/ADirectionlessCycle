@@ -55,6 +55,8 @@ public class LevelManager : MonoBehaviour
     private bool canMove = true;
     private bool isPaused = false;
     public bool hasWon = false;
+    private float levelTimer = 0;
+    private int levelMoves = 0;
 
     void Awake()
     {
@@ -162,7 +164,7 @@ public class LevelManager : MonoBehaviour
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
-        string levelPath = $"{Application.persistentDataPath}/{levelID}.bytes";
+        string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.bytes";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
         UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
     }
@@ -224,6 +226,8 @@ public class LevelManager : MonoBehaviour
         levelWinAreas.Clear();
         levelHazards.Clear();
         levelEffects.Clear();
+        levelTimer = 0f;
+        levelMoves = 0;
     }
 
     // Moves a tile (needs optimizing)
@@ -399,7 +403,11 @@ public class LevelManager : MonoBehaviour
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
-        if (winCondition) {
+        // If won, do the thing
+        if (winCondition)
+        {
+            GameData.LevelChanges changes = new(true, levelTimer, levelMoves);
+            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes);
             UI.Instance.win.Toggle(true);
             hasWon = true;
         }
@@ -414,7 +422,7 @@ public class LevelManager : MonoBehaviour
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external)
     {
-        string externalPath = $"{Application.persistentDataPath}/{levelID}.bytes";
+        string externalPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.bytes";
         string level = null;
 
         // Internal/external level import.
