@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,6 +36,8 @@ public class UI : MonoBehaviour
         pause = new() { self = transform.Find("Pause Menu").gameObject };
         pause.levelInfo = pause.self.transform.Find("Level Info");
         pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
+        pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
+        pause.levelMoves = pause.levelInfo.Find("Level Moves").GetComponent<Text>();
 
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
@@ -123,7 +126,11 @@ public class UI : MonoBehaviour
     {
         public Transform levelInfo;
         public Text levelName;
+        public Text levelTimer;
+        public Text levelMoves;
 
         public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
+        public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}"; }
+        public void SetLevelMoves(int newMoves) { levelMoves.text = $"Moves: {newMoves}"; }
     }
 }

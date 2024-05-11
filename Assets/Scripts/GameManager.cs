@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     private string dataPath;
 
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };
 
     void Awake()
     {

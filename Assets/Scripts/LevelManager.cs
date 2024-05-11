@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
+using System.Collections;
 using System.Linq;
-using UnityEngine;
 using System.IO;
+using UnityEngine.Tilemaps;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
@@ -52,10 +53,11 @@ public class LevelManager : MonoBehaviour
 
     // Player //
     private Vector3Int latestMovement = Vector3Int.zero;
+    private Coroutine timerCoroutine = null;
     private bool canMove = true;
     private bool isPaused = false;
     public bool hasWon = false;
-    private float levelTimer = 0;
+    private float levelTimer = 0f;
     private int levelMoves = 0;
 
     void Awake()
@@ -186,6 +188,10 @@ public class LevelManager : MonoBehaviour
         currentLevelID = levelID;
         BuildLevel();
 
+        // Start the level timer (coro)
+        if (timerCoroutine != null) StopCoroutine(timerCoroutine);
+        timerCoroutine = StartCoroutine(LevelTimer());
+
         // Yay! UI!
         UI.Instance.pause.SetLevelName(currentLevel.levelName);
         UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
@@ -226,8 +232,6 @@ public class LevelManager : MonoBehaviour
         levelWinAreas.Clear();
         levelHazards.Clear();
         levelEffects.Clear();
-        levelTimer = 0f;
-        levelMoves = 0;
     }
 
     // Moves a tile (needs optimizing)
@@ -382,6 +386,11 @@ public class LevelManager : MonoBehaviour
 
         // Destroys all marked object tiles.
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
+
+        // Win check, add one move to the player
+        levelMoves++;
+        if (UI.Instance) UI.Instance.pause.SetLevelMoves(levelMoves);
+        CheckCompletion();
     }
 
     // Checks if you've won
@@ -456,8 +465,26 @@ public class LevelManager : MonoBehaviour
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
         if (scene.name != "Game") return;
+
         isPaused = false;
         hasWon = false;
+        levelTimer = 0f;
+        levelMoves = 0;
+
+        UI.Instance.pause.SetLevelName("Unknown");
+        UI.Instance.pause.SetLevelTimer(levelTimer);
+        UI.Instance.pause.SetLevelMoves(levelMoves);
+    }
+
+    // Level timer speedrun any%
+    private IEnumerator LevelTimer()
+    {
+        while (!hasWon)
+        {
+            levelTimer += 0.01f;
+            if (UI.Instance) UI.Instance.pause.SetLevelTimer(levelTimer);
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
     }
 
     // Player Input //
@@ -476,9 +503,8 @@ public class LevelManager : MonoBehaviour
         latestMovement = movement;
         canMove = false;
 
-        // Moves tiles and checks for a win
+        // Moves tiles
         ApplyGravity(movement);
-        CheckCompletion();
     }
 
     // Wait
@@ -488,7 +514,6 @@ public class LevelManager : MonoBehaviour
 
         // Moves tiles using the user's latest movement
         ApplyGravity(latestMovement);
-        CheckCompletion();
     }
 
     // Restart
