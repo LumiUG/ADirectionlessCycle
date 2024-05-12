@@ -8,4 +8,13 @@ public class Hub : MonoBehaviour
     {
 
     }
+
+    // Load level
+    public void StaticLoadLevel(string levelName)
+    {
+        if (!LevelManager.Instance) return;
+
+        LevelManager.Instance.LoadLevel(levelName);
+        UI.Instance.ChangeScene("Game");
+    }
 }

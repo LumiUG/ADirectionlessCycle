@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.IO;
+using System;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
 
@@ -52,13 +54,13 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public string levelEditorName = null;
 
     // Player //
-    private Vector3Int latestMovement = Vector3Int.zero;
+    private Vector3Int latestMovement = Vector3Int.back;
     private Coroutine timerCoroutine = null;
     private bool canMove = true;
     private bool isPaused = false;
-    public bool hasWon = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
+    public bool hasWon = false;
 
     void Awake()
     {
@@ -80,6 +82,9 @@ public class LevelManager : MonoBehaviour
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
+
+        // Defaults
+        hasWon = false;
 
         // Editor (with file persistence per session)
         levelEditorName = "EditorSession";
@@ -180,7 +185,7 @@ public class LevelManager : MonoBehaviour
         // Clears the current level
         ClearLevel();
 
-        // Loads the new level
+        // Gets the new level
         currentLevel = GetLevel(levelID, external);
         if (currentLevel == null) return;
 
@@ -189,7 +194,6 @@ public class LevelManager : MonoBehaviour
         BuildLevel();
 
         // Start the level timer (coro)
-        if (timerCoroutine != null) StopCoroutine(timerCoroutine);
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Yay! UI!
@@ -205,7 +209,12 @@ public class LevelManager : MonoBehaviour
         // Clears the current level
         ClearLevel();
 
-        // Loads the new level
+        // Restart timer and level stats
+        levelTimer = 0f;
+        levelMoves = 0;
+        timerCoroutine = StartCoroutine(LevelTimer());
+
+        // ""Loads"" the new level
         UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
         BuildLevel();
@@ -225,7 +234,8 @@ public class LevelManager : MonoBehaviour
     public void ClearLevel()
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
-        latestMovement = Vector3Int.zero;
+        if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
+        latestMovement = Vector3Int.back;
         movementBlacklist.Clear();
         levelSolids.Clear();
         levelObjects.Clear();
@@ -415,8 +425,9 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition)
         {
-            GameData.LevelChanges changes = new(true, levelTimer, levelMoves);
-            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes);
+            GameData.LevelChanges changes = new(true, (float)Math.Round(levelTimer, 2), levelMoves);
+            Debug.Log($"{changes.completed}, {changes.time}, {changes.moves}");
+            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
             UI.Instance.win.Toggle(true);
             hasWon = true;
         }
@@ -471,7 +482,7 @@ public class LevelManager : MonoBehaviour
         levelTimer = 0f;
         levelMoves = 0;
 
-        UI.Instance.pause.SetLevelName("Unknown");
+        // UI.Instance.pause.SetLevelName("Unknown");
         UI.Instance.pause.SetLevelTimer(levelTimer);
         UI.Instance.pause.SetLevelMoves(levelMoves);
     }
@@ -510,7 +521,7 @@ public class LevelManager : MonoBehaviour
     // Wait
     private void OnWait()
     {
-        if (latestMovement == Vector3Int.zero || !IsAllowedToPlay()) return;
+        if (latestMovement == Vector3Int.zero || latestMovement == Vector3Int.back || !IsAllowedToPlay()) return;
 
         // Moves tiles using the user's latest movement
         ApplyGravity(latestMovement);

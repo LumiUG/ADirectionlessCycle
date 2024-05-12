@@ -60,6 +60,7 @@ public class UI : MonoBehaviour
     public void GoMainMenu()
     {
         LevelManager.Instance.ClearLevel();
+        LevelManager.Instance.hasWon = false;
         ClearUI();
 
         ChangeScene("Main Menu");

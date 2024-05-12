@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public void LoadDataJSON() { save = JsonUtility.FromJson<Savedata>(File.ReadAllText(dataPath)); }
 
     // Mark level
-    public void UpdateSavedLevel(string levelID, GameData.LevelChanges changes)
+    public void UpdateSavedLevel(string levelID, GameData.LevelChanges changes, bool compareBest = false)
     {
         // Get the level
         GameData.Level level = save.game.levels.Find(l => l.levelID == levelID);
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
         // Update the level
         level.completed = changes.completed;
-        if (changes.time != -1 ) level.stats.bestTime = changes.time;
-        if (changes.moves != -1 ) level.stats.totalMoves = changes.moves;
+        if (changes.time != -1) level.stats.bestTime = (compareBest && (changes.time < level.stats.bestTime || level.stats.bestTime == 0f)) ? changes.time : level.stats.bestTime;
+        if (changes.moves != -1) level.stats.totalMoves = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
     }
 }
