@@ -152,7 +152,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Saves a level to the game's persistent path
-    public void SaveLevel(string levelName, string levelID = default)
+    public void SaveLevel(string levelName, string levelID = default, bool hideMessage = false)
     {
         if (IsStringEmptyOfNull(levelName)) return;
         levelName = levelName.Trim();
@@ -171,9 +171,9 @@ public class LevelManager : MonoBehaviour
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
-        string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.bytes";
+        string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
-        UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
+        if (!hideMessage) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
     }
 
     // Load and build a level
@@ -426,7 +426,6 @@ public class LevelManager : MonoBehaviour
         if (winCondition)
         {
             GameData.LevelChanges changes = new(true, (float)Math.Round(levelTimer, 2), levelMoves);
-            Debug.Log($"{changes.completed}, {changes.time}, {changes.moves}");
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
             UI.Instance.win.Toggle(true);
             hasWon = true;
@@ -442,7 +441,7 @@ public class LevelManager : MonoBehaviour
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external)
     {
-        string externalPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.bytes";
+        string externalPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         string level = null;
 
         // Internal/external level import.
@@ -508,7 +507,7 @@ public class LevelManager : MonoBehaviour
         // Bad input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
         if (movement == Vector3Int.zero) { canMove = true; return; };
-        if (!canMove) return;
+        if (!canMove || (movement.x != 0 && movement.y != 0)) return;
 
         // Checks if you can actually move in that direction
         latestMovement = movement;
