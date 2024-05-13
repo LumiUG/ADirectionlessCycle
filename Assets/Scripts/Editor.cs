@@ -114,13 +114,15 @@ public class Editor : MonoBehaviour
         {
             // Checks mouse position
             Vector3Int gridPos = GetMousePositionOnGrid();
-            if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) yield break;
-
-            // Places the tile (add shift support)
-            if (isPlacing) EditorPlaceTile(gridPos);
-            else EditorDeleteTile(gridPos);
+            if (gridPos != Vector3.back)
+            {
+                // Places the tile
+                if (isPlacing) EditorPlaceTile(gridPos);
+                else EditorDeleteTile(gridPos);
+            }
 
             // Waits and does another loop
+            if (UI.Instance.editor.self.activeSelf) yield break;
             yield return new WaitForSeconds(0.01f);
         }
     }
