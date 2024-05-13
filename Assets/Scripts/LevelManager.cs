@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
-    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert };
+    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
+    [HideInInspector] public GameTile arrowTile;
     public int boundsX = 13; // Recommended not to change!
     public int boundsY = -7; // Recommended not to change!
 
@@ -81,6 +82,7 @@ public class LevelManager : MonoBehaviour
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
+        arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
 
         // Defaults
         hasWon = false;
@@ -358,6 +360,7 @@ public class LevelManager : MonoBehaviour
             "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
             "Invert" => Instantiate(invertTile),
+            "Arrow" => Instantiate(arrowTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 
@@ -485,6 +488,13 @@ public class LevelManager : MonoBehaviour
     {
         tilemapObjects.SetTile(tile.position, null);
         tilemapObjects.SetTile(tile.position, tile);
+    }
+
+    // Refreshes an effect tile
+    public void RefreshEffectTile(GameTile tile)
+    {
+        tilemapEffects.SetTile(tile.position, null);
+        tilemapEffects.SetTile(tile.position, tile);
     }
 
     // Gets called whenever you change scenes

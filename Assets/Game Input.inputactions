@@ -394,9 +394,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SelectEffect",
+                    "name": "SelectInvert",
                     "type": "Button",
                     "id": "c7c6f807-70f6-4516-8f70-8068ae9d5e82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectArrow",
+                    "type": "Button",
+                    "id": "3868c538-01ae-4f8b-bfac-7930fad5ae21",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -608,7 +617,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectEffect",
+                    "action": "SelectInvert",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b074be29-2dcd-415b-b9f3-2d8845ff20f1",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -52,7 +52,8 @@ public class Editor : MonoBehaviour
     private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
     private void OnSelectInverseArea() { selectedTile = LevelManager.Instance.inverseAreaTile; }
     private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
-    private void OnSelectEffect() { selectedTile = LevelManager.Instance.invertTile; }
+    private void OnSelectInvert() { selectedTile = LevelManager.Instance.invertTile; }
+    private void OnSelectArrow() { selectedTile = LevelManager.Instance.arrowTile; }
 
     // Places a tile
     private void OnClickGrid()
@@ -78,12 +79,16 @@ public class Editor : MonoBehaviour
 
         // Selects the tile
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
+        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<ArrowTile>(gridPos); // Only arrow tiles
         if (!tile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Changes directions
         if (waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
         else {
+            if (tile.GetTileType() == ObjectTypes.Arrow) return;
+
+            // Update pushable
             UI.Instance.global.SendMessage("Pushable updated.");
             tile.directions.pushable = !tile.directions.pushable;
             tile.directions.UpdateSprites();
@@ -112,6 +117,8 @@ public class Editor : MonoBehaviour
     {
         while (true)
         {
+            if (UI.Instance.editor.self.activeSelf) yield break;
+
             // Checks mouse position
             Vector3Int gridPos = GetMousePositionOnGrid();
             if (gridPos != Vector3.back)
@@ -122,8 +129,7 @@ public class Editor : MonoBehaviour
             }
 
             // Waits and does another loop
-            if (UI.Instance.editor.self.activeSelf) yield break;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
         }
     }
 
@@ -131,8 +137,6 @@ public class Editor : MonoBehaviour
     private void EditorPlaceTile(Vector3Int position)
     {
         if (selectedTile == null) return;
-
-        // GameTile isThereATileThere = null;
 
         // Creates the tile
         GameTile tileToCreate = Instantiate(selectedTile);
@@ -196,7 +200,8 @@ public class Editor : MonoBehaviour
 
         // Sets the new tile directions (why do i have to refresh it???)
         tile.directions.SetNewDirections(directionSet.Item1, directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        LevelManager.Instance.RefreshObjectTile(tile);
+        if (tile.GetTileType() == ObjectTypes.Arrow) LevelManager.Instance.RefreshEffectTile(tile);
+        else LevelManager.Instance.RefreshObjectTile(tile);
         UI.Instance.global.SendMessage("Set new tile directions.");
     }
 
