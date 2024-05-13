@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
 
         // Load the savefile
         LoadDataJSON();
-        // UpdateSavedLevel("1234", new(true, 255f, 85));
     }
 
     // Save game on leaving
@@ -42,7 +41,8 @@ public class GameManager : MonoBehaviour
     private void OnPause()
     {
         if (IsBadScene() || LevelManager.Instance.hasWon) return;
-        LevelManager.Instance.PauseResumeGame(true);
+        if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
+        else LevelManager.Instance.PauseResumeGame(false);
     }
 
     // DEBUG, load event

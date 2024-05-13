@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static GameTile;
 
@@ -86,6 +87,7 @@ public class Editor : MonoBehaviour
             UI.Instance.global.SendMessage("Pushable updated.");
             tile.directions.pushable = !tile.directions.pushable;
             tile.directions.UpdateSprites();
+            LevelManager.Instance.RefreshObjectTile(tile);
         }
     }
 
@@ -200,5 +202,9 @@ public class Editor : MonoBehaviour
     private void OnEscape() { if (UI.Instance) UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf); }
 
     // Select deleting/placing tiles
-    private void OnDelete() { isPlacing = !isPlacing; }
+    private void OnDelete(InputValue ctx)
+    {
+        if (ctx.Get<float>() == 1f) isPlacing = false;
+        else isPlacing = true;
+    }
 }

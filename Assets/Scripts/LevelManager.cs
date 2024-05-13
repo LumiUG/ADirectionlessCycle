@@ -56,7 +56,6 @@ public class LevelManager : MonoBehaviour
     // Player //
     private Vector3Int latestMovement = Vector3Int.back;
     private Coroutine timerCoroutine = null;
-    private bool canMove = true;
     private bool isPaused = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
@@ -197,8 +196,18 @@ public class LevelManager : MonoBehaviour
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Yay! UI!
-        UI.Instance.pause.SetLevelName(currentLevel.levelName);
         UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
+
+        // Pause menu stuff
+        GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
+        UI.Instance.pause.SetLevelName(currentLevel.levelName);
+        if (levelAsSave != null) {
+            UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
+            UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
+        } else {
+            UI.Instance.pause.SetBestTime(0f);
+            UI.Instance.pause.SetBestMoves(0);
+        }
     }
 
     // Load and build a level
@@ -223,6 +232,7 @@ public class LevelManager : MonoBehaviour
     // Builds the level
     private void BuildLevel()
     {
+        if (currentLevel == null) return;
         currentLevel.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
         currentLevel.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
         currentLevel.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
@@ -373,6 +383,7 @@ public class LevelManager : MonoBehaviour
 
         // Sort by move "priority"
         List<GameTile> moveList = levelObjects.OrderBy(tile => tile.GetTileType() != ObjectTypes.Hexagon).ToList();
+        List<bool> validation = new();
 
         // Moves every object
         foreach (var tile in moveList)
@@ -380,7 +391,7 @@ public class LevelManager : MonoBehaviour
             if (!movementBlacklist.Contains(tile))
             {
                 // Tries to move a tile
-                TryMove(tile.position, tile.position + movement, movement, true);
+                validation.Add(TryMove(tile.position, tile.position + movement, movement, true));
             }
         }
 
@@ -390,7 +401,7 @@ public class LevelManager : MonoBehaviour
             if (!movementBlacklist.Contains(tile))
             {
                 // Tries to move a tile
-                TryMove(tile.position, tile.position + movement, movement, true);
+                validation.Add(TryMove(tile.position, tile.position + movement, movement, true));
             }
         }
 
@@ -398,7 +409,7 @@ public class LevelManager : MonoBehaviour
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
 
         // Win check, add one move to the player
-        levelMoves++;
+        if (validation.Contains(true)) levelMoves++;
         if (UI.Instance) UI.Instance.pause.SetLevelMoves(levelMoves);
         CheckCompletion();
     }
@@ -481,7 +492,6 @@ public class LevelManager : MonoBehaviour
         levelTimer = 0f;
         levelMoves = 0;
 
-        // UI.Instance.pause.SetLevelName("Unknown");
         UI.Instance.pause.SetLevelTimer(levelTimer);
         UI.Instance.pause.SetLevelMoves(levelMoves);
     }
@@ -504,16 +514,13 @@ public class LevelManager : MonoBehaviour
     {
         if (!IsAllowedToPlay()) return;
 
-        // Bad input prevention logic
+        // Input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero) { canMove = true; return; };
-        if (!canMove || (movement.x != 0 && movement.y != 0)) return;
-
-        // Checks if you can actually move in that direction
-        latestMovement = movement;
-        canMove = false;
+        if (movement == Vector3Int.zero) return;
+        if (movement.x != 0 && movement.y != 0) return;
 
         // Moves tiles
+        latestMovement = movement;
         ApplyGravity(movement);
     }
 

@@ -79,7 +79,7 @@ public class Serializables
         [Serializable]
         public class LevelStats
         {
-            public double bestTime = 0f;
+            public float bestTime = 0f;
             public int totalMoves = 0;
         }
 

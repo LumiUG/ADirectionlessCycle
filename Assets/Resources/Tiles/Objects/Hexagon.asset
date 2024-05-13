@@ -16,7 +16,7 @@ MonoBehaviour:
   tileObject: {fileID: 7852494226514332356, guid: 67825c11fa7c27b4b99742cd1a3eb568, type: 3}
   position: {x: 0, y: 0, z: 0}
   directions:
-    pushable: 0
+    pushable: 1
     up: 1
     down: 1
     left: 1

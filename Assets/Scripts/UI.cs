@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Serializables.GameData;
 
 public class UI : MonoBehaviour
 {
@@ -34,10 +35,13 @@ public class UI : MonoBehaviour
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
+        if (!Application.isEditor) pause.self.transform.Find("Edit Level Button").gameObject.SetActive(false);
         pause.levelInfo = pause.self.transform.Find("Level Info");
         pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
         pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
         pause.levelMoves = pause.levelInfo.Find("Level Moves").GetComponent<Text>();
+        pause.levelBestMoves = pause.levelInfo.Find("Best Moves").GetComponent<Text>();
+        pause.levelBestTime = pause.levelInfo.Find("Best Time").GetComponent<Text>();
 
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
@@ -129,9 +133,13 @@ public class UI : MonoBehaviour
         public Text levelName;
         public Text levelTimer;
         public Text levelMoves;
+        public Text levelBestTime;
+        public Text levelBestMoves;
 
         public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"Moves: {newMoves}"; }
+        public void SetBestTime(float newTime) { levelBestTime.text = $"Best time: {Math.Round(newTime, 2)}"; }
+        public void SetBestMoves(int newMoves) { levelBestMoves.text = $"Best moves: {newMoves}"; }
     }
 }

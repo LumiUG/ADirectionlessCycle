@@ -19,9 +19,11 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         // Populate and update dropdown
+        options.Add("Default");
         options.Add("NATIVE");
         foreach (Resolution resolution in resolutions) { options.Add($"{resolution.width}x{resolution.height}"); }
         resolutionDropdown.AddOptions(options);
+        resolutionDropdown.options.RemoveAt(0);
 
         // Update sliders (change from GameManager in the future)
         // masterSlider.value = 1;

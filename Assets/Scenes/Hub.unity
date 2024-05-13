@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 293672307}
   - component: {fileID: 293672306}
   - component: {fileID: 293672310}
+  - component: {fileID: 293672312}
   - component: {fileID: 293672311}
   m_Layer: 5
   m_Name: Hub UI
@@ -718,6 +719,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c3603b0a5c4c1644a77f0e05477d215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &293672312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293672303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bda10a989941854dadcca9f5a7ff682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &410000425
@@ -1754,10 +1767,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: GoMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 293672312}
+        m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
+        m_MethodName: StaticChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

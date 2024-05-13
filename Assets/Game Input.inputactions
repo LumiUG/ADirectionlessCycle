@@ -449,7 +449,7 @@
                 },
                 {
                     "name": "Delete",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "f36c9748-47b6-4168-8102-206cbd19caea",
                     "expectedControlType": "Button",
                     "processors": "",
