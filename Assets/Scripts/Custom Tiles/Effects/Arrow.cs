@@ -22,21 +22,17 @@ public class ArrowTile : EffectTile
             (tile.directions.left == false && directions.left == true) ||
             (tile.directions.right == false && directions.right == true))) return;
 
-        // Update directions
-        if (directions.up && !tile.directions.up) { tile.directions.up = true; directions.up = false; }
-        if (directions.down && !tile.directions.down) { tile.directions.down = true; directions.down = false; }
-        if (directions.left && !tile.directions.left) { tile.directions.left = true; directions.left = false; }
-        if (directions.right && !tile.directions.right) { tile.directions.right = true; directions.right = false; }
+        // Update directions (im sorry)
+        if (directions.up && !tile.directions.up) { tile.directions.SetNewDirections(true, tile.directions.down, tile.directions.left, tile.directions.right); directions.SetNewDirections(false, directions.down, directions.left, directions.right); }
+        if (directions.down && !tile.directions.down) { tile.directions.SetNewDirections(tile.directions.up, true, tile.directions.left, tile.directions.right); directions.SetNewDirections(directions.up, false, directions.left, directions.right); }
+        if (directions.left && !tile.directions.left) { tile.directions.SetNewDirections(tile.directions.up, tile.directions.down, true, tile.directions.right); directions.SetNewDirections(directions.up, directions.down, false, directions.right); }
+        if (directions.right && !tile.directions.right) { tile.directions.SetNewDirections(tile.directions.up, tile.directions.down, tile.directions.left, true); directions.SetNewDirections(directions.up, directions.down, directions.left, false); }
 
         // Update sprites of the object that triggered this
-        tile.directions.UpdateSprites();
         LevelManager.Instance.RefreshObjectTile(tile);
 
         // Delete or update itself
         if (!directions.up && !directions.down && !directions.left && !directions.right) LevelManager.Instance.RemoveTile(this);
-        else {
-            directions.UpdateSprites();
-            LevelManager.Instance.RefreshEffectTile(this);
-        }
+        else LevelManager.Instance.RefreshEffectTile(this);
     }
 }
