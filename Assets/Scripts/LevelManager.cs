@@ -436,8 +436,13 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition)
         {
+            // Level savedata
             GameData.LevelChanges changes = new(true, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+
+            // UI
+            UI.Instance.win.SetTotalTime(changes.time);
+            UI.Instance.win.SetTotalMoves(changes.moves);
             UI.Instance.win.Toggle(true);
             hasWon = true;
         }

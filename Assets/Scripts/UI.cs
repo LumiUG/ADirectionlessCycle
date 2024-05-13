@@ -32,6 +32,9 @@ public class UI : MonoBehaviour
 
         // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
+        win.stats = win.self.transform.Find("Level Stats");
+        win.time = win.stats.Find("Win Time").GetComponent<Text>();
+        win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
@@ -125,7 +128,15 @@ public class UI : MonoBehaviour
         public GameObject exportMenu;
     }
 
-    public class WinUI : UIObject { }
+    public class WinUI : UIObject
+    {
+        public Transform stats;
+        public Text time;
+        public Text moves;
+
+        public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}"; }
+        public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
+    }
 
     public class PauseUI : UIObject
     {
@@ -137,9 +148,9 @@ public class UI : MonoBehaviour
         public Text levelBestMoves;
 
         public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
-        public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}"; }
+        public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}s"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"Moves: {newMoves}"; }
-        public void SetBestTime(float newTime) { levelBestTime.text = $"Best time: {Math.Round(newTime, 2)}"; }
+        public void SetBestTime(float newTime) { levelBestTime.text = $"Best time: {Math.Round(newTime, 2)}s"; }
         public void SetBestMoves(int newMoves) { levelBestMoves.text = $"Best moves: {newMoves}"; }
     }
 }
