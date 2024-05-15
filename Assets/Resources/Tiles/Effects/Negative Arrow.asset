@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33fbbf323cb9aac47a90471470cc8304, type: 3}
+  m_Name: Negative Arrow
+  m_EditorClassIdentifier: 
+  tileSprite: {fileID: 0}
+  tileObject: {fileID: 7852494226514332356, guid: 2ccf694d25d8b2e45b944ac35bcbaf3f, type: 3}
+  position: {x: 0, y: 0, z: 0}
+  directions:
+    pushable: 1
+    up: 1
+    down: 1
+    left: 1
+    right: 1

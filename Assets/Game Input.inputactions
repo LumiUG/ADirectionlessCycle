@@ -412,6 +412,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectNegativeArrow",
+                    "type": "Button",
+                    "id": "35dc60a2-1631-4fe5-8d2d-508a912f28a8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ClickGrid",
                     "type": "PassThrough",
                     "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
@@ -629,6 +638,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "SelectArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2112ef99-7518-430e-97f2-2653ac20781d",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectNegativeArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

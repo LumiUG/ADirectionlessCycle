@@ -54,6 +54,7 @@ public class Editor : MonoBehaviour
     private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
     private void OnSelectInvert() { selectedTile = LevelManager.Instance.invertTile; }
     private void OnSelectArrow() { selectedTile = LevelManager.Instance.arrowTile; }
+    private void OnSelectNegativeArrow() { selectedTile = LevelManager.Instance.negativeArrowTile; }
 
     // Places a tile
     private void OnClickGrid()
@@ -79,14 +80,14 @@ public class Editor : MonoBehaviour
 
         // Selects the tile
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<ArrowTile>(gridPos); // Only arrow tiles
+        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
         if (!tile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Changes directions
         if (waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
         if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
         else {
-            if (tile.GetTileType() == ObjectTypes.Arrow) return;
+            if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) return;
 
             // Update pushable
             UI.Instance.global.SendMessage("Pushable updated.");
@@ -200,7 +201,7 @@ public class Editor : MonoBehaviour
 
         // Sets the new tile directions (why do i have to refresh it???)
         tile.directions.SetNewDirections(directionSet.Item1, directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        if (tile.GetTileType() == ObjectTypes.Arrow) LevelManager.Instance.RefreshEffectTile(tile);
+        if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(tile);
         else LevelManager.Instance.RefreshObjectTile(tile);
         UI.Instance.global.SendMessage("Set new tile directions.");
     }

@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
-    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow };
+    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
+    [HideInInspector] public GameTile negativeArrowTile;
     public int boundsX = 13; // Recommended not to change!
     public int boundsY = -7; // Recommended not to change!
 
@@ -83,6 +84,7 @@ public class LevelManager : MonoBehaviour
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
+        negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
 
         // Defaults
         hasWon = false;
@@ -361,6 +363,7 @@ public class LevelManager : MonoBehaviour
             "Hazard" => Instantiate(hazardTile),
             "Invert" => Instantiate(invertTile),
             "Arrow" => Instantiate(arrowTile),
+            "NegativeArrow" => Instantiate(negativeArrowTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 
