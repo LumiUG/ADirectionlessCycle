@@ -16,15 +16,17 @@ public class LevelManager : MonoBehaviour
 {
     // Basic //
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
-    internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon };
+    internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
+    internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
     [HideInInspector] public GameTile boxTile;
-    [HideInInspector] public GameTile hexagonTile;
     [HideInInspector] public GameTile circleTile;
+    [HideInInspector] public GameTile hexagonTile;
+    [HideInInspector] public GameTile mimicTile;
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile hazardTile;
@@ -77,8 +79,9 @@ public class LevelManager : MonoBehaviour
         // Getting tile references
         wallTile = Resources.Load<WallTile>("Tiles/Solids/Wall");
         boxTile = Resources.Load<BoxTile>("Tiles/Objects/Box");
-        hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
         circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
+        hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
+        mimicTile = Resources.Load<MimicTile>("Tiles/Objects/Mimic");
         areaTile = Resources.Load<AreaTile>("Tiles/Areas/Area");
         inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
@@ -272,7 +275,7 @@ public class LevelManager : MonoBehaviour
         if (movementBlacklist.Contains(tile) && !beingPushed) return false;
 
         // Scene bounds (x,y always at 0)
-        if (!CheckSceneInbounds(newPosition)) return false;
+        if (!CheckSceneInbounds(newPosition) && !customMovers.Contains(tile.GetTileType())) return false;
 
         // Checks if directions are null
         if ((direction.y > 0 && !tile.directions.up ||
@@ -357,6 +360,7 @@ public class LevelManager : MonoBehaviour
         {
             "Circle" => Instantiate(circleTile),
             "Hexagon" => Instantiate(hexagonTile),
+            "Mimic" => Instantiate(mimicTile),
             "Wall" => Instantiate(wallTile),
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),

@@ -55,6 +55,7 @@ public class Editor : MonoBehaviour
     private void OnSelectInvert() { selectedTile = LevelManager.Instance.invertTile; }
     private void OnSelectArrow() { selectedTile = LevelManager.Instance.arrowTile; }
     private void OnSelectNegativeArrow() { selectedTile = LevelManager.Instance.negativeArrowTile; }
+    private void OnSelectMimic() { selectedTile = LevelManager.Instance.mimicTile; }
 
     // Places a tile
     private void OnClickGrid()

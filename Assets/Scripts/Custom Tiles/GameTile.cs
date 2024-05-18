@@ -8,7 +8,7 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Wall, Box, Circle, Hexagon, Area, InverseArea, Hazard, Invert, Arrow, NegativeArrow }
+    public enum ObjectTypes { Wall, Box, Circle, Hexagon, Mimic, Area, InverseArea, Hazard, Invert, Arrow, NegativeArrow }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
 
@@ -46,10 +46,17 @@ public abstract class GameTile : TileBase
         // Object? uh.
         if (objectCollision)
         {
-            // Allow the object infront to move first (if they can)
-            if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, false))
+            if (!beingPushed)
             {
-                // Has the object moved? Fucking yes. Try to push the object infront.
+                // Allow the object infront to move first (if they can)
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, false))
+                {
+                    // Has the object moved? Fucking yes. Try to push the object infront.
+                    if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+                }
+
+            } else {
+                // Push if being pushed (buggy while interacting with mimics!)
                 if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
             }
         }

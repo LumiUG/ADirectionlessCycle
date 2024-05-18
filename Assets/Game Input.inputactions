@@ -421,6 +421,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectMimic",
+                    "type": "Button",
+                    "id": "8b16b5cd-7b50-4ad9-b5c4-1c1df5b8c3d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ClickGrid",
                     "type": "PassThrough",
                     "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
@@ -649,6 +658,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "SelectNegativeArrow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "689172de-fbb5-4ba0-ad40-53c307b8daef",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectMimic",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
