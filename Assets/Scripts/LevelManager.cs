@@ -230,7 +230,7 @@ public class LevelManager : MonoBehaviour
         levelMoves = 0;
         timerCoroutine = StartCoroutine(LevelTimer());
 
-        // ""Loads"" the new level
+        // Soft "loads" the new level (doesnt use LoadLevel)
         UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
         BuildLevel();
@@ -486,6 +486,7 @@ public class LevelManager : MonoBehaviour
     // Pauses or resumes the game.
     public void PauseResumeGame(bool status)
     {
+        if (status) UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
         UI.Instance.pause.Toggle(status);
         isPaused = status;
     }
@@ -523,7 +524,7 @@ public class LevelManager : MonoBehaviour
     {
         while (!hasWon)
         {
-            levelTimer += 0.01f;
+            levelTimer += 1f * Time.deltaTime;
             if (UI.Instance) UI.Instance.pause.SetLevelTimer(levelTimer);
             yield return new WaitForSecondsRealtime(0.01f);
         }

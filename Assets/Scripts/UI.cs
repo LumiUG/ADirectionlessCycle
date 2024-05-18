@@ -37,8 +37,8 @@ public class UI : MonoBehaviour
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
-        if (!Application.isEditor) pause.self.transform.Find("Edit Level Button").gameObject.SetActive(false);
         pause.levelInfo = pause.self.transform.Find("Level Info");
+        pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
         pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
         pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
         pause.levelMoves = pause.levelInfo.Find("Level Moves").GetComponent<Text>();
@@ -67,13 +67,24 @@ public class UI : MonoBehaviour
     {
         LevelManager.Instance.ClearLevel();
         LevelManager.Instance.hasWon = false;
+        GameManager.Instance.isEditing = false;
         ClearUI();
 
         ChangeScene("Main Menu");
     }
 
+    // Go from a level to the editor
+    public void GoLevelEditor()
+    {
+        LevelManager.Instance.ReloadLevel();
+        CleanChangeScene("Level Editor");
+    }
+
     // Pause/Unpause game
-    public void PauseUnpauseGame(bool status) { LevelManager.Instance.PauseResumeGame(status); }
+    public void PauseUnpauseGame(bool status)
+    {
+        LevelManager.Instance.PauseResumeGame(status);
+    }
 
     // Clears the UI (disables everything)
     private void ClearUI()
@@ -95,6 +106,7 @@ public class UI : MonoBehaviour
         LevelManager.Instance.SaveLevel(LevelManager.Instance.levelEditorName, LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
+        GameManager.Instance.isEditing = true;
         editor.Toggle(false);
         ChangeScene("Game");
     }
@@ -140,12 +152,14 @@ public class UI : MonoBehaviour
     public class PauseUI : UIObject
     {
         public Transform levelInfo;
+        public GameObject editorButton;
         public Text levelName;
         public Text levelTimer;
         public Text levelMoves;
         public Text levelBestTime;
         public Text levelBestMoves;
 
+        public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
         public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}s"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"Moves: {newMoves}"; }

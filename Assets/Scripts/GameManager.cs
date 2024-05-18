@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     
     // Game data // 
     public static Savedata save;
+    public bool isEditing;
     private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };
@@ -34,6 +35,9 @@ public class GameManager : MonoBehaviour
 
         // Load the savefile
         LoadDataJSON();
+
+        // Default variables
+        isEditing = false;
     }
 
     // Save game on leaving
