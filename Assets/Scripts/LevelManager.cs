@@ -160,7 +160,7 @@ public class LevelManager : MonoBehaviour
     // Saves a level to the game's persistent path
     public void SaveLevel(string levelName, string levelID = default, bool hideMessage = false)
     {
-        if (IsStringEmptyOfNull(levelName)) return;
+        if (IsStringEmptyOrNull(levelName)) return;
         levelName = levelName.Trim();
 
         // Level id stuff
@@ -185,7 +185,7 @@ public class LevelManager : MonoBehaviour
     // Load and build a level
     public void LoadLevel(string levelID, bool external = false)
     {
-        if (IsStringEmptyOfNull(levelID)) return;
+        if (IsStringEmptyOrNull(levelID)) return;
         levelID = levelID.Trim();
 
         // Clears the current level
@@ -451,6 +451,8 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
+            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
+            UI.Instance.win.ToggleNextLevel(!IsStringEmptyOrNull(currentLevel.nextLevel));
             UI.Instance.win.SetTotalTime(changes.time);
             UI.Instance.win.SetTotalMoves(changes.moves);
             UI.Instance.win.Toggle(true);
@@ -462,7 +464,7 @@ public class LevelManager : MonoBehaviour
     public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon); }
 
     // Is string empty or null
-    public bool IsStringEmptyOfNull(string str) { return str == null || str == string.Empty; }
+    public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
 
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external)
@@ -505,11 +507,9 @@ public class LevelManager : MonoBehaviour
         tilemapEffects.SetTile(tile.position, tile);
     }
 
-    // Gets called whenever you change scenes
-    private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
+    // Refreshes the game and closes all UI's
+    public void RefreshGame()
     {
-        if (scene.name != "Game") return;
-
         isPaused = false;
         hasWon = false;
         levelTimer = 0f;
@@ -517,6 +517,16 @@ public class LevelManager : MonoBehaviour
 
         UI.Instance.pause.SetLevelTimer(levelTimer);
         UI.Instance.pause.SetLevelMoves(levelMoves);
+        UI.Instance.pause.Toggle(false);
+        UI.Instance.win.Toggle(false);
+        UI.Instance.editor.Toggle(false);
+    }
+
+    // Gets called whenever you change scenes
+    private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
+    {
+        if (scene.name != "Game") return;
+        RefreshGame();
     }
 
     // Level timer speedrun any%

@@ -12,6 +12,7 @@ public class Serializables
     public class SerializableLevel
     {
         public string levelName;
+        public string nextLevel = null;
         public Tiles tiles = new();
     }
 

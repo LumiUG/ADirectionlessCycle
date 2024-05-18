@@ -31,14 +31,16 @@ public class UI : MonoBehaviour
 
         // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
+        win.editorButton = win.self.transform.Find("Edit Level Button").gameObject;
+        win.nextLevel = win.self.transform.Find("Next Level Button").gameObject;
         win.stats = win.self.transform.Find("Level Stats");
         win.time = win.stats.Find("Win Time").GetComponent<Text>();
         win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
-        pause.levelInfo = pause.self.transform.Find("Level Info");
         pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
+        pause.levelInfo = pause.self.transform.Find("Level Info");
         pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
         pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
         pause.levelMoves = pause.levelInfo.Find("Level Moves").GetComponent<Text>();
@@ -111,6 +113,14 @@ public class UI : MonoBehaviour
         ChangeScene("Game");
     }
 
+    // Goto next level
+    public void GoNextLevel()
+    {
+        if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel)) return;
+        LevelManager.Instance.RefreshGame();
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+    } 
+
     // Object classes
     public abstract class UIObject
     {
@@ -141,18 +151,22 @@ public class UI : MonoBehaviour
 
     public class WinUI : UIObject
     {
+        public GameObject editorButton;
+        public GameObject nextLevel;
         public Transform stats;
         public Text time;
         public Text moves;
 
+        public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
+        public void ToggleNextLevel(bool toggle) { nextLevel.SetActive(toggle); }
         public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}"; }
         public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
     }
 
     public class PauseUI : UIObject
     {
-        public Transform levelInfo;
         public GameObject editorButton;
+        public Transform levelInfo;
         public Text levelName;
         public Text levelTimer;
         public Text levelMoves;
