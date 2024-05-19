@@ -100,7 +100,7 @@ PlayerSettings:
   xboxEnableKinectAutoTracking: 0
   xboxEnableFitness: 0
   visibleInBackground: 1
-  allowFullscreenSwitch: 0
+  allowFullscreenSwitch: 1
   fullscreenMode: 1
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
@@ -135,7 +135,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.40
+  bundleVersion: 0.45
   preloadedAssets:
   - {fileID: 11400000, guid: b55d4ef3c64608042ace5a95d7736097, type: 2}
   metroInputSource: 0
