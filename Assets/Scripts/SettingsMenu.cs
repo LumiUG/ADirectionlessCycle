@@ -18,7 +18,6 @@ public class SettingsMenu : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         // Populate and update dropdown
-        // resolutions.Add("Default");
         resolutions.Add("1920x1080");
         resolutions.Add("1600x900");
         resolutions.Add("1366x768");
@@ -26,7 +25,6 @@ public class SettingsMenu : MonoBehaviour
         resolutions.Add("1152x648");
         resolutions.Add("1024x576");
         resolutionDropdown.AddOptions(resolutions);
-        // resolutionDropdown.options.RemoveAt(0); // Remove "Default" 
 
         // Update sliders (change from GameManager in the future)
         // masterSlider.value = 1;
@@ -39,7 +37,6 @@ public class SettingsMenu : MonoBehaviour
     // Changes the game resolution
     public void ChangeResolution(int res)
     {
-        // Scaled screen (very buggy, unfinished)
         int[] changeTo = resolutions[res].Split("x").ToList().ConvertAll(res => { return int.Parse(res); }).ToArray();
         Screen.SetResolution(changeTo[0], changeTo[1], Screen.fullScreen);
         UI.Instance.global.SendMessage($"New resolution set.", 2f);

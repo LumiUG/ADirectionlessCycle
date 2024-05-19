@@ -51,13 +51,6 @@ public class GameManager : MonoBehaviour
         else LevelManager.Instance.PauseResumeGame(false);
     }
 
-    // DEBUG, load event
-    private void OnDebugLoad()
-    {
-        if (IsBadScene()) return;
-        LevelManager.Instance.LoadLevel($"1-{Random.Range(1,4)}");
-    }
-
     // Returns if the current scene shouldn't be taken into account
     public bool IsBadScene()
     {
