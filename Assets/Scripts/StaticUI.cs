@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class StaticUI : MonoBehaviour
 {
+    void Start()
+    {
+        if (SceneManager.GetActiveScene().name != "Main Menu") return;
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("Play Button"));
+    }
+
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {

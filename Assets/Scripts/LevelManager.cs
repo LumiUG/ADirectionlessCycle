@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
+using UnityEngine.EventSystems;
 
 public class LevelManager : MonoBehaviour
 {
@@ -488,9 +489,12 @@ public class LevelManager : MonoBehaviour
     // Pauses or resumes the game.
     public void PauseResumeGame(bool status)
     {
-        if (status) UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
         UI.Instance.pause.Toggle(status);
         isPaused = status;
+        if (status) {
+            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
+            EventSystem.current.SetSelectedGameObject(UI.Instance.pause.backToMenu);
+        }
     }
 
     // Refreshes an object tile

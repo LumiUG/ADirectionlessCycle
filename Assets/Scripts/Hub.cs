@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Hub : MonoBehaviour
 {
+    public GameObject backButton;
     private void Start()
     {
-
+        EventSystem.current.SetSelectedGameObject(backButton);
     }
 
     // Load level

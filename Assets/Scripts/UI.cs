@@ -28,6 +28,7 @@ public class UI : MonoBehaviour
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
         editor.importMenu = editor.self.transform.Find("Import").gameObject;
         editor.exportMenu = editor.self.transform.Find("Export").gameObject;
+        editor.playtest = editor.self.transform.Find("Play Button").gameObject;
 
         // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
@@ -40,6 +41,7 @@ public class UI : MonoBehaviour
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
         pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
+        pause.backToMenu = pause.self.transform.Find("Menu Button").gameObject;
         pause.levelInfo = pause.self.transform.Find("Level Info");
         pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
         pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
@@ -147,6 +149,7 @@ public class UI : MonoBehaviour
     {
         public GameObject importMenu;
         public GameObject exportMenu;
+        public GameObject playtest;
     }
 
     public class WinUI : UIObject
@@ -166,6 +169,7 @@ public class UI : MonoBehaviour
     public class PauseUI : UIObject
     {
         public GameObject editorButton;
+        public GameObject backToMenu;
         public Transform levelInfo;
         public Text levelName;
         public Text levelTimer;

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
     public Dropdown resolutionDropdown;
+    public Toggle settingsToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
     public Text version;
@@ -26,7 +28,9 @@ public class SettingsMenu : MonoBehaviour
         resolutions.Add("1024x576");
         resolutionDropdown.AddOptions(resolutions);
 
-        // Update sliders (change from GameManager in the future)
+        // Update UI (change from GameManager in the future)
+        EventSystem.current.SetSelectedGameObject(resolutionDropdown.gameObject);
+        settingsToggle.isOn = Screen.fullScreen;
         // masterSlider.value = 1;
         // SFXSlider.value = 1;
 

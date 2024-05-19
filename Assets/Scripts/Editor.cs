@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static GameTile;
@@ -208,7 +209,13 @@ public class Editor : MonoBehaviour
     }
 
     // Toggles menu
-    private void OnEscape() { if (UI.Instance) UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf); }
+    private void OnEscape()
+    {
+        if (!UI.Instance) return;
+
+        UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
+        if (UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
+    }
 
     // Select deleting/placing tiles
     private void OnDelete(InputValue ctx)
