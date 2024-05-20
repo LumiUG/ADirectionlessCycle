@@ -9,6 +9,7 @@ public class Editor : MonoBehaviour
     // Editor Default Settings //
     public static Editor I;
     private Image previewImage;
+    private Sprite directionSprite;
     internal Coroutine multiClick = null;
     internal (bool, bool, bool, bool) directionSet;
     internal bool waitingForDirections = false;
@@ -21,12 +22,19 @@ public class Editor : MonoBehaviour
     {
         I = this; // No persistence!
         previewImage = transform.Find("Preview").GetComponent<Image>();
+        directionSprite = Resources.Load<Sprite>("Sprites/Direction");
     }
 
     void OnDisable() { I = null; }
 
     // Set the preview image
-    void FixedUpdate() { if (selectedTile) previewImage.sprite = selectedTile.tileSprite; }
+    void FixedUpdate()
+    {
+        if (!selectedTile) return;
+
+        if (selectedTile.GetTileType() == ObjectTypes.Arrow || selectedTile.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
+        else previewImage.sprite = selectedTile.tileSprite;
+    }
 
     // Returns the mouse position on the playable grid
     internal Vector3Int GetMousePositionOnGrid()

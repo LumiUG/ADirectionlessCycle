@@ -249,7 +249,7 @@ public class LevelManager : MonoBehaviour
     // Clears the current level
     public void ClearLevel()
     {
-        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
+        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox") layer.ClearAllTiles(); });
         if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
         InputManager.Instance.latestMovement = Vector3Int.back;
         movementBlacklist.Clear();

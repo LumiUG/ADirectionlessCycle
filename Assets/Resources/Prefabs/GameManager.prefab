@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057d18e16c7f6814495d8e5a7dd66ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  latestMovement: {x: 0, y: 0, z: -1}
 --- !u!114 &1619713515668400291
 MonoBehaviour:
   m_ObjectHideFlags: 0

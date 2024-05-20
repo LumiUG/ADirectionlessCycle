@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arrow
   m_EditorClassIdentifier: 
   tileSprite: {fileID: 0}
-  tileObject: {fileID: 7852494226514332356, guid: 67825c11fa7c27b4b99742cd1a3eb568, type: 3}
+  tileObject: {fileID: 7852494226514332356, guid: 3f367682affdbb64da33e4b69dc841f9, type: 3}
   position: {x: 0, y: 0, z: 0}
   directions:
     pushable: 1
