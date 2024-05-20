@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,21 @@ using static GameTile;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance;
+    public Vector3Int latestMovement = Vector3Int.back;
+    private bool isHolding = false;
+    private Coroutine movementCoro = null;
+
+    void Awake()
+    {       
+        // Singleton without persistence (GameManager already declares it)
+        if (!Instance) { Instance = this; }
+        else { Destroy(gameObject); return; }
+
+        // Defaults
+        latestMovement = Vector3Int.back;
+    }
+
     // INGAME (LevelManager) //
 
     // Player movement
@@ -14,20 +30,23 @@ public class InputManager : MonoBehaviour
 
         // Input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero || (movement.x != 0 && movement.y != 0)) return;
+        if (movement == Vector3Int.zero) { isHolding = false; return; }
+        if (movement.x != 0 && movement.y != 0) return;
 
         // Moves tiles
-        LevelManager.Instance.latestMovement = movement;
-        LevelManager.Instance.ApplyGravity(movement);
+        isHolding = true;
+        latestMovement = movement;
+        if (movementCoro != null) StopCoroutine(movementCoro); 
+        movementCoro = StartCoroutine(RepeatMovement(movement));
     }
 
     // Repeat last movement
     private void OnWait()
     {
-        if (LevelManager.Instance.latestMovement == Vector3Int.zero || LevelManager.Instance.latestMovement == Vector3Int.back || !LevelManager.Instance.IsAllowedToPlay()) return;
+        if (latestMovement == Vector3Int.zero || latestMovement == Vector3Int.back || !LevelManager.Instance.IsAllowedToPlay()) return;
 
         // Moves tiles using the user's latest movement
-        LevelManager.Instance.ApplyGravity(LevelManager.Instance.latestMovement);
+        LevelManager.Instance.ApplyGravity(latestMovement);
     }
 
     // Restart the level
@@ -35,6 +54,16 @@ public class InputManager : MonoBehaviour
     {
         if (!LevelManager.Instance.IsAllowedToPlay()) return;
         LevelManager.Instance.ReloadLevel();
+    }
+
+    // Repeats a movement
+    private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.12f)
+    {
+        while (direction == latestMovement && isHolding)
+        {
+            LevelManager.Instance.ApplyGravity(direction);
+            yield return new WaitForSeconds(speed);
+        }
     }
 
     // External (GameManager) //

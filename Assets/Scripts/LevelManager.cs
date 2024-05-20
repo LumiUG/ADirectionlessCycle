@@ -7,10 +7,10 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
-using UnityEngine.EventSystems;
 
 public class LevelManager : MonoBehaviour
 {
@@ -62,7 +62,6 @@ public class LevelManager : MonoBehaviour
     private bool isPaused = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
-    public Vector3Int latestMovement = Vector3Int.back;
     public bool hasWon = false;
 
     void Awake()
@@ -90,7 +89,6 @@ public class LevelManager : MonoBehaviour
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
 
         // Defaults
-        latestMovement = Vector3Int.back;
         hasWon = false;
 
         // Editor (with file persistence per session)
@@ -253,7 +251,7 @@ public class LevelManager : MonoBehaviour
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => layer.ClearAllTiles());
         if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
-        latestMovement = Vector3Int.back;
+        InputManager.Instance.latestMovement = Vector3Int.back;
         movementBlacklist.Clear();
         levelSolids.Clear();
         levelObjects.Clear();
