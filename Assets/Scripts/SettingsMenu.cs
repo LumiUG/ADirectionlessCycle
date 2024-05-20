@@ -8,6 +8,7 @@ public class SettingsMenu : MonoBehaviour
 {
     public Dropdown resolutionDropdown;
     public Toggle settingsToggle;
+    public Toggle repeatInputToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
     public Text version;
@@ -35,6 +36,8 @@ public class SettingsMenu : MonoBehaviour
         // Update UI (change from GameManager in the future)
         EventSystem.current.SetSelectedGameObject(resolutionDropdown.gameObject);
         settingsToggle.isOn = Screen.fullScreen;
+        repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
+
         // masterSlider.value = 1;
         // SFXSlider.value = 1;
 
@@ -49,9 +52,15 @@ public class SettingsMenu : MonoBehaviour
         Screen.SetResolution(changeTo[0], changeTo[1], Screen.fullScreen);
     }
 
-    // Toggle fullscreen (disabled for now)
+    // Toggle fullscreen
     public void ToggleFullscreen(bool toggle)
     {
         Screen.fullScreen = toggle;
+    }
+
+        // Toggle input repeating
+    public void ToggleRepeatingInput(bool toggle)
+    {
+        GameManager.save.preferences.repeatInput = toggle;
     }
 }

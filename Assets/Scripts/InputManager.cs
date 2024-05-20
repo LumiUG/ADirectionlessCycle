@@ -33,9 +33,18 @@ public class InputManager : MonoBehaviour
         if (movement == Vector3Int.zero) { isHolding = false; return; }
         if (movement.x != 0 && movement.y != 0) return;
 
-        // Moves tiles
+        // Tile vars
         isHolding = true;
         latestMovement = movement;
+
+        // Move a single time
+        if (!GameManager.save.preferences.repeatInput)
+        {
+            LevelManager.Instance.ApplyGravity(movement);
+            return;
+        }
+
+        // Repeat your movement
         if (movementCoro != null) StopCoroutine(movementCoro); 
         movementCoro = StartCoroutine(RepeatMovement(movement));
     }
@@ -59,7 +68,7 @@ public class InputManager : MonoBehaviour
     // Repeats a movement
     private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.12f)
     {
-        while (direction == latestMovement && isHolding)
+        while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon)
         {
             LevelManager.Instance.ApplyGravity(direction);
             yield return new WaitForSeconds(speed);

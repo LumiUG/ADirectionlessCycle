@@ -110,5 +110,6 @@ public class Serializables
         public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
         public float masterVolume = 1f;
         public float SFXVolume = 1f;
+        public bool repeatInput = true;
     }
 }
