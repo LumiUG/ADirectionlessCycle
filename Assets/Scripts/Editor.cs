@@ -213,8 +213,8 @@ public class Editor : MonoBehaviour
     {
         if (!UI.Instance) return;
 
+        if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
-        if (UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
     }
 
     // Select deleting/placing tiles

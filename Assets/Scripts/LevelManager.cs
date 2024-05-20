@@ -452,6 +452,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
+            EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
             UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
             UI.Instance.win.ToggleNextLevel(!IsStringEmptyOrNull(currentLevel.nextLevel));
             UI.Instance.win.SetTotalTime(changes.time);
@@ -489,12 +490,13 @@ public class LevelManager : MonoBehaviour
     // Pauses or resumes the game.
     public void PauseResumeGame(bool status)
     {
+        if (status) {
+            EventSystem.current.SetSelectedGameObject(UI.Instance.pause.backToMenu);
+            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
+        }
+
         UI.Instance.pause.Toggle(status);
         isPaused = status;
-        if (status) {
-            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
-            EventSystem.current.SetSelectedGameObject(UI.Instance.pause.backToMenu);
-        }
     }
 
     // Refreshes an object tile

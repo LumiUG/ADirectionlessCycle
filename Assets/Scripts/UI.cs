@@ -34,6 +34,7 @@ public class UI : MonoBehaviour
         win = new() { self = transform.Find("Win Screen").gameObject };
         win.editorButton = win.self.transform.Find("Edit Level Button").gameObject;
         win.nextLevel = win.self.transform.Find("Next Level Button").gameObject;
+        win.menuButton = win.self.transform.Find("Menu Button").gameObject;
         win.stats = win.self.transform.Find("Level Stats");
         win.time = win.stats.Find("Win Time").GetComponent<Text>();
         win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
@@ -156,6 +157,7 @@ public class UI : MonoBehaviour
     {
         public GameObject editorButton;
         public GameObject nextLevel;
+        public GameObject menuButton;
         public Transform stats;
         public Text time;
         public Text moves;
