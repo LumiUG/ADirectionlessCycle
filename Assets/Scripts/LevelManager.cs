@@ -208,6 +208,7 @@ public class LevelManager : MonoBehaviour
 
         // UI Stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
+        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
         UI.Instance.ingame.SetLevelName(currentLevel.levelName);
         if (levelAsSave != null) {
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
@@ -235,6 +236,9 @@ public class LevelManager : MonoBehaviour
         if (!silent) UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
         BuildLevel();
+
+        // UI!
+        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
     }
 
     // Builds the level
@@ -440,9 +444,15 @@ public class LevelManager : MonoBehaviour
                     ObjectTypes type = overlap.GetTileType();
 
                     return (objectOverlap != null && type == ObjectTypes.Area) ||
-                    (objectOverlap == null && type == ObjectTypes.InverseArea);
+                    (objectOverlap == null && type == ObjectTypes.InverseArea);;
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
+
+        // UI area count
+        UI.Instance.ingame.SetAreaCount(
+            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
+            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
+            );
 
         // If won, do the thing
         if (winCondition)
