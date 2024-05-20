@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1539257398746845850}
   - component: {fileID: 5763641757629147682}
-  - component: {fileID: 5290032226446939581}
+  - component: {fileID: 7559403501453299123}
+  - component: {fileID: 1619713515668400291}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39df71b5ac713d243b2c1c58b8d8758b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5290032226446939581
+  musicBox: {fileID: 0}
+  isEditing: 0
+--- !u!114 &7559403501453299123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648892615143216791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057d18e16c7f6814495d8e5a7dd66ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1619713515668400291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,6 +87,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Game
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 293672307}
   - component: {fileID: 293672306}
   - component: {fileID: 293672305}
-  - component: {fileID: 293672310}
   m_Layer: 5
   m_Name: Editor
   m_TagString: Untagged
@@ -314,36 +313,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &293672310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293672303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 508887f8cedcbe54491848bf329db2bd, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Editor
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!20 &791655426 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7931077653251743037, guid: 13286846226f4e44ba7833ffb00bb2e5, type: 3}

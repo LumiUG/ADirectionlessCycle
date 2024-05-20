@@ -1,112 +1,35 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static GameTile;
 
 public class Editor : MonoBehaviour
 {
     // Editor Default Settings //
+    public static Editor I;
     private Image previewImage;
-    private GameTile selectedTile;
-    private Coroutine multiClick = null;
-    private (bool, bool, bool, bool) directionSet;
-    private bool waitingForDirections = false;
-    private bool isShiftHeld = false;
-    private bool isPlacing = true;
+    internal Coroutine multiClick = null;
+    internal (bool, bool, bool, bool) directionSet;
+    internal bool waitingForDirections = false;
+    internal bool isPlacing = true;
+    internal bool isShiftHeld = false;
+    internal GameTile selectedTile;
 
     // Find preview image
-    void Awake() { previewImage = transform.Find("Preview").GetComponent<Image>(); }
+    void Awake()
+    {
+        I = this; // No persistence!
+        previewImage = transform.Find("Preview").GetComponent<Image>();
+    }
+
+    void OnDisable() { I = null; }
 
     // Set the preview image
     void FixedUpdate() { if (selectedTile) previewImage.sprite = selectedTile.tileSprite; }
 
-    // Player Input //
-
-    // Changing tiles
-    private void OnSelectWall()
-    {
-        if (waitingForDirections) directionSet = (!directionSet.Item1, directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        else selectedTile = LevelManager.Instance.wallTile;
-    }
-
-    private void OnSelectBox()
-    {
-        if (waitingForDirections) directionSet = (directionSet.Item1, !directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        else selectedTile = LevelManager.Instance.boxTile;
-    }
-
-    private void OnSelectCircle()
-    {
-        if (waitingForDirections) directionSet = (directionSet.Item1, directionSet.Item2, !directionSet.Item3, directionSet.Item4);
-        else selectedTile = LevelManager.Instance.circleTile; 
-    }  
-
-    private void OnSelectHex() 
-    {
-        if (waitingForDirections) directionSet = (directionSet.Item1, directionSet.Item2, directionSet.Item3, !directionSet.Item4);
-        else selectedTile = LevelManager.Instance.hexagonTile;
-    }
-
-    private void OnSelectArea() { selectedTile = LevelManager.Instance.areaTile; }
-    private void OnSelectInverseArea() { selectedTile = LevelManager.Instance.inverseAreaTile; }
-    private void OnSelectHazard() { selectedTile = LevelManager.Instance.hazardTile; }
-    private void OnSelectInvert() { selectedTile = LevelManager.Instance.invertTile; }
-    private void OnSelectArrow() { selectedTile = LevelManager.Instance.arrowTile; }
-    private void OnSelectNegativeArrow() { selectedTile = LevelManager.Instance.negativeArrowTile; }
-    private void OnSelectMimic() { selectedTile = LevelManager.Instance.mimicTile; }
-
-    // Places a tile
-    private void OnClickGrid()
-    {
-        // Checks if you are already multi-placing
-        if (multiClick != null)
-        {
-            StopCoroutine(multiClick);
-            multiClick = null;
-            return;
-        }
-
-        // Multi placing tiles !!
-        multiClick = StartCoroutine(MultiPlace());
-    }
-
-    // Changes a tile's properties (objects only)
-    private void OnRightClickGrid()
-    {
-        // Checks mouse position
-        Vector3Int gridPos = GetMousePositionOnGrid();
-        if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
-
-        // Selects the tile
-        GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
-        if (!tile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
-
-        // Changes directions
-        if (waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
-        if (!isShiftHeld) StartCoroutine(WaitForDirection(tile));
-        else {
-            if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) return;
-
-            // Update pushable
-            UI.Instance.global.SendMessage("Pushable updated.");
-            tile.directions.pushable = !tile.directions.pushable;
-            tile.directions.UpdateSprites();
-            LevelManager.Instance.RefreshObjectTile(tile);
-        }
-    }
-
-    // Toggles if the shift key is currently being held (passthrough value)
-    private void OnShift() { isShiftHeld = !isShiftHeld; }
-
-    // Confirm directions
-    private void OnConfirm() { if (waitingForDirections) waitingForDirections = false; }
-
     // Returns the mouse position on the playable grid
-    private Vector3Int GetMousePositionOnGrid()
+    internal Vector3Int GetMousePositionOnGrid()
     {
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPos = LevelManager.Instance.tilemapCollideable.WorldToCell(worldPoint);
@@ -116,7 +39,7 @@ public class Editor : MonoBehaviour
     }
 
     // Places multiple tiles
-    private IEnumerator MultiPlace()
+    internal IEnumerator MultiPlace()
     {
         while (true)
         {
@@ -192,7 +115,7 @@ public class Editor : MonoBehaviour
     }
 
     // Waits for a direction to be set
-    private IEnumerator WaitForDirection(GameTile tile)
+    internal IEnumerator WaitForDirection(GameTile tile)
     {
         UI.Instance.global.SendMessage($"Selected {tile.name}!");
         directionSet = (false, false, false, false);
@@ -206,21 +129,5 @@ public class Editor : MonoBehaviour
         if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(tile);
         else LevelManager.Instance.RefreshObjectTile(tile);
         UI.Instance.global.SendMessage("Set new tile directions.");
-    }
-
-    // Toggles menu
-    private void OnEscape()
-    {
-        if (!UI.Instance) return;
-
-        if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
-        UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
-    }
-
-    // Select deleting/placing tiles
-    private void OnDelete(InputValue ctx)
-    {
-        if (ctx.Get<float>() == 1f) isPlacing = false;
-        else isPlacing = true;
     }
 }

@@ -5,7 +5,6 @@ using System.IO;
 using System;
 using UnityEngine.Tilemaps;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
@@ -59,11 +58,11 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public string levelEditorName = null;
 
     // Player //
-    private Vector3Int latestMovement = Vector3Int.back;
     private Coroutine timerCoroutine = null;
     private bool isPaused = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
+    public Vector3Int latestMovement = Vector3Int.back;
     public bool hasWon = false;
 
     void Awake()
@@ -91,6 +90,7 @@ public class LevelManager : MonoBehaviour
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
 
         // Defaults
+        latestMovement = Vector3Int.back;
         hasWon = false;
 
         // Editor (with file persistence per session)
@@ -385,7 +385,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Applies gravity using a direction
-    private void ApplyGravity(Vector3Int movement)
+    internal void ApplyGravity(Vector3Int movement)
     {
         // Clears blacklist
         movementBlacklist.Clear();
@@ -545,33 +545,4 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
     }
-
-    // Player Input //
-
-    // Movement
-    private void OnMove(InputValue ctx)
-    {
-        if (!IsAllowedToPlay()) return;
-
-        // Input prevention logic
-        Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero) return;
-        if (movement.x != 0 && movement.y != 0) return;
-
-        // Moves tiles
-        latestMovement = movement;
-        ApplyGravity(movement);
-    }
-
-    // Wait
-    private void OnWait()
-    {
-        if (latestMovement == Vector3Int.zero || latestMovement == Vector3Int.back || !IsAllowedToPlay()) return;
-
-        // Moves tiles using the user's latest movement
-        ApplyGravity(latestMovement);
-    }
-
-    // Restart
-    private void OnRestart() { if (IsAllowedToPlay()) ReloadLevel(); }
 }

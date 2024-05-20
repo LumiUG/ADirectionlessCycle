@@ -43,18 +43,16 @@ public class GameManager : MonoBehaviour
     // Save game on leaving
     void OnDisable() { SaveDataJSON(save); }
 
-    // Pause event
-    private void OnPause()
-    {
-        if (IsBadScene() || LevelManager.Instance.hasWon) return;
-        if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
-        else LevelManager.Instance.PauseResumeGame(false);
-    }
-
     // Returns if the current scene shouldn't be taken into account
     public bool IsBadScene()
     {
         return badScenes.Contains(SceneManager.GetActiveScene().name);
+    }
+
+    // Editor check
+    public bool IsEditor()
+    {
+        return SceneManager.GetActiveScene().name == "Level Editor";
     }
 
     // Stuff with savedata //

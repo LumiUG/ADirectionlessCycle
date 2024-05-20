@@ -2,48 +2,171 @@
     "name": "Game Input",
     "maps": [
         {
-            "name": "Game",
-            "id": "b4827bef-ee8c-4bd2-ae06-1526e592c058",
+            "name": "Player",
+            "id": "458977e7-f863-4e54-b33b-98bf0a44d429",
             "actions": [
                 {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "a871649f-516d-4138-a023-e124f4391fd2",
+                    "name": "EditorDelete",
+                    "type": "PassThrough",
+                    "id": "5d4ba14d-24df-4f6e-a920-e8c8420cd8d8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "53fd03e4-d7e7-4a7b-8fe2-54e66740550e",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "03177cc4-6d85-4b86-bf44-8f19182e02d4",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
+                    "name": "EditorEscape",
+                    "type": "Button",
+                    "id": "da9c6b1a-6cbc-4822-9562-b7d59a8f7524",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Player",
-            "id": "458977e7-f863-4e54-b33b-98bf0a44d429",
-            "actions": [
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorConfirm",
+                    "type": "Button",
+                    "id": "e3143953-8c1b-4bd1-b7d1-505de6e7294a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorShift",
+                    "type": "PassThrough",
+                    "id": "d04588fc-1723-406f-8e00-b2cd538db0ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorRightClickGrid",
+                    "type": "Button",
+                    "id": "09d217be-4e60-47ea-b6f3-a6272f9e1047",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorClickGrid",
+                    "type": "PassThrough",
+                    "id": "01621832-91cb-4fe8-8c50-73852c3285aa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectMimic",
+                    "type": "Button",
+                    "id": "f5943388-8a16-4651-9403-42236efa81a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectNegativeArrow",
+                    "type": "Button",
+                    "id": "61e0d725-dd4e-4cba-9f7c-095b2e4cdbee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectArrow",
+                    "type": "Button",
+                    "id": "d752ef85-8eb9-463c-98d6-b0fc822135b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectInvert",
+                    "type": "Button",
+                    "id": "e1c90b58-2d1c-448d-85c0-d7cd825e7458",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectHazard",
+                    "type": "Button",
+                    "id": "cbf7925c-f619-482b-8411-1762f3a0aace",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectInverseArea",
+                    "type": "Button",
+                    "id": "635b6be8-77b3-420c-96f8-5d913ef0ff0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectArea",
+                    "type": "Button",
+                    "id": "b06ba682-3e57-4dac-af93-9746f83ad0f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectHex",
+                    "type": "Button",
+                    "id": "0c08aadc-b0db-4516-ae7a-3f770de06e45",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectCircle",
+                    "type": "Button",
+                    "id": "a1ef82ca-cf83-47c1-b82a-a8fd9b7b9d3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectBox",
+                    "type": "Button",
+                    "id": "ee42702d-69a3-4b33-a00b-8162bb9a3589",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectWall",
+                    "type": "Button",
+                    "id": "44d9cfaf-1d25-467f-af03-3f2a75bfabd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "6d666605-18d7-4f98-985f-6688942a2236",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
                 {
                     "name": "Move",
                     "type": "Value",
@@ -73,6 +196,50 @@
                 }
             ],
             "bindings": [
+                {
+                    "name": "",
+                    "id": "d15f484c-57cf-458b-b56c-fbd0dff532e6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Wait",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee695e32-c055-421e-ad3e-ce2b90da4bec",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Wait",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6f76949-d728-4886-a339-6405d3293499",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93fb65c1-853b-413c-87d3-6c38c7029d6a",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "WASD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
@@ -229,454 +396,210 @@
                 },
                 {
                     "name": "",
-                    "id": "978bfe49-cc26-4a3d-ab7b-7d7a29327403",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8",
-                    "path": "<XRController>/{Primary2DAxis}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3ea4d645-4504-4529-b061-ab81934c3752",
-                    "path": "<Joystick>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d15f484c-57cf-458b-b56c-fbd0dff532e6",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Wait",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ee695e32-c055-421e-ad3e-ce2b90da4bec",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Wait",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a6f76949-d728-4886-a339-6405d3293499",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "93fb65c1-853b-413c-87d3-6c38c7029d6a",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Editor",
-            "id": "93ca9b5a-a29a-48d7-b1b8-8a3cbd9f2f60",
-            "actions": [
-                {
-                    "name": "SelectWall",
-                    "type": "Button",
-                    "id": "0aab54f7-ee0e-4b3f-97db-61de6b088829",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectBox",
-                    "type": "Button",
-                    "id": "5e6a69e5-4aa8-4f69-86f3-21fd10b2d3fd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectCircle",
-                    "type": "Button",
-                    "id": "e81d7a0d-6de3-4b90-bda6-497c4e876f31",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectHex",
-                    "type": "Button",
-                    "id": "8c7f1b61-8e88-40ce-b317-f51c84762f79",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectArea",
-                    "type": "Button",
-                    "id": "7ac52ab6-03b5-4ceb-8267-81f963ca17d4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectInverseArea",
-                    "type": "Button",
-                    "id": "c14f0cc8-825d-4500-92c2-85fd3be374a8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectHazard",
-                    "type": "Button",
-                    "id": "e81f6b1d-e025-4d95-829a-58f9ea133542",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectInvert",
-                    "type": "Button",
-                    "id": "c7c6f807-70f6-4516-8f70-8068ae9d5e82",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectArrow",
-                    "type": "Button",
-                    "id": "3868c538-01ae-4f8b-bfac-7930fad5ae21",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectNegativeArrow",
-                    "type": "Button",
-                    "id": "35dc60a2-1631-4fe5-8d2d-508a912f28a8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectMimic",
-                    "type": "Button",
-                    "id": "8b16b5cd-7b50-4ad9-b5c4-1c1df5b8c3d1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ClickGrid",
-                    "type": "PassThrough",
-                    "id": "ec2d735e-b6cf-4aa0-9199-6b2f7b57941e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RightClickGrid",
-                    "type": "Button",
-                    "id": "2f74bbf5-1c28-440e-9522-3b4a2b60d72c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Shift",
-                    "type": "PassThrough",
-                    "id": "2dcf7beb-c471-4c33-9044-a7f3db313300",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Confirm",
-                    "type": "Button",
-                    "id": "f6ad8306-ace5-453b-86cb-fd66afc8a098",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Escape",
-                    "type": "Button",
-                    "id": "5b60dd27-5aea-4ced-8cbd-c21d0bce847f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Delete",
-                    "type": "PassThrough",
-                    "id": "f36c9748-47b6-4168-8102-206cbd19caea",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "9fb6c4e2-f59e-45fd-ada4-6e9541cdcbd4",
+                    "id": "dc6ba21e-a2cb-4bf2-a6d6-3b71b93592b3",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectWall",
+                    "action": "EditorSelectWall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0a71e14d-417b-4491-82e4-f8d1a4404113",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "ClickGrid",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3d77317a-dac2-4128-af09-8afb5427028f",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "RightClickGrid",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "561ffa03-de3b-4145-9a11-935b59b918e2",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectCircle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ab1d982a-db7d-4ec6-91ce-d7831bdc9002",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectHex",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "31a15b56-352e-49dc-bc4a-229f228d21a3",
-                    "path": "<Keyboard>/5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectArea",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b73ffbbc-2609-435e-9665-bec4944ab570",
+                    "id": "a453d1f4-38fe-49ea-bb5f-756748de7d36",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectBox",
+                    "action": "EditorSelectBox",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a3376f64-1e7e-409e-bda7-fe23d5c94efc",
-                    "path": "<Keyboard>/shift",
+                    "id": "d5fa880c-55d9-4e52-8d8d-87e43dbe9af8",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Shift",
+                    "action": "EditorSelectCircle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c53af821-629c-4528-9aae-9d39b5d02e4c",
-                    "path": "<Keyboard>/enter",
+                    "id": "6d761a8b-5434-41e9-bdcb-6ebbe747d9ec",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Confirm",
+                    "action": "EditorSelectHex",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "981a4f52-4699-4914-8e89-60dd101c8360",
-                    "path": "<Keyboard>/7",
+                    "id": "a6e613ec-f75d-42c3-a273-d36482abad97",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectHazard",
+                    "action": "EditorSelectArea",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "e9f25eef-e3ea-41bd-bb29-e5291d43411b",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fd24c558-aafa-4335-9761-26708714fce2",
+                    "id": "f76b7c5a-d73a-4500-8dcd-7222a6c56867",
                     "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectInverseArea",
+                    "action": "EditorSelectInverseArea",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "09b5c983-d431-43b7-9273-1c0eb70c5882",
-                    "path": "<Keyboard>/d",
+                    "id": "41277616-a5e3-4356-9f1e-34b092e6181e",
+                    "path": "<Keyboard>/7",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Delete",
+                    "action": "EditorSelectHazard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "3762a7fb-8159-476c-85e0-d4761af9cdbb",
+                    "id": "c9237adb-8a43-4515-9814-559d4e2576c1",
                     "path": "<Keyboard>/8",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectInvert",
+                    "action": "EditorSelectInvert",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b074be29-2dcd-415b-b9f3-2d8845ff20f1",
+                    "id": "f74d3258-608c-4aa3-b4a3-91595ecb27e9",
                     "path": "<Keyboard>/9",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectArrow",
+                    "action": "EditorSelectArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2112ef99-7518-430e-97f2-2653ac20781d",
+                    "id": "6d598313-aac2-4c95-b118-aa370c6c8fa4",
                     "path": "<Keyboard>/0",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectNegativeArrow",
+                    "action": "EditorSelectNegativeArrow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "689172de-fbb5-4ba0-ad40-53c307b8daef",
+                    "id": "5a4f7f3d-7912-4222-a89a-217bded1e51d",
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SelectMimic",
+                    "action": "EditorSelectMimic",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Hub",
-            "id": "e58540c9-f719-4259-8667-79267202508b",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "77171403-7fb0-43c4-8ec3-6407db57bc92",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "49591e59-f4b2-4541-8285-974fe4b6262b",
-                    "path": "",
+                    "id": "13d469ea-109b-444e-964b-b5018343731c",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorClickGrid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73bf7da3-5f85-4e79-bc6d-3584703b2aef",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorRightClickGrid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aefee4f8-6a6c-467d-b344-0bc445d08e5f",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "825709b9-59a1-46a3-9728-f105eca4cb9b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorConfirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ded37f87-8476-4a57-92a6-36eb48cffc7a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorEscape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41292ce5-eb78-48b5-8281-48e3526e5f5c",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorDelete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d6cae0b-f807-46f6-9969-eaa82cf84362",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a611a684-63d5-4fe1-a29c-ba5db8792874",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
