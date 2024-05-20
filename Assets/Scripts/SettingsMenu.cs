@@ -28,6 +28,10 @@ public class SettingsMenu : MonoBehaviour
         resolutions.Add("1024x576");
         resolutionDropdown.AddOptions(resolutions);
 
+        // Select current resolution
+        int currentIndex = resolutions.FindIndex(res => { return res == $"{Screen.width}x{Screen.height}"; });
+        if (currentIndex != -1) resolutionDropdown.value = currentIndex;
+
         // Update UI (change from GameManager in the future)
         EventSystem.current.SetSelectedGameObject(resolutionDropdown.gameObject);
         settingsToggle.isOn = Screen.fullScreen;
@@ -43,7 +47,6 @@ public class SettingsMenu : MonoBehaviour
     {
         int[] changeTo = resolutions[res].Split("x").ToList().ConvertAll(res => { return int.Parse(res); }).ToArray();
         Screen.SetResolution(changeTo[0], changeTo[1], Screen.fullScreen);
-        UI.Instance.global.SendMessage($"New resolution set.", 2f);
     }
 
     // Toggle fullscreen (disabled for now)

@@ -159,7 +159,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Saves a level to the game's persistent path
-    public void SaveLevel(string levelName, string levelID = default, bool hideMessage = false)
+    public void SaveLevel(string levelName, string levelID = default, bool silent = true)
     {
         if (IsStringEmptyOrNull(levelName)) return;
         levelName = levelName.Trim();
@@ -180,11 +180,11 @@ public class LevelManager : MonoBehaviour
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
-        if (!hideMessage) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
+        if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
     }
 
     // Load and build a level
-    public void LoadLevel(string levelID, bool external = false)
+    public void LoadLevel(string levelID, bool external = false, bool silent = true)
     {
         if (IsStringEmptyOrNull(levelID)) return;
         levelID = levelID.Trim();
@@ -204,7 +204,7 @@ public class LevelManager : MonoBehaviour
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Yay! UI!
-        UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
+        if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
 
         // Pause menu stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
@@ -219,7 +219,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Load and build a level
-    public void ReloadLevel()
+    public void ReloadLevel(bool silent = true)
     {
         if (currentLevel == null) return;
 
@@ -232,7 +232,7 @@ public class LevelManager : MonoBehaviour
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Soft "loads" the new level (doesnt use LoadLevel)
-        UI.Instance.global.SendMessage("Reloaded level.");
+        if (!silent) UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
         BuildLevel();
     }
