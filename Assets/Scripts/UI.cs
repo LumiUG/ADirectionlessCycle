@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public LevelEditorUI editor;
     [HideInInspector] public PauseUI pause;
     [HideInInspector] public WinUI win;
+    [HideInInspector] public IngameUI ingame;
 
     private void Awake()
     {
@@ -44,11 +45,16 @@ public class UI : MonoBehaviour
         pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
         pause.backToMenu = pause.self.transform.Find("Menu Button").gameObject;
         pause.levelInfo = pause.self.transform.Find("Level Info");
-        pause.levelName = pause.levelInfo.Find("Level Name").GetComponent<Text>();
-        pause.levelTimer = pause.levelInfo.Find("Level Timer").GetComponent<Text>();
-        pause.levelMoves = pause.levelInfo.Find("Level Moves").GetComponent<Text>();
         pause.levelBestMoves = pause.levelInfo.Find("Best Moves").GetComponent<Text>();
         pause.levelBestTime = pause.levelInfo.Find("Best Time").GetComponent<Text>();
+
+        // Ingame UI
+        ingame = new() { self = transform.Find("Ingame UI").gameObject };
+        ingame.levelName = ingame.self.transform.Find("Level Name").GetComponent<Text>();
+        ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
+        ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
+        ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
+
 
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
@@ -94,6 +100,7 @@ public class UI : MonoBehaviour
     // Clears the UI (disables everything)
     private void ClearUI()
     {
+        ingame.Toggle(false);
         editor.Toggle(false);
         pause.Toggle(false);
         win.Toggle(false);
@@ -173,17 +180,23 @@ public class UI : MonoBehaviour
         public GameObject editorButton;
         public GameObject backToMenu;
         public Transform levelInfo;
-        public Text levelName;
-        public Text levelTimer;
-        public Text levelMoves;
         public Text levelBestTime;
         public Text levelBestMoves;
 
         public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
-        public void SetLevelName(string newName) { levelName.text = $"Level: {newName}"; }
-        public void SetLevelTimer(float newTime) { levelTimer.text = $"Time: {Math.Round(newTime, 2)}s"; }
-        public void SetLevelMoves(int newMoves) { levelMoves.text = $"Moves: {newMoves}"; }
         public void SetBestTime(float newTime) { levelBestTime.text = $"Best time: {Math.Round(newTime, 2)}s"; }
         public void SetBestMoves(int newMoves) { levelBestMoves.text = $"Best moves: {newMoves}"; }
+    }
+
+    public class IngameUI : UIObject
+    {
+        public Text levelName;
+        public Text levelMoves;
+        public Text levelTimer;
+        public Text areaCount;
+        public void SetLevelName(string newName) { levelName.text = $"{newName}"; }
+        public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
+        public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }
+        public void SerAreaCount(int min, int max) { areaCount.text = $"{min}/{max}"; }
     }
 }

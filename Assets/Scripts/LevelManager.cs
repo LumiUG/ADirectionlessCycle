@@ -43,6 +43,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapWinAreas;
     [HideInInspector] public Tilemap tilemapHazards;
     [HideInInspector] public Tilemap tilemapEffects;
+    [HideInInspector] public Tilemap tilemapLetterbox;
 
     // Level data //
     private readonly List<GameTile> levelSolids = new();
@@ -107,6 +108,7 @@ public class LevelManager : MonoBehaviour
         tilemapWinAreas = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
         tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
         tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
+        tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
     }
 
     // Adds a tile to the private objects list
@@ -206,7 +208,6 @@ public class LevelManager : MonoBehaviour
 
         // Pause menu stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
-        UI.Instance.pause.SetLevelName(currentLevel.levelName);
         if (levelAsSave != null) {
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
             UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
@@ -419,7 +420,7 @@ public class LevelManager : MonoBehaviour
 
         // Win check, add one move to the player
         if (validation.Contains(true)) levelMoves++;
-        if (UI.Instance) UI.Instance.pause.SetLevelMoves(levelMoves);
+        if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
         CheckCompletion();
     }
 
@@ -526,8 +527,10 @@ public class LevelManager : MonoBehaviour
         levelTimer = 0f;
         levelMoves = 0;
 
-        UI.Instance.pause.SetLevelTimer(levelTimer);
-        UI.Instance.pause.SetLevelMoves(levelMoves);
+        tilemapLetterbox.gameObject.SetActive(true);
+        UI.Instance.ingame.SetLevelTimer(levelTimer);
+        UI.Instance.ingame.SetLevelMoves(levelMoves);
+        UI.Instance.ingame.Toggle(true);
         UI.Instance.pause.Toggle(false);
         UI.Instance.win.Toggle(false);
         UI.Instance.editor.Toggle(false);
@@ -536,7 +539,13 @@ public class LevelManager : MonoBehaviour
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
-        if (scene.name != "Game") return;
+        if (scene.name != "Game" && scene.name != "Level Editor")
+        {
+            tilemapLetterbox.gameObject.SetActive(false);
+            UI.Instance.ingame.Toggle(false);
+            return;
+        }
+
         RefreshGame();
     }
 
@@ -546,7 +555,7 @@ public class LevelManager : MonoBehaviour
         while (!hasWon)
         {
             levelTimer += 1f * Time.deltaTime;
-            if (UI.Instance) UI.Instance.pause.SetLevelTimer(levelTimer);
+            if (UI.Instance) UI.Instance.ingame.SetLevelTimer(levelTimer);
             yield return new WaitForSecondsRealtime(0.01f);
         }
     }

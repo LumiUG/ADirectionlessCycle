@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 6219309857826065997}
   - component: {fileID: 7438695892853163474}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Letterbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

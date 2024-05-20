@@ -10,6 +10,9 @@ public class StaticUI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Play Button"));
     }
 
+    // aaa
+    public void StaticGoLevelEditor() { if (UI.Instance) UI.Instance.GoLevelEditor(); }
+
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {
