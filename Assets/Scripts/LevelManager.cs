@@ -206,8 +206,9 @@ public class LevelManager : MonoBehaviour
         // Yay! UI!
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
 
-        // Pause menu stuff
+        // UI Stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
+        UI.Instance.ingame.SetLevelName(currentLevel.levelName);
         if (levelAsSave != null) {
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
             UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);

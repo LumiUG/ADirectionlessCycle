@@ -55,7 +55,6 @@ public class UI : MonoBehaviour
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
         ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
 
-
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
     }
@@ -79,6 +78,7 @@ public class UI : MonoBehaviour
         LevelManager.Instance.ClearLevel();
         LevelManager.Instance.hasWon = false;
         GameManager.Instance.isEditing = false;
+        LevelManager.Instance.currentLevel = null;
         ClearUI();
 
         ChangeScene("Main Menu");
@@ -89,6 +89,7 @@ public class UI : MonoBehaviour
     {
         LevelManager.Instance.ReloadLevel();
         CleanChangeScene("Level Editor");
+        ingame.SetLevelName("Editor Mode!");
     }
 
     // Pause/Unpause game
@@ -100,7 +101,6 @@ public class UI : MonoBehaviour
     // Clears the UI (disables everything)
     private void ClearUI()
     {
-        ingame.Toggle(false);
         editor.Toggle(false);
         pause.Toggle(false);
         win.Toggle(false);
