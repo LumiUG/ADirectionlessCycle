@@ -559,7 +559,7 @@ public class LevelManager : MonoBehaviour
             if (status) tilemapWinAreas.GetTile<AreaTile>(area.position).Ping();
             else {
                 GameManager.Instance.drawOver.sprite = null;
-                tilemapWinAreas.RefreshTile(area.position);
+                RefreshAreaTile(area);
             }
         }
     }
