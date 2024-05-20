@@ -81,8 +81,8 @@ public class LevelManager : MonoBehaviour
         circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
         hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
         mimicTile = Resources.Load<MimicTile>("Tiles/Objects/Mimic");
-        areaTile = Resources.Load<AreaTile>("Tiles/Areas/Area");
-        inverseAreaTile = Resources.Load<InverseAreaTile>("Tiles/Areas/Inverse Area");
+        areaTile = Resources.Load<WinAreaTile>("Tiles/Areas/Area");
+        inverseAreaTile = Resources.Load<InverseWinAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
@@ -511,6 +511,13 @@ public class LevelManager : MonoBehaviour
         tilemapEffects.SetTile(tile.position, tile);
     }
 
+    // Refreshes an area tile
+    public void RefreshAreaTile(GameTile tile)
+    {
+        tilemapWinAreas.SetTile(tile.position, null);
+        tilemapWinAreas.SetTile(tile.position, tile);
+    }
+
     // Refreshes the game and closes all UI's
     public void RefreshGame()
     {
@@ -541,6 +548,19 @@ public class LevelManager : MonoBehaviour
             levelTimer += 1f * Time.deltaTime;
             if (UI.Instance) UI.Instance.pause.SetLevelTimer(levelTimer);
             yield return new WaitForSecondsRealtime(0.01f);
+        }
+    }
+
+    // Pings all areas (FYI, this is horrible.)
+    internal void PingAllAreas(bool status)
+    {
+        foreach (GameTile area in levelWinAreas)
+        {
+            if (status) tilemapWinAreas.GetTile<AreaTile>(area.position).Ping();
+            else {
+                GameManager.Instance.drawOver.sprite = null;
+                tilemapWinAreas.RefreshTile(area.position);
+            }
         }
     }
 }

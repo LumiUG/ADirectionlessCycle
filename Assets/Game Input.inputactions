@@ -177,8 +177,8 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Wait",
-                    "type": "Button",
+                    "name": "PingAreas",
+                    "type": "PassThrough",
                     "id": "ae657d9c-7f9d-4092-83f8-72b47bf62d3f",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -203,7 +203,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Wait",
+                    "action": "PingAreas",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -214,7 +214,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Wait",
+                    "action": "PingAreas",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

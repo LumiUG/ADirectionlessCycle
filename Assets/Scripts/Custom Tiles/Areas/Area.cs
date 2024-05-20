@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Game Tiles/Areas/Area Tile")]
-public class AreaTile : GameTile
+public class WinAreaTile : AreaTile
 {
     // Returns the tile type
     public override ObjectTypes GetTileType() { return ObjectTypes.Area; }

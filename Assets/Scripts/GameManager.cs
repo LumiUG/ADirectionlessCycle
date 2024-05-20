@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 using static Serializables;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Game data // 
     public static Savedata save;
     public bool isEditing;
+    public SpriteRenderer drawOver;
     private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };
@@ -38,6 +40,10 @@ public class GameManager : MonoBehaviour
 
         // Default variables
         isEditing = false;
+
+        // Fixes a stupid bug
+        drawOver = Resources.Load("Prefabs/PingDrawOver").GetComponent<SpriteRenderer>();
+        drawOver.sprite = null;
     }
 
     // Save game on leaving

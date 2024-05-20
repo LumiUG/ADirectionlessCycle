@@ -49,13 +49,10 @@ public class InputManager : MonoBehaviour
         movementCoro = StartCoroutine(RepeatMovement(movement));
     }
 
-    // Repeat last movement
-    private void OnWait()
+    // Ping all areas (FYI, this is horrible.)
+    private void OnPingAreas(InputValue ctx)
     {
-        if (latestMovement == Vector3Int.zero || latestMovement == Vector3Int.back || !LevelManager.Instance.IsAllowedToPlay()) return;
-
-        // Moves tiles using the user's latest movement
-        LevelManager.Instance.ApplyGravity(latestMovement);
+        LevelManager.Instance.PingAllAreas(ctx.Get<float>() == 1f);
     }
 
     // Restart the level
@@ -230,7 +227,6 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.Instance.IsEditor()) return;
         
-        if (ctx.Get<float>() == 1f) Editor.I.isPlacing = false;
-        else Editor.I.isPlacing = true;
+        Editor.I.isPlacing = ctx.Get<float>() != 1f;
     }
 }

@@ -13,7 +13,6 @@ public class Directions
     public bool right;
 
     // Direction tile sprite references //
-    private SpriteRenderer voided;
     private SpriteRenderer pushableSprite;
     private SpriteRenderer upDir;
     private SpriteRenderer downDir;
@@ -48,9 +47,9 @@ public class Directions
     // Sets private sprites
     public void GetSpriteReferences(GameObject parent)
     {
-        if (!parent || !parent.TryGetComponent<Renderer>(out _)) return;
+        parent.TryGetComponent(out SpriteRenderer componentCheck);
+        if (!parent || componentCheck == null || parent.name == "PingDrawOver") return;
 
-        // voided = parent.transform.Find("Voided").GetComponent<SpriteRenderer>();
         pushableSprite = parent.transform.Find("Pushable").GetComponent<SpriteRenderer>();
         upDir = parent.transform.Find("UpDirection").GetComponent<SpriteRenderer>();
         downDir = parent.transform.Find("DownDirection").GetComponent<SpriteRenderer>();
@@ -63,7 +62,6 @@ public class Directions
     {
         if (!upDir) return;
 
-        // voided.gameObject.SetActive(!(up && down && left && right));
         pushableSprite.gameObject.SetActive(!pushable);
         upDir.gameObject.SetActive(up);
         downDir.gameObject.SetActive(down);
