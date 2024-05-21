@@ -230,6 +230,7 @@ public class LevelManager : MonoBehaviour
         // Restart timer and level stats
         levelTimer = 0f;
         levelMoves = 0;
+        UI.Instance.ingame.SetLevelMoves(levelMoves);
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Soft "loads" the new level (doesnt use LoadLevel)
@@ -565,9 +566,9 @@ public class LevelManager : MonoBehaviour
     {
         while (!hasWon)
         {
-            levelTimer += 1f * Time.deltaTime;
+            levelTimer += Time.deltaTime;
             if (UI.Instance) UI.Instance.ingame.SetLevelTimer(levelTimer);
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return null;
         }
     }
 
