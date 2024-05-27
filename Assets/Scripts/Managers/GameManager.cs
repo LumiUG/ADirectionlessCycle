@@ -2,8 +2,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Linq;
 using System.IO;
-using static Serializables;
 using Unity.VisualScripting;
+using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public AudioSource musicBox;
     
     // Game data // 
+    [HideInInspector] public bool isEditing;
+    [HideInInspector] public SpriteRenderer drawOver;
     public static Savedata save;
-    public bool isEditing;
-    public SpriteRenderer drawOver;
     private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };

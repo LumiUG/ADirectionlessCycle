@@ -422,6 +422,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Destroys all marked object tiles.
+        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath);
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
 
         // Win check, add one move to the player

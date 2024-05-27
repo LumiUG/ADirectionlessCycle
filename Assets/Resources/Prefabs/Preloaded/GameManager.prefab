@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1539257398746845850}
-  - component: {fileID: 5763641757629147682}
+  - component: {fileID: 8723019367223489551}
   - component: {fileID: 7559403501453299123}
   - component: {fileID: 1619713515668400291}
   m_Layer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5763641757629147682
+--- !u!114 &8723019367223489551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicBox: {fileID: 0}
   isEditing: 0
+  drawOver: {fileID: 0}
 --- !u!114 &7559403501453299123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +89,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

@@ -543,6 +543,7 @@ MonoBehaviour:
   tilemapWinAreas: {fileID: 0}
   tilemapHazards: {fileID: 0}
   tilemapEffects: {fileID: 0}
+  tilemapLetterbox: {fileID: 0}
   currentLevel:
     levelName: 
     nextLevel: 
