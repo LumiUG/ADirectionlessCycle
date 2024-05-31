@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
     // SFX //
     [HideInInspector] public static AudioClip tileDeath;
+    [HideInInspector] public static AudioClip tilePush;
 
     // AudioSources //
     [SerializeField] private AudioSource master;
@@ -32,6 +33,7 @@ public class AudioManager : MonoBehaviour
         W2BGM = null;
         W3BGM = null;
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
+        tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
 
         // Default looping BGM
         // PlayBGM(tileDeath);
@@ -65,8 +67,9 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays an SFX
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volume = 1f)
     {
+        sfx.volume = volume;
         sfx.PlayOneShot(clip);
     }
 }

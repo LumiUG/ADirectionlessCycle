@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
     // Player //
     private Coroutine timerCoroutine = null;
     private bool isPaused = false;
+    private bool doPushSFX = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
     public bool hasWon = false;
@@ -295,6 +296,7 @@ public class LevelManager : MonoBehaviour
         MoveTile(startingPosition, newPosition, tile);
 
         // Updates new current position of the tile
+        if (beingPushed) doPushSFX = true;
         tile.position = newPosition;
 
         // Removes from movement queue
@@ -396,6 +398,7 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         toDestroy.Clear();
         lateMove.Clear();
+        doPushSFX = false;
 
         // Sort by move "priority"
         List<GameTile> moveList = levelObjects.OrderBy(tile => tile.GetTileType() != ObjectTypes.Hexagon).ToList();
@@ -420,6 +423,9 @@ public class LevelManager : MonoBehaviour
                 validation.Add(TryMove(tile.position, tile.position + movement, movement, true));
             }
         }
+
+        // Tile pushed SFX
+        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush);
 
         // Destroys all marked object tiles.
         if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath);
