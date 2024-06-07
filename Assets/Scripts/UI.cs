@@ -197,6 +197,14 @@ public class UI : MonoBehaviour
         public void SetLevelName(string newName) { levelName.text = $"{newName}"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }
-        public void SetAreaCount(int current, int max) { areaCount.text = $"{current}/{max}"; }
+        public void SetAreaCount(int current, int max)
+        {
+            // Area overlapped SFX
+            int.TryParse(areaCount.text.Split("/")[0], out int areaNum);
+            if (AudioManager.Instance && current > areaNum) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.46f);
+
+            // Update text
+            areaCount.text = $"{current}/{max}";
+        }
     }
 }

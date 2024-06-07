@@ -40,7 +40,7 @@ public class SettingsMenu : MonoBehaviour
 
         masterSlider.value = GameManager.save.preferences.masterVolume;
         SFXSlider.value = GameManager.save.preferences.SFXVolume;
-
+        
         // Version text
         version.text = $"Running v{Application.version}";
     }

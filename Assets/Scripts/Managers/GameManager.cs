@@ -8,7 +8,6 @@ using static Serializables;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
-    [HideInInspector] public AudioSource musicBox;
     
     // Game data // 
     [HideInInspector] public bool isEditing;
@@ -44,6 +43,12 @@ public class GameManager : MonoBehaviour
         // Fixes a stupid bug
         drawOver = Resources.Load("Prefabs/PingDrawOver").GetComponent<SpriteRenderer>();
         drawOver.sprite = null;
+
+        // Set master and SFX values
+        if (AudioManager.Instance) {
+            AudioManager.Instance.SetMasterVolume(save.preferences.masterVolume);
+            // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed
+        }
     }
 
     // Save game on leaving

@@ -12,7 +12,8 @@ public class InputManager : MonoBehaviour
 
     private bool isHolding = false;
     private Coroutine movementCoro = null;
-    private readonly float globalMovementCD = 0.12f;
+    private readonly float repeatMovementCD = 0.12f;
+    private readonly float manualMovementCD = 0.12f;
     private float currentMovementCD = 0f;
 
     void Awake()
@@ -26,9 +27,9 @@ public class InputManager : MonoBehaviour
     }
 
     // Returns if you are past the move cooldown timer
-    private bool MoveCDCheck()
+    private bool MoveCDCheck(float cooldown)
     {
-        return Time.time < currentMovementCD + globalMovementCD;
+        return Time.time < currentMovementCD + cooldown;
     }
 
     // INGAME (LevelManager) //
@@ -36,7 +37,7 @@ public class InputManager : MonoBehaviour
     // Player movement
     private void OnMove(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() && MoveCDCheck()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay()) return;
 
         // Input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
@@ -48,6 +49,7 @@ public class InputManager : MonoBehaviour
         latestMovement = movement;
 
         // Move a single time
+        if (MoveCDCheck(manualMovementCD) && !GameManager.save.preferences.repeatInput) return;
         if (!GameManager.save.preferences.repeatInput)
         {
             LevelManager.Instance.ApplyGravity(movement);
@@ -80,7 +82,7 @@ public class InputManager : MonoBehaviour
     {
         while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon)
         {
-            if (!MoveCDCheck())
+            if (!MoveCDCheck(repeatMovementCD))
             {
                 // Move
                 LevelManager.Instance.ApplyGravity(direction);

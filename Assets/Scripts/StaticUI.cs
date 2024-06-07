@@ -26,7 +26,7 @@ public class StaticUI : MonoBehaviour
     // Master Slider
     public void StaticUpdateMasterSlider(float value)
     {
-        if (GameManager.Instance.musicBox) GameManager.Instance.musicBox.volume = value;
+        if (AudioManager.Instance) AudioManager.Instance.SetMasterVolume(value);
         GameManager.save.preferences.masterVolume = value;
     }
 

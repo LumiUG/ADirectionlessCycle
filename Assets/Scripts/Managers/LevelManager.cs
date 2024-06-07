@@ -425,10 +425,10 @@ public class LevelManager : MonoBehaviour
         }
 
         // Tile pushed SFX
-        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush);
+        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.74f);
 
         // Destroys all marked object tiles.
-        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath);
+        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.48f);
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
 
         // Win check, add one move to the player
@@ -460,7 +460,7 @@ public class LevelManager : MonoBehaviour
         UI.Instance.ingame.SetAreaCount(
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
-            );
+        );
 
         // If won, do the thing
         if (winCondition)
