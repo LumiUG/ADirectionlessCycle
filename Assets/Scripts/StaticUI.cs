@@ -27,11 +27,12 @@ public class StaticUI : MonoBehaviour
     public void StaticUpdateMasterSlider(float value)
     {
         if (GameManager.Instance.musicBox) GameManager.Instance.musicBox.volume = value;
+        GameManager.save.preferences.masterVolume = value;
     }
 
     // SFX Slider
     public void StaticUpdateSFXSlider(float value)
     {
-        Debug.Log($"SFX: {value}");
+        GameManager.save.preferences.SFXVolume = value;
     }
 }

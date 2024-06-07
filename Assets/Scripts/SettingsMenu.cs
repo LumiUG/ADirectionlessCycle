@@ -38,8 +38,8 @@ public class SettingsMenu : MonoBehaviour
         settingsToggle.isOn = Screen.fullScreen;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
 
-        // masterSlider.value = 1;
-        // SFXSlider.value = 1;
+        masterSlider.value = GameManager.save.preferences.masterVolume;
+        SFXSlider.value = GameManager.save.preferences.SFXVolume;
 
         // Version text
         version.text = $"Running v{Application.version}";

@@ -69,7 +69,7 @@ public class AudioManager : MonoBehaviour
     // Plays an SFX
     public void PlaySFX(AudioClip clip, float volume = 1f)
     {
-        sfx.volume = volume;
+        sfx.volume = volume * GameManager.save.preferences.SFXVolume;
         sfx.PlayOneShot(clip);
     }
 }

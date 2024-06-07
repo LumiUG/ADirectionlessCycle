@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,8 +9,11 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
     public Vector3Int latestMovement = Vector3Int.back;
+
     private bool isHolding = false;
     private Coroutine movementCoro = null;
+    private readonly float globalMovementCD = 0.12f;
+    private float currentMovementCD = 0f;
 
     void Awake()
     {       
@@ -21,12 +25,18 @@ public class InputManager : MonoBehaviour
         latestMovement = Vector3Int.back;
     }
 
+    // Returns if you are past the move cooldown timer
+    private bool MoveCDCheck()
+    {
+        return Time.time < currentMovementCD + globalMovementCD;
+    }
+
     // INGAME (LevelManager) //
 
     // Player movement
     private void OnMove(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() && MoveCDCheck()) return;
 
         // Input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
@@ -41,6 +51,9 @@ public class InputManager : MonoBehaviour
         if (!GameManager.save.preferences.repeatInput)
         {
             LevelManager.Instance.ApplyGravity(movement);
+            
+            // New move CD
+            currentMovementCD = Time.time;
             return;
         }
 
@@ -63,11 +76,16 @@ public class InputManager : MonoBehaviour
     }
 
     // Repeats a movement
-    private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.12f)
+    private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.005f)
     {
         while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon)
         {
-            LevelManager.Instance.ApplyGravity(direction);
+            if (!MoveCDCheck())
+            {
+                // Move
+                LevelManager.Instance.ApplyGravity(direction);
+                currentMovementCD = Time.time;
+            }
             yield return new WaitForSeconds(speed);
         }
     }
