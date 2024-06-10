@@ -10,9 +10,9 @@ public class HexagonTile : GameTile
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable, bool beingPushed = false)
     {
-        // Move double, 
+        // Move double, check inbounds
         checkPosition += !beingPushed ? direction : Vector3Int.zero;
-        if (!LevelManager.Instance.CheckSceneInbounds(checkPosition) && !beingPushed) return Vector3Int.back;
+        if (!LevelManager.Instance.CheckSceneInbounds(checkPosition)) return Vector3Int.back;
 
         // Get the collissions
         GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
@@ -28,7 +28,15 @@ public class HexagonTile : GameTile
             LevelManager.Instance.AddToLateMove(this);
             return Vector3Int.back;
         }
-        if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
+        if (objectCollision)
+        {
+            if (!beingPushed) {
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
+            } else {
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+            }
+        }
+
 
         // Moves if there's nothing infront
         return checkPosition;

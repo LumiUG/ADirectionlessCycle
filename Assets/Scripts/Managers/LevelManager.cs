@@ -33,8 +33,6 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
     [HideInInspector] public GameTile negativeArrowTile;
-    public int boundsX = 13; // Recommended not to change!
-    public int boundsY = -7; // Recommended not to change!
 
     // Grids and tilemaps //
     private Grid levelGrid;
@@ -46,6 +44,9 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapLetterbox;
 
     // Level data //
+    [HideInInspector] public SerializableLevel currentLevel = null;
+    [HideInInspector] public string currentLevelID = null;
+    [HideInInspector] public string levelEditorName = null;
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
     private readonly List<GameTile> levelWinAreas = new();
@@ -54,9 +55,8 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
-    [HideInInspector] public SerializableLevel currentLevel = null;
-    [HideInInspector] public string currentLevelID = null;
-    [HideInInspector] public string levelEditorName = null;
+    private readonly int boundsX = 13;
+    private readonly int boundsY = -7;
 
     // Player //
     private Coroutine timerCoroutine = null;
@@ -64,7 +64,7 @@ public class LevelManager : MonoBehaviour
     private bool doPushSFX = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
-    public bool hasWon = false;
+    public bool hasWon;
 
     void Awake()
     {
@@ -288,7 +288,11 @@ public class LevelManager : MonoBehaviour
         if ((direction.y > 0 && !tile.directions.up ||
             direction.y < 0 && !tile.directions.down ||
             direction.x < 0 && !tile.directions.left ||
-            direction.x > 0 && !tile.directions.right) && !beingPushed) return false;
+            direction.x > 0 && !tile.directions.right)
+            && !beingPushed) {
+            if (removeFromQueue) movementBlacklist.Add(tile);
+            return false;
+        }
 
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);

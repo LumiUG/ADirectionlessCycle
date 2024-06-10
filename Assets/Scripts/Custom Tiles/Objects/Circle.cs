@@ -18,7 +18,16 @@ public class CircleTile : GameTile
         if (collideableCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition)) return checkPosition - direction;
 
         // Moves the tile infront if able, this DOES NOT PUSH.
-        else if (objectCollision) if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return checkPosition - direction;
+        if (objectCollision)
+        {
+            if (!beingPushed) {
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return checkPosition - direction;
+            }
+            else {
+                // Push if being pushed
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return checkPosition - direction;
+            }
+        }
 
         // If pushed, move infront instead
         if (beingPushed) return checkPosition;
