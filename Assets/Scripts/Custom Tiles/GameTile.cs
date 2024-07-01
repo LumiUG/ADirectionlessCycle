@@ -51,12 +51,12 @@ public abstract class GameTile : TileBase
                 // Allow the object infront to move first (if they can)
                 if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, false))
                 {
-                    // Has the object moved? Fucking yes. Try to push the object infront.
+                    // Has the object moved? Fucking no. Try to push the object infront.
                     if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
                 }
 
             } else {
-                // Push if being pushed (buggy while interacting with mimics!)
+                // Push if being pushed
                 if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
             }
         }

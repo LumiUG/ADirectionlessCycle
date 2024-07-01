@@ -15,7 +15,7 @@ public class MimicTile : GameTile
             direction.x *= -1;
             direction.y *= -1;
             direction.z *= -1;
-            checkPosition += direction * 2;
+            checkPosition += direction * 2; // inverts check position aswell
 
             // Checks if the movement is inbounds
             if (!LevelManager.Instance.CheckSceneInbounds(checkPosition)) return Vector3Int.back;
@@ -32,8 +32,19 @@ public class MimicTile : GameTile
         // Object? uh.
         if (objectCollision)
         {
-            // Push object infront
-            if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+            if (!beingPushed)
+            {
+                // Allow the object infront to move first (if they can)
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true, false))
+                {
+                    // Has the object moved? Fucking no. Try to push the object infront.
+                    if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+                }
+
+            } else {
+                // Push if being pushed
+                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+            }
         }
         return checkPosition;
     }

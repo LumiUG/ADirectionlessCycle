@@ -283,6 +283,7 @@ public class LevelManager : MonoBehaviour
     {
         // Check if the tile exists
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
+        Debug.LogWarning(tile.name);
         if (!tile) return false;
 
         // Is the tile pushable?
@@ -306,7 +307,7 @@ public class LevelManager : MonoBehaviour
 
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
-        if (newPosition == Vector3.back || newPosition == startingPosition) return false;
+        if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed)) return false; // also re-checking for blacklist
         MoveTile(startingPosition, newPosition, tile);
 
         // Updates new current position of the tile
@@ -314,7 +315,7 @@ public class LevelManager : MonoBehaviour
         tile.position = newPosition;
 
         // Removes from movement queue
-        if (removeFromQueue) { movementBlacklist.Add(tile); }
+        if (removeFromQueue) { if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile); }
 
         // Marks all the objects that should be deleted
         HazardTile hazard = tilemapHazards.GetTile<HazardTile>(tile.position);
