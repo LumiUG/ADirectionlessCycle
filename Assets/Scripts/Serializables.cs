@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GameTile;
 
@@ -25,6 +26,17 @@ public class Serializables
         public List<SerializableTile> overlapTiles = new();
         public List<SerializableTile> hazardTiles = new();
         public List<SerializableTile> effectTiles = new();
+
+        // List constructors (im sorryyyyy)
+        public Tiles() { }
+        public Tiles(List<GameTile> solids, List<GameTile> objects, List<GameTile> overlaps, List<GameTile> hazards, List<GameTile> effects)
+        {
+            solids.ForEach(tile => solidTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            objects.ForEach(tile => objectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            overlaps.ForEach(tile => overlapTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            hazards.ForEach(tile => hazardTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            effects.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+        }
     }
 
     // Similar to a GameTile, but able to serialize to json
@@ -39,8 +51,8 @@ public class Serializables
         public SerializableTile(ObjectTypes tileType, Directions tileDirections, Vector3Int tilePosition)
         {
             type = tileType.ToString();
-            directions = tileDirections;
-            position = tilePosition;
+            directions = new(tileDirections.up, tileDirections.down, tileDirections.left, tileDirections.right);
+            position = new(tilePosition.x, tilePosition.y, tilePosition.z);
         }
     }
 

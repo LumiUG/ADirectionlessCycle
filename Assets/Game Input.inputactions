@@ -177,6 +177,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Undo",
+                    "type": "Button",
+                    "id": "686b5dae-6bb7-4733-bb85-e0aa531a9fb5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PingAreas",
                     "type": "PassThrough",
                     "id": "ae657d9c-7f9d-4092-83f8-72b47bf62d3f",
@@ -210,7 +219,7 @@
                 {
                     "name": "",
                     "id": "ee695e32-c055-421e-ad3e-ce2b90da4bec",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -600,6 +609,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "965c0a36-3cb0-4881-a63e-3a5217bd89ee",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8ed491c-08d5-429e-8c08-ece2751a7be5",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Undo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

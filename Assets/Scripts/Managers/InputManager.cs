@@ -52,6 +52,7 @@ public class InputManager : MonoBehaviour
         if (MoveCDCheck(manualMovementCD) && !GameManager.save.preferences.repeatInput) return;
         if (!GameManager.save.preferences.repeatInput)
         {
+            LevelManager.Instance.AddUndoFrame();
             LevelManager.Instance.ApplyGravity(movement);
             
             // New move CD
@@ -62,6 +63,14 @@ public class InputManager : MonoBehaviour
         // Repeat your movement
         if (movementCoro != null) StopCoroutine(movementCoro); 
         movementCoro = StartCoroutine(RepeatMovement(movement));
+    }
+
+    // Undo move
+    private void OnUndo()
+    {
+        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()) return;
+        LevelManager.Instance.Undo();
+        LevelManager.Instance.RemoveUndoFrame();
     }
 
     // Ping all areas (FYI, this is horrible.)
@@ -85,6 +94,7 @@ public class InputManager : MonoBehaviour
             if (!MoveCDCheck(repeatMovementCD))
             {
                 // Move
+                LevelManager.Instance.AddUndoFrame();
                 LevelManager.Instance.ApplyGravity(direction);
                 currentMovementCD = Time.time;
             }

@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
+    private readonly List<Tiles> undoSequence = new(capacity: 100); // 100 undo capacity (for now)
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
 
@@ -199,7 +200,7 @@ public class LevelManager : MonoBehaviour
 
         // Loads the level
         currentLevelID = levelID;
-        BuildLevel();
+        BuildLevel(currentLevel.tiles);
 
         // Start the level timer (coro)
         timerCoroutine = StartCoroutine(LevelTimer());
@@ -237,29 +238,33 @@ public class LevelManager : MonoBehaviour
         // Soft "loads" the new level (doesnt use LoadLevel)
         if (!silent) UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
-        BuildLevel();
+        BuildLevel(currentLevel.tiles);
 
         // UI!
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
     }
 
     // Builds the level
-    private void BuildLevel()
+    private void BuildLevel(Tiles level)
     {
-        if (currentLevel == null) return;
-        currentLevel.tiles.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
-        currentLevel.tiles.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
-        currentLevel.tiles.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
-        currentLevel.tiles.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
-        currentLevel.tiles.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
+        if (level == null) return;
+        level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
+        level.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
+        level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
+        level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
+        level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
     }
 
     // Clears the current level
-    public void ClearLevel()
+    public void ClearLevel(bool soft = false)
     {
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox") layer.ClearAllTiles(); });
-        if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
-        InputManager.Instance.latestMovement = Vector3Int.back;
+        if (!soft) {
+            if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
+            InputManager.Instance.latestMovement = Vector3Int.back;
+            ClearUndoFrames();
+        }
+
         movementBlacklist.Clear();
         levelSolids.Clear();
         levelObjects.Clear();
@@ -437,6 +442,7 @@ public class LevelManager : MonoBehaviour
 
         // Win check, add one move to the player
         if (validation.Contains(true)) levelMoves++;
+        else RemoveUndoFrame();
         if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
         CheckCompletion();
     }
@@ -594,5 +600,38 @@ public class LevelManager : MonoBehaviour
                 RefreshAreaTile(area);
             }
         }
+    }
+
+    // Adds an undo frame to the sequence (lord help me)
+    internal void AddUndoFrame()
+    {
+        if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
+        undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects));
+    }
+
+    // Removes the latest undo frame from the sequence
+    internal void RemoveUndoFrame(bool earliest = false)
+    {
+        if (undoSequence.Count <= 0) return;
+        if (earliest) undoSequence.RemoveAt(0);
+        else undoSequence.RemoveAt(undoSequence.Count - 1);
+    }
+
+    // Clears all frames
+    internal void ClearUndoFrames() { undoSequence.Clear(); }
+
+    // Undo check
+    internal bool IsUndoQueueValid() { return undoSequence.Count > 0; }
+
+    // Undoes a move
+    internal void Undo()
+    {
+        // Reload level snapshot (not very efficient)
+        ClearLevel(true);
+        BuildLevel(undoSequence[^1]);
+        
+        // Remove a move
+        levelMoves--;
+        if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
     }
 }
