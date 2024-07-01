@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapHazards;
     [HideInInspector] public Tilemap tilemapEffects;
     [HideInInspector] public Tilemap tilemapLetterbox;
+    private TilemapRenderer areaRenderer;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -58,6 +59,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<Tiles> undoSequence = new(capacity: 100); // 100 undo capacity (for now)
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
+    private int defaultOverlapLayer;
 
     // Player //
     private Coroutine timerCoroutine = null;
@@ -92,6 +94,7 @@ public class LevelManager : MonoBehaviour
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
 
         // Defaults
+        defaultOverlapLayer = areaRenderer.sortingOrder;
         hasWon = false;
 
         // Editor (with file persistence per session)
@@ -111,6 +114,8 @@ public class LevelManager : MonoBehaviour
         tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
         tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
         tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
+
+        areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
     }
 
     // Adds a tile to the private objects list
@@ -462,7 +467,7 @@ public class LevelManager : MonoBehaviour
                     ObjectTypes type = overlap.GetTileType();
 
                     return (objectOverlap != null && type == ObjectTypes.Area) ||
-                    (objectOverlap == null && type == ObjectTypes.InverseArea);;
+                    (objectOverlap == null && type == ObjectTypes.InverseArea);
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
@@ -589,17 +594,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Pings all areas (FYI, this is horrible.)
+    // Pings all areas
     internal void PingAllAreas(bool status)
     {
-        foreach (GameTile area in levelWinAreas)
-        {
-            if (status) tilemapWinAreas.GetTile<AreaTile>(area.position).Ping();
-            else {
-                GameManager.Instance.drawOver.sprite = null;
-                RefreshAreaTile(area);
-            }
-        }
+        if (status) areaRenderer.sortingOrder = 5;
+        else areaRenderer.sortingOrder = defaultOverlapLayer;
+
+        // foreach (GameTile area in levelWinAreas)
+        // {
+        //     if (status) tilemapWinAreas.GetTile<AreaTile>(area.position).Ping();
+        //     else {
+        //         GameManager.Instance.drawOver.sprite = null;
+        //         RefreshAreaTile(area);
+        //     }
+        // }
     }
 
     // Adds an undo frame to the sequence (lord help me)
