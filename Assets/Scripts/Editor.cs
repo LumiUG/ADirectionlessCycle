@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static GameTile;
 
@@ -9,6 +10,8 @@ public class Editor : MonoBehaviour
     // Editor Default Settings //
     public static Editor I;
     private Image previewImage;
+    private Tilemap editorTilemap;
+    private SpriteRenderer tilemapRenderer;
     private Sprite directionSprite;
     internal Coroutine multiClick = null;
     internal (bool, bool, bool, bool) directionSet;
@@ -21,6 +24,8 @@ public class Editor : MonoBehaviour
     void Awake()
     {
         I = this; // No persistence!
+        editorTilemap = GameObject.Find("Editor Tilemap").GetComponent<Tilemap>();
+        tilemapRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
         previewImage = transform.Find("Preview").GetComponent<Image>();
         directionSprite = Resources.Load<Sprite>("Sprites/Direction");
     }
@@ -28,12 +33,20 @@ public class Editor : MonoBehaviour
     void OnDisable() { I = null; }
 
     // Set the preview image
-    void FixedUpdate()
+    void Update()
     {
         if (!selectedTile) return;
 
+        // Preview sprite (top-right)
         if (selectedTile.GetTileType() == ObjectTypes.Arrow || selectedTile.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
         else previewImage.sprite = selectedTile.tileSprite;
+
+        // Preview sprite (on tilemap)
+        Vector3Int mousePos = GetMousePositionOnGrid();
+        if (mousePos == Vector3.back) return;
+
+        tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
+        tilemapRenderer.sprite = previewImage.sprite;
     }
 
     // Returns the mouse position on the playable grid

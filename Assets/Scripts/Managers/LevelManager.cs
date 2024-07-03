@@ -283,7 +283,6 @@ public class LevelManager : MonoBehaviour
     {
         // Check if the tile exists
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
-        Debug.LogWarning(tile.name);
         if (!tile) return false;
 
         // Is the tile pushable?
