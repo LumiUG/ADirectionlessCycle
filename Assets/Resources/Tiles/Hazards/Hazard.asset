@@ -21,3 +21,5 @@ MonoBehaviour:
     down: 0
     left: 0
     right: 0
+    editorDirections: 0
+    editorPushable: 0

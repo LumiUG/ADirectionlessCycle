@@ -117,65 +117,65 @@ public class InputManager : MonoBehaviour
     // Changing tiles
     private void OnEditorSelectWall()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
         Editor.I.tileToPlace = LevelManager.Instance.wallTile;
     }
 
     private void OnEditorSelectBox()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.boxTile;
     }
 
     private void OnEditorSelectCircle()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.circleTile; 
     }  
 
     private void OnEditorSelectHex() 
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.hexagonTile;
     }
 
     private void OnEditorSelectArea()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.areaTile;
     }
     private void OnEditorSelectInverseArea() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.inverseAreaTile; 
     }
     private void OnEditorSelectHazard() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.hazardTile; 
     }
     private void OnEditorSelectInvert() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.invertTile; 
     }
     private void OnEditorSelectArrow() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.arrowTile; 
     }
     private void OnEditorSelectNegativeArrow() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.negativeArrowTile; 
     }
     private void OnEditorSelectMimic() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.mimicTile; 
     }
 
@@ -210,11 +210,19 @@ public class InputManager : MonoBehaviour
         if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
         if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
-        // Update UI
+        // Update UI (dear god)
+        Editor.I.firstSetup = true;
+        Editor.I.pushableToggle.interactable = Editor.I.editingTile.directions.editorPushable;
+        Editor.I.pushableToggle.isOn = Editor.I.editingTile.directions.pushable;
+        Editor.I.upToggle.interactable = Editor.I.editingTile.directions.editorDirections;
+        Editor.I.downToggle.interactable = Editor.I.editingTile.directions.editorDirections;
+        Editor.I.leftToggle.interactable = Editor.I.editingTile.directions.editorDirections;
+        Editor.I.rightToggle.interactable = Editor.I.editingTile.directions.editorDirections;
         Editor.I.upToggle.isOn = Editor.I.editingTile.directions.up;
         Editor.I.downToggle.isOn = Editor.I.editingTile.directions.down;
         Editor.I.leftToggle.isOn = Editor.I.editingTile.directions.left;
         Editor.I.rightToggle.isOn = Editor.I.editingTile.directions.right;
+        Editor.I.firstSetup = false;
     }
 
     // Toggles menu

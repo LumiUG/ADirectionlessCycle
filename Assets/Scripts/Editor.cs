@@ -8,7 +8,8 @@ using static GameTile;
 public class Editor : MonoBehaviour
 {
     // Editor Default Settings //
-    public static Editor I;
+    [HideInInspector] public static Editor I;
+    [HideInInspector] public bool firstSetup = false;
     private Tilemap editorTilemap;
     private SpriteRenderer tilemapRenderer;
     private Sprite directionSprite;
@@ -43,6 +44,9 @@ public class Editor : MonoBehaviour
         leftToggle = directions.Find("Left").GetComponent<Toggle>();
         rightToggle = directions.Find("Right").GetComponent<Toggle>();
         pushableToggle = directions.Find("Pushable").GetComponent<Toggle>();
+
+        // Default
+        if (LevelManager.Instance) tileToPlace = LevelManager.Instance.wallTile;
     }
 
     void OnDisable() { I = null; }
@@ -58,7 +62,7 @@ public class Editor : MonoBehaviour
 
         // Preview sprite (on tilemap)
         Vector3Int mousePos = GetMousePositionOnGrid();
-        if (mousePos == Vector3.back) return;
+        if (mousePos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
         if (isPlacing) tilemapRenderer.sprite = previewImage.sprite;
@@ -154,7 +158,7 @@ public class Editor : MonoBehaviour
     // Updates the selected tile's pushable
     public void UpdatePushable(bool value)
     {
-        if (!editingTile) return;
+        if (!editingTile || !editingTile.directions.editorPushable || firstSetup) return;
         editingTile.directions.pushable = value;
         editingTile.directions.UpdateSprites();
         LevelManager.Instance.RefreshObjectTile(editingTile);
@@ -162,27 +166,26 @@ public class Editor : MonoBehaviour
 
     public void UpdateDirection(int direction)
     {
-        if (!editingTile) return;
+        if (!editingTile || !editingTile.directions.editorDirections || firstSetup) return;
 
         // Direction thing (awful)
         switch(direction)
         {
             case 1:
-                editingTile.directions.up = !editingTile.directions.up;
+                editingTile.directions.SetNewDirections(!editingTile.directions.up, editingTile.directions.down, editingTile.directions.left, editingTile.directions.right);
                 break;
             case 2:
-                editingTile.directions.down = !editingTile.directions.down;
+                editingTile.directions.SetNewDirections(editingTile.directions.up, !editingTile.directions.down, editingTile.directions.left, editingTile.directions.right);
                 break;
             case 3:
-                editingTile.directions.left = !editingTile.directions.left;
+                editingTile.directions.SetNewDirections(editingTile.directions.up, editingTile.directions.down, !editingTile.directions.left, editingTile.directions.right);
                 break;
             case 4:
-                editingTile.directions.right = !editingTile.directions.right;
+                editingTile.directions.SetNewDirections(editingTile.directions.up, editingTile.directions.down, editingTile.directions.left, !editingTile.directions.right);
                 break;
         }
     
         // Sets the new tile directions (why do i have to refresh it???)
-        editingTile.directions.SetNewDirections();
         if (editingTile.GetTileType() == ObjectTypes.Arrow || editingTile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(editingTile);
         else LevelManager.Instance.RefreshObjectTile(editingTile);
     }

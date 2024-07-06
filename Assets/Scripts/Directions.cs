@@ -19,9 +19,15 @@ public class Directions
     private SpriteRenderer leftDir;
     private SpriteRenderer rightDir;
 
+    // Editor //
+    public bool editorDirections = true;
+    public bool editorPushable = true;
+
     // Constructors //
-    public Directions(bool upMovement = true, bool downMovement = true, bool leftMovement = true, bool rightMovement = true)
+    public Directions(bool upMovement = true, bool downMovement = true, bool leftMovement = true, bool rightMovement = true, bool pushableMovement = true)
     {
+        pushable = pushableMovement;
+        
         // We don't call for SetNewDirection's UpdateSprites as we have no references.
         SetNewDirections(upMovement, downMovement, leftMovement, rightMovement);
     }

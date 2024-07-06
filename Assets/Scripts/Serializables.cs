@@ -51,7 +51,7 @@ public class Serializables
         public SerializableTile(ObjectTypes tileType, Directions tileDirections, Vector3Int tilePosition)
         {
             type = tileType.ToString();
-            directions = new(tileDirections.up, tileDirections.down, tileDirections.left, tileDirections.right);
+            directions = new(tileDirections.up, tileDirections.down, tileDirections.left, tileDirections.right, tileDirections.pushable);
             position = new(tilePosition.x, tilePosition.y, tilePosition.z);
         }
     }
