@@ -200,7 +200,7 @@ public class LevelManager : MonoBehaviour
         ClearLevel();
 
         // Gets the new level
-        currentLevel = GetLevel(levelID, external);
+        currentLevel = GetLevel(levelID, external, silent);
         if (currentLevel == null) return;
 
         // Loads the level
@@ -502,7 +502,7 @@ public class LevelManager : MonoBehaviour
     public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
 
     // Gets a level and returns it as a serialized object
-    public SerializableLevel GetLevel(string levelID, bool external)
+    public SerializableLevel GetLevel(string levelID, bool external, bool silent = false)
     {
         string externalPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         string level = null;
@@ -515,7 +515,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Invalid level!
-        if (level == null) { UI.Instance.global.SendMessage($"Invalid level! ({levelID})", 2.5f); return null; }
+        if (level == null) { if (!silent) UI.Instance.global.SendMessage($"Invalid level! ({levelID})", 2.5f); return null; }
 
         return JsonUtility.FromJson<SerializableLevel>(level);
     }
@@ -554,7 +554,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Refreshes the game and closes all UI's
-    public void RefreshGame()
+    public void RefreshGameVars()
     {
         isPaused = false;
         hasWon = false;
@@ -564,6 +564,11 @@ public class LevelManager : MonoBehaviour
         tilemapLetterbox.gameObject.SetActive(true);
         UI.Instance.ingame.SetLevelTimer(levelTimer);
         UI.Instance.ingame.SetLevelMoves(levelMoves);
+    }
+
+    // Sets all UI's to its defaults
+    public void RefreshGameUI()
+    {
         UI.Instance.ingame.Toggle(true);
         UI.Instance.pause.Toggle(false);
         UI.Instance.win.Toggle(false);
@@ -573,14 +578,25 @@ public class LevelManager : MonoBehaviour
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
-        if (scene.name != "Game" && scene.name != "Level Editor")
+        // Prepare level editor scene
+        if (scene.name == "Level Editor")
+        {
+            RefreshGameVars();
+            UI.Instance.ingame.Toggle(false);
+            return;
+        }
+
+        // Default scene other than game
+        if (scene.name != "Game")
         {
             tilemapLetterbox.gameObject.SetActive(false);
             UI.Instance.ingame.Toggle(false);
             return;
         }
 
-        RefreshGame();
+        // Game scene
+        RefreshGameVars();
+        RefreshGameUI();
     }
 
     // Level timer speedrun any%

@@ -87,7 +87,8 @@ public class UI : MonoBehaviour
     // Go from a level to the editor
     public void GoLevelEditor()
     {
-        LevelManager.Instance.ReloadLevel();
+        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
+        else LevelManager.Instance.LoadLevel("EditorSession", true);
         CleanChangeScene("Level Editor");
         ingame.SetLevelName("Editor Mode!");
     }
@@ -120,14 +121,17 @@ public class UI : MonoBehaviour
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
         GameManager.Instance.isEditing = true;
         editor.Toggle(false);
+        ingame.Toggle(true);
         ChangeScene("Game");
+        LevelManager.Instance.ReloadLevel();
     }
 
     // Goto next level
     public void GoNextLevel()
     {
         if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel)) return;
-        LevelManager.Instance.RefreshGame();
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
     } 
 

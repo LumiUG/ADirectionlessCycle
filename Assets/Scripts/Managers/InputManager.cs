@@ -119,68 +119,64 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.Instance.IsEditor()) return;
 
-        if (Editor.I.waitingForDirections) Editor.I.directionSet = (!Editor.I.directionSet.Item1, Editor.I.directionSet.Item2, Editor.I.directionSet.Item3, Editor.I.directionSet.Item4);
-        else Editor.I.selectedTile = LevelManager.Instance.wallTile;
+        Editor.I.tileToPlace = LevelManager.Instance.wallTile;
     }
 
     private void OnEditorSelectBox()
     {
         if (!GameManager.Instance.IsEditor()) return;
         
-        if (Editor.I.waitingForDirections) Editor.I.directionSet = (Editor.I.directionSet.Item1, !Editor.I.directionSet.Item2, Editor.I.directionSet.Item3, Editor.I.directionSet.Item4);
-        else Editor.I.selectedTile = LevelManager.Instance.boxTile;
+        Editor.I.tileToPlace = LevelManager.Instance.boxTile;
     }
 
     private void OnEditorSelectCircle()
     {
         if (!GameManager.Instance.IsEditor()) return;
         
-        if (Editor.I.waitingForDirections) Editor.I.directionSet = (Editor.I.directionSet.Item1, Editor.I.directionSet.Item2, !Editor.I.directionSet.Item3, Editor.I.directionSet.Item4);
-        else Editor.I.selectedTile = LevelManager.Instance.circleTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.circleTile; 
     }  
 
     private void OnEditorSelectHex() 
     {
         if (!GameManager.Instance.IsEditor()) return;
         
-        if (Editor.I.waitingForDirections) Editor.I.directionSet = (Editor.I.directionSet.Item1, Editor.I.directionSet.Item2, Editor.I.directionSet.Item3, !Editor.I.directionSet.Item4);
-        else Editor.I.selectedTile = LevelManager.Instance.hexagonTile;
+        Editor.I.tileToPlace = LevelManager.Instance.hexagonTile;
     }
 
     private void OnEditorSelectArea()
     {
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.areaTile;
+        Editor.I.tileToPlace = LevelManager.Instance.areaTile;
     }
     private void OnEditorSelectInverseArea() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.inverseAreaTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.inverseAreaTile; 
     }
     private void OnEditorSelectHazard() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.hazardTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.hazardTile; 
     }
     private void OnEditorSelectInvert() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.invertTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.invertTile; 
     }
     private void OnEditorSelectArrow() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.arrowTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.arrowTile; 
     }
     private void OnEditorSelectNegativeArrow() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.negativeArrowTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.negativeArrowTile; 
     }
     private void OnEditorSelectMimic() 
     { 
         if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.selectedTile = LevelManager.Instance.mimicTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.mimicTile; 
     }
 
     // Places a tile
@@ -209,37 +205,16 @@ public class InputManager : MonoBehaviour
         Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
         if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
-        // Selects the tile
-        GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
-        if (!tile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
+        // Tile validation and selection
+        Editor.I.editingTile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
+        if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
+        if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
-        // Changes directions
-        if (Editor.I.waitingForDirections) { UI.Instance.global.SendMessage($"Already Waiting!"); return; }
-        if (!Editor.I.isShiftHeld) StartCoroutine(Editor.I.WaitForDirection(tile));
-        else {
-            if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) return;
-
-            // Update pushable
-            UI.Instance.global.SendMessage("Pushable updated.");
-            tile.directions.pushable = !tile.directions.pushable;
-            tile.directions.UpdateSprites();
-            LevelManager.Instance.RefreshObjectTile(tile);
-        }
-    }
-
-    // Toggles if the shift key is currently being held (passthrough value)
-    private void OnEditorShift()
-    { 
-        if (!GameManager.Instance.IsEditor()) return;
-        Editor.I.isShiftHeld = !Editor.I.isShiftHeld;
-    }
-
-    // Confirm directions
-    private void OnEditorConfirm()
-    { 
-        if (!GameManager.Instance.IsEditor()) return;
-        if (Editor.I.waitingForDirections) Editor.I.waitingForDirections = false;
+        // Update UI
+        Editor.I.upToggle.isOn = Editor.I.editingTile.directions.up;
+        Editor.I.downToggle.isOn = Editor.I.editingTile.directions.down;
+        Editor.I.leftToggle.isOn = Editor.I.editingTile.directions.left;
+        Editor.I.rightToggle.isOn = Editor.I.editingTile.directions.right;
     }
 
     // Toggles menu

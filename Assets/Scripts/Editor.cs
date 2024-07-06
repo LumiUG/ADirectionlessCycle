@@ -9,16 +9,22 @@ public class Editor : MonoBehaviour
 {
     // Editor Default Settings //
     public static Editor I;
-    private Image previewImage;
     private Tilemap editorTilemap;
     private SpriteRenderer tilemapRenderer;
     private Sprite directionSprite;
+    private Sprite deletionSprite;
     internal Coroutine multiClick = null;
-    internal (bool, bool, bool, bool) directionSet;
-    internal bool waitingForDirections = false;
     internal bool isPlacing = true;
-    internal bool isShiftHeld = false;
-    internal GameTile selectedTile;
+    internal GameTile editingTile = null;
+    internal GameTile tileToPlace;
+
+    // UI //
+    private Image previewImage;
+    internal Toggle upToggle;
+    internal Toggle downToggle;
+    internal Toggle leftToggle;
+    internal Toggle rightToggle;
+    internal Toggle pushableToggle;
 
     // Find preview image
     void Awake()
@@ -26,8 +32,17 @@ public class Editor : MonoBehaviour
         I = this; // No persistence!
         editorTilemap = GameObject.Find("Editor Tilemap").GetComponent<Tilemap>();
         tilemapRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
-        previewImage = transform.Find("Preview").GetComponent<Image>();
         directionSprite = Resources.Load<Sprite>("Sprites/Direction");
+        deletionSprite = Resources.Load<Sprite>("Sprites/Non Pushable");
+
+        // Tile info
+        previewImage = transform.Find("Preview").GetComponent<Image>();
+        Transform directions = transform.Find("Tile Information").Find("Directions");
+        upToggle = directions.Find("Up").GetComponent<Toggle>();
+        downToggle = directions.Find("Down").GetComponent<Toggle>();
+        leftToggle = directions.Find("Left").GetComponent<Toggle>();
+        rightToggle = directions.Find("Right").GetComponent<Toggle>();
+        pushableToggle = directions.Find("Pushable").GetComponent<Toggle>();
     }
 
     void OnDisable() { I = null; }
@@ -35,18 +50,19 @@ public class Editor : MonoBehaviour
     // Set the preview image
     void Update()
     {
-        if (!selectedTile) return;
+        if (!tileToPlace) return;
 
         // Preview sprite (top-right)
-        if (selectedTile.GetTileType() == ObjectTypes.Arrow || selectedTile.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
-        else previewImage.sprite = selectedTile.tileSprite;
+        if (tileToPlace.GetTileType() == ObjectTypes.Arrow || tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
+        else previewImage.sprite = tileToPlace.tileSprite;
 
         // Preview sprite (on tilemap)
         Vector3Int mousePos = GetMousePositionOnGrid();
         if (mousePos == Vector3.back) return;
 
         tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
-        tilemapRenderer.sprite = previewImage.sprite;
+        if (isPlacing) tilemapRenderer.sprite = previewImage.sprite;
+        else tilemapRenderer.sprite = deletionSprite;
     }
 
     // Returns the mouse position on the playable grid
@@ -83,14 +99,14 @@ public class Editor : MonoBehaviour
     // Places a tile on the corresponding grid
     private void EditorPlaceTile(Vector3Int position)
     {
-        if (selectedTile == null) return;
+        if (tileToPlace == null) return;
 
         // Creates the tile
-        GameTile tileToCreate = Instantiate(selectedTile);
+        GameTile tileToCreate = Instantiate(tileToPlace);
         tileToCreate.position = position;
 
         // Sets the tile
-        switch (selectedTile.GetTileType())
+        switch (tileToPlace.GetTileType())
         {
             case ObjectTypes t when LevelManager.Instance.typesSolidsList.Contains(t):
                 if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) break;
@@ -135,20 +151,39 @@ public class Editor : MonoBehaviour
         if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 
-    // Waits for a direction to be set
-    internal IEnumerator WaitForDirection(GameTile tile)
+    // Updates the selected tile's pushable
+    public void UpdatePushable(bool value)
     {
-        UI.Instance.global.SendMessage($"Selected {tile.name}!");
-        directionSet = (false, false, false, false);
-        waitingForDirections = true;
+        if (!editingTile) return;
+        editingTile.directions.pushable = value;
+        editingTile.directions.UpdateSprites();
+        LevelManager.Instance.RefreshObjectTile(editingTile);
+    }
 
-        // Waits for enter to be pressed (confirming directions)
-        while (waitingForDirections) { yield return new WaitForSeconds(0.01f); }
+    public void UpdateDirection(int direction)
+    {
+        if (!editingTile) return;
 
+        // Direction thing (awful)
+        switch(direction)
+        {
+            case 1:
+                editingTile.directions.up = !editingTile.directions.up;
+                break;
+            case 2:
+                editingTile.directions.down = !editingTile.directions.down;
+                break;
+            case 3:
+                editingTile.directions.left = !editingTile.directions.left;
+                break;
+            case 4:
+                editingTile.directions.right = !editingTile.directions.right;
+                break;
+        }
+    
         // Sets the new tile directions (why do i have to refresh it???)
-        tile.directions.SetNewDirections(directionSet.Item1, directionSet.Item2, directionSet.Item3, directionSet.Item4);
-        if (tile.GetTileType() == ObjectTypes.Arrow || tile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(tile);
-        else LevelManager.Instance.RefreshObjectTile(tile);
-        UI.Instance.global.SendMessage("Set new tile directions.");
+        editingTile.directions.SetNewDirections();
+        if (editingTile.GetTileType() == ObjectTypes.Arrow || editingTile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(editingTile);
+        else LevelManager.Instance.RefreshObjectTile(editingTile);
     }
 }

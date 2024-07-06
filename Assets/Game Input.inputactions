@@ -24,24 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EditorConfirm",
-                    "type": "Button",
-                    "id": "e3143953-8c1b-4bd1-b7d1-505de6e7294a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "EditorShift",
-                    "type": "PassThrough",
-                    "id": "d04588fc-1723-406f-8e00-b2cd538db0ba",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "EditorRightClickGrid",
                     "type": "Button",
                     "id": "09d217be-4e60-47ea-b6f3-a6272f9e1047",
@@ -543,28 +525,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorRightClickGrid",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aefee4f8-6a6c-467d-b344-0bc445d08e5f",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "EditorShift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "825709b9-59a1-46a3-9728-f105eca4cb9b",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "EditorConfirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
