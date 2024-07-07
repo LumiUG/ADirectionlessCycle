@@ -12,4 +12,12 @@ public class WinAreaTile : AreaTile
     {
         return Vector3Int.back;
     }
+
+    // Prepares editor variables.
+    public override void PrepareEditor()
+    {
+        directions.editorDirections = false;
+        directions.editorPushable = false;
+        directions.editorMinimumDirections = 0;
+    }
 }

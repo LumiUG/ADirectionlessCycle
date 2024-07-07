@@ -35,4 +35,12 @@ public class ArrowTile : EffectTile
         if (!directions.up && !directions.down && !directions.left && !directions.right) LevelManager.Instance.RemoveTile(this);
         else LevelManager.Instance.RefreshEffectTile(this);
     }
+    
+    // Prepares editor variables.
+    public override void PrepareEditor()
+    {
+        directions.editorDirections = true;
+        directions.editorPushable = false;
+        directions.editorMinimumDirections = 1;
+    }
 }

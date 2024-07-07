@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -29,6 +30,9 @@ public abstract class GameTile : TileBase
 
     // Returns the tile type.
     public abstract ObjectTypes GetTileType();
+
+    // Prepares editor variables.
+    public abstract void PrepareEditor();
 
     // DEFAULT //
 

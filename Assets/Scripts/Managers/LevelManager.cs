@@ -339,7 +339,7 @@ public class LevelManager : MonoBehaviour
     public void PlaceTile(GameTile tile, Tilemap tilemap, List<GameTile> tileList = null)
     {
         tilemap.SetTile(tile.position, tile);
-        tileList.Add(tile);
+        tileList?.Add(tile);
     }
 
     // Removes a tile from a tilemap
@@ -396,6 +396,7 @@ public class LevelManager : MonoBehaviour
         // Apply tile defaults
         tile.directions = defaultDirections;
         tile.position = defaultPosition;
+        tile.PrepareEditor(); // just incase??
         return tile;
     }
 

@@ -20,8 +20,9 @@ public class Directions
     private SpriteRenderer rightDir;
 
     // Editor //
-    public bool editorDirections = true;
-    public bool editorPushable = true;
+    [NonSerialized] internal bool editorDirections;
+    [NonSerialized] internal bool editorPushable;
+    [NonSerialized] internal int editorMinimumDirections;
 
     // Constructors //
     public Directions(bool upMovement = true, bool downMovement = true, bool leftMovement = true, bool rightMovement = true, bool pushableMovement = true)
@@ -73,5 +74,11 @@ public class Directions
         downDir.gameObject.SetActive(down);
         leftDir.gameObject.SetActive(left);
         rightDir.gameObject.SetActive(right);
+    }
+
+    // Returns the amount of directions
+    public int GetActiveDirectionCount()
+    {
+        return Convert.ToInt32(up) + Convert.ToInt32(down) + Convert.ToInt32(left) + Convert.ToInt32(right);
     }
 }

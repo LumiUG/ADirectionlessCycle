@@ -41,4 +41,12 @@ public class HexagonTile : GameTile
         // Moves if there's nothing infront
         return checkPosition;
     }
+    
+    // Prepares editor variables.
+    public override void PrepareEditor()
+    {
+        directions.editorDirections = true;
+        directions.editorPushable = true;
+        directions.editorMinimumDirections = 0;
+    }
 }

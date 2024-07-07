@@ -35,4 +35,12 @@ public class CircleTile : GameTile
         // Find next jump spot. Recursion...
         return CollisionHandler(checkPosition + direction, direction, tilemapObjects, tilemapCollideable);
     }
+    
+    // Prepares editor variables.
+    public override void PrepareEditor()
+    {
+        directions.editorDirections = true;
+        directions.editorPushable = true;
+        directions.editorMinimumDirections = 0;
+    }
 }

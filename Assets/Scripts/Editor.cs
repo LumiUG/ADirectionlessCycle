@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Editor : MonoBehaviour
 {
     // Editor Default Settings //
     [HideInInspector] public static Editor I;
-    [HideInInspector] public bool firstSetup = false;
+    [HideInInspector] public bool ignoreUpdateEvent = false;
     private Tilemap editorTilemap;
     private SpriteRenderer tilemapRenderer;
     private Sprite directionSprite;
@@ -105,9 +106,10 @@ public class Editor : MonoBehaviour
     {
         if (tileToPlace == null) return;
 
-        // Creates the tile
+        // Creates the tile (this creates a tile every frame the button is held! very bad!)
         GameTile tileToCreate = Instantiate(tileToPlace);
         tileToCreate.position = position;
+        tileToCreate.PrepareEditor();
 
         // Sets the tile
         switch (tileToPlace.GetTileType())
@@ -158,35 +160,49 @@ public class Editor : MonoBehaviour
     // Updates the selected tile's pushable
     public void UpdatePushable(bool value)
     {
-        if (!editingTile || !editingTile.directions.editorPushable || firstSetup) return;
+        if (!editingTile || !editingTile.directions.editorPushable || ignoreUpdateEvent) return;
         editingTile.directions.pushable = value;
         editingTile.directions.UpdateSprites();
         LevelManager.Instance.RefreshObjectTile(editingTile);
     }
 
-    public void UpdateDirection(int direction)
+    public void UpdateDirection(Toggle toggle)
     {
-        if (!editingTile || !editingTile.directions.editorDirections || firstSetup) return;
+        if (!editingTile || !editingTile.directions.editorDirections || ignoreUpdateEvent) return;
+
+        Debug.LogWarning($"{editingTile.directions.GetActiveDirectionCount()}, {Convert.ToInt32(editingTile.directions.up)}, {editingTile.directions.editorMinimumDirections}");
 
         // Direction thing (awful)
-        switch(direction)
+        switch(toggle.name)
         {
-            case 1:
+            case "Up":
+                if (editingTile.directions.GetActiveDirectionCount() + -Convert.ToInt32(editingTile.directions.up) < editingTile.directions.editorMinimumDirections) { ToggleToggle(toggle); return; } 
                 editingTile.directions.SetNewDirections(!editingTile.directions.up, editingTile.directions.down, editingTile.directions.left, editingTile.directions.right);
                 break;
-            case 2:
+            case "Down":
+                if (editingTile.directions.GetActiveDirectionCount() + -Convert.ToInt32(editingTile.directions.down) < editingTile.directions.editorMinimumDirections) { ToggleToggle(toggle); return; } 
                 editingTile.directions.SetNewDirections(editingTile.directions.up, !editingTile.directions.down, editingTile.directions.left, editingTile.directions.right);
                 break;
-            case 3:
+            case "Left":
+                if (editingTile.directions.GetActiveDirectionCount() + -Convert.ToInt32(editingTile.directions.left) < editingTile.directions.editorMinimumDirections) { ToggleToggle(toggle); return; } 
                 editingTile.directions.SetNewDirections(editingTile.directions.up, editingTile.directions.down, !editingTile.directions.left, editingTile.directions.right);
                 break;
-            case 4:
+            case "Right":
+                if (editingTile.directions.GetActiveDirectionCount() + -Convert.ToInt32(editingTile.directions.right) < editingTile.directions.editorMinimumDirections) { ToggleToggle(toggle); return; } 
                 editingTile.directions.SetNewDirections(editingTile.directions.up, editingTile.directions.down, editingTile.directions.left, !editingTile.directions.right);
                 break;
         }
     
-        // Sets the new tile directions (why do i have to refresh it???)
+        // Refresh tile
         if (editingTile.GetTileType() == ObjectTypes.Arrow || editingTile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(editingTile);
         else LevelManager.Instance.RefreshObjectTile(editingTile);
+    }
+
+    // Turn on/off a toggle without evoking an event
+    private void ToggleToggle(Toggle toggle)
+    {
+        ignoreUpdateEvent = true;
+        toggle.isOn = !toggle.isOn;
+        ignoreUpdateEvent = false;
     }
 }

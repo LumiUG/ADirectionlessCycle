@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using static GameTile;
 
 public class InputManager : MonoBehaviour
 {
@@ -211,7 +209,7 @@ public class InputManager : MonoBehaviour
         if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Update UI (dear god)
-        Editor.I.firstSetup = true;
+        Editor.I.ignoreUpdateEvent = true;
         Editor.I.pushableToggle.interactable = Editor.I.editingTile.directions.editorPushable;
         Editor.I.pushableToggle.isOn = Editor.I.editingTile.directions.pushable;
         Editor.I.upToggle.interactable = Editor.I.editingTile.directions.editorDirections;
@@ -222,7 +220,7 @@ public class InputManager : MonoBehaviour
         Editor.I.downToggle.isOn = Editor.I.editingTile.directions.down;
         Editor.I.leftToggle.isOn = Editor.I.editingTile.directions.left;
         Editor.I.rightToggle.isOn = Editor.I.editingTile.directions.right;
-        Editor.I.firstSetup = false;
+        Editor.I.ignoreUpdateEvent = false;
     }
 
     // Toggles menu
