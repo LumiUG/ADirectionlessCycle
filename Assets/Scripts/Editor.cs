@@ -62,7 +62,7 @@ public class Editor : MonoBehaviour
         else previewImage.sprite = tileToPlace.tileSprite;
 
         // Preview sprite (on tilemap)
-        Vector3Int mousePos = GetMousePositionOnGrid();
+        Vector3Int mousePos = GetMousePositionOnGrid() - new Vector3Int(LevelManager.Instance.worldOffsetX, LevelManager.Instance.worldOffsetY);
         if (mousePos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);

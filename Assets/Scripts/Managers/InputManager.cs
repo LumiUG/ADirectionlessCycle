@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -66,7 +67,7 @@ public class InputManager : MonoBehaviour
     // Undo move
     private void OnUndo()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()  || SceneManager.GetActiveScene().name == "World") return;
         LevelManager.Instance.Undo();
         LevelManager.Instance.RemoveUndoFrame();
     }
@@ -80,14 +81,14 @@ public class InputManager : MonoBehaviour
     // Restart the level
     private void OnRestart()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || SceneManager.GetActiveScene().name == "World") return;
         LevelManager.Instance.ReloadLevel();
     }
 
     // Repeats a movement
     private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.005f)
     {
-        while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon)
+        while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon && !LevelManager.Instance.isPaused)
         {
             if (!MoveCDCheck(repeatMovementCD))
             {
@@ -236,8 +237,42 @@ public class InputManager : MonoBehaviour
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        
+        
         
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
+    }
+
+    // Moving the level screen up/down/left/right
+    private void OnEditorUp() 
+    { 
+        if (!GameManager.Instance.IsEditor()) return;
+
+        LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
+        LevelManager.Instance.worldOffsetY += 8;
+    }
+
+    private void OnEditorDown() 
+    { 
+        if (!GameManager.Instance.IsEditor()) return;
+
+        LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
+        LevelManager.Instance.worldOffsetY -= 8;
+    }
+
+    private void OnEditorLeft() 
+    { 
+        if (!GameManager.Instance.IsEditor()) return;
+
+        LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
+        LevelManager.Instance.worldOffsetX -= 14;
+    }
+
+    private void OnEditorRight() 
+    { 
+        if (!GameManager.Instance.IsEditor()) return;
+
+        LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
+        LevelManager.Instance.worldOffsetX += 14;
     }
 }

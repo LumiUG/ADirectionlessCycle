@@ -141,6 +141,42 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorUp",
+                    "type": "Button",
+                    "id": "a8612a34-f177-4870-885a-fed75aa86ce6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorDown",
+                    "type": "Button",
+                    "id": "0c166154-d8c8-4893-9ef7-dc387b2f03dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorLeft",
+                    "type": "Button",
+                    "id": "251426b6-d8e3-4f83-8052-a7f640ee73b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorRight",
+                    "type": "Button",
+                    "id": "6b771967-0169-434d-bba6-9e4d83899340",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "6d666605-18d7-4f98-985f-6688942a2236",
@@ -591,6 +627,50 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23d562e1-e471-49e7-8592-614f2417e6d3",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11c690c3-8ca9-4c77-895e-3c495b6e088d",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ccd707a-1ca9-461e-b8b9-62ca32821b88",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5d15597-0c95-479a-a303-d14c2743edad",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -44,8 +44,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapLetterbox;
     private TilemapRenderer areaRenderer;
     private Vector3 originalPosition;
-    private int worldOffsetX = 0;
-    private int worldOffsetY = 0;
+    internal int worldOffsetX = 0;
+    internal int worldOffsetY = 0;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -66,10 +66,10 @@ public class LevelManager : MonoBehaviour
 
     // Player //
     private Coroutine timerCoroutine = null;
-    private bool isPaused = false;
     private bool doPushSFX = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
+    public bool isPaused = false;
     public bool hasWon;
 
     void Awake()
@@ -419,6 +419,7 @@ public class LevelManager : MonoBehaviour
     public bool CheckSceneInbounds(Vector3Int position)
     {
         if (SceneManager.GetActiveScene().name == "World") return true;
+        if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY); 
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
 
@@ -609,7 +610,6 @@ public class LevelManager : MonoBehaviour
         // World map scene
         if (scene.name == "World")
         {
-            Debug.Log("world");
             RefreshGameVars();
             tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);
@@ -641,7 +641,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // (World Scene) Moves all* tilemaps towards a direction
-    private void MoveTilemaps(Vector3 direction, bool force = false)
+    internal void MoveTilemaps(Vector3 direction, bool force = false)
     {
         foreach (Transform tilemap in levelGrid.transform)
         {
