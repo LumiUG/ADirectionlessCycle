@@ -43,6 +43,9 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapEffects;
     [HideInInspector] public Tilemap tilemapLetterbox;
     private TilemapRenderer areaRenderer;
+    private Vector3 originalPosition;
+    private int worldOffsetX = 0;
+    private int worldOffsetY = 0;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -116,6 +119,7 @@ public class LevelManager : MonoBehaviour
         tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
 
         areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
+        originalPosition = new Vector3(tilemapObjects.transform.position.x, tilemapObjects.transform.position.y, tilemapObjects.transform.position.z);
     }
 
     // Adds a tile to the private objects list
@@ -313,6 +317,17 @@ public class LevelManager : MonoBehaviour
         if (beingPushed) doPushSFX = true;
         tile.position = newPosition;
 
+        // Change "scene" if on world map?
+        if (SceneManager.GetActiveScene().name == "World")
+        {
+            // X POSITION: -14 / +14.
+            // Y POSITION: -8 / +8.
+            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; }
+            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; }
+            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; }
+            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; }
+        }
+
         // Removes from movement queue
         if (removeFromQueue) { if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile); }
 
@@ -403,6 +418,7 @@ public class LevelManager : MonoBehaviour
     // Returns if a position is inside or outside the level bounds
     public bool CheckSceneInbounds(Vector3Int position)
     {
+        if (SceneManager.GetActiveScene().name == "World") return true;
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
 
@@ -561,10 +577,13 @@ public class LevelManager : MonoBehaviour
         hasWon = false;
         levelTimer = 0f;
         levelMoves = 0;
+        worldOffsetX = 0;
+        worldOffsetY = 0;
 
         tilemapLetterbox.gameObject.SetActive(true);
         UI.Instance.ingame.SetLevelTimer(levelTimer);
         UI.Instance.ingame.SetLevelMoves(levelMoves);
+        MoveTilemaps(originalPosition, true);
     }
 
     // Sets all UI's to its defaults
@@ -583,6 +602,16 @@ public class LevelManager : MonoBehaviour
         if (scene.name == "Level Editor")
         {
             RefreshGameVars();
+            UI.Instance.ingame.Toggle(false);
+            return;
+        }
+
+        // World map scene
+        if (scene.name == "World")
+        {
+            Debug.Log("world");
+            RefreshGameVars();
+            tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);
             return;
         }
@@ -608,6 +637,19 @@ public class LevelManager : MonoBehaviour
             levelTimer += Time.deltaTime;
             if (UI.Instance) UI.Instance.ingame.SetLevelTimer(levelTimer);
             yield return null;
+        }
+    }
+
+    // (World Scene) Moves all* tilemaps towards a direction
+    private void MoveTilemaps(Vector3 direction, bool force = false)
+    {
+        foreach (Transform tilemap in levelGrid.transform)
+        {
+            if (tilemap.name == "Letterbox") continue; // * except letterbox
+
+            // Updates position based on direction
+            if (force) tilemap.position = direction;
+            else tilemap.position += direction;
         }
     }
 

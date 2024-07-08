@@ -93,6 +93,13 @@ public class UI : MonoBehaviour
         ingame.SetLevelName("Editor Mode!");
     }
 
+    // Go from anywhere to the world map
+    public void GoWorldMap()
+    {
+        LevelManager.Instance.LoadLevel("WORLD/Main");
+        CleanChangeScene("World");
+    }
+
     // Pause/Unpause game
     public void PauseUnpauseGame(bool status)
     {
