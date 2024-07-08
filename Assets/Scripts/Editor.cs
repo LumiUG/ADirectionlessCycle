@@ -138,6 +138,12 @@ public class Editor : MonoBehaviour
                 LevelManager.Instance.AddToEffectsList(tileToCreate);
                 break;
 
+            case ObjectTypes t when LevelManager.Instance.typesCustomsList.Contains(t):
+                if (LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position)) break;
+                LevelManager.Instance.tilemapCustoms.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.Instance.AddToCustomsList(tileToCreate);
+                break;
+
             default:
                 if (LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position)) break;
                 LevelManager.Instance.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
@@ -154,6 +160,7 @@ public class Editor : MonoBehaviour
         if (!tile) tile = LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position);
         if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 
@@ -169,8 +176,6 @@ public class Editor : MonoBehaviour
     public void UpdateDirection(Toggle toggle)
     {
         if (!editingTile || !editingTile.directions.editorDirections || ignoreUpdateEvent) return;
-
-        Debug.LogWarning($"{editingTile.directions.GetActiveDirectionCount()}, {Convert.ToInt32(editingTile.directions.up)}, {editingTile.directions.editorMinimumDirections}");
 
         // Direction thing (awful)
         switch(toggle.name)

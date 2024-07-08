@@ -13,6 +13,7 @@ public class Serializables
     {
         public string levelName;
         public string nextLevel = null;
+        public bool freeroam = false;
         public Tiles tiles = new();
     }
 
@@ -25,6 +26,7 @@ public class Serializables
         public List<SerializableTile> overlapTiles = new();
         public List<SerializableTile> hazardTiles = new();
         public List<SerializableTile> effectTiles = new();
+        public List<SerializableTile> customTiles = new();
 
         // List constructors (im sorryyyyy)
         public Tiles() { }

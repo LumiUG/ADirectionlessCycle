@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -67,7 +66,7 @@ public class InputManager : MonoBehaviour
     // Undo move
     private void OnUndo()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()  || SceneManager.GetActiveScene().name == "World") return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid() || LevelManager.Instance.currentLevel.freeroam) return;
         LevelManager.Instance.Undo();
         LevelManager.Instance.RemoveUndoFrame();
     }
@@ -81,7 +80,7 @@ public class InputManager : MonoBehaviour
     // Restart the level
     private void OnRestart()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || SceneManager.GetActiveScene().name == "World") return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || LevelManager.Instance.currentLevel.freeroam) return;
         LevelManager.Instance.ReloadLevel();
     }
 
@@ -172,6 +171,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.negativeArrowTile; 
     }
+    private void OnEditorSelectLevel() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.levelTile; 
+    }
     private void OnEditorSelectMimic() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -237,16 +241,13 @@ public class InputManager : MonoBehaviour
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {
-        
-        
-        
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
     }
 
     // Moving the level screen up/down/left/right
     private void OnEditorUp() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
         LevelManager.Instance.worldOffsetY += 8;
@@ -254,7 +255,7 @@ public class InputManager : MonoBehaviour
 
     private void OnEditorDown() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
         LevelManager.Instance.worldOffsetY -= 8;
@@ -262,7 +263,7 @@ public class InputManager : MonoBehaviour
 
     private void OnEditorLeft() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
         LevelManager.Instance.worldOffsetX -= 14;
@@ -270,7 +271,7 @@ public class InputManager : MonoBehaviour
 
     private void OnEditorRight() 
     { 
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
         LevelManager.Instance.worldOffsetX += 14;

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Settings", "Hub" };
 
     void Awake()
     {

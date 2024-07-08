@@ -89,15 +89,16 @@ public class UI : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
         else LevelManager.Instance.LoadLevel("EditorSession", true);
+        LevelManager.Instance.RefreshGameVars();
         CleanChangeScene("Level Editor");
-        ingame.SetLevelName("Editor Mode!");
     }
 
     // Go from anywhere to the world map
     public void GoWorldMap()
     {
         LevelManager.Instance.LoadLevel("WORLD/Main");
-        CleanChangeScene("World");
+        LevelManager.Instance.RefreshGameVars();
+        CleanChangeScene("Game");
     }
 
     // Pause/Unpause game
@@ -109,6 +110,7 @@ public class UI : MonoBehaviour
     // Clears the UI (disables everything)
     private void ClearUI()
     {
+        ingame.Toggle(false);
         editor.Toggle(false);
         pause.Toggle(false);
         win.Toggle(false);
@@ -127,10 +129,11 @@ public class UI : MonoBehaviour
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
         GameManager.Instance.isEditing = true;
+        LevelManager.Instance.ReloadLevel();
+        ingame.SetLevelName("Editor Mode!");
         editor.Toggle(false);
         ingame.Toggle(true);
         ChangeScene("Game");
-        LevelManager.Instance.ReloadLevel();
     }
 
     // Goto next level

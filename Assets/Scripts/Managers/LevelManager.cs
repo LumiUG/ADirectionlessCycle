@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
+    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile mimicTile;
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile inverseAreaTile;
+    [HideInInspector] public GameTile levelTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
@@ -41,6 +43,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapWinAreas;
     [HideInInspector] public Tilemap tilemapHazards;
     [HideInInspector] public Tilemap tilemapEffects;
+    [HideInInspector] public Tilemap tilemapCustoms;
     [HideInInspector] public Tilemap tilemapLetterbox;
     private TilemapRenderer areaRenderer;
     private Vector3 originalPosition;
@@ -56,6 +59,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> levelWinAreas = new();
     private readonly List<GameTile> levelHazards = new();
     private readonly List<GameTile> levelEffects = new();
+    private readonly List<GameTile> levelCustoms = new();
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
@@ -95,6 +99,7 @@ public class LevelManager : MonoBehaviour
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
+        levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
 
         // Defaults
         defaultOverlapLayer = areaRenderer.sortingOrder;
@@ -116,6 +121,7 @@ public class LevelManager : MonoBehaviour
         tilemapWinAreas = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
         tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
         tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
+        tilemapCustoms = gridObject != null ? gridObject.Find("Customs").GetComponent<Tilemap>() : null;
         tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
 
         areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
@@ -157,6 +163,13 @@ public class LevelManager : MonoBehaviour
         else if (!levelEffects.Contains(tile)) levelEffects.Add(tile);
     }
 
+    // Adds a tile to the private customs list
+    public void AddToCustomsList(GameTile tile)
+    {
+        if (!typesCustomsList.Contains(tile.GetTileType())) return;
+        else if (!levelCustoms.Contains(tile)) levelCustoms.Add(tile);
+    }
+
     // Adds a tile to the private to destroy queue (hazards use this)
     public void AddToDestroyQueue(GameTile tile)
     {
@@ -187,6 +200,7 @@ public class LevelManager : MonoBehaviour
         levelWinAreas.ForEach(tile => level.tiles.overlapTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelHazards.ForEach(tile => level.tiles.hazardTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
+        levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
@@ -216,6 +230,13 @@ public class LevelManager : MonoBehaviour
 
         // Yay! UI!
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
+
+        // Freeroam level?
+        if (currentLevel.freeroam) {
+            tilemapLetterbox.gameObject.SetActive(true);
+            UI.Instance.ingame.Toggle(false);
+            return;
+        }
 
         // UI Stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
@@ -262,6 +283,7 @@ public class LevelManager : MonoBehaviour
         level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
         level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
         level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
+        level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCustoms, levelCustoms));
     }
 
     // Clears the current level
@@ -280,6 +302,7 @@ public class LevelManager : MonoBehaviour
         levelWinAreas.Clear();
         levelHazards.Clear();
         levelEffects.Clear();
+        levelCustoms.Clear();
     }
 
     // Moves a tile (needs optimizing)
@@ -318,7 +341,7 @@ public class LevelManager : MonoBehaviour
         tile.position = newPosition;
 
         // Change "scene" if on world map?
-        if (SceneManager.GetActiveScene().name == "World")
+        if (currentLevel.freeroam)
         {
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
@@ -382,6 +405,11 @@ public class LevelManager : MonoBehaviour
                 levelEffects.Remove(tile);
                 break;
 
+            case ObjectTypes t when typesCustomsList.Contains(t):
+                tilemapCustoms.SetTile(tile.position, null);
+                levelCustoms.Remove(tile);
+                break;
+
             default:
                 tilemapObjects.SetTile(tile.position, null);
                 levelObjects.Remove(tile);
@@ -405,6 +433,7 @@ public class LevelManager : MonoBehaviour
             "Invert" => Instantiate(invertTile),
             "Arrow" => Instantiate(arrowTile),
             "NegativeArrow" => Instantiate(negativeArrowTile),
+            "Level" => Instantiate(levelTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 
@@ -418,7 +447,7 @@ public class LevelManager : MonoBehaviour
     // Returns if a position is inside or outside the level bounds
     public bool CheckSceneInbounds(Vector3Int position)
     {
-        if (SceneManager.GetActiveScene().name == "World") return true;
+        if (currentLevel.freeroam) return true;
         if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY); 
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
@@ -599,34 +628,12 @@ public class LevelManager : MonoBehaviour
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
-        // Prepare level editor scene
-        if (scene.name == "Level Editor")
-        {
-            RefreshGameVars();
-            UI.Instance.ingame.Toggle(false);
-            return;
-        }
-
-        // World map scene
-        if (scene.name == "World")
-        {
-            RefreshGameVars();
-            tilemapLetterbox.gameObject.SetActive(true);
-            UI.Instance.ingame.Toggle(false);
-            return;
-        }
-
-        // Default scene other than game
-        if (scene.name != "Game")
+        if (GameManager.Instance.noGameplayScenes.Contains(scene.name))
         {
             tilemapLetterbox.gameObject.SetActive(false);
             UI.Instance.ingame.Toggle(false);
             return;
         }
-
-        // Game scene
-        RefreshGameVars();
-        RefreshGameUI();
     }
 
     // Level timer speedrun any%

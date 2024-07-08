@@ -15,6 +15,8 @@ public class Hub : MonoBehaviour
         if (!LevelManager.Instance) return;
 
         LevelManager.Instance.LoadLevel(levelName);
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
         UI.Instance.ChangeScene("Game");
     }
 }
