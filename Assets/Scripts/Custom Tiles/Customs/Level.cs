@@ -19,7 +19,6 @@ public class LevelTile : CustomTile
         if (tile.directions.GetActiveDirectionCount() <= 0) return;
 
         // Loads a level using its custom text
-        Debug.LogWarning($"\"{customText}\"");
         LevelManager.Instance.LoadLevel(customText);
         LevelManager.Instance.StopMovements();
     }

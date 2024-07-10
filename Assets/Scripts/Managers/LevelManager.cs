@@ -54,6 +54,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public SerializableLevel currentLevel = null;
     [HideInInspector] public string currentLevelID = null;
     [HideInInspector] public string levelEditorName = null;
+    internal List<SerializableCustomInfo> customTileInfo = new();
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
     private readonly List<GameTile> levelWinAreas = new();
@@ -203,6 +204,13 @@ public class LevelManager : MonoBehaviour
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
+        // Add custom tile information
+        foreach (var tile in customTileInfo)
+        {
+            if (!tilemapCustoms.GetTile<CustomTile>(tile.position)) continue;
+            level.tiles.customTileInfo.Add(tile);
+        }
+
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
@@ -285,6 +293,15 @@ public class LevelManager : MonoBehaviour
         level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
         level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
         level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCustoms, levelCustoms));
+        
+        // Apply all custom tile text
+        level.customTileInfo.ForEach(tile => customTileInfo.Add(new(tile.position, tile.text)));
+        foreach (var tile in level.customTileInfo)
+        {
+            CustomTile realTile = tilemapCustoms.GetTile<CustomTile>(tile.position);
+            if (realTile) realTile.customText = tile.text;
+            else customTileInfo.Remove(tile);
+        }
     }
 
     // Clears the current level
@@ -298,6 +315,7 @@ public class LevelManager : MonoBehaviour
         }
 
         movementBlacklist.Clear();
+        customTileInfo.Clear();
         levelSolids.Clear();
         levelObjects.Clear();
         levelWinAreas.Clear();
@@ -686,7 +704,7 @@ public class LevelManager : MonoBehaviour
     internal void AddUndoFrame()
     {
         if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
-        undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms));
+        undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms, customTileInfo));
     }
 
     // Removes the latest undo frame from the sequence

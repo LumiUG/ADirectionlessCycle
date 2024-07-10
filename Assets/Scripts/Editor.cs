@@ -172,9 +172,8 @@ public class Editor : MonoBehaviour
         if (!LevelManager.Instance.typesCustomsList.Contains(editingTile.GetTileType())) return;
 
         // Get the real tile that you can edit
-        LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(editingTile.position).customText = text;
-        UI.Instance.global.SendMessage("edited");
-        Debug.Log(LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(editingTile.position).customText);
+        LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
+        UI.Instance.global.SendMessage($"Set custom warp to \"{text}\".");
     }
 
     // Updates the selected tile's pushable

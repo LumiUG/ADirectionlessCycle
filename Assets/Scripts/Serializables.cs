@@ -15,13 +15,13 @@ public class Serializables
         public string nextLevel = null;
         public bool freeroam = false;
         public Tiles tiles = new();
-        public List<SerializableCustomInfo> customTileInfo = new();
     }
 
     // Collection of tiles in a level
     [Serializable]
     public class Tiles
     {
+        public List<SerializableCustomInfo> customTileInfo = new();
         public List<SerializableTile> solidTiles = new();
         public List<SerializableTile> objectTiles = new();
         public List<SerializableTile> overlapTiles = new();
@@ -31,7 +31,7 @@ public class Serializables
 
         // List constructors (im sorryyyyy)
         public Tiles() { }
-        public Tiles(List<GameTile> solids, List<GameTile> objects, List<GameTile> overlaps, List<GameTile> hazards, List<GameTile> effects, List<GameTile> customs)
+        public Tiles(List<GameTile> solids, List<GameTile> objects, List<GameTile> overlaps, List<GameTile> hazards, List<GameTile> effects, List<GameTile> customs, List<SerializableCustomInfo> info)
         {
             solids.ForEach(tile => solidTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             objects.ForEach(tile => objectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
@@ -39,6 +39,7 @@ public class Serializables
             hazards.ForEach(tile => hazardTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             effects.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             customs.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            customTileInfo = info;
         }
     }
 
@@ -60,6 +61,7 @@ public class Serializables
     }
 
     // ugh.
+    [Serializable]
     public class SerializableCustomInfo
     {
         public Vector3Int position;
