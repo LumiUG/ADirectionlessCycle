@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
-    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level };
+    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile levelTile;
+    [HideInInspector] public GameTile fakeTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
@@ -102,6 +103,7 @@ public class LevelManager : MonoBehaviour
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
+        fakeTile = Resources.Load<FakeTile>("Tiles/Customs/Fake");
 
         // Defaults
         defaultOverlapLayer = areaRenderer.sortingOrder;
@@ -460,6 +462,7 @@ public class LevelManager : MonoBehaviour
             "Arrow" => Instantiate(arrowTile),
             "NegativeArrow" => Instantiate(negativeArrowTile),
             "Level" => Instantiate(levelTile),
+            "Fake" => Instantiate(fakeTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -176,6 +177,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.levelTile; 
     }
+    private void OnEditorSelectFake() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.fakeTile; 
+    }
     private void OnEditorSelectMimic() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -216,6 +222,7 @@ public class InputManager : MonoBehaviour
 
         // Update UI (dear god)
         Editor.I.ignoreUpdateEvent = true;
+        Editor.I.customInputField.interactable = LevelManager.Instance.typesCustomsList.Contains(Editor.I.editingTile.GetTileType());
         Editor.I.pushableToggle.interactable = Editor.I.editingTile.directions.editorPushable;
         Editor.I.pushableToggle.isOn = Editor.I.editingTile.directions.pushable;
         Editor.I.upToggle.interactable = Editor.I.editingTile.directions.editorDirections;

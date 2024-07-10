@@ -27,6 +27,7 @@ public class Editor : MonoBehaviour
     internal Toggle leftToggle;
     internal Toggle rightToggle;
     internal Toggle pushableToggle;
+    internal InputField customInputField;
 
     // Find preview image
     void Awake()
@@ -45,6 +46,7 @@ public class Editor : MonoBehaviour
         leftToggle = directions.Find("Left").GetComponent<Toggle>();
         rightToggle = directions.Find("Right").GetComponent<Toggle>();
         pushableToggle = directions.Find("Pushable").GetComponent<Toggle>();
+        customInputField = directions.Find("Text").GetComponent<InputField>();
 
         // Default
         if (LevelManager.Instance) tileToPlace = LevelManager.Instance.wallTile;
@@ -170,6 +172,8 @@ public class Editor : MonoBehaviour
     // Updates the selected tile's pushable
     public void UpdateCustomText(string text)
     {
+        if (!editingTile) return;
+
         // stupid ren was here
         if (!LevelManager.Instance.typesCustomsList.Contains(editingTile.GetTileType())) return;
 

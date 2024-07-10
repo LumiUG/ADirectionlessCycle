@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectFake",
+                    "type": "Button",
+                    "id": "3edb8400-7e9b-4a02-8f14-649cfb846c63",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectNegativeArrow",
                     "type": "Button",
                     "id": "61e0d725-dd4e-4cba-9f7c-095b2e4cdbee",
@@ -691,6 +700,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72ae7ff-3699-4d63-ae69-0efa9c0af2de",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectFake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
