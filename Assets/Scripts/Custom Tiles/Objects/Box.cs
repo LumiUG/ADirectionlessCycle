@@ -7,7 +7,7 @@ public class BoxTile : GameTile
     public override ObjectTypes GetTileType() { return ObjectTypes.Box; }
     
     // Prepares editor variables.
-    public override void PrepareEditor()
+    public override void PrepareTile()
     {
         directions.editorDirections = true;
         directions.editorPushable = true;

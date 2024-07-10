@@ -50,7 +50,7 @@ public class MimicTile : GameTile
     }
     
     // Prepares editor variables.
-    public override void PrepareEditor()
+    public override void PrepareTile()
     {
         directions.editorDirections = true;
         directions.editorPushable = true;

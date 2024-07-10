@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(menuName = "Game Tiles/Customs/Level Tile")]
-public class LevelTile : GameTile
+public class LevelTile : CustomTile
 {
     // Returns the tile type
     public override ObjectTypes GetTileType() { return ObjectTypes.Level; }
@@ -13,8 +13,19 @@ public class LevelTile : GameTile
         return Vector3Int.back;
     }
 
+    // The tile's effect
+    public override void Effect(GameTile tile)
+    {
+        if (tile.directions.GetActiveDirectionCount() <= 0) return;
+
+        // Loads a level using its custom text
+        Debug.LogWarning($"\"{customText}\"");
+        LevelManager.Instance.LoadLevel(customText);
+        LevelManager.Instance.StopMovements();
+    }
+
     // Prepares editor variables.
-    public override void PrepareEditor()
+    public override void PrepareTile()
     {
         directions.editorDirections = false;
         directions.editorPushable = false;

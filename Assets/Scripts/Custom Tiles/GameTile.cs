@@ -32,7 +32,7 @@ public abstract class GameTile : TileBase
     public abstract ObjectTypes GetTileType();
 
     // Prepares editor variables.
-    public abstract void PrepareEditor();
+    public abstract void PrepareTile();
 
     // DEFAULT //
 

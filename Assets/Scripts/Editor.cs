@@ -109,7 +109,7 @@ public class Editor : MonoBehaviour
         // Creates the tile (this creates a tile every frame the button is held! very bad!)
         GameTile tileToCreate = Instantiate(tileToPlace);
         tileToCreate.position = position;
-        tileToCreate.PrepareEditor();
+        tileToCreate.PrepareTile();
 
         // Sets the tile
         switch (tileToPlace.GetTileType())
@@ -139,9 +139,10 @@ public class Editor : MonoBehaviour
                 break;
 
             case ObjectTypes t when LevelManager.Instance.typesCustomsList.Contains(t):
-                if (LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapCustoms.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToCustomsList(tileToCreate);
+                if (LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(position)) break;
+                CustomTile custom = (CustomTile)tileToCreate;
+                LevelManager.Instance.tilemapCustoms.SetTile(custom.position, custom);
+                LevelManager.Instance.AddToCustomsList(custom);
                 break;
 
             default:
@@ -162,6 +163,18 @@ public class Editor : MonoBehaviour
         if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position);
         if (tile) LevelManager.Instance.RemoveTile(tile);
+    }
+
+    // Updates the selected tile's pushable
+    public void UpdateCustomText(string text)
+    {
+        // stupid ren was here
+        if (!LevelManager.Instance.typesCustomsList.Contains(editingTile.GetTileType())) return;
+
+        // Get the real tile that you can edit
+        LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(editingTile.position).customText = text;
+        UI.Instance.global.SendMessage("edited");
+        Debug.Log(LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(editingTile.position).customText);
     }
 
     // Updates the selected tile's pushable

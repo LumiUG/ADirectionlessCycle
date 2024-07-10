@@ -73,6 +73,7 @@ public class LevelManager : MonoBehaviour
     private bool doPushSFX = false;
     private float levelTimer = 0f;
     private int levelMoves = 0;
+    private bool noMove = false;
     public bool isPaused = false;
     public bool hasWon;
 
@@ -205,7 +206,7 @@ public class LevelManager : MonoBehaviour
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
-        if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\" to \"{levelPath}\".", 4.0f);
+        if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\".", 4.0f);
     }
 
     // Load and build a level
@@ -308,6 +309,8 @@ public class LevelManager : MonoBehaviour
     // Moves a tile (needs optimizing)
     public bool TryMove(Vector3Int startingPosition, Vector3Int newPosition, Vector3Int direction, bool removeFromQueue = false, bool beingPushed = false)
     {
+        if (noMove) return false;
+
         // Check if the tile exists
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
@@ -333,7 +336,7 @@ public class LevelManager : MonoBehaviour
 
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
-        if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed)) return false; // also re-checking for blacklist
+        if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed) || noMove) return false; // also re-checking for blacklist
         MoveTile(startingPosition, newPosition, tile);
 
         // Updates new current position of the tile
@@ -360,7 +363,9 @@ public class LevelManager : MonoBehaviour
 
         // Tile effect?
         EffectTile effect = tilemapEffects.GetTile<EffectTile>(tile.position);
+        CustomTile custom = tilemapCustoms.GetTile<CustomTile>(tile.position);
         if (effect) effect.Effect(tile);
+        if (custom) custom.Effect(tile);
 
         return true;
     }
@@ -440,7 +445,7 @@ public class LevelManager : MonoBehaviour
         // Apply tile defaults
         tile.directions = defaultDirections;
         tile.position = defaultPosition;
-        tile.PrepareEditor(); // just incase??
+        tile.PrepareTile();
         return tile;
     }
 
@@ -460,6 +465,7 @@ public class LevelManager : MonoBehaviour
         toDestroy.Clear();
         lateMove.Clear();
         doPushSFX = false;
+        noMove = false;
 
         // Sort by move "priority"
         List<GameTile> moveList = levelObjects.OrderBy(tile => tile.GetTileType() != ObjectTypes.Hexagon).ToList();
@@ -680,7 +686,7 @@ public class LevelManager : MonoBehaviour
     internal void AddUndoFrame()
     {
         if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
-        undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects));
+        undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms));
     }
 
     // Removes the latest undo frame from the sequence
@@ -707,5 +713,18 @@ public class LevelManager : MonoBehaviour
         // Remove a move
         levelMoves--;
         if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
+    }
+
+    // No more moving!
+    internal void StopMovements()
+    {
+        // Gotta do it this way instead of clearing the movement list
+        // to avoid changing the stack size!
+        noMove = true;
+        
+        // foreach (GameTile tile in levelObjects)
+        // {
+        //     if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile);
+        // }
     }
 }

@@ -14,7 +14,7 @@ public class WallTile : GameTile
     }
     
     // Prepares editor variables.
-    public override void PrepareEditor()
+    public override void PrepareTile()
     {
         directions.editorDirections = false;
         directions.editorPushable = false;

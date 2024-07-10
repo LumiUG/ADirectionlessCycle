@@ -15,6 +15,7 @@ public class Serializables
         public string nextLevel = null;
         public bool freeroam = false;
         public Tiles tiles = new();
+        public List<SerializableCustomInfo> customTileInfo = new();
     }
 
     // Collection of tiles in a level
@@ -30,13 +31,14 @@ public class Serializables
 
         // List constructors (im sorryyyyy)
         public Tiles() { }
-        public Tiles(List<GameTile> solids, List<GameTile> objects, List<GameTile> overlaps, List<GameTile> hazards, List<GameTile> effects)
+        public Tiles(List<GameTile> solids, List<GameTile> objects, List<GameTile> overlaps, List<GameTile> hazards, List<GameTile> effects, List<GameTile> customs)
         {
             solids.ForEach(tile => solidTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             objects.ForEach(tile => objectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             overlaps.ForEach(tile => overlapTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             hazards.ForEach(tile => hazardTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             effects.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            customs.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
         }
     }
 
@@ -54,6 +56,20 @@ public class Serializables
             type = tileType.ToString();
             directions = new(tileDirections.up, tileDirections.down, tileDirections.left, tileDirections.right, tileDirections.pushable);
             position = new(tilePosition.x, tilePosition.y, tilePosition.z);
+        }
+    }
+
+    // ugh.
+    public class SerializableCustomInfo
+    {
+        public Vector3Int position;
+        public string text;
+
+        // Constructor
+        public SerializableCustomInfo(Vector3Int tilePosition, string text)
+        {
+            position = new(tilePosition.x, tilePosition.y, tilePosition.z);
+            this.text = text;
         }
     }
 
