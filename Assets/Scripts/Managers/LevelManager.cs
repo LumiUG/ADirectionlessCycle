@@ -218,17 +218,18 @@ public class LevelManager : MonoBehaviour
     }
 
     // Load and build a level
-    public void LoadLevel(string levelID, bool external = false, bool silent = true)
+    public bool LoadLevel(string levelID, bool external = false, bool silent = true)
     {
-        if (IsStringEmptyOrNull(levelID)) return;
+        if (IsStringEmptyOrNull(levelID)) return false;
         levelID = levelID.Trim();
+
+        // Gets the new level
+        SerializableLevel checkLevel = GetLevel(levelID, external, silent);
+        if (checkLevel == null) return false;
+        else currentLevel = checkLevel;
 
         // Clears the current level
         ClearLevel();
-
-        // Gets the new level
-        currentLevel = GetLevel(levelID, external, silent);
-        if (currentLevel == null) return;
 
         // Loads the level
         currentLevelID = levelID;
@@ -244,7 +245,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel.freeroam) {
             tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);
-            return;
+            return true;
         }
 
         // UI Stuff
@@ -258,6 +259,8 @@ public class LevelManager : MonoBehaviour
             UI.Instance.pause.SetBestTime(0f);
             UI.Instance.pause.SetBestMoves(0);
         }
+
+        return true;
     }
 
     // Load and build a level

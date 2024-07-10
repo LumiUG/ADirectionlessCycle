@@ -73,6 +73,8 @@ public class Editor : MonoBehaviour
     // Returns the mouse position on the playable grid
     internal Vector3Int GetMousePositionOnGrid()
     {
+        if (LevelManager.Instance.currentLevel == null) return Vector3Int.back;
+        
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int gridPos = LevelManager.Instance.tilemapCollideable.WorldToCell(worldPoint);
 
