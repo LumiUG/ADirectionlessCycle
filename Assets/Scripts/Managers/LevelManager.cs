@@ -205,6 +205,9 @@ public class LevelManager : MonoBehaviour
         levelHazards.ForEach(tile => level.tiles.hazardTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
+        
+        // Freeroam?
+        if (currentLevel != null) level.freeroam = currentLevel.freeroam;
 
         // Add custom tile information
         foreach (var tile in customTileInfo)

@@ -129,10 +129,11 @@ public class UI : MonoBehaviour
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
         GameManager.Instance.isEditing = true;
-        LevelManager.Instance.ReloadLevel();
         ingame.SetLevelName("Editor Mode!");
         editor.Toggle(false);
         ingame.Toggle(true);
+        
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.levelEditorName, true);
         ChangeScene("Game");
     }
 
