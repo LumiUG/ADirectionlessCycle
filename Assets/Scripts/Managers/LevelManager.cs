@@ -234,6 +234,7 @@ public class LevelManager : MonoBehaviour
         else currentLevel = checkLevel;
 
         // Clears the current level
+        MoveTilemaps(originalPosition, true);
         ClearLevel();
 
         // Loads the level
@@ -479,8 +480,8 @@ public class LevelManager : MonoBehaviour
     // Returns if a position is inside or outside the level bounds
     public bool CheckSceneInbounds(Vector3Int position)
     {
-        if (currentLevel.freeroam) return true;
         if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY); 
+        if (currentLevel.freeroam) return true;
         return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
     }
 

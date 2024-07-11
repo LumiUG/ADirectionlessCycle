@@ -19,7 +19,12 @@ public class LevelTile : CustomTile
         if (tile.directions.GetActiveDirectionCount() <= 0) return;
 
         // Loads a level using its custom text
-        if (LevelManager.Instance.LoadLevel(customText)) LevelManager.Instance.StopMovements();
+        if (LevelManager.Instance.LoadLevel(customText))
+        {
+            if (!LevelManager.Instance.currentLevel.freeroam) UI.Instance.ingame.Toggle(true);
+            LevelManager.Instance.StopMovements();
+            LevelManager.Instance.ReloadLevel();
+        }
     }
 
     // Prepares editor variables.
