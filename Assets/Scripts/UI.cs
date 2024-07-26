@@ -88,7 +88,13 @@ public class UI : MonoBehaviour
     public void GoLevelEditor()
     {
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
-        else LevelManager.Instance.LoadLevel("EditorSession", true);
+        else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
+        {
+            // Create EditorSession if the file does not exist.
+            LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
+            LevelManager.Instance.LoadLevel("EditorSession", true);
+        }
+
         LevelManager.Instance.RefreshGameVars();
         CleanChangeScene("Level Editor");
     }
@@ -125,7 +131,7 @@ public class UI : MonoBehaviour
     // Playtest level
     public void LevelEditorPlaytest()
     {
-        LevelManager.Instance.SaveLevel(LevelManager.Instance.levelEditorName, LevelManager.Instance.levelEditorName);
+        LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
         GameManager.Instance.isEditing = true;

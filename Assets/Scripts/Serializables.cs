@@ -13,6 +13,7 @@ public class Serializables
     {
         public string levelName;
         public string nextLevel = null;
+        public string remixLevel = null;
         public bool freeroam = false;
         public Tiles tiles = new();
     }
