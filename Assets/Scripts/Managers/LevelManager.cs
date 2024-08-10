@@ -14,7 +14,7 @@ using static GameTile;
 
 public class LevelManager : MonoBehaviour
 {
-    // Basic //
+    // Tile References & Others //
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
@@ -536,7 +536,7 @@ public class LevelManager : MonoBehaviour
     // Checks if you've won
     private void CheckCompletion()
     {
-        // Condition:
+        // Level win condition:
         // All area tiles have some object overlapping them and at least 1 exists,
         // no inverse areas are being overlapped.
         bool winCondition = 
@@ -551,6 +551,35 @@ public class LevelManager : MonoBehaviour
                     (objectOverlap == null && type == ObjectTypes.InverseArea);
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
+
+        // Inverted win condition:
+        // All area tiles have some object overlapping them and at least 1 exists,
+        // all object tiles must be overlapping said inverted areas,
+        // level MUST have a remix level defined (not null)
+        bool remixCondition =
+            levelWinAreas.All(overlap => // All inverse areas are overlapped
+                {
+                    if (!typesAreas.Contains(overlap.GetTileType())) return true;
+
+                    GameTile objectOverlap = tilemapObjects.GetTile<GameTile>(overlap.position);
+                    ObjectTypes type = overlap.GetTileType();
+
+                    return (objectOverlap != null && type == ObjectTypes.InverseArea) ||
+                    (objectOverlap == null && type == ObjectTypes.Area);
+                }
+            ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.InverseArea) // At least one exists
+            && levelObjects.All(tile => // All level objects are overlapping inverse areas
+                {
+                    return tilemapWinAreas.GetTile<InverseWinAreaTile>(tile.position) != null;
+                }
+            ) && currentLevel.remixLevel != null;
+
+        // Load remix level!
+        if (remixCondition)
+        {
+            LoadLevel(currentLevel.remixLevel);
+            return;
+        }
 
         // UI area count
         UI.Instance.ingame.SetAreaCount(

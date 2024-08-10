@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         // Set master and SFX values
         if (AudioManager.Instance) {
             AudioManager.Instance.SetMasterVolume(save.preferences.masterVolume);
-            // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed
+            // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
     }
 
