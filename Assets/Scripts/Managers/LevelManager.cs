@@ -606,7 +606,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if currently in editor
-    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon); }
+    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog); }
 
     // Is string empty or null
     public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }

@@ -238,6 +238,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugDialog",
+                    "type": "Button",
+                    "id": "b465bcc8-bf63-4c66-a3f3-284e29ef6c01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -711,6 +720,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectFake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc99ed57-2209-47a0-a978-c04bbb66dcff",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugDialog",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

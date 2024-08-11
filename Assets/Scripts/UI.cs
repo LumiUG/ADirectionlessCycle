@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public PauseUI pause;
     [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
+    [HideInInspector] public DialogUI dialog;
 
     private void Awake()
     {
@@ -54,6 +55,11 @@ public class UI : MonoBehaviour
         ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
         ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
+        
+        // Dialog UI
+        dialog = new() { self = transform.Find("Dialog UI").gameObject };
+        dialog.name = dialog.self.transform.Find("Name").GetComponent<Text>();
+        dialog.text = dialog.self.transform.Find("Text").GetComponent<Text>();
 
         // Change from preload scene?
         if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
@@ -227,5 +233,17 @@ public class UI : MonoBehaviour
             // Update text
             areaCount.text = $"{current}/{max}";
         }
+    }
+
+    public class DialogUI : UIObject
+    {
+        public Text name;
+        public Text text;
+        public void SetText(string newText, bool additive = false)
+        {
+            if (additive) text.text += $"{newText}";
+            else text.text = $"{newText}";
+        }
+
     }
 }

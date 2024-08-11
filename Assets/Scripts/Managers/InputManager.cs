@@ -72,7 +72,7 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.RemoveUndoFrame();
     }
 
-    // Ping all areas (FYI, this is horrible.)
+    // Ping all areas
     private void OnPingAreas(InputValue ctx)
     {
         LevelManager.Instance.PingAllAreas(ctx.Get<float>() == 1f);
@@ -88,7 +88,7 @@ public class InputManager : MonoBehaviour
     // Repeats a movement
     private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.005f)
     {
-        while (direction == latestMovement && isHolding && !LevelManager.Instance.hasWon && !LevelManager.Instance.isPaused)
+        while (direction == latestMovement && isHolding && LevelManager.Instance.IsAllowedToPlay())
         {
             if (!MoveCDCheck(repeatMovementCD))
             {
@@ -249,6 +249,7 @@ public class InputManager : MonoBehaviour
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {
+        if (!GameManager.Instance.IsEditor()) return;
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
     }
 
@@ -283,5 +284,10 @@ public class InputManager : MonoBehaviour
 
         LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
         LevelManager.Instance.worldOffsetX += 14;
+    }
+
+    private void OnDebugDialog() 
+    {
+        DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/Debug"));
     }
 }
