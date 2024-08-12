@@ -178,7 +178,9 @@ public class Editor : MonoBehaviour
         if (!LevelManager.Instance.typesCustomsList.Contains(editingTile.GetTileType())) return;
 
         // Get the real tile that you can edit
-        LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
+        var existingRule = LevelManager.Instance.customTileInfo.Find(rule => { return rule.position == editingTile.position; });
+        if (existingRule != null) existingRule.text = text;
+        else LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
         UI.Instance.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
     }
 
