@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectNPC",
+                    "type": "Button",
+                    "id": "8e4cb32d-7951-4b6e-92e9-ab5e0872c496",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectLevel",
                     "type": "Button",
                     "id": "49d8ec54-c2e7-498e-8d25-efac934bffbd",
@@ -731,6 +740,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DebugDialog",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fec3288-71b1-4953-9cdc-caab5a98d53e",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectNPC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

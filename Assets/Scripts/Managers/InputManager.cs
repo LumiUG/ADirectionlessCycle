@@ -182,6 +182,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.fakeTile; 
     }
+    private void OnEditorSelectNPC() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.npcTile; 
+    }
     private void OnEditorSelectMimic() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -222,7 +227,16 @@ public class InputManager : MonoBehaviour
 
         // Update UI (dear god)
         Editor.I.ignoreUpdateEvent = true;
-        Editor.I.customInputField.interactable = LevelManager.Instance.typesCustomsList.Contains(Editor.I.editingTile.GetTileType());
+
+        // Custom tiles field (missing loading custom text automatically)
+        if (LevelManager.Instance.typesCustomsList.Contains(Editor.I.editingTile.GetTileType())) {
+            Editor.I.customInputField.interactable = true;
+        } else {
+            Editor.I.customInputField.interactable = false;
+            Editor.I.customInputField.text = string.Empty;
+        }
+
+        // Basic
         Editor.I.pushableToggle.interactable = Editor.I.editingTile.directions.editorPushable;
         Editor.I.pushableToggle.isOn = Editor.I.editingTile.directions.pushable;
         Editor.I.upToggle.interactable = Editor.I.editingTile.directions.editorDirections;
@@ -288,6 +302,7 @@ public class InputManager : MonoBehaviour
 
     private void OnDebugDialog() 
     {
+        if (GameManager.Instance.IsBadScene()) return;
         DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/Debug"));
     }
 }

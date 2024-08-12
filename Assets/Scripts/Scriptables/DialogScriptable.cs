@@ -8,5 +8,6 @@ public class DialogScriptable : ScriptableObject
     public DialogManager.DialogEvent[] events = { new() };
     public string npcName = "?????";
     public float textSpeed = 0.05f;
+    public AudioClip sfx = null;
     public bool canBeSkipped = true;
 }

@@ -94,6 +94,7 @@ public class DialogManager : MonoBehaviour
         foreach (char c in dialog[dialogIndex])
         {
             UI.Instance.dialog.SetText(c.ToString(), true);
+            if (loadedDial.sfx != null) AudioManager.Instance.PlaySFX(loadedDial.sfx, 0.60f);
             if (c.ToString() != "." && c.ToString() != ",") yield return new WaitForSecondsRealtime(textSpeed);
             else yield return new WaitForSecondsRealtime(textSpeed + 0.1f);
         }

@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
-    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake };
+    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile levelTile;
     [HideInInspector] public GameTile fakeTile;
+    [HideInInspector] public GameTile npcTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
@@ -104,6 +105,7 @@ public class LevelManager : MonoBehaviour
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
         fakeTile = Resources.Load<FakeTile>("Tiles/Customs/Fake");
+        npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
 
         // Defaults
         defaultOverlapLayer = areaRenderer.sortingOrder;
@@ -308,7 +310,7 @@ public class LevelManager : MonoBehaviour
         foreach (var tile in level.customTileInfo)
         {
             CustomTile realTile = tilemapCustoms.GetTile<CustomTile>(tile.position);
-            if (realTile) realTile.customText = tile.text;
+            if (realTile) { realTile.customText = tile.text; realTile.PrepareTile(); }
             else customTileInfo.Remove(tile);
         }
     }
@@ -467,6 +469,7 @@ public class LevelManager : MonoBehaviour
             "NegativeArrow" => Instantiate(negativeArrowTile),
             "Level" => Instantiate(levelTile),
             "Fake" => Instantiate(fakeTile),
+            "NPC" => Instantiate(npcTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 
@@ -661,6 +664,13 @@ public class LevelManager : MonoBehaviour
     {
         tilemapWinAreas.SetTile(tile.position, null);
         tilemapWinAreas.SetTile(tile.position, tile);
+    }
+
+    // Refreshes a custom tile
+    public void RefreshCustomTile(GameTile tile)
+    {
+        tilemapCustoms.SetTile(tile.position, null);
+        tilemapCustoms.SetTile(tile.position, tile);
     }
 
     // Refreshes the game and closes all UI's
