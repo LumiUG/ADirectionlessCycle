@@ -31,12 +31,5 @@ public class NPCTile : CustomTile
         directions.editorDirections = false;
         directions.editorPushable = false;
         directions.editorMinimumDirections = 0;
-    
-        // Updates the NPC sprite upon loading again
-        if (customText != string.Empty)
-        {
-            tileSprite = Resources.Load<Sprite>($"Sprites/Tiles/{customText.Split(";")[1]}");
-            LevelManager.Instance.RefreshCustomTile(this);
-        }
     }
 }

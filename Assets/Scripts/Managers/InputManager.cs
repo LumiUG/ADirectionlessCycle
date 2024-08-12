@@ -185,7 +185,7 @@ public class InputManager : MonoBehaviour
     private void OnEditorSelectNPC() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.npcTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.npcTile;
     }
     private void OnEditorSelectMimic() 
     { 

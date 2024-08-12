@@ -179,7 +179,7 @@ public class Editor : MonoBehaviour
 
         // Get the real tile that you can edit
         LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
-        UI.Instance.global.SendMessage($"Set custom warp to \"{text}\".");
+        UI.Instance.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
     }
 
     // Updates the selected tile's pushable

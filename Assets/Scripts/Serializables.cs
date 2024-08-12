@@ -39,8 +39,8 @@ public class Serializables
             overlaps.ForEach(tile => overlapTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             hazards.ForEach(tile => hazardTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
             effects.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
-            customs.ForEach(tile => effectTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
-            customTileInfo = info;
+            customs.ForEach(tile => customTiles.Add(new SerializableTile(tile.GetTileType(), tile.directions, tile.position)));
+            info.ForEach(custom => customTileInfo.Add(new SerializableCustomInfo(custom.position, custom.text)));
         }
     }
 

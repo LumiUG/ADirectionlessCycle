@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
+    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -214,7 +215,7 @@ public class LevelManager : MonoBehaviour
         // Add custom tile information
         foreach (var tile in customTileInfo)
         {
-            if (!tilemapCustoms.GetTile<CustomTile>(tile.position)) continue;
+            if (!tilemapCustoms.GetTile<CustomTile>(tile.position) || level.tiles.customTileInfo.Any(pos => { return pos.position == tile.position; })) continue;
             level.tiles.customTileInfo.Add(tile);
         }
 
@@ -310,7 +311,7 @@ public class LevelManager : MonoBehaviour
         foreach (var tile in level.customTileInfo)
         {
             CustomTile realTile = tilemapCustoms.GetTile<CustomTile>(tile.position);
-            if (realTile) { realTile.customText = tile.text; realTile.PrepareTile(); }
+            if (realTile) { realTile.customText = tile.text; SetCustomSprite(realTile, false); RefreshCustomTile(realTile); }
             else customTileInfo.Remove(tile);
         }
     }
@@ -667,10 +668,10 @@ public class LevelManager : MonoBehaviour
     }
 
     // Refreshes a custom tile
-    public void RefreshCustomTile(GameTile tile)
+    public void RefreshCustomTile(CustomTile tile)
     {
         tilemapCustoms.SetTile(tile.position, null);
-        tilemapCustoms.SetTile(tile.position, tile);
+        tilemapCustoms.SetTile(tile.position, tile); // avoid passing in ghost references
     }
 
     // Refreshes the game and closes all UI's
@@ -793,5 +794,17 @@ public class LevelManager : MonoBehaviour
         // {
         //     if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile);
         // }
+    }
+
+    // Updates a custom tile's sprite
+    internal void SetCustomSprite(CustomTile tile, bool refresh = true)
+    {
+        if (!customSpriters.Contains(tile.GetTileType())) return;
+
+        if (tile.customText != string.Empty)
+        {
+            tile.tileSprite = Resources.Load<Sprite>($"Sprites/Tiles/{tile.customText.Split(";")[1]}");
+            if (refresh) RefreshCustomTile(tile);
+        }
     }
 }
