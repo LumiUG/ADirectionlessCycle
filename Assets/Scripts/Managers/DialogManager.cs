@@ -33,7 +33,7 @@ public class DialogManager : MonoBehaviour
     // Starts the dialog with the NPC
     public void StartDialog(DialogScriptable chat)
     {
-        if (!canInteract) return;
+        if (!canInteract || !chat) return;
         inDialog = true;
 
         // Should we change/load the new scriptable?
