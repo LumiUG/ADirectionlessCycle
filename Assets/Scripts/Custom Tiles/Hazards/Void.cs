@@ -1,30 +1,18 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-// NPC TILE USES CUSTOM TEXT SLICING !!
-// Example: "dialogScriptable;yourSprite"
-
-[CreateAssetMenu(menuName = "Game Tiles/Customs/NPC Tile")]
-public class NPCTile : CustomTile 
+[CreateAssetMenu(menuName = "Game Tiles/Hazards/Void Tile")]
+public class VoidTile : GameTile
 {
     // Returns the tile type
-    public override ObjectTypes GetTileType() { return ObjectTypes.NPC; }
+    public override ObjectTypes GetTileType() { return ObjectTypes.Void; }
 
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable, bool beingPushed = false)
     {
         return Vector3Int.back;
     }
-
-    // The tile's effect
-    public override void Effect(GameTile tile)
-    {
-        if (tile) return;
-
-        // Play the dialog (too many load calls...)
-        DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>($"Dialog/{customText.Split(";")[0]}"));
-    }
-
+    
     // Prepares editor variables.
     public override void PrepareTile()
     {

@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class InputManager : MonoBehaviour
 {
@@ -192,6 +193,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.mimicTile; 
     }
+    private void OnEditorSelectVoid() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.voidTile; 
+    }
 
     // Places a tile
     private void OnEditorClickGrid()
@@ -303,6 +309,21 @@ public class InputManager : MonoBehaviour
     private void OnDebugDialog() 
     {
         if (GameManager.Instance.IsBadScene()) return;
-        DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/Debug"));
+
+        // Searches for a first valid NPC
+        GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
+            npc => {
+                GameTile test = null;
+                test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
+                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
+                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
+                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
+                if (test) return npc;
+                else return false;
+            }
+        );
+
+        // Gets the NPC and triggers it
+        if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(null); }
     }
 }

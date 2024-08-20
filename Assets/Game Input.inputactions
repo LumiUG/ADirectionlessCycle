@@ -114,6 +114,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectVoid",
+                    "type": "Button",
+                    "id": "3c27c380-b93b-43a6-82b6-b1819b1d94fd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectInverseArea",
                     "type": "Button",
                     "id": "635b6be8-77b3-420c-96f8-5d913ef0ff0f",
@@ -751,6 +760,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectNPC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a38ba4cd-1342-4443-b47c-08cf1ab20e4b",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectVoid",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

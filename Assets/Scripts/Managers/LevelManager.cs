@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
-    internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard };
+    internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
     internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC };
@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile fakeTile;
     [HideInInspector] public GameTile npcTile;
     [HideInInspector] public GameTile hazardTile;
+    [HideInInspector] public GameTile voidTile;
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
     [HideInInspector] public GameTile negativeArrowTile;
@@ -101,6 +102,7 @@ public class LevelManager : MonoBehaviour
         areaTile = Resources.Load<WinAreaTile>("Tiles/Areas/Area");
         inverseAreaTile = Resources.Load<InverseWinAreaTile>("Tiles/Areas/Inverse Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
+        voidTile = Resources.Load<VoidTile>("Tiles/Hazards/Void");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
@@ -388,8 +390,12 @@ public class LevelManager : MonoBehaviour
         if (removeFromQueue) { if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile); }
 
         // Marks all the objects that should be deleted
-        HazardTile hazard = tilemapHazards.GetTile<HazardTile>(tile.position);
-        if (hazard) AddToDestroyQueue(tile);
+        GameTile hazard = tilemapHazards.GetTile<GameTile>(tile.position);
+        if (hazard)
+        {
+            AddToDestroyQueue(tile);
+            if (hazard.GetTileType() == ObjectTypes.Void) RemoveTile(hazard);
+        }
 
         // Tile effect?
         EffectTile effect = tilemapEffects.GetTile<EffectTile>(tile.position);
@@ -465,6 +471,7 @@ public class LevelManager : MonoBehaviour
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
+            "Void" => Instantiate(voidTile),
             "Invert" => Instantiate(invertTile),
             "Arrow" => Instantiate(arrowTile),
             "NegativeArrow" => Instantiate(negativeArrowTile),
@@ -684,6 +691,7 @@ public class LevelManager : MonoBehaviour
         worldOffsetX = 0;
         worldOffsetY = 0;
 
+        DialogManager.Instance.loadedDial = null;
         tilemapLetterbox.gameObject.SetActive(true);
         UI.Instance.ingame.SetLevelTimer(levelTimer);
         UI.Instance.ingame.SetLevelMoves(levelMoves);
@@ -806,5 +814,11 @@ public class LevelManager : MonoBehaviour
             tile.tileSprite = Resources.Load<Sprite>($"Sprites/Tiles/{tile.customText.Split(";")[1]}");
             if (refresh) RefreshCustomTile(tile);
         }
+    }
+
+    // Returns the list of custom tiles
+    internal List<GameTile> GetCustomTiles()
+    {
+        return levelCustoms;
     }
 }
