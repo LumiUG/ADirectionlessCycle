@@ -107,7 +107,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog) return;
         if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
         else LevelManager.Instance.PauseResumeGame(false);
     }
@@ -121,28 +121,30 @@ public class InputManager : MonoBehaviour
 
         Editor.I.tileToPlace = LevelManager.Instance.wallTile;
     }
+    private void OnEditorSelectAntiWall()
+    {
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
 
+        Editor.I.tileToPlace = LevelManager.Instance.antiwallTile;
+    }
     private void OnEditorSelectBox()
     {
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.boxTile;
     }
-
     private void OnEditorSelectCircle()
     {
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.circleTile; 
     }  
-
     private void OnEditorSelectHex() 
     {
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         
         Editor.I.tileToPlace = LevelManager.Instance.hexagonTile;
     }
-
     private void OnEditorSelectArea()
     {
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;

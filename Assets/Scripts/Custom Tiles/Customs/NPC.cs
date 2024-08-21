@@ -21,8 +21,16 @@ public class NPCTile : CustomTile
     {
         if (tile) return;
 
+        // Checks if there is a string
+        string[] stringCheck = customText.Split(";");
+        if (stringCheck.Length < 2) return;
+
+        // Checks if the dialog exists
+        DialogScriptable dialogCheck = Resources.Load<DialogScriptable>($"Dialog/{stringCheck.GetValue(0)}");
+        if (dialogCheck == null) return;
+
         // Play the dialog (too many load calls...)
-        DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>($"Dialog/{customText.Split(";")[0]}"));
+        DialogManager.Instance.StartDialog(dialogCheck);
     }
 
     // Prepares editor variables.

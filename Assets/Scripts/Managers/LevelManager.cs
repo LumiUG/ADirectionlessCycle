@@ -15,7 +15,7 @@ using static GameTile;
 public class LevelManager : MonoBehaviour
 {
     // Tile References & Others //
-    internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall };
+    internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall, ObjectTypes.AntiWall };
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
+    [HideInInspector] public GameTile antiwallTile;
     [HideInInspector] public GameTile boxTile;
     [HideInInspector] public GameTile circleTile;
     [HideInInspector] public GameTile hexagonTile;
@@ -95,6 +96,7 @@ public class LevelManager : MonoBehaviour
 
         // Getting tile references
         wallTile = Resources.Load<WallTile>("Tiles/Solids/Wall");
+        antiwallTile = Resources.Load<AntiWallTile>("Tiles/Solids/Anti Wall");
         boxTile = Resources.Load<BoxTile>("Tiles/Objects/Box");
         circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
         hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
@@ -468,6 +470,7 @@ public class LevelManager : MonoBehaviour
             "Hexagon" => Instantiate(hexagonTile),
             "Mimic" => Instantiate(mimicTile),
             "Wall" => Instantiate(wallTile),
+            "AntiWall" => Instantiate(antiwallTile),
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),
             "Hazard" => Instantiate(hazardTile),
@@ -678,7 +681,7 @@ public class LevelManager : MonoBehaviour
     public void RefreshCustomTile(CustomTile tile)
     {
         tilemapCustoms.SetTile(tile.position, null);
-        tilemapCustoms.SetTile(tile.position, tile); // avoid passing in ghost references
+        tilemapCustoms.SetTile(tile.position, tile);
     }
 
     // Refreshes the game and closes all UI's
@@ -811,7 +814,16 @@ public class LevelManager : MonoBehaviour
 
         if (tile.customText != string.Empty)
         {
-            tile.tileSprite = Resources.Load<Sprite>($"Sprites/Tiles/{tile.customText.Split(";")[1]}");
+            // Checks if there is a sprite
+            string[] stringCheck = tile.customText.Split(";");
+            if (stringCheck.Length < 2) return;
+
+            // Checks if the sprite exists
+            Sprite spriteCheck = Resources.Load<Sprite>($"Sprites/Tiles/{stringCheck.GetValue(1)}");
+            if (spriteCheck == null) return;
+
+            // Sets the sprite and (optionally) refreshes the tile
+            tile.tileSprite = spriteCheck;
             if (refresh) RefreshCustomTile(tile);
         }
     }

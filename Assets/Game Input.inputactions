@@ -177,6 +177,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectAntiWall",
+                    "type": "Button",
+                    "id": "842595f2-6366-41d2-82b5-54f0ece48886",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorUp",
                     "type": "Button",
                     "id": "a8612a34-f177-4870-885a-fed75aa86ce6",
@@ -771,6 +780,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectVoid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa003f22-2efa-4129-998f-05ec4669a0ec",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectAntiWall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
