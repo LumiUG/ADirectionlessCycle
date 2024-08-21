@@ -43,6 +43,7 @@ public class LevelManager : MonoBehaviour
 
     // Grids and tilemaps //
     private Grid levelGrid;
+    private Grid extraGrid;
     [HideInInspector] public Tilemap tilemapCollideable;
     [HideInInspector] public Tilemap tilemapObjects;
     [HideInInspector] public Tilemap tilemapWinAreas;
@@ -50,6 +51,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapEffects;
     [HideInInspector] public Tilemap tilemapCustoms;
     [HideInInspector] public Tilemap tilemapLetterbox;
+    [HideInInspector] public Tilemap extrasOutlines;
     private TilemapRenderer areaRenderer;
     private Vector3 originalPosition;
     internal int worldOffsetX = 0;
@@ -125,6 +127,7 @@ public class LevelManager : MonoBehaviour
     // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
     private void TryGetSceneReferences()
     {
+        // Level grids and tilemaps
         Transform gridObject = transform.Find("Level Grid");
         levelGrid = gridObject != null ? gridObject.GetComponent<Grid>() : null;
         tilemapCollideable = gridObject != null ? gridObject.Find("Collideable").GetComponent<Tilemap>() : null;
@@ -134,6 +137,11 @@ public class LevelManager : MonoBehaviour
         tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
         tilemapCustoms = gridObject != null ? gridObject.Find("Customs").GetComponent<Tilemap>() : null;
         tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
+
+        // Extra grids and tilemaps
+        Transform extraObject = transform.Find("Extras");
+        extraGrid = extraObject != null ? extraObject.GetComponent<Grid>() : null;
+        extrasOutlines = extraObject != null ? extraObject.Find("Outlines").GetComponent<Tilemap>() : null;
 
         areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
         originalPosition = new Vector3(tilemapObjects.transform.position.x, tilemapObjects.transform.position.y, tilemapObjects.transform.position.z);
@@ -696,6 +704,7 @@ public class LevelManager : MonoBehaviour
 
         DialogManager.Instance.loadedDial = null;
         tilemapLetterbox.gameObject.SetActive(true);
+        extrasOutlines.gameObject.SetActive(true);
         UI.Instance.ingame.SetLevelTimer(levelTimer);
         UI.Instance.ingame.SetLevelMoves(levelMoves);
         MoveTilemaps(originalPosition, true);
@@ -716,6 +725,7 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance.noGameplayScenes.Contains(scene.name))
         {
             tilemapLetterbox.gameObject.SetActive(false);
+            extrasOutlines.gameObject.SetActive(false);
             UI.Instance.ingame.Toggle(false);
             return;
         }
