@@ -109,6 +109,10 @@ PrefabInstance:
       propertyPath: m_PlaneDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3049161543094135185, guid: 56fc4d816b9c5f94baa33e7c46c096b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3273298960951477495, guid: 56fc4d816b9c5f94baa33e7c46c096b0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
