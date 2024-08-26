@@ -267,7 +267,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DebugDialog",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "b465bcc8-bf63-4c66-a3f3-284e29ef6c01",
                     "expectedControlType": "Button",
@@ -753,11 +753,22 @@
                 {
                     "name": "",
                     "id": "fc99ed57-2209-47a0-a978-c04bbb66dcff",
-                    "path": "<Keyboard>/leftAlt",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DebugDialog",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb599032-3e4e-4d28-a0a2-931f694840fe",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

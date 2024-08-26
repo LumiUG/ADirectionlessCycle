@@ -308,7 +308,7 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.worldOffsetX += 14;
     }
 
-    private void OnDebugDialog() 
+    private void OnInteract() 
     {
         if (GameManager.Instance.IsBadScene()) return;
 

@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
     [HideInInspector] public DialogUI dialog;
+    [HideInInspector] public Selectors selectors;
 
     private void Awake()
     {
@@ -66,7 +67,20 @@ public class UI : MonoBehaviour
     }
 
     // Change scenes
-    public void ChangeScene(string sceneName) { SceneManager.LoadScene(sceneName); }
+    public void ChangeScene(string sceneName)
+    {
+        // Move the UI selectors to its default place
+        if (selectors)
+        {
+            selectors.left.SetParent(selectors.gameObject.transform);
+            selectors.right.SetParent(selectors.gameObject.transform);
+            selectors.left.anchoredPosition = Vector2.zero;
+            selectors.right.anchoredPosition = Vector2.zero;
+        }
+
+        // Load the scene
+        SceneManager.LoadScene(sceneName);
+    }
 
     // Clear UI Change scene
     public void CleanChangeScene(string sceneName)

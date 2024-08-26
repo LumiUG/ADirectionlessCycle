@@ -256,8 +256,11 @@ public class LevelManager : MonoBehaviour
         currentLevelID = levelID;
         BuildLevel(currentLevel.tiles);
 
-        // Start the level timer (coro)
+        // Start the level timer (coro) and reset moves
+        levelTimer = 0;
+        levelMoves = 0;
         timerCoroutine = StartCoroutine(LevelTimer());
+        UI.Instance.ingame.SetLevelMoves(levelMoves);
 
         // Yay! UI!
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");

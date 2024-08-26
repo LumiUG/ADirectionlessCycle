@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f495c88b7719c49b95c21442c7105d, type: 3}
   m_Name: Mimic
   m_EditorClassIdentifier: 
-  tileSprite: {fileID: 21300000, guid: 54bc42cf312873a499ad504fade73ee1, type: 3}
+  tileSprite: {fileID: 21300000, guid: 81e1616c734c35d4387e86dc7eaca6bc, type: 3}
   tileObject: {fileID: 7852494226514332356, guid: 67825c11fa7c27b4b99742cd1a3eb568, type: 3}
   position: {x: 0, y: 0, z: 0}
   directions:
