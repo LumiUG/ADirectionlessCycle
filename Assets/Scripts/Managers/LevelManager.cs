@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
-    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC };
+    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Fake };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -827,12 +827,25 @@ public class LevelManager : MonoBehaviour
 
         if (tile.customText != string.Empty)
         {
+            string stringCheck;
+
             // Checks if there is a sprite
-            string[] stringCheck = tile.customText.Split(";");
-            if (stringCheck.Length < 2) return;
+            switch (tile.GetTileType())
+            {
+                case ObjectTypes.NPC:
+                    if (tile.customText.Split(";").Length < 2) return;
+                    stringCheck = (string)tile.customText.Split(";").GetValue(1);
+                    break;
+                
+                case ObjectTypes.Fake:
+                    stringCheck = tile.customText;
+                    break;
+                default:
+                    return;
+            }
 
             // Checks if the sprite exists
-            Sprite spriteCheck = Resources.Load<Sprite>($"Sprites/Tiles/{stringCheck.GetValue(1)}");
+            Sprite spriteCheck = Resources.Load<Sprite>($"Sprites/Tiles/{stringCheck}");
             if (spriteCheck == null) return;
 
             // Sets the sprite and (optionally) refreshes the tile
