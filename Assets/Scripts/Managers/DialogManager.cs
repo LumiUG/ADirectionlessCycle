@@ -71,7 +71,7 @@ public class DialogManager : MonoBehaviour
         if (dialogIndex < dialog.Length)
         {
             // Executes a dialog event
-            // foreach (DialogEvent ev in events) { if (ev.executeAtIndex == dialogIndex) ev.userDialog.Run(); }
+            foreach (DialogEvent ev in events) { if (ev.executeAtIndex == dialogIndex) ev.textSpeedEvent.Run(); }
             
             // Reads the line
             StartCoroutine(ReadLine());
@@ -135,12 +135,24 @@ public class DialogManager : MonoBehaviour
 
     // Dialog events
     [Serializable] public class DialogEvent {
+        public EventTextSpeed textSpeedEvent;
         public int executeAtIndex = 0;
 
         // Required to have Run() or something idk
-        [Serializable] public class EventAction {
+        [Serializable] public abstract class EventAction {
             public bool enabled = false;
-            public virtual void Run() { }
+            public abstract void Run();
+        }
+
+        // Change text speed
+        [Serializable] public class EventTextSpeed : EventAction
+        {
+            public float textSpeed;
+            public override void Run()
+            {
+                if (!enabled) return;
+                Instance.textSpeed = textSpeed;
+            }
         }
     }
 }

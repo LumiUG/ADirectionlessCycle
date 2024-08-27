@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Gummi Build 2
+  m_Name: Events
   m_EditorClassIdentifier: 
   dialog:
-  - okay so i dont actually know what to write since im still doing the npc interactions
-    and events but this is looking good
-  - also i can change the sfx while talking which is cool (i wont do it, lazy)
-  - and text speed.
+  - Hello, world.
+  - Programmed to work and not to feel.
+  - Not even sure that this is real.
+  - Hello, world.
   events:
-  - executeAtIndex: 0
-  npcName: Gummi
+  - textSpeedEvent:
+      enabled: 1
+      textSpeed: 0.2
+    executeAtIndex: 1
+  npcName: ?????
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
+  sfx: {fileID: 0}
   canBeSkipped: 1

@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Gummi Build
+  m_Name: Wall
   m_EditorClassIdentifier: 
   dialog:
-  - Goodbye, World.
-  - Programmed to feel and not to work.
+  - '[A strange wall.]'
+  - '[Being around it makes you feel uneasy.]'
+  - '[...]'
+  - '[You should go.]'
   events:
-  - executeAtIndex: 0
-  npcName: ?????
-  textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    executeAtIndex: 0
+  npcName: 
+  textSpeed: 0.1
+  sfx: {fileID: 0}
   canBeSkipped: 1
