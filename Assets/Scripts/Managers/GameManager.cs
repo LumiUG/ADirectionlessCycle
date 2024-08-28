@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // Game data // 
     [HideInInspector] public bool isEditing;
     [HideInInspector] public SpriteRenderer drawOver;
+    [HideInInspector] public bool buildDebugMode;
     public static Savedata save;
     private string dataPath;
 
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         LoadDataJSON();
 
         // Default variables
+        buildDebugMode = false;
         isEditing = false;
 
         // Fixes a stupid bug
@@ -65,6 +67,12 @@ public class GameManager : MonoBehaviour
     public bool IsEditor()
     {
         return SceneManager.GetActiveScene().name == "Level Editor";
+    }
+
+    // Debug check
+    public bool IsDebug()
+    {
+        return buildDebugMode || Application.isEditor;
     }
 
     // Stuff with savedata //

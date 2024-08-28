@@ -15,8 +15,7 @@ MonoBehaviour:
   dialog:
   - Goodbye, World.
   - Programmed to feel and not to work.
-  events:
-  - executeAtIndex: 0
+  events: []
   npcName: ?????
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}

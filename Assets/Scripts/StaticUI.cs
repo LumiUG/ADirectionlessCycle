@@ -14,7 +14,13 @@ public class StaticUI : MonoBehaviour
     public void StaticGoLevelEditor() { if (UI.Instance) UI.Instance.GoLevelEditor(); }
 
     // Change scene to the world map / real hub
-    public void StaticGoWorldMap() { if (UI.Instance) UI.Instance.GoWorldMap(); }
+    public void StaticGoWorldMap()
+    {
+        if (!UI.Instance) return;
+
+        if (!GameManager.Instance.IsDebug()) { UI.Instance.global.SendMessage("Debug needed."); return; }
+        UI.Instance.GoWorldMap();
+    }
 
     // Change scenes
     public void StaticChangeScene(string sceneName)

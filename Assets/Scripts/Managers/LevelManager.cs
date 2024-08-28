@@ -621,7 +621,7 @@ public class LevelManager : MonoBehaviour
 
             // UI
             EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
-            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
+            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
             UI.Instance.win.ToggleNextLevel(!IsStringEmptyOrNull(currentLevel.nextLevel));
             UI.Instance.win.SetTotalTime(changes.time);
             UI.Instance.win.SetTotalMoves(changes.moves);
@@ -725,6 +725,8 @@ public class LevelManager : MonoBehaviour
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
+        if (UI.Instance.selectors) UI.Instance.selectors.sceneLoaded = true;
+
         if (GameManager.Instance.noGameplayScenes.Contains(scene.name))
         {
             tilemapLetterbox.gameObject.SetActive(false);

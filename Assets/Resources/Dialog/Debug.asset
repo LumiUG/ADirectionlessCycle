@@ -17,8 +17,7 @@ MonoBehaviour:
   - Programmed to work and not to feel.
   - Not even sure that this is real.
   - Hello, world.
-  events:
-  - executeAtIndex: 0
+  events: []
   npcName: ?????
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}

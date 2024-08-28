@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
 public class InputManager : MonoBehaviour
 {
@@ -308,7 +307,7 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.worldOffsetX += 14;
     }
 
-    private void OnInteract() 
+    private void OnInteract()
     {
         if (GameManager.Instance.IsBadScene()) return;
 

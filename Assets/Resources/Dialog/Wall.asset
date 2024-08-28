@@ -17,11 +17,7 @@ MonoBehaviour:
   - '[Being around it makes you feel uneasy.]'
   - '[...]'
   - '[You should go.]'
-  events:
-  - textSpeedEvent:
-      enabled: 0
-      textSpeed: 0
-    executeAtIndex: 0
+  events: []
   npcName: 
   textSpeed: 0.1
   sfx: {fileID: 0}

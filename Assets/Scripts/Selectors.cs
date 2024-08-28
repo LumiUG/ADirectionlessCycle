@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Selectors : MonoBehaviour
 {
+    [HideInInspector] public bool sceneLoaded; 
     internal RectTransform left;
     internal RectTransform right;
 
@@ -18,6 +19,7 @@ public class Selectors : MonoBehaviour
         if (UI.Instance) UI.Instance.selectors = this;
         left = transform.Find("Left").gameObject.GetComponent<RectTransform>();
         right = transform.Find("Right").gameObject.GetComponent<RectTransform>();
+        sceneLoaded = false;
     }
 
     void Update()
@@ -36,13 +38,27 @@ public class Selectors : MonoBehaviour
         stopMoving = false;
 
         // Move the selectors to the currently selected UI object
-        distanceRight = trackRT.rect.center + new Vector2(trackRT.rect.width + (right.rect.width / 2), 0);
-        distanceLeft = trackRT.rect.center + new Vector2(-trackRT.rect.width - (left.rect.width / 2), 0);
+        SetSelector(trackRT, sceneLoaded);
+        sceneLoaded = false;
+    }
 
-        right.SetParent(trackRT);
-        left.SetParent(trackRT);
-        right.localScale = Vector3.one;
-        left.localScale = Vector3.one * -1;
+    // Sets the selector to a RectTransform object
+    internal void SetSelector(RectTransform rt, bool forceMove = false)
+    {
+        distanceRight = rt.rect.center + new Vector2(rt.rect.width + (right.rect.width / 2), 0);
+        distanceLeft = rt.rect.center + new Vector2(-rt.rect.width - (left.rect.width / 2), 0);
+
+        right.SetParent(rt);
+        left.SetParent(rt);
+        right.localScale = new(1, 1, 1);
+        left.localScale = new(-1, 1, 1);
+
+        // (optionally) sets the position to the RectTransform
+        if (forceMove)
+        {
+            right.anchoredPosition = distanceRight;
+            left.anchoredPosition = distanceLeft;
+        }
     }
 
     // Moves the selector to a target direction
@@ -51,7 +67,7 @@ public class Selectors : MonoBehaviour
         if (stopMoving) return;
 
         float rightSpeed = Vector2.Distance(right.anchoredPosition, distanceRight) * Time.deltaTime * 10f;
-        float leftSpeed = Vector2.Distance(left.anchoredPosition, distanceLeft) *  Time.deltaTime * 10f;
+        float leftSpeed = Vector2.Distance(left.anchoredPosition, distanceLeft) * Time.deltaTime * 10f;
         if (rightSpeed <= 0.001f && leftSpeed <= 0.001f) stopMoving = true;
 
         right.anchoredPosition = Vector2.MoveTowards(right.anchoredPosition, distanceRight, rightSpeed);
