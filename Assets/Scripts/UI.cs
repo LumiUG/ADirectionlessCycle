@@ -72,6 +72,7 @@ public class UI : MonoBehaviour
         // Move the UI selectors to its default place
         if (selectors)
         {
+            if (!selectors.left || !selectors.right) return;
             selectors.left.SetParent(selectors.gameObject.transform);
             selectors.right.SetParent(selectors.gameObject.transform);
             selectors.left.anchoredPosition = Vector2.zero;

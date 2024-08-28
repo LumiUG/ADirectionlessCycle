@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class InputManager : MonoBehaviour
     private readonly float repeatMovementCD = 0.12f;
     private readonly float manualMovementCD = 0.12f;
     private float currentMovementCD = 0f;
+
+    // Hub //
+    private Hub hubMovement = null;
 
     void Awake()
     {       
@@ -306,6 +310,23 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
         LevelManager.Instance.worldOffsetX += 14;
     }
+
+    // Hub //
+    private void OnHubSwipeLeft()
+    {
+        if (SceneManager.GetActiveScene().name != "Hub") return;
+        if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
+        hubMovement.ChangeWorld(-1);
+    }
+
+    private void OnHubSwipeRight()
+    {
+        if (SceneManager.GetActiveScene().name != "Hub") return;
+        if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
+        hubMovement.ChangeWorld(1);
+    }
+
+    // Etc //
 
     private void OnInteract()
     {

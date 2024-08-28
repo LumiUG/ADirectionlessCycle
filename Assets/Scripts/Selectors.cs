@@ -17,14 +17,22 @@ public class Selectors : MonoBehaviour
     void Start()
     {
         if (UI.Instance) UI.Instance.selectors = this;
-        left = transform.Find("Left").gameObject.GetComponent<RectTransform>();
-        right = transform.Find("Right").gameObject.GetComponent<RectTransform>();
+        GetSelectors();
         sceneLoaded = false;
     }
 
     void Update()
     {
         if (EventSystem.current.currentSelectedGameObject == null) return;
+
+        // Null check, recreate selectors upon destroying
+        if (!right || !left)
+        {
+            Instantiate(Resources.Load("Prefabs/Selectors/Left"), transform).name = "Left";
+            Instantiate(Resources.Load("Prefabs/Selectors/Right"), transform).name = "Right";
+            sceneLoaded = true; // using this so it automatically sets to its destination
+            GetSelectors();
+        }
 
         // Slowly move towards the target position
         if (tracking != null) MoveSelector();
@@ -72,5 +80,12 @@ public class Selectors : MonoBehaviour
 
         right.anchoredPosition = Vector2.MoveTowards(right.anchoredPosition, distanceRight, rightSpeed);
         left.anchoredPosition = Vector2.MoveTowards(left.anchoredPosition, distanceLeft, leftSpeed);
+    }
+
+    // Gets the references of the selectors
+    private void GetSelectors()
+    {
+        left = transform.Find("Left").gameObject.GetComponent<RectTransform>();
+        right = transform.Find("Right").gameObject.GetComponent<RectTransform>();
     }
 }

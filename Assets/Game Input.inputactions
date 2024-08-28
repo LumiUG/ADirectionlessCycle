@@ -274,6 +274,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HubSwipeLeft",
+                    "type": "Button",
+                    "id": "7ae208ed-2a4b-4e8f-b00e-dd4df3968d91",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HubSwipeRight",
+                    "type": "Button",
+                    "id": "eb03a0f3-c459-486a-90de-8418e5d850d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -802,6 +820,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectAntiWall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9172316b-974a-4634-bdaa-c4a463419e06",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "EditorEscape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ccab1a23-b1db-4579-8f34-4d402b192591",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HubSwipeLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29d38ce2-cd57-4c80-b570-d85c8d3bccf1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HubSwipeRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
