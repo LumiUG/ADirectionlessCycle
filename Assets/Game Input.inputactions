@@ -310,15 +310,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "DebugInput",
-                    "type": "Button",
-                    "id": "b4d04c3f-f86b-4d73-b283-96ec1ad51248",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -902,17 +893,6 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "DebugEnable",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "37423232-fd98-466f-a588-c7a103e2ac8a",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "DebugInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

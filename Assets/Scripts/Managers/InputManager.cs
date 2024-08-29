@@ -33,6 +33,26 @@ public class InputManager : MonoBehaviour
         latestMovement = Vector3Int.back;
     }
 
+    // Debug input
+    void Update()
+    {
+        if (!canInputCommands) return;
+
+        // Write command
+        if (Input.anyKeyDown)
+        {
+            debugCommand += Input.inputString.Trim().ToLower();
+        }
+
+        // Enable debug command
+        if (debugCommand == "debug")
+        {
+            GameManager.Instance.buildDebugMode = !GameManager.Instance.buildDebugMode;
+            UI.Instance.global.SendMessage(":>");
+            debugCommand = "";
+        }
+    }
+
     // Returns if you are past the move cooldown timer
     private bool MoveCDCheck(float cooldown)
     {
@@ -365,14 +385,7 @@ public class InputManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
         canInputCommands = ctx.Get<float>() == 1f;
-        // Debug.Log(canInputCommands);
-    }
 
-    // Input a debug command
-    private void OnDebugInput(InputValue ctx)
-    {
-        if (!canInputCommands) return;
-        // debugCommand += ctx.Get<char>();
-        // Debug.Log(debugCommand);
+        if (!canInputCommands) debugCommand = "";
     }
 }
