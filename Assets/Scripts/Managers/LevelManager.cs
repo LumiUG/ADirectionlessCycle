@@ -671,7 +671,7 @@ public class LevelManager : MonoBehaviour
     {
         if (status) {
             EventSystem.current.SetSelectedGameObject(UI.Instance.pause.backToMenu);
-            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || Application.isEditor);
+            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
         }
 
         UI.Instance.pause.Toggle(status);
