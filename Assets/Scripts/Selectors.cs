@@ -1,12 +1,14 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Selectors : MonoBehaviour
 {
     [HideInInspector] public bool sceneLoaded; 
     internal RectTransform left;
     internal RectTransform right;
+    internal Image leftImage;
+    internal Image rightImage;
 
     private GameObject tracking = null;
     private RectTransform trackRT = null;
@@ -32,6 +34,13 @@ public class Selectors : MonoBehaviour
             Instantiate(Resources.Load("Prefabs/Selectors/Right"), transform).name = "Right";
             sceneLoaded = true; // using this so it automatically sets to its destination
             GetSelectors();
+        }
+
+        // Is its image disabled? (dunno why this happens!)
+        if (!rightImage.enabled || !leftImage.enabled) 
+        {
+            rightImage.enabled = true;
+            leftImage.enabled = true;
         }
 
         // Slowly move towards the target position
@@ -87,5 +96,7 @@ public class Selectors : MonoBehaviour
     {
         left = transform.Find("Left").gameObject.GetComponent<RectTransform>();
         right = transform.Find("Right").gameObject.GetComponent<RectTransform>();
+        leftImage = left.GetComponent<Image>();
+        rightImage = right.GetComponent<Image>();
     }
 }
