@@ -91,6 +91,9 @@ public class Serializables
     public class GameData
     {
         public List<Level> levels = new();
+        public List<string> collectedOrbs; // stored as level ID's
+        public List<string> exhaustedDialog;
+        public bool hasCompletedGame = false;
 
         // A level
         [Serializable]

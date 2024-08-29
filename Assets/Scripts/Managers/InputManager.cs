@@ -19,6 +19,10 @@ public class InputManager : MonoBehaviour
     // Hub //
     private Hub hubMovement = null;
 
+    // Debug //
+    private bool canInputCommands = false;
+    private string debugCommand = null;
+
     void Awake()
     {       
         // Singleton without persistence (GameManager already declares it)
@@ -178,6 +182,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.negativeArrowTile; 
     }
+    private void OnEditorSelectOrb() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.orbTile;
+    }
     private void OnEditorSelectLevel() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -330,7 +339,7 @@ public class InputManager : MonoBehaviour
 
     private void OnInteract()
     {
-        if (GameManager.Instance.IsBadScene()) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.isPaused) return;
 
         // Searches for a first valid NPC
         GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
@@ -347,5 +356,23 @@ public class InputManager : MonoBehaviour
 
         // Gets the NPC and triggers it
         if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(null); }
+    }
+
+    // Debug commands //
+    
+    // Enable debug commands
+    private void OnDebugEnable(InputValue ctx)
+    {
+        if (SceneManager.GetActiveScene().name != "Main Menu") return;
+        canInputCommands = ctx.Get<float>() == 1f;
+        // Debug.Log(canInputCommands);
+    }
+
+    // Input a debug command
+    private void OnDebugInput(InputValue ctx)
+    {
+        if (!canInputCommands) return;
+        // debugCommand += ctx.Get<char>();
+        // Debug.Log(debugCommand);
     }
 }

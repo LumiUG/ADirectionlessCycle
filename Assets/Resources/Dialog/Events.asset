@@ -22,6 +22,7 @@ MonoBehaviour:
       enabled: 1
       textSpeed: 0.2
     executeAtIndex: 1
+  exhaustDialog: {fileID: 11400000}
   npcName: ?????
   textSpeed: 0.05
   sfx: {fileID: 0}

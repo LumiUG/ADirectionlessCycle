@@ -9,15 +9,17 @@ public class DialogManager : MonoBehaviour
     public DialogScriptable loadedDial;
     public string[] dialog;
     public DialogEvent[] events = { new() };
-    public string npcName = "Stranger";
+    public string npcName = "???";
     public float textSpeed = 0.05f;
     public bool canBeSkipped = true;
+    public bool shouldExhaust = true;
     public bool inDialog = false;
 
     private bool ignoreNewChatSource;
     private bool hasDialogStarted;
     private bool canInteract;
     private int dialogIndex;
+    private string currentDialogPath;
 
     public void Awake()
     {
@@ -31,10 +33,14 @@ public class DialogManager : MonoBehaviour
     }
 
     // Starts the dialog with the NPC
-    public void StartDialog(DialogScriptable chat)
+    public void StartDialog(DialogScriptable chat, string dialogPath)
     {
         if (!canInteract || !chat) return;
+        currentDialogPath = dialogPath;
         inDialog = true;
+
+        // Check if we should use the exhausted dialog instead
+        if (GameManager.save.game.exhaustedDialog.Contains(dialogPath)) chat = chat.exhaustDialog;
 
         // Should we change/load the new scriptable?
         if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat);
@@ -82,6 +88,10 @@ public class DialogManager : MonoBehaviour
         UI.Instance.dialog.Toggle(false);
         ResetPrivatesToDefaultState();
         inDialog = false;
+
+        // Has the chat ended? Exhaust the chat
+        if (!shouldExhaust || LevelManager.Instance.currentLevelID == LevelManager.Instance.levelEditorName) return;
+        if (!GameManager.save.game.exhaustedDialog.Contains(currentDialogPath)) GameManager.save.game.exhaustedDialog.Add(currentDialogPath);
     }
 
     // Reads a line of text
@@ -107,6 +117,7 @@ public class DialogManager : MonoBehaviour
         npcName = newDialog.npcName;
         textSpeed = newDialog.textSpeed;
         canBeSkipped = newDialog.canBeSkipped;
+        shouldExhaust = newDialog.shouldExhaust;
         loadedDial = newDialog;
 
         // Reset to defaults?

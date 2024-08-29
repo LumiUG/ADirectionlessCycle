@@ -105,6 +105,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectOrb",
+                    "type": "Button",
+                    "id": "1fea6245-0fcf-4836-b9f2-1d1a6402b65e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectHazard",
                     "type": "Button",
                     "id": "cbf7925c-f619-482b-8411-1762f3a0aace",
@@ -288,6 +297,24 @@
                     "name": "HubSwipeRight",
                     "type": "Button",
                     "id": "eb03a0f3-c459-486a-90de-8418e5d850d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugEnable",
+                    "type": "PassThrough",
+                    "id": "5943e2f2-824c-4aa6-b016-0c862b31c1e7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugInput",
+                    "type": "Button",
+                    "id": "b4d04c3f-f86b-4d73-b283-96ec1ad51248",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -853,6 +880,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "HubSwipeRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29bbf4dc-1828-42fc-962e-c189ca93c861",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectOrb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4558c01f-61fe-4be7-860c-03b08f0be423",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DebugEnable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37423232-fd98-466f-a588-c7a103e2ac8a",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "DebugInput",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

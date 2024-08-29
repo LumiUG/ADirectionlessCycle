@@ -108,6 +108,8 @@ public class UI : MonoBehaviour
     // Go from a level to the editor
     public void GoLevelEditor()
     {
+        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
+
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
         else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
         {
@@ -123,6 +125,8 @@ public class UI : MonoBehaviour
     // Go from anywhere to the world map
     public void GoWorldMap()
     {
+        if (!GameManager.Instance.IsDebug()) { global.SendMessage("Debug needed."); return; }
+
         LevelManager.Instance.LoadLevel("WORLD/Main");
         LevelManager.Instance.RefreshGameVars();
         CleanChangeScene("Game");

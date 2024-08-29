@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Other
+  m_Name: Guardian Exit
   m_EditorClassIdentifier: 
   dialog:
-  - Goodbye, World.
-  - Programmed to feel and not to work.
+  - Got it? ...Good.
+  - The exit is on the left.
+  - ...There's a wall? Yeah, of course there is. Just phase through.
   events: []
-  exhaustDialog: {fileID: 11400000}
-  npcName: ?????
-  textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
+  exhaustDialog: {fileID: 11400000, guid: e7b7b162246aa674f81fe6ae53dc7ba2, type: 2}
+  npcName: ???
+  textSpeed: 0.06
+  sfx: {fileID: 0}
+  shouldExhaust: 1
   canBeSkipped: 1

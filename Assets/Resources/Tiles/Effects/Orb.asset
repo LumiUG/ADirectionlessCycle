@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e894e19ff93a44ab727ec1daa2772f, type: 3}
-  m_Name: Void
+  m_Script: {fileID: 11500000, guid: 60858ac09e6f8584abe24914359d0137, type: 3}
+  m_Name: Orb
   m_EditorClassIdentifier: 
-  tileSprite: {fileID: 21300000, guid: a9a9cdd5c150bc44aa448ca17f1f947a, type: 3}
+  tileSprite: {fileID: 21300000, guid: 988fd27339a9fe84f9df3a6a7400551a, type: 3}
   tileObject: {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   directions:

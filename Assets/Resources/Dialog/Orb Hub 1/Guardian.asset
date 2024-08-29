@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: Guardian
+  m_EditorClassIdentifier: 
+  dialog:
+  - Huh.
+  - Wasn't expecting... visitors.
+  - ... ... Just what are you?
+  - Some kind of... cube?
+  - No matter. I suppose you're here for the Orb, no?
+  - Go ahead, but don't expect the others to be as nice about it.
+  - And, I would advise against touching the fire. Takes a while to get back here,
+    got burnt by the seventh one not too long ago.
+  events: []
+  exhaustDialog: {fileID: 11400000, guid: c4cb45599b9bbe445b224e8f498c937b, type: 2}
+  npcName: ???
+  textSpeed: 0.06
+  sfx: {fileID: 0}
+  canBeSkipped: 1

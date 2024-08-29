@@ -18,6 +18,7 @@ MonoBehaviour:
   - '[...]'
   - '[You should go.]'
   events: []
+  exhaustDialog: {fileID: 11400000}
   npcName: 
   textSpeed: 0.1
   sfx: {fileID: 0}

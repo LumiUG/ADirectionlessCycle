@@ -18,7 +18,6 @@ public class StaticUI : MonoBehaviour
     {
         if (!UI.Instance) return;
 
-        if (!GameManager.Instance.IsDebug()) { UI.Instance.global.SendMessage("Debug needed."); return; }
         UI.Instance.GoWorldMap();
     }
 

@@ -7,7 +7,7 @@ public class Hub : MonoBehaviour
     public GameObject backButton;
 
     private RectTransform holderRT;
-    private readonly int[] positions = { 0, -1920, -3840 };
+    private readonly int[] positions = { 0, -1920, -3840, -5760 };
     private int worldIndex = 0;
 
     private void Start()
@@ -32,7 +32,8 @@ public class Hub : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(backButton);
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
-        
+        if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
+
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
     }

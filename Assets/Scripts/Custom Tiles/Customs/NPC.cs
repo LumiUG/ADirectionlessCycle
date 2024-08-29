@@ -30,7 +30,7 @@ public class NPCTile : CustomTile
         if (dialogCheck == null) return;
 
         // Play the dialog (too many load calls...)
-        DialogManager.Instance.StartDialog(dialogCheck);
+        DialogManager.Instance.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
     }
 
     // Prepares editor variables.
