@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 247285168}
   - component: {fileID: 247285167}
   - component: {fileID: 247285169}
+  - component: {fileID: 247285170}
   m_Layer: 5
   m_Name: Play Button
   m_TagString: Untagged
@@ -259,6 +260,21 @@ MonoBehaviour:
           m_StringArgument: Hub
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &247285170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247285165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &515087474
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +287,7 @@ GameObject:
   - component: {fileID: 515087477}
   - component: {fileID: 515087476}
   - component: {fileID: 515087478}
+  - component: {fileID: 515087479}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -395,6 +412,21 @@ MonoBehaviour:
           m_StringArgument: Settings
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &515087479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515087474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &777098589
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +439,7 @@ GameObject:
   - component: {fileID: 777098592}
   - component: {fileID: 777098591}
   - component: {fileID: 777098593}
+  - component: {fileID: 777098594}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -531,6 +564,21 @@ MonoBehaviour:
           m_StringArgument: Level Editor
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &777098594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777098589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1146104097
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +727,7 @@ GameObject:
   - component: {fileID: 1591934391}
   - component: {fileID: 1591934390}
   - component: {fileID: 1591934392}
+  - component: {fileID: 1591934393}
   m_Layer: 5
   m_Name: Level Editor Button
   m_TagString: Untagged
@@ -803,6 +852,21 @@ MonoBehaviour:
           m_StringArgument: Level Editor
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1591934393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591934388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1634448438
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +998,7 @@ GameObject:
   - component: {fileID: 2023218780}
   - component: {fileID: 2023218782}
   - component: {fileID: 2023218781}
+  - component: {fileID: 2023218783}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1002,8 +1067,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023218779}
   m_CullTransparentMesh: 1
+--- !u!114 &2023218783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023218779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 0
+--- !u!1001 &6910772969690999967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864131267921881130, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: m_Name
+      value: Checker Background
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1634448442}
+  - {fileID: 6910772969690999967}
