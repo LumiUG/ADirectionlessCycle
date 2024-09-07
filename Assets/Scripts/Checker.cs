@@ -19,7 +19,7 @@ public class Checker : MonoBehaviour
     void Update()
     {
         // Swap checker (i mean nevermind, if it works it works for now LMAO)
-        if (enabledChecker.transform.position.x >= 2.5f || enabledChecker.transform.position.y >= 2.5f)
+        if (enabledChecker.transform.position.x >= -4.5f || enabledChecker.transform.position.x <= -8.5f || enabledChecker.transform.position.y >= 2.5f || enabledChecker.transform.position.y <= -2.5f)
         {
             enabledChecker.transform.position = transform.position;
             // enabledChecker.SetActive(false);
