@@ -1098,6 +1098,10 @@ PrefabInstance:
       propertyPath: dirY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5346905068317676519, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
+      propertyPath: speed
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7644414922083768919, guid: 5dab2d5ca677505419d3f2a8a133598a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.5

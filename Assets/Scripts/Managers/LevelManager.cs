@@ -76,6 +76,7 @@ public class LevelManager : MonoBehaviour
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
     private int defaultOverlapLayer;
+    private Checker background;
 
     // Player //
     private Coroutine timerCoroutine = null;
@@ -285,6 +286,13 @@ public class LevelManager : MonoBehaviour
             UI.Instance.pause.SetBestTime(0f);
             UI.Instance.pause.SetBestMoves(0);
         }
+
+        // Move checker background to a random direction
+        // if (background)
+        // {
+        //     background.dirX = Random.Range(-1, 1);
+        //     background.dirY = Random.Range(-1, 1);
+        // }
 
         return true;
     }
@@ -745,6 +753,9 @@ public class LevelManager : MonoBehaviour
             UI.Instance.ingame.Toggle(false);
             return;
         }
+
+        // Get game background reference
+        if (SceneManager.GetActiveScene().name == "Game" && !background) background = GameObject.Find("Checker Background").GetComponent<Checker>();
     }
 
     // Level timer speedrun any%

@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Hub : MonoBehaviour
 {
+    public Checker checker;
     public GameObject worldHolder;
     public GameObject backButton;
 
@@ -36,5 +37,8 @@ public class Hub : MonoBehaviour
 
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+
+        // Update checker direction
+        checker.dirX = direction;
     }
 }

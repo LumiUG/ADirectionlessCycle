@@ -2,34 +2,20 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    public GameObject checkerTop;
-    public GameObject checkerBottom;
-    [Range(-1 ,1)] public int dirX = 1;
+    public GameObject checker;
+    [Range(-1 , 1)] public int dirX = 1;
     [Range(-1, 1)] public int dirY = -1;
 
-    private GameObject enabledChecker = null;
-    [Range(-4f, 4f)] public  float speed = 1.0f;
-
-    void Start()
-    {
-        enabledChecker = checkerTop;
-    }
+    [Range(-4f, 4f)] public float speed = 1.0f;
 
     // Checkerboard
     void Update()
     {
-        // Swap checker (i mean nevermind, if it works it works for now LMAO)
-        if (enabledChecker.transform.position.x >= -4.5f || enabledChecker.transform.position.x <= -8.5f || enabledChecker.transform.position.y >= 2.5f || enabledChecker.transform.position.y <= -2.5f)
-        {
-            enabledChecker.transform.position = transform.position;
-            // enabledChecker.SetActive(false);
-
-            // if (enabledChecker == checkerTop) enabledChecker = checkerBottom;
-            // else enabledChecker = checkerTop;
-            // enabledChecker.SetActive(true);
-        }
+        // Move back checkers
+        if (checker.transform.position.x >= -4.5f || checker.transform.position.x <= -8.5f) checker.transform.position = new(transform.position.x, checker.transform.position.y, checker.transform.position.z);
+        if (checker.transform.position.y >= 1.5f || checker.transform.position.y <= -2.5f) checker.transform.position = new (checker.transform.position.x, transform.position.y, checker.transform.position.z);
 
         // Moves
-        enabledChecker.transform.position += speed * Time.deltaTime * new Vector3(dirX, dirY, 0);
+        checker.transform.position += speed * Time.deltaTime * new Vector3(dirX, dirY, 0);
     }
 }
