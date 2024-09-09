@@ -1,19 +1,22 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Serializables;
 
 public class Hub : MonoBehaviour
 {
     public List<GameObject> worldHolders = new(capacity: 3);
     public GameObject worldHolder;
+    public RectTransform outlineHolder;
     public GameObject backButton;
     public Checker checker;
     public Text levelName;
 
     private readonly int[] positions = { 0, -1920, -3840, -5760 };
     private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
+    private Color unfinishedColor = new(1f, 0.85f, 0.35f, 1f);
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
     private int worldIndex = 0;
@@ -36,9 +39,9 @@ public class Hub : MonoBehaviour
                 // Add an outline and add a completed count
                 if (levelCheck.completed)
                 {
-                    Outline o = child.AddComponent<Outline>();
-                    o.effectColor = Color.green;
-                    o.effectDistance = new(8, -8);
+                    Transform outline = outlineHolder.Find(worldHolders[i].name).Find(child.name);
+                    outline.gameObject.SetActive(true);
+                    if (RecursiveRemixCheck(LevelManager.Instance.GetLevel(levelCheck.levelID, false, true), levelCheck.levelID)) outline.GetComponent<Image>().color = unfinishedColor;
                     completedLevelsCount[i]++;
                 }
             }
@@ -67,7 +70,7 @@ public class Hub : MonoBehaviour
 
         // Set the preview text
         string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
-        var level = LevelManager.Instance.GetLevel(levelID, false, true);
+        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         if (level != null)
         {
             // Locked level?
@@ -106,6 +109,7 @@ public class Hub : MonoBehaviour
 
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+        outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
 
         // Update checker direction
         checker.dirX = direction;
@@ -118,5 +122,25 @@ public class Hub : MonoBehaviour
 
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
         return completedLevelsCount[int.Parse(levelSplit[0]) - 1] < int.Parse(levelSplit[1]);
+    }
+
+    // bullshit basically
+    private bool RecursiveRemixCheck(SerializableLevel level, string levelID, bool isRemix = false)
+    {
+        if (level == null) return false;
+
+        // stats
+        GameData.Level statCheck = GameManager.save.game.levels.Find(l => l.levelID == levelID);
+        if (!isRemix) {
+            if (statCheck == null) return false;
+            if (!statCheck.completed) return false;
+            if (level.remixLevel == null) return false;
+        } else {
+            if (statCheck == null) return true;
+            if (!statCheck.completed) return true;
+            if (level.remixLevel == null) return false;
+        }
+        
+        return RecursiveRemixCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
     }
 }
