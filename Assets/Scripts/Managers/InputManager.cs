@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
 
     // Debug //
     private bool canInputCommands = false;
+    private string confirmCommand = null;
     private string debugCommand = null;
 
     void Awake()
@@ -47,9 +48,28 @@ public class InputManager : MonoBehaviour
         // Enable debug command
         if (debugCommand == "debug")
         {
-            GameManager.Instance.buildDebugMode = !GameManager.Instance.buildDebugMode;
-            UI.Instance.global.SendMessage(":>");
-            debugCommand = "";
+            if (!GameManager.Instance.buildDebugMode)
+            {
+                GameManager.Instance.buildDebugMode = true;
+                UI.Instance.global.SendMessage("I hope you know what you're doing.", 3);
+                AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+            } else {
+                GameManager.Instance.buildDebugMode = false;
+                UI.Instance.global.SendMessage("Good call.", 3);
+                AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+            }
+            debugCommand = null;
+        }
+
+        // Delete savedata and generate a new one
+        if (debugCommand == "begone" && GameManager.Instance.buildDebugMode)
+        {
+            if (DebugConfirm()) return;
+            GameManager.Instance.DeleteSave();
+            GameManager.Instance.CreateSave(true);
+            AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.30f);
+            UI.Instance.global.SendMessage("Been taken care of.", 4);
+            debugCommand = null;
         }
     }
 
@@ -386,6 +406,22 @@ public class InputManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
         canInputCommands = ctx.Get<float>() == 1f;
 
-        if (!canInputCommands) debugCommand = "";
+        if (!canInputCommands) debugCommand = null;
+    }
+
+    // Confirm a command
+    private bool DebugConfirm()
+    {
+        if (confirmCommand != debugCommand)
+        {
+            UI.Instance.global.SendMessage("Are you sure about that?", 2);
+            AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.30f);
+            confirmCommand = $"{debugCommand}";
+            debugCommand = null;
+            return true;
+        }
+        
+        confirmCommand = null;
+        return false;
     }
 }

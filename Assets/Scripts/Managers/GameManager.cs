@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         // Create a savefile if none exist
         string levelDir = $"{Application.persistentDataPath}/Custom Levels";
-        if (!File.Exists(dataPath)) SaveDataJSON(new Savedata());
+        CreateSave();
 
         // Create custom levels directory
         if (!Directory.Exists(levelDir)) Directory.CreateDirectory(levelDir);
@@ -77,6 +77,19 @@ public class GameManager : MonoBehaviour
 
     // Stuff with savedata //
     
+    // Creates a savefile
+    public void CreateSave(bool load = false)
+    {
+        if (!File.Exists(dataPath)) SaveDataJSON(new Savedata());
+        if (load) LoadDataJSON();
+    }
+
+    // Deletes a savefile
+    public void DeleteSave()
+    {
+        if (File.Exists(dataPath)) File.Delete(dataPath);
+    }
+
     // Save user data
     public void SaveDataJSON(Savedata save) { File.WriteAllText(dataPath, JsonUtility.ToJson(save)); }
 
