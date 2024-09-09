@@ -47,7 +47,11 @@ public class Hub : MonoBehaviour
             for (int j = 0; j < completedLevelsCount[i]; j++)
             { 
                 Transform child = worldHolders[i].transform.GetChild(j);
-                if (child) child.GetComponent<Image>().color = Color.white;
+                if (child)
+                {
+                    if (LevelManager.Instance.GetLevel($"{worldHolders[i].name}/{child.name}", false, true) == null) continue;
+                    child.GetComponent<Image>().color = Color.white;
+                }
             }
         }
     }
