@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
+using static GameTile;
 
 public class DialogManager : MonoBehaviour
 {
@@ -77,7 +79,14 @@ public class DialogManager : MonoBehaviour
         if (dialogIndex < dialog.Length)
         {
             // Executes a dialog event
-            foreach (DialogEvent ev in events) { if (ev.executeAtIndex == dialogIndex) ev.textSpeedEvent.Run(); }
+            foreach (DialogEvent ev in events)
+            {
+                if (ev.executeAtIndex == dialogIndex)
+                {
+                    ev.textSpeedEvent.Run();
+                    ev.setTileEvent.Run();
+                }
+            }
             
             // Reads the line
             StartCoroutine(ReadLine());
@@ -147,6 +156,7 @@ public class DialogManager : MonoBehaviour
     // Dialog events
     [Serializable] public class DialogEvent {
         public EventTextSpeed textSpeedEvent;
+        public EventSetTile setTileEvent;
         public int executeAtIndex = 0;
 
         // Required to have Run() or something idk
@@ -163,6 +173,32 @@ public class DialogManager : MonoBehaviour
             {
                 if (!enabled) return;
                 Instance.textSpeed = textSpeed;
+            }
+        }
+
+        // Set a tile
+        [Serializable] public class EventSetTile : EventAction
+        {
+            public ObjectTypes setAs = new();
+            public Vector3Int position = new();
+            public bool delete = false;
+            public override void Run()
+            {
+                if (!enabled) return;
+                if (!delete) LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(setAs.ToString(), new(), position));
+                else {
+                    GameTile tile;
+                    tile = setAs switch
+                    {
+                        var t when LevelManager.Instance.typesSolidsList.Contains(t) => LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position),
+                        var t when LevelManager.Instance.typesAreas.Contains(t) => LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position),
+                        var t when LevelManager.Instance.typesHazardsList.Contains(t) => LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position),
+                        var t when LevelManager.Instance.typesEffectsList.Contains(t) => LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position),
+                        var t when LevelManager.Instance.typesCustomsList.Contains(t) => LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position),
+                        _ => LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position),
+                    };
+                    if (tile) LevelManager.Instance.RemoveTile(tile);
+                }
             }
         }
     }

@@ -331,12 +331,12 @@ public class LevelManager : MonoBehaviour
         }
 
         // Build the level
-        level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCollideable, levelSolids));
-        level.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapObjects, levelObjects));
-        level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapWinAreas, levelWinAreas));
-        level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapHazards, levelHazards));
-        level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapEffects, levelEffects));
-        level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position), tilemapCustoms, levelCustoms));
+        level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        level.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         
         // Apply all custom tile text
         level.customTileInfo.ForEach(tile => customTileInfo.Add(new(tile.position, tile.text)));
@@ -445,10 +445,40 @@ public class LevelManager : MonoBehaviour
     }
 
     // Places a tile using its own position
-    public void PlaceTile(GameTile tile, Tilemap tilemap, List<GameTile> tileList = null)
+    public void PlaceTile(GameTile tile)
     {
-        tilemap.SetTile(tile.position, tile);
-        tileList?.Add(tile);
+        switch (tile.GetTileType())
+        {
+            case ObjectTypes t when typesSolidsList.Contains(t):
+                tilemapCollideable.SetTile(tile.position, tile);
+                levelSolids.Add(tile);
+                break;
+
+            case ObjectTypes t when typesAreas.Contains(t):
+                tilemapWinAreas.SetTile(tile.position, tile);
+                levelWinAreas.Add(tile);
+                break;
+
+            case ObjectTypes t when typesHazardsList.Contains(t):
+                tilemapHazards.SetTile(tile.position, tile);
+                levelHazards.Add(tile);
+                break;
+
+            case ObjectTypes t when typesEffectsList.Contains(t):
+                tilemapEffects.SetTile(tile.position, tile);
+                levelEffects.Add(tile);
+                break;
+
+            case ObjectTypes t when typesCustomsList.Contains(t):
+                tilemapCustoms.SetTile(tile.position, tile);
+                levelCustoms.Add(tile);
+                break;
+
+            default:
+                tilemapObjects.SetTile(tile.position, tile);
+                levelObjects.Add(tile);
+                break;
+        }
     }
 
     // Removes a tile from a tilemap
