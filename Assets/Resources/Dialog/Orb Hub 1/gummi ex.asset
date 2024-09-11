@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Guardian
+  m_Name: gummi ex
   m_EditorClassIdentifier: 
   dialog:
-  - holy shit its gummi
-  - some people will see this and go "hell yeah"
-  - hell yeah.
+  - ok like actually this isnt gummi but its very funny so im leaving it like this
+    for the alpha
+  - disappointing? i hope not.
+  - 
+  - 
+  - boo.
+  - okay keep going, there's not much more over here tbh.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 7a7430484bb969a49b45b202d67730c6, type: 2}
+  exhaustDialog: {fileID: 0}
   npcName: Gummi
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
-  shouldExhaust: 1
+  shouldExhaust: 0
   canBeSkipped: 1

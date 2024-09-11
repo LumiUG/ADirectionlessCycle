@@ -11122,10 +11122,12 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: ORBS
+  m_Text: 'ORBS
+
+    (ignore this for now)'
 --- !u!222 &1941181246
 CanvasRenderer:
   m_ObjectHideFlags: 0
