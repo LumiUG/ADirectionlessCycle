@@ -22,11 +22,11 @@ public class SettingsMenu : MonoBehaviour
 
         // Populate and update dropdown
         resolutions.Add("1920x1080");
-        resolutions.Add("1600x900");
+        resolutions.Add("1600x900"); // looks odd
         resolutions.Add("1366x768");
         resolutions.Add("1280x720");
         resolutions.Add("1152x648");
-        resolutions.Add("1024x576");
+        resolutions.Add("1024x576"); // looks odd
         resolutionDropdown.AddOptions(resolutions);
 
         // Select current resolution
