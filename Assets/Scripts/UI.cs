@@ -96,6 +96,7 @@ public class UI : MonoBehaviour
     // Goes to main menu (scary)
     public void GoMainMenu()
     {
+        if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
         LevelManager.Instance.ClearLevel();
         LevelManager.Instance.hasWon = false;
         GameManager.Instance.isEditing = false;
@@ -175,6 +176,15 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+    }
+    
+    // Restart current level
+    public void RestartLevel()
+    {
+        if (LevelManager.Instance.currentLevel == null) return;
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
+        LevelManager.Instance.ReloadLevel(true);
     } 
 
     // Object classes

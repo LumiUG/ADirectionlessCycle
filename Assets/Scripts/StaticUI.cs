@@ -43,4 +43,10 @@ public class StaticUI : MonoBehaviour
     {
         GameManager.save.preferences.SFXVolume = value;
     }
+
+    // Open an URL (unsafe, apparently!)
+    public void StaticOpenURL(string url)
+    {
+        Application.OpenURL(url);
+    }
 }

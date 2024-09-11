@@ -17,13 +17,13 @@ MonoBehaviour:
   - Wasn't expecting... visitors.
   - ... ... Just what are you?
   - Some kind of... cube?
-  - No matter. I suppose you're here for the Orb, no?
+  - No matter.
   - Go ahead, but don't expect the others to be as nice about it.
-  - And, I would advise against touching the fire. Takes a while to get back here,
-    got burnt by the seventh one not too long ago.
+  - And, I would advise against touching the fire. Seriously.
   events: []
   exhaustDialog: {fileID: 11400000, guid: c4cb45599b9bbe445b224e8f498c937b, type: 2}
   npcName: ???
   textSpeed: 0.06
   sfx: {fileID: 0}
+  shouldExhaust: 1
   canBeSkipped: 1

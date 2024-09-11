@@ -16,8 +16,8 @@ MonoBehaviour:
   - Still digging deeper?
   - I expected you to give up halfway through, but really- you made it here.
   - However, don't think that you can make it past. This one will never let you through.
-  - But... I could just...
-  - ...mhm.
+  - But... ... I could just...
+  - ...This ought to be fun.
   events:
   - textSpeedEvent:
       enabled: 0
@@ -55,9 +55,27 @@ MonoBehaviour:
       position: {x: 10, y: -5, z: 0}
       delete: 0
     executeAtIndex: 4
-  exhaustDialog: {fileID: 11400000, guid: 2d42411271d1ad74f8a3d75d8ffa087c, type: 2}
+  - textSpeedEvent:
+      enabled: 1
+      textSpeed: 0.08
+    setTileEvent:
+      enabled: 0
+      setAs: 0
+      position: {x: 0, y: 0, z: 0}
+      delete: 0
+    executeAtIndex: 3
+  - textSpeedEvent:
+      enabled: 1
+      textSpeed: 0.05
+    setTileEvent:
+      enabled: 0
+      setAs: 0
+      position: {x: 0, y: 0, z: 0}
+      delete: 0
+    executeAtIndex: 4
+  exhaustDialog: {fileID: 0}
   npcName: ???
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 1
+  shouldExhaust: 0
   canBeSkipped: 1
