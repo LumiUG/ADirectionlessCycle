@@ -351,7 +351,7 @@ public class LevelManager : MonoBehaviour
     // Clears the current level
     public void ClearLevel(bool soft = false)
     {
-        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox") layer.ClearAllTiles(); });
+        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
         if (!soft) {
             if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
             InputManager.Instance.latestMovement = Vector3Int.back;
@@ -784,7 +784,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Get game background reference
-        if (SceneManager.GetActiveScene().name == "Game" && !background) background = GameObject.Find("Checker Background").GetComponent<Checker>();
+        if (SceneManager.GetActiveScene().name == "Game" && !background) background = GameObject.Find("Static Background").GetComponent<Checker>();
     }
 
     // Level timer speedrun any%

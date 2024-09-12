@@ -52,7 +52,7 @@ public class UI : MonoBehaviour
 
         // Ingame UI
         ingame = new() { self = transform.Find("Ingame UI").gameObject };
-        ingame.levelName = ingame.self.transform.Find("Level Name").GetComponent<Text>();
+        ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
         ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
         ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();

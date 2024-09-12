@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 266029687
+    locked: 0
+  - name: Game Tiles
+    uniqueID: 3317735933
+    locked: 0
+  - name: Letterbox
+    uniqueID: 1622328197
+    locked: 0
+  - name: Scanlines
+    uniqueID: 2576344075
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
