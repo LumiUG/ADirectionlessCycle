@@ -94,6 +94,7 @@ public class Serializables
         public List<string> collectedOrbs; // stored as level ID's
         public List<string> exhaustedDialog;
         public bool hasCompletedGame = false;
+        public bool hasSeenRemix = false;
 
         // A level
         [Serializable]

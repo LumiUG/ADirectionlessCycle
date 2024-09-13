@@ -593,10 +593,10 @@ public class LevelManager : MonoBehaviour
         }
 
         // Tile pushed SFX
-        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.74f);
+        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.50f);
 
         // Destroys all marked object tiles.
-        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.48f);
+        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.40f);
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
 
         // Win check, add one move to the player
@@ -650,6 +650,7 @@ public class LevelManager : MonoBehaviour
         // Load remix level!
         if (remixCondition)
         {
+            if (!GameManager.save.game.hasSeenRemix) GameManager.save.game.hasSeenRemix = true;
             LoadLevel(currentLevel.remixLevel);
             return;
         }
@@ -773,7 +774,12 @@ public class LevelManager : MonoBehaviour
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
-        if (UI.Instance.selectors) UI.Instance.selectors.sceneLoaded = true;
+        if (UI.Instance.selectors)
+        {
+            UI.Instance.selectors.right.SetParent(UI.Instance.selectors.gameObject.transform);
+            UI.Instance.selectors.left.SetParent(UI.Instance.selectors.gameObject.transform);
+            UI.Instance.selectors.sceneLoaded = true;
+        }
 
         if (GameManager.Instance.noGameplayScenes.Contains(scene.name))
         {

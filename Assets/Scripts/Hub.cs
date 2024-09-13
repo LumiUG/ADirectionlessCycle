@@ -40,8 +40,8 @@ public class Hub : MonoBehaviour
                 {
                     Transform outline = outlineHolder.Find(worldHolders[i].name).Find(child.name);
                     outline.gameObject.SetActive(true);
-                    if (RecursiveRemixCheck(LevelManager.Instance.GetLevel(levelCheck.levelID, false, true), levelCheck.levelID)) outline.GetComponent<Image>().color = unfinishedColor;
                     completedLevelsCount[i]++;
+                    if (GameManager.save.game.hasSeenRemix && RecursiveRemixCheck(LevelManager.Instance.GetLevel(levelCheck.levelID, false, true), levelCheck.levelID)) outline.GetComponent<Image>().color = unfinishedColor;
                 }
             }
 

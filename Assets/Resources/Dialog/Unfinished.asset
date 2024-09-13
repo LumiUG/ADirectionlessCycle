@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: Unfinished
+  m_EditorClassIdentifier: 
+  dialog:
+  - yeahhhhhhhhhhhhhh sooo
+  - this is unfinished! (for now...)
+  - but there'll be something cool here when the time comes.
+  - you can trust me on that <3
+  events: []
+  exhaustDialog: {fileID: 11400000}
+  npcName: gummi
+  textSpeed: 0.05
+  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
+  shouldExhaust: 0
+  canBeSkipped: 1
