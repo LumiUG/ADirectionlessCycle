@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -133,7 +132,7 @@ public class UI : MonoBehaviour
         TransitionManager.Instance.TransitionIn();
         yield return new WaitForSeconds(TransitionManager.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
         ev.enabled = true;
-        
+
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
         else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
         {
