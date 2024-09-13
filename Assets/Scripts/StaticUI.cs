@@ -13,14 +13,6 @@ public class StaticUI : MonoBehaviour
     // Change scene to the level editor
     public void StaticGoLevelEditor() { if (UI.Instance) UI.Instance.GoLevelEditor(); }
 
-    // Change scene to the world map / real hub
-    public void StaticGoWorldMap()
-    {
-        if (!UI.Instance) return;
-
-        UI.Instance.GoWorldMap();
-    }
-
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {

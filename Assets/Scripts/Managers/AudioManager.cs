@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton (GameManager has persistence)
+        // Singleton (AudioManager has persistence)
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);

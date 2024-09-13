@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -61,6 +62,7 @@ public class Hub : MonoBehaviour
     // Cycle through levels
     private void Update()
     {
+        if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
 
         // Checking if you swapped levels
@@ -90,13 +92,7 @@ public class Hub : MonoBehaviour
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.25f); return; }
 
-        // Does the level exist? (also loads it)
-        if (!LevelManager.Instance.LoadLevel(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.40f); return; }
-        
-        // Keep loading
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
-        UI.Instance.ChangeScene("Game");
+        StartCoroutine(HubLoadLevel(levelName));
     }
 
     // Change world
@@ -117,6 +113,8 @@ public class Hub : MonoBehaviour
     // Returns true if a level is locked.
     public bool AbsurdLockedLevelDetection(string fullLevelID)
     {
+        if (LevelManager.Instance.GetLevel(fullLevelID, false) == null) return false;
+
         if (GameManager.Instance.IsDebug()) return false;
 
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
@@ -141,5 +139,21 @@ public class Hub : MonoBehaviour
         }
         
         return RecursiveRemixCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
+    }
+
+    // Loads level with a transition
+    private IEnumerator HubLoadLevel(string levelName)
+    {
+        var ev = EventSystem.current;
+        ev.enabled = false;
+        TransitionManager.Instance.TransitionIn();
+        yield return new WaitForSeconds(TransitionManager.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
+        ev.enabled = true;
+
+        // Loads the level
+        LevelManager.Instance.LoadLevel(levelName);
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
+        UI.Instance.ChangeScene("Game");
     }
 }

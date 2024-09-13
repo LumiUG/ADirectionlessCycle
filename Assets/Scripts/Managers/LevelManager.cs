@@ -286,13 +286,6 @@ public class LevelManager : MonoBehaviour
             UI.Instance.pause.SetBestMoves(0);
         }
 
-        // Move checker background to a random direction
-        // if (background)
-        // {
-        //     background.dirX = Random.Range(-1, 1);
-        //     background.dirY = Random.Range(-1, 1);
-        // }
-
         return true;
     }
 

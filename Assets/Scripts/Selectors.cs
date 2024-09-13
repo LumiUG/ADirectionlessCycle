@@ -25,7 +25,10 @@ public class Selectors : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null) return;
+        if (EventSystem.current)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null) return;
+        }
 
         // Null check, recreate selectors upon destroying
         if (!right || !left)
@@ -47,6 +50,7 @@ public class Selectors : MonoBehaviour
         if (tracking != null) MoveSelector();
 
         // New object?
+        if (!EventSystem.current) return;
         if (tracking == EventSystem.current.currentSelectedGameObject) return;
 
         // Get the new reference
