@@ -314,7 +314,7 @@ public class InputManager : MonoBehaviour
     private void OnEditorEscape()
     {
         if (!GameManager.Instance.IsEditor()) return;
-        if (!UI.Instance) return;
+        if (!UI.Instance || !EventSystem.current) return;
 
         if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
