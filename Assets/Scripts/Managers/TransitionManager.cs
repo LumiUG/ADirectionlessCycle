@@ -6,10 +6,11 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public static TransitionManager Instance;
     [HideInInspector] public Animator animator;
 
-    internal enum Transitions { Crossfade, Reveal };
+    internal enum Transitions { Crossfade, Reveal, Swipe };
 
     private AnimatorOverrideController crossfade;
     private AnimatorOverrideController reveal;
+    private AnimatorOverrideController swipe;
 
     void Awake()
     {
@@ -25,10 +26,10 @@ public class TransitionManager : MonoBehaviour
         animator = GetComponent<Animator>();
         crossfade = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Crossfade/Base");
         reveal = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Reveal/Base");
+        swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
 
         // Play default
-        ChangeTransition(Transitions.Reveal);
-        animator.Play("OUT");
+        ChangeTransition(Transitions.Swipe);
     }
 
     // Transitions out of a black screen
@@ -44,6 +45,9 @@ public class TransitionManager : MonoBehaviour
                 break;
             case Transitions.Reveal:
                 animator.runtimeAnimatorController = reveal;
+                break;
+            case Transitions.Swipe:
+                animator.runtimeAnimatorController = swipe;
                 break;
         }
     }

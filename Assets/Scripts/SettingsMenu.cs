@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public GameObject menuButton;
     public Dropdown resolutionDropdown;
     public Toggle settingsToggle;
     public Toggle repeatInputToggle;
@@ -43,6 +44,15 @@ public class SettingsMenu : MonoBehaviour
         
         // Version text
         version.text = $"Running v{Application.version}";
+    }
+
+    // Sometimes when interacting with a dropdown menu
+    // Unity destroys the reference to the last object interacted with
+    // and doesnt fix it. Bravo.
+    public void FixedUpdate()
+    {
+        if (!EventSystem.current) return;
+        if (EventSystem.current.currentSelectedGameObject == null) EventSystem.current.SetSelectedGameObject(menuButton);
     }
 
     // Changes the game resolution

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         LoadDataJSON();
 
         // Default variables
+        ToggleCursor(false);
         buildDebugMode = false;
         isEditing = false;
 
@@ -73,6 +74,19 @@ public class GameManager : MonoBehaviour
     public bool IsDebug()
     {
         return buildDebugMode || Application.isEditor;
+    }
+
+    // 
+    public void ToggleCursor(bool status)
+    {
+        if (status) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     // Stuff with savedata //
