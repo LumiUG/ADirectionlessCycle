@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
@@ -6,7 +9,10 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public static TransitionManager Instance;
     [HideInInspector] public Animator animator;
 
+    internal bool inTransition = false;
     internal enum Transitions { Crossfade, Reveal, Swipe };
+    internal EventSystem eventReference;
+    internal Coroutine currentTransition = null;
 
     private AnimatorOverrideController crossfade;
     private AnimatorOverrideController reveal;
@@ -23,17 +29,18 @@ public class TransitionManager : MonoBehaviour
         SceneManager.sceneLoaded += SceneLoad;
 
         // Get overrides & animator
+        eventReference = eventReference = EventSystem.current;
         animator = GetComponent<Animator>();
         crossfade = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Crossfade/Base");
         reveal = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Reveal/Base");
         swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
 
         // Play default
-        ChangeTransition(Transitions.Swipe);
+        ChangeTransition(Transitions.Reveal);
     }
 
     // Transitions out of a black screen
-    private void SceneLoad(Scene scene, LoadSceneMode sceneMode) { TransitionOut(); }
+    private void SceneLoad(Scene scene, LoadSceneMode sceneMode) { TransitionOut<string>(Transitions.Reveal); }
 
     // Change the current animator controller
     internal void ChangeTransition(Transitions transition)
@@ -52,7 +59,37 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
-    // Plays the transition IN and OUT
-    public void TransitionIn() { animator.Play("IN"); }
-    public void TransitionOut() { animator.Play("OUT"); }
+    // Transition callers
+    internal void TransitionIn<T>(Transitions transition, Action<T> doAfter = null, T parameters = default)
+    {
+        StartCoroutine(CoroIn(transition, doAfter, parameters));
+    }
+    internal void TransitionOut<T>(Transitions transition, Action<T> doAfter = null, T parameters = default)
+    {
+        StartCoroutine(CoroOut(transition, doAfter, parameters));
+    }
+
+    // Transition (coroutines)
+    private IEnumerator CoroIn<T>(Transitions transition, Action<T> doAfter, T parameters)
+    {
+        // Transition in
+        eventReference.enabled = false;
+        ChangeTransition(transition);
+        animator.Play("IN");
+
+        inTransition = true;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        doAfter?.Invoke(parameters);
+    }
+    private IEnumerator CoroOut<T>(Transitions transition, Action<T> doAfter, T parameters)
+    {
+        // Transition out
+        eventReference.enabled = true;
+        ChangeTransition(transition);
+        animator.Play("OUT");
+
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        inTransition = false;
+        doAfter?.Invoke(parameters);
+    }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using Unity.VisualScripting;
 using static Serializables;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -80,12 +81,10 @@ public class GameManager : MonoBehaviour
     public void ToggleCursor(bool status)
     {
         if (status) {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            InputSystem.EnableDevice(Mouse.current);
         }
         else {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            InputSystem.DisableDevice(Mouse.current);
         }
     }
 

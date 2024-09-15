@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static TransitionManager.Transitions;
 
 public class UI : MonoBehaviour
 {
@@ -65,40 +64,16 @@ public class UI : MonoBehaviour
         dialog.text = dialog.self.transform.Find("Text").GetComponent<Text>();
 
         // Change from preload scene?
-        if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu", false);
+        if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
     }
 
     // Change scenes
-    public void ChangeScene(string sceneName, bool doTransition = true)
+    public void ChangeScene(string sceneName)
     {
         // Change scene after transition
-        StartCoroutine(TransitionLoad(sceneName, doTransition));
-    }
-
-    private IEnumerator TransitionLoad(string sceneName, bool doTransition = true)
-    {
-        // Screen transition
-        if (doTransition)
-        {
-            var ev = EventSystem.current;
-            ev.enabled = false;
-            TransitionManager.Instance.TransitionIn();
-            yield return new WaitForSeconds(TransitionManager.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
-            ev.enabled = true;
-        }
-
-        // Move the UI selectors to its default place
-        if (selectors)
-        {
-            if (!selectors.left || !selectors.right) yield break;
-            selectors.left.SetParent(selectors.gameObject.transform);
-            selectors.right.SetParent(selectors.gameObject.transform);
-            selectors.left.anchoredPosition = Vector2.zero;
-            selectors.right.anchoredPosition = Vector2.zero;
-        }
-
-        // Load the scene
-        SceneManager.LoadScene(sceneName);
+        if (GameManager.Instance) GameManager.Instance.ToggleCursor(false);
+        if (TransitionManager.Instance) TransitionManager.Instance.TransitionIn(Reveal, ActionChangeScene, sceneName);
+        else SceneManager.LoadScene(sceneName);
     }
 
     // Exit application
@@ -122,30 +97,9 @@ public class UI : MonoBehaviour
     {
         if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
 
-        StartCoroutine(LevelEditorTransition());
+        // Transition in
+        TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);
     }
-
-    private IEnumerator LevelEditorTransition()
-    {
-        var ev = EventSystem.current;
-        ev.enabled = false;
-        TransitionManager.Instance.TransitionIn();
-        yield return new WaitForSeconds(TransitionManager.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
-        ev.enabled = true;
-
-        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
-        else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
-        {
-            // Create EditorSession if the file does not exist.
-            LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
-            LevelManager.Instance.LoadLevel("EditorSession", true);
-        }
-
-        LevelManager.Instance.RefreshGameVars();
-        ChangeScene("Level Editor", false);
-        ClearUI();
-    }
-
     // Pause/Unpause game
     public void PauseUnpauseGame(bool status)
     {
@@ -186,11 +140,9 @@ public class UI : MonoBehaviour
     public void GoNextLevel()
     {
         if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel)) return;
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
-        LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionGoNextLevel);
     }
-    
+
     // Restart current level
     public void RestartLevel()
     {
@@ -286,6 +238,44 @@ public class UI : MonoBehaviour
             if (additive) text.text += $"{newText}";
             else text.text = $"{newText}";
         }
+    }
 
+    // Actions //
+    internal void ActionChangeScene(string sceneName)
+    {
+        // Move the UI selectors to its default place
+        if (selectors)
+        {
+            if (!selectors.left || !selectors.right) return;
+            selectors.left.SetParent(selectors.gameObject.transform);
+            selectors.right.SetParent(selectors.gameObject.transform);
+            selectors.left.anchoredPosition = Vector2.zero;
+            selectors.right.anchoredPosition = Vector2.zero;
+        }
+
+        // Load the scene
+        SceneManager.LoadScene(sceneName);
+    }
+    internal void ActionGoLevelEditor(string _)
+    {
+        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
+        else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
+        {
+            // Create EditorSession if the file does not exist.
+            LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
+            LevelManager.Instance.LoadLevel("EditorSession", true);
+        }
+
+        LevelManager.Instance.RefreshGameVars();
+        ChangeScene("Level Editor");
+        GameManager.Instance.ToggleCursor(true);
+        ClearUI();
+    }
+    internal void ActionGoNextLevel(string _)
+    {
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
+        LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+        TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

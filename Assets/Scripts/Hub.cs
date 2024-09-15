@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static TransitionManager.Transitions;
 using static Serializables;
+using System;
 
 public class Hub : MonoBehaviour
 {
@@ -92,7 +93,8 @@ public class Hub : MonoBehaviour
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.25f); return; }
 
-        StartCoroutine(HubLoadLevel(levelName));
+        // Plays the transition
+        TransitionManager.Instance.TransitionIn(Reveal, ActionLoadLevel, levelName);
     }
 
     // Change world
@@ -113,7 +115,7 @@ public class Hub : MonoBehaviour
     // Returns true if a level is locked.
     public bool AbsurdLockedLevelDetection(string fullLevelID)
     {
-        if (LevelManager.Instance.GetLevel(fullLevelID, false) == null) return false;
+        if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
 
         if (GameManager.Instance.IsDebug()) return false;
 
@@ -141,17 +143,11 @@ public class Hub : MonoBehaviour
         return RecursiveRemixCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
     }
 
-    // Loads level with a transition
-    private IEnumerator HubLoadLevel(string levelName)
+    // Actions //
+    internal void ActionLoadLevel(string name)
     {
-        var ev = EventSystem.current;
-        ev.enabled = false;
-        TransitionManager.Instance.TransitionIn();
-        yield return new WaitForSeconds(TransitionManager.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
-        ev.enabled = true;
-
         // Loads the level
-        LevelManager.Instance.LoadLevel(levelName);
+        LevelManager.Instance.LoadLevel(name);
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         UI.Instance.ChangeScene("Game");

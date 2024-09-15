@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
+using UnityEditorInternal;
 
 public class LevelManager : MonoBehaviour
 {
@@ -649,10 +650,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // UI area count
-        UI.Instance.ingame.SetAreaCount(
-            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
-            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
-        );
+        SetUIAreaCount();
 
         // If won, do the thing
         if (winCondition)
@@ -673,7 +671,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if currently in editor
-    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog); }
+    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition); }
 
     // Is string empty or null
     public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
@@ -853,6 +851,7 @@ public class LevelManager : MonoBehaviour
         // Reload level snapshot (not very efficient)
         ClearLevel(true);
         BuildLevel(undoSequence[^1]);
+        SetUIAreaCount();
         
         // Remove a move
         levelMoves--;
@@ -910,5 +909,14 @@ public class LevelManager : MonoBehaviour
     internal List<GameTile> GetCustomTiles()
     {
         return levelCustoms;
+    }
+
+    // Finds all overlapped areas and sets the amount on the UI
+    private void SetUIAreaCount()
+    {
+        UI.Instance.ingame.SetAreaCount(
+            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
+            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
+        );
     }
 }

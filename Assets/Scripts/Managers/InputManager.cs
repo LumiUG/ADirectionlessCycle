@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static TransitionManager.Transitions;
 
 public class InputManager : MonoBehaviour
 {
@@ -130,7 +132,9 @@ public class InputManager : MonoBehaviour
     private void OnRestart()
     {
         if (!LevelManager.Instance.IsAllowedToPlay() || LevelManager.Instance.currentLevel.freeroam) return;
-        LevelManager.Instance.ReloadLevel();
+
+        // Transition in and out while restarting the level
+        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestart);
     }
 
     // Repeats a movement
@@ -154,7 +158,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition) return;
         if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
         else LevelManager.Instance.PauseResumeGame(false);
     }
@@ -423,5 +427,12 @@ public class InputManager : MonoBehaviour
         
         confirmCommand = null;
         return false;
+    }
+
+    // Actions //
+    internal void ActionRestart(string _)
+    {
+        LevelManager.Instance.ReloadLevel();
+        TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }
