@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
+using static TransitionManager.Transitions;
 
 public class LevelManager : MonoBehaviour
 {
@@ -640,16 +641,16 @@ public class LevelManager : MonoBehaviour
                 }
             ) && currentLevel.remixLevel != null;
 
+        // UI area count
+        SetUIAreaCount();
+
         // Load remix level!
         if (remixCondition)
         {
             if (!GameManager.save.game.hasSeenRemix) GameManager.save.game.hasSeenRemix = true;
-            LoadLevel(currentLevel.remixLevel);
+            TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
             return;
         }
-
-        // UI area count
-        SetUIAreaCount();
 
         // If won, do the thing
         if (winCondition)
@@ -917,5 +918,12 @@ public class LevelManager : MonoBehaviour
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
         );
+    }
+
+    // Actions //
+    public void ActionRemixCondition(string remixID)
+    {
+        LoadLevel(remixID);
+        TransitionManager.Instance.TransitionOut<string>(Unknown);
     }
 }

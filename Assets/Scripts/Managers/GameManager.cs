@@ -80,12 +80,12 @@ public class GameManager : MonoBehaviour
     // 
     public void ToggleCursor(bool status)
     {
-        if (status) {
-            InputSystem.EnableDevice(Mouse.current);
-        }
-        else {
-            InputSystem.DisableDevice(Mouse.current);
-        }
+        // if (status) {
+        //     InputSystem.EnableDevice(Mouse.current);
+        // }
+        // else {
+        //     InputSystem.DisableDevice(Mouse.current);
+        // }
     }
 
     // Stuff with savedata //

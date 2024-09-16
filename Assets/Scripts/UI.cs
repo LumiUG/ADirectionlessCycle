@@ -64,15 +64,24 @@ public class UI : MonoBehaviour
         dialog.text = dialog.self.transform.Find("Text").GetComponent<Text>();
 
         // Change from preload scene?
-        if (SceneManager.GetActiveScene().name == "Preload") ChangeScene("Main Menu");
+        SceneManager.LoadScene("Main Menu");
     }
 
     // Change scenes
-    public void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName, bool doTransition = true)
     {
+        // Move the UI selectors to its default place
+        if (selectors)
+        {
+            if (!selectors.left || !selectors.right) return;
+            selectors.left.SetParent(selectors.gameObject.transform);
+            selectors.right.SetParent(selectors.gameObject.transform);
+            selectors.left.anchoredPosition = Vector2.zero;
+            selectors.right.anchoredPosition = Vector2.zero;
+        }
+
         // Change scene after transition
-        if (GameManager.Instance) GameManager.Instance.ToggleCursor(false);
-        if (TransitionManager.Instance) TransitionManager.Instance.TransitionIn(Reveal, ActionChangeScene, sceneName);
+        if (doTransition) TransitionManager.Instance.TransitionIn(Reveal, ActionChangeScene, sceneName);
         else SceneManager.LoadScene(sceneName);
     }
 
@@ -83,13 +92,7 @@ public class UI : MonoBehaviour
     public void GoMainMenu()
     {
         if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
-        LevelManager.Instance.ClearLevel();
-        LevelManager.Instance.hasWon = false;
-        GameManager.Instance.isEditing = false;
-        LevelManager.Instance.currentLevel = null;
-        ClearUI();
-
-        ChangeScene("Main Menu");
+        TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoMainMenu);
     }
 
     // Go from a level to the editor
@@ -100,6 +103,7 @@ public class UI : MonoBehaviour
         // Transition in
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);
     }
+
     // Pause/Unpause game
     public void PauseUnpauseGame(bool status)
     {
@@ -147,9 +151,7 @@ public class UI : MonoBehaviour
     public void RestartLevel()
     {
         if (LevelManager.Instance.currentLevel == null) return;
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
-        LevelManager.Instance.ReloadLevel(true);
+        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestartLevel);
     } 
 
     // Object classes
@@ -243,20 +245,10 @@ public class UI : MonoBehaviour
     // Actions //
     internal void ActionChangeScene(string sceneName)
     {
-        // Move the UI selectors to its default place
-        if (selectors)
-        {
-            if (!selectors.left || !selectors.right) return;
-            selectors.left.SetParent(selectors.gameObject.transform);
-            selectors.right.SetParent(selectors.gameObject.transform);
-            selectors.left.anchoredPosition = Vector2.zero;
-            selectors.right.anchoredPosition = Vector2.zero;
-        }
-
         // Load the scene
         SceneManager.LoadScene(sceneName);
     }
-    internal void ActionGoLevelEditor(string _)
+    private void ActionGoLevelEditor(string _)
     {
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
         else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
@@ -267,15 +259,31 @@ public class UI : MonoBehaviour
         }
 
         LevelManager.Instance.RefreshGameVars();
-        ChangeScene("Level Editor");
-        GameManager.Instance.ToggleCursor(true);
+        ChangeScene("Level Editor", false);
         ClearUI();
     }
-    internal void ActionGoNextLevel(string _)
+    private void ActionGoNextLevel(string _)
     {
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+        TransitionManager.Instance.TransitionOut<string>(Swipe);
+    }
+    private void ActionGoMainMenu(string _)
+    {
+        LevelManager.Instance.ClearLevel();
+        LevelManager.Instance.hasWon = false;
+        GameManager.Instance.isEditing = false;
+        LevelManager.Instance.currentLevel = null;
+        ClearUI();
+
+        ChangeScene("Main Menu", false);
+    }
+    private void ActionRestartLevel(string _)
+    {
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
+        LevelManager.Instance.ReloadLevel(true);
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

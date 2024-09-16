@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
-using System;
 
 public class Hub : MonoBehaviour
 {
@@ -69,9 +68,13 @@ public class Hub : MonoBehaviour
         // Checking if you swapped levels
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject || !EventSystem.current.currentSelectedGameObject.transform.parent.name.StartsWith("W")) return;
         lastSelectedlevel = EventSystem.current.currentSelectedGameObject;
+        PreviewText($"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}");
+    }
 
+    // Now as a function for mouse hovers!
+    public void PreviewText(string levelID)
+    {
         // Set the preview text
-        string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         if (level != null)
         {
@@ -144,12 +147,12 @@ public class Hub : MonoBehaviour
     }
 
     // Actions //
-    internal void ActionLoadLevel(string name)
+    private void ActionLoadLevel(string name)
     {
         // Loads the level
         LevelManager.Instance.LoadLevel(name);
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
-        UI.Instance.ChangeScene("Game");
+        UI.Instance.ChangeScene("Game", false);
     }
 }

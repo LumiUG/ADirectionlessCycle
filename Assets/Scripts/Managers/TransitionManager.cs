@@ -10,13 +10,14 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = false;
-    internal enum Transitions { Crossfade, Reveal, Swipe };
+    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Unknown };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
 
     private AnimatorOverrideController crossfade;
     private AnimatorOverrideController reveal;
     private AnimatorOverrideController swipe;
+    private AnimatorOverrideController unknown;
 
     void Awake()
     {
@@ -34,13 +35,14 @@ public class TransitionManager : MonoBehaviour
         crossfade = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Crossfade/Base");
         reveal = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Reveal/Base");
         swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
+        unknown = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Unknown/Base");
 
         // Play default
         ChangeTransition(Transitions.Reveal);
     }
 
     // Transitions out of a black screen
-    private void SceneLoad(Scene scene, LoadSceneMode sceneMode) { TransitionOut<string>(Transitions.Reveal); }
+    private void SceneLoad(Scene scene, LoadSceneMode sceneMode) { TransitionOut<string>(); }
 
     // Change the current animator controller
     internal void ChangeTransition(Transitions transition)
@@ -56,16 +58,31 @@ public class TransitionManager : MonoBehaviour
             case Transitions.Swipe:
                 animator.runtimeAnimatorController = swipe;
                 break;
+            case Transitions.Unknown:
+                animator.runtimeAnimatorController = unknown;
+                break;
+            default: // Transitions.Ignore
+                break;
         }
     }
 
-    // Transition callers
-    internal void TransitionIn<T>(Transitions transition, Action<T> doAfter = null, T parameters = default)
+    // Get the CORRECT clip length
+    internal float GetClipLength(string clipName)
     {
+	    AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+		foreach (AnimationClip clip in clips) { if(clip.name == clipName) return clip.length; }
+        return 0f;
+    }
+
+    // Transition callers
+    internal void TransitionIn<T>(Transitions transition = Transitions.Ignore, Action<T> doAfter = null, T parameters = default)
+    {
+        ChangeTransition(transition);
         StartCoroutine(CoroIn(transition, doAfter, parameters));
     }
-    internal void TransitionOut<T>(Transitions transition, Action<T> doAfter = null, T parameters = default)
+    internal void TransitionOut<T>(Transitions transition = Transitions.Ignore, Action<T> doAfter = null, T parameters = default)
     {
+        ChangeTransition(transition);
         StartCoroutine(CoroOut(transition, doAfter, parameters));
     }
 
@@ -74,21 +91,19 @@ public class TransitionManager : MonoBehaviour
     {
         // Transition in
         eventReference.enabled = false;
-        ChangeTransition(transition);
         animator.Play("IN");
 
         inTransition = true;
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(GetClipLength($"{transition} IN"));
         doAfter?.Invoke(parameters);
     }
     private IEnumerator CoroOut<T>(Transitions transition, Action<T> doAfter, T parameters)
     {
         // Transition out
         eventReference.enabled = true;
-        ChangeTransition(transition);
         animator.Play("OUT");
 
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(GetClipLength($"{transition} OUT"));
         inTransition = false;
         doAfter?.Invoke(parameters);
     }
