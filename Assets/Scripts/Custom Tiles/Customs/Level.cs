@@ -21,7 +21,7 @@ public class LevelTile : CustomTile
         // Loads a level using its custom text
         if (LevelManager.Instance.LoadLevel(customText))
         {
-            if (!LevelManager.Instance.currentLevel.freeroam) UI.Instance.ingame.Toggle(true);
+            if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
             LevelManager.Instance.StopMovements();
             LevelManager.Instance.ReloadLevel();
         }

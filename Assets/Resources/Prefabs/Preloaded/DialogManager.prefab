@@ -47,7 +47,17 @@ MonoBehaviour:
   loadedDial: {fileID: 0}
   dialog: []
   events:
-  - executeAtIndex: 0
-  npcName: Stranger
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    setTileEvent:
+      enabled: 0
+      setAs: 0
+      position: {x: 0, y: 0, z: 0}
+      delete: 0
+    executeAtIndex: 0
+  npcName: ???
   textSpeed: 0.05
   canBeSkipped: 1
+  shouldExhaust: 1
+  inDialog: 0

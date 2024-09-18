@@ -223,9 +223,12 @@ public class LevelManager : MonoBehaviour
         levelHazards.ForEach(tile => level.tiles.hazardTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
-        
-        // Freeroam?
-        if (currentLevel != null) level.freeroam = currentLevel.freeroam;
+
+        // Freeroam & hideui
+        if (currentLevel != null) {
+            level.freeroam = currentLevel.freeroam;
+            level.hideUI = currentLevel.hideUI;
+        }
 
         // Add custom tile information
         foreach (var tile in customTileInfo)
@@ -268,8 +271,8 @@ public class LevelManager : MonoBehaviour
         // Yay! UI!
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
 
-        // Freeroam level?
-        if (currentLevel.freeroam) {
+        // Hide UI?
+        if (currentLevel.hideUI) {
             tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);
             return true;

@@ -12,7 +12,6 @@ public class SettingsMenu : MonoBehaviour
     public Toggle repeatInputToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
-    public Text version;
 
     private readonly List<string> resolutions = new();
 
@@ -41,9 +40,6 @@ public class SettingsMenu : MonoBehaviour
 
         masterSlider.value = GameManager.save.preferences.masterVolume;
         SFXSlider.value = GameManager.save.preferences.SFXVolume;
-        
-        // Version text
-        version.text = $"Running v{Application.version}";
     }
 
     // Sometimes when interacting with a dropdown menu
