@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static GameTile;
 using static TransitionManager.Transitions;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
     public Vector3Int latestMovement = Vector3Int.back;
+
+    internal ObjectTypes latestTile = ObjectTypes.Hexagon;
 
     private bool isHolding = false;
     private Coroutine movementCoro = null;
@@ -41,11 +45,11 @@ public class InputManager : MonoBehaviour
     {
         if (!canInputCommands) return;
 
-        // Write command
-        if (Input.anyKeyDown)
-        {
-            debugCommand += Input.inputString.Trim().ToLower();
-        }
+        // Write a command
+        if (Input.anyKeyDown) { debugCommand += Input.inputString.Trim().ToLower(); }
+
+        // Null check
+        if (debugCommand == null) return;
 
         // Enable debug command
         if (debugCommand == "debug")
@@ -53,26 +57,34 @@ public class InputManager : MonoBehaviour
             if (!GameManager.Instance.buildDebugMode)
             {
                 GameManager.Instance.buildDebugMode = true;
-                UI.Instance.global.SendMessage("I hope you know what you're doing.", 3);
-                AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+                UI.Instance.global.SendMessage("...I hope you know what you're doing.", 3);
             } else {
                 GameManager.Instance.buildDebugMode = false;
-                UI.Instance.global.SendMessage("Good call.", 3);
-                AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+                UI.Instance.global.SendMessage("Then so be it!", 3);
             }
             debugCommand = null;
         }
 
         // Delete savedata and generate a new one
-        if (debugCommand == "begone" && GameManager.Instance.buildDebugMode)
+        else if (debugCommand == "begone" && GameManager.Instance.buildDebugMode)
         {
             if (DebugConfirm()) return;
             GameManager.Instance.DeleteSave();
             GameManager.Instance.CreateSave(true);
-            AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.30f);
-            UI.Instance.global.SendMessage("Been taken care of.", 4);
+            UI.Instance.global.SendMessage("[ Game reset ]", 4);
             debugCommand = null;
         }
+
+        // Delete savedata and generate a new one
+        else if (debugCommand == "swap" && GameManager.Instance.buildDebugMode)
+        {
+            if (DebugConfirm()) return;
+            GameManager.save.game.hasSwapUpgrade = true;
+            UI.Instance.global.SendMessage("[ New Ability Unlocked ]", 4);
+            debugCommand = null;
+        }
+
+        if (debugCommand == null) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
     }
 
     // Returns if you are past the move cooldown timer
@@ -117,7 +129,7 @@ public class InputManager : MonoBehaviour
     // Undo move
     private void OnUndo()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid() || LevelManager.Instance.currentLevel.freeroam) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()) return;
         LevelManager.Instance.Undo();
         LevelManager.Instance.RemoveUndoFrame();
     }
@@ -125,13 +137,14 @@ public class InputManager : MonoBehaviour
     // Ping all areas
     private void OnPingAreas(InputValue ctx)
     {
+        if (!LevelManager.Instance.IsAllowedToPlay()) return;
         LevelManager.Instance.PingAllAreas(ctx.Get<float>() == 1f);
     }
 
     // Restart the level
     private void OnRestart()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || LevelManager.Instance.currentLevel.freeroam) return;
+        if (!LevelManager.Instance.IsAllowedToPlay()) return;
 
         // Transition in and out while restarting the level
         TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestart);
@@ -205,6 +218,11 @@ public class InputManager : MonoBehaviour
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.inverseAreaTile; 
+    }
+    private void OnEditorSelectOutboundArea() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.outboundAreaTile; 
     }
     private void OnEditorSelectHazard() 
     { 
@@ -339,7 +357,6 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
         LevelManager.Instance.worldOffsetY += 8;
     }
-
     private void OnEditorDown() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -347,7 +364,6 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
         LevelManager.Instance.worldOffsetY -= 8;
     }
-
     private void OnEditorLeft() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -355,7 +371,6 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
         LevelManager.Instance.worldOffsetX -= 14;
     }
-
     private void OnEditorRight() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
@@ -365,6 +380,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Hub //
+
     private void OnHubSwipeLeft()
     {
         if (SceneManager.GetActiveScene().name != "Hub") return;
@@ -402,8 +418,28 @@ public class InputManager : MonoBehaviour
         if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(null); }
     }
 
+    // Changes the only tile active's form (might cause issues in the future?)
+    private void OnChangeForms()
+    {
+        if (!LevelManager.Instance.IsAllowedToPlay() || !GameManager.save.game.hasSwapUpgrade) return;
+
+        List<GameTile> count = GetPlayableObjects();
+        if (count.Count > 1 || count.Count <= 0) return;
+
+        LevelManager.Instance.RemoveTile(count[0]);
+        if (count[0].GetTileType() == ObjectTypes.Hexagon) {
+            LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
+        }
+        else {
+            LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile("Hexagon", count[0].directions, count[0].position));
+            latestTile = count[0].GetTileType();
+        }
+    }
+
+    internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0; }); }
+
     // Debug commands //
-    
+
     // Enable debug commands
     private void OnDebugEnable(InputValue ctx)
     {
@@ -433,6 +469,9 @@ public class InputManager : MonoBehaviour
     internal void ActionRestart(string _)
     {
         LevelManager.Instance.ReloadLevel();
+        LevelManager.Instance.worldOffsetX = 0;
+        LevelManager.Instance.worldOffsetY = 0;
+        LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

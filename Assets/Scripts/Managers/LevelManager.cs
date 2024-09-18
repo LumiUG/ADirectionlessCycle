@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     // Tile References & Others //
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall, ObjectTypes.AntiWall };
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
-    internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea };
+    internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile mimicTile;
     [HideInInspector] public GameTile areaTile;
     [HideInInspector] public GameTile inverseAreaTile;
+    [HideInInspector] public GameTile outboundAreaTile;
     [HideInInspector] public GameTile levelTile;
     [HideInInspector] public GameTile fakeTile;
     [HideInInspector] public GameTile npcTile;
@@ -54,7 +55,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapLetterbox;
     [HideInInspector] public Tilemap extrasOutlines;
     private TilemapRenderer areaRenderer;
-    private Vector3 originalPosition;
+    internal Vector3 originalPosition;
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
 
@@ -62,6 +63,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public SerializableLevel currentLevel = null;
     [HideInInspector] public string currentLevelID = null;
     [HideInInspector] public string levelEditorName = null;
+    internal List<ObjectTypes> formQueue = new(capacity: 101); // 100 + 1 form capacity (for now)
     internal List<SerializableCustomInfo> customTileInfo = new();
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
@@ -107,6 +109,7 @@ public class LevelManager : MonoBehaviour
         mimicTile = Resources.Load<MimicTile>("Tiles/Objects/Mimic");
         areaTile = Resources.Load<WinAreaTile>("Tiles/Areas/Area");
         inverseAreaTile = Resources.Load<InverseWinAreaTile>("Tiles/Areas/Inverse Area");
+        outboundAreaTile = Resources.Load<OutboundAreaTile>("Tiles/Areas/Outbound Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         voidTile = Resources.Load<VoidTile>("Tiles/Hazards/Void");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
@@ -267,6 +270,11 @@ public class LevelManager : MonoBehaviour
         levelMoves = 0;
         timerCoroutine = StartCoroutine(LevelTimer());
         UI.Instance.ingame.SetLevelMoves(levelMoves);
+
+        // Swapping mechanic startup
+        var playables = InputManager.Instance.GetPlayableObjects();
+        if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
+        else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
 
         // Yay! UI!
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
@@ -528,6 +536,7 @@ public class LevelManager : MonoBehaviour
             "AntiWall" => Instantiate(antiwallTile),
             "Area" => Instantiate(areaTile),
             "InverseArea" => Instantiate(inverseAreaTile),
+            "OutboundArea" => Instantiate(outboundAreaTile),
             "Hazard" => Instantiate(hazardTile),
             "Void" => Instantiate(voidTile),
             "Invert" => Instantiate(invertTile),
@@ -548,11 +557,12 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if a position is inside or outside the level bounds
-    public bool CheckSceneInbounds(Vector3Int position)
+    public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false)
     {
-        if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY); 
-        if (currentLevel.freeroam) return true;
-        return !(position.x < 0 || position.x > boundsX || position.y > 0 || position.y < boundsY);
+        if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
+        if (currentLevel.freeroam && hexSpecial) return true;
+        if (currentLevel.freeroam && currentLevel.hideUI) return true;
+        return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
     }
 
     // Applies gravity using a direction
@@ -618,7 +628,8 @@ public class LevelManager : MonoBehaviour
                     ObjectTypes type = overlap.GetTileType();
 
                     return (objectOverlap != null && type == ObjectTypes.Area) ||
-                    (objectOverlap == null && type == ObjectTypes.InverseArea);
+                    (objectOverlap == null && type == ObjectTypes.InverseArea) ||
+                    (objectOverlap == null && type == ObjectTypes.OutboundArea);
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.Area); // At least one exists
 
@@ -635,7 +646,8 @@ public class LevelManager : MonoBehaviour
                     ObjectTypes type = overlap.GetTileType();
 
                     return (objectOverlap != null && type == ObjectTypes.InverseArea) ||
-                    (objectOverlap == null && type == ObjectTypes.Area);
+                    (objectOverlap == null && type == ObjectTypes.Area) ||
+                    (objectOverlap == null && type == ObjectTypes.OutboundArea);
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.InverseArea) // At least one exists
             && levelObjects.All(tile => // All level objects are overlapping inverse areas
@@ -831,6 +843,7 @@ public class LevelManager : MonoBehaviour
     internal void AddUndoFrame()
     {
         if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
+        formQueue.Add(InputManager.Instance.latestTile);
         undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms, customTileInfo));
     }
 
@@ -838,12 +851,12 @@ public class LevelManager : MonoBehaviour
     internal void RemoveUndoFrame(bool earliest = false)
     {
         if (undoSequence.Count <= 0) return;
-        if (earliest) undoSequence.RemoveAt(0);
-        else undoSequence.RemoveAt(undoSequence.Count - 1);
+        if (earliest) { undoSequence.RemoveAt(0); formQueue.RemoveAt(0); }
+        else { undoSequence.RemoveAt(undoSequence.Count - 1); formQueue.RemoveAt(formQueue.Count - 1); }
     }
 
     // Clears all frames
-    internal void ClearUndoFrames() { undoSequence.Clear(); }
+    internal void ClearUndoFrames() { undoSequence.Clear(); formQueue.Clear(); }
 
     // Undo check
     internal bool IsUndoQueueValid() { return undoSequence.Count > 0; }
@@ -854,6 +867,7 @@ public class LevelManager : MonoBehaviour
         // Reload level snapshot (not very efficient)
         ClearLevel(true);
         BuildLevel(undoSequence[^1]);
+        InputManager.Instance.latestTile = formQueue[^1];
         SetUIAreaCount();
         
         // Remove a move
@@ -906,6 +920,12 @@ public class LevelManager : MonoBehaviour
             tile.tileSprite = spriteCheck;
             if (refresh) RefreshCustomTile(tile);
         }
+    }
+
+    // Returns the list of object tiles
+    internal List<GameTile> GetObjectTiles()
+    {
+        return levelObjects;
     }
 
     // Returns the list of custom tiles

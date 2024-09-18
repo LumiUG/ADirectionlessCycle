@@ -141,6 +141,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectOutboundArea",
+                    "type": "Button",
+                    "id": "509d6728-a6cf-40f7-a835-2c2e4fffb383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectArea",
                     "type": "Button",
                     "id": "b06ba682-3e57-4dac-af93-9746f83ad0f6",
@@ -279,6 +288,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "b465bcc8-bf63-4c66-a3f3-284e29ef6c01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeForms",
+                    "type": "Button",
+                    "id": "1aa1fe39-8654-440f-a459-b1aef16f7767",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -893,6 +911,39 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "DebugEnable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87dee461-ca3d-4cb6-af6e-ec4a948550c4",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeForms",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd0093a3-9848-4f41-bd1a-46b3cedacc24",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeForms",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89d57f2a-6cce-419c-861f-40e6e43d5f90",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectOutboundArea",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
