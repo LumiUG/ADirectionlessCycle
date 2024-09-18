@@ -97,6 +97,7 @@ public class Serializables
         public bool hasSwapUpgrade = false;
         public bool hasCompletedGame = false;
         public bool hasSeenRemix = false;
+        public bool hasSeenOutbound = false;
 
         // A level
         [Serializable]
@@ -104,6 +105,7 @@ public class Serializables
         {
             public string levelID = null;
             public bool completed = false;
+            public bool outboundCompletion = false;
             public LevelStats stats;
 
             // Constructor
@@ -126,13 +128,15 @@ public class Serializables
         public class LevelChanges
         {
             public bool completed;
+            public bool outbound;
             public float time = -1f;
             public int moves = -1;
 
             // Constructor
-            public LevelChanges(bool completed, float time, int moves)
+            public LevelChanges(bool completed, bool outbound, float time, int moves)
             {
                 this.completed = completed;
+                this.outbound = outbound;
                 this.time = time;
                 this.moves = moves;
             }

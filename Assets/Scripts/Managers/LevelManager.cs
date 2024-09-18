@@ -363,6 +363,7 @@ public class LevelManager : MonoBehaviour
             ClearUndoFrames();
         }
 
+        InputManager.Instance.latestTile = ObjectTypes.Hexagon;
         movementBlacklist.Clear();
         customTileInfo.Clear();
         levelSolids.Clear();
@@ -618,7 +619,7 @@ public class LevelManager : MonoBehaviour
     {
         // Level win condition:
         // All area tiles have some object overlapping them and at least 1 exists,
-        // no inverse areas are being overlapped.
+        // no other areas are being overlapped.
         bool winCondition = 
             levelWinAreas.All(overlap =>
                 {
@@ -656,8 +657,42 @@ public class LevelManager : MonoBehaviour
                 }
             ) && currentLevel.remixLevel != null;
 
+        // Outbound win condition:
+        // All outbound area tiles have some object overlapping them and at least 1 exists,
+        // no other areas are being overlapped.
+        bool outboundCondition = 
+            levelWinAreas.All(overlap =>
+                {
+                    if (!typesAreas.Contains(overlap.GetTileType())) return true;
+
+                    GameTile objectOverlap = tilemapObjects.GetTile<GameTile>(overlap.position);
+                    ObjectTypes type = overlap.GetTileType();
+
+                    return (objectOverlap != null && type == ObjectTypes.OutboundArea) ||
+                    (objectOverlap == null && type == ObjectTypes.InverseArea) ||
+                    (objectOverlap == null && type == ObjectTypes.Area);
+                }
+            ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.OutboundArea); // At least one exists
+
         // UI area count
         SetUIAreaCount();
+
+        // Outbound win
+        if (outboundCondition)
+        {
+            // Level + savedata
+            GameData.LevelChanges changes = new(false, true, -1, -1);
+            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+            GameManager.save.game.hasSeenOutbound = true;
+
+            // UI
+            EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
+            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
+            UI.Instance.win.SetTotalTime(changes.time);
+            UI.Instance.win.SetTotalMoves(changes.moves);
+            UI.Instance.win.Toggle(true);
+            hasWon = true;
+        }
 
         // Load remix level!
         if (remixCondition)
@@ -671,7 +706,7 @@ public class LevelManager : MonoBehaviour
         if (winCondition)
         {
             // Level savedata
-            GameData.LevelChanges changes = new(true, (float)Math.Round(levelTimer, 2), levelMoves);
+            GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI

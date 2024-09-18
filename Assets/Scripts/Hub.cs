@@ -16,7 +16,8 @@ public class Hub : MonoBehaviour
 
     private readonly int[] positions = { 0, -1920, -3840, -5760 };
     private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
-    private Color unfinishedColor = new(1f, 0.85f, 0.35f, 1f);
+    private Color remixColor;
+    private Color outboundColor;
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
     private int worldIndex = 0;
@@ -25,6 +26,10 @@ public class Hub : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(backButton);
         holderRT = worldHolder.GetComponent<RectTransform>();
+
+        // Colors!!
+        ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
+        ColorUtility.TryParseHtmlString("#A22BE3", out outboundColor);
 
         // Set colors for locked levels
         for (int i = 0; i < worldHolders.Count; i++)
@@ -41,8 +46,11 @@ public class Hub : MonoBehaviour
                 {
                     Transform outline = outlineHolder.Find(worldHolders[i].name).Find(child.name);
                     outline.gameObject.SetActive(true);
-                    completedLevelsCount[i]++;
-                    if (GameManager.save.game.hasSeenRemix && RecursiveRemixCheck(LevelManager.Instance.GetLevel(levelCheck.levelID, false, true), levelCheck.levelID)) outline.GetComponent<Image>().color = unfinishedColor;
+                    if (completedLevelsCount[i] < 12) completedLevelsCount[i]++;
+
+                    var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
+                    if (GameManager.save.game.hasSeenRemix && RecursiveRemixCheck(levelAsData, levelCheck.levelID)) outline.GetComponent<Image>().color = remixColor;
+                    else if (GameManager.save.game.hasSeenOutbound && !levelCheck.outboundCompletion && levelAsData.freeroam) outline.GetComponent<Image>().color = outboundColor;
                 }
             }
 
