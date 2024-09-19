@@ -601,10 +601,10 @@ public class LevelManager : MonoBehaviour
         }
 
         // Tile pushed SFX
-        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.50f);
+        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.45f);
 
         // Destroys all marked object tiles.
-        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.40f);
+        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
 
         // Win check, add one move to the player
@@ -659,7 +659,7 @@ public class LevelManager : MonoBehaviour
 
         // Outbound win condition:
         // All outbound area tiles have some object overlapping them and at least 1 exists,
-        // no other areas are being overlapped.
+        // All area tiles have some object overlapping them.
         bool outboundCondition = 
             levelWinAreas.All(overlap =>
                 {
@@ -669,8 +669,8 @@ public class LevelManager : MonoBehaviour
                     ObjectTypes type = overlap.GetTileType();
 
                     return (objectOverlap != null && type == ObjectTypes.OutboundArea) ||
-                    (objectOverlap == null && type == ObjectTypes.InverseArea) ||
-                    (objectOverlap == null && type == ObjectTypes.Area);
+                    (objectOverlap != null && type == ObjectTypes.Area) ||
+                    type == ObjectTypes.InverseArea;
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.OutboundArea); // At least one exists
 
@@ -904,6 +904,9 @@ public class LevelManager : MonoBehaviour
         BuildLevel(undoSequence[^1]);
         InputManager.Instance.latestTile = formQueue[^1];
         SetUIAreaCount();
+
+        // Undo SFX
+        AudioManager.Instance.PlaySFX(AudioManager.undo, 0.65f, true);
         
         // Remove a move
         levelMoves--;

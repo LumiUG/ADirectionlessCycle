@@ -12,9 +12,11 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public static AudioClip W3BGM;
 
     // SFX //
-    [HideInInspector] public static AudioClip tileDeath;
-    [HideInInspector] public static AudioClip tilePush;
-    [HideInInspector] public static AudioClip areaOverlap;
+    internal static AudioClip tileDeath;
+    internal static AudioClip tilePush;
+    internal static AudioClip areaOverlap;
+    internal static AudioClip select;
+    internal static AudioClip undo;
 
     // AudioSources //
     [SerializeField] private AudioSource master;
@@ -36,6 +38,8 @@ public class AudioManager : MonoBehaviour
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
+        select = Resources.Load<AudioClip>("Audio/SFX/Select");
+        undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
 
         // Default looping BGM
         // PlayBGM(tileDeath);
@@ -69,8 +73,10 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays an SFX
-    public void PlaySFX(AudioClip clip, float volume = 1f)
+    public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false)
     {
+        if (pitchShift) sfx.pitch = Random.Range(0.95f, 1.05f);
+        else sfx.pitch = 1;
         sfx.volume = volume * GameManager.save.preferences.SFXVolume;
         sfx.PlayOneShot(clip);
     }

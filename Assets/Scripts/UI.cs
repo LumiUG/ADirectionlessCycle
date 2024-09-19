@@ -224,7 +224,7 @@ public class UI : MonoBehaviour
         {
             // Area overlapped SFX
             int.TryParse(areaCount.text.Split("/")[0], out int areaNum);
-            if (AudioManager.Instance && current > areaNum) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.46f);
+            if (AudioManager.Instance && current > areaNum) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
 
             // Update text
             areaCount.text = $"{current}/{max}";

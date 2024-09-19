@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -84,7 +85,7 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
-        if (debugCommand == null) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+        if (debugCommand == null) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
     }
 
     // Returns if you are past the move cooldown timer
@@ -436,7 +437,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0; }); }
+    internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.Instance.CheckSceneInbounds(tile.position); }); }
 
     // Debug commands //
 
