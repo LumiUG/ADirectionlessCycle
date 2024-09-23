@@ -75,6 +75,7 @@ public class LevelManager : MonoBehaviour
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
     private readonly List<Tiles> undoSequence = new(capacity: 100); // 100 undo capacity (for now)
+    private readonly List<(int, int)> roomSequence = new(capacity: 100); // 100 undo capacity (for now)
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
     private int defaultOverlapLayer;
@@ -879,6 +880,7 @@ public class LevelManager : MonoBehaviour
     {
         if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
         formQueue.Add(InputManager.Instance.latestTile);
+        roomSequence.Add((worldOffsetX, worldOffsetY));
         undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms, customTileInfo));
     }
 
@@ -886,12 +888,12 @@ public class LevelManager : MonoBehaviour
     internal void RemoveUndoFrame(bool earliest = false)
     {
         if (undoSequence.Count <= 0) return;
-        if (earliest) { undoSequence.RemoveAt(0); formQueue.RemoveAt(0); }
-        else { undoSequence.RemoveAt(undoSequence.Count - 1); formQueue.RemoveAt(formQueue.Count - 1); }
+        if (earliest) { undoSequence.RemoveAt(0); roomSequence.RemoveAt(0); formQueue.RemoveAt(0); }
+        else { undoSequence.RemoveAt(undoSequence.Count - 1); roomSequence.RemoveAt(roomSequence.Count - 1); formQueue.RemoveAt(formQueue.Count - 1); }
     }
 
     // Clears all frames
-    internal void ClearUndoFrames() { undoSequence.Clear(); formQueue.Clear(); }
+    internal void ClearUndoFrames() { undoSequence.Clear(); roomSequence.Clear(); formQueue.Clear(); }
 
     // Undo check
     internal bool IsUndoQueueValid() { return undoSequence.Count > 0; }
@@ -903,6 +905,9 @@ public class LevelManager : MonoBehaviour
         ClearLevel(true);
         BuildLevel(undoSequence[^1]);
         InputManager.Instance.latestTile = formQueue[^1];
+        worldOffsetX = roomSequence[^1].Item1;
+        worldOffsetY = roomSequence[^1].Item2;
+        MoveTilemaps(originalPosition - new Vector3(worldOffsetX, worldOffsetY), true);
         SetUIAreaCount();
 
         // Undo SFX

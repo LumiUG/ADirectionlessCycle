@@ -8,6 +8,7 @@ using static Serializables;
 public class Hub : MonoBehaviour
 {
     public List<GameObject> worldHolders = new(capacity: 3);
+    public List<GameObject> hubArrows = new(capacity: 2);
     public GameObject worldHolder;
     public RectTransform outlineHolder;
     public GameObject backButton;
@@ -55,7 +56,11 @@ public class Hub : MonoBehaviour
             }
 
             // Progress locking
-            if (completedLevelsCount[0] < 12) { completedLevelsCount[1] = 0; completedLevelsCount[2] = 0; }
+            if (completedLevelsCount[0] < 12) {
+                if (!GameManager.Instance.IsDebug()) { hubArrows[0].SetActive(false); hubArrows[1].SetActive(false); }
+                completedLevelsCount[1] = 0;
+                completedLevelsCount[2] = 0;
+            }
             else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
 
             // Sorry! We are looping again for available levels using the completed count!
@@ -115,15 +120,19 @@ public class Hub : MonoBehaviour
     // Change world
     public void ChangeWorld(int direction)
     {
-        EventSystem.current.SetSelectedGameObject(backButton);
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
-        if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
+
+        if (!GameManager.Instance.IsDebug()) {
+            if ((worldIndex + direction == 1 && completedLevelsCount[1] < 1) || (worldIndex + direction == 2 && completedLevelsCount[2] < 1)) return;
+            if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
+        }
 
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
         outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
 
         // Update checker direction
+        EventSystem.current.SetSelectedGameObject(backButton);
         checker.dirX = direction;
     }
 

@@ -25,8 +25,8 @@ public class SettingsMenu : MonoBehaviour
         resolutions.Add("1600x900"); // looks odd
         resolutions.Add("1366x768");
         resolutions.Add("1280x720");
-        resolutions.Add("1152x648");
-        resolutions.Add("1024x576"); // looks odd
+        // resolutions.Add("1152x648"); // looks odd
+        // resolutions.Add("1024x576"); // looks odd
         resolutionDropdown.AddOptions(resolutions);
 
         // Select current resolution

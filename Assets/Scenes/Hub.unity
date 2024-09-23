@@ -1801,6 +1801,9 @@ MonoBehaviour:
   - {fileID: 1260845371}
   - {fileID: 561929054}
   - {fileID: 688490809}
+  hubArrows:
+  - {fileID: 683167373}
+  - {fileID: 744228267}
   worldHolder: {fileID: 25933887}
   outlineHolder: {fileID: 1230158722}
   backButton: {fileID: 1836153647}
