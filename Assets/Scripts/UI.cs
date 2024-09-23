@@ -132,6 +132,9 @@ public class UI : MonoBehaviour
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
         GameManager.Instance.isEditing = true;
+        LevelManager.Instance.worldOffsetX = 0;
+        LevelManager.Instance.worldOffsetY = 0;
+        LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
         ingame.SetLevelName("Editor Mode!");
         editor.Toggle(false);
         ingame.Toggle(true);

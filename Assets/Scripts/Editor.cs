@@ -64,12 +64,15 @@ public class Editor : MonoBehaviour
         else previewImage.sprite = tileToPlace.tileSprite;
 
         // Preview sprite (on tilemap)
-        Vector3Int mousePos = GetMousePositionOnGrid() - new Vector3Int(LevelManager.Instance.worldOffsetX, LevelManager.Instance.worldOffsetY);
-        if (mousePos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
-
-        tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
         if (isPlacing) tilemapRenderer.sprite = previewImage.sprite;
         else tilemapRenderer.sprite = deletionSprite;
+
+        // Move mouse selector (on tilemap)
+        Vector3Int mousePos = GetMousePositionOnGrid();
+        if (mousePos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
+
+        mousePos -= new Vector3Int(LevelManager.Instance.worldOffsetX, LevelManager.Instance.worldOffsetY);
+        tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
     }
 
     // Returns the mouse position on the playable grid

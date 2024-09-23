@@ -655,7 +655,7 @@ public class LevelManager : MonoBehaviour
                 {
                     return tilemapWinAreas.GetTile<InverseWinAreaTile>(tile.position) != null;
                 }
-            ) && currentLevel.remixLevel != null;
+            ) && !IsStringEmptyOrNull(currentLevel.remixLevel);
 
         // Outbound win condition:
         // All outbound area tiles have some object overlapping them and at least 1 exists,

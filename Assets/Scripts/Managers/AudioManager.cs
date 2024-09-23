@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     // AudioSources //
     [SerializeField] private AudioSource master;
     [SerializeField] private AudioSource sfx;
+    [SerializeField] private AudioSource sfxPitch;
 
     void Awake()
     {
@@ -75,8 +76,14 @@ public class AudioManager : MonoBehaviour
     // Plays an SFX
     public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false)
     {
-        if (pitchShift) sfx.pitch = Random.Range(0.95f, 1.05f);
-        else sfx.pitch = 1;
+        if (pitchShift)
+        {
+            sfxPitch.pitch = Random.Range(0.95f, 1.05f);
+            sfxPitch.volume = volume * GameManager.save.preferences.SFXVolume;
+            sfxPitch.PlayOneShot(clip);
+            return;
+        }
+
         sfx.volume = volume * GameManager.save.preferences.SFXVolume;
         sfx.PlayOneShot(clip);
     }
