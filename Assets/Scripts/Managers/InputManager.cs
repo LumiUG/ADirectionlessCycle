@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
         else if (debugCommand == "swap" && GameManager.Instance.buildDebugMode)
         {
             if (DebugConfirm()) return;
-            GameManager.save.game.hasSwapUpgrade = true;
+            GameManager.save.game.mechanics.hasSwapUpgrade = true;
             UI.Instance.global.SendMessage("[ New Ability Unlocked ]", 4);
             debugCommand = null;
         }
@@ -131,6 +131,8 @@ public class InputManager : MonoBehaviour
     private void OnUndo()
     {
         if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()) return;
+
+        // Undo latest move
         LevelManager.Instance.Undo();
         LevelManager.Instance.RemoveUndoFrame();
     }
@@ -422,7 +424,7 @@ public class InputManager : MonoBehaviour
     // Changes the only tile active's form (might cause issues in the future?)
     private void OnChangeForms()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !GameManager.save.game.hasSwapUpgrade) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
 
         List<GameTile> count = GetPlayableObjects();
         if (count.Count > 1 || count.Count <= 0) return;

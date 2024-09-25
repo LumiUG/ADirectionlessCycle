@@ -17,6 +17,9 @@ public class DialogManager : MonoBehaviour
     public bool shouldExhaust = true;
     public bool inDialog = false;
 
+    private readonly string[] waitExtraSmall = { ",", "-", "\"" };
+    private readonly string[] waitExtraMedium = { ".", ":", ";" };
+    private readonly string[] waitExtraLong = { "!", "?", ":", ";" };
     private bool ignoreNewChatSource;
     private bool hasDialogStarted;
     private bool canInteract;
@@ -54,7 +57,7 @@ public class DialogManager : MonoBehaviour
         UI.Instance.dialog.Toggle(true);
     
         // Resets the dialog box
-        UI.Instance.dialog.name.text = npcName;
+        UI.Instance.dialog.name.text = null; // UI.Instance.dialog.name.text = npcName;
         UI.Instance.dialog.text.text = string.Empty;
         hasDialogStarted = true;
 
@@ -114,8 +117,10 @@ public class DialogManager : MonoBehaviour
         {
             UI.Instance.dialog.SetText(c.ToString(), true);
             if (loadedDial.sfx != null) AudioManager.Instance.PlaySFX(loadedDial.sfx, 0.60f);
-            if (c.ToString() != "." && c.ToString() != ",") yield return new WaitForSecondsRealtime(textSpeed);
-            else yield return new WaitForSecondsRealtime(textSpeed + 0.1f);
+            if (waitExtraLong.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.25f);
+            if (waitExtraMedium.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.175f);
+            if (waitExtraSmall.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.1f);
+            else yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
 

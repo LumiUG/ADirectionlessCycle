@@ -50,8 +50,8 @@ public class Hub : MonoBehaviour
                     if (completedLevelsCount[i] < 12) completedLevelsCount[i]++;
 
                     var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
-                    if (GameManager.save.game.hasSeenRemix && RecursiveRemixCheck(levelAsData, levelCheck.levelID)) outline.GetComponent<Image>().color = remixColor;
-                    else if (GameManager.save.game.hasSeenOutbound && !levelCheck.outboundCompletion && levelAsData.freeroam) outline.GetComponent<Image>().color = outboundColor;
+                    if (GameManager.save.game.mechanics.hasSeenRemix && RecursiveRemixCheck(levelAsData, levelCheck.levelID)) outline.GetComponent<Image>().color = remixColor;
+                    else if (GameManager.save.game.mechanics.hasSeenOutbound && !levelCheck.outboundCompletion && levelAsData.freeroam) outline.GetComponent<Image>().color = outboundColor;
                 }
             }
 

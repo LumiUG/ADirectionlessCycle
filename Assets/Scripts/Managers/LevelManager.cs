@@ -684,7 +684,7 @@ public class LevelManager : MonoBehaviour
             // Level + savedata
             GameData.LevelChanges changes = new(false, true, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
-            GameManager.save.game.hasSeenOutbound = true;
+            GameManager.save.game.mechanics.hasSeenOutbound = true;
 
             // UI
             EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
@@ -698,7 +698,7 @@ public class LevelManager : MonoBehaviour
         // Load remix level!
         if (remixCondition)
         {
-            if (!GameManager.save.game.hasSeenRemix) GameManager.save.game.hasSeenRemix = true;
+            if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
             TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
             return;
         }
@@ -911,7 +911,7 @@ public class LevelManager : MonoBehaviour
         SetUIAreaCount();
 
         // Undo SFX
-        AudioManager.Instance.PlaySFX(AudioManager.undo, 0.65f, true);
+        AudioManager.Instance.PlaySFX(AudioManager.undo, 1f, true);
         
         // Remove a move
         levelMoves--;

@@ -19,7 +19,7 @@ MonoBehaviour:
   - you can trust me on that <3
   events: []
   exhaustDialog: {fileID: 11400000}
-  npcName: gummi
+  npcName: ???
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
   shouldExhaust: 0

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Interact
   m_EditorClassIdentifier: 
   dialog:
-  - Still digging deeper?
-  - I expected you to give up halfway through, but really- you made it here.
-  - However, don't think that you can make it past. This one will never let you through.
-  - But... ... I could just...
+  - Still trying?
+  - There's nothing you can do, you can't fix anything.
+  - This room is not one that can be solved.
+  - However. Since you are this stubborn...
+  - '[You feel your surroundings shift]'
   - ...This ought to be fun.
   events:
   - textSpeedEvent:

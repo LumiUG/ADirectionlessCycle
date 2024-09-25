@@ -4,7 +4,6 @@ using System.Linq;
 using System.IO;
 using Unity.VisualScripting;
 using static Serializables;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +11,12 @@ public class GameManager : MonoBehaviour
     
     // Game data // 
     [HideInInspector] public bool isEditing;
-    [HideInInspector] public SpriteRenderer drawOver;
     [HideInInspector] public bool buildDebugMode;
     public static Savedata save;
     private string dataPath;
 
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Settings", "Hub" };
-    internal readonly string[] noGameplayScenes = { "Main Menu", "Settings", "Hub" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Mechanics", "Settings", "Hub" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Mechanics", "Settings", "Hub" };
 
     void Awake()
     {
@@ -44,10 +42,6 @@ public class GameManager : MonoBehaviour
         ToggleCursor(false);
         buildDebugMode = false;
         isEditing = false;
-
-        // Fixes a stupid bug
-        drawOver = Resources.Load("Prefabs/PingDrawOver").GetComponent<SpriteRenderer>();
-        drawOver.sprite = null;
 
         // Set master and SFX values
         if (AudioManager.Instance) {

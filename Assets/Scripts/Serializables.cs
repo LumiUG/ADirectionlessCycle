@@ -94,10 +94,8 @@ public class Serializables
         public List<Level> levels = new();
         public List<string> collectedOrbs; // stored as level ID's
         public List<string> exhaustedDialog;
-        public bool hasSwapUpgrade = false;
+        public Mechanics mechanics = new();
         public bool hasCompletedGame = false;
-        public bool hasSeenRemix = false;
-        public bool hasSeenOutbound = false;
 
         // A level
         [Serializable]
@@ -141,6 +139,15 @@ public class Serializables
                 this.moves = moves;
             }
         }
+
+        // Seen mechanics
+        [Serializable]
+        public class Mechanics
+        {
+            public bool hasSwapUpgrade = false;
+            public bool hasSeenRemix = false;
+            public bool hasSeenOutbound = false;
+        }
     }
 
 
@@ -151,7 +158,7 @@ public class Serializables
         public Resolution resolution;
         public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
         public float masterVolume = 1f;
-        public float SFXVolume = 0.6f;
+        public float SFXVolume = 0.8f;
         public bool repeatInput = true;
     }
 }
