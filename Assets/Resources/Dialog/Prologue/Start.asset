@@ -21,13 +21,13 @@ MonoBehaviour:
   - I'll be your guiding angel!! Or, um- well... Your guiding voice? Sorry, I'm bad
     with this stuff.
   - A-Anyways, as we were talking before, you should go with the flow of this world.
-  - 'What I mean is: "NO DETOURS"'
+  - What I mean is "no detours, focus on your objective"
   - ...Personally, It's just company policy. Do whatever you feel like.
   - Though, I'd advise against snooping around in places too deep. You're supposed
     to get in and out. Safely.
   - Just do your job and we'll all be alright!
-  - Now, I have other vessels to take care of. I'll see you around if something interesting
-    happens.
+  - Now, I have other crawlers to take care of. I'll see you around if something
+    interesting happens.
   events: []
   exhaustDialog: {fileID: 0}
   npcName: Voice

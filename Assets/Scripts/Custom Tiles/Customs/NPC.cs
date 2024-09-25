@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 // NPC TILE USES CUSTOM TEXT SLICING !!
-// Example: "dialogScriptable;yourSprite"
+// Example: "dialogScriptable;yourSprite;triggerOnEnter;ignoreOutboundInteracts"
+// Example: "Dialog/Debug;NPC/Gummi;1;0"
 
 [CreateAssetMenu(menuName = "Game Tiles/Customs/NPC Tile")]
 public class NPCTile : CustomTile 
@@ -19,11 +20,15 @@ public class NPCTile : CustomTile
     // The tile's effect
     public override void Effect(GameTile tile)
     {
-        if (tile) return;
-
         // Checks if there is a string
         string[] stringCheck = customText.Split(";");
-        if (stringCheck.Length < 2) return;
+        if (stringCheck.Length != 4) return; // TODO: move to 4 for support
+
+        // Collission check
+        if (tile && stringCheck[2] == "0") return;
+
+        // Outbound interaction (ignore?)
+        if (tile == null && stringCheck[3] == "1") return;
 
         // Checks if the dialog exists
         DialogScriptable dialogCheck = Resources.Load<DialogScriptable>($"Dialog/{stringCheck.GetValue(0)}");

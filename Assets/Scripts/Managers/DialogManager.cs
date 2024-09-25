@@ -48,6 +48,7 @@ public class DialogManager : MonoBehaviour
         if (GameManager.save.game.exhaustedDialog.Contains(dialogPath)) chat = chat.exhaustDialog;
 
         // Should we change/load the new scriptable?
+        if (!chat) { inDialog = false; return; }
         if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat);
 
         // Not the first time?

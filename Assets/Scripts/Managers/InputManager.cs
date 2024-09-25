@@ -405,20 +405,23 @@ public class InputManager : MonoBehaviour
         if (GameManager.Instance.IsBadScene() || LevelManager.Instance.isPaused) return;
 
         // Searches for a first valid NPC
+        GameTile tl = null; // (garbage collector tysm)
         GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
-            npc => {
+            npc =>
+            {
                 GameTile test = null;
                 test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
+                if (!test) { test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
                 if (test) return npc;
                 else return false;
             }
         );
-
-        // Gets the NPC and triggers it
-        if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(null); }
+        
+        // Gets the NPC and triggers it 
+        if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(tl); }
     }
 
     // Changes the only tile active's form (might cause issues in the future?)

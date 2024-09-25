@@ -95,6 +95,7 @@ public class Serializables
         public List<string> collectedOrbs; // stored as level ID's
         public List<string> exhaustedDialog;
         public Mechanics mechanics = new();
+        public bool doPrologue = true;
         public bool hasCompletedGame = false;
 
         // A level
