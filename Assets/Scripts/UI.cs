@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -47,7 +49,8 @@ public class UI : MonoBehaviour
         preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
         preload.levelName = preload.self.transform.Find("Level Name").gameObject.GetComponent<Text>();
         preload.stars = preload.self.transform.Find("Difficulty Stars").gameObject;
-        preload.starGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
+        preload.starFilledGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
+        preload.starHollowGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         preload.time = preload.self.transform.Find("Best Time").gameObject.GetComponent<Text>();
         preload.moves = preload.self.transform.Find("Best Moves").gameObject.GetComponent<Text>();
 
@@ -198,7 +201,8 @@ public class UI : MonoBehaviour
     {
         public Text levelName;
         public GameObject stars;
-        public Sprite starGraphic;
+        public Sprite starFilledGraphic;
+        public Sprite starHollowGraphic;
         public Text time;
         public Text moves;
 
@@ -208,11 +212,13 @@ public class UI : MonoBehaviour
             else if (amount > 9) amount = 9;
 
             // Enable stars
-            foreach (var star in stars.transform.Find("Stars").GetComponentsInChildren<Image>())
+            List<Image> starList = stars.transform.Find("Stars").GetComponentsInChildren<Image>().ToList();
+            starList.ForEach(s => s.sprite = starHollowGraphic);
+            foreach (var star in starList)
             {
                 if (amount <= 0) break;
 
-                star.sprite = starGraphic;
+                star.sprite = starFilledGraphic;
                 amount--;
             }
         }
