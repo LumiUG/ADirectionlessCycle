@@ -246,7 +246,7 @@ public class UI : MonoBehaviour
             if (save != null) { SetBestTime(save.stats.bestTime); SetBestMoves(save.stats.totalMoves); }
             else { SetBestTime(-1); SetBestMoves(-1); }
             Toggle(true);
-            animator.Play("Load");
+            animator.Play("Load In");
         }
     }
 

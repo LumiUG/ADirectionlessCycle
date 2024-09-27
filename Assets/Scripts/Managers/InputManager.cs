@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
 
     private bool isHolding = false;
+    private Coroutine outCoro = null;
     private Coroutine movementCoro = null;
     private readonly float repeatMovementCD = 0.12f;
     private readonly float manualMovementCD = 0.12f;
@@ -47,10 +48,8 @@ public class InputManager : MonoBehaviour
         // Next level / Load level intermission
         if (TransitionManager.Instance.inTransition && UI.Instance.preload.self.activeSelf && Input.anyKeyDown)
         {
-            UI.Instance.preload.animator.SetTrigger("Reset");
-            UI.Instance.preload.Toggle(false);
-            if (SceneManager.GetActiveScene().name != "Game") UI.Instance.ChangeScene("Game", false);
-            else TransitionManager.Instance.TransitionOut<string>();
+            if (outCoro != null) return;
+            outCoro = StartCoroutine(OutTransition());
             return;
         }
 
@@ -454,6 +453,20 @@ public class InputManager : MonoBehaviour
     }
 
     internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.Instance.CheckSceneInbounds(tile.position); }); }
+
+    // Plays an "out" transition
+    private IEnumerator OutTransition()
+    {
+        UI.Instance.preload.animator.SetTrigger("Out");
+
+        yield return new WaitForSeconds(0.5f);
+
+        UI.Instance.preload.Toggle(false);
+        if (SceneManager.GetActiveScene().name != "Game") UI.Instance.ChangeScene("Game", false);
+        else TransitionManager.Instance.TransitionOut<string>();
+
+        outCoro = null;
+    }
 
     // Debug commands //
 
