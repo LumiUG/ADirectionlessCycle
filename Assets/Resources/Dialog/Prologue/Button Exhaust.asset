@@ -15,7 +15,16 @@ MonoBehaviour:
   dialog:
   - '[You slam into the button, again]'
   - '[Nothing happens]'
-  events: []
+  events:
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    setTileEvent:
+      enabled: 1
+      setAs: 9
+      position: {x: 35, y: -10, z: 0}
+      delete: 1
+    executeAtIndex: 1
   exhaustDialog: {fileID: 0}
   npcName: Button
   textSpeed: 0.05

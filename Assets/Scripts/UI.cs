@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public static UI Instance;
     [HideInInspector] public GlobalUI global;
     [HideInInspector] public LevelEditorUI editor;
+    [HideInInspector] public PreloadUI preload; 
     [HideInInspector] public PauseUI pause;
     [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
@@ -42,6 +43,13 @@ public class UI : MonoBehaviour
         win.stats = win.self.transform.Find("Level Stats");
         win.time = win.stats.Find("Win Time").GetComponent<Text>();
         win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
+
+        preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
+        preload.levelName = preload.self.transform.Find("Level Name").gameObject.GetComponent<Text>();
+        preload.stars = preload.self.transform.Find("Difficulty Stars").gameObject;
+        preload.starGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
+        preload.time = preload.self.transform.Find("Best Time").gameObject.GetComponent<Text>();
+        preload.moves = preload.self.transform.Find("Best Moves").gameObject.GetComponent<Text>();
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
@@ -186,6 +194,52 @@ public class UI : MonoBehaviour
         public GameObject playtest;
     }
 
+    public class PreloadUI : UIObject
+    {
+        public Text levelName;
+        public GameObject stars;
+        public Sprite starGraphic;
+        public Text time;
+        public Text moves;
+
+        public void SetStars(int amount = 1)
+        {
+            if (amount < 1) amount = 1;
+            else if (amount > 9) amount = 9;
+
+            // Enable stars
+            foreach (var star in stars.transform.Find("Stars").GetComponentsInChildren<Image>())
+            {
+                if (amount <= 0) break;
+
+                star.sprite = starGraphic;
+                amount--;
+            }
+        }
+        public void SetLevelName(string name) { levelName.text = name; }
+
+        public void SetBestTime(float newTime = -1)
+        {
+            if (newTime == -1 ) time.text = "Best time: ???";
+            else time.text = $"Best time: {Math.Round(newTime, 2)}s";
+        }
+
+        public void SetBestMoves(int newMoves = -1)
+        {
+            if (newMoves == -1) moves.text = "Best moves: ???";
+            else moves.text = $"Best moves: {newMoves}";
+        }
+
+        internal void PreparePreloadScreen(Serializables.GameData.Level save)
+        {
+            SetLevelName(LevelManager.Instance.currentLevel.levelName);
+            SetStars(LevelManager.Instance.currentLevel.difficulty);
+            if (save != null) { SetBestTime(save.stats.bestTime); SetBestMoves(save.stats.totalMoves); }
+            else { SetBestTime(-1); SetBestMoves(-1); }
+            Toggle(true);
+        }
+    }
+
     public class WinUI : UIObject
     {
         public GameObject editorButton;
@@ -197,7 +251,7 @@ public class UI : MonoBehaviour
 
         public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
         public void ToggleNextLevel(bool toggle) { nextLevel.SetActive(toggle); }
-        public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}"; }
+        public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}s"; }
         public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
     }
 
@@ -267,11 +321,19 @@ public class UI : MonoBehaviour
     }
     private void ActionGoNextLevel(string _)
     {
+        var save = GameManager.save.game.levels.Find(level => level.levelID == LevelManager.Instance.currentLevel.nextLevel);
+
+        // Loads the level
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
-        TransitionManager.Instance.TransitionOut<string>(Triangle);
+
+        // Preload screen
+        TransitionManager.Instance.ChangeTransition(Triangle);
+        if (!LevelManager.Instance.currentLevel.hideUI) preload.PreparePreloadScreen(save);
+        else TransitionManager.Instance.TransitionOut<string>();
     }
+
     private void ActionGoMainMenu(string _)
     {
         LevelManager.Instance.ClearLevel();

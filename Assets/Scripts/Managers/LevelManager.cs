@@ -990,7 +990,12 @@ public class LevelManager : MonoBehaviour
     // Actions //
     public void ActionRemixCondition(string remixID)
     {
+        var save = GameManager.save.game.levels.Find(level => level.levelID == remixID);
         LoadLevel(remixID);
-        TransitionManager.Instance.TransitionOut<string>(Unknown);
+
+        // Preload screen
+        TransitionManager.Instance.ChangeTransition(Unknown);
+        if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
+        else TransitionManager.Instance.TransitionOut<string>();
     }
 }

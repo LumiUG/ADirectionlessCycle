@@ -170,10 +170,16 @@ public class Hub : MonoBehaviour
     // Actions //
     private void ActionLoadLevel(string name)
     {
+        var save = GameManager.save.game.levels.Find(level => level.levelID == name);
+
         // Loads the level
         LevelManager.Instance.LoadLevel(name);
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
-        UI.Instance.ChangeScene("Game", false);
+
+        // Preload screen
+        TransitionManager.Instance.ChangeTransition(Triangle);
+        if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
+        else TransitionManager.Instance.TransitionOut<string>();
     }
 }
