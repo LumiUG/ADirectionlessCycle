@@ -47,6 +47,7 @@ public class InputManager : MonoBehaviour
         // Next level / Load level intermission
         if (TransitionManager.Instance.inTransition && UI.Instance.preload.self.activeSelf && Input.anyKeyDown)
         {
+            UI.Instance.preload.animator.SetTrigger("Reset");
             UI.Instance.preload.Toggle(false);
             if (SceneManager.GetActiveScene().name != "Game") UI.Instance.ChangeScene("Game", false);
             else TransitionManager.Instance.TransitionOut<string>();

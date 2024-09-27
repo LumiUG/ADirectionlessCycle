@@ -46,7 +46,9 @@ public class UI : MonoBehaviour
         win.time = win.stats.Find("Win Time").GetComponent<Text>();
         win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
 
+        // Preload / intermissions
         preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
+        preload.animator = preload.self.transform.parent.GetComponent<Animator>();
         preload.levelName = preload.self.transform.Find("Level Name").gameObject.GetComponent<Text>();
         preload.stars = preload.self.transform.Find("Difficulty Stars").gameObject;
         preload.starFilledGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
@@ -199,6 +201,7 @@ public class UI : MonoBehaviour
 
     public class PreloadUI : UIObject
     {
+        public Animator animator;
         public Text levelName;
         public GameObject stars;
         public Sprite starFilledGraphic;
@@ -243,6 +246,7 @@ public class UI : MonoBehaviour
             if (save != null) { SetBestTime(save.stats.bestTime); SetBestMoves(save.stats.totalMoves); }
             else { SetBestTime(-1); SetBestMoves(-1); }
             Toggle(true);
+            animator.Play("Load");
         }
     }
 
