@@ -213,9 +213,12 @@ public class UI : MonoBehaviour
         {
             if (amount < 1) amount = 1;
             else if (amount > 9) amount = 9;
+            
+            // Get list of stars
+            List<Image> starList = new();
+            foreach (Transform child in stars.transform.Find("Stars")) { starList.Add(child.GetComponent<Image>()); }
 
             // Enable stars
-            List<Image> starList = stars.transform.Find("Stars").GetComponentsInChildren<Image>().ToList();
             starList.ForEach(s => s.sprite = starHollowGraphic);
             foreach (var star in starList)
             {
