@@ -147,7 +147,7 @@ public class UI : MonoBehaviour
     public void GoNextLevel()
     {
         if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel)) return;
-        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionGoNextLevel);
+        TransitionManager.Instance.TransitionIn<string>(Triangle, ActionGoNextLevel);
     }
 
     // Restart current level
@@ -270,7 +270,7 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
-        TransitionManager.Instance.TransitionOut<string>(Swipe);
+        TransitionManager.Instance.TransitionOut<string>(Triangle);
     }
     private void ActionGoMainMenu(string _)
     {

@@ -215,7 +215,7 @@ public class LevelManager : MonoBehaviour
         levelName = levelName.Trim();
 
         // Level id stuff
-        if (levelID == default) levelID = $"{Random.Range(1000000, 1000000000)}";
+        if (levelID == default) levelID = $"{levelName}-{Random.Range(1000000, 1000000000)}";
 
         // Create the level object
         SerializableLevel level = new() { levelName = levelName };
@@ -228,10 +228,11 @@ public class LevelManager : MonoBehaviour
         levelEffects.ForEach(tile => level.tiles.effectTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
         levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
-        // Freeroam & hideui
+        // Set some flags
         if (currentLevel != null) {
             level.freeroam = currentLevel.freeroam;
             level.hideUI = currentLevel.hideUI;
+            level.difficulty = currentLevel.difficulty;
         }
 
         // Add custom tile information

@@ -16,6 +16,7 @@ public class Serializables
         public string remixLevel = null;
         public bool hideUI = false;
         public bool freeroam = false;
+        public int difficulty = 1;
         public Tiles tiles = new();
     }
 

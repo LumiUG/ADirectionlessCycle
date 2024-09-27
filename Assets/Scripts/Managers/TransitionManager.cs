@@ -10,13 +10,14 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = false;
-    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Unknown };
+    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Triangle, Unknown };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
 
     private AnimatorOverrideController crossfade;
     private AnimatorOverrideController reveal;
     private AnimatorOverrideController swipe;
+    private AnimatorOverrideController triangle;
     private AnimatorOverrideController unknown;
 
     void Awake()
@@ -35,6 +36,7 @@ public class TransitionManager : MonoBehaviour
         crossfade = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Crossfade/Base");
         reveal = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Reveal/Base");
         swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
+        triangle = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Triangle/Base");
         unknown = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Unknown/Base");
 
         // Play default
@@ -57,6 +59,9 @@ public class TransitionManager : MonoBehaviour
                 break;
             case Transitions.Swipe:
                 animator.runtimeAnimatorController = swipe;
+                break;
+            case Transitions.Triangle:
+                animator.runtimeAnimatorController = triangle;
                 break;
             case Transitions.Unknown:
                 animator.runtimeAnimatorController = unknown;

@@ -79,19 +79,19 @@ public class DialogManager : MonoBehaviour
     // Changes dialog line to a next one or ends the conversation
     private void NextLine()
     {
+        // Executes a dialog event
+        foreach (DialogEvent ev in events)
+        {
+            if (ev.executeAtIndex == dialogIndex)
+            {
+                ev.textSpeedEvent.Run();
+                ev.setTileEvent.Run();
+            }
+        }
+
         // Goes to the next line of dialog
         if (dialogIndex < dialog.Length)
-        {
-            // Executes a dialog event
-            foreach (DialogEvent ev in events)
-            {
-                if (ev.executeAtIndex == dialogIndex)
-                {
-                    ev.textSpeedEvent.Run();
-                    ev.setTileEvent.Run();
-                }
-            }
-            
+        { 
             // Reads the line
             StartCoroutine(ReadLine());
             return;
