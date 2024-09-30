@@ -54,7 +54,7 @@ public class Selectors : MonoBehaviour
         if (tracking == EventSystem.current.currentSelectedGameObject) return;
 
         // Select SFX
-        if (!sceneLoaded) AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+        // if (!sceneLoaded) AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
 
         // Get the new reference
         tracking = EventSystem.current.currentSelectedGameObject;

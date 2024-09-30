@@ -22,6 +22,8 @@ public class LevelTile : CustomTile
         if (LevelManager.Instance.LoadLevel(customText))
         {
             if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
+            LevelManager.Instance.worldOffsetX = 0;
+            LevelManager.Instance.worldOffsetY = 0;
             LevelManager.Instance.StopMovements();
             LevelManager.Instance.ReloadLevel();
         }

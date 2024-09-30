@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -170,7 +169,13 @@ public class UI : MonoBehaviour
         TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestartLevel);
     } 
 
-    // Object classes
+    // UI confirm sound
+    public void ConfirmSound()
+    {
+        AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+    }
+
+    // Object classes //
     public abstract class UIObject
     {
         public GameObject self;

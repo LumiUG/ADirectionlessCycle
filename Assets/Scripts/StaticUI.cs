@@ -41,4 +41,10 @@ public class StaticUI : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+
+    // Play submit sound
+    public void StaticSubmitSound()
+    {
+        if (UI.Instance) UI.Instance.ConfirmSound();
+    }
 }
