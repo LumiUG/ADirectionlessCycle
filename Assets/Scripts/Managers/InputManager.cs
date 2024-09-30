@@ -150,7 +150,7 @@ public class InputManager : MonoBehaviour
     // Ping all areas
     private void OnPingAreas(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) return;
         LevelManager.Instance.PingAllAreas(ctx.Get<float>() == 1f);
     }
 
