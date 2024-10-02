@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
+using static GameTile;
 
 public class Hub : MonoBehaviour
 {
@@ -50,8 +51,9 @@ public class Hub : MonoBehaviour
                     if (completedLevelsCount[i] < 12) completedLevelsCount[i]++;
 
                     var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
-                    if (GameManager.save.game.mechanics.hasSeenRemix && RecursiveRemixCheck(levelAsData, levelCheck.levelID)) outline.GetComponent<Image>().color = remixColor;
-                    else if (GameManager.save.game.mechanics.hasSeenOutbound && !levelCheck.outboundCompletion && levelAsData.freeroam) outline.GetComponent<Image>().color = outboundColor;
+                    int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
+                    if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outline.GetComponent<Image>().color = remixColor;
+                    else if (GameManager.save.game.mechanics.hasSeenOutbound && displayCheck == 2) outline.GetComponent<Image>().color = outboundColor;
                 }
             }
 
@@ -148,23 +150,27 @@ public class Hub : MonoBehaviour
     }
 
     // bullshit basically
-    private bool RecursiveRemixCheck(SerializableLevel level, string levelID, bool isRemix = false)
+    private int RecursiveHubCheck(SerializableLevel level, string levelID, bool isRemix)
     {
-        if (level == null) return false;
+        if (level == null) return 0;
 
-        // stats
+        // Outerbound completion?
+        if (level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); }) && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == false; })) return 2;
+        
+        // Remix completion? (DOESNT have priority RN)
         GameData.Level statCheck = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         if (!isRemix) {
-            if (statCheck == null) return false;
-            if (!statCheck.completed) return false;
-            if (level.remixLevel == null) return false;
+            if (statCheck == null) return 0;
+            if (!statCheck.completed) return 0;
+            if (level.remixLevel == null) return 0;
         } else {
-            if (statCheck == null) return true;
-            if (!statCheck.completed) return true;
-            if (level.remixLevel == null) return false;
+            if (statCheck == null) return 1;
+            if (!statCheck.completed) return 1;
+            if (level.remixLevel == null) return 0;
         }
-        
-        return RecursiveRemixCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
+
+
+        return RecursiveHubCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
     }
 
     // Actions //
