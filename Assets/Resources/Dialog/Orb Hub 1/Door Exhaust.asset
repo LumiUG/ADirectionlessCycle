@@ -13,8 +13,28 @@ MonoBehaviour:
   m_Name: Door Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - hii
-  events: []
+  - '[You give it a slight nudge...]'
+  - ...
+  - '[You feel your surroundings shift]'
+  events:
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    setTileEvent:
+      enabled: 1
+      setAs: 0
+      position: {x: 13, y: -4, z: 0}
+      delete: 1
+    executeAtIndex: 2
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    setTileEvent:
+      enabled: 1
+      setAs: 0
+      position: {x: 13, y: -5, z: 0}
+      delete: 1
+    executeAtIndex: 2
   exhaustDialog: {fileID: 0}
   npcName: ???
   textSpeed: 0.05

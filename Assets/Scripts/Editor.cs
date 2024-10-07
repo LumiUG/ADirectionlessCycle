@@ -172,7 +172,7 @@ public class Editor : MonoBehaviour
         if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 
-    // Updates the selected tile's pushable
+    // Updates the selected tile's custom text
     public void UpdateCustomText(string text)
     {
         if (!editingTile) return;
@@ -185,6 +185,7 @@ public class Editor : MonoBehaviour
         if (existingRule != null) existingRule.text = text;
         else LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
         UI.Instance.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
+        customInputField.enabled = false;
     }
 
     // Updates the selected tile's pushable

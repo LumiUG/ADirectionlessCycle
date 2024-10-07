@@ -8,7 +8,7 @@ public abstract class GameTile : TileBase
     public GameObject tileObject;
 
     // Tile default properties //
-    public enum ObjectTypes { Wall, AntiWall, Box, Circle, Hexagon, Mimic, Area, InverseArea, OutboundArea, Hazard, Void, Invert, Arrow, NegativeArrow, Orb, Level, Fake, NPC }
+    public enum ObjectTypes { Wall, AntiWall, Box, Circle, Hexagon, Mimic, Area, InverseArea, OutboundArea, Hazard, Void, Invert, Arrow, NegativeArrow, Orb, Fragment, Level, Fake, NPC }
     public Vector3Int position = new();
     public Directions directions = new(true, true, true, true);
 

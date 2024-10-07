@@ -262,6 +262,11 @@ public class InputManager : MonoBehaviour
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.tileToPlace = LevelManager.Instance.orbTile;
     }
+    private void OnEditorSelectFragment() 
+    { 
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        Editor.I.tileToPlace = LevelManager.Instance.fragmentTile;
+    }
     private void OnEditorSelectLevel() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;

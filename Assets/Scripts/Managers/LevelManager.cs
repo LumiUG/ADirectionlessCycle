@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
-    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb };
+    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
     internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Fake };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile arrowTile;
     [HideInInspector] public GameTile negativeArrowTile;
     [HideInInspector] public GameTile orbTile;
+    [HideInInspector] public GameTile fragmentTile;
 
     // Grids and tilemaps //
     private Grid levelGrid;
@@ -117,6 +118,7 @@ public class LevelManager : MonoBehaviour
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
         orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
+        fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
         fakeTile = Resources.Load<FakeTile>("Tiles/Customs/Fake");
         npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
@@ -331,11 +333,9 @@ public class LevelManager : MonoBehaviour
     {
         if (level == null) return;
 
-        // Allow orb spawning in the level?
-        if (GameManager.save.game.collectedOrbs.Contains(currentLevelID))
-        {
-            level.effectTiles = level.effectTiles.FindAll(tile => { return tile.type != "Orb"; });
-        }
+        // Disallow fragment and orb spawning
+        if (GameManager.save.game.collectedOrbs.Contains(currentLevelID)) level.effectTiles = level.effectTiles.FindAll(tile => { return tile.type != "Orb"; });
+        if (GameManager.save.game.collectedFragments.Contains(currentLevelID)) level.effectTiles = level.effectTiles.FindAll(tile => { return tile.type != "Fragment"; });
 
         // Build the level
         level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
@@ -546,6 +546,7 @@ public class LevelManager : MonoBehaviour
             "Arrow" => Instantiate(arrowTile),
             "NegativeArrow" => Instantiate(negativeArrowTile),
             "Orb" => Instantiate(orbTile),
+            "Fragment" => Instantiate(fragmentTile),
             "Level" => Instantiate(levelTile),
             "Fake" => Instantiate(fakeTile),
             "NPC" => Instantiate(npcTile),
@@ -680,7 +681,7 @@ public class LevelManager : MonoBehaviour
         SetUIAreaCount();
 
         // Outbound win
-        if (outboundCondition)
+        if (outboundCondition && !DialogManager.Instance.inDialog)
         {
             // Level + savedata
             GameData.LevelChanges changes = new(false, true, -1, -1);
@@ -697,7 +698,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Load remix level!
-        if (remixCondition)
+        if (remixCondition && !DialogManager.Instance.inDialog)
         {
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
             TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
@@ -705,7 +706,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // If won, do the thing
-        if (winCondition)
+        if (winCondition && !DialogManager.Instance.inDialog)
         {
             // Level savedata
             GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);

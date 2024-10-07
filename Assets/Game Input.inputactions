@@ -114,6 +114,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSelectFragment",
+                    "type": "Button",
+                    "id": "fa7ce4e9-f695-43aa-acbe-4b555a06c01e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorSelectHazard",
                     "type": "Button",
                     "id": "cbf7925c-f619-482b-8411-1762f3a0aace",
@@ -994,11 +1003,22 @@
                 {
                     "name": "",
                     "id": "89d57f2a-6cce-419c-861f-40e6e43d5f90",
-                    "path": "<Keyboard>/o",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectOutboundArea",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "276dba8b-6890-414e-af5b-181fb5df3c55",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectFragment",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

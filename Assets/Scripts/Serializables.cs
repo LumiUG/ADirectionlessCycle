@@ -94,6 +94,7 @@ public class Serializables
     {
         public List<Level> levels = new();
         public List<string> collectedOrbs; // stored as level ID's
+        public List<string> collectedFragments; // stored as level ID's
         public List<string> exhaustedDialog;
         public Mechanics mechanics = new();
         public bool doPrologue = true;
