@@ -10,20 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Real Guardian
+  m_Name: Gummi
   m_EditorClassIdentifier: 
   dialog:
-  - Huh.
-  - Wasn't expecting... visitors.
-  - ... ... Just what are you?
-  - Some kind of... cube?
-  - No matter.
-  - Go ahead, but don't expect the others to be as nice about it.
-  - And, I would advise against touching the fire. Seriously.
+  - Hello, world.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: c4cb45599b9bbe445b224e8f498c937b, type: 2}
+  exhaustDialog: {fileID: 0}
   npcName: ???
-  textSpeed: 0.06
+  textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 1
+  shouldExhaust: 0
   canBeSkipped: 1

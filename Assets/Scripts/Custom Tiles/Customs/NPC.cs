@@ -3,7 +3,7 @@ using UnityEngine.Tilemaps;
 
 // !! NPC TILE USES CUSTOM TEXT SLICING !!
 // Example: "dialogScriptable;yourSprite;triggerOnEnter;ignoreOutboundInteracts"
-// Example: "Dialog/Debug;NPC/Gummi;1;0"
+// Example: "Debug;NPC/Gummi;1;0"
 // Custom Values: "yourSprite" can be set to "Invisible" (caps!)
 
 [CreateAssetMenu(menuName = "Game Tiles/Customs/NPC Tile")]

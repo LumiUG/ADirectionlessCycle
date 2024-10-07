@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Orb Interact
+  m_Name: Door
   m_EditorClassIdentifier: 
   dialog:
   - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: 1d506ff719dcbb540a72828d9cf2b765, type: 2}
   npcName: ???
   textSpeed: 0.05
   sfx: {fileID: 0}
