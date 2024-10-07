@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-// NPC TILE USES CUSTOM TEXT SLICING !!
+// !! NPC TILE USES CUSTOM TEXT SLICING !!
 // Example: "dialogScriptable;yourSprite;triggerOnEnter;ignoreOutboundInteracts"
 // Example: "Dialog/Debug;NPC/Gummi;1;0"
+// Custom Values: "yourSprite" can be set to "Invisible" (caps!)
 
 [CreateAssetMenu(menuName = "Game Tiles/Customs/NPC Tile")]
 public class NPCTile : CustomTile 
@@ -30,11 +31,11 @@ public class NPCTile : CustomTile
         // Outbound interaction (ignore?)
         if (tile == null && stringCheck[3] == "1") return;
 
-        // Checks if the dialog exists
+        // Checks if the dialog exists (too many load calls...)
         DialogScriptable dialogCheck = Resources.Load<DialogScriptable>($"Dialog/{stringCheck.GetValue(0)}");
         if (dialogCheck == null) return;
 
-        // Play the dialog (too many load calls...)
+        // Play the dialog 
         DialogManager.Instance.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
     }
 

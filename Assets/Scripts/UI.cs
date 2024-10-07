@@ -325,12 +325,14 @@ public class UI : MonoBehaviour
     }
     private void ActionGoLevelEditor(string _)
     {
-        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel();
+        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel(true, true);
         else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
         {
             // Create EditorSession if the file does not exist.
             LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
             LevelManager.Instance.LoadLevel("EditorSession", true);
+        } else {
+            LevelManager.Instance.ReloadLevel(true, true); // reload for custom sprites (very stupid!)
         }
 
         LevelManager.Instance.RefreshGameVars();

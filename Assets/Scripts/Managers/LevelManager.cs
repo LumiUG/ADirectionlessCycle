@@ -304,7 +304,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Load and build a level
-    public void ReloadLevel(bool silent = true)
+    public void ReloadLevel(bool silent = true, bool isLevelEditor = false)
     {
         if (currentLevel == null) return;
 
@@ -320,14 +320,14 @@ public class LevelManager : MonoBehaviour
         // Soft "loads" the new level (doesnt use LoadLevel)
         if (!silent) UI.Instance.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
-        BuildLevel(currentLevel.tiles);
+        BuildLevel(currentLevel.tiles, isLevelEditor);
 
         // UI!
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
     }
 
     // Builds the level
-    private void BuildLevel(Tiles level)
+    private void BuildLevel(Tiles level, bool editor = false)
     {
         if (level == null) return;
 
@@ -350,7 +350,7 @@ public class LevelManager : MonoBehaviour
         foreach (var tile in level.customTileInfo)
         {
             CustomTile realTile = tilemapCustoms.GetTile<CustomTile>(tile.position);
-            if (realTile) { realTile.customText = tile.text; SetCustomSprite(realTile, false); RefreshCustomTile(realTile); }
+            if (realTile) { realTile.customText = tile.text; SetCustomSprite(realTile, false, editor); RefreshCustomTile(realTile); }
             else customTileInfo.Remove(tile);
         }
     }
@@ -933,7 +933,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Updates a custom tile's sprite
-    internal void SetCustomSprite(CustomTile tile, bool refresh = true)
+    internal void SetCustomSprite(CustomTile tile, bool refresh = true, bool isLevelEditor = false)
     {
         if (!customSpriters.Contains(tile.GetTileType())) return;
 
@@ -958,7 +958,8 @@ public class LevelManager : MonoBehaviour
 
             // Checks if the sprite exists
             Sprite spriteCheck = Resources.Load<Sprite>($"Sprites/Tiles/{stringCheck}");
-            if (spriteCheck == null) return;
+            if (spriteCheck == null && stringCheck != "Invisible") return;
+            else if (isLevelEditor && stringCheck == "Invisible") return;
 
             // Sets the sprite and (optionally) refreshes the tile
             tile.tileSprite = spriteCheck;
