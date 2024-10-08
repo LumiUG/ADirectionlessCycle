@@ -63,21 +63,21 @@ public class InputManager : MonoBehaviour
         if (debugCommand == null) return;
 
         // Enable debug command
-        if (debugCommand == "debug")
-        {
-            if (!GameManager.Instance.buildDebugMode)
-            {
-                GameManager.Instance.buildDebugMode = true;
-                UI.Instance.global.SendMessage("...I hope you know what you're doing.", 3);
-            } else {
-                GameManager.Instance.buildDebugMode = false;
-                UI.Instance.global.SendMessage("Then so be it!", 3);
-            }
-            debugCommand = null;
-        }
+        // if (debugCommand == "debug")
+        // {
+        //     if (!GameManager.Instance.buildDebugMode)
+        //     {
+        //         GameManager.Instance.buildDebugMode = true;
+        //         UI.Instance.global.SendMessage("...I hope you know what you're doing.", 3);
+        //     } else {
+        //         GameManager.Instance.buildDebugMode = false;
+        //         UI.Instance.global.SendMessage("Then so be it!", 3);
+        //     }
+        //     debugCommand = null;
+        // }
 
         // Delete savedata and generate a new one
-        else if (debugCommand == "begone" && GameManager.Instance.buildDebugMode)
+        else if (debugCommand == "begone")
         {
             if (DebugConfirm()) return;
             GameManager.Instance.DeleteSave();

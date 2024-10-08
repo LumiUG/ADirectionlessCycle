@@ -16,8 +16,8 @@ public class Hub : MonoBehaviour
     public Checker checker;
     public Text levelName;
 
-    private readonly int[] positions = { 0, -1920, -3840, -5760 };
-    private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
+    private readonly int[] positions = { 0, -1920 };
+    private readonly List<int> completedLevelsCount = new() { 2, 1 };
     private Color remixColor;
     private Color outboundColor;
     private GameObject lastSelectedlevel = null;
@@ -59,11 +59,9 @@ public class Hub : MonoBehaviour
 
             // Progress locking
             if (completedLevelsCount[0] < 12) {
-                if (!GameManager.Instance.IsDebug()) { hubArrows[0].SetActive(false); hubArrows[1].SetActive(false); }
+                // if (!GameManager.Instance.IsDebug()) { hubArrows[0].SetActive(false); hubArrows[1].SetActive(false); }
                 completedLevelsCount[1] = 0;
-                completedLevelsCount[2] = 0;
             }
-            else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
 
             // Sorry! We are looping again for available levels using the completed count!
             for (int j = 0; j < completedLevelsCount[i]; j++)
@@ -143,8 +141,9 @@ public class Hub : MonoBehaviour
     {
         if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
 
-        if (GameManager.Instance.IsDebug()) return false;
+        // if (GameManager.Instance.IsDebug()) return false;
 
+        if (fullLevelID.Contains("REMIX")) return false;
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
         return completedLevelsCount[int.Parse(levelSplit[0]) - 1] < int.Parse(levelSplit[1]);
     }

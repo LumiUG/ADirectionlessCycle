@@ -110,7 +110,7 @@ public class UI : MonoBehaviour
     // Go from a level to the editor
     public void GoLevelEditor()
     {
-        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
+        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Not available in DEMO!"); return; }
 
         // Transition in
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);

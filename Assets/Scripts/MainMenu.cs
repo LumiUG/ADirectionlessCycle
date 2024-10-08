@@ -15,8 +15,8 @@ public class MainMenu : MonoBehaviour
     // 
     public void Play()
     {
-        if (GameManager.save.game.doPrologue) TransitionManager.Instance.TransitionIn<string>(Reveal, ActionPrologue);
-        else UI.Instance.ChangeScene("Hub");
+        // if (GameManager.save.game.doPrologue) TransitionManager.Instance.TransitionIn<string>(Reveal, ActionPrologue);
+        UI.Instance.ChangeScene("Hub");
     }
 
     // Actions //
