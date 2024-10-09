@@ -107,10 +107,10 @@ public class UI : MonoBehaviour
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoMainMenu);
     }
 
-    // Go from a level to the editor
+    // Go from a level to the editord
     public void GoLevelEditor()
     {
-        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Not available in DEMO!"); return; }
+        // if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Not available in DEMO!"); return; }
 
         // Transition in
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);
