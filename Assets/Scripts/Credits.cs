@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Credits : MonoBehaviour
 {
     private RectTransform rt;
 
-    void Start() { rt = transform.Find("Holder").GetComponent<RectTransform>(); }
+    void Start() { rt = transform.Find("Holder").GetComponent<RectTransform>(); EventSystem.current.SetSelectedGameObject(transform.Find("Back Button").gameObject); }
 
     // void Update()
     // {

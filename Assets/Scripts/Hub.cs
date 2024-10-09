@@ -9,15 +9,14 @@ using static GameTile;
 public class Hub : MonoBehaviour
 {
     public List<GameObject> worldHolders = new(capacity: 3);
-    public List<GameObject> hubArrows = new(capacity: 2);
     public GameObject worldHolder;
     public RectTransform outlineHolder;
     public GameObject backButton;
     public Checker checker;
     public Text levelName;
 
-    private readonly int[] positions = { 0, -1920 };
-    private readonly List<int> completedLevelsCount = new() { 2, 1 };
+    private readonly int[] positions = { 0 };
+    private readonly List<int> completedLevelsCount = new() { 2 };
     private Color remixColor;
     private Color outboundColor;
     private GameObject lastSelectedlevel = null;
@@ -55,12 +54,6 @@ public class Hub : MonoBehaviour
                     if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outline.GetComponent<Image>().color = remixColor;
                     else if (GameManager.save.game.mechanics.hasSeenOutbound && displayCheck == 2) outline.GetComponent<Image>().color = outboundColor;
                 }
-            }
-
-            // Progress locking
-            if (completedLevelsCount[0] < 12) {
-                // if (!GameManager.Instance.IsDebug()) { hubArrows[0].SetActive(false); hubArrows[1].SetActive(false); }
-                completedLevelsCount[1] = 0;
             }
 
             // Sorry! We are looping again for available levels using the completed count!
