@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a8ba7928485d534db62a7a90d474fc7, type: 3}
-  m_Name: Fake
+  m_Name: Hologram
   m_EditorClassIdentifier: 
-  tileSprite: {fileID: 21300000, guid: d3069aedaa9e6e24cbcd253200fe1e6c, type: 3}
+  tileSprite: {fileID: 21300000, guid: 82c186294678ad54f8dc6e06900c7674, type: 3}
   tileObject: {fileID: 0}
   position: {x: 0, y: 0, z: 0}
   directions:

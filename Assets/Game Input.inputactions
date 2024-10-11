@@ -276,7 +276,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PingAreas",
+                    "name": "ShowOverlaps",
                     "type": "PassThrough",
                     "id": "ae657d9c-7f9d-4092-83f8-72b47bf62d3f",
                     "expectedControlType": "Button",
@@ -347,7 +347,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "PingAreas",
+                    "action": "ShowOverlaps",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -358,7 +358,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "PingAreas",
+                    "action": "ShowOverlaps",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

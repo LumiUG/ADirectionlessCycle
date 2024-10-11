@@ -772,7 +772,7 @@ RectTransform:
   - {fileID: 9132593173276482240}
   - {fileID: 4523052417627996361}
   - {fileID: 6075559851214704521}
-  m_Father: {fileID: 1344255748845671565}
+  m_Father: {fileID: 3273298960951477495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -925,7 +925,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1995329164816885897}
-  - {fileID: 1906287628566013288}
   - {fileID: 1553019122098860605}
   - {fileID: 5267326235946499022}
   - {fileID: 8803854708499214254}
@@ -3789,7 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5b43e8e6be5aa4cbda53d694ac1db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoaded: 0
+  instant: 0
 --- !u!1 &6491550581650929351
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,6 +4794,7 @@ RectTransform:
   - {fileID: 1344255748845671565}
   - {fileID: 524105424205426072}
   - {fileID: 1682446373347656285}
+  - {fileID: 1906287628566013288}
   - {fileID: 3402723409033842556}
   - {fileID: 2982701881522820701}
   - {fileID: 9182797148834716965}

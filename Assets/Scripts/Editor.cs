@@ -185,7 +185,7 @@ public class Editor : MonoBehaviour
         if (existingRule != null) existingRule.text = text;
         else LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
         UI.Instance.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
-        customInputField.enabled = false;
+        customInputField.interactable = false;
     }
 
     // Updates the selected tile's pushable

@@ -20,8 +20,8 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
-    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Fake, ObjectTypes.NPC };
-    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Fake };
+    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Hologram, ObjectTypes.NPC, ObjectTypes.Fake };
+    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Hologram, ObjectTypes.Fake };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile inverseAreaTile;
     [HideInInspector] public GameTile outboundAreaTile;
     [HideInInspector] public GameTile levelTile;
-    [HideInInspector] public GameTile fakeTile;
+    [HideInInspector] public GameTile hologramTile;
     [HideInInspector] public GameTile npcTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile voidTile;
@@ -56,6 +56,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapLetterbox;
     [HideInInspector] public Tilemap extrasOutlines;
     private TilemapRenderer areaRenderer;
+    private TilemapRenderer objectRenderer;
+    private TilemapRenderer effectRenderer;
     internal Vector3 originalPosition;
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
@@ -79,7 +81,9 @@ public class LevelManager : MonoBehaviour
     private readonly List<(int, int)> roomSequence = new(capacity: 100); // 100 undo capacity (for now)
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
-    private int defaultOverlapLayer;
+    private int defaultAreaLayer;
+    private int defaultObjectsLayer;
+    private int defaultEffectsLayer;
     private Checker background;
 
     // Player //
@@ -120,11 +124,13 @@ public class LevelManager : MonoBehaviour
         orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
         fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
-        fakeTile = Resources.Load<FakeTile>("Tiles/Customs/Fake");
+        hologramTile = Resources.Load<HologramTile>("Tiles/Customs/Hologram");
         npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
 
         // Defaults
-        defaultOverlapLayer = areaRenderer.sortingOrder;
+        defaultAreaLayer = areaRenderer.sortingOrder;
+        defaultObjectsLayer = objectRenderer.sortingOrder;
+        defaultEffectsLayer = effectRenderer.sortingOrder;
         hasWon = false;
 
         // Editor (with file persistence per session)
@@ -153,6 +159,8 @@ public class LevelManager : MonoBehaviour
         extrasOutlines = extraObject != null ? extraObject.Find("Outlines").GetComponent<Tilemap>() : null;
 
         areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
+        objectRenderer = tilemapObjects.GetComponent<TilemapRenderer>();
+        effectRenderer = tilemapEffects.GetComponent<TilemapRenderer>();
         originalPosition = new Vector3(tilemapObjects.transform.position.x, tilemapObjects.transform.position.y, tilemapObjects.transform.position.z);
     }
 
@@ -548,7 +556,8 @@ public class LevelManager : MonoBehaviour
             "Orb" => Instantiate(orbTile),
             "Fragment" => Instantiate(fragmentTile),
             "Level" => Instantiate(levelTile),
-            "Fake" => Instantiate(fakeTile),
+            "Hologram" => Instantiate(hologramTile),
+            "Fake" => Instantiate(hologramTile), // Hologram tile demo support
             "NPC" => Instantiate(npcTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
@@ -724,7 +733,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if currently in editor
-    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.ingame.confirmRestart.activeSelf); }
+    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf); }
 
     // Is string empty or null
     public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
@@ -862,19 +871,19 @@ public class LevelManager : MonoBehaviour
     }
 
     // Pings all areas
-    internal void PingAllAreas(bool status)
+    internal void ShowOverlaps(bool status)
     {
-        if (status) areaRenderer.sortingOrder = 5;
-        else areaRenderer.sortingOrder = defaultOverlapLayer;
-
-        // foreach (GameTile area in levelWinAreas)
-        // {
-        //     if (status) tilemapWinAreas.GetTile<AreaTile>(area.position).Ping();
-        //     else {
-        //         GameManager.Instance.drawOver.sprite = null;
-        //         RefreshAreaTile(area);
-        //     }
-        // }
+        if (status)
+        {
+            areaRenderer.sortingOrder = 5;
+            effectRenderer.sortingOrder = 4;
+            objectRenderer.sortingOrder = 3;
+        } else
+        {
+            areaRenderer.sortingOrder = defaultAreaLayer;
+            effectRenderer.sortingOrder = defaultEffectsLayer;
+            objectRenderer.sortingOrder = defaultObjectsLayer;
+        }
     }
 
     // Adds an undo frame to the sequence (lord help me)
@@ -950,6 +959,7 @@ public class LevelManager : MonoBehaviour
                     stringCheck = (string)tile.customText.Split(";").GetValue(1);
                     break;
                 
+                case ObjectTypes.Hologram:
                 case ObjectTypes.Fake:
                     stringCheck = tile.customText;
                     break;

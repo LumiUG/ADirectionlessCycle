@@ -148,10 +148,10 @@ public class InputManager : MonoBehaviour
     }
 
     // Ping all areas
-    private void OnPingAreas(InputValue ctx)
+    private void OnShowOverlaps(InputValue ctx)
     {
         if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) return;
-        LevelManager.Instance.PingAllAreas(ctx.Get<float>() == 1f);
+        LevelManager.Instance.ShowOverlaps(ctx.Get<float>() == 1f);
     }
 
     // Restart the level
@@ -163,7 +163,7 @@ public class InputManager : MonoBehaviour
         if (GameManager.save.preferences.forceConfirmRestart)
         {
             // UI.Instance.selectors.instant = true;
-            UI.Instance.ingame.ToggleConfirmRestart(true);
+            UI.Instance.restart.Toggle(true);
             return;
         }
 
@@ -192,7 +192,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.ingame.confirmRestart.activeSelf) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf) return;
         if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
         else LevelManager.Instance.PauseResumeGame(false);
     }
@@ -283,7 +283,7 @@ public class InputManager : MonoBehaviour
     private void OnEditorSelectFake() 
     { 
         if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.fakeTile; 
+        Editor.I.tileToPlace = LevelManager.Instance.hologramTile; 
     }
     private void OnEditorSelectNPC() 
     { 

@@ -15,6 +15,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public PauseUI pause;
     [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
+    [HideInInspector] public ConfirmRestartUI restart;
     [HideInInspector] public DialogUI dialog;
     [HideInInspector] public Selectors selectors;
 
@@ -66,13 +67,15 @@ public class UI : MonoBehaviour
 
         // Ingame UI
         ingame = new() { self = transform.Find("Ingame UI").gameObject };
-        ingame.confirmRestart = ingame.self.transform.Find("Confirm Restart").gameObject;
-        ingame.restartButton = ingame.confirmRestart.transform.Find("Restart").GetComponent<Button>();
         ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
         ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
         ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
         
+        // Restart UI
+        restart = new() { self = transform.Find("Confirm Restart").gameObject };
+        restart.restartButton = restart.self.transform.Find("Restart").GetComponent<Button>();
+
         // Dialog UI
         dialog = new() { self = transform.Find("Dialog UI").gameObject };
         dialog.name = dialog.self.transform.Find("Name").GetComponent<Text>();
@@ -174,7 +177,7 @@ public class UI : MonoBehaviour
     }
 
     // Remove restart screen
-    public void CloseConfirmRestart() { ingame.ToggleConfirmRestart(false); }
+    public void CloseConfirmRestart() { restart.Toggle(false); }
 
     // UI confirm sound
     public void ConfirmSound()
@@ -187,7 +190,7 @@ public class UI : MonoBehaviour
     {
         public GameObject self;
 
-        public void Toggle(bool status) { if (self) self.SetActive(status); }
+        public virtual void Toggle(bool status) { if (self) self.SetActive(status); }
     }
 
     public class GlobalUI : UIObject
@@ -295,17 +298,10 @@ public class UI : MonoBehaviour
 
     public class IngameUI : UIObject
     {
-        public GameObject confirmRestart;
-        public Button restartButton;
         public Text levelName;
         public Text levelMoves;
         public Text levelTimer;
         public Text areaCount;
-        public void ToggleConfirmRestart(bool toggle)
-        {
-            confirmRestart.SetActive(toggle);
-            if (toggle) EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
-        }
         public void SetLevelName(string newName) { levelName.text = $"{newName}"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }
@@ -317,6 +313,16 @@ public class UI : MonoBehaviour
 
             // Update text
             areaCount.text = $"{current}/{max}";
+        }
+    }
+
+    public class ConfirmRestartUI : UIObject
+    {
+        public Button restartButton;
+        public override void Toggle(bool toggle)
+        {
+            self.SetActive(toggle);
+            if (toggle) EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
         }
     }
 

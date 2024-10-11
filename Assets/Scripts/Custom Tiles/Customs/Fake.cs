@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(menuName = "Game Tiles/Customs/Fake Tile")]
-public class FakeTile : CustomTile
+[CreateAssetMenu(menuName = "Game Tiles/Customs/Hologram Tile")]
+public class HologramTile : CustomTile
 {
     // Returns the tile type
-    public override ObjectTypes GetTileType() { return ObjectTypes.Fake; }
+    public override ObjectTypes GetTileType() { return ObjectTypes.Hologram; }
 
     // Checks colisions between collideables and objects
     public override Vector3Int CollisionHandler(Vector3Int checkPosition, Vector3Int direction, Tilemap tilemapObjects, Tilemap tilemapCollideable, bool beingPushed = false)
