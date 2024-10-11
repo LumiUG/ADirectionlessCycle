@@ -163,5 +163,6 @@ public class Serializables
         public float masterVolume = 1f;
         public float SFXVolume = 0.8f;
         public bool repeatInput = true;
+        public bool forceConfirmRestart = true;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TransitionManager.Transitions;
@@ -65,6 +66,8 @@ public class UI : MonoBehaviour
 
         // Ingame UI
         ingame = new() { self = transform.Find("Ingame UI").gameObject };
+        ingame.confirmRestart = ingame.self.transform.Find("Confirm Restart").gameObject;
+        ingame.restartButton = ingame.confirmRestart.transform.Find("Restart").GetComponent<Button>();
         ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
         ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
@@ -163,11 +166,15 @@ public class UI : MonoBehaviour
     }
 
     // Restart current level
-    public void RestartLevel()
+    public void RestartLevel(bool restartScreen = false)
     {
         if (LevelManager.Instance.currentLevel == null) return;
+        if (restartScreen) CloseConfirmRestart();
         TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestartLevel);
-    } 
+    }
+
+    // Remove restart screen
+    public void CloseConfirmRestart() { ingame.ToggleConfirmRestart(false); }
 
     // UI confirm sound
     public void ConfirmSound()
@@ -288,10 +295,17 @@ public class UI : MonoBehaviour
 
     public class IngameUI : UIObject
     {
+        public GameObject confirmRestart;
+        public Button restartButton;
         public Text levelName;
         public Text levelMoves;
         public Text levelTimer;
         public Text areaCount;
+        public void ToggleConfirmRestart(bool toggle)
+        {
+            confirmRestart.SetActive(toggle);
+            if (toggle) EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
+        }
         public void SetLevelName(string newName) { levelName.text = $"{newName}"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }

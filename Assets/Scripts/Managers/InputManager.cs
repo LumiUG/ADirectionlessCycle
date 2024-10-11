@@ -159,6 +159,14 @@ public class InputManager : MonoBehaviour
     {
         if (!LevelManager.Instance.IsAllowedToPlay()) return;
 
+        // Confirm restart screen
+        if (GameManager.save.preferences.forceConfirmRestart)
+        {
+            // UI.Instance.selectors.instant = true;
+            UI.Instance.ingame.ToggleConfirmRestart(true);
+            return;
+        }
+
         // Transition in and out while restarting the level
         TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestart);
     }
@@ -184,7 +192,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.ingame.confirmRestart.activeSelf) return;
         if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
         else LevelManager.Instance.PauseResumeGame(false);
     }

@@ -10,6 +10,7 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionDropdown;
     public Toggle settingsToggle;
     public Toggle repeatInputToggle;
+    public Toggle restartToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
 
@@ -37,6 +38,7 @@ public class SettingsMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(resolutionDropdown.gameObject);
         settingsToggle.isOn = Screen.fullScreen;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
+        restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
 
         masterSlider.value = GameManager.save.preferences.masterVolume;
         SFXSlider.value = GameManager.save.preferences.SFXVolume;
@@ -64,9 +66,15 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreen = toggle;
     }
 
-        // Toggle input repeating
+    // Toggle input repeating
     public void ToggleRepeatingInput(bool toggle)
     {
         GameManager.save.preferences.repeatInput = toggle;
+    }
+
+    // Toggle input repeating
+    public void ToggleConfirmRestart(bool toggle)
+    {
+        GameManager.save.preferences.forceConfirmRestart = toggle;
     }
 }

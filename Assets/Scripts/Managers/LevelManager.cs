@@ -724,7 +724,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if currently in editor
-    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition); }
+    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.ingame.confirmRestart.activeSelf); }
 
     // Is string empty or null
     public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
@@ -822,7 +822,7 @@ public class LevelManager : MonoBehaviour
         {
             UI.Instance.selectors.right.SetParent(UI.Instance.selectors.gameObject.transform);
             UI.Instance.selectors.left.SetParent(UI.Instance.selectors.gameObject.transform);
-            UI.Instance.selectors.sceneLoaded = true;
+            UI.Instance.selectors.instant = true;
         }
 
         if (GameManager.Instance.noGameplayScenes.Contains(scene.name))

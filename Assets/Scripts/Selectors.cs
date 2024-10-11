@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Selectors : MonoBehaviour
 {
-    [HideInInspector] public bool sceneLoaded; 
+    [HideInInspector] public bool instant; 
     internal RectTransform left;
     internal RectTransform right;
     internal Image leftImage;
@@ -20,7 +20,7 @@ public class Selectors : MonoBehaviour
     {
         if (UI.Instance) UI.Instance.selectors = this;
         GetSelectors();
-        sceneLoaded = false;
+        instant = false;
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class Selectors : MonoBehaviour
         {
             Instantiate(Resources.Load("Prefabs/Selectors/Left"), transform).name = "Left";
             Instantiate(Resources.Load("Prefabs/Selectors/Right"), transform).name = "Right";
-            sceneLoaded = true; // using this so it automatically sets to its destination
+            instant = true; // using this so it automatically sets to its destination
             GetSelectors();
         }
 
@@ -54,7 +54,7 @@ public class Selectors : MonoBehaviour
         if (tracking == EventSystem.current.currentSelectedGameObject) return;
 
         // Select SFX
-        // if (!sceneLoaded) AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+        // if (!instant) AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
 
         // Get the new reference
         tracking = EventSystem.current.currentSelectedGameObject;
@@ -62,8 +62,8 @@ public class Selectors : MonoBehaviour
         stopMoving = false;
 
         // Move the selectors to the currently selected UI object
-        SetSelector(trackRT, sceneLoaded);
-        sceneLoaded = false;
+        SetSelector(trackRT, instant);
+        instant = false;
     }
 
     // Sets the selector to a RectTransform object
