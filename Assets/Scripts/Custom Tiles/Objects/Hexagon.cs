@@ -12,7 +12,7 @@ public class HexagonTile : GameTile
     {
         // Move double, check inbounds
         checkPosition += !beingPushed ? direction : Vector3Int.zero;
-        if (!LevelManager.Instance.CheckSceneInbounds(checkPosition, true)) return Vector3Int.back;
+        if (!LevelManager.Instance.CheckSceneInbounds(checkPosition, true, beingPushed)) return Vector3Int.back;
 
         // Get the collissions
         GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);

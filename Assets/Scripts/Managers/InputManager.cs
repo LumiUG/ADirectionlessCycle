@@ -150,7 +150,7 @@ public class InputManager : MonoBehaviour
     // Ping all areas
     private void OnShowOverlaps(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) { LevelManager.Instance.ShowOverlaps(false); return; }
         LevelManager.Instance.ShowOverlaps(ctx.Get<float>() == 1f);
     }
 

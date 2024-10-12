@@ -426,6 +426,7 @@ public class LevelManager : MonoBehaviour
         {
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
+            // TODO: noMove = true; (Freeze object tiles from the new room, except ones coming from old room)
             if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; }
             else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; }
             else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; }
@@ -570,10 +571,10 @@ public class LevelManager : MonoBehaviour
     }
 
     // Returns if a position is inside or outside the level bounds
-    public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false)
+    public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false, bool hexPushed = false)
     {
         if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
-        if (currentLevel.freeroam && hexSpecial) return true;
+        if (currentLevel.freeroam && hexSpecial && !hexPushed) return !(position.x < 0 - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
         if (currentLevel.freeroam && currentLevel.hideUI) return true;
         return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
     }
