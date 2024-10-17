@@ -574,7 +574,7 @@ public class LevelManager : MonoBehaviour
     public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false, bool hexPushed = false)
     {
         if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
-        if (currentLevel.freeroam && hexSpecial && !hexPushed) return !(position.x < 0 - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
+        if (currentLevel.freeroam && hexSpecial && !hexPushed) return !(position.x < 0 + worldOffsetX - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
         if (currentLevel.freeroam && currentLevel.hideUI) return true;
         return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
     }
