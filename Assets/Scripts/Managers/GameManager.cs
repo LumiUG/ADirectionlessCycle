@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using Unity.VisualScripting;
 using static Serializables;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,12 +14,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isEditing;
     [HideInInspector] public bool buildDebugMode;
     public static Savedata save;
-    public static string customLevelsPreviewsPath;
     public static string customLevelPath;
     private string dataPath;
 
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Mechanics", "Settings", "Hub" };
-    internal readonly string[] noGameplayScenes = { "Main Menu", "Mechanics", "Settings", "Hub" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Hub" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Hub" };
 
     void Awake()
     {
@@ -32,12 +32,10 @@ public class GameManager : MonoBehaviour
 
         // Create a savefile if none exist
         customLevelPath = $"{Application.persistentDataPath}/Custom Levels";
-        customLevelsPreviewsPath = $"{customLevelPath}/Preview Images";
         CreateSave();
 
         // Create custom levels directory
         if (!Directory.Exists(customLevelPath)) Directory.CreateDirectory(customLevelPath);
-        if (!Directory.Exists(customLevelsPreviewsPath)) Directory.CreateDirectory(customLevelsPreviewsPath);
 
         // Load the savefile
         LoadDataJSON();
@@ -123,5 +121,39 @@ public class GameManager : MonoBehaviour
         if (!level.outboundCompletion) level.outboundCompletion = changes.outbound;
         if (changes.time != -1) level.stats.bestTime = (compareBest && (changes.time < level.stats.bestTime || level.stats.bestTime == 0f)) ? changes.time : level.stats.bestTime;
         if (changes.moves != -1) level.stats.totalMoves = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
+    }
+
+    // Saves a level preview when exporting from the editor
+    internal byte[] SaveLevelPreview(string name)
+    {
+        if (SceneManager.GetActiveScene().name != "Level Editor") return null;
+        RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");
+
+        // Clear editor area
+        UI.Instance.editor.Toggle(false);
+        // GameTile yoink = Editor.I.tileToPlace;
+        // Editor.I.tileToPlace = null;
+
+        // Convert to Texture2D
+        Texture2D tex = new(1920, 1080, TextureFormat.RGB24, false, true);
+        RenderTexture.active = texture;
+        tex.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
+        tex.Apply();
+
+        // Re-enable editor stuff
+        UI.Instance.editor.Toggle(true);
+        // Editor.I.tileToPlace = yoink;
+
+        // Encode and return
+        return tex.EncodeToPNG(); 
+    }
+    
+    // Converts a base 64 string to a texture
+    public Texture2D Base64ToTexture(string image)
+    {
+        Texture2D texture = new(1920, 1080);
+        byte[] bytes = Convert.FromBase64String(image);
+        ImageConversion.LoadImage(texture, bytes);
+        return texture;
     }
 }

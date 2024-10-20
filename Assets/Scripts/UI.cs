@@ -141,7 +141,12 @@ public class UI : MonoBehaviour
     public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName, true, false); }
 
     // Export level
-    public void LevelEditorExportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.SaveLevel(levelName, default, false); }
+    public void LevelEditorExportLevel(string levelName)
+    {
+        if (!LevelManager.Instance) return;
+
+        LevelManager.Instance.SaveLevel(levelName, default, false, GameManager.Instance.SaveLevelPreview(levelName));
+    }
 
     // Playtest level
     public void LevelEditorPlaytest()

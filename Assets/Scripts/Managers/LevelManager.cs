@@ -219,7 +219,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Saves a level to the game's persistent path
-    public void SaveLevel(string levelName, string levelID = default, bool silent = true)
+    public void SaveLevel(string levelName, string levelID = default, bool silent = true, byte[] previewImage = null)
     {
         if (IsStringEmptyOrNull(levelName)) return;
         levelName = levelName.Trim();
@@ -240,9 +240,13 @@ public class LevelManager : MonoBehaviour
 
         // Set some flags
         if (currentLevel != null) {
+            if (previewImage != null) level.previewImage = Convert.ToBase64String(previewImage);
+            else level.previewImage = null;
+            level.nextLevel = currentLevel.nextLevel;
+            level.remixLevel = currentLevel.remixLevel;
+            level.difficulty = currentLevel.difficulty;
             level.freeroam = currentLevel.freeroam;
             level.hideUI = currentLevel.hideUI;
-            level.difficulty = currentLevel.difficulty;
         }
 
         // Add custom tile information
@@ -255,6 +259,9 @@ public class LevelManager : MonoBehaviour
         // Save the level locally
         string levelPath = $"{Application.persistentDataPath}/Custom Levels/{levelID}.level";
         File.WriteAllText(levelPath, JsonUtility.ToJson(level, false));
+        // byte[] levelAsBytes = System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(level, false));
+        // File.WriteAllText(levelPath, Convert.ToBase64String(levelAsBytes));
+
         if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\".", 4.0f);
     }
 
@@ -737,7 +744,7 @@ public class LevelManager : MonoBehaviour
     public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf); }
 
     // Is string empty or null
-    public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty; }
+    public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty || str == ""; }
 
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external, bool silent = false)
@@ -755,6 +762,9 @@ public class LevelManager : MonoBehaviour
         // Invalid level!
         if (level == null) { if (!silent) UI.Instance.global.SendMessage($"Invalid level! ({levelID})", 2.5f); return null; }
 
+        // Gets the level as readable data
+        // byte[] levelAsBytes = Convert.FromBase64String(level);
+        // level = System.Text.Encoding.UTF8.GetString(levelAsBytes);
         return JsonUtility.FromJson<SerializableLevel>(level);
     }
 

@@ -492,30 +492,6 @@ public class InputManager : MonoBehaviour
         if (!canInputCommands) debugCommand = null;
     }
 
-    // Make a screenshot
-    private void OnDebugScreenshot()
-    {
-        if (SceneManager.GetActiveScene().name != "Level Editor") return;
-        RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");
-
-        // Clear editor area
-        // GameTile yoink = Editor.I.tileToPlace;
-        // Editor.I.tileToPlace = null;
-
-        // Convert to Texture2D
-        Texture2D tex = new(1920, 1080, TextureFormat.RGB24, false, true);
-        RenderTexture.active = texture;
-        tex.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
-        tex.Apply();
-
-        // Re-enable editor stuff
-        // Editor.I.tileToPlace = yoink;
-
-        // Save to disk
-        byte[] bytes = tex.EncodeToPNG();
-        System.IO.File.WriteAllBytes($"{GameManager.customLevelsPreviewsPath}/test.png", bytes);
-    }
-
     // Confirm a command
     private bool DebugConfirm()
     {

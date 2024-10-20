@@ -14,6 +14,7 @@ public class Serializables
         public string levelName;
         public string nextLevel = null;
         public string remixLevel = null;
+        public string previewImage = null;
         public bool hideUI = false;
         public bool freeroam = false;
         public int difficulty = 1;
