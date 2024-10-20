@@ -12,9 +12,9 @@ public class Editor : MonoBehaviour
     [HideInInspector] public static Editor I;
     [HideInInspector] public bool ignoreUpdateEvent = false;
     private Tilemap editorTilemap;
-    private SpriteRenderer tilemapRenderer;
     private Sprite directionSprite;
     private Sprite deletionSprite;
+    internal SpriteRenderer spriteRenderer;
     internal Coroutine multiClick = null;
     internal bool isPlacing = true;
     internal GameTile editingTile = null;
@@ -34,7 +34,7 @@ public class Editor : MonoBehaviour
     {
         I = this; // No persistence!
         editorTilemap = GameObject.Find("Editor Tilemap").GetComponent<Tilemap>();
-        tilemapRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
+        spriteRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
         directionSprite = Resources.Load<Sprite>("Sprites/Direction");
         deletionSprite = Resources.Load<Sprite>("Sprites/Non Pushable");
 
@@ -64,15 +64,15 @@ public class Editor : MonoBehaviour
         else previewImage.sprite = tileToPlace.tileSprite;
 
         // Preview sprite (on tilemap)
-        if (isPlacing) tilemapRenderer.sprite = previewImage.sprite;
-        else tilemapRenderer.sprite = deletionSprite;
+        if (isPlacing) spriteRenderer.sprite = previewImage.sprite;
+        else spriteRenderer.sprite = deletionSprite;
 
         // Move mouse selector (on tilemap)
         Vector3Int mousePos = GetMousePositionOnGrid();
         if (mousePos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
 
         mousePos -= new Vector3Int(LevelManager.Instance.worldOffsetX, LevelManager.Instance.worldOffsetY);
-        tilemapRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
+        spriteRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
     }
 
     // Returns the mouse position on the playable grid

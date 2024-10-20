@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isEditing;
     [HideInInspector] public bool buildDebugMode;
     public static Savedata save;
+    public static string customLevelsPreviewsPath;
+    public static string customLevelPath;
     private string dataPath;
 
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Mechanics", "Settings", "Hub" };
@@ -29,11 +31,13 @@ public class GameManager : MonoBehaviour
         dataPath = $"{Application.persistentDataPath}/userdata.save";
 
         // Create a savefile if none exist
-        string levelDir = $"{Application.persistentDataPath}/Custom Levels";
+        customLevelPath = $"{Application.persistentDataPath}/Custom Levels";
+        customLevelsPreviewsPath = $"{customLevelPath}/Preview Images";
         CreateSave();
 
         // Create custom levels directory
-        if (!Directory.Exists(levelDir)) Directory.CreateDirectory(levelDir);
+        if (!Directory.Exists(customLevelPath)) Directory.CreateDirectory(customLevelPath);
+        if (!Directory.Exists(customLevelsPreviewsPath)) Directory.CreateDirectory(customLevelsPreviewsPath);
 
         // Load the savefile
         LoadDataJSON();

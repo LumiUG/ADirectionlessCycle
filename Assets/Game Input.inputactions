@@ -337,6 +337,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugScreenshot",
+                    "type": "Button",
+                    "id": "0ceabd9d-cc6c-4c86-81ee-efa534c133a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1019,6 +1028,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSelectFragment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e172f0d1-c482-4ff2-8916-60d61435a166",
+                    "path": "<Keyboard>/f12",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugScreenshot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
