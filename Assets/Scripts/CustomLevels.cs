@@ -1,8 +1,8 @@
-using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static TransitionManager.Transitions;
 
 public class CustomLevels : MonoBehaviour
 {
@@ -21,40 +21,37 @@ public class CustomLevels : MonoBehaviour
         // Load all custom levels
         foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
         {
-            if (!fileName.EndsWith(".level")) continue;
+            if (!fileName.EndsWith(".level") || fileName.Contains($"{LevelManager.Instance.levelEditorName}.level")) continue;
             Texture2D preview = null;
             count++;
 
             // Get level info & preview image
-            Serializables.SerializableLevel level = LevelManager.Instance.GetLevel(fileName.Replace(".level", "").Replace(GameManager.customLevelPath, ""), true);
+            string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "");
+            Serializables.SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
             if (!LevelManager.Instance.IsStringEmptyOrNull(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
 
             // Create prefab and set position
             GameObject entry = Instantiate(customLevelPrefab, holder);
-            if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, vertical * rowCount);
-            else if (count == 2) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, vertical * rowCount);
+            // if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, vertical * rowCount);
+            if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, vertical * rowCount);
             else {
-                entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(650, vertical * rowCount);
+                entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(550, vertical * rowCount);
                 rowCount++;
                 count = 0;
             }
 
-            // Fill prefab data
+            // Prefab basic data
             entry.transform.Find("Name").GetComponent<Text>().text = $"\"{level.levelName}\"";
             if (preview != null) entry.transform.Find("Preview").GetComponent<RawImage>().texture = preview;
 
+            // Prefab stars
             Transform stars = entry.transform.Find("Stars");
-            for (int i = 0; i < level.difficulty; i++)
-            {
-                stars.Find($"{i + 1}").GetComponent<Image>().sprite = starSprite;
-            }
+            for (int i = 0; i < level.difficulty; i++) { stars.Find($"{i + 1}").GetComponent<Image>().sprite = starSprite; }
+
+            // Prefab load level
+            entry.GetComponent<Button>().onClick.AddListener(delegate { TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, levelID); });
         }
 
         EventSystem.current.SetSelectedGameObject(transform.Find("Back Button").gameObject);
     }
-
-    // void Update()
-    // {
-    //     rt.anchoredPosition += Time.deltaTime * (Vector2.up * 22f);  
-    // }
 }

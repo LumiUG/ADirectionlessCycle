@@ -116,7 +116,7 @@ public class Hub : MonoBehaviour
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.25f); return; }
 
         // Plays the transition
-        TransitionManager.Instance.TransitionIn(Reveal, ActionLoadLevel, levelName);
+        TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, levelName);
     }
 
     // Change world
@@ -169,23 +169,8 @@ public class Hub : MonoBehaviour
             if (level.remixLevel == null) return 0;
         }
 
-
         return RecursiveHubCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
     }
 
     // Actions //
-    private void ActionLoadLevel(string name)
-    {
-        var save = GameManager.save.game.levels.Find(level => level.levelID == name);
-
-        // Loads the level
-        LevelManager.Instance.LoadLevel(name);
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
-
-        // Preload screen
-        TransitionManager.Instance.ChangeTransition(Triangle);
-        if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
-        else TransitionManager.Instance.TransitionOut<string>();
-    }
 }
