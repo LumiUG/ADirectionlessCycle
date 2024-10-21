@@ -472,7 +472,7 @@ public class InputManager : MonoBehaviour
         float scrollAmount = -(ctx.Get<float>() / 2);
 
         // Scroll checks
-        if (scrollAmount == 0) return;
+        if (scrollAmount == 0 || CustomLevels.I.popup.activeSelf) return;
         if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount <= -540 && scrollAmount < 0) return;
         if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount >= (CustomLevels.I.rowCount * CustomLevels.I.vertical * -1) - 540 && scrollAmount > 0) return;
         
