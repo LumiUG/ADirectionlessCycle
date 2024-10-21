@@ -465,6 +465,20 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void OnScroll(InputValue ctx)
+    {
+        if (SceneManager.GetActiveScene().name != "Custom Levels") return;
+        float scrollAmount = -(ctx.Get<float>() / 2);
+
+        // Scroll checks
+        if (scrollAmount == 0) return;
+        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount <= -500 && scrollAmount < 0) return;
+        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount >= (CustomLevels.I.rowCount * CustomLevels.I.vertical * -1) - 500 && scrollAmount > 0) return;
+        
+        // Scrolls by the amount
+        CustomLevels.I.holder.anchoredPosition -= Vector2.down * new Vector2(0, scrollAmount);
+    }
+
     internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.Instance.CheckSceneInbounds(tile.position); }); }
 
     // Plays an "out" transition

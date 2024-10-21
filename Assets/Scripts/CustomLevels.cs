@@ -6,17 +6,23 @@ using static TransitionManager.Transitions;
 
 public class CustomLevels : MonoBehaviour
 {
+    [HideInInspector] public static CustomLevels I;
     public RectTransform holder;
+    public readonly int vertical = -700;
+    public int rowCount = 0;
+
+    private GameObject selectedLevel = null;
     private GameObject customLevelPrefab;
     private Sprite starSprite;
-    private int rowCount = 0;
+    private int count = 0;
 
     void Start()
     {
+        I = this; // No persistence!
+        EventSystem.current.SetSelectedGameObject(transform.Find("Back Button").gameObject);
         customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
         starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
-        int vertical = -700;
-        int count = 0;
+        rowCount = 0;
 
         // Load all custom levels
         foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
@@ -32,7 +38,7 @@ public class CustomLevels : MonoBehaviour
 
             // Create prefab and set position
             GameObject entry = Instantiate(customLevelPrefab, holder);
-            // if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, vertical * rowCount);
+            entry.name = level.levelName;
             if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, vertical * rowCount);
             else {
                 entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(550, vertical * rowCount);
@@ -51,7 +57,14 @@ public class CustomLevels : MonoBehaviour
             // Prefab load level
             entry.GetComponent<Button>().onClick.AddListener(delegate { TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, levelID); });
         }
+    }
 
-        EventSystem.current.SetSelectedGameObject(transform.Find("Back Button").gameObject);
+    void Update() 
+    {
+        if (EventSystem.current == null) return;
+        if (selectedLevel == EventSystem.current.currentSelectedGameObject || EventSystem.current.currentSelectedGameObject.transform.parent.name != "Content") return;
+        selectedLevel = EventSystem.current.currentSelectedGameObject;
+
+        holder.anchoredPosition = new Vector2(holder.anchoredPosition.x, selectedLevel.GetComponent<RectTransform>().anchoredPosition.y * -1 - 540);
     }
 }

@@ -339,13 +339,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DebugScreenshot",
-                    "type": "Button",
-                    "id": "0ceabd9d-cc6c-4c86-81ee-efa534c133a1",
-                    "expectedControlType": "Button",
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "48b418ea-7e00-4a01-abbe-1d15c0641e4a",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -564,7 +564,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -575,7 +575,7 @@
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -586,7 +586,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -597,7 +597,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1033,12 +1033,12 @@
                 },
                 {
                     "name": "",
-                    "id": "e172f0d1-c482-4ff2-8916-60d61435a166",
-                    "path": "<Keyboard>/f12",
+                    "id": "436d488d-4001-4637-87d9-b7ad3479316b",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "DebugScreenshot",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
