@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 777098593}
+    m_SelectOnUp: {fileID: 32048900}
     m_SelectOnDown: {fileID: 515087478}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 1417924359}

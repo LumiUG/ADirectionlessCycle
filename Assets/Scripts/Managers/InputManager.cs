@@ -465,6 +465,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    // Custom level scene scrolling
     private void OnScroll(InputValue ctx)
     {
         if (SceneManager.GetActiveScene().name != "Custom Levels") return;
@@ -472,8 +473,8 @@ public class InputManager : MonoBehaviour
 
         // Scroll checks
         if (scrollAmount == 0) return;
-        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount <= -500 && scrollAmount < 0) return;
-        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount >= (CustomLevels.I.rowCount * CustomLevels.I.vertical * -1) - 500 && scrollAmount > 0) return;
+        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount <= -540 && scrollAmount < 0) return;
+        if (CustomLevels.I.holder.anchoredPosition.y + scrollAmount >= (CustomLevels.I.rowCount * CustomLevels.I.vertical * -1) - 540 && scrollAmount > 0) return;
         
         // Scrolls by the amount
         CustomLevels.I.holder.anchoredPosition -= Vector2.down * new Vector2(0, scrollAmount);
