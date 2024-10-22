@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 {
     // Tile References & Others //
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall, ObjectTypes.AntiWall };
-    internal readonly ObjectTypes[] typesObjectList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
+    internal readonly ObjectTypes[] typesObjectsList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
@@ -167,7 +167,7 @@ public class LevelManager : MonoBehaviour
     // Adds a tile to the private objects list
     public void AddToObjectList(GameTile tile)
     {
-        if (!typesObjectList.Contains(tile.GetTileType())) return;
+        if (!typesObjectsList.Contains(tile.GetTileType())) return;
         else if (!levelObjects.Contains(tile)) levelObjects.Add(tile);
     }
 

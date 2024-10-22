@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {       
-        // Singleton without persistence (GameManager already declares it)
+        // Singleton (InputManager has persistence)
         if (!Instance) { Instance = this; }
         else { Destroy(gameObject); return; }
 
@@ -198,108 +198,6 @@ public class InputManager : MonoBehaviour
     }
 
     // Level Editor (Editor) //
-
-    // Changing tiles
-    private void OnEditorSelectWall()
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-
-        Editor.I.tileToPlace = LevelManager.Instance.wallTile;
-    }
-    private void OnEditorSelectAntiWall()
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-
-        Editor.I.tileToPlace = LevelManager.Instance.antiwallTile;
-    }
-    private void OnEditorSelectBox()
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        
-        Editor.I.tileToPlace = LevelManager.Instance.boxTile;
-    }
-    private void OnEditorSelectCircle()
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        
-        Editor.I.tileToPlace = LevelManager.Instance.circleTile; 
-    }  
-    private void OnEditorSelectHex() 
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        
-        Editor.I.tileToPlace = LevelManager.Instance.hexagonTile;
-    }
-    private void OnEditorSelectArea()
-    {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.areaTile;
-    }
-    private void OnEditorSelectInverseArea() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.inverseAreaTile; 
-    }
-    private void OnEditorSelectOutboundArea() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.outboundAreaTile; 
-    }
-    private void OnEditorSelectHazard() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.hazardTile; 
-    }
-    private void OnEditorSelectInvert() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.invertTile; 
-    }
-    private void OnEditorSelectArrow() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.arrowTile; 
-    }
-    private void OnEditorSelectNegativeArrow() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.negativeArrowTile; 
-    }
-    private void OnEditorSelectOrb() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.orbTile;
-    }
-    private void OnEditorSelectFragment() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.fragmentTile;
-    }
-    private void OnEditorSelectLevel() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.levelTile; 
-    }
-    private void OnEditorSelectFake() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.hologramTile; 
-    }
-    private void OnEditorSelectNPC() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.npcTile;
-    }
-    private void OnEditorSelectMimic() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.mimicTile; 
-    }
-    private void OnEditorSelectVoid() 
-    { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
-        Editor.I.tileToPlace = LevelManager.Instance.voidTile; 
-    }
 
     // Places a tile
     private void OnEditorClickGrid()
