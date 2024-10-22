@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     // Game data // 
     [HideInInspector] public bool isEditing;
     [HideInInspector] public bool buildDebugMode;
+    [HideInInspector] public string currentEditorLevelID;
+    [HideInInspector] public string currentEditorLevelName;
     public static Savedata save;
     public static string customLevelPath;
-    private string dataPath;
 
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Hub" };
     internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Hub" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Hub" };
+    private string dataPath;
 
     void Awake()
     {
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
 
         // Default variables
         ToggleCursor(false);
+        currentEditorLevelID = null;
+        currentEditorLevelName = null;
         buildDebugMode = false;
         isEditing = false;
 
@@ -123,7 +127,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Saves a level preview when exporting from the editor
-    internal byte[] SaveLevelPreview(string name)
+    internal byte[] SaveLevelPreview()
     {
         if (SceneManager.GetActiveScene().name != "Level Editor") return null;
         RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");

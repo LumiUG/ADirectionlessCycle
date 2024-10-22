@@ -19,6 +19,7 @@ public class CustomLevels : MonoBehaviour
     public readonly int vertical = -700;
 
     private string selectedLevelID = null;
+    private string selectedLevelName = null;
     private GameObject selectedLevel = null;
     private GameObject customLevelPrefab;
     private Sprite starSprite;
@@ -69,7 +70,7 @@ public class CustomLevels : MonoBehaviour
             count++;
 
             // Get level info & preview image
-            string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "");
+            string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
             if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
             Serializables.SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
             if (!LevelManager.Instance.IsStringEmptyOrNull(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
@@ -92,21 +93,30 @@ public class CustomLevels : MonoBehaviour
             for (int i = 0; i < level.difficulty; i++) { stars.Find($"{i + 1}").GetComponent<Image>().sprite = starSprite; }
 
             // Prefab load level
-            entry.GetComponent<Button>().onClick.AddListener(delegate { OpenLevelMenu(levelID); });
+            entry.GetComponent<Button>().onClick.AddListener(delegate { OpenLevelMenu(levelID, level.levelName); });
         }
     }
 
     // Player Interactions //
 
     // Open a level's menu
-    private void OpenLevelMenu(string levelID)
+    private void OpenLevelMenu(string levelID, string levelName)
     {
         EventSystem.current.SetSelectedGameObject(popupPlay.gameObject);
+        selectedLevelName = levelName;
         selectedLevelID = levelID;
         popupPlay.interactable = true;
         popupEdit.interactable = true;
         popupDelete.interactable = true;
         popup.SetActive(true);
+    }
+
+    // Close a level's menu
+    public void CreateLevel()
+    {
+        selectedLevelID = LevelManager.Instance.SaveLevel("New level", default, true, null);
+        selectedLevelName = "New level";
+        EditLevel();
     }
 
     // Close a level's menu
@@ -127,7 +137,12 @@ public class CustomLevels : MonoBehaviour
     // Edit current level
     public void EditLevel()
     {
-        LevelManager.Instance.LoadLevel(selectedLevelID, true, false);
+        GameManager.Instance.currentEditorLevelID = selectedLevelID;
+        GameManager.Instance.currentEditorLevelName = selectedLevelName;
+
+        string content = File.ReadAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level");
+        File.WriteAllText($"{GameManager.customLevelPath}/{LevelManager.Instance.levelEditorName}.level", content);
+
         UI.Instance.GoLevelEditor();
     }
 

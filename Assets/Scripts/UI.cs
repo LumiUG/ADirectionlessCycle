@@ -34,8 +34,7 @@ public class UI : MonoBehaviour
 
         // Editor menu
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
-        editor.importMenu = editor.self.transform.Find("Import").gameObject;
-        editor.exportMenu = editor.self.transform.Find("Export").gameObject;
+        editor.import = editor.self.transform.Find("Import Field").gameObject;
         editor.playtest = editor.self.transform.Find("Play Button").gameObject;
 
         // Win screen
@@ -141,11 +140,10 @@ public class UI : MonoBehaviour
     public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName, true, false); }
 
     // Export level
-    public void LevelEditorExportLevel(string levelName)
+    public void LevelEditorExportLevel()
     {
         if (!LevelManager.Instance) return;
-
-        LevelManager.Instance.SaveLevel(levelName, default, false, GameManager.Instance.SaveLevelPreview(levelName));
+        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, GameManager.Instance.currentEditorLevelID, false, GameManager.Instance.SaveLevelPreview());
     }
 
     // Playtest level
@@ -214,8 +212,7 @@ public class UI : MonoBehaviour
 
     public class LevelEditorUI : UIObject
     {
-        public GameObject importMenu;
-        public GameObject exportMenu;
+        public GameObject import;
         public GameObject playtest;
     }
 

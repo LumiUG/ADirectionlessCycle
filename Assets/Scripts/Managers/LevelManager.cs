@@ -219,9 +219,9 @@ public class LevelManager : MonoBehaviour
     }
 
     // Saves a level to the game's persistent path
-    public void SaveLevel(string levelName, string levelID = default, bool silent = true, byte[] previewImage = null)
+    public string SaveLevel(string levelName, string levelID = default, bool silent = true, byte[] previewImage = null)
     {
-        if (IsStringEmptyOrNull(levelName)) return;
+        if (IsStringEmptyOrNull(levelName)) return null;
         levelName = levelName.Trim();
 
         // Level id stuff
@@ -263,6 +263,7 @@ public class LevelManager : MonoBehaviour
         // File.WriteAllText(levelPath, Convert.ToBase64String(levelAsBytes));
 
         if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\".", 4.0f);
+        return levelID;
     }
 
     // Load and build a level
