@@ -45,8 +45,8 @@ public class Editor : MonoBehaviour
         spriteRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
         directionSprite = Resources.Load<Sprite>("Sprites/Direction");
         deletionSprite = Resources.Load<Sprite>("Sprites/Non Pushable");
-        badArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/ColorArrows");
-        colorArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/BadArrows");
+        colorArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/ColorArrows");
+        badArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/BadArrows");
 
         // Tile info
         previewImage = transform.Find("Preview").GetComponent<Image>();
@@ -83,6 +83,7 @@ public class Editor : MonoBehaviour
                 currentTile.GetComponent<Button>().onClick.AddListener(delegate { tileToPlace = tile; });
 
                 // Sprite (and arrows as exceptions)
+
                 if (tile.GetTileType() == ObjectTypes.Arrow) currentTile.GetComponent<Image>().sprite = colorArrowSprite;
                 else if (tile.GetTileType() == ObjectTypes.NegativeArrow) currentTile.GetComponent<Image>().sprite = badArrowSprite;
                 else currentTile.GetComponent<Image>().sprite = tile.tileSprite;
@@ -105,13 +106,16 @@ public class Editor : MonoBehaviour
 
         // Preview sprite (top-right)
         if (tileToPlace.GetTileType() == ObjectTypes.Arrow || tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
+        // Custom handling for arrow tiles.
+        if (tileToPlace.GetTileType() == ObjectTypes.Arrow) previewImage.sprite = colorArrowSprite;
+        else if (tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = badArrowSprite;
         else previewImage.sprite = tileToPlace.tileSprite;
 
         // Preview sprite (on tilemap)
         if (isPlacing) {
             // Custom handling for arrow tiles.
-            if (tileToPlace.GetTileType() == ObjectTypes.Arrow) spriteRenderer.sprite = badArrowSprite;
-            else if (tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) spriteRenderer.sprite = colorArrowSprite;
+            if (tileToPlace.GetTileType() == ObjectTypes.Arrow) spriteRenderer.sprite = colorArrowSprite;
+            else if (tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) spriteRenderer.sprite = badArrowSprite;
             else spriteRenderer.sprite = previewImage.sprite;
         }
         else spriteRenderer.sprite = deletionSprite;
