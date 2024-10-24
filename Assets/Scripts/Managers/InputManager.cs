@@ -256,11 +256,24 @@ public class InputManager : MonoBehaviour
         Editor.I.ignoreUpdateEvent = false;
     }
 
+    // Selects a tile on the editor
+    private void OnEditorMiddleClick()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+
+        Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
+        if (gridPos == Vector3.back) return;
+
+        GameTile tile = Editor.I.GetEditorTile(gridPos);
+        if (tile) Editor.I.SelectListTile(tile, false);
+    }
+
     // Toggles menu
     private void OnEditorEscape()
     {
         if (!GameManager.Instance.IsEditor()) return;
         if (!UI.Instance || !EventSystem.current) return;
+        if (Editor.I.tileList.activeSelf) return;
 
         if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
@@ -271,6 +284,35 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.Instance.IsEditor()) return;
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
+    }
+
+    // Editor toggle tile menu
+    private void OnEditorTileMenu()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        Editor.I.ToggleTileMenu();
+    }
+
+    // Editor select tiles 1/2/3/4
+    private void OnEditorSelectOne()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        Editor.I.SelectMenuTile(0);
+    }
+    private void OnEditorSelectTwo()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        Editor.I.SelectMenuTile(1);
+    }
+    private void OnEditorSelectThree()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        Editor.I.SelectMenuTile(2);
+    }
+    private void OnEditorSelectFour()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        Editor.I.SelectMenuTile(3);
     }
 
     // Moving the level screen up/down/left/right

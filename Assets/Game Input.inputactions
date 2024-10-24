@@ -42,6 +42,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorMiddleClick",
+                    "type": "Button",
+                    "id": "d5ba82e4-ac3a-4b2c-8680-9db5ee03eb71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorTileMenu",
+                    "type": "Button",
+                    "id": "e32d62f3-5c6d-494f-8605-5151b52c28cb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorUp",
                     "type": "Button",
                     "id": "a8612a34-f177-4870-885a-fed75aa86ce6",
@@ -72,6 +90,42 @@
                     "name": "EditorRight",
                     "type": "Button",
                     "id": "6b771967-0169-434d-bba6-9e4d83899340",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectOne",
+                    "type": "Button",
+                    "id": "fd1833bc-23d8-4293-9ad4-d0a9766fd518",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectTwo",
+                    "type": "Button",
+                    "id": "8e464777-dabe-4dfd-b80d-81cc7b3e4ae7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectThree",
+                    "type": "Button",
+                    "id": "d872ce66-a732-4d44-b5ae-799cdc05676d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EditorSelectFour",
+                    "type": "Button",
+                    "id": "55b677ff-91a7-4ed0-a231-dd5319b6a5d9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -659,6 +713,72 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03f5a00d-bbc5-4a3c-a4da-e5330c77c5fc",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46dd1312-2d6a-4bde-bf23-1d1309b11308",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9a52a3f-0eb6-48b0-832d-6af786ab26c5",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectThree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6260a068-7e12-408a-9188-a68aac15cc8a",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSelectFour",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c8d8aff-1c7d-4cfd-a566-275cb6c097f6",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorTileMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0499f54-4697-4c84-99c3-40d8b4d7f838",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorMiddleClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

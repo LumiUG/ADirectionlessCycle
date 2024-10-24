@@ -12,24 +12,26 @@ public class Editor : MonoBehaviour
     // Editor Default Settings //
     [HideInInspector] public static Editor I;
     [HideInInspector] public bool ignoreUpdateEvent = false;
+    public List<Image> menuTiles = new(capacity: 4);
+    public List<GameObject> menuSelectors = new(capacity: 4);
 
     internal SpriteRenderer spriteRenderer;
     internal Coroutine multiClick = null;
     internal bool isPlacing = true;
     internal GameTile editingTile = null;
-    internal GameTile tileToPlace;
+    internal ObjectTypes tileToPlace;
 
     private Tilemap editorTilemap;
-    private Sprite directionSprite;
     private Sprite deletionSprite;
     private Sprite badArrowSprite;
     private Sprite colorArrowSprite;
     private readonly List<string> listStrings = new() { "Solids", "Objects", "Areas", "Hazards", "Effects", "Customs" };
     private readonly List<List<GameTile>> listVars = new();
+    private int selectedTileIndex = 0;
 
     // UI //
-    private GameObject tileList;
     private Image previewImage;
+    internal GameObject tileList;
     internal Toggle upToggle;
     internal Toggle downToggle;
     internal Toggle leftToggle;
@@ -43,7 +45,6 @@ public class Editor : MonoBehaviour
         I = this; // No persistence!
         editorTilemap = GameObject.Find("Editor Tilemap").GetComponent<Tilemap>();
         spriteRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
-        directionSprite = Resources.Load<Sprite>("Sprites/Direction");
         deletionSprite = Resources.Load<Sprite>("Sprites/Non Pushable");
         colorArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/ColorArrows");
         badArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/BadArrows");
@@ -61,7 +62,7 @@ public class Editor : MonoBehaviour
         customInputField = directions.Find("Text").GetComponent<InputField>();
 
         // Default tile
-        tileToPlace = LevelManager.Instance.wallTile;
+        tileToPlace = GameManager.save.preferences.editorTiles[0];
 
         // Populate tile list
         GameObject editorTile = Resources.Load<GameObject>("Prefabs/Editor Tile");
@@ -80,10 +81,9 @@ public class Editor : MonoBehaviour
             foreach (GameTile tile in listVars[i])
             {
                 GameObject currentTile = Instantiate(editorTile, tileList.transform.Find(listStrings[i]));
-                currentTile.GetComponent<Button>().onClick.AddListener(delegate { tileToPlace = tile; });
+                currentTile.GetComponent<Button>().onClick.AddListener(delegate { SelectListTile(tile); });
 
                 // Sprite (and arrows as exceptions)
-
                 if (tile.GetTileType() == ObjectTypes.Arrow) currentTile.GetComponent<Image>().sprite = colorArrowSprite;
                 else if (tile.GetTileType() == ObjectTypes.NegativeArrow) currentTile.GetComponent<Image>().sprite = badArrowSprite;
                 else currentTile.GetComponent<Image>().sprite = tile.tileSprite;
@@ -95,30 +95,28 @@ public class Editor : MonoBehaviour
                 offset -= 175;
             }
         }
+
+        // Menu tiles sprites
+        for (int i = 0; i < menuTiles.Count; i++) { SetMenuSprite(i); }
     }
 
     void OnDisable() { I = null; }
 
-    // Set the preview image
+    // Set the preview image (right now, creates a tile every frame for rendering sprites, ow...)
     void Update()
     {
-        if (!tileToPlace) return;
-
         // Preview sprite (top-right)
-        if (tileToPlace.GetTileType() == ObjectTypes.Arrow || tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = directionSprite;
-        // Custom handling for arrow tiles.
-        if (tileToPlace.GetTileType() == ObjectTypes.Arrow) previewImage.sprite = colorArrowSprite;
-        else if (tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) previewImage.sprite = badArrowSprite;
-        else previewImage.sprite = tileToPlace.tileSprite;
+        // if (tileToPlace == ObjectTypes.Arrow) previewImage.sprite = colorArrowSprite;
+        // else if (tileToPlace == ObjectTypes.NegativeArrow) previewImage.sprite = badArrowSprite;
+        // else previewImage.sprite = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), Vector3Int.zero).tileSprite;
 
         // Preview sprite (on tilemap)
-        if (isPlacing) {
-            // Custom handling for arrow tiles.
-            if (tileToPlace.GetTileType() == ObjectTypes.Arrow) spriteRenderer.sprite = colorArrowSprite;
-            else if (tileToPlace.GetTileType() == ObjectTypes.NegativeArrow) spriteRenderer.sprite = badArrowSprite;
-            else spriteRenderer.sprite = previewImage.sprite;
-        }
-        else spriteRenderer.sprite = deletionSprite;
+        if (isPlacing)
+        {
+            if (tileToPlace == ObjectTypes.Arrow) spriteRenderer.sprite = colorArrowSprite;
+            else if (tileToPlace == ObjectTypes.NegativeArrow) spriteRenderer.sprite = badArrowSprite;
+            else spriteRenderer.sprite = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), Vector3Int.zero).tileSprite;
+        } else spriteRenderer.sprite = deletionSprite;
 
         // Move mouse selector (on tilemap)
         if (UI.Instance.editor.self.activeSelf || tileList.activeSelf) return;
@@ -165,15 +163,11 @@ public class Editor : MonoBehaviour
     // Places a tile on the corresponding grid
     private void EditorPlaceTile(Vector3Int position)
     {
-        if (tileToPlace == null) return;
-
         // Creates the tile (this creates a tile every frame the button is held! very bad!)
-        GameTile tileToCreate = Instantiate(tileToPlace);
-        tileToCreate.position = position;
-        tileToCreate.PrepareTile();
+        GameTile tileToCreate = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), position);
 
         // Sets the tile
-        switch (tileToPlace.GetTileType())
+        switch (tileToPlace)
         {
             case ObjectTypes t when LevelManager.Instance.typesSolidsList.Contains(t):
                 if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) break;
@@ -217,13 +211,20 @@ public class Editor : MonoBehaviour
     // Deletes a tile from the corresponding grid (holy shit kill me)
     private void EditorDeleteTile(Vector3Int position)
     {
+        GameTile tile = GetEditorTile(position);
+        if (tile) LevelManager.Instance.RemoveTile(tile);
+    }
+
+    // Returns a tile from the level tilemap
+    public GameTile GetEditorTile(Vector3Int position)
+    {
         GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position);
         if (!tile) tile = LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position);
-        if (tile) LevelManager.Instance.RemoveTile(tile);
+        return tile;
     }
 
     // Updates the selected tile's custom text
@@ -289,9 +290,38 @@ public class Editor : MonoBehaviour
         ignoreUpdateEvent = false;
     }
 
+    // Sets one of the menu sprites
+    private void SetMenuSprite(int index)
+    {
+        GameTile tile = LevelManager.Instance.CreateTile(GameManager.save.preferences.editorTiles[index].ToString(), new(), Vector3Int.zero);
+        if (tile.GetTileType() == ObjectTypes.Arrow) menuTiles[index].sprite = colorArrowSprite;
+        else if (tile.GetTileType() == ObjectTypes.NegativeArrow) menuTiles[index].sprite = badArrowSprite;
+        else menuTiles[index].sprite = tile.tileSprite;
+    }
+
+    // UI tile list event
+    public void SelectListTile(GameTile tile, bool toggleMenu = true)
+    {
+        GameManager.save.preferences.editorTiles[selectedTileIndex] = tile.GetTileType();
+        SelectMenuTile(selectedTileIndex);
+        if (toggleMenu) ToggleTileMenu();
+    }
+
+    // Selects a menu tile event
+    public void SelectMenuTile(int index)
+    {
+        selectedTileIndex = index;
+        tileToPlace = GameManager.save.preferences.editorTiles[selectedTileIndex];
+        menuSelectors.ForEach(sel => sel.SetActive(false));
+        menuSelectors[index].SetActive(true);
+        SetMenuSprite(selectedTileIndex);
+    }
+
     // Toggles the tile list on/off
     public void ToggleTileMenu()
     {
+        if (UI.Instance.editor.self.activeSelf) return;
+
         if (tileList.activeSelf) tileList.SetActive(false);
         else  tileList.SetActive(true);
     }
