@@ -20,6 +20,7 @@ public class Editor : MonoBehaviour
     internal bool isPlacing = true;
     internal GameTile editingTile = null;
     internal ObjectTypes tileToPlace;
+    internal RectTransform popupRect;
 
     private Tilemap editorTilemap;
     private Sprite deletionSprite;
@@ -30,7 +31,7 @@ public class Editor : MonoBehaviour
     private int selectedTileIndex = 0;
 
     // UI //
-    private Image previewImage;
+    internal GameObject popup;
     internal GameObject tileList;
     internal Toggle upToggle;
     internal Toggle downToggle;
@@ -50,10 +51,11 @@ public class Editor : MonoBehaviour
         badArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/BadArrows");
 
         // Tile info
-        previewImage = transform.Find("Preview").GetComponent<Image>();
         tileList = transform.Find("Tile List").gameObject;
 
-        Transform directions = transform.Find("Tile Information").Find("Directions");
+        popup = transform.Find("Tile Information").gameObject;
+        popupRect = popup.GetComponent<RectTransform>();
+        Transform directions = popup.transform.Find("Directions");
         upToggle = directions.Find("Up").GetComponent<Toggle>();
         downToggle = directions.Find("Down").GetComponent<Toggle>();
         leftToggle = directions.Find("Left").GetComponent<Toggle>();
@@ -105,11 +107,6 @@ public class Editor : MonoBehaviour
     // Set the preview image (right now, creates a tile every frame for rendering sprites, ow...)
     void Update()
     {
-        // Preview sprite (top-right)
-        // if (tileToPlace == ObjectTypes.Arrow) previewImage.sprite = colorArrowSprite;
-        // else if (tileToPlace == ObjectTypes.NegativeArrow) previewImage.sprite = badArrowSprite;
-        // else previewImage.sprite = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), Vector3Int.zero).tileSprite;
-
         // Preview sprite (on tilemap)
         if (isPlacing)
         {
@@ -321,8 +318,9 @@ public class Editor : MonoBehaviour
     public void ToggleTileMenu()
     {
         if (UI.Instance.editor.self.activeSelf) return;
+        if (popup.activeSelf) { popup.SetActive(false); return; }
 
         if (tileList.activeSelf) tileList.SetActive(false);
-        else  tileList.SetActive(true);
+        else tileList.SetActive(true);
     }
 }

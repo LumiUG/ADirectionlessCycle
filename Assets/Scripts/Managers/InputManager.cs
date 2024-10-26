@@ -203,6 +203,7 @@ public class InputManager : MonoBehaviour
     private void OnEditorClickGrid()
     {
         if (!GameManager.Instance.IsEditor()) return;
+        if (Editor.I.popup.activeSelf) return;
         
         // Checks if you are already multi-placing
         if (Editor.I.multiClick != null)
@@ -216,10 +217,11 @@ public class InputManager : MonoBehaviour
         Editor.I.multiClick = StartCoroutine(Editor.I.MultiPlace());
     }
 
-    // Changes a tile's properties (objects only)
+    // Changes a tile's properties
     private void OnEditorRightClickGrid()
     {
         if (!GameManager.Instance.IsEditor()) return;
+        if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
         
         // Checks mouse position
         Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
@@ -232,6 +234,11 @@ public class InputManager : MonoBehaviour
         if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Update UI (dear god)
+		Vector2 anchorPos = Input.mousePosition - new Vector3(Editor.I.popupRect.sizeDelta.x * 2f, Editor.I.popupRect.sizeDelta.y);
+		anchorPos = new Vector2(Math.Clamp(anchorPos.x / Editor.I.popupRect.lossyScale.x, -710, 710), Math.Clamp(anchorPos.y / Editor.I.popupRect.lossyScale.y, -202, 202));
+        Editor.I.popupRect.anchoredPosition = anchorPos;
+        
+        Editor.I.popup.SetActive(true);
         Editor.I.ignoreUpdateEvent = true;
 
         // Custom tiles field (missing loading custom text automatically)
@@ -260,6 +267,7 @@ public class InputManager : MonoBehaviour
     private void OnEditorMiddleClick()
     {
         if (!GameManager.Instance.IsEditor()) return;
+        if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
         Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
         if (gridPos == Vector3.back) return;
@@ -273,7 +281,8 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.Instance.IsEditor()) return;
         if (!UI.Instance || !EventSystem.current) return;
-        if (Editor.I.tileList.activeSelf) return;
+        if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
+        if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
         if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
