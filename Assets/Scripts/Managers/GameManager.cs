@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
         RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");
 
         // Clear editor area
+        bool wasEditorMenuOpen = UI.Instance.editor.self.activeSelf;
         UI.Instance.editor.Toggle(false);
         // GameTile yoink = Editor.I.tileToPlace;
         // Editor.I.tileToPlace = null;
@@ -144,7 +145,7 @@ public class GameManager : MonoBehaviour
         tex.Apply();
 
         // Re-enable editor stuff
-        UI.Instance.editor.Toggle(true);
+        if (wasEditorMenuOpen) UI.Instance.editor.Toggle(true);
         // Editor.I.tileToPlace = yoink;
 
         // Encode and return

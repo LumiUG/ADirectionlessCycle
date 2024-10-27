@@ -288,6 +288,13 @@ public class InputManager : MonoBehaviour
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
     }
 
+    // Save current level manually
+    private void OnEditorSave()
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        UI.Instance.LevelEditorExportLevel();
+    }
+
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {

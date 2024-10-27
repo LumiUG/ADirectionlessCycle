@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "EditorSave",
+                    "type": "Button",
+                    "id": "2601c33c-e56c-4bbb-880f-da5db2d6626b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "EditorUp",
                     "type": "Button",
                     "id": "a8612a34-f177-4870-885a-fed75aa86ce6",
@@ -779,6 +788,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorMiddleClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d275588f-e8af-4470-9aad-ea278b639030",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EditorSave",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
