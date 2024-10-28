@@ -234,7 +234,7 @@ public class InputManager : MonoBehaviour
         if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Update UI (dear god)
-		Vector2 anchorPos = Input.mousePosition - new Vector3(Editor.I.popupRect.sizeDelta.x * 2f, Editor.I.popupRect.sizeDelta.y);
+		Vector2 anchorPos = Input.mousePosition - new Vector3(Editor.I.popupRect.sizeDelta.x, Editor.I.popupRect.sizeDelta.y);
 		anchorPos = new Vector2(Math.Clamp(anchorPos.x / Editor.I.popupRect.lossyScale.x, -710, 710), Math.Clamp(anchorPos.y / Editor.I.popupRect.lossyScale.y, -202, 202));
         Editor.I.popupRect.anchoredPosition = anchorPos;
         
@@ -291,14 +291,14 @@ public class InputManager : MonoBehaviour
     // Save current level manually
     private void OnEditorSave()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
         UI.Instance.LevelEditorExportLevel();
     }
 
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
     }
 
@@ -312,50 +312,50 @@ public class InputManager : MonoBehaviour
     // Editor select tiles 1/2/3/4
     private void OnEditorSelectOne()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(0);
     }
     private void OnEditorSelectTwo()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(1);
     }
     private void OnEditorSelectThree()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(2);
     }
     private void OnEditorSelectFour()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(3);
     }
 
     // Moving the level screen up/down/left/right
     private void OnEditorUp() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
         LevelManager.Instance.worldOffsetY += 8;
     }
     private void OnEditorDown() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
         LevelManager.Instance.worldOffsetY -= 8;
     }
     private void OnEditorLeft() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
         LevelManager.Instance.worldOffsetX -= 14;
     }
     private void OnEditorRight() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
         LevelManager.Instance.worldOffsetX += 14;

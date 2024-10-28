@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -36,6 +37,11 @@ public class UI : MonoBehaviour
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
         editor.import = editor.self.transform.Find("Import Field").gameObject;
         editor.playtest = editor.self.transform.Find("Play Button").gameObject;
+        editor.idField = editor.self.transform.Find("Level ID").Find("ID Field").GetComponent<InputField>();
+        editor.nameField = editor.self.transform.Find("Level Name").Find("Name Field").GetComponent<InputField>();
+        editor.nextLevelField = editor.self.transform.Find("Next Level").Find("NL Field").GetComponent<InputField>();
+        editor.remixLevelField = editor.self.transform.Find("Remix Level").Find("RL Field").GetComponent<InputField>();
+        editor.freeroamToggle = editor.self.transform.Find("Freeroam Toggle").GetComponent<Toggle>();
 
         // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
@@ -137,18 +143,39 @@ public class UI : MonoBehaviour
     }
 
     // Import level
-    public void LevelEditorImportLevel(string levelName) { if (LevelManager.Instance) LevelManager.Instance.LoadLevel(levelName, true, false); }
+    public void LevelEditorImportLevel(string levelName)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        LevelManager.Instance.LoadLevel(levelName, true, false);
+    }
 
     // Export level
     public void LevelEditorExportLevel()
     {
-        if (!LevelManager.Instance) return;
-        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, GameManager.Instance.currentEditorLevelID, false, GameManager.Instance.SaveLevelPreview());
+        if (!GameManager.Instance.IsEditor()) return;
+
+        // Rename file if level ID changed
+        string cleanID = string.Concat(GameManager.Instance.newEditorLevelID.Split(Path.GetInvalidFileNameChars()));
+        if (LevelManager.Instance.IsStringEmptyOrNull(GameManager.Instance.newEditorLevelID)) cleanID = GameManager.Instance.currentEditorLevelID;
+        
+        if (GameManager.Instance.currentEditorLevelID != GameManager.Instance.newEditorLevelID) {
+            if (File.Exists($"{GameManager.customLevelPath}/{cleanID}.level")) cleanID = GameManager.Instance.currentEditorLevelID;
+            File.Move(
+                $"{GameManager.customLevelPath}/{GameManager.Instance.currentEditorLevelID}.level",
+                $"{GameManager.customLevelPath}/{cleanID}.level"
+            );
+        }
+
+        // Export level
+        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, cleanID, false, GameManager.Instance.SaveLevelPreview());
+        GameManager.Instance.currentEditorLevelID = cleanID;
     }
 
     // Playtest level
     public void LevelEditorPlaytest()
     {
+        if (!GameManager.Instance.IsEditor()) return;
+
         LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
         LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
         LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
@@ -162,6 +189,41 @@ public class UI : MonoBehaviour
         
         LevelManager.Instance.LoadLevel(LevelManager.Instance.levelEditorName, true);
         ChangeScene("Game");
+    }
+
+    // Changes the current level name
+    public void LevelEditorChangeID(string value)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        GameManager.Instance.newEditorLevelID = value;
+    }
+
+    // Changes the current level name
+    public void LevelEditorChangeName(string value)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        GameManager.Instance.currentEditorLevelName = value;
+    }
+
+    // Sets the next level (sanitize input?)
+    public void LevelEditorSetNextLevel(string value)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        LevelManager.Instance.currentLevel.nextLevel = value;
+    }
+
+    // Sets the REMIX level (sanitize input?)
+    public void LevelEditorSetRemixLevel(string value)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        LevelManager.Instance.currentLevel.remixLevel = value;
+    }
+
+    // Set freeroam value
+    public void LevelEditorSetFreeroam(bool value)
+    {
+        if (!GameManager.Instance.IsEditor()) return;
+        LevelManager.Instance.currentLevel.freeroam = value;
     }
 
     // Goto next level
@@ -214,6 +276,11 @@ public class UI : MonoBehaviour
     {
         public GameObject import;
         public GameObject playtest;
+        public InputField idField;
+        public InputField nameField;
+        public InputField nextLevelField;
+        public InputField remixLevelField;
+        public Toggle freeroamToggle;
     }
 
     public class PreloadUI : UIObject
@@ -365,10 +432,10 @@ public class UI : MonoBehaviour
     {
         var save = GameManager.save.game.levels.Find(level => level.levelID == LevelManager.Instance.currentLevel.nextLevel);
 
-        // Loads the level
+        // Loads the level (Load internal level first, if it fails, load external)
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
-        LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel);
+        if (!LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel)) LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel, true);
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);

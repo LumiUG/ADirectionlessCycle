@@ -225,7 +225,7 @@ public class LevelManager : MonoBehaviour
         levelName = levelName.Trim();
 
         // Level id stuff
-        if (levelID == default) levelID = $"{levelName}-{Random.Range(1000000, 1000000000)}";
+        if (levelID == default) levelID = $"{levelName}-{Random.Range(1, 1000)}";
 
         // Create the level object
         SerializableLevel level = new() { levelName = levelName };
@@ -1030,7 +1030,9 @@ public class LevelManager : MonoBehaviour
     public void ActionRemixCondition(string remixID)
     {
         var save = GameManager.save.game.levels.Find(level => level.levelID == remixID);
-        LoadLevel(remixID);
+        
+        // Loads the level (Load internal level first, if it fails, load external)
+        if (!LoadLevel(remixID)) LoadLevel(remixID, true);
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Unknown);

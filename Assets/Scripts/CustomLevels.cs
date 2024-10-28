@@ -139,6 +139,7 @@ public class CustomLevels : MonoBehaviour
     {
         GameManager.Instance.currentEditorLevelID = selectedLevelID;
         GameManager.Instance.currentEditorLevelName = selectedLevelName;
+        GameManager.Instance.newEditorLevelID = selectedLevelID;
 
         string content = File.ReadAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level");
         File.WriteAllText($"{GameManager.customLevelPath}/{LevelManager.Instance.levelEditorName}.level", content);
