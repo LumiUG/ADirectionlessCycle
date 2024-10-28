@@ -1291,6 +1291,7 @@ MonoBehaviour:
   - {fileID: 420599475}
   - {fileID: 543097116}
   - {fileID: 131792950}
+  canvas: {fileID: 293672308}
 --- !u!114 &293672306
 MonoBehaviour:
   m_ObjectHideFlags: 0

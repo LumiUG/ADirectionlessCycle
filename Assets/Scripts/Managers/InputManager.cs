@@ -63,7 +63,7 @@ public class InputManager : MonoBehaviour
         if (debugCommand == null) return;
 
         // Enable debug command
-        if (debugCommand == "debug")
+        if (debugCommand == "adastra")
         {
             if (!GameManager.Instance.buildDebugMode)
             {
@@ -76,8 +76,22 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
+        // Game completed flag
+        if (debugCommand == "imacheater")
+        {
+            if (!GameManager.save.game.hasCompletedGame)
+            {
+                GameManager.save.game.hasCompletedGame = true;
+                UI.Instance.global.SendMessage("Ready for some challenges?", 3);
+            } else {
+                GameManager.save.game.hasCompletedGame = false;
+                UI.Instance.global.SendMessage("You've been redeemed.", 3);
+            }
+            debugCommand = null;
+        }
+
         // Delete savedata and generate a new one
-        else if (debugCommand == "begone" && GameManager.Instance.buildDebugMode)
+        else if (debugCommand == "begone")
         {
             if (DebugConfirm()) return;
             GameManager.Instance.DeleteSave();
@@ -233,9 +247,10 @@ public class InputManager : MonoBehaviour
         if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
         if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
-        // Update UI (dear god)
-		Vector2 anchorPos = Input.mousePosition - new Vector3(Editor.I.popupRect.sizeDelta.x, Editor.I.popupRect.sizeDelta.y);
-		anchorPos = new Vector2(Math.Clamp(anchorPos.x / Editor.I.popupRect.lossyScale.x, -710, 710), Math.Clamp(anchorPos.y / Editor.I.popupRect.lossyScale.y, -202, 202));
+        // Set popup position
+        Vector3 screenPos = Input.mousePosition;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(Editor.I.canvas.transform as RectTransform, screenPos, null, out Vector2 anchorPos);
+        anchorPos = new Vector2(Math.Clamp(anchorPos.x, -710, 710), Math.Clamp(anchorPos.y, -202, 202));
         Editor.I.popupRect.anchoredPosition = anchorPos;
         
         Editor.I.popup.SetActive(true);

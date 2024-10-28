@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,6 +21,7 @@ public class CustomLevels : MonoBehaviour
     public Button popupDelete;
     public InputField popupLevelID;
     public InputField popupLevelName;
+    public List<Image> popupStars = new();
     public readonly int vertical = -700;
 
     private string selectedLevelID = null;
@@ -27,8 +30,10 @@ public class CustomLevels : MonoBehaviour
     private GameObject selectedLevel = null;
     private GameObject customLevelPrefab;
     private Sprite starSprite;
+    private Sprite hollowStarSprite;
     private bool confirmDeletion = false;
     private int count = 0;
+    private bool shouldReloadLevels = false;
 
     void Start()
     {
@@ -36,6 +41,7 @@ public class CustomLevels : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(backButton);
         customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
         starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
+        hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
 
         // Load all custom levels
         LoadCustomLevels();
@@ -110,6 +116,7 @@ public class CustomLevels : MonoBehaviour
         selectedLevelName = levelName;
         selectedLevelID = levelID;
         selectedLevelAsData = LevelManager.Instance.GetLevel(selectedLevelID, true);
+        SetStarSprites(selectedLevelAsData.difficulty);
         popupPlay.interactable = true;
         popupEdit.interactable = true;
         popupDelete.interactable = true;
@@ -123,6 +130,13 @@ public class CustomLevels : MonoBehaviour
     // Close a level's menu
     public void CreateLevel()
     {
+        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame)
+        {
+            UI.Instance.global.SendMessage("Complete the game first!");
+            CloseLevelMenu();
+            return;
+        }
+
         selectedLevelID = LevelManager.Instance.SaveLevel("New level", default, true, null);
         selectedLevelName = "New level";
         EditLevel();
@@ -131,9 +145,12 @@ public class CustomLevels : MonoBehaviour
     // Close a level's menu
     public void CloseLevelMenu()
     {
+        if (shouldReloadLevels) RefreshCustomLevels();
+
         popupTitle.text = "Level Menu";
         selectedLevelAsData = null;
         confirmDeletion = false;
+        shouldReloadLevels = false;
         EventSystem.current.SetSelectedGameObject(backButton);
         popup.SetActive(false);
     }
@@ -147,6 +164,13 @@ public class CustomLevels : MonoBehaviour
     // Edit current level
     public void EditLevel()
     {
+        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame)
+        {
+            UI.Instance.global.SendMessage("Complete the game first!");
+            CloseLevelMenu();
+            return;
+        }
+
         GameManager.Instance.currentEditorLevelID = selectedLevelID;
         GameManager.Instance.currentEditorLevelName = selectedLevelName;
 
@@ -198,6 +222,17 @@ public class CustomLevels : MonoBehaviour
         CloseLevelMenu();
     }
 
+    // Sets the current level difficulty
+    public void SetLevelDifficulty(int difficulty)
+    {
+        if (selectedLevelAsData.difficulty == difficulty) return;
+        
+        selectedLevelAsData.difficulty = difficulty;
+        File.WriteAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level", JsonUtility.ToJson(selectedLevelAsData, false));
+        SetStarSprites(difficulty);
+        shouldReloadLevels = true;
+    }
+
     // Changes a Level's ID
     public void ChangeLevelID(string newID)
     {
@@ -222,5 +257,12 @@ public class CustomLevels : MonoBehaviour
     public void OpenCustomLevelFolder()
     {
         Application.OpenURL(GameManager.customLevelPath);
+    }
+
+    // Enables/disables stars
+    private void SetStarSprites(int index)
+    {
+        popupStars.ForEach(star => star.sprite = hollowStarSprite);
+        for (int i = 0; i < index; i++) { popupStars[i].sprite = starSprite; }
     }
 }

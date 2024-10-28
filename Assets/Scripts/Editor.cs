@@ -14,6 +14,7 @@ public class Editor : MonoBehaviour
     [HideInInspector] public bool ignoreUpdateEvent = false;
     public List<Image> menuTiles = new(capacity: 4);
     public List<GameObject> menuSelectors = new(capacity: 4);
+    public Canvas canvas;
 
     internal SpriteRenderer spriteRenderer;
     internal Coroutine multiClick = null;
