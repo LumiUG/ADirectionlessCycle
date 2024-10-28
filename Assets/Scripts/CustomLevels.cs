@@ -2,6 +2,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Serializables;
 using static TransitionManager.Transitions;
 
 public class CustomLevels : MonoBehaviour
@@ -16,10 +17,13 @@ public class CustomLevels : MonoBehaviour
     public Button popupPlay;
     public Button popupEdit;
     public Button popupDelete;
+    public InputField popupLevelID;
+    public InputField popupLevelName;
     public readonly int vertical = -700;
 
     private string selectedLevelID = null;
     private string selectedLevelName = null;
+    private SerializableLevel selectedLevelAsData = null;
     private GameObject selectedLevel = null;
     private GameObject customLevelPrefab;
     private Sprite starSprite;
@@ -105,10 +109,15 @@ public class CustomLevels : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(popupPlay.gameObject);
         selectedLevelName = levelName;
         selectedLevelID = levelID;
+        selectedLevelAsData = LevelManager.Instance.GetLevel(selectedLevelID, true);
         popupPlay.interactable = true;
         popupEdit.interactable = true;
         popupDelete.interactable = true;
+        popupLevelID.interactable = true;
+        popupLevelName.interactable = true;
         popup.SetActive(true);
+        popupLevelID.text = selectedLevelID;
+        popupLevelName.text = selectedLevelAsData.levelName;
     }
 
     // Close a level's menu
@@ -123,6 +132,7 @@ public class CustomLevels : MonoBehaviour
     public void CloseLevelMenu()
     {
         popupTitle.text = "Level Menu";
+        selectedLevelAsData = null;
         confirmDeletion = false;
         EventSystem.current.SetSelectedGameObject(backButton);
         popup.SetActive(false);
@@ -139,7 +149,6 @@ public class CustomLevels : MonoBehaviour
     {
         GameManager.Instance.currentEditorLevelID = selectedLevelID;
         GameManager.Instance.currentEditorLevelName = selectedLevelName;
-        GameManager.Instance.newEditorLevelID = selectedLevelID;
 
         string content = File.ReadAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level");
         File.WriteAllText($"{GameManager.customLevelPath}/{LevelManager.Instance.levelEditorName}.level", content);
@@ -171,7 +180,42 @@ public class CustomLevels : MonoBehaviour
         popupPlay.interactable = false;
         popupEdit.interactable = false;
         popupDelete.interactable = false;
+        popupLevelID.interactable = false;
+        popupLevelName.interactable = false;
         confirmDeletion = false;
+    }
+
+    // Changes the current level name
+    public void ChangeLevelName(string value)
+    {
+        if (LevelManager.Instance.IsStringEmptyOrNull(value)) return;
+
+        selectedLevelAsData.levelName = value;
+        File.WriteAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level", JsonUtility.ToJson(selectedLevelAsData, false));
+        
+        UI.Instance.global.SendMessage($"Level name set to \"{value}\"", 5f);
+        RefreshCustomLevels();
+        CloseLevelMenu();
+    }
+
+    // Changes a Level's ID
+    public void ChangeLevelID(string newID)
+    {
+        if (LevelManager.Instance.IsStringEmptyOrNull(newID)) return;
+
+        // Rename file if level ID changed
+        string cleanID = string.Concat(newID.Split(Path.GetInvalidFileNameChars()));
+        if (File.Exists($"{GameManager.customLevelPath}/{cleanID}.level")) return;
+
+        // Rename file and refresh levels
+        File.Move(
+            $"{GameManager.customLevelPath}/{selectedLevelID}.level",
+            $"{GameManager.customLevelPath}/{cleanID}.level");
+        selectedLevelID = cleanID;
+
+        UI.Instance.global.SendMessage($"Level ID set to \"{newID}\"", 5f);
+        RefreshCustomLevels();
+        CloseLevelMenu();
     }
 
     // Open the custom level folder

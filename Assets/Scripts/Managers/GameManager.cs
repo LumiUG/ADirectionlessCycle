@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool buildDebugMode;
     [HideInInspector] public string currentEditorLevelID;
     [HideInInspector] public string currentEditorLevelName;
-    [HideInInspector] public string newEditorLevelID;
     public static Savedata save;
     public static string customLevelPath;
 
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviour
         ToggleCursor(false);
         currentEditorLevelID = null;
         currentEditorLevelName = null;
-        newEditorLevelID = null;
         buildDebugMode = false;
         isEditing = false;
 

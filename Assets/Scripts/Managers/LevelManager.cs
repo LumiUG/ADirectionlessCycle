@@ -720,6 +720,7 @@ public class LevelManager : MonoBehaviour
         {
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
             TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
+            GameManager.Instance.isEditing = false;
             return;
         }
 

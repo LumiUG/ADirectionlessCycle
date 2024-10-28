@@ -102,8 +102,6 @@ public class Editor : MonoBehaviour
         for (int i = 0; i < menuTiles.Count; i++) { SetMenuSprite(i); }
 
         // Editor menu default values
-        UI.Instance.editor.idField.text = GameManager.Instance.currentEditorLevelID;
-        UI.Instance.editor.nameField.text = GameManager.Instance.currentEditorLevelName;
         UI.Instance.editor.nextLevelField.text = LevelManager.Instance.currentLevel.nextLevel;
         UI.Instance.editor.remixLevelField.text = LevelManager.Instance.currentLevel.remixLevel;
         UI.Instance.editor.freeroamToggle.isOn = LevelManager.Instance.currentLevel.freeroam;
