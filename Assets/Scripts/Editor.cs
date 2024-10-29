@@ -106,6 +106,9 @@ public class Editor : MonoBehaviour
         UI.Instance.editor.nextLevelField.text = LevelManager.Instance.currentLevel.nextLevel;
         UI.Instance.editor.remixLevelField.text = LevelManager.Instance.currentLevel.remixLevel;
         UI.Instance.editor.freeroamToggle.isOn = LevelManager.Instance.currentLevel.freeroam;
+
+        // Debug import level
+        if (GameManager.Instance.IsDebug()) UI.Instance.editor.import.SetActive(true);
     }
 
     void OnDisable() { I = null; }

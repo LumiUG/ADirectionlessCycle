@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -82,7 +81,7 @@ public class CustomLevels : MonoBehaviour
             // Get level info & preview image
             string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
             if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
-            Serializables.SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
+            SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
             if (!LevelManager.Instance.IsStringEmptyOrNull(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
 
             // Create prefab and set position

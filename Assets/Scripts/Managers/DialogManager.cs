@@ -58,7 +58,6 @@ public class DialogManager : MonoBehaviour
         UI.Instance.dialog.Toggle(true);
     
         // Resets the dialog box
-        UI.Instance.dialog.name.text = null; // UI.Instance.dialog.name.text = npcName;
         UI.Instance.dialog.text.text = string.Empty;
         hasDialogStarted = true;
 

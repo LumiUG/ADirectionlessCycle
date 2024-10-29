@@ -536,7 +536,7 @@ MonoBehaviour:
   inverseAreaTile: {fileID: 0}
   outboundAreaTile: {fileID: 0}
   levelTile: {fileID: 0}
-  fakeTile: {fileID: 0}
+  hologramTile: {fileID: 0}
   npcTile: {fileID: 0}
   hazardTile: {fileID: 0}
   voidTile: {fileID: 0}
@@ -544,6 +544,7 @@ MonoBehaviour:
   arrowTile: {fileID: 0}
   negativeArrowTile: {fileID: 0}
   orbTile: {fileID: 0}
+  fragmentTile: {fileID: 0}
   tilemapCollideable: {fileID: 0}
   tilemapObjects: {fileID: 0}
   tilemapWinAreas: {fileID: 0}
@@ -556,6 +557,7 @@ MonoBehaviour:
     levelName: 
     nextLevel: 
     remixLevel: 
+    previewImage: 
     hideUI: 0
     freeroam: 0
     difficulty: 1
@@ -919,7 +921,7 @@ GameObject:
   - component: {fileID: 6233202218686722990}
   - component: {fileID: 8585931209472274590}
   - component: {fileID: 1016618088581132397}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Outlines
   m_TagString: Untagged
   m_Icon: {fileID: 0}

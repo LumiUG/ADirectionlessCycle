@@ -132,21 +132,11 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Level Editor") return null;
         RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");
 
-        // Clear editor area
-        bool wasEditorMenuOpen = UI.Instance.editor.self.activeSelf;
-        UI.Instance.editor.Toggle(false);
-        // GameTile yoink = Editor.I.tileToPlace;
-        // Editor.I.tileToPlace = null;
-
         // Convert to Texture2D
         Texture2D tex = new(1920, 1080, TextureFormat.RGB24, false, true);
         RenderTexture.active = texture;
         tex.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
         tex.Apply();
-
-        // Re-enable editor stuff
-        if (wasEditorMenuOpen) UI.Instance.editor.Toggle(true);
-        // Editor.I.tileToPlace = yoink;
 
         // Encode and return
         return tex.EncodeToPNG(); 

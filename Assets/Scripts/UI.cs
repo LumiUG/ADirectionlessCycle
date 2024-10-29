@@ -80,7 +80,6 @@ public class UI : MonoBehaviour
 
         // Dialog UI
         dialog = new() { self = transform.Find("Dialog UI").gameObject };
-        dialog.name = dialog.self.transform.Find("Name").GetComponent<Text>();
         dialog.text = dialog.self.transform.Find("Text").GetComponent<Text>();
 
         // Change from preload scene?
@@ -366,7 +365,6 @@ public class UI : MonoBehaviour
 
     public class DialogUI : UIObject
     {
-        public Text name;
         public Text text;
         public void SetText(string newText, bool additive = false)
         {
