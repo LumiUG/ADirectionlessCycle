@@ -10,7 +10,7 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = false;
-    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Triangle, Unknown };
+    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
 
@@ -19,6 +19,7 @@ public class TransitionManager : MonoBehaviour
     private AnimatorOverrideController swipe;
     private AnimatorOverrideController triangle;
     private AnimatorOverrideController unknown;
+    private AnimatorOverrideController refresh;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class TransitionManager : MonoBehaviour
         swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
         triangle = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Triangle/Base");
         unknown = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Unknown/Base");
+        refresh = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Refresh/Base");
 
         // Play default
         ChangeTransition(Transitions.Reveal);
@@ -66,6 +68,9 @@ public class TransitionManager : MonoBehaviour
             case Transitions.Unknown:
                 animator.runtimeAnimatorController = unknown;
                 break;
+            case Transitions.Refresh:
+                animator.runtimeAnimatorController = refresh;
+                break;
             default: // Transitions.Ignore
                 break;
         }
@@ -75,7 +80,7 @@ public class TransitionManager : MonoBehaviour
     internal float GetClipLength(string clipName)
     {
 	    AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-		foreach (AnimationClip clip in clips) { if(clip.name == clipName) return clip.length; }
+		foreach (AnimationClip clip in clips) { if (clip.name == clipName) return clip.length; }
         return 0f;
     }
 

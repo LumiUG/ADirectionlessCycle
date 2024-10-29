@@ -76,6 +76,8 @@ public class Selectors : MonoBehaviour
         left.SetParent(rt);
         right.localScale = new(1, 1, 1);
         left.localScale = new(-1, 1, 1);
+        left.rotation = Quaternion.identity;
+        right.rotation = Quaternion.identity;
 
         // (optionally) sets the position to the RectTransform
         if (forceMove)
@@ -96,6 +98,8 @@ public class Selectors : MonoBehaviour
 
         right.anchoredPosition = Vector2.MoveTowards(right.anchoredPosition, distanceRight, rightSpeed);
         left.anchoredPosition = Vector2.MoveTowards(left.anchoredPosition, distanceLeft, leftSpeed);
+        left.rotation = Quaternion.identity;
+        right.rotation = Quaternion.identity;
     }
 
     // Gets the references of the selectors

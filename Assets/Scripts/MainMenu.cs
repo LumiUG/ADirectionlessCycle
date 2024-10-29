@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
         version.text = $"v{Application.version}";
     }
 
-    // 
+    // Play button event
     public void Play()
     {
         if (GameManager.save.game.doPrologue) TransitionManager.Instance.TransitionIn<string>(Reveal, ActionPrologue);

@@ -30,6 +30,7 @@ public class CustomLevels : MonoBehaviour
     private GameObject customLevelPrefab;
     private Sprite starSprite;
     private Sprite hollowStarSprite;
+    private Animator popupAnimator;
     private bool confirmDeletion = false;
     private int count = 0;
     private bool shouldReloadLevels = false;
@@ -41,6 +42,7 @@ public class CustomLevels : MonoBehaviour
         customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
         starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
         hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
+        popupAnimator = popup.GetComponent<Animator>();
 
         // Load all custom levels
         LoadCustomLevels();
@@ -59,10 +61,7 @@ public class CustomLevels : MonoBehaviour
     // Refreshes custom levels
     public void RefreshCustomLevels(string filter = null)
     {
-        // Clear all levels and re-load everything
-        foreach (Transform level in holder.transform) { Destroy(level.gameObject); }
-        holder.anchoredPosition = new Vector2(holder.anchoredPosition.x, -540);
-        LoadCustomLevels(filter);
+        TransitionManager.Instance.TransitionIn(Refresh, ActionRefreshLevels, filter);
     }
 
     // Loads all custom levels
@@ -124,6 +123,7 @@ public class CustomLevels : MonoBehaviour
         popup.SetActive(true);
         popupLevelID.text = selectedLevelID;
         popupLevelName.text = selectedLevelAsData.levelName;
+        popupAnimator.Play("Level Menu");
     }
 
     // Close a level's menu
@@ -192,12 +192,12 @@ public class CustomLevels : MonoBehaviour
         }
 
         // Delete the level!
+        EventSystem.current.SetSelectedGameObject(popupExit);
         string deletionPath = $"{GameManager.customLevelPath}/{selectedLevelID}.level";
         if (File.Exists(deletionPath)) File.Delete(deletionPath);
         RefreshCustomLevels();
 
         // Deletion visuals
-        EventSystem.current.SetSelectedGameObject(popupExit);
         AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
         popupTitle.text = "Level deleted!";
         popupPlay.interactable = false;
@@ -263,5 +263,15 @@ public class CustomLevels : MonoBehaviour
     {
         popupStars.ForEach(star => star.sprite = hollowStarSprite);
         for (int i = 0; i < index; i++) { popupStars[i].sprite = starSprite; }
+    }
+
+    // Actions //
+    private void ActionRefreshLevels(string filter)
+    {
+        // Clear all levels and re-load everything
+        foreach (Transform level in holder.transform) { Destroy(level.gameObject); }
+        holder.anchoredPosition = new Vector2(holder.anchoredPosition.x, -540);
+        LoadCustomLevels(filter);
+        TransitionManager.Instance.TransitionOut<string>(Refresh);
     }
 }
