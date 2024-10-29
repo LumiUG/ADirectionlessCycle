@@ -7,10 +7,10 @@ public class Float : MonoBehaviour
     [Range(0, 1f)] public int dirX = 0;
     [Range(0, 1f)] public int dirY = 1;
     [Range(0.1f, 10f)] public float speed = 1f;
+    public bool direction = true;
 
     private Vector2 originalPos;
     private RectTransform anchor;
-    private bool direction = true;
 
     private void Awake()
     {

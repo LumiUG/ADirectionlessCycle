@@ -57,7 +57,13 @@ public class InputManager : MonoBehaviour
         if (!canInputCommands) return;
 
         // Write a command
-        if (Input.anyKeyDown) { debugCommand += Input.inputString.Trim().ToLower(); }
+        if (Input.anyKeyDown)
+        {
+            debugCommand += Input.inputString.Trim().ToLower();
+            if (debugCommand.Length > 10) debugCommand = debugCommand[..10];
+            MainMenu.I.debug.CrossFadeAlpha(1f, 0f, true);
+            MainMenu.I.debug.text = debugCommand;
+        }
 
         // Null check
         if (debugCommand == null) return;
@@ -109,7 +115,11 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
-        if (debugCommand == null) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+        if (debugCommand == null)
+        {
+            MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
+            AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+        }
     }
 
     // Returns if you are past the move cooldown timer
@@ -294,8 +304,10 @@ public class InputManager : MonoBehaviour
     // Toggles menu
     private void OnEditorEscape()
     {
-        if (!GameManager.Instance.IsEditor()) return;
         if (!UI.Instance || !EventSystem.current) return;
+        if (SceneManager.GetActiveScene().name == "Custom Levels") if (CustomLevels.I.popup.activeSelf) { CustomLevels.I.CloseLevelMenu(); return; }
+        
+        if (!GameManager.Instance.IsEditor()) return;
         if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
@@ -475,7 +487,7 @@ public class InputManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
         canInputCommands = ctx.Get<float>() == 1f;
 
-        if (!canInputCommands) debugCommand = null;
+        if (!canInputCommands) { debugCommand = null; MainMenu.I.debug.text = null; }
     }
 
     // Confirm a command
@@ -485,6 +497,7 @@ public class InputManager : MonoBehaviour
         {
             UI.Instance.global.SendMessage("Are you sure about that?", 2);
             AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.30f);
+            MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             confirmCommand = $"{debugCommand}";
             debugCommand = null;
             return true;

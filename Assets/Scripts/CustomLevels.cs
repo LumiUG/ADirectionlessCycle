@@ -144,14 +144,14 @@ public class CustomLevels : MonoBehaviour
     // Close a level's menu
     public void CloseLevelMenu()
     {
-        if (shouldReloadLevels) RefreshCustomLevels();
-
         popupTitle.text = "Level Menu";
         selectedLevelAsData = null;
         confirmDeletion = false;
-        shouldReloadLevels = false;
         EventSystem.current.SetSelectedGameObject(backButton);
         popup.SetActive(false);
+
+        if (shouldReloadLevels) RefreshCustomLevels();
+        shouldReloadLevels = false;
     }
 
     // Load current level
