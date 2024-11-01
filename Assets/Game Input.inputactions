@@ -204,7 +204,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HubSwipeLeft",
+                    "name": "SwipeLeft",
                     "type": "Button",
                     "id": "7ae208ed-2a4b-4e8f-b00e-dd4df3968d91",
                     "expectedControlType": "Button",
@@ -213,7 +213,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HubSwipeRight",
+                    "name": "SwipeRight",
                     "type": "Button",
                     "id": "eb03a0f3-c459-486a-90de-8418e5d850d9",
                     "expectedControlType": "Button",
@@ -666,7 +666,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HubSwipeLeft",
+                    "action": "SwipeLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -677,7 +677,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HubSwipeRight",
+                    "action": "SwipeRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

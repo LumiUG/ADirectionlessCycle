@@ -6,18 +6,24 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject menuButton;
+    [HideInInspector] public static SettingsMenu I;
+    [HideInInspector] public int menuIndex = 0;
     public Dropdown resolutionDropdown;
     public Toggle settingsToggle;
     public Toggle repeatInputToggle;
     public Toggle restartToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
+    public List<GameObject> menus = new();
 
     private readonly List<string> resolutions = new();
 
+    private void Awake() { I = this; }
+
     private void Start()
     {
+        menuIndex = 0;
+
         // Resolution dropdown menu
         resolutionDropdown.ClearOptions();
 
@@ -50,7 +56,7 @@ public class SettingsMenu : MonoBehaviour
     public void FixedUpdate()
     {
         if (!EventSystem.current) return;
-        if (EventSystem.current.currentSelectedGameObject == null) EventSystem.current.SetSelectedGameObject(menuButton);
+        if (EventSystem.current.currentSelectedGameObject == null) EventSystem.current.SetSelectedGameObject(menus[menuIndex].transform.Find("Back Button").gameObject);
     }
 
     // Changes the game resolution
@@ -76,5 +82,13 @@ public class SettingsMenu : MonoBehaviour
     public void ToggleConfirmRestart(bool toggle)
     {
         GameManager.save.preferences.forceConfirmRestart = toggle;
+    }
+
+    public void ToggleMenu(int index)
+    {
+        if (menuIndex == index || index > menus.Count || index < 0) return;
+        foreach (GameObject menu in menus) { menu.SetActive(false); }
+        menus[index].SetActive(true);
+        menuIndex = index;
     }
 }

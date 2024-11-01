@@ -390,18 +390,34 @@ public class InputManager : MonoBehaviour
 
     // Hub //
 
-    private void OnHubSwipeLeft()
+    private void OnSwipeLeft()
     {
-        if (SceneManager.GetActiveScene().name != "Hub") return;
-        if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
-        hubMovement.ChangeWorld(-1);
+        if (SceneManager.GetActiveScene().name == "Hub")
+        {
+            if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
+            hubMovement.ChangeWorld(-1);
+            return;
+        }
+
+        if (SceneManager.GetActiveScene().name == "Settings")
+        {
+            SettingsMenu.I.ToggleMenu(SettingsMenu.I.menuIndex - 1);
+        }
     }
 
-    private void OnHubSwipeRight()
+    private void OnSwipeRight()
     {
-        if (SceneManager.GetActiveScene().name != "Hub") return;
-        if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
-        hubMovement.ChangeWorld(1);
+        if (SceneManager.GetActiveScene().name == "Hub")
+        {
+            if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
+            hubMovement.ChangeWorld(1);
+            return; 
+        }
+
+        if (SceneManager.GetActiveScene().name == "Settings")
+        {
+            SettingsMenu.I.ToggleMenu(SettingsMenu.I.menuIndex + 1);
+        }
     }
 
     // Etc //
