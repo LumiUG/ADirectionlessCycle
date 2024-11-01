@@ -248,7 +248,7 @@ public class CustomLevels : MonoBehaviour
         selectedLevelID = cleanID;
 
         UI.Instance.global.SendMessage($"Level ID set to \"{newID}\"", 5f);
-        RefreshCustomLevels();
+        shouldReloadLevels = true;
         CloseLevelMenu();
     }
 

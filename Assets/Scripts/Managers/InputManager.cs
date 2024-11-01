@@ -59,7 +59,15 @@ public class InputManager : MonoBehaviour
         // Write a command
         if (Input.anyKeyDown)
         {
-            debugCommand += Input.inputString.Trim().ToLower();
+            string keyboardInput = Input.inputString.Trim().ToLower();
+            if (LevelManager.Instance.IsStringEmptyOrNull(keyboardInput)) {
+                if (Input.GetKeyDown(KeyCode.UpArrow)) keyboardInput = "U";
+                else if (Input.GetKeyDown(KeyCode.DownArrow)) keyboardInput = "D";
+                else if (Input.GetKeyDown(KeyCode.LeftArrow)) keyboardInput = "L";
+                else if (Input.GetKeyDown(KeyCode.RightArrow)) keyboardInput = "R";
+            }
+            debugCommand += keyboardInput;
+
             if (debugCommand.Length > 10) debugCommand = debugCommand[..10];
             MainMenu.I.debug.CrossFadeAlpha(1f, 0f, true);
             MainMenu.I.debug.text = debugCommand;
@@ -74,11 +82,18 @@ public class InputManager : MonoBehaviour
             if (!GameManager.Instance.buildDebugMode)
             {
                 GameManager.Instance.buildDebugMode = true;
-                UI.Instance.global.SendMessage("...I hope you know what you're doing.", 3);
+                UI.Instance.global.SendMessage("I hope you know what you're doing.", 3);
             } else {
                 GameManager.Instance.buildDebugMode = false;
                 UI.Instance.global.SendMessage("Then so be it!", 3);
             }
+            debugCommand = null;
+        }
+
+        // Secret title command
+        if (debugCommand == "UDLRLRDL")
+        {
+            UI.Instance.global.SendMessage("Sneaky!", 3);
             debugCommand = null;
         }
 
@@ -97,7 +112,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Delete savedata and generate a new one
-        else if (debugCommand == "begone")
+        else if (debugCommand == "zero")
         {
             if (DebugConfirm()) return;
             GameManager.Instance.DeleteSave();

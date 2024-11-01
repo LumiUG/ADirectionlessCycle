@@ -15,6 +15,7 @@ public class SettingsMenu : MonoBehaviour
     public Slider masterSlider;
     public Slider SFXSlider;
     public List<GameObject> menus = new();
+    public List<GameObject> buttons = new();
 
     private readonly List<string> resolutions = new();
 
@@ -22,6 +23,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
+        EventSystem.current.SetSelectedGameObject(buttons[0]);
         menuIndex = 0;
 
         // Resolution dropdown menu
@@ -40,8 +42,7 @@ public class SettingsMenu : MonoBehaviour
         int currentIndex = resolutions.FindIndex(res => { return res == $"{Screen.width}x{Screen.height}"; });
         if (currentIndex != -1) resolutionDropdown.value = currentIndex;
 
-        // Update UI (change from GameManager in the future)
-        EventSystem.current.SetSelectedGameObject(resolutionDropdown.gameObject);
+        // Update UI
         settingsToggle.isOn = Screen.fullScreen;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
         restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
@@ -86,8 +87,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void ToggleMenu(int index)
     {
-        if (menuIndex == index || index > menus.Count || index < 0) return;
+        if (menuIndex == index || index >= menus.Count || index < 0) return;
         foreach (GameObject menu in menus) { menu.SetActive(false); }
+
+        if (buttons[index] != EventSystem.current.currentSelectedGameObject) EventSystem.current.SetSelectedGameObject(buttons[index]);
         menus[index].SetActive(true);
         menuIndex = index;
     }
