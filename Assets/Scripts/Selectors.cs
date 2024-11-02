@@ -15,6 +15,7 @@ public class Selectors : MonoBehaviour
     private Vector2 distanceRight = Vector2.zero;
     private Vector2 distanceLeft = Vector2.zero;
     private bool stopMoving = false;
+    private Color visibleColor = new(1, 1, 1, 1);
 
     void Start()
     {
@@ -51,6 +52,9 @@ public class Selectors : MonoBehaviour
 
         // New object?
         if (!EventSystem.current) return;
+        leftImage.color = visibleColor;
+        rightImage.color = visibleColor;
+
         if (tracking == EventSystem.current.currentSelectedGameObject) return;
 
         // Select SFX

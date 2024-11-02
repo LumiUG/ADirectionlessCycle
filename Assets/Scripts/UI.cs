@@ -19,6 +19,8 @@ public class UI : MonoBehaviour
     [HideInInspector] public DialogUI dialog;
     [HideInInspector] public Selectors selectors;
 
+    private Color invisibleColor = new(1, 1, 1, 0);
+
     private void Awake()
     {
         // Singleton (UI has persistence)
@@ -93,6 +95,10 @@ public class UI : MonoBehaviour
         if (selectors)
         {
             if (!selectors.left || !selectors.right) return;
+            
+            selectors.leftImage.color = invisibleColor;
+            selectors.rightImage.color = invisibleColor;
+
             selectors.left.SetParent(selectors.gameObject.transform);
             selectors.right.SetParent(selectors.gameObject.transform);
             selectors.left.anchoredPosition = Vector2.zero;
