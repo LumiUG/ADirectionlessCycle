@@ -392,6 +392,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321015118444761898, guid: 1654daf2d227c7c42a11ebc9183e456c, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6832144983975311638, guid: 1654daf2d227c7c42a11ebc9183e456c, type: 3}
       propertyPath: m_Name
       value: Intermissions
