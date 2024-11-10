@@ -160,7 +160,7 @@
                 },
                 {
                     "name": "Undo",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "686b5dae-6bb7-4733-bb85-e0aa531a9fb5",
                     "expectedControlType": "Button",
                     "processors": "",

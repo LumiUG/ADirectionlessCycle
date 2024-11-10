@@ -17,9 +17,11 @@ public class InputManager : MonoBehaviour
 
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
 
-    private bool isHolding = false;
+    private bool isHoldingMovement = false;
+    private bool isHoldingUndo = false;
     private Coroutine outCoro = null;
     private Coroutine movementCoro = null;
+    private Coroutine undoCoro = null;
     private readonly float repeatMovementCD = 0.12f;
     private readonly float manualMovementCD = 0.12f;
     private float currentMovementCD = 0f;
@@ -152,11 +154,11 @@ public class InputManager : MonoBehaviour
 
         // Input prevention logic
         Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero) { isHolding = false; return; }
+        if (movement == Vector3Int.zero) { isHoldingMovement = false; return; }
         if (movement.x != 0 && movement.y != 0) return;
 
         // Tile vars
-        isHolding = true;
+        isHoldingMovement = true;
         latestMovement = movement;
 
         // Move a single time
@@ -177,13 +179,16 @@ public class InputManager : MonoBehaviour
     }
 
     // Undo move
-    private void OnUndo()
+    private void OnUndo(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !LevelManager.Instance.IsUndoQueueValid()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        bool holding = ctx.Get<float>() == 1f;
+        isHoldingUndo = holding;
 
         // Undo latest move
-        LevelManager.Instance.Undo();
-        LevelManager.Instance.RemoveUndoFrame();
+        if (!holding) return;
+        if (undoCoro != null) StopCoroutine(undoCoro); 
+        undoCoro = StartCoroutine(RepeatUndo());
     }
 
     // Ping all areas
@@ -213,7 +218,7 @@ public class InputManager : MonoBehaviour
     // Repeats a movement
     private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.005f)
     {
-        while (direction == latestMovement && isHolding && LevelManager.Instance.IsAllowedToPlay())
+        while (direction == latestMovement && isHoldingMovement && LevelManager.Instance.IsAllowedToPlay())
         {
             if (!MoveCDCheck(repeatMovementCD))
             {
@@ -223,6 +228,23 @@ public class InputManager : MonoBehaviour
                 currentMovementCD = Time.time;
             }
             yield return new WaitForSeconds(speed);
+        }
+    }
+
+    // Repeats undoing
+    private IEnumerator RepeatUndo(float speed = 0.22f)
+    {
+        int performed = 0;
+        while (isHoldingUndo && LevelManager.Instance.IsAllowedToPlay() && LevelManager.Instance.IsUndoQueueValid())
+        {
+            LevelManager.Instance.Undo();
+            LevelManager.Instance.RemoveUndoFrame();
+            yield return new WaitForSeconds(speed);
+
+            // Speedup undoing gradually
+            performed++;
+            if (performed >= 5) { performed = 0; speed -= 0.015f; }
+            if (speed <= 0.05f) speed = 0.05f; // speed cap
         }
     }
 
