@@ -339,11 +339,17 @@ public class InputManager : MonoBehaviour
     }
 
     // Toggles menu
-    private void OnEditorEscape()
+    private void OnEscape()
     {
         if (!UI.Instance || !EventSystem.current) return;
+
+        // Custom levels scene
         if (SceneManager.GetActiveScene().name == "Custom Levels") if (CustomLevels.I.popup.activeSelf) { CustomLevels.I.CloseLevelMenu(); return; }
-        
+
+        // Misc
+        if (UI.Instance.restart.self.activeSelf) { UI.Instance.CloseConfirmRestart(); return; }
+
+        // Editor scene
         if (!GameManager.Instance.IsEditor()) return;
         if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }

@@ -15,15 +15,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EditorEscape",
-                    "type": "Button",
-                    "id": "da9c6b1a-6cbc-4822-9562-b7d59a8f7524",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "EditorRightClickGrid",
                     "type": "Button",
                     "id": "09d217be-4e60-47ea-b6f3-a6272f9e1047",
@@ -135,6 +126,15 @@
                     "name": "EditorSelectFour",
                     "type": "Button",
                     "id": "55b677ff-91a7-4ed0-a231-dd5319b6a5d9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "da9c6b1a-6cbc-4822-9562-b7d59a8f7524",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -518,17 +518,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ded37f87-8476-4a57-92a6-36eb48cffc7a",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "EditorEscape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "41292ce5-eb78-48b5-8281-48e3526e5f5c",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -645,17 +634,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9172316b-974a-4634-bdaa-c4a463419e06",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "EditorEscape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -799,6 +777,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "EditorSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ded37f87-8476-4a57-92a6-36eb48cffc7a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9172316b-974a-4634-bdaa-c4a463419e06",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

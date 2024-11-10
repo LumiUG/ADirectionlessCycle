@@ -11,7 +11,6 @@ public class DialogManager : MonoBehaviour
     public DialogScriptable loadedDial;
     public string[] dialog;
     public DialogEvent[] events = { new() };
-    public string npcName = "???";
     public float textSpeed = 0.05f;
     public bool canBeSkipped = true;
     public bool shouldExhaust = true;
@@ -128,7 +127,6 @@ public class DialogManager : MonoBehaviour
     public void DelegateScriptable(DialogScriptable newDialog, bool doDefaults = false) {
         dialog = newDialog.dialog;
         events = newDialog.events;
-        npcName = newDialog.npcName;
         textSpeed = newDialog.textSpeed;
         canBeSkipped = newDialog.canBeSkipped;
         shouldExhaust = newDialog.shouldExhaust;
