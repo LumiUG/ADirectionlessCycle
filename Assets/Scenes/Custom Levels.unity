@@ -5769,6 +5769,7 @@ MonoBehaviour:
   rowCount: 0
   holder: {fileID: 1062814774}
   backButton: {fileID: 247285165}
+  lastSessionButton: {fileID: 238436359}
   popup: {fileID: 1230291201}
   popupTitle: {fileID: 1106863066}
   popupExit: {fileID: 1927172182}
@@ -6100,7 +6101,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 15
+  m_CharacterLimit: 25
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls:

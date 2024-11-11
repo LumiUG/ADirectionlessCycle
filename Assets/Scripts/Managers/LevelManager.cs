@@ -948,11 +948,6 @@ public class LevelManager : MonoBehaviour
         // Gotta do it this way instead of clearing the movement list
         // to avoid changing the stack size!
         noMove = true;
-        
-        // foreach (GameTile tile in levelObjects)
-        // {
-        //     if (!movementBlacklist.Contains(tile)) movementBlacklist.Add(tile);
-        // }
     }
 
     // Updates a custom tile's sprite

@@ -12,6 +12,7 @@ public class CustomLevels : MonoBehaviour
     [HideInInspector] public int rowCount;
     public RectTransform holder;
     public GameObject backButton;
+    public Button lastSessionButton;
     public GameObject popup;
     public Text popupTitle;
     public GameObject popupExit;
@@ -44,6 +45,8 @@ public class CustomLevels : MonoBehaviour
         hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         popupAnimator = popup.GetComponent<Animator>();
 
+        if (GameManager.Instance.IsDebug()) lastSessionButton.interactable = true;
+
         // Load all custom levels
         LoadCustomLevels();
     }
@@ -72,7 +75,8 @@ public class CustomLevels : MonoBehaviour
 
         foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
         {
-            if (!fileName.EndsWith(".level") || fileName.Contains($"{LevelManager.Instance.levelEditorName}.level")) continue;
+            if (!fileName.EndsWith(".level")) continue;
+            if (fileName.Contains($"{LevelManager.Instance.levelEditorName}.level") && !GameManager.Instance.IsDebug()) continue;
             if (count == 0) rowCount++;
             Texture2D preview = null;
             count++;
@@ -235,7 +239,7 @@ public class CustomLevels : MonoBehaviour
     // Changes a Level's ID
     public void ChangeLevelID(string newID)
     {
-        if (LevelManager.Instance.IsStringEmptyOrNull(newID)) return;
+        if (LevelManager.Instance.IsStringEmptyOrNull(newID) || newID == LevelManager.Instance.levelEditorName) return;
 
         // Rename file if level ID changed
         string cleanID = string.Concat(newID.Split(Path.GetInvalidFileNameChars()));
