@@ -115,17 +115,17 @@ public class LevelManager : MonoBehaviour
         mimicTile = Resources.Load<MimicTile>("Tiles/Objects/Mimic");
         areaTile = Resources.Load<WinAreaTile>("Tiles/Areas/Area");
         inverseAreaTile = Resources.Load<InverseWinAreaTile>("Tiles/Areas/Inverse Area");
-        outboundAreaTile = Resources.Load<OutboundAreaTile>("Tiles/Areas/Outbound Area");
+        // outboundAreaTile = Resources.Load<OutboundAreaTile>("Tiles/Areas/Outbound Area");
         hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
         voidTile = Resources.Load<VoidTile>("Tiles/Hazards/Void");
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
-        orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
-        fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
-        levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
+        // orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
+        // fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
+        // levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
         hologramTile = Resources.Load<HologramTile>("Tiles/Customs/Hologram");
-        npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
+        // npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
 
         // Defaults
         defaultAreaLayer = areaRenderer.sortingOrder;

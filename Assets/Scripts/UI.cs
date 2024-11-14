@@ -36,11 +36,9 @@ public class UI : MonoBehaviour
 
         // Editor menu
         editor = new() { self = transform.Find("Level Editor Menu").gameObject };
-        editor.import = editor.self.transform.Find("Import Field").gameObject;
         editor.playtest = editor.self.transform.Find("Play Button").gameObject;
         editor.nextLevelField = editor.self.transform.Find("Next Level").Find("NL Field").GetComponent<InputField>();
         editor.remixLevelField = editor.self.transform.Find("Remix Level").Find("RL Field").GetComponent<InputField>();
-        editor.freeroamToggle = editor.self.transform.Find("Freeroam Toggle").GetComponent<Toggle>();
 
         // Win screen
         win = new() { self = transform.Find("Win Screen").gameObject };
@@ -250,11 +248,9 @@ public class UI : MonoBehaviour
 
     public class LevelEditorUI : UIObject
     {
-        public GameObject import;
         public GameObject playtest;
         public InputField nextLevelField;
         public InputField remixLevelField;
-        public Toggle freeroamToggle;
     }
 
     public class PreloadUI : UIObject

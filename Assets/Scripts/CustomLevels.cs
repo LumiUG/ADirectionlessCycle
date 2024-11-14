@@ -167,13 +167,6 @@ public class CustomLevels : MonoBehaviour
     // Edit current level
     public void EditLevel()
     {
-        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame)
-        {
-            UI.Instance.global.SendMessage("Complete the game first!");
-            CloseLevelMenu();
-            return;
-        }
-
         GameManager.Instance.currentEditorLevelID = selectedLevelID;
         GameManager.Instance.currentEditorLevelName = selectedLevelName;
 
