@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     public static string customLevelPath;
 
-    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Hub" };
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Hub" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub" };
     private string dataPath;
 
     void Awake()
