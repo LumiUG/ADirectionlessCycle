@@ -26,6 +26,7 @@ public class Hub : MonoBehaviour
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
     private RectTransform previewRT = null;
+    private List<GameObject> remixList = new();
     private int worldIndex = 0;
 
     private void Awake()
@@ -104,18 +105,10 @@ public class Hub : MonoBehaviour
         if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
         
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
-        PreviewText(level, levelID);
+        PreviewText(levelID);
 
         // Show proper remix levels attached
-        if (!levelID.Contains("REMIX"))
-        {
-            if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel))
-            {
-                HideRevealUI(true);
-                
-            }
-            else HideRevealUI(false);
-        }
+        RemixUIChecks(level, levelID);
     }
 
     // Hides/unhides some UI elements while a valid level is selected (not hovered)
@@ -126,27 +119,31 @@ public class Hub : MonoBehaviour
         {
             backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 75);
             previewRT.anchoredPosition = new(0, -75);
-            hubArrows[0].gameObject.SetActive(false);
-            hubArrows[1].gameObject.SetActive(false);
+            hubArrows[0].anchoredPosition = new(-825, 540);
+            hubArrows[1].anchoredPosition = new(825, 540);
             return;
         }
 
         // Toggle off
         backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 150);
         previewRT.anchoredPosition = new(0, -150);
-        hubArrows[0].gameObject.SetActive(true);
-        hubArrows[1].gameObject.SetActive(true);
+        hubArrows[0].anchoredPosition = new(-750, 150);
+        hubArrows[1].anchoredPosition = new(750, 150);
     }
 
     // Now as a function for mouse hovers!
-    public void PreviewText(SerializableLevel level, string levelID)
+    public void PreviewText(string levelID)
     {
         // Set the preview text
+        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         if (level != null)
         {
             // Locked level?
             if (AbsurdLockedLevelDetection(levelID)) SetLevelName("???");
             else SetLevelName(level.levelName);
+
+            // Also show other levels (if applicable)
+            RemixUIChecks(level, levelID);
         }
         else SetLevelName("UNDER DEVELOPMENT");
     }
@@ -183,7 +180,7 @@ public class Hub : MonoBehaviour
         // Update checker direction
         checker.dirX = direction;
         
-        if (EventSystem.current.currentSelectedGameObject == hubArrows[0] || EventSystem.current.currentSelectedGameObject == hubArrows[1]) return;
+        if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
         EventSystem.current.SetSelectedGameObject(backButton);
     }
 
@@ -196,6 +193,22 @@ public class Hub : MonoBehaviour
 
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
         return completedLevelsCount[int.Parse(levelSplit[0]) - 1] < int.Parse(levelSplit[1]);
+    }
+
+    // yeah
+    private void RemixUIChecks(SerializableLevel level, string levelID)
+    {
+        if (levelID.Contains("REMIX")) return;
+        
+        remixList.ForEach(item => item.SetActive(false));
+        remixList.Clear();
+
+        if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel))
+        {
+            HideRevealUI(true);
+            UIRecursiveRemixes(level.remixLevel, levelID, 1);
+        }
+        else HideRevealUI(false);
     }
 
     // bullshit basically
@@ -219,6 +232,21 @@ public class Hub : MonoBehaviour
         }
 
         return RecursiveHubCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
+    }
+
+    // recursion bullshit here
+    private void UIRecursiveRemixes(string remix, string level, int count)
+    {
+        Transform selected = worldHolder.transform.Find("REMIX").Find(level.Split("/")[0]).Find($"{level.Split("-")[1]}.{count}-{remix.Replace("REMIX/", "")}");
+        if (selected)
+        {
+            remixList.Add(selected.gameObject);
+            selected.gameObject.SetActive(true);
+        }
+
+        // Next!
+        SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
+        if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
     }
 
     // Actions //
