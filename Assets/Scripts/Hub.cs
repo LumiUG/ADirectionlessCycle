@@ -19,14 +19,14 @@ public class Hub : MonoBehaviour
     public Text levelName;
 
 
-    private readonly int[] positions = { 0, -1920, -3840, -5760 };
+    private readonly int[] positions = { 0, -2200, -4400, -4400 };
     private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
+    private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
     private RectTransform previewRT = null;
-    private List<GameObject> remixList = new();
     private int worldIndex = 0;
 
     private void Awake()
@@ -94,6 +94,7 @@ public class Hub : MonoBehaviour
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
+        // if (EventSystem.current.currentSelectedGameObject == backButton) SetLevelName("Please select a level!");
 
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
@@ -127,8 +128,8 @@ public class Hub : MonoBehaviour
         // Toggle off
         backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 150);
         previewRT.anchoredPosition = new(0, -150);
-        hubArrows[0].anchoredPosition = new(-750, 150);
-        hubArrows[1].anchoredPosition = new(750, 150);
+        hubArrows[0].anchoredPosition = new(-800, 150);
+        hubArrows[1].anchoredPosition = new(800, 150);
     }
 
     // Now as a function for mouse hovers!
@@ -143,7 +144,7 @@ public class Hub : MonoBehaviour
             else SetLevelName(level.levelName);
 
             // Also show other levels (if applicable)
-            RemixUIChecks(level, levelID);
+            // RemixUIChecks(level, levelID);
         }
         else SetLevelName("UNDER DEVELOPMENT");
     }
@@ -181,6 +182,7 @@ public class Hub : MonoBehaviour
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
+        UI.Instance.selectors.instant = true;
         EventSystem.current.SetSelectedGameObject(backButton);
     }
 
@@ -188,8 +190,11 @@ public class Hub : MonoBehaviour
     public bool AbsurdLockedLevelDetection(string fullLevelID)
     {
         if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
-
         if (GameManager.Instance.IsDebug()) return false;
+
+        // Custom handling for remix levels (TODO)
+        if (fullLevelID.StartsWith("REMIX/")) return false;
+        // Debug.Log(fullLevelID);
 
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
         return completedLevelsCount[int.Parse(levelSplit[0]) - 1] < int.Parse(levelSplit[1]);
@@ -198,7 +203,7 @@ public class Hub : MonoBehaviour
     // yeah
     private void RemixUIChecks(SerializableLevel level, string levelID)
     {
-        if (levelID.Contains("REMIX")) return;
+        if (levelID.Contains("REMIX") || level == null) return;
         
         remixList.ForEach(item => item.SetActive(false));
         remixList.Clear();
@@ -237,11 +242,20 @@ public class Hub : MonoBehaviour
     // recursion bullshit here
     private void UIRecursiveRemixes(string remix, string level, int count)
     {
-        Transform selected = worldHolder.transform.Find("REMIX").Find(level.Split("/")[0]).Find($"{level.Split("-")[1]}.{count}-{remix.Replace("REMIX/", "")}");
+        string world = level.Split("/")[0];
+        string fullName = $"{level.Split("-")[1]}.{count}-{remix.Replace("REMIX/", "")}";
+        Transform selected = worldHolder.transform.Find("REMIX").Find(world).Find(fullName);
+        Transform outline = outlineHolder.transform.Find("REMIX").Find(world).Find(fullName);
+
         if (selected)
         {
             remixList.Add(selected.gameObject);
             selected.gameObject.SetActive(true);
+            if (outline)
+            {
+                remixList.Add(outline.gameObject);
+                outline.gameObject.SetActive(true);
+            }
         }
 
         // Next!
