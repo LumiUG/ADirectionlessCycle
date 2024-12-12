@@ -26,9 +26,6 @@ public class InputManager : MonoBehaviour
     private readonly float manualMovementCD = 0.12f;
     private float currentMovementCD = 0f;
 
-    // Hub //
-    private Hub hubMovement = null;
-
     // Debug //
     private bool canInputCommands = false;
     private string confirmCommand = null;
@@ -194,6 +191,7 @@ public class InputManager : MonoBehaviour
     // Ping all areas
     private void OnShowOverlaps(InputValue ctx)
     {
+        // Shows overlaps
         if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) { LevelManager.Instance.ShowOverlaps(false); return; }
         LevelManager.Instance.ShowOverlaps(ctx.Get<float>() == 1f);
     }
@@ -437,8 +435,7 @@ public class InputManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Hub")
         {
-            if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
-            hubMovement.ChangeWorld(-1);
+            Hub.I.ChangeWorld(-1);
             return;
         }
 
@@ -452,8 +449,7 @@ public class InputManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Hub")
         {
-            if (!hubMovement) hubMovement = GameObject.Find("Hub UI").GetComponent<Hub>();
-            hubMovement.ChangeWorld(1);
+            Hub.I.ChangeWorld(1);
             return; 
         }
 

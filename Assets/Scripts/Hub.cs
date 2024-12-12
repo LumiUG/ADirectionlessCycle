@@ -5,16 +5,19 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
+using System;
 
 public class Hub : MonoBehaviour
 {
+    [HideInInspector] public static Hub I;
     public List<GameObject> worldHolders = new(capacity: 3);
-    public List<GameObject> hubArrows = new(capacity: 2);
+    public List<RectTransform> hubArrows = new(capacity: 2);
     public GameObject worldHolder;
     public RectTransform outlineHolder;
     public GameObject backButton;
     public Checker checker;
     public Text levelName;
+
 
     private readonly int[] positions = { 0, -1920, -3840, -5760 };
     private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
@@ -22,12 +25,19 @@ public class Hub : MonoBehaviour
     private Color outboundColor;
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
+    private RectTransform previewRT = null;
     private int worldIndex = 0;
+
+    private void Awake()
+    {
+        I = this; // No persistence!
+    }
 
     private void Start()
     {
         EventSystem.current.SetSelectedGameObject(backButton);
         holderRT = worldHolder.GetComponent<RectTransform>();
+        previewRT = levelName.GetComponent<RectTransform>();
 
         // Colors!!
         ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
@@ -59,7 +69,7 @@ public class Hub : MonoBehaviour
 
             // Progress locking
             if (completedLevelsCount[0] < 12) {
-                if (!GameManager.Instance.IsDebug()) { hubArrows[0].SetActive(false); hubArrows[1].SetActive(false); }
+                if (!GameManager.Instance.IsDebug()) { hubArrows[0].gameObject.SetActive(false); hubArrows[1].gameObject.SetActive(false); }
                 completedLevelsCount[1] = 0;
                 completedLevelsCount[2] = 0;
             }
@@ -84,17 +94,54 @@ public class Hub : MonoBehaviour
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
 
-        // Checking if you swapped levels
-        if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject || !EventSystem.current.currentSelectedGameObject.transform.parent.name.StartsWith("W")) return;
+        // Checking if you swapped levels (condition)
+        if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
+        || !EventSystem.current.currentSelectedGameObject.transform.parent.name.StartsWith("W")) return;
         lastSelectedlevel = EventSystem.current.currentSelectedGameObject;
-        PreviewText($"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}");
+
+        // Update UI
+        string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
+        if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
+        
+        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
+        PreviewText(level, levelID);
+
+        // Show proper remix levels attached
+        if (!levelID.Contains("REMIX"))
+        {
+            if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel))
+            {
+                HideRevealUI(true);
+                
+            }
+            else HideRevealUI(false);
+        }
+    }
+
+    // Hides/unhides some UI elements while a valid level is selected (not hovered)
+    private void HideRevealUI(bool toggle)
+    {
+        // Toggle on
+        if (toggle)
+        {
+            backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 75);
+            previewRT.anchoredPosition = new(0, -75);
+            hubArrows[0].gameObject.SetActive(false);
+            hubArrows[1].gameObject.SetActive(false);
+            return;
+        }
+
+        // Toggle off
+        backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 150);
+        previewRT.anchoredPosition = new(0, -150);
+        hubArrows[0].gameObject.SetActive(true);
+        hubArrows[1].gameObject.SetActive(true);
     }
 
     // Now as a function for mouse hovers!
-    public void PreviewText(string levelID)
+    public void PreviewText(SerializableLevel level, string levelID)
     {
         // Set the preview text
-        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         if (level != null)
         {
             // Locked level?
@@ -134,8 +181,10 @@ public class Hub : MonoBehaviour
         outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
 
         // Update checker direction
-        EventSystem.current.SetSelectedGameObject(backButton);
         checker.dirX = direction;
+        
+        if (EventSystem.current.currentSelectedGameObject == hubArrows[0] || EventSystem.current.currentSelectedGameObject == hubArrows[1]) return;
+        EventSystem.current.SetSelectedGameObject(backButton);
     }
 
     // Returns true if a level is locked.
