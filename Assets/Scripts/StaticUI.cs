@@ -7,7 +7,7 @@ public class StaticUI : MonoBehaviour
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("Play Button"));
+        UI.Instance.selectors.ChangeSelected(GameObject.Find("Play Button"), true);
     }
 
     // Change scene to the level editor

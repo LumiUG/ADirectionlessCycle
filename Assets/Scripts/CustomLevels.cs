@@ -39,7 +39,7 @@ public class CustomLevels : MonoBehaviour
     void Start()
     {
         I = this; // No persistence!
-        EventSystem.current.SetSelectedGameObject(backButton);
+        UI.Instance.selectors.ChangeSelected(backButton, true);
         customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
         starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
         hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
@@ -114,7 +114,7 @@ public class CustomLevels : MonoBehaviour
     // Open a level's menu
     private void OpenLevelMenu(string levelID, string levelName)
     {
-        EventSystem.current.SetSelectedGameObject(popupPlay.gameObject);
+        UI.Instance.selectors.ChangeSelected(popupPlay.gameObject);
         selectedLevelName = levelName;
         selectedLevelID = levelID;
         selectedLevelAsData = LevelManager.Instance.GetLevel(selectedLevelID, true);
@@ -151,7 +151,7 @@ public class CustomLevels : MonoBehaviour
         popupTitle.text = "Level Menu";
         selectedLevelAsData = null;
         confirmDeletion = false;
-        EventSystem.current.SetSelectedGameObject(backButton);
+        UI.Instance.selectors.ChangeSelected(backButton);
         popup.SetActive(false);
 
         if (shouldReloadLevels) RefreshCustomLevels();
@@ -196,7 +196,7 @@ public class CustomLevels : MonoBehaviour
         }
 
         // Delete the level!
-        EventSystem.current.SetSelectedGameObject(popupExit);
+        UI.Instance.selectors.ChangeSelected(popupExit);
         string deletionPath = $"{GameManager.customLevelPath}/{selectedLevelID}.level";
         if (File.Exists(deletionPath)) File.Delete(deletionPath);
         RefreshCustomLevels();

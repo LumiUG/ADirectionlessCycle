@@ -91,6 +91,15 @@ public class Selectors : MonoBehaviour
         }
     }
 
+    //
+    internal void ChangeSelected(GameObject obj, bool instant = false) 
+    {
+        this.instant = instant;
+        if (EventSystem.current) EventSystem.current.SetSelectedGameObject(obj);
+        if (instant) SetSelector(obj.GetComponent<RectTransform>(), instant);
+        this.instant = false;
+    }
+
     // Moves the selector to a target direction
     private void MoveSelector()
     {

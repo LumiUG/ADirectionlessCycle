@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Credits : MonoBehaviour
 {
@@ -7,7 +6,7 @@ public class Credits : MonoBehaviour
 
     void Start()
     {
-        EventSystem.current.SetSelectedGameObject(transform.Find("Back Button").gameObject);
+        UI.Instance.selectors.ChangeSelected(transform.Find("Back Button").gameObject, true);
         rt = transform.Find("Holder").GetComponent<RectTransform>();
     }
 

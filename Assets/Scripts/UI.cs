@@ -365,7 +365,7 @@ public class UI : MonoBehaviour
         public override void Toggle(bool toggle)
         {
             self.SetActive(toggle);
-            if (toggle) EventSystem.current.SetSelectedGameObject(restartButton.gameObject);
+            if (toggle) UI.Instance.selectors.ChangeSelected(restartButton.gameObject, true);
         }
     }
 

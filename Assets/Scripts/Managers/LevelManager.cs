@@ -707,7 +707,7 @@ public class LevelManager : MonoBehaviour
             GameManager.save.game.mechanics.hasSeenOutbound = true;
 
             // UI
-            EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
+            UI.Instance.selectors.ChangeSelected(UI.Instance.win.menuButton, true);
             UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
             UI.Instance.win.SetTotalTime(changes.time);
             UI.Instance.win.SetTotalMoves(changes.moves);
@@ -732,7 +732,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            EventSystem.current.SetSelectedGameObject(UI.Instance.win.menuButton);
+            UI.Instance.selectors.ChangeSelected(UI.Instance.win.menuButton, true);
             UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
             UI.Instance.win.ToggleNextLevel(!IsStringEmptyOrNull(currentLevel.nextLevel));
             UI.Instance.win.SetTotalTime(changes.time);
@@ -774,7 +774,7 @@ public class LevelManager : MonoBehaviour
     public void PauseResumeGame(bool status)
     {
         if (status) {
-            EventSystem.current.SetSelectedGameObject(UI.Instance.pause.backToMenu);
+            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.backToMenu, true);
             UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
         }
 
@@ -844,7 +844,7 @@ public class LevelManager : MonoBehaviour
         {
             UI.Instance.selectors.right.SetParent(UI.Instance.selectors.gameObject.transform);
             UI.Instance.selectors.left.SetParent(UI.Instance.selectors.gameObject.transform);
-            UI.Instance.selectors.instant = true;
+            // UI.Instance.selectors.instant = true;
         }
 
         if (GameManager.Instance.noGameplayScenes.Contains(scene.name))

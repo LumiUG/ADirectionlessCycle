@@ -204,7 +204,6 @@ public class InputManager : MonoBehaviour
         // Confirm restart screen
         if (GameManager.save.preferences.forceConfirmRestart)
         {
-            // UI.Instance.selectors.instant = true;
             UI.Instance.restart.Toggle(true);
             return;
         }
@@ -352,7 +351,7 @@ public class InputManager : MonoBehaviour
         if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
-        if (!UI.Instance.editor.self.activeSelf) EventSystem.current.SetSelectedGameObject(UI.Instance.editor.playtest);
+        if (!UI.Instance.editor.self.activeSelf) UI.Instance.selectors.ChangeSelected(UI.Instance.editor.playtest, true);
         UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
     }
 

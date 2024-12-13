@@ -23,7 +23,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.current.SetSelectedGameObject(buttons[0]);
+        UI.Instance.selectors.ChangeSelected(buttons[0], true);
         menuIndex = 0;
 
         // Resolution dropdown menu
@@ -57,7 +57,7 @@ public class SettingsMenu : MonoBehaviour
     public void FixedUpdate()
     {
         if (!EventSystem.current) return;
-        if (EventSystem.current.currentSelectedGameObject == null) EventSystem.current.SetSelectedGameObject(menus[menuIndex].transform.Find("Back Button").gameObject);
+        if (EventSystem.current.currentSelectedGameObject == null) UI.Instance.selectors.ChangeSelected(menus[menuIndex].transform.Find("Back Button").gameObject, true);
     }
 
     // Changes the game resolution
@@ -90,7 +90,7 @@ public class SettingsMenu : MonoBehaviour
         if (menuIndex == index || index >= menus.Count || index < 0) return;
         foreach (GameObject menu in menus) { menu.SetActive(false); }
 
-        if (buttons[index] != EventSystem.current.currentSelectedGameObject) EventSystem.current.SetSelectedGameObject(buttons[index]);
+        if (buttons[index] != EventSystem.current.currentSelectedGameObject) UI.Instance.selectors.ChangeSelected(buttons[index]);
         menus[index].SetActive(true);
         menuIndex = index;
     }

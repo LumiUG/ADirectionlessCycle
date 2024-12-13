@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using System;
 
 public class Hub : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class Hub : MonoBehaviour
 
     private void Start()
     {
-        EventSystem.current.SetSelectedGameObject(backButton);
+        UI.Instance.selectors.ChangeSelected(backButton, true);
         holderRT = worldHolder.GetComponent<RectTransform>();
         previewRT = levelName.GetComponent<RectTransform>();
 
@@ -182,8 +181,7 @@ public class Hub : MonoBehaviour
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
-        UI.Instance.selectors.instant = true;
-        EventSystem.current.SetSelectedGameObject(backButton);
+        UI.Instance.selectors.ChangeSelected(backButton, true);
     }
 
     // Returns true if a level is locked.
