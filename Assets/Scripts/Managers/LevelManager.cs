@@ -462,9 +462,23 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile, no other cases
-    public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
+    public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile, bool doAnimation = true)
     {
-        // Sets the new tile and removes the old one
+        if (doAnimation)
+        {
+            // Enable TP's sprite
+            tile.directions.animationSprite.sprite = tile.tileSprite;
+            tile.directions.animationSprite.gameObject.SetActive(true);
+
+            // Removing the tile's main sprite
+            tile.tileSprite = null;
+            RefreshObjectTile(tile);
+
+            StartCoroutine(PlayObjectAnimation(startingPos, newPos, tile));
+            return;
+        }
+
+        // Only sets the new tile and removes the old one
         tilemapObjects.SetTile(newPos, tile);
         tilemapObjects.SetTile(startingPos, null);
     }
@@ -1007,20 +1021,68 @@ public class LevelManager : MonoBehaviour
         );
     }
 
+    private IEnumerator PlayObjectAnimation(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
+    {
+        Vector3 lastPosAsWorld = tilemapObjects.CellToWorld(newPos);
+        float time = 0f;
+
+        do {
+            // Plays tile's animation, towards target position (ONLY OBJECT TILES)
+            switch (tile.GetTileType())
+            {
+                case ObjectTypes.Mimic:
+                case ObjectTypes.Box:
+                    tile.tileObject.transform.position += (lastPosAsWorld - tile.tileObject.transform.position) * Time.deltaTime * 0.12f;
+                    break;
+
+                case ObjectTypes.Circle:
+                    break;
+
+                case ObjectTypes.Hexagon:
+                    break;
+            }
+            
+            time += Time.deltaTime;
+            yield return null; // so unity doesnt freeze
+        } while (time < 0.12f);
+
+        // Give back its sprite
+        tile.tileSprite = tile.directions.animationSprite.sprite;
+
+        // Moves tile to new position
+        tilemapObjects.SetTile(newPos, tile);
+        tilemapObjects.SetTile(startingPos, null);
+
+        // Disable TP's sprite
+        tile.directions.animationSprite.gameObject.SetActive(false);
+    }
+
     // Actions //
     public void ActionLoadLevel(string name)
     {
         var save = GameManager.save.game.levels.Find(level => level.levelID == name);
 
         // Loads the level
-        LoadLevel(name, SceneManager.GetActiveScene().name == "Custom Levels");
+        try {
+            LoadLevel(name, SceneManager.GetActiveScene().name == "Custom Levels");
+        } catch(Exception e) {
+            Debug.LogException(e, this);
+            UI.Instance.global.SendMessage("An error ocurred while loading!", 10f);
+            UI.Instance.ChangeScene("Main Menu", false);
+            ClearLevel();
+            return;
+        }
+
         RefreshGameVars();
         RefreshGameUI();
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
         if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
-        else TransitionManager.Instance.TransitionOut<string>();
+        else {
+            UI.Instance.ChangeScene("Game", false);
+            TransitionManager.Instance.TransitionOut<string>();
+        }
     }
 
     public void ActionRemixCondition(string remixID)
