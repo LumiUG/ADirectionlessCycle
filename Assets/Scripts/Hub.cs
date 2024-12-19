@@ -18,7 +18,7 @@ public class Hub : MonoBehaviour
     public Text levelName;
 
 
-    private readonly int[] positions = { 0, -2200, -4400, -4400 };
+    private readonly int[] positions = { 0, -2200, -4400, -6600 };
     private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
