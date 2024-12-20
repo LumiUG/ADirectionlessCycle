@@ -6,7 +6,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
@@ -341,6 +340,7 @@ public class LevelManager : MonoBehaviour
         BuildLevel(currentLevel.tiles, isLevelEditor);
 
         // UI!
+        if (currentLevel.hideUI) return;
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
     }
 
@@ -855,7 +855,7 @@ public class LevelManager : MonoBehaviour
     // Sets all UI's to its defaults
     public void RefreshGameUI()
     {
-        UI.Instance.ingame.Toggle(true);
+        if (!currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
         UI.Instance.pause.Toggle(false);
         UI.Instance.win.Toggle(false);
         UI.Instance.editor.Toggle(false);
