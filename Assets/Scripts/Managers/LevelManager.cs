@@ -466,15 +466,25 @@ public class LevelManager : MonoBehaviour
     {
         if (doAnimation)
         {
-            // Enable TP's sprite
-            tile.directions.animationSprite.sprite = tile.tileSprite;
-            tile.directions.animationSprite.gameObject.SetActive(true);
+            // Vector3 lastPosAsWorld = tilemapObjects.CellToWorld(newPos);
 
-            // Removing the tile's main sprite
-            tile.tileSprite = null;
-            RefreshObjectTile(tile);
+            // Moves tile to new position
+            tilemapObjects.SetTile(newPos, tile);
+            tilemapObjects.SetTile(startingPos, null);
 
-            StartCoroutine(PlayObjectAnimation(startingPos, newPos, tile));
+            // Plays tile's animation, towards target position after moving a tile (ONLY OBJECT TILES)
+            switch (tile.GetTileType())
+            {
+                case ObjectTypes.Mimic:
+                case ObjectTypes.Box:
+                    break;
+
+                case ObjectTypes.Circle:
+                    break;
+
+                case ObjectTypes.Hexagon:
+                    break;
+            }
             return;
         }
 
@@ -1019,42 +1029,6 @@ public class LevelManager : MonoBehaviour
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
         );
-    }
-
-    private IEnumerator PlayObjectAnimation(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
-    {
-        Vector3 lastPosAsWorld = tilemapObjects.CellToWorld(newPos);
-        float time = 0f;
-
-        do {
-            // Plays tile's animation, towards target position (ONLY OBJECT TILES)
-            switch (tile.GetTileType())
-            {
-                case ObjectTypes.Mimic:
-                case ObjectTypes.Box:
-                    tile.tileObject.transform.position += (lastPosAsWorld - tile.tileObject.transform.position) * Time.deltaTime * 0.12f;
-                    break;
-
-                case ObjectTypes.Circle:
-                    break;
-
-                case ObjectTypes.Hexagon:
-                    break;
-            }
-            
-            time += Time.deltaTime;
-            yield return null; // so unity doesnt freeze
-        } while (time < 0.12f);
-
-        // Give back its sprite
-        tile.tileSprite = tile.directions.animationSprite.sprite;
-
-        // Moves tile to new position
-        tilemapObjects.SetTile(newPos, tile);
-        tilemapObjects.SetTile(startingPos, null);
-
-        // Disable TP's sprite
-        tile.directions.animationSprite.gameObject.SetActive(false);
     }
 
     // Actions //

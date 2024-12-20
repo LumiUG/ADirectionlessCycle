@@ -96,6 +96,14 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
+        // Chess battle advanced
+        if (debugCommand == "cba")
+        {
+            UI.Instance.global.SendMessage("Chess Battle Advanced", 3);
+            GameManager.Instance.chessbattleadvanced = !GameManager.Instance.chessbattleadvanced;
+            debugCommand = null;
+        }
+
         // Game completed flag
         if (debugCommand == "imacheater")
         {

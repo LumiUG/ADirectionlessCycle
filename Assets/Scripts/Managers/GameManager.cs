@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // Game data // 
     [HideInInspector] public bool isEditing;
     [HideInInspector] public bool buildDebugMode;
+    [HideInInspector] public bool chessbattleadvanced;
     [HideInInspector] public string currentEditorLevelID;
     [HideInInspector] public string currentEditorLevelName;
     public static Savedata save;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         ToggleCursor(false);
         currentEditorLevelID = null;
         currentEditorLevelName = null;
+        chessbattleadvanced = false;
         buildDebugMode = false;
         isEditing = false;
 

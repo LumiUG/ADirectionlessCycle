@@ -64,6 +64,7 @@ public class Directions
         downDir = parent.transform.Find("DownDirection").GetComponent<SpriteRenderer>();
         leftDir = parent.transform.Find("LeftDirection").GetComponent<SpriteRenderer>();
         rightDir = parent.transform.Find("RightDirection").GetComponent<SpriteRenderer>();
+        animationSprite.gameObject.SetActive(false);
     }
 
     // Updates direction sprites

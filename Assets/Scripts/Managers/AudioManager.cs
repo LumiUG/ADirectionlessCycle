@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip areaOverlap;
     internal static AudioClip select;
     internal static AudioClip undo;
+    internal static AudioClip cba;
 
     // AudioSources //
     [SerializeField] private AudioSource master;
@@ -41,6 +42,7 @@ public class AudioManager : MonoBehaviour
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
         select = Resources.Load<AudioClip>("Audio/SFX/Select");
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
+        cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
 
         // Default looping BGM
         // PlayBGM(tileDeath);
@@ -76,6 +78,8 @@ public class AudioManager : MonoBehaviour
     // Plays an SFX
     public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false)
     {
+        if (GameManager.Instance.chessbattleadvanced) clip = cba;
+
         if (pitchShift)
         {
             sfxPitch.pitch = Random.Range(0.95f, 1.05f);
