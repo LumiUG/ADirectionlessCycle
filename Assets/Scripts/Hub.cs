@@ -13,19 +13,19 @@ public class Hub : MonoBehaviour
     public List<RectTransform> hubArrows = new(capacity: 2);
     public GameObject worldHolder;
     public RectTransform outlineHolder;
-    public GameObject backButton;
+    public RectTransform backButton;
     public Checker checker;
     public Text levelName;
 
 
     private readonly int[] positions = { 0, -2200, -4400, -6600 };
-    private readonly List<int> completedLevelsCount = new() { 2, 2, 2 };
+    private readonly List<int> completedLevelsCount = new() { 3, 3, 3 };
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
-    private RectTransform previewRT = null;
+    private Animator animator;
     private int worldIndex = 0;
 
     private void Awake()
@@ -35,9 +35,9 @@ public class Hub : MonoBehaviour
 
     private void Start()
     {
-        UI.Instance.selectors.ChangeSelected(backButton, true);
+        UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
         holderRT = worldHolder.GetComponent<RectTransform>();
-        previewRT = levelName.GetComponent<RectTransform>();
+        animator = GetComponent<Animator>();
 
         // Colors!!
         ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
@@ -63,11 +63,11 @@ public class Hub : MonoBehaviour
                     var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
                     int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
                     if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outline.GetComponent<Image>().color = remixColor;
-                    else if (GameManager.save.game.mechanics.hasSeenOutbound && displayCheck == 2) outline.GetComponent<Image>().color = outboundColor;
+                    else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outline.GetComponent<Image>().color = outboundColor;
                 }
             }
 
-            // Progress locking
+            // Progress locking (between worlds, not levels)
             if (completedLevelsCount[0] < 12) {
                 if (!GameManager.Instance.IsDebug()) { hubArrows[0].gameObject.SetActive(false); hubArrows[1].gameObject.SetActive(false); }
                 completedLevelsCount[1] = 0;
@@ -93,7 +93,7 @@ public class Hub : MonoBehaviour
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
-        // if (EventSystem.current.currentSelectedGameObject == backButton) SetLevelName("Please select a level!");
+        // if (EventSystem.current.currentSelectedGameObject == backButton.gameObject) SetLevelName("Please select a level!");
 
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
@@ -117,18 +117,12 @@ public class Hub : MonoBehaviour
         // Toggle on
         if (toggle)
         {
-            backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 75);
-            previewRT.anchoredPosition = new(0, -75);
-            hubArrows[0].anchoredPosition = new(-825, 540);
-            hubArrows[1].anchoredPosition = new(825, 540);
+            animator.Play("Away", 0);
             return;
         }
 
         // Toggle off
-        backButton.GetComponent<RectTransform>().anchoredPosition = new(0, 150);
-        previewRT.anchoredPosition = new(0, -150);
-        hubArrows[0].anchoredPosition = new(-800, 150);
-        hubArrows[1].anchoredPosition = new(800, 150);
+        animator.Play("Revert");
     }
 
     // Now as a function for mouse hovers!
@@ -181,7 +175,7 @@ public class Hub : MonoBehaviour
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
-        UI.Instance.selectors.ChangeSelected(backButton, true);
+        UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
     }
 
     // Returns true if a level is locked.
@@ -201,14 +195,16 @@ public class Hub : MonoBehaviour
     // yeah
     private void RemixUIChecks(SerializableLevel level, string levelID)
     {
-        if (levelID.Contains("REMIX") || level == null) return;
+        if (levelID.Contains("REMIX") || level == null || !GameManager.save.game.mechanics.hasSeenRemix) return;
         
         remixList.ForEach(item => item.SetActive(false));
+        // animator.Play("Blank", 1);
+        // animator.Play("Blank", 2);
         remixList.Clear();
 
         if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel))
         {
-            HideRevealUI(true);
+            HideRevealUI(true); 
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
         else HideRevealUI(false);
@@ -249,6 +245,9 @@ public class Hub : MonoBehaviour
         {
             remixList.Add(selected.gameObject);
             selected.gameObject.SetActive(true);
+            // animator.Play("Reveal Top", 1);
+            // animator.Play("Reveal Bottom", 2);
+            
             if (outline)
             {
                 remixList.Add(outline.gameObject);

@@ -423,7 +423,7 @@ public class LevelManager : MonoBehaviour
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
         if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed) || noMove) return false; // also re-checking for blacklist
-        MoveTile(startingPosition, newPosition, tile);
+        MoveTile(startingPosition, newPosition, tile, false);
 
         // Updates new current position of the tile
         if (beingPushed) doPushSFX = true;
@@ -464,7 +464,7 @@ public class LevelManager : MonoBehaviour
     // Moves a tile, no other cases
     public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile, bool doAnimation = true)
     {
-        if (doAnimation)
+        if (doAnimation) // Will always be false!! caller is set to false rn.
         {
             // Vector3 lastPosAsWorld = tilemapObjects.CellToWorld(newPos);
 
@@ -726,9 +726,8 @@ public class LevelManager : MonoBehaviour
         if (outboundCondition && !DialogManager.Instance.inDialog)
         {
             // Level + savedata
-            GameData.LevelChanges changes = new(false, true, -1, -1);
+            GameData.LevelChanges changes = new(false, false, true, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
-            GameManager.save.game.mechanics.hasSeenOutbound = true;
 
             // UI
             UI.Instance.selectors.ChangeSelected(UI.Instance.win.menuButton, true);
@@ -742,7 +741,11 @@ public class LevelManager : MonoBehaviour
         // Load remix level!
         if (remixCondition && !DialogManager.Instance.inDialog)
         {
+            // Level + savedata
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
+            GameData.LevelChanges changes = new(false, true, false, -1, -1);
+            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+
             TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
             GameManager.Instance.isEditing = false;
             return;
@@ -752,7 +755,7 @@ public class LevelManager : MonoBehaviour
         if (winCondition && !DialogManager.Instance.inDialog)
         {
             // Level savedata
-            GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
+            GameData.LevelChanges changes = new(true, false, false, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI

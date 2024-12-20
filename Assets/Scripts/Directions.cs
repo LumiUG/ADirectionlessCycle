@@ -58,13 +58,12 @@ public class Directions
         parent.TryGetComponent(out SpriteRenderer componentCheck);
         if (!parent || componentCheck == null || parent.name == "PingDrawOver") return;
 
-        animationSprite = parent.transform.Find("AnimationSprite").GetComponent<SpriteRenderer>();
+        // animationSprite = parent.transform.Find("AnimationSprite").GetComponent<SpriteRenderer>();
         pushableSprite = parent.transform.Find("Pushable").GetComponent<SpriteRenderer>();
         upDir = parent.transform.Find("UpDirection").GetComponent<SpriteRenderer>();
         downDir = parent.transform.Find("DownDirection").GetComponent<SpriteRenderer>();
         leftDir = parent.transform.Find("LeftDirection").GetComponent<SpriteRenderer>();
         rightDir = parent.transform.Find("RightDirection").GetComponent<SpriteRenderer>();
-        animationSprite.gameObject.SetActive(false);
     }
 
     // Updates direction sprites
