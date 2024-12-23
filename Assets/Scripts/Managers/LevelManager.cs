@@ -726,7 +726,7 @@ public class LevelManager : MonoBehaviour
         if (outboundCondition && !DialogManager.Instance.inDialog)
         {
             // Level + savedata
-            GameData.LevelChanges changes = new(false, false, true, -1, -1);
+            GameData.LevelChanges changes = new(false, true, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
@@ -743,8 +743,9 @@ public class LevelManager : MonoBehaviour
         {
             // Level + savedata
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
-            GameData.LevelChanges changes = new(false, true, false, -1, -1);
+            GameData.LevelChanges changes = new(false, false, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+            GameManager.Instance.UpdateSavedLevel(currentLevel.remixLevel, changes, false); // create a remix entry (therefore its discovered)
 
             TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
             GameManager.Instance.isEditing = false;
@@ -755,7 +756,7 @@ public class LevelManager : MonoBehaviour
         if (winCondition && !DialogManager.Instance.inDialog)
         {
             // Level savedata
-            GameData.LevelChanges changes = new(true, false, false, (float)Math.Round(levelTimer, 2), levelMoves);
+            GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI

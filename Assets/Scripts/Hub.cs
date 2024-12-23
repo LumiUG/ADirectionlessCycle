@@ -86,7 +86,6 @@ public class Hub : MonoBehaviour
     // Prepares the hub and outlines
     private void PrepareHub(GameObject holder, bool isRemix, int index)
     {
-        Debug.LogWarning(holder.name);
         // Check all levels present in the hub for completion
         for (int childnNum = 0; childnNum < holder.transform.childCount; childnNum++)
         {
@@ -129,7 +128,6 @@ public class Hub : MonoBehaviour
                 if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = remixColor;
                 else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = outboundColor;
                 else outlineImg.color = completedColor; // for remixes!
-                Debug.Log(cname);
             }
         }
 
@@ -141,11 +139,8 @@ public class Hub : MonoBehaviour
         }
         else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
 
-        // Setting level color for available remix levels (also locks levels)
-        if (holder.transform.parent.name == "REMIX")
-        {
-            return;
-        }
+        // nuh uh
+        if (holder.transform.parent.name == "REMIX") return;
 
         // Setting level color for available hub levels
         for (int j = 0; j < completedLevelsCount[index]; j++)
@@ -229,15 +224,14 @@ public class Hub : MonoBehaviour
         UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
     }
 
-    // Returns true if a level is locked.
+    // Returns true if a level is locked. (FALSE = good)
     public bool AbsurdLockedLevelDetection(string fullLevelID)
     {
         if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
         if (GameManager.Instance.IsDebug()) return false;
 
-        // Custom handling for remix levels (TODO)
-        if (fullLevelID.StartsWith("REMIX/")) return false;
-        // Debug.Log(fullLevelID);
+        // Custom handling for remix levels
+        if (fullLevelID.StartsWith("REMIX/")) return GameManager.save.game.levels.Find(l => l.levelID == fullLevelID) == null;
 
         string[] levelSplit = fullLevelID.Split("/")[1].Split("-");
         return completedLevelsCount[int.Parse(levelSplit[0]) - 1] < int.Parse(levelSplit[1]);

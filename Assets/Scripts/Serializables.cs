@@ -107,7 +107,6 @@ public class Serializables
         {
             public string levelID = null;
             public bool completed = false;
-            public bool unlockedRemix = false;
             public bool outboundCompletion = false;
             public LevelStats stats;
 
@@ -132,15 +131,13 @@ public class Serializables
         {
             public bool completed;
             public bool outbound;
-            public bool unlockedRemix;
             public float time = -1f;
             public int moves = -1;
 
             // Constructor
-            public LevelChanges(bool completed, bool unlockedRemix, bool outbound, float time, int moves)
+            public LevelChanges(bool completed, bool outbound, float time, int moves)
             {
                 this.completed = completed;
-                this.unlockedRemix = unlockedRemix;
                 this.outbound = outbound;
                 this.time = time;
                 this.moves = moves;

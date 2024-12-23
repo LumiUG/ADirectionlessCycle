@@ -124,7 +124,6 @@ public class GameManager : MonoBehaviour
         // Update the level
         if (!level.completed) level.completed = changes.completed;
         if (!level.outboundCompletion) level.outboundCompletion = changes.outbound;
-        if (!level.unlockedRemix) level.unlockedRemix = changes.unlockedRemix;
         if (changes.time != -1) level.stats.bestTime = (compareBest && (changes.time < level.stats.bestTime || level.stats.bestTime == 0f)) ? changes.time : level.stats.bestTime;
         if (changes.moves != -1) level.stats.totalMoves = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
     }
