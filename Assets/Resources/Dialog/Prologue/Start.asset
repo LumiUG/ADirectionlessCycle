@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Testing, testing, can you hear me?
+  - This is an abandoned prologue, there isnt anything interesting here.
+  - Though, im surprised you found this. Enjoy looking around.
   events: []
   exhaustDialog: {fileID: 0}
-  npcName: Voice
   textSpeed: 0.04
   sfx: {fileID: 0}
   shouldExhaust: 1

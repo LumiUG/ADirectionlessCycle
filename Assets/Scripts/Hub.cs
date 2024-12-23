@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
+using System;
 
 public class Hub : MonoBehaviour
 {
     [HideInInspector] public static Hub I;
     public List<GameObject> worldHolders = new(capacity: 3);
+    public List<GameObject> remixHolders = new(capacity: 3);
     public List<RectTransform> hubArrows = new(capacity: 2);
     public Text completedCountText;
     public Text fragmentCountText;
@@ -25,6 +27,7 @@ public class Hub : MonoBehaviour
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
+    private Color completedColor;
     private GameObject lastSelectedlevel = null;
     private RectTransform holderRT = null;
     private Animator animator;
@@ -44,54 +47,15 @@ public class Hub : MonoBehaviour
         // Colors!!
         ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
         ColorUtility.TryParseHtmlString("#A22BE3", out outboundColor);
+        ColorUtility.TryParseHtmlString("#4CF832", out completedColor);
 
-        // Set colors for locked levels
-        for (int i = 0; i < worldHolders.Count; i++)
-        {
-            // Check all levels present in the hub for completion
-            for (int j = 0; j < worldHolders[i].transform.childCount; j++)
-            {
-                Transform child = worldHolders[i].transform.GetChild(j);
-                var levelCheck = GameManager.save.game.levels.Find(level => level.levelID == $"{worldHolders[i].name}/{child.name}");
-                if (levelCheck == null) continue;
+        // Iterate all non-remix levels.
+        for (int count = 0; count < worldHolders.Count; count++) { PrepareHub(worldHolders[count], false, count); }
 
-                // Add an outline and add a completed count
-                if (levelCheck.completed)
-                {
-                    Transform outline = outlineHolder.Find(worldHolders[i].name).Find(child.name);
-                    outline.gameObject.SetActive(true);
-                    
-                    if (completedLevelsCount[i] < 12) completedLevelsCount[i]++;
-                    completedReal[i]++;
+        // Iterate all remix levels.
+        for (int count = 0; count < remixHolders.Count; count++) { PrepareHub(remixHolders[count], true, count); }
 
-                    var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
-                    int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
-                    if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outline.GetComponent<Image>().color = remixColor;
-                    else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outline.GetComponent<Image>().color = outboundColor;
-                }
-            }
-
-            // Progress locking (between worlds, not levels)
-            if (completedLevelsCount[0] < 12) {
-                if (!GameManager.Instance.IsDebug()) { hubArrows[0].gameObject.SetActive(false); hubArrows[1].gameObject.SetActive(false); }
-                completedLevelsCount[1] = 0;
-                completedLevelsCount[2] = 0;
-            }
-            else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
-
-            // Sorry! We are looping again for available levels using the completed count!
-            for (int j = 0; j < completedLevelsCount[i]; j++)
-            { 
-                Transform child = worldHolders[i].transform.GetChild(j);
-                if (child)
-                {
-                    if (LevelManager.Instance.GetLevel($"{worldHolders[i].name}/{child.name}", false, true) == null) continue;
-                    child.GetComponent<Image>().color = Color.white;
-                }
-            }
-        }
-
-        // Initial
+        // Initial variables!
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
         else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
         completedCountText.text = $"{completedReal[worldIndex]}/12";
@@ -102,7 +66,6 @@ public class Hub : MonoBehaviour
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
-        // if (EventSystem.current.currentSelectedGameObject == backButton.gameObject) SetLevelName("Please select a level!");
 
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
@@ -118,6 +81,82 @@ public class Hub : MonoBehaviour
 
         // Show proper remix levels attached
         RemixUIChecks(level, levelID);
+    }
+
+    // Prepares the hub and outlines
+    private void PrepareHub(GameObject holder, bool isRemix, int index)
+    {
+        Debug.LogWarning(holder.name);
+        // Check all levels present in the hub for completion
+        for (int childnNum = 0; childnNum < holder.transform.childCount; childnNum++)
+        {
+            Transform child = holder.transform.GetChild(childnNum);
+            GameData.Level levelCheck;
+            string cname = child.name;
+
+            // Find the level
+            if (isRemix) {
+                cname = cname.Split("-")[1];
+                levelCheck = GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/{cname}");
+            } else {
+                levelCheck = GameManager.save.game.levels.Find(level => level.levelID == $"{holder.name}/{cname}");
+            }
+
+            // Level doesnt exist? Leave.
+            if (levelCheck == null) continue;
+
+            // Add an outline to the level
+            if (levelCheck.completed)
+            {
+                Transform outline;
+                if (isRemix) outline = outlineHolder.Find("REMIX").Find(holder.name).GetChild(childnNum);
+                else {
+                    outline = outlineHolder.Find(holder.name).Find(cname);
+                    outline.gameObject.SetActive(true);
+                }
+                
+                // Add 1 to the completed level count (if not remix)
+                if (!isRemix) {
+                    if (completedLevelsCount[index] < 12) completedLevelsCount[index]++;
+                    completedReal[index]++;
+                }
+
+                // Get level data and check for the correct outline to use
+                var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
+                int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
+
+                Image outlineImg = outline.GetComponent<Image>();
+                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = remixColor;
+                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = outboundColor;
+                else outlineImg.color = completedColor; // for remixes!
+                Debug.Log(cname);
+            }
+        }
+
+        // Progress locking (between worlds, not levels)
+        if (completedLevelsCount[0] < 12) {
+            if (!GameManager.Instance.IsDebug()) { hubArrows[0].gameObject.SetActive(false); hubArrows[1].gameObject.SetActive(false); }
+            completedLevelsCount[1] = 0;
+            completedLevelsCount[2] = 0;
+        }
+        else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
+
+        // Setting level color for available remix levels (also locks levels)
+        if (holder.transform.parent.name == "REMIX")
+        {
+            return;
+        }
+
+        // Setting level color for available hub levels
+        for (int j = 0; j < completedLevelsCount[index]; j++)
+        { 
+            Transform child = holder.transform.GetChild(j);
+            if (child)
+            {
+                if (LevelManager.Instance.GetLevel($"{holder.name}/{child.name}", false, true) == null) return;
+                child.GetComponent<Image>().color = Color.white;
+            }
+        }
     }
 
     // Hides/unhides some UI elements while a valid level is selected (not hovered)
@@ -207,7 +246,8 @@ public class Hub : MonoBehaviour
     // yeah
     private void RemixUIChecks(SerializableLevel level, string levelID)
     {
-        if (levelID.Contains("REMIX") || level == null || !GameManager.save.game.mechanics.hasSeenRemix) return;
+        if (levelID.Contains("REMIX") || level == null) return;
+        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.mechanics.hasSeenRemix) return;
         
         remixList.ForEach(item => item.SetActive(false));
         // animator.Play("Blank", 1);

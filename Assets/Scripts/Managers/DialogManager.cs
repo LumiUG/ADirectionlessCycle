@@ -188,8 +188,10 @@ public class DialogManager : MonoBehaviour
             public override void Run()
             {
                 if (!enabled) return;
-                if (!delete) LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(setAs.ToString(), new(), position));
-                else {
+
+                // Delete a tile
+                if (delete)
+                {
                     GameTile tile;
                     tile = setAs switch
                     {
@@ -201,7 +203,17 @@ public class DialogManager : MonoBehaviour
                         _ => LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position),
                     };
                     if (tile) LevelManager.Instance.RemoveTile(tile);
+
+                    // Deleting effect
+                    Debug.Log(position);
+                    return;
                 }
+
+                // Place a tile
+                LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(setAs.ToString(), new(), position));
+
+                // Placing effect
+                Debug.Log(position);
             }
         }
     }

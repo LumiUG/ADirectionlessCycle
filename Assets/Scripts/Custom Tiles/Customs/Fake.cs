@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// !! CUSTOM TEXT TILE !!
+// Example: "yourSprite"
+
 [CreateAssetMenu(menuName = "Game Tiles/Customs/Hologram Tile")]
 public class HologramTile : CustomTile
 {

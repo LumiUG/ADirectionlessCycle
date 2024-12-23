@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// !! CUSTOM TEXT TILE !!
+// Example: "levelID"
+
 [CreateAssetMenu(menuName = "Game Tiles/Customs/Level Tile")]
 public class LevelTile : CustomTile
 {

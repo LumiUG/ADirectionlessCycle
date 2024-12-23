@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
   m_Name: Door
   m_EditorClassIdentifier: 
-  dialog:
-  - '[You slam into yet another button]'
-  - '[...Ow. Should probably stop.]'
-  - '[You feel your surroundings shift]'
+  dialog: []
   events:
   - textSpeedEvent:
       enabled: 0
@@ -25,7 +22,7 @@ MonoBehaviour:
       setAs: 0
       position: {x: 13, y: -4, z: 0}
       delete: 1
-    executeAtIndex: 2
+    executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
       textSpeed: 0
@@ -34,10 +31,9 @@ MonoBehaviour:
       setAs: 0
       position: {x: 13, y: -5, z: 0}
       delete: 1
-    executeAtIndex: 2
+    executeAtIndex: 0
   exhaustDialog: {fileID: 11400000, guid: 1d506ff719dcbb540a72828d9cf2b765, type: 2}
-  npcName: ???
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 1
-  canBeSkipped: 1
+  shouldExhaust: 0
+  canBeSkipped: 0

@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
   m_Name: Interact
   m_EditorClassIdentifier: 
-  dialog:
-  - '[You slam into another button]'
-  - ...
-  - '[You feel your surroundings shift]'
+  dialog: []
   events:
   - textSpeedEvent:
       enabled: 0
@@ -25,7 +22,7 @@ MonoBehaviour:
       setAs: 2
       position: {x: 2, y: -1, z: 0}
       delete: 1
-    executeAtIndex: 2
+    executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
       textSpeed: 0
@@ -34,7 +31,7 @@ MonoBehaviour:
       setAs: 3
       position: {x: 10, y: -5, z: 0}
       delete: 1
-    executeAtIndex: 2
+    executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
       textSpeed: 0
@@ -43,9 +40,8 @@ MonoBehaviour:
       setAs: 3
       position: {x: 10, y: -5, z: 0}
       delete: 0
-    executeAtIndex: 2
+    executeAtIndex: 0
   exhaustDialog: {fileID: 0}
-  npcName: Button
   textSpeed: 0.05
   sfx: {fileID: 0}
   shouldExhaust: 0

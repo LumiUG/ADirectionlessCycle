@@ -14,10 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Halt!
-  - Identify yours--
-  - A crawler? No. That can't be. How-
-  - ...Allow me to clear the way for you.
-  - '[You feel your surroundings shift]'
   events:
   - textSpeedEvent:
       enabled: 0
@@ -27,9 +23,8 @@ MonoBehaviour:
       setAs: 9
       position: {x: 35, y: -10, z: 0}
       delete: 1
-    executeAtIndex: 4
+    executeAtIndex: 0
   exhaustDialog: {fileID: 11400000, guid: 46a751ae2769da5408c1adfe6aa8c211, type: 2}
-  npcName: Protector
   textSpeed: 0.05
   sfx: {fileID: 0}
   shouldExhaust: 1
