@@ -11,15 +11,17 @@ public class Hub : MonoBehaviour
     [HideInInspector] public static Hub I;
     public List<GameObject> worldHolders = new(capacity: 3);
     public List<RectTransform> hubArrows = new(capacity: 2);
+    public Text completedCountText;
+    public Text fragmentCountText;
     public GameObject worldHolder;
     public RectTransform outlineHolder;
     public RectTransform backButton;
     public Checker checker;
     public Text levelName;
 
-
     private readonly int[] positions = { 0, -2200, -4400, -6600 };
-    private readonly List<int> completedLevelsCount = new() { 3, 3, 3 };
+    private readonly List<int> completedLevelsCount = new() { 3, 3, 3, 0 };
+    private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
@@ -58,7 +60,9 @@ public class Hub : MonoBehaviour
                 {
                     Transform outline = outlineHolder.Find(worldHolders[i].name).Find(child.name);
                     outline.gameObject.SetActive(true);
+                    
                     if (completedLevelsCount[i] < 12) completedLevelsCount[i]++;
+                    completedReal[i]++;
 
                     var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
                     int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
@@ -86,6 +90,11 @@ public class Hub : MonoBehaviour
                 }
             }
         }
+
+        // Initial
+        if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
+        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
+        completedCountText.text = $"{completedReal[worldIndex]}/12";
     }
 
     // Cycle through levels
@@ -170,6 +179,9 @@ public class Hub : MonoBehaviour
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
         outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+
+        // Update world completions
+        completedCountText.text = $"{completedReal[worldIndex]}/12";
 
         // Update checker direction
         checker.dirX = direction;

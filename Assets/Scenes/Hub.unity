@@ -2403,6 +2403,8 @@ MonoBehaviour:
   hubArrows:
   - {fileID: 683167374}
   - {fileID: 744228268}
+  completedCountText: {fileID: 1962371436}
+  fragmentCountText: {fileID: 613207286}
   worldHolder: {fileID: 25933887}
   outlineHolder: {fileID: 1230158722}
   backButton: {fileID: 46980881}
@@ -17654,7 +17656,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 200, y: -150}
-  m_SizeDelta: {x: 250, y: 120}
+  m_SizeDelta: {x: 260, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962371434
 MonoBehaviour:
