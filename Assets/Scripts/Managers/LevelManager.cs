@@ -722,6 +722,9 @@ public class LevelManager : MonoBehaviour
         // UI area count
         SetUIAreaCount();
 
+        // Save current game status when beating a level (doesnt store new stats)
+        if (winCondition || remixCondition || outboundCondition) GameManager.Instance.SaveDataJSON(GameManager.save);
+
         // Outbound win
         if (outboundCondition && !DialogManager.Instance.inDialog)
         {
@@ -736,6 +739,7 @@ public class LevelManager : MonoBehaviour
             UI.Instance.win.SetTotalMoves(changes.moves);
             UI.Instance.win.Toggle(true);
             hasWon = true;
+            return;
         }
 
         // Load remix level!

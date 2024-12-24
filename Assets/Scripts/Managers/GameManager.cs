@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         LoadDataJSON();
 
         // Default variables
-        ToggleCursor(false);
         currentEditorLevelID = null;
         currentEditorLevelName = null;
         chessbattleadvanced = false;
@@ -57,9 +56,11 @@ public class GameManager : MonoBehaviour
             // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
 
-        // Steam test!
+        // Steam testing!
         if (!SteamManager.Initialized) return;
         Debug.Log(SteamFriends.GetPersonaName());
+        // SetPresence("steam_display", "#Test");
+        // EditAchivement("ACH_TEST");
     }
 
     // Save game on leaving
@@ -83,17 +84,6 @@ public class GameManager : MonoBehaviour
         return buildDebugMode || Application.isEditor;
     }
 
-    // 
-    public void ToggleCursor(bool status)
-    {
-        // if (status) {
-        //     InputSystem.EnableDevice(Mouse.current);
-        // }
-        // else {
-        //     InputSystem.DisableDevice(Mouse.current);
-        // }
-    }
-
     // Stuff with savedata //
     
     // Creates a savefile
@@ -110,7 +100,11 @@ public class GameManager : MonoBehaviour
     }
 
     // Save user data
-    public void SaveDataJSON(Savedata save) { File.WriteAllText(dataPath, JsonUtility.ToJson(save)); }
+    public void SaveDataJSON(Savedata savedata = null)
+    {
+        savedata ??= save;
+        File.WriteAllText(dataPath, JsonUtility.ToJson(savedata));
+    }
 
     // Load user data
     public void LoadDataJSON() { save = JsonUtility.FromJson<Savedata>(File.ReadAllText(dataPath)); }
@@ -149,12 +143,36 @@ public class GameManager : MonoBehaviour
         return tex.EncodeToPNG(); 
     }
     
-    // Converts a base 64 string to a texture
+    // Converts a base 64 string to a texture, usually used with level preview textures
     public Texture2D Base64ToTexture(string image)
     {
         Texture2D texture = new(1920, 1080);
         byte[] bytes = Convert.FromBase64String(image);
         ImageConversion.LoadImage(texture, bytes);
         return texture;
+    }
+
+    // Steam Integration //
+
+    // Grants an achievement, then stores it to server
+    // Example: EditAchivement("ACH_TEST");
+    internal void EditAchivement(string id, bool grant = true)
+    {
+        if (!SteamManager.Initialized || id == null) return;
+
+        if (grant) SteamUserStats.SetAchievement(id);
+        else SteamUserStats.ClearAchievement(id);
+
+        SteamUserStats.StoreStats();
+    }
+
+    // Grants an achievement, then stores it to server
+    // Example: SetPresence("steam_display", "#Test");
+    // https://steamcommunity.com/dev/testrichpresence
+    internal void SetPresence(string key, string display)
+    {
+        if (!SteamManager.Initialized) return;
+
+        SteamFriends.SetRichPresence(key, display);
     }
 }
