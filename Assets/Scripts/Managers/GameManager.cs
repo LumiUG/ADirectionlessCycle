@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System;
 using static Serializables;
+using Steamworks;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,10 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.SetMasterVolume(save.preferences.masterVolume);
             // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
+
+        // Steam test!
+        if (!SteamManager.Initialized) return;
+        Debug.Log(SteamFriends.GetPersonaName());
     }
 
     // Save game on leaving
