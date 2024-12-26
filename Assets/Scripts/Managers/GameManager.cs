@@ -3,8 +3,8 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 using System;
-using static Serializables;
 using Steamworks;
+using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,10 +56,10 @@ public class GameManager : MonoBehaviour
             // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
 
-        // Steam testing!
+        // Steam integration initial stuff
         if (!SteamManager.Initialized) return;
         Debug.Log(SteamFriends.GetPersonaName());
-        // SetPresence("steam_display", "#Test");
+        SetPresence("steam_display", "#Menuing");
         // EditAchivement("ACH_TEST");
     }
 
@@ -167,7 +167,8 @@ public class GameManager : MonoBehaviour
     }
 
     // Grants an achievement, then stores it to server
-    // Example: SetPresence("steam_display", "#Test");
+    // Example key: SetPresence("steam_display", "#Menuing");
+    // Example variable: SetPresence("currentlevel", "Level Name!");
     // https://steamcommunity.com/dev/testrichpresence
     internal void SetPresence(string key, string display)
     {

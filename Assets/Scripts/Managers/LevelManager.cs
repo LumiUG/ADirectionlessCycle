@@ -295,10 +295,12 @@ public class LevelManager : MonoBehaviour
         if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
         else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
 
-        // Yay! UI!
-        if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
+        // Rich presence
+        GameManager.Instance.SetPresence("playinglevel", currentLevel.levelName);
+        GameManager.Instance.SetPresence("steam_display", "#Playing");
 
         // Hide UI?
+        if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
         if (currentLevel.hideUI) {
             tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);

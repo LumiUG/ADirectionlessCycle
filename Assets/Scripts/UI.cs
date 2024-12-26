@@ -117,12 +117,17 @@ public class UI : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoMainMenu);
+        GameManager.Instance.SetPresence("steam_display", "#Menuing");
     }
 
     // Go from a level to the editor
     public void GoLevelEditor()
     {
         // if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
+
+        // Rich presence
+        GameManager.Instance.SetPresence("editorlevel", LevelManager.Instance.currentLevel.levelName);
+        GameManager.Instance.SetPresence("steam_display", "#Editor");
 
         // Transition in
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);

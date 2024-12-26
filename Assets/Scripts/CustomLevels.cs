@@ -47,6 +47,9 @@ public class CustomLevels : MonoBehaviour
 
         if (GameManager.Instance.IsDebug()) lastSessionButton.interactable = true;
 
+        // Rich presence
+        GameManager.Instance.SetPresence("steam_display", "#Customs");
+
         // Load all custom levels
         LoadCustomLevels();
     }

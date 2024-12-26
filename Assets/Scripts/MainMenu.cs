@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static TransitionManager.Transitions;
 
 public class MainMenu : MonoBehaviour
 {
