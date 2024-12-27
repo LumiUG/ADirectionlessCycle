@@ -125,10 +125,6 @@ public class UI : MonoBehaviour
     {
         // if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
 
-        // Rich presence
-        GameManager.Instance.SetPresence("editorlevel", LevelManager.Instance.currentLevel.levelName);
-        GameManager.Instance.SetPresence("steam_display", "#Editor");
-
         // Transition in
         TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);
     }
@@ -400,6 +396,10 @@ public class UI : MonoBehaviour
         } else {
             LevelManager.Instance.ReloadLevel(true, true); // reload for custom sprites (very stupid!)
         }
+
+        // Rich presence
+        GameManager.Instance.SetPresence("editorlevel", LevelManager.Instance.currentLevel.levelName);
+        GameManager.Instance.SetPresence("steam_display", "#Editor");
 
         LevelManager.Instance.RefreshGameVars();
         ChangeScene("Level Editor", false);

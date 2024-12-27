@@ -348,12 +348,6 @@ public class InputManager : MonoBehaviour
     {
         if (!UI.Instance || !EventSystem.current) return;
 
-        // Custom levels scene
-        if (SceneManager.GetActiveScene().name == "Custom Levels") if (CustomLevels.I.popup.activeSelf) { CustomLevels.I.CloseLevelMenu(); return; }
-
-        // Misc
-        if (UI.Instance.restart.self.activeSelf) { UI.Instance.CloseConfirmRestart(); return; }
-
         // Editor scene
         if (!GameManager.Instance.IsEditor()) return;
         if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
@@ -523,6 +517,32 @@ public class InputManager : MonoBehaviour
         
         // Scrolls by the amount
         CustomLevels.I.holder.anchoredPosition -= Vector2.down * new Vector2(0, scrollAmount);
+    }
+
+    // Handles some inputs that should actually prompt an UI exit, but doesnt (thanks, Unity)
+    private void OnCustomUIExits()
+    {
+        if (!EventSystem.current) return;
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Custom Levels":
+                if (CustomLevels.I.popup.activeSelf) CustomLevels.I.CloseLevelMenu();
+                else UI.Instance.selectors.ChangeSelected(CustomLevels.I.backButton);
+                break;
+            case "Hub":
+                UI.Instance.selectors.ChangeSelected(Hub.I.backButton.gameObject);
+                break;
+            case "Settings":
+                SettingsMenu.I.ToggleMenu(0);
+                UI.Instance.selectors.ChangeSelected(SettingsMenu.I.menus[0].transform.Find("Back Button").gameObject);
+                break;
+            case "Game":
+                if (UI.Instance.restart.self.activeSelf) UI.Instance.CloseConfirmRestart();
+                break;
+            default:
+                break;
+        }
     }
 
     internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.Instance.CheckSceneInbounds(tile.position); }); }

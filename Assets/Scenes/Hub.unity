@@ -2405,8 +2405,8 @@ MonoBehaviour:
   - {fileID: 1512003639}
   - {fileID: 1351890605}
   hubArrows:
-  - {fileID: 683167374}
-  - {fileID: 744228268}
+  - {fileID: 683167375}
+  - {fileID: 744228269}
   completedCountText: {fileID: 1962371436}
   fragmentCountText: {fileID: 613207286}
   worldHolder: {fileID: 25933887}
@@ -6661,7 +6661,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 683167376}
   m_OnClick:
     m_PersistentCalls:

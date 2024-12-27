@@ -5,14 +5,13 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using System;
 
 public class Hub : MonoBehaviour
 {
     [HideInInspector] public static Hub I;
     public List<GameObject> worldHolders = new(capacity: 3);
     public List<GameObject> remixHolders = new(capacity: 3);
-    public List<RectTransform> hubArrows = new(capacity: 2);
+    public List<Button> hubArrows = new(capacity: 2);
     public Text completedCountText;
     public Text fragmentCountText;
     public GameObject worldHolder;
@@ -122,7 +121,7 @@ public class Hub : MonoBehaviour
 
                 // Get level data and check for the correct outline to use
                 var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
-                int displayCheck = RecursiveHubCheck(levelAsData, levelCheck.levelID, false);
+                int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
 
                 Image outlineImg = outline.GetComponent<Image>();
                 if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = remixColor;
@@ -132,8 +131,8 @@ public class Hub : MonoBehaviour
         }
 
         // Progress locking (between worlds, not levels)
-        if (completedLevelsCount[0] < 12) {
-            if (!GameManager.Instance.IsDebug()) { hubArrows[0].gameObject.SetActive(false); hubArrows[1].gameObject.SetActive(false); }
+        if (completedLevelsCount[0] < 12)
+        {
             completedLevelsCount[1] = 0;
             completedLevelsCount[2] = 0;
         }
@@ -204,15 +203,39 @@ public class Hub : MonoBehaviour
     public void ChangeWorld(int direction)
     {
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
+        if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
 
-        if (!GameManager.Instance.IsDebug()) {
-            if ((worldIndex + direction == 1 && completedLevelsCount[1] < 1) || (worldIndex + direction == 2 && completedLevelsCount[2] < 1)) return;
-            if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
-        }
+        // if (!GameManager.Instance.IsDebug()) {
+        //     if ((worldIndex + direction == 1 && completedLevelsCount[1] < 1) || (worldIndex + direction == 2 && completedLevelsCount[2] < 1)) return;
+        //     if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
+        // }
 
+        // Move!!!
         worldIndex += direction;
         holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
         outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+
+        // Disable arrows, etc
+        switch (worldIndex)
+        {
+            case 2:
+                if (GameManager.save.game.collectedOrbs.Count >= 1) break;
+                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                hubArrows[1].interactable = false;
+                break;
+            case 3:
+                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                hubArrows[1].interactable = false;
+                break;
+            case 0:
+                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                hubArrows[0].interactable = false;
+                break;
+            default:
+                hubArrows[0].interactable = true;
+                hubArrows[1].interactable = true;
+                break;
+        }
 
         // Update world completions
         completedCountText.text = $"{completedReal[worldIndex]}/12";
@@ -221,7 +244,7 @@ public class Hub : MonoBehaviour
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
-        UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
+        if (hubArrows[0].interactable && hubArrows[1].interactable) UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
     }
 
     // Returns true if a level is locked. (FALSE = good)
@@ -256,27 +279,23 @@ public class Hub : MonoBehaviour
         else HideRevealUI(false);
     }
 
-    // bullshit basically
-    private int RecursiveHubCheck(SerializableLevel level, string levelID, bool isRemix)
+    // 0 = green (ignore)
+    // 1 = red
+    // 2 = purple
+    private int HubCheck(SerializableLevel level, string levelID)
     {
         if (level == null) return 0;
 
-        // Outerbound completion?
-        if (level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); }) && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == false; })) return 2;
-        
-        // Remix completion? (DOESNT have priority RN)
-        GameData.Level statCheck = GameManager.save.game.levels.Find(l => l.levelID == levelID);
-        if (!isRemix) {
-            if (statCheck == null) return 0;
-            if (!statCheck.completed) return 0;
-            if (level.remixLevel == null) return 0;
-        } else {
-            if (statCheck == null) return 1;
-            if (!statCheck.completed) return 1;
-            if (level.remixLevel == null) return 0;
-        }
+        // Outerbound?
+        if (level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); })
+            && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == false; })) return 2;
 
-        return RecursiveHubCheck(LevelManager.Instance.GetLevel(level.remixLevel, false, true), level.remixLevel, true);
+        // Remix completion?
+        if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) return 0;
+
+        GameData.Level statCheck = GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel);
+        if (statCheck == null) return 1;
+        return 0; // fallback
     }
 
     // recursion bullshit here

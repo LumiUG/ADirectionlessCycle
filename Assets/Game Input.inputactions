@@ -231,6 +231,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "CustomUIExits",
+                    "type": "Button",
+                    "id": "5cdf829a-7fbc-4db9-9faf-177a1ed1144e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Scroll",
                     "type": "Value",
                     "id": "48b418ea-7e00-4a01-abbe-1d15c0641e4a",
@@ -799,6 +808,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90bdf94c-6728-46b8-86e7-6798076ec7b1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CustomUIExits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0d175a2-7325-4b8e-b322-432bf668ea6a",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CustomUIExits",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
