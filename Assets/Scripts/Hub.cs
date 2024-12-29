@@ -13,8 +13,10 @@ public class Hub : MonoBehaviour
     public List<GameObject> remixHolders = new(capacity: 3);
     public List<Button> hubArrows = new(capacity: 2);
     public Text completedCountText;
-    public Text fragmentCountText;
     public GameObject worldHolder;
+    public Text fragmentCountText;
+    public RectTransform backgrounds;
+    public RectTransform locks;
     public RectTransform outlineHolder;
     public RectTransform backButton;
     public Checker checker;
@@ -205,15 +207,34 @@ public class Hub : MonoBehaviour
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
 
-        // if (!GameManager.Instance.IsDebug()) {
-        //     if ((worldIndex + direction == 1 && completedLevelsCount[1] < 1) || (worldIndex + direction == 2 && completedLevelsCount[2] < 1)) return;
-        //     if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
-        // }
+        // Move!!! (animation, i know im repeating two switches.)
+        switch (worldIndex)
+        {
+            case 0:
+                if (direction > 0) animator.Play("W1Right", 3);
+                else animator.Play("W1Left", 3);
+                break;
+            case 1:
+                if (direction > 0) animator.Play("W2Right", 3);
+                else animator.Play("W2Left", 3);
+                break;
+            case 2:
+                if (direction > 0) animator.Play("W3Right", 3);
+                else animator.Play("W3Left", 3);
+                break;
+            case 3:
+                if (direction < 0) animator.Play("WSLeft", 3);
+                break;
+            default:
+                break;
+        }
 
-        // Move!!!
         worldIndex += direction;
-        holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
-        outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+
+        // holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+        // outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+        // backgrounds.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
+        // locks.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
 
         // Disable arrows, etc
         switch (worldIndex)
