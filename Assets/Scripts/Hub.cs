@@ -67,6 +67,11 @@ public class Hub : MonoBehaviour
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) return;
+        if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
+            remixList.ForEach(item => item.SetActive(false));
+            HideRevealUI(false);
+            return;
+        }
 
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
@@ -240,7 +245,7 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (GameManager.save.game.collectedOrbs.Count >= 1) break;
+                if (GameManager.save.game.collectedOrbs.Count >= 1) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
