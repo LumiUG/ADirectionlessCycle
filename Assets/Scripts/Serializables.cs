@@ -98,6 +98,9 @@ public class Serializables
         public List<string> collectedFragments; // stored as level ID's
         public List<string> exhaustedDialog;
         public Mechanics mechanics = new();
+        public bool unlockedWorldTwo = false;
+        public bool unlockedWorldThree = false;
+        public bool unlockedWorldSuper = false;
         public bool doPrologue = true;
         public bool hasCompletedGame = false;
 

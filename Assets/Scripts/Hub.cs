@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
+using System;
 
 public class Hub : MonoBehaviour
 {
@@ -13,8 +14,10 @@ public class Hub : MonoBehaviour
     public List<GameObject> remixHolders = new(capacity: 3);
     public List<Button> hubArrows = new(capacity: 2);
     public Text completedCountText;
-    public GameObject worldHolder;
+    public Text remixCountText;
+    public Text outboundCountText;
     public Text fragmentCountText;
+    public GameObject worldHolder;
     public RectTransform backgrounds;
     public RectTransform locks;
     public RectTransform outlineHolder;
@@ -25,12 +28,12 @@ public class Hub : MonoBehaviour
     private readonly int[] positions = { 0, -2200, -4400, -6600 };
     private readonly List<int> completedLevelsCount = new() { 3, 3, 3, 0 };
     private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
+    private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
     private Color completedColor;
     private GameObject lastSelectedlevel = null;
-    private RectTransform holderRT = null;
     private Animator animator;
     private int worldIndex = 0;
 
@@ -42,7 +45,6 @@ public class Hub : MonoBehaviour
     private void Start()
     {
         UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
-        holderRT = worldHolder.GetComponent<RectTransform>();
         animator = GetComponent<Animator>();
 
         // Colors!!
@@ -56,10 +58,17 @@ public class Hub : MonoBehaviour
         // Iterate all remix levels.
         for (int count = 0; count < remixHolders.Count; count++) { PrepareHub(remixHolders[count], true, count); }
 
+        // Lock screen for levels
+        SetupLocks();
+
         // Initial variables!
+        if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
+        if (!GameManager.save.game.mechanics.hasSwapUpgrade) fragmentCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
         else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
         completedCountText.text = $"{completedReal[worldIndex]}/12";
+        remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+        // outboundCountText.text = $"{completedOutboundRemix[worldIndex]}/??";
     }
 
     // Cycle through levels
@@ -70,6 +79,7 @@ public class Hub : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
             HideRevealUI(false);
+            levelName.text = "";
             return;
         }
 
@@ -124,7 +134,7 @@ public class Hub : MonoBehaviour
                 if (!isRemix) {
                     if (completedLevelsCount[index] < 12) completedLevelsCount[index]++;
                     completedReal[index]++;
-                }
+                } else completedRealRemix[index]++;
 
                 // Get level data and check for the correct outline to use
                 var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
@@ -172,6 +182,29 @@ public class Hub : MonoBehaviour
 
         // Toggle off
         animator.Play("Revert");
+    }
+
+    private void SetupLocks()
+    {
+        Transform wLock = locks.Find("W2");
+        if (!GameManager.save.game.unlockedWorldTwo)
+        {
+            wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[0]}/9";
+            foreach (Transform level in worldHolders[1].transform)
+                { level.GetComponent<Button>().interactable = false; }
+        }
+        else wLock.gameObject.SetActive(false);
+
+        wLock = locks.Find("W3");
+        if (!GameManager.save.game.unlockedWorldThree)
+        {
+            wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
+            foreach (Transform level in worldHolders[2].transform)
+                { level.GetComponent<Button>().interactable = false; }
+        }
+        else wLock.gameObject.SetActive(false);
+
+        if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
     // Now as a function for mouse hovers!
@@ -233,13 +266,7 @@ public class Hub : MonoBehaviour
             default:
                 break;
         }
-
         worldIndex += direction;
-
-        // holderRT.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
-        // outlineHolder.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
-        // backgrounds.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
-        // locks.anchoredPosition = new(positions[worldIndex], holderRT.anchoredPosition.y);
 
         // Disable arrows, etc
         switch (worldIndex)
@@ -265,6 +292,7 @@ public class Hub : MonoBehaviour
 
         // Update world completions
         completedCountText.text = $"{completedReal[worldIndex]}/12";
+        if (worldIndex <= 2) remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
 
         // Update checker direction
         checker.dirX = direction;
@@ -297,9 +325,9 @@ public class Hub : MonoBehaviour
         // animator.Play("Blank", 2);
         remixList.Clear();
 
-        if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel))
+        if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null)
         {
-            HideRevealUI(true); 
+            HideRevealUI(true);
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
         else HideRevealUI(false);
@@ -327,11 +355,13 @@ public class Hub : MonoBehaviour
     // recursion bullshit here
     private void UIRecursiveRemixes(string remix, string level, int count)
     {
+        // Find all references for level/outlines/etc
         string world = level.Split("/")[0];
         string fullName = $"{level.Split("-")[1]}.{count}-{remix.Replace("REMIX/", "")}";
         Transform selected = worldHolder.transform.Find("REMIX").Find(world).Find(fullName);
         Transform outline = outlineHolder.transform.Find("REMIX").Find(world).Find(fullName);
 
+        // Toggles level on
         if (selected)
         {
             remixList.Add(selected.gameObject);
@@ -339,6 +369,7 @@ public class Hub : MonoBehaviour
             // animator.Play("Reveal Top", 1);
             // animator.Play("Reveal Bottom", 2);
             
+            // Toggles outline on
             if (outline)
             {
                 remixList.Add(outline.gameObject);
@@ -346,9 +377,38 @@ public class Hub : MonoBehaviour
             }
         }
 
-        // Next!
+        // We jump to the next level, if current level has a remix level.
         SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
-        if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+        if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+        else if (GameManager.Instance.IsDebug() && !LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+    }
+
+    // Unlocks a world, setting a variable to your savefile for easy access
+    public void UnlockWorld(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                if (completedLevelsCount[0] < 12) return;
+                GameManager.save.game.unlockedWorldTwo = true;
+                locks.Find("W2").gameObject.SetActive(false);
+                break;
+            case 2:
+                if (completedLevelsCount[1] < 12) return;
+                GameManager.save.game.unlockedWorldThree = true;
+                locks.Find("W3").gameObject.SetActive(false);
+                break;
+            case 3:
+                Debug.Log("Not yet unlockeable.");
+                break;
+
+            default:
+                return;
+        }
+
+        // Reactivate buttons
+        UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+        foreach (Transform level in worldHolders[index].transform) { level.GetComponent<Button>().interactable = true; }
     }
 
     // Actions //
