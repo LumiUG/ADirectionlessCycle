@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using System;
 
 public class Hub : MonoBehaviour
 {
@@ -29,6 +28,7 @@ public class Hub : MonoBehaviour
     private readonly List<int> completedLevelsCount = new() { 3, 3, 3, 0 };
     private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
+    private readonly List<int> completedRealOutbound = new() { 0, 0, 0, 0 };
     private readonly List<GameObject> remixList = new();
     private Color remixColor;
     private Color outboundColor;
@@ -63,12 +63,12 @@ public class Hub : MonoBehaviour
 
         // Initial variables!
         if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
-        if (!GameManager.save.game.mechanics.hasSwapUpgrade) fragmentCountText.gameObject.SetActive(false);
+        if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
         else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
         completedCountText.text = $"{completedReal[worldIndex]}/12";
         remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
-        // outboundCountText.text = $"{completedOutboundRemix[worldIndex]}/??";
+        outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
     }
 
     // Cycle through levels
@@ -129,32 +129,26 @@ public class Hub : MonoBehaviour
                     outline = outlineHolder.Find(holder.name).Find(cname);
                     outline.gameObject.SetActive(true);
                 }
-                
+
+                // Get level data
+                var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
+                int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
+
                 // Add 1 to the completed level count (if not remix)
+                if (OutboundCheck(levelAsData, levelCheck.levelID, true)) completedRealOutbound[index]++;
                 if (!isRemix) {
                     if (completedLevelsCount[index] < 12) completedLevelsCount[index]++;
                     completedReal[index]++;
                 } else completedRealRemix[index]++;
 
-                // Get level data and check for the correct outline to use
-                var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
-                int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
-
+                // Check for the correct outline to use
                 Image outlineImg = outline.GetComponent<Image>();
                 if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = remixColor;
                 else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = outboundColor;
                 else outlineImg.color = completedColor; // for remixes!
             }
         }
-
-        // Progress locking (between worlds, not levels)
-        if (completedLevelsCount[0] < 12)
-        {
-            completedLevelsCount[1] = 0;
-            completedLevelsCount[2] = 0;
-        }
-        else if (completedLevelsCount[1] < 12) { completedLevelsCount[2] = 0; }
-
+        
         // nuh uh
         if (holder.transform.parent.name == "REMIX") return;
 
@@ -186,8 +180,11 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
+        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
+
+        // World 2
         Transform wLock = locks.Find("W2");
-        if (!GameManager.save.game.unlockedWorldTwo)
+        if (!GameManager.save.game.unlockedWorldTwo && !GameManager.Instance.IsDebug())
         {
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[0]}/9";
             foreach (Transform level in worldHolders[1].transform)
@@ -195,8 +192,9 @@ public class Hub : MonoBehaviour
         }
         else wLock.gameObject.SetActive(false);
 
+        // World 3
         wLock = locks.Find("W3");
-        if (!GameManager.save.game.unlockedWorldThree)
+        if (!GameManager.save.game.unlockedWorldThree && !GameManager.Instance.IsDebug())
         {
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
             foreach (Transform level in worldHolders[2].transform)
@@ -204,6 +202,7 @@ public class Hub : MonoBehaviour
         }
         else wLock.gameObject.SetActive(false);
 
+        // add debug later please
         if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
@@ -292,7 +291,11 @@ public class Hub : MonoBehaviour
 
         // Update world completions
         completedCountText.text = $"{completedReal[worldIndex]}/12";
-        if (worldIndex <= 2) remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+        if (worldIndex <= 2)
+        {
+            remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+            outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
+        }
 
         // Update checker direction
         checker.dirX = direction;
@@ -325,8 +328,9 @@ public class Hub : MonoBehaviour
         // animator.Play("Blank", 2);
         remixList.Clear();
 
-        if (!LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null)
+        if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.Instance.IsDebug())
         {
+            if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) return;
             HideRevealUI(true);
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
@@ -341,8 +345,7 @@ public class Hub : MonoBehaviour
         if (level == null) return 0;
 
         // Outerbound?
-        if (level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); })
-            && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == false; })) return 2;
+        if (OutboundCheck(level, levelID)) return 2;
 
         // Remix completion?
         if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) return 0;
@@ -381,6 +384,13 @@ public class Hub : MonoBehaviour
         SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
         if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
         else if (GameManager.Instance.IsDebug() && !LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+    }
+
+    // Check for outbounds on a completed level
+    private bool OutboundCheck(SerializableLevel level, string levelID, bool completed = false)
+    {
+        return level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); })
+            && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == completed; });
     }
 
     // Unlocks a world, setting a variable to your savefile for easy access
