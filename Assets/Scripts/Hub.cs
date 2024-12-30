@@ -271,7 +271,7 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (GameManager.save.game.collectedOrbs.Count >= 1) { hubArrows[1].interactable = true; break; };
+                if (GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12").completed) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
