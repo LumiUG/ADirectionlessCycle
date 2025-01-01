@@ -169,21 +169,21 @@ public class InputManager : MonoBehaviour
             else if (latestMovement.y == 0) movement = new(0, movCheck.y);
         }
 
-        // Tile vars
-        isHoldingMovement = true;
-        latestMovement = movement;
-
         // Move a single time
-        if (MoveCDCheck(manualMovementCD) && !GameManager.save.preferences.repeatInput) return;
-        if (!GameManager.save.preferences.repeatInput)
+        bool doSingle = true;
+        if (!GameManager.save.preferences.repeatInput && MoveCDCheck(manualMovementCD)) return;
+        if (GameManager.save.preferences.repeatInput && !MoveCDCheck(repeatMovementCD)) doSingle = false;
+
+        if ((doSingle && !isHoldingMovement && GameManager.save.preferences.repeatInput) || doSingle && !GameManager.save.preferences.repeatInput)
         {
             LevelManager.Instance.AddUndoFrame();
             LevelManager.Instance.ApplyGravity(movement);
-            
-            // New move CD
             currentMovementCD = Time.time;
-            return;
         }
+
+        // Tile vars
+        isHoldingMovement = true;
+        latestMovement = movement;
 
         // Repeat your movement
         if (movementCoro != null) StopCoroutine(movementCoro); 
@@ -230,6 +230,8 @@ public class InputManager : MonoBehaviour
     // Repeats a movement
     private IEnumerator RepeatMovement(Vector3Int direction, float speed = 0.005f)
     {
+        if (!GameManager.save.preferences.repeatInput) yield break;
+
         while (direction == latestMovement && isHoldingMovement && LevelManager.Instance.IsAllowedToPlay())
         {
             if (!MoveCDCheck(repeatMovementCD))
