@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
+using System;
 
 public class Hub : MonoBehaviour
 {
@@ -271,7 +272,8 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12").completed) { hubArrows[1].interactable = true; break; };
+                var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12");
+                if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;

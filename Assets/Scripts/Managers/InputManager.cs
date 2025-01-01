@@ -22,8 +22,8 @@ public class InputManager : MonoBehaviour
     private Coroutine outCoro = null;
     private Coroutine movementCoro = null;
     private Coroutine undoCoro = null;
-    private readonly float repeatMovementCD = 0.12f;
-    private readonly float manualMovementCD = 0.12f;
+    private readonly float repeatMovementCD = 0.14f; // 0.12f default
+    private readonly float manualMovementCD = 0.04f; // 0.12f default
     private float currentMovementCD = 0f;
 
     // Debug //
@@ -158,9 +158,16 @@ public class InputManager : MonoBehaviour
         if (!LevelManager.Instance.IsAllowedToPlay()) return;
 
         // Input prevention logic
-        Vector3Int movement = Vector3Int.RoundToInt(ctx.Get<Vector2>());
-        if (movement == Vector3Int.zero) { isHoldingMovement = false; return; }
-        if (movement.x != 0 && movement.y != 0) return;
+        Vector3Int movCheck = Vector3Int.RoundToInt(ctx.Get<Vector2>());
+        if (movCheck == Vector3Int.zero) { isHoldingMovement = false; return; }
+
+        // Better input handler
+        Vector3Int movement = movCheck;
+        if (movCheck.x != 0 && movCheck.y != 0)
+        {
+            if (latestMovement.x == 0) movement = new(movCheck.x, 0);
+            else if (latestMovement.y == 0) movement = new(0, movCheck.y);
+        }
 
         // Tile vars
         isHoldingMovement = true;

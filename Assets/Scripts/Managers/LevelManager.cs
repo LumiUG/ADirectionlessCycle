@@ -616,6 +616,8 @@ public class LevelManager : MonoBehaviour
     // Applies gravity using a direction
     internal void ApplyGravity(Vector3Int movement)
     {
+        // Debug.LogWarning(movement);
+
         // Clears blacklist
         movementBlacklist.Clear();
         toDestroy.Clear();
