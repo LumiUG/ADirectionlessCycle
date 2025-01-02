@@ -243,7 +243,10 @@ public class Hub : MonoBehaviour
     public void ChangeWorld(int direction)
     {
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
-        if (worldIndex + direction == 3 && GameManager.save.game.collectedOrbs.Count < 1) return;
+        
+        // Stuff for super world.
+        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12");
+        if (worldIndex + direction == 3) if (level != null) if (!level.completed) return;
 
         // Move!!! (animation, i know im repeating two switches.)
         switch (worldIndex)
@@ -272,7 +275,6 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12");
                 if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
