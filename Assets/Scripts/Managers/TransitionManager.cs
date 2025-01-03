@@ -87,6 +87,8 @@ public class TransitionManager : MonoBehaviour
     // Transition callers
     internal void TransitionIn<T>(Transitions transition = Transitions.Ignore, Action<T> doAfter = null, T parameters = default)
     {
+        if (inTransition) { doAfter?.Invoke(parameters); return; }
+
         ChangeTransition(transition);
         StartCoroutine(CoroIn(transition, doAfter, parameters));
     }

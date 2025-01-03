@@ -737,10 +737,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            // GameManager.Instance.isEditing
-            UI.Instance.win.SetTotalTime(changes.time);
-            UI.Instance.win.SetTotalMoves(changes.moves);
-            UI.Instance.win.TriggerWin();
+            UI.Instance.GoNextLevel();
             hasWon = true;
             return;
         }
@@ -774,9 +771,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            UI.Instance.win.SetTotalTime(changes.time);
-            UI.Instance.win.SetTotalMoves(changes.moves);
-            UI.Instance.win.TriggerWin();
+            UI.Instance.GoNextLevel();
             hasWon = true;
         }
     }
@@ -872,7 +867,7 @@ public class LevelManager : MonoBehaviour
     {
         if (!currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
         UI.Instance.pause.Toggle(false);
-        UI.Instance.win.Toggle(false);
+        // UI.Instance.win.Toggle(false);
         UI.Instance.editor.Toggle(false);
     }
 

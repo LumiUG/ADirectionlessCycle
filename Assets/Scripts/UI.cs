@@ -12,7 +12,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public LevelEditorUI editor;
     [HideInInspector] public PreloadUI preload; 
     [HideInInspector] public PauseUI pause;
-    [HideInInspector] public WinUI win;
+    // [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
     [HideInInspector] public ConfirmRestartUI restart;
     [HideInInspector] public DialogUI dialog;
@@ -42,11 +42,11 @@ public class UI : MonoBehaviour
         editor.freeroamToggle = editor.self.transform.Find("Freeroam Toggle").GetComponent<Toggle>();
 
         // Win screen (intermission)
-        win = new() { self = transform.parent.Find("Intermissions").Find("Win Screen").gameObject };
-        win.animator = win.self.transform.parent.GetComponent<Animator>();
-        win.stats = win.self.transform.Find("Level Stats");
-        win.time = win.stats.Find("Win Time").GetComponent<Text>();
-        win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
+        // win = new() { self = transform.parent.Find("Intermissions").Find("Win Screen").gameObject };
+        // win.animator = win.self.transform.parent.GetComponent<Animator>();
+        // win.stats = win.self.transform.Find("Level Stats");
+        // win.time = win.stats.Find("Win Time").GetComponent<Text>();
+        // win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
 
         // Preload (intermission)
         preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
@@ -141,7 +141,7 @@ public class UI : MonoBehaviour
         ingame.Toggle(false);
         editor.Toggle(false);
         pause.Toggle(false);
-        win.Toggle(false);
+        // win.Toggle(false);
     }
 
     // Import level
@@ -213,12 +213,7 @@ public class UI : MonoBehaviour
         // There's no next level.
         if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel))
         {
-            LevelManager.Instance.ClearLevel();
-            LevelManager.Instance.hasWon = false;
-            GameManager.Instance.isEditing = false;
-            LevelManager.Instance.currentLevel = null;
-            ClearUI();
-            ChangeScene("Hub");
+            TransitionManager.Instance.TransitionIn<string>(Swipe, ActionReturnHub);
             return;
         }
         
@@ -337,11 +332,6 @@ public class UI : MonoBehaviour
         public Text time;
         public Text moves;
 
-        public void TriggerWin()
-        {
-            Instance.GoNextLevel();
-            Debug.Log("nice");
-        }
         public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}s"; }
         public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
     }
@@ -386,7 +376,7 @@ public class UI : MonoBehaviour
         public override void Toggle(bool toggle)
         {
             self.SetActive(toggle);
-            if (toggle) UI.Instance.selectors.ChangeSelected(restartButton.gameObject, true);
+            if (toggle) Instance.selectors.ChangeSelected(restartButton.gameObject, true);
         }
     }
 
@@ -406,6 +396,7 @@ public class UI : MonoBehaviour
         // Load the scene
         SceneManager.LoadScene(sceneName);
     }
+
     private void ActionGoLevelEditor(string _)
     {
         if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel(true, true);
@@ -457,5 +448,15 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.ReloadLevel(true);
         TransitionManager.Instance.TransitionOut<string>(Swipe);
+    }
+
+    private void ActionReturnHub(string _)
+    {
+        LevelManager.Instance.ClearLevel();
+        LevelManager.Instance.hasWon = false;
+        GameManager.Instance.isEditing = false;
+        LevelManager.Instance.currentLevel = null;
+        ClearUI();
+        ChangeScene("Hub");
     }
 }
