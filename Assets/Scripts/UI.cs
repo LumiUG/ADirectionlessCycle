@@ -62,6 +62,8 @@ public class UI : MonoBehaviour
 
         // Pause menu
         pause = new() { self = transform.Find("Pause Menu").gameObject };
+        pause.title = pause.self.transform.Find("Pause Title").GetComponent<Text>();
+        pause.resumeButton = pause.self.transform.Find("Resume Button").gameObject;
         pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
         pause.backToMenu = pause.self.transform.Find("Menu Button").gameObject;
         pause.levelInfo = pause.self.transform.Find("Level Info");
@@ -172,7 +174,6 @@ public class UI : MonoBehaviour
         LevelManager.Instance.worldOffsetX = 0;
         LevelManager.Instance.worldOffsetY = 0;
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
-        ingame.SetLevelName("Editor Mode!");
         editor.Toggle(false);
         ingame.Toggle(true);
         
@@ -328,9 +329,11 @@ public class UI : MonoBehaviour
 
     public class PauseUI : UIObject
     {
+        public GameObject resumeButton;
         public GameObject editorButton;
         public GameObject backToMenu;
         public Transform levelInfo;
+        public Text title;
         public Text levelBestTime;
         public Text levelBestMoves;
 
@@ -345,7 +348,6 @@ public class UI : MonoBehaviour
         public Text levelMoves;
         public Text levelTimer;
         public Text areaCount;
-        public void SetLevelName(string newName) { levelName.text = $"{newName}"; }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }
         public void SetAreaCount(int current, int max)

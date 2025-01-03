@@ -310,8 +310,8 @@ public class LevelManager : MonoBehaviour
         // UI Stuff
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
-        UI.Instance.ingame.SetLevelName(currentLevel.levelName);
         if (levelAsSave != null) {
+            UI.Instance.pause.title.text = currentLevel.levelName;
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
             UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
         } else {
@@ -810,7 +810,7 @@ public class LevelManager : MonoBehaviour
     public void PauseResumeGame(bool status)
     {
         if (status) {
-            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.backToMenu, true);
+            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
             UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
         }
 
