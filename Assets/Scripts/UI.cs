@@ -41,16 +41,14 @@ public class UI : MonoBehaviour
         editor.remixLevelField = editor.self.transform.Find("Remix Level").Find("RL Field").GetComponent<InputField>();
         editor.freeroamToggle = editor.self.transform.Find("Freeroam Toggle").GetComponent<Toggle>();
 
-        // Win screen
-        win = new() { self = transform.Find("Win Screen").gameObject };
-        win.editorButton = win.self.transform.Find("Edit Level Button").gameObject;
-        win.nextLevel = win.self.transform.Find("Next Level Button").gameObject;
-        win.menuButton = win.self.transform.Find("Menu Button").gameObject;
+        // Win screen (intermission)
+        win = new() { self = transform.parent.Find("Intermissions").Find("Win Screen").gameObject };
+        win.animator = win.self.transform.parent.GetComponent<Animator>();
         win.stats = win.self.transform.Find("Level Stats");
         win.time = win.stats.Find("Win Time").GetComponent<Text>();
         win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
 
-        // Preload / intermissions
+        // Preload (intermission)
         preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
         preload.animator = preload.self.transform.parent.GetComponent<Animator>();
         preload.levelName = preload.self.transform.Find("Level Name").gameObject.GetComponent<Text>();
@@ -205,7 +203,26 @@ public class UI : MonoBehaviour
     // Goto next level
     public void GoNextLevel()
     {
-        if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel)) return;
+        // Player is playtesting
+        if (GameManager.Instance.isEditing)
+        {
+            GoLevelEditor();
+            return;   
+        }
+
+        // There's no next level.
+        if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel))
+        {
+            LevelManager.Instance.ClearLevel();
+            LevelManager.Instance.hasWon = false;
+            GameManager.Instance.isEditing = false;
+            LevelManager.Instance.currentLevel = null;
+            ClearUI();
+            ChangeScene("Hub");
+            return;
+        }
+        
+        // Next level.
         TransitionManager.Instance.TransitionIn<string>(Triangle, ActionGoNextLevel);
         GameManager.Instance.isEditing = false;
     }
@@ -314,15 +331,17 @@ public class UI : MonoBehaviour
 
     public class WinUI : UIObject
     {
-        public GameObject editorButton;
-        public GameObject nextLevel;
-        public GameObject menuButton;
+        public Animator animator;
+        public Text completeText;
         public Transform stats;
         public Text time;
         public Text moves;
 
-        public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
-        public void ToggleNextLevel(bool toggle) { nextLevel.SetActive(toggle); }
+        public void TriggerWin()
+        {
+            Instance.GoNextLevel();
+            Debug.Log("nice");
+        }
         public void SetTotalTime(float newTime) { time.text = $"Total time: {Math.Round(newTime, 2)}s"; }
         public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
     }

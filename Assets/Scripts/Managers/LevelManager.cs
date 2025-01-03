@@ -737,11 +737,10 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            UI.Instance.selectors.ChangeSelected(UI.Instance.win.menuButton, true);
-            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
+            // GameManager.Instance.isEditing
             UI.Instance.win.SetTotalTime(changes.time);
             UI.Instance.win.SetTotalMoves(changes.moves);
-            UI.Instance.win.Toggle(true);
+            UI.Instance.win.TriggerWin();
             hasWon = true;
             return;
         }
@@ -749,6 +748,13 @@ public class LevelManager : MonoBehaviour
         // Load remix level!
         if (remixCondition && !DialogManager.Instance.inDialog)
         {
+            // Check if the player is playtesting a level
+            if (GameManager.Instance.isEditing)
+            {
+                UI.Instance.GoLevelEditor();
+                return;   
+            }
+
             // Level + savedata
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
             GameData.LevelChanges changes = new(false, false, -1, -1);
@@ -768,12 +774,9 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            UI.Instance.selectors.ChangeSelected(UI.Instance.win.menuButton, true);
-            UI.Instance.win.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
-            UI.Instance.win.ToggleNextLevel(!IsStringEmptyOrNull(currentLevel.nextLevel));
             UI.Instance.win.SetTotalTime(changes.time);
             UI.Instance.win.SetTotalMoves(changes.moves);
-            UI.Instance.win.Toggle(true);
+            UI.Instance.win.TriggerWin();
             hasWon = true;
         }
     }
