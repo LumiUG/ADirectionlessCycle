@@ -486,8 +486,8 @@ public class InputManager : MonoBehaviour
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
                 if (!test) { test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
-                if (test) return npc;
-                else return false;
+                if (test) { if (test.directions.GetActiveDirectionCount() > 0) return npc; }
+                return false;
             }
         );
         

@@ -205,16 +205,9 @@ public class Hub : MonoBehaviour
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
             foreach (Transform level in worldHolders[2].transform)
                 { level.GetComponent<Button>().interactable = false; }
-            spikes = false;
-        }
-        else {
-            spikes = true;
-            wLock.gameObject.SetActive(false);
-        }
+        } else wLock.gameObject.SetActive(false);
 
         // add debug later please
-        wLock = locks.Find("WS");
-        if (spikes) { wLock.Find("Spikes").gameObject.SetActive(true); wLock.Find("Filler").gameObject.SetActive(false); }
         if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
