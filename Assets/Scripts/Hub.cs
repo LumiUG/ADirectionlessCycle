@@ -184,6 +184,7 @@ public class Hub : MonoBehaviour
         if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
 
         // World 2
+        bool spikes = false;
         Transform wLock = locks.Find("W2");
         if (!GameManager.save.game.unlockedWorldTwo && !GameManager.Instance.IsDebug())
         {
@@ -191,19 +192,29 @@ public class Hub : MonoBehaviour
             foreach (Transform level in worldHolders[1].transform)
                 { level.GetComponent<Button>().interactable = false; }
         }
-        else wLock.gameObject.SetActive(false);
+        else {
+            spikes = true;
+            wLock.gameObject.SetActive(false);
+        }
 
         // World 3
         wLock = locks.Find("W3");
+        if (spikes) { wLock.Find("Spikes").gameObject.SetActive(true); wLock.Find("Filler").gameObject.SetActive(false); }
         if (!GameManager.save.game.unlockedWorldThree && !GameManager.Instance.IsDebug())
         {
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
             foreach (Transform level in worldHolders[2].transform)
                 { level.GetComponent<Button>().interactable = false; }
+            spikes = false;
         }
-        else wLock.gameObject.SetActive(false);
+        else {
+            spikes = true;
+            wLock.gameObject.SetActive(false);
+        }
 
         // add debug later please
+        wLock = locks.Find("WS");
+        if (spikes) { wLock.Find("Spikes").gameObject.SetActive(true); wLock.Find("Filler").gameObject.SetActive(false); }
         if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
@@ -400,17 +411,26 @@ public class Hub : MonoBehaviour
     // Unlocks a world, setting a variable to your savefile for easy access
     public void UnlockWorld(int index)
     {
+        Transform nextWorld;
         switch (index)
         {
             case 1:
                 if (completedLevelsCount[0] < 12) return;
                 GameManager.save.game.unlockedWorldTwo = true;
                 locks.Find("W2").gameObject.SetActive(false);
+
+                nextWorld = locks.Find("W3");
+                nextWorld.Find("Spikes").gameObject.SetActive(true);
+                nextWorld.Find("Filler").gameObject.SetActive(false);
                 break;
             case 2:
                 if (completedLevelsCount[1] < 12) return;
                 GameManager.save.game.unlockedWorldThree = true;
                 locks.Find("W3").gameObject.SetActive(false);
+
+                nextWorld = locks.Find("WS");
+                nextWorld.Find("Spikes").gameObject.SetActive(true);
+                nextWorld.Find("Filler").gameObject.SetActive(false);
                 break;
             case 3:
                 Debug.Log("Not yet unlockeable.");
