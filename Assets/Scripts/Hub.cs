@@ -80,8 +80,8 @@ public class Hub : MonoBehaviour
 
         if (delayOneFrame)
         {
-            animator.Play("Reveal Top", 1);
-            animator.Play("Reveal Bottom", 2);
+            animator.Play("Reveal Top", 2);
+            animator.Play("Reveal Bottom", 3);
             delayOneFrame = false;
         }
 
@@ -96,7 +96,9 @@ public class Hub : MonoBehaviour
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
         || !EventSystem.current.currentSelectedGameObject.transform.parent.name.StartsWith("W")) return;
+        
         lastSelectedlevel = EventSystem.current.currentSelectedGameObject;
+        HideRevealUI(false, false, "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 1 : 2);
 
         // Update UI
         string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
@@ -106,12 +108,10 @@ public class Hub : MonoBehaviour
         PreviewText(levelID);
 
         // Show proper remix levels attached
-        bool remixSelection = "654321".Contains(lastSelectedlevel.name.Split("-")[1]);
-        Debug.Log(remixSelection);
         if (!levelID.Contains("REMIX"))
         {
-            animator.Play("Blank", 1);
             animator.Play("Blank", 2);
+            animator.Play("Blank", 3);
         }
 
         RemixUIChecks(level, levelID);
@@ -183,17 +183,27 @@ public class Hub : MonoBehaviour
     }
 
     // Hides/unhides some UI elements while a valid level is selected (not hovered)
-    private void HideRevealUI(bool toggle)
+    private void HideRevealUI(bool toggle, bool arrows = true, int overwrite = -1)
     {
+        int remixSelection;
+        if (lastSelectedlevel) remixSelection = "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 2 : 1;
+        else remixSelection = 0;
+
+        if (overwrite != -1) remixSelection = overwrite;
+
         // Toggle on
         if (toggle)
         {
-            animator.Play("Away", 0);
+            if (remixSelection == 2 || remixSelection == 0) animator.Play("Away Top", 0);
+            if (remixSelection == 1 || remixSelection == 0) animator.Play("Away Bottom", 1);
+            if (arrows) animator.Play("Arrows In", 5);
             return;
         }
 
         // Toggle off
-        animator.Play("Revert");
+        if (remixSelection == 2 || remixSelection == 0) animator.Play("Revert Top", 0);
+        if (remixSelection == 1 || remixSelection == 0) animator.Play("Revert Bottom", 1);
+        if (arrows) animator.Play("Arrows Out", 5);
     }
 
     private void SetupLocks()
@@ -273,19 +283,19 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 0:
-                if (direction > 0) animator.Play("W1Right", 3);
-                else animator.Play("W1Left", 3);
+                if (direction > 0) animator.Play("W1Right", 4);
+                else animator.Play("W1Left", 4);
                 break;
             case 1:
-                if (direction > 0) animator.Play("W2Right", 3);
-                else animator.Play("W2Left", 3);
+                if (direction > 0) animator.Play("W2Right", 4);
+                else animator.Play("W2Left", 4);
                 break;
             case 2:
-                if (direction > 0) animator.Play("W3Right", 3);
-                else animator.Play("W3Left", 3);
+                if (direction > 0) animator.Play("W3Right", 4);
+                else animator.Play("W3Left", 4);
                 break;
             case 3:
-                if (direction < 0) animator.Play("WSLeft", 3);
+                if (direction < 0) animator.Play("WSLeft", 4);
                 break;
             default:
                 break;
@@ -347,7 +357,7 @@ public class Hub : MonoBehaviour
     {
         if (levelID.Contains("REMIX") || level == null) return;
         if (!GameManager.Instance.IsDebug() && !GameManager.save.game.mechanics.hasSeenRemix) return;
-        
+
         remixList.ForEach(item => item.SetActive(false));
         remixList.Clear();
 
@@ -357,7 +367,7 @@ public class Hub : MonoBehaviour
             HideRevealUI(true);
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
-        else HideRevealUI(false);
+        else HideRevealUI(false, true, 0);
     }
 
     // 0 = green (ignore)
