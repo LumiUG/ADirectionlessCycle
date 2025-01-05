@@ -37,6 +37,7 @@ public class Hub : MonoBehaviour
     private GameObject lastSelectedlevel = null;
     private Animator animator;
     private int worldIndex = 0;
+    private bool delayOneFrame = false;
 
     private void Awake()
     {
@@ -76,6 +77,14 @@ public class Hub : MonoBehaviour
     private void Update()
     {
         if (!EventSystem.current) return;
+
+        if (delayOneFrame)
+        {
+            animator.Play("Reveal Top", 1);
+            animator.Play("Reveal Bottom", 2);
+            delayOneFrame = false;
+        }
+
         if (EventSystem.current.currentSelectedGameObject == null) return;
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
@@ -92,11 +101,19 @@ public class Hub : MonoBehaviour
         // Update UI
         string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
         if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
-        
+
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         PreviewText(levelID);
 
         // Show proper remix levels attached
+        bool remixSelection = "654321".Contains(lastSelectedlevel.name.Split("-")[1]);
+        Debug.Log(remixSelection);
+        if (!levelID.Contains("REMIX"))
+        {
+            animator.Play("Blank", 1);
+            animator.Play("Blank", 2);
+        }
+
         RemixUIChecks(level, levelID);
     }
 
@@ -181,7 +198,7 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
-        // if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
+        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
 
         // World 2
         bool spikes = false;
@@ -332,8 +349,6 @@ public class Hub : MonoBehaviour
         if (!GameManager.Instance.IsDebug() && !GameManager.save.game.mechanics.hasSeenRemix) return;
         
         remixList.ForEach(item => item.SetActive(false));
-        // animator.Play("Blank", 1);
-        // animator.Play("Blank", 2);
         remixList.Clear();
 
         if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.Instance.IsDebug())
@@ -377,8 +392,9 @@ public class Hub : MonoBehaviour
         {
             remixList.Add(selected.gameObject);
             selected.gameObject.SetActive(true);
-            // animator.Play("Reveal Top", 1);
-            // animator.Play("Reveal Bottom", 2);
+
+            // Show remix level animation
+            delayOneFrame = true;
             
             // Toggles outline on
             if (outline)
