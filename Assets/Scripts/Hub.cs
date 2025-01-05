@@ -181,7 +181,7 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
-        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
+        // if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
 
         // World 2
         bool spikes = false;
@@ -420,10 +420,6 @@ public class Hub : MonoBehaviour
                 if (completedLevelsCount[1] < 12) return;
                 GameManager.save.game.unlockedWorldThree = true;
                 locks.Find("W3").gameObject.SetActive(false);
-
-                nextWorld = locks.Find("WS");
-                nextWorld.Find("Spikes").gameObject.SetActive(true);
-                nextWorld.Find("Filler").gameObject.SetActive(false);
                 break;
             case 3:
                 Debug.Log("Not yet unlockeable.");
