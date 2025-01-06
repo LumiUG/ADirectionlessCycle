@@ -96,10 +96,8 @@ public class Hub : MonoBehaviour
         // Checking if you swapped levels (condition)
         if (lastSelectedlevel == EventSystem.current.currentSelectedGameObject
         || !EventSystem.current.currentSelectedGameObject.transform.parent.name.StartsWith("W")) return;
-        
         lastSelectedlevel = EventSystem.current.currentSelectedGameObject;
-        HideRevealUI(false, false, "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 1 : 2);
-
+        
         // Update UI
         string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
         if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
@@ -110,6 +108,12 @@ public class Hub : MonoBehaviour
         // Show proper remix levels attached
         if (!levelID.Contains("REMIX"))
         {
+            if (GameManager.save.game.mechanics.hasSeenRemix || GameManager.Instance.IsDebug())
+            {
+                if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) HideRevealUI(false, false, 0);
+                else HideRevealUI(false, false, "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 1 : 2); // 2:1 is oppsite rows btw
+            }
+            
             animator.Play("Blank", 2);
             animator.Play("Blank", 3);
         }
@@ -367,7 +371,6 @@ public class Hub : MonoBehaviour
             HideRevealUI(true);
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
-        else HideRevealUI(false, true, 0);
     }
 
     // 0 = green (ignore)
