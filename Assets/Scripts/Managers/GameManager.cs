@@ -58,9 +58,10 @@ public class GameManager : MonoBehaviour
 
         // Steam integration initial stuff
         if (!SteamManager.Initialized) return;
-        Debug.Log(SteamFriends.GetPersonaName());
         SetPresence("steam_display", "#Menuing");
-        // EditAchivement("ACH_TEST");
+        
+        Debug.Log(SteamFriends.GetPersonaName());
+        SteamUserStats.ResetAllStats(true);
     }
 
     // Save game on leaving

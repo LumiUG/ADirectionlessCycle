@@ -110,7 +110,8 @@ public class Hub : MonoBehaviour
         {
             if (GameManager.save.game.mechanics.hasSeenRemix || GameManager.Instance.IsDebug())
             {
-                if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) HideRevealUI(false, false, 0);
+                if (level == null) HideRevealUI(false, false);
+                else if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) HideRevealUI(false, false, 0);
                 else HideRevealUI(false, false, "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 1 : 2); // 2:1 is oppsite rows btw
             }
             
@@ -239,7 +240,7 @@ public class Hub : MonoBehaviour
         } else wLock.gameObject.SetActive(false);
 
         // add debug later please
-        if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
+        // if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
     // Now as a function for mouse hovers!

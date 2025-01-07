@@ -434,13 +434,19 @@ public class LevelManager : MonoBehaviour
         // Change "scene" if on world map?
         if (currentLevel.freeroam)
         {
+
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
             // TODO: noMove = true; (Freeze object tiles from the new room, except ones coming from old room)
-            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; }
-            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; }
-            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; }
-            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; }
+            bool ach = false;
+            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; ach = true; }
+            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; ach = true; }
+            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; ach = true; }
+            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
+
+            // Achievement (will retrigger multiple times, maybe bad?)
+            // we don't use "GameManager.save.game.mechanics.hasSwapUpgrade", you can get out without.
+            if (ach) GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
         }
 
         // Removes from movement queue
@@ -616,8 +622,6 @@ public class LevelManager : MonoBehaviour
     // Applies gravity using a direction
     internal void ApplyGravity(Vector3Int movement)
     {
-        // Debug.LogWarning(movement);
-
         // Clears blacklist
         movementBlacklist.Clear();
         toDestroy.Clear();
@@ -653,8 +657,11 @@ public class LevelManager : MonoBehaviour
         if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.45f);
 
         // Destroys all marked object tiles.
-        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
+        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
+
+        // Achievement (will retrigger multiple times, maybe bad?)
+        if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.Instance.EditAchivement("ACH_DIRECTIONLESS");
 
         // Win check, add one move to the player
         if (validation.Contains(true)) levelMoves++;
@@ -752,8 +759,14 @@ public class LevelManager : MonoBehaviour
                 return;   
             }
 
+            // First remix level?
+            if (!GameManager.save.game.mechanics.hasSeenRemix)
+            {
+                GameManager.Instance.EditAchivement("ACH_FIRST_INVERSE");
+                GameManager.save.game.mechanics.hasSeenRemix = true;
+            }
+
             // Level + savedata
-            if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
             GameData.LevelChanges changes = new(false, false, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
             GameManager.Instance.UpdateSavedLevel(currentLevel.remixLevel, changes, false); // create a remix entry (therefore its discovered)
@@ -766,6 +779,9 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition && !DialogManager.Instance.inDialog)
         {
+            // Level 1 achievement
+            if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.Instance.EditAchivement("ACH_SIXMOVES");
+
             // Level savedata
             GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);

@@ -120,6 +120,12 @@ public class UI : MonoBehaviour
         GameManager.Instance.SetPresence("steam_display", "#Menuing");
     }
 
+    // Goes to hub (scarier)
+    public void GoHub()
+    {
+        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionReturnHub);
+    }
+
     // Go from a level to the editor
     public void GoLevelEditor()
     {
@@ -213,7 +219,7 @@ public class UI : MonoBehaviour
         // There's no next level.
         if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel))
         {
-            TransitionManager.Instance.TransitionIn<string>(Swipe, ActionReturnHub);
+            GoHub();
             return;
         }
         
