@@ -548,6 +548,7 @@ public class InputManager : MonoBehaviour
                 break;
             case "Game":
                 if (UI.Instance.restart.self.activeSelf) UI.Instance.CloseConfirmRestart();
+                if (UI.Instance.popup.self.activeSelf) UI.Instance.ClosePopup();
                 break;
             default:
                 break;

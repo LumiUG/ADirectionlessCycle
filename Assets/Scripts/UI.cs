@@ -15,6 +15,7 @@ public class UI : MonoBehaviour
     // [HideInInspector] public WinUI win;
     [HideInInspector] public IngameUI ingame;
     [HideInInspector] public ConfirmRestartUI restart;
+    [HideInInspector] public PopupUI popup;
     [HideInInspector] public DialogUI dialog;
     [HideInInspector] public Selectors selectors;
 
@@ -78,6 +79,11 @@ public class UI : MonoBehaviour
         // Restart UI
         restart = new() { self = transform.Find("Confirm Restart").gameObject };
         restart.restartButton = restart.self.transform.Find("Restart").GetComponent<Button>();
+
+        // Popup UI
+        popup = new() { self = transform.Find("Popup").gameObject };
+        popup.popupBtn = popup.self.transform.Find("Any Key").gameObject;
+        popup.popupText = popup.self.transform.Find("Text").GetComponent<Text>();
 
         // Dialog UI
         dialog = new() { self = transform.Find("Dialog UI").gameObject };
@@ -239,10 +245,31 @@ public class UI : MonoBehaviour
     // Remove restart screen
     public void CloseConfirmRestart() { restart.Toggle(false); }
 
+    // Remove popup
+    public void ClosePopup() { selectors.ChangeSelected(pause.backToMenu, true); popup.Toggle(false); }
+
     // UI confirm sound
     public void ConfirmSound()
     {
         AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+    }
+
+    // Goes to the current level's
+    public void CurrentLevelHint()
+    {
+        if (LevelManager.Instance.currentLevel == null) return;
+
+        // if (LevelManager.Instance.currentLevel.hintOrSomething)
+        // Prepare the hint level's ID
+        string[] split = LevelManager.Instance.currentLevelID.Split("/");
+        string hintLevelID;
+
+        if (split[0].Contains("REMIX")) hintLevelID = $"HINTS/{split[1]}H";
+        else hintLevelID = $"HINTS/W{split[1]}H";
+
+        // Get the level and load it accordingly
+        if (LevelManager.Instance.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("This level has no hints available."); return; }
+        TransitionManager.Instance.TransitionIn(Triangle, ActionGoHintLevel, hintLevelID);
     }
 
     // Object classes //
@@ -386,6 +413,18 @@ public class UI : MonoBehaviour
         }
     }
 
+    public class PopupUI : UIObject
+    {
+        public GameObject popupBtn;
+        public Text popupText;
+        public void SetPopup(string content)
+        {
+            Instance.selectors.ChangeSelected(popupBtn, true);
+            popupText.text = content;
+            Toggle(true);
+        }
+    }
+
     public class DialogUI : UIObject
     {
         public Text text;
@@ -429,13 +468,25 @@ public class UI : MonoBehaviour
 
         // Loads the level (Load internal level first, if it fails, load external)
         LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
         if (!LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel)) LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel, true);
+        LevelManager.Instance.RefreshGameUI();
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
         if (!LevelManager.Instance.currentLevel.hideUI) preload.PreparePreloadScreen(save);
         else TransitionManager.Instance.TransitionOut<string>();
+    }
+
+    private void ActionGoHintLevel(string hintLevelID)
+    {
+        // Loads the level
+        LevelManager.Instance.RefreshGameVars();
+        LevelManager.Instance.RefreshGameUI();
+        LevelManager.Instance.LoadLevel(hintLevelID);
+
+        // transition out
+        TransitionManager.Instance.ChangeTransition(Triangle);
+        TransitionManager.Instance.TransitionOut<string>();
     }
 
     private void ActionGoMainMenu(string _)
