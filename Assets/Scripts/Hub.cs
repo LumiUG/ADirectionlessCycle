@@ -60,6 +60,13 @@ public class Hub : MonoBehaviour
         // Iterate all remix levels.
         for (int count = 0; count < remixHolders.Count; count++) { PrepareHub(remixHolders[count], true, count); }
 
+        // Achievements
+        if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
+        if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2"); // needs testing
+        if (completedReal[2] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3"); // needs testing
+        if (completedReal[3] >= 12) GameManager.Instance.EditAchivement("ACH_ORBS"); // needs testing
+        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 12) GameManager.Instance.EditAchivement("ACH_ALL_MAIN"); // needs testing
+
         // Lock screen for levels
         SetupLocks();
 

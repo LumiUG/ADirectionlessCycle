@@ -61,11 +61,10 @@ public class GameManager : MonoBehaviour
         SetPresence("steam_display", "#Menuing");
         
         Debug.Log(SteamFriends.GetPersonaName());
-        SteamUserStats.ResetAllStats(true);
     }
 
     // Save game on leaving
-    void OnDisable() { SaveDataJSON(save); }
+    void OnDisable() { SaveDataJSON(save); SteamUserStats.ResetAllStats(true); }
 
     // Returns if the current scene shouldn't be taken into account
     public bool IsBadScene()
