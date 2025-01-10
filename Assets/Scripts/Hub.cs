@@ -96,7 +96,13 @@ public class Hub : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
             HideRevealUI(false);
-            levelName.text = "";
+            switch (worldIndex) 
+            {
+                case 0: SetLevelName("World 1"); break;
+                case 1: SetLevelName("World 2"); break;
+                case 2: SetLevelName("World 3"); break;
+                case 3: SetLevelName("SUPER World"); break;
+            }
             return;
         }
 
@@ -276,7 +282,7 @@ public class Hub : MonoBehaviour
         if (!LevelManager.Instance) return;
 
         // Is the level locked?
-        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.25f); return; }
+        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Plays the transition
         TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, levelName);

@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     public Vector3Int latestMovement = Vector3Int.back;
 
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
+    internal int restartCount = 0;
 
     private bool isHoldingMovement = false;
     private bool isHoldingUndo = false;
@@ -81,7 +82,7 @@ public class InputManager : MonoBehaviour
             if (!GameManager.Instance.buildDebugMode)
             {
                 GameManager.Instance.buildDebugMode = true;
-                UI.Instance.global.SendMessage("I hope you know what you're doing.", 3);
+                UI.Instance.global.SendMessage("Debug enabled.", 3);
             } else {
                 GameManager.Instance.buildDebugMode = false;
                 UI.Instance.global.SendMessage("Then so be it!", 3);
@@ -90,7 +91,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Secret title command
-        if (debugCommand == "UDLRLRDL")
+        if (debugCommand == "UDLRLRUR")
         {
             UI.Instance.global.SendMessage("Sneaky!", 3);
             debugCommand = null;
@@ -588,7 +589,7 @@ public class InputManager : MonoBehaviour
         if (confirmCommand != debugCommand)
         {
             UI.Instance.global.SendMessage("Are you sure about that?", 2);
-            AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.30f);
+            AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.30f);
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             confirmCommand = $"{debugCommand}";
             debugCommand = null;
@@ -602,9 +603,19 @@ public class InputManager : MonoBehaviour
     // Actions //
     internal void ActionRestart(string _)
     {
+        // Hint popup
+        if (!GameManager.save.game.seenHintPopup)
+        {
+            restartCount++;
+            if (restartCount >= 5)
+            {
+                UI.Instance.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
+                GameManager.save.game.seenHintPopup = true;
+            }
+        }
+        
         LevelManager.Instance.ReloadLevel();
-        LevelManager.Instance.worldOffsetX = 0;
-        LevelManager.Instance.worldOffsetY = 0;
+        LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }

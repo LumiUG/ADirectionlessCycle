@@ -308,10 +308,10 @@ public class LevelManager : MonoBehaviour
         }
 
         // UI Stuff
+        UI.Instance.pause.title.text = currentLevel.levelName;
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
         if (levelAsSave != null) {
-            UI.Instance.pause.title.text = currentLevel.levelName;
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
             UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
         } else {

@@ -15,6 +15,8 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip tileDeath;
     internal static AudioClip tilePush;
     internal static AudioClip areaOverlap;
+    internal static AudioClip inverseOverlap;
+    internal static AudioClip uiDeny;
     internal static AudioClip select;
     internal static AudioClip undo;
     internal static AudioClip cba;
@@ -40,12 +42,13 @@ public class AudioManager : MonoBehaviour
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
+        uiDeny = Resources.Load<AudioClip>("Audio/SFX/UI Deny");
         select = Resources.Load<AudioClip>("Audio/SFX/Select");
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
         cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
 
         // Default looping BGM
-        // PlayBGM(tileDeath);
+        // PlayBGM(cba);
     }
 
     // Dunno yet

@@ -27,6 +27,7 @@ public class UI : MonoBehaviour
         if (!Instance) { Instance = this; }
         else { Destroy(transform.parent.gameObject); return; }
         DontDestroyOnLoad(transform.parent.gameObject);
+        DontDestroyOnLoad(GameObject.Find("Ingame Effects"));
 
         // UI References!
         global = new() { self = gameObject };
@@ -251,7 +252,7 @@ public class UI : MonoBehaviour
     // UI confirm sound
     public void ConfirmSound()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+        AudioManager.Instance.PlaySFX(AudioManager.select, 0.35f, true);
     }
 
     // Goes to the current level's
@@ -501,6 +502,17 @@ public class UI : MonoBehaviour
     }
     private void ActionRestartLevel(string _)
     {
+        // Hint popup (same as inputmanager's)
+        if (!GameManager.save.game.seenHintPopup)
+        {
+            InputManager.Instance.restartCount++;
+            if (InputManager.Instance.restartCount >= 5)
+            {
+                popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
+                GameManager.save.game.seenHintPopup = true;
+            }
+        }
+
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.ReloadLevel(true);
