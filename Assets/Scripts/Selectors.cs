@@ -73,6 +73,8 @@ public class Selectors : MonoBehaviour
     // Sets the selector to a RectTransform object
     internal void SetSelector(RectTransform rt, bool forceMove = false)
     {
+        if (!rt) return;
+
         distanceRight = rt.rect.center + new Vector2(rt.rect.width + (right.rect.width / 2), 0);
         distanceLeft = rt.rect.center + new Vector2(-rt.rect.width - (left.rect.width / 2), 0);
 

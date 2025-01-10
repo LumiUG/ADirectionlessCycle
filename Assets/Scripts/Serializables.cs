@@ -162,8 +162,6 @@ public class Serializables
     [Serializable]
     public class Preferences
     {
-        public Resolution resolution;
-        public FullScreenMode fullScreenMode = FullScreenMode.FullScreenWindow;
         public List<ObjectTypes> editorTiles = new() { ObjectTypes.Wall, ObjectTypes.Box, ObjectTypes.Hazard, ObjectTypes.Area };
         public float masterVolume = 1f;
         public float SFXVolume = 0.8f;

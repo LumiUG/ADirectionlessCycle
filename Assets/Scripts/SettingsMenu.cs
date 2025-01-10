@@ -85,6 +85,34 @@ public class SettingsMenu : MonoBehaviour
         GameManager.save.preferences.forceConfirmRestart = toggle;
     }
 
+    // Resets a setting to its default values (hardcoded, here)
+    public void ResetSetting(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                GameManager.save.preferences.forceConfirmRestart = true;
+                GameManager.save.preferences.repeatInput = true;
+                repeatInputToggle.isOn = true;
+                restartToggle.isOn = true;
+                break;
+            case 1:
+                ToggleFullscreen(true);
+                ChangeResolution(0);
+                settingsToggle.isOn = true;
+                break;
+            case 2:
+                GameManager.save.preferences.masterVolume = 1f;
+                GameManager.save.preferences.SFXVolume = 0.80f;
+                masterSlider.value = 1f;
+                SFXSlider.value = 0.80f;
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    // Toggles one of the settings menus
     public void ToggleMenu(int index)
     {
         if (menuIndex == index || index >= menus.Count || index < 0) return;
