@@ -446,7 +446,7 @@ public class LevelManager : MonoBehaviour
 
             // Achievement (will retrigger multiple times, maybe bad?)
             // we don't use "GameManager.save.game.mechanics.hasSwapUpgrade", you can get out without.
-            if (ach) GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
+            if (ach && !currentLevel.hideUI) GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
         }
 
         // Removes from movement queue
