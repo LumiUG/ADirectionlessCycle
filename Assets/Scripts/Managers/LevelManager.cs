@@ -295,6 +295,9 @@ public class LevelManager : MonoBehaviour
         if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
         else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
 
+        // Reset hint popup (if applicable)
+        if (!GameManager.save.game.seenHintPopup) InputManager.Instance.restartCount = 0;
+
         // Rich presence
         GameManager.Instance.SetPresence("playinglevel", currentLevel.levelName);
         GameManager.Instance.SetPresence("steam_display", "#Playing");
