@@ -60,6 +60,10 @@ public class LevelManager : MonoBehaviour
     internal Vector3 originalPosition;
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
+    internal GameObject directionPrefab;
+    internal Sprite emptyBox;
+    internal Sprite emptyCircle;
+    internal Sprite emptyHex;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -127,6 +131,10 @@ public class LevelManager : MonoBehaviour
         npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
 
         // Defaults
+        directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
+        emptyBox = Resources.Load<Sprite>("Sprites/BlankBox");
+        emptyCircle = Resources.Load<Sprite>("Sprites/BlankBall");
+        emptyHex = Resources.Load<Sprite>("Sprites/BlankHexagon");
         defaultAreaLayer = areaRenderer.sortingOrder;
         defaultObjectsLayer = objectRenderer.sortingOrder;
         defaultEffectsLayer = effectRenderer.sortingOrder;
@@ -386,6 +394,7 @@ public class LevelManager : MonoBehaviour
             ClearUndoFrames();
         }
 
+        directionPrefab.transform.Find("AnimationSprite").gameObject.SetActive(false);
         InputManager.Instance.latestTile = ObjectTypes.Hexagon;
         movementBlacklist.Clear();
         customTileInfo.Clear();
@@ -405,6 +414,9 @@ public class LevelManager : MonoBehaviour
         // Check if the tile exists
         GameTile tile = tilemapObjects.GetTile<GameTile>(startingPosition);
         if (!tile) return false;
+
+        // Disable the tile's sprite before it moves
+        tile.directions.animationSprite.gameObject.SetActive(false);
 
         // Is the tile pushable?
         if (!tile.directions.pushable && beingPushed) return false;
@@ -737,7 +749,7 @@ public class LevelManager : MonoBehaviour
         SetUIAreaCount();
 
         // Save current game status when beating a level (doesnt store new stats)
-        if (winCondition || remixCondition || outboundCondition) GameManager.Instance.SaveDataJSON(GameManager.save);
+        if (winCondition || remixCondition || outboundCondition) { GameManager.Instance.SaveDataJSON(GameManager.save); }
 
         // Outbound win
         if (outboundCondition && !DialogManager.Instance.inDialog)
@@ -1054,9 +1066,38 @@ public class LevelManager : MonoBehaviour
     // Finds all overlapped areas and sets the amount on the UI
     private void SetUIAreaCount()
     {
-        int normalOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; });
-        int remixOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.InverseArea && tilemapObjects.GetTile<GameTile>(area.position) != null; });
-        int outboundOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.OutboundArea && tilemapObjects.GetTile<GameTile>(area.position) != null; });
+        GameTile currTile;
+
+        // Applies tile overlap colors and counts the total amount
+        int normalOverlaps = levelWinAreas.Count(area => {
+            currTile = tilemapObjects.GetTile<GameTile>(area.position);
+            if (area.GetTileType() == ObjectTypes.Area && currTile != null)
+            {
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.completedColor);
+                RefreshObjectTile(currTile);
+            }
+            return currTile != null;
+        });
+
+        int remixOverlaps = levelWinAreas.Count(area => {
+            currTile = tilemapObjects.GetTile<GameTile>(area.position);
+            if (area.GetTileType() == ObjectTypes.InverseArea && currTile != null)
+            {
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.remixColor);
+                RefreshObjectTile(currTile);
+            }
+            return currTile != null;
+        });
+
+        int outboundOverlaps = levelWinAreas.Count(area => {
+            currTile = tilemapObjects.GetTile<GameTile>(area.position);
+            if (area.GetTileType() == ObjectTypes.OutboundArea && currTile != null)
+            {
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.outboundColor);
+                RefreshObjectTile(currTile);
+            }
+            return currTile != null;
+        });
 
         // Outbound overlaps
         if (outboundOverlaps > 0)

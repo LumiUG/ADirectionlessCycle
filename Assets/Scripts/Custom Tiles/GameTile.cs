@@ -33,6 +33,21 @@ public abstract class GameTile : TileBase
     // Prepares editor variables.
     public abstract void PrepareTile();
 
+    // Overlap tile
+    public Sprite GetOverlapSprite()
+    {
+        if (!LevelManager.Instance) return null;
+
+        return GetTileType() switch
+        {
+            ObjectTypes.Mimic => LevelManager.Instance.emptyBox,
+            ObjectTypes.Box => LevelManager.Instance.emptyBox,
+            ObjectTypes.Circle => LevelManager.Instance.emptyCircle,
+            ObjectTypes.Hexagon => LevelManager.Instance.emptyHex,
+            _ => null,
+        };
+    }
+
     // DEFAULT //
 
     // Checks colisions between collideables and objects

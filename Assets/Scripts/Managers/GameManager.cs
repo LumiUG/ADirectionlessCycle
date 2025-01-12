@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     public static string customLevelPath;
 
+    internal Color remixColor;
+    internal Color outboundColor;
+    internal Color completedColor;
     internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub" };
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub" };
     private string dataPath;
@@ -49,6 +52,11 @@ public class GameManager : MonoBehaviour
         chessbattleadvanced = false;
         buildDebugMode = false;
         isEditing = false;
+
+        // Colors!!
+        ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
+        ColorUtility.TryParseHtmlString("#A22BE3", out outboundColor);
+        ColorUtility.TryParseHtmlString("#4CF832", out completedColor);
 
         // Set master and SFX values
         if (AudioManager.Instance) {

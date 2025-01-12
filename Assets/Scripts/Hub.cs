@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using System;
 
 public class Hub : MonoBehaviour
 {
@@ -31,9 +30,6 @@ public class Hub : MonoBehaviour
     private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealOutbound = new() { 0, 0, 0, 0 };
     private readonly List<GameObject> remixList = new();
-    private Color remixColor;
-    private Color outboundColor;
-    private Color completedColor;
     private GameObject lastSelectedlevel = null;
     private Animator animator;
     private int worldIndex = 0;
@@ -48,11 +44,6 @@ public class Hub : MonoBehaviour
     {
         UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
-
-        // Colors!!
-        ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
-        ColorUtility.TryParseHtmlString("#A22BE3", out outboundColor);
-        ColorUtility.TryParseHtmlString("#4CF832", out completedColor);
 
         // Iterate all non-remix levels.
         for (int count = 0; count < worldHolders.Count; count++) { PrepareHub(worldHolders[count], false, count); }
@@ -179,9 +170,9 @@ public class Hub : MonoBehaviour
 
                 // Check for the correct outline to use
                 Image outlineImg = outline.GetComponent<Image>();
-                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = remixColor;
-                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = outboundColor;
-                else outlineImg.color = completedColor; // for remixes!
+                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = GameManager.Instance.remixColor;
+                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = GameManager.Instance.outboundColor;
+                else outlineImg.color = GameManager.Instance.completedColor; // for remixes!
             }
         }
         
