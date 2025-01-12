@@ -1075,8 +1075,9 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.completedColor);
                 RefreshObjectTile(currTile);
+                return true;
             }
-            return currTile != null;
+            return false;
         });
 
         int remixOverlaps = levelWinAreas.Count(area => {
@@ -1085,8 +1086,9 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.remixColor);
                 RefreshObjectTile(currTile);
+                return true;
             }
-            return currTile != null;
+            return false;
         });
 
         int outboundOverlaps = levelWinAreas.Count(area => {
@@ -1095,11 +1097,13 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.outboundColor);
                 RefreshObjectTile(currTile);
+                return true;
             }
-            return currTile != null;
+            return false;
         });
 
         // Outbound overlaps
+        Debug.Log(outboundOverlaps);
         if (outboundOverlaps > 0)
         {
             UI.Instance.ingame.SetAreaCount(
