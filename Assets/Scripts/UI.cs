@@ -75,6 +75,7 @@ public class UI : MonoBehaviour
         ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
         ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
+        ingame.areaIcon = ingame.self.transform.Find("Area Info").Find("Area Sprite").GetComponent<Image>();
         ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
         
         // Restart UI
@@ -392,17 +393,49 @@ public class UI : MonoBehaviour
         public Text levelName;
         public Text levelMoves;
         public Text levelTimer;
+        public Image areaIcon;
         public Text areaCount;
+
+        public void SetAreaIcon(int icon)
+        {
+            switch (icon)
+            {
+                case 1:
+                    areaIcon.sprite = LevelManager.Instance.areaTile.tileSprite;
+                    break;
+                case 2:
+                    areaIcon.sprite = LevelManager.Instance.inverseAreaTile.tileSprite;
+                    break;
+                case 3:
+                    areaIcon.sprite = LevelManager.Instance.outboundAreaTile.tileSprite;
+                    break;
+            }
+        }
         public void SetLevelMoves(int newMoves) { levelMoves.text = $"{newMoves}"; }
         public void SetLevelTimer(float newTime) { levelTimer.text = $"{Math.Round(newTime, 2)}s"; }
-        public void SetAreaCount(int current, int max)
+        public void SetAreaCount(int current, int max, int type)
         {
             // Area overlapped SFX
             int.TryParse(areaCount.text.Split("/")[0], out int areaNum);
-            if (AudioManager.Instance && current > areaNum) AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+            if (AudioManager.Instance && current > areaNum)
+            {
+                switch (type)
+                {
+                    case 1:
+                        AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+                        break;
+                    case 2:
+                        AudioManager.Instance.PlaySFX(AudioManager.inverseOverlap, 0.35f);
+                        break;
+                    case 3:
+                        AudioManager.Instance.PlaySFX(AudioManager.outboundOverlap, 0.35f);
+                        break;
+                }
+            }
 
-            // Update text
+            // Update UI
             areaCount.text = $"{current}/{max}";
+            SetAreaIcon(type);
         }
     }
 

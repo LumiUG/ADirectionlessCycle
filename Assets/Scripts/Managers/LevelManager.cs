@@ -313,7 +313,7 @@ public class LevelManager : MonoBehaviour
         // UI Stuff
         UI.Instance.pause.title.text = currentLevel.levelName;
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
-        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
+        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
         if (levelAsSave != null) {
             UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
             UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
@@ -346,7 +346,7 @@ public class LevelManager : MonoBehaviour
 
         // UI!
         if (currentLevel.hideUI) return;
-        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }));
+        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
     }
 
     // Builds the level
@@ -1054,9 +1054,45 @@ public class LevelManager : MonoBehaviour
     // Finds all overlapped areas and sets the amount on the UI
     private void SetUIAreaCount()
     {
+        int normalOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; });
+        int remixOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.InverseArea && tilemapObjects.GetTile<GameTile>(area.position) != null; });
+        int outboundOverlaps = levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.OutboundArea && tilemapObjects.GetTile<GameTile>(area.position) != null; });
+
+        // Outbound overlaps
+        if (outboundOverlaps > 0)
+        {
+            UI.Instance.ingame.SetAreaCount(
+                outboundOverlaps,
+                levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.OutboundArea; }) + levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }),
+                3 // thats a funny 3
+            );
+            return;
+        }
+
+        // Normal overlaps
+        if (normalOverlaps > 0 && !GameManager.save.game.mechanics.hasSeenRemix || (normalOverlaps > remixOverlaps && GameManager.save.game.mechanics.hasSeenRemix))
+        {
+            UI.Instance.ingame.SetAreaCount(
+                normalOverlaps,
+                levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1
+            );
+            return;
+        }
+
+        // Remix overlaps
+        if (remixOverlaps > 0 && GameManager.save.game.mechanics.hasSeenRemix)
+        {
+            UI.Instance.ingame.SetAreaCount(
+                remixOverlaps,
+                levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.InverseArea; }), 2
+            );
+            return;
+        }
+
+        // if nothing applies, use default (normal overlaps, copied code)
         UI.Instance.ingame.SetAreaCount(
-            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area && tilemapObjects.GetTile<GameTile>(area.position) != null; }),
-            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; })
+            normalOverlaps,
+            levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1
         );
     }
 

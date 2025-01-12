@@ -121,6 +121,7 @@ public class CustomLevels : MonoBehaviour
         selectedLevelName = levelName;
         selectedLevelID = levelID;
         selectedLevelAsData = LevelManager.Instance.GetLevel(selectedLevelID, true);
+        foreach (Image star in popupStars) { star.GetComponent<Button>().interactable = true; }
         SetStarSprites(selectedLevelAsData.difficulty);
         popupPlay.interactable = true;
         popupEdit.interactable = true;
@@ -206,6 +207,7 @@ public class CustomLevels : MonoBehaviour
 
         // Deletion visuals
         AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+        foreach (Image star in popupStars) { star.GetComponent<Button>().interactable = false; }
         popupTitle.text = "Level deleted!";
         popupPlay.interactable = false;
         popupEdit.interactable = false;
@@ -224,8 +226,8 @@ public class CustomLevels : MonoBehaviour
         File.WriteAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level", JsonUtility.ToJson(selectedLevelAsData, false));
         
         UI.Instance.global.SendMessage($"Level name set to \"{value}\"", 5f);
-        RefreshCustomLevels();
         CloseLevelMenu();
+        RefreshCustomLevels();
     }
 
     // Sets the current level difficulty
