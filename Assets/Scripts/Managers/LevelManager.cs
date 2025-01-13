@@ -61,9 +61,12 @@ public class LevelManager : MonoBehaviour
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
     // internal GameObject directionPrefab;
-    internal Sprite emptyBox;
-    internal Sprite emptyCircle;
-    internal Sprite emptyHex;
+    internal Sprite dottedOverlapBox;
+    internal Sprite dottedOverlapCircle;
+    internal Sprite dottedOverlapHex;
+    internal Sprite fullOverlapBox;
+    internal Sprite fullOverlapCircle;
+    internal Sprite fullOverlapHex;
     private Color slightlyTransparent;
 
     // Level data //
@@ -133,9 +136,12 @@ public class LevelManager : MonoBehaviour
 
         // Defaults
         // directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
-        emptyBox = Resources.Load<Sprite>("Sprites/BlankBox");
-        emptyCircle = Resources.Load<Sprite>("Sprites/BlankBall");
-        emptyHex = Resources.Load<Sprite>("Sprites/BlankHexagon");
+        dottedOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/DottedBoxOverlap");
+        dottedOverlapCircle = Resources.Load<Sprite>("Sprites/DottedCircleOverlap");
+        dottedOverlapHex = Resources.Load<Sprite>("Sprites/DottedHexOverlap");
+        fullOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/FullBoxOverlap");
+        fullOverlapCircle = Resources.Load<Sprite>("Sprites/FullCircleOverlap");
+        fullOverlapHex = Resources.Load<Sprite>("Sprites/FullHexOverlap");
         slightlyTransparent = new(1, 1, 1, 0.85f);
         defaultAreaLayer = areaRenderer.sortingOrder;
         defaultObjectsLayer = objectRenderer.sortingOrder;
@@ -955,15 +961,17 @@ public class LevelManager : MonoBehaviour
     {
         if (status)
         {
-            // areaRenderer.sortingOrder = 5;
+            areaRenderer.sortingOrder = 5;
             effectRenderer.sortingOrder = 10;
             objectRenderer.sortingOrder = 3;
+            tilemapWinAreas.color = slightlyTransparent;
             tilemapEffects.color = slightlyTransparent;
         } else
         {
-            // areaRenderer.sortingOrder = defaultAreaLayer;
+            areaRenderer.sortingOrder = defaultAreaLayer;
             effectRenderer.sortingOrder = defaultEffectsLayer;
             objectRenderer.sortingOrder = defaultObjectsLayer;
+            tilemapWinAreas.color = Color.white;
             tilemapEffects.color = Color.white;
         }
     }

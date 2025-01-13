@@ -9,6 +9,7 @@ public class SettingsMenu : MonoBehaviour
     [HideInInspector] public static SettingsMenu I;
     [HideInInspector] public int menuIndex = 0;
     public Dropdown resolutionDropdown;
+    public Dropdown outlineDropdown;
     public Toggle settingsToggle;
     public Toggle repeatInputToggle;
     public Toggle restartToggle;
@@ -18,6 +19,7 @@ public class SettingsMenu : MonoBehaviour
     public List<GameObject> buttons = new();
 
     private readonly List<string> resolutions = new();
+    private readonly List<string> outlines = new();
 
     private void Awake() { I = this; }
 
@@ -26,10 +28,11 @@ public class SettingsMenu : MonoBehaviour
         UI.Instance.selectors.ChangeSelected(buttons[0], true);
         menuIndex = 0;
 
-        // Resolution dropdown menu
+        // Dropdown menus
         resolutionDropdown.ClearOptions();
+        outlineDropdown.ClearOptions();
 
-        // Populate and update dropdown
+        // Populate and update dropdowns
         resolutions.Add("1920x1080");
         resolutions.Add("1600x900"); // looks odd
         resolutions.Add("1366x768");
@@ -38,9 +41,17 @@ public class SettingsMenu : MonoBehaviour
         // resolutions.Add("1024x576"); // looks odd
         resolutionDropdown.AddOptions(resolutions);
 
-        // Select current resolution
+        outlines.Add("Dotted");
+        outlines.Add("Full");
+        outlines.Add("NONE");
+        outlineDropdown.AddOptions(outlines);
+
+        // Select current dropdown values
         int currentIndex = resolutions.FindIndex(res => { return res == $"{Screen.width}x{Screen.height}"; });
         if (currentIndex != -1) resolutionDropdown.value = currentIndex;
+
+        currentIndex = outlines.FindIndex(outline => { return outline == GameManager.save.preferences.outlineType; });
+        if (currentIndex != -1) outlineDropdown.value = currentIndex;
 
         // Update UI
         settingsToggle.isOn = Screen.fullScreen;
@@ -65,6 +76,13 @@ public class SettingsMenu : MonoBehaviour
     {
         int[] changeTo = resolutions[res].Split("x").ToList().ConvertAll(res => { return int.Parse(res); }).ToArray();
         Screen.SetResolution(changeTo[0], changeTo[1], Screen.fullScreen);
+    }
+
+
+    // Sets the new tile's outline
+    public void ChangeOutline(int index)
+    {
+        GameManager.save.preferences.outlineType = outlines[index];
     }
 
     // Toggle fullscreen
@@ -100,6 +118,7 @@ public class SettingsMenu : MonoBehaviour
                 ToggleFullscreen(true);
                 ChangeResolution(0);
                 resolutionDropdown.value = 0;
+                outlineDropdown.value = 0;
                 settingsToggle.isOn = true;
                 break;
             case 2:

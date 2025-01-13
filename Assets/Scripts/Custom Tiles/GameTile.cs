@@ -37,15 +37,35 @@ public abstract class GameTile : TileBase
     public Sprite GetOverlapSprite()
     {
         if (!LevelManager.Instance) return null;
+        if (GameManager.save.preferences.outlineType == "NONE") return null;
 
-        return GetTileType() switch
+        // Full Outlines
+        if (GameManager.save.preferences.outlineType == "Full")
         {
-            ObjectTypes.Mimic => LevelManager.Instance.emptyBox,
-            ObjectTypes.Box => LevelManager.Instance.emptyBox,
-            ObjectTypes.Circle => LevelManager.Instance.emptyCircle,
-            ObjectTypes.Hexagon => LevelManager.Instance.emptyHex,
-            _ => null,
-        };
+            return GetTileType() switch
+            {
+                ObjectTypes.Mimic => LevelManager.Instance.fullOverlapBox,
+                ObjectTypes.Box => LevelManager.Instance.fullOverlapBox,
+                ObjectTypes.Circle => LevelManager.Instance.fullOverlapCircle,
+                ObjectTypes.Hexagon => LevelManager.Instance.fullOverlapHex,
+                _ => null,
+            };
+        }
+
+        // Dotted Outlines
+        if (GameManager.save.preferences.outlineType == "Dotted")
+        {
+            return GetTileType() switch
+            {
+                ObjectTypes.Mimic => LevelManager.Instance.dottedOverlapBox,
+                ObjectTypes.Box => LevelManager.Instance.dottedOverlapBox,
+                ObjectTypes.Circle => LevelManager.Instance.dottedOverlapCircle,
+                ObjectTypes.Hexagon => LevelManager.Instance.dottedOverlapHex,
+                _ => null,
+            };
+        }
+
+        return null;
     }
 
     // DEFAULT //
