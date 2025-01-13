@@ -73,7 +73,7 @@ public class Selectors : MonoBehaviour
     // Sets the selector to a RectTransform object
     internal void SetSelector(RectTransform rt, bool forceMove = false)
     {
-        if (!rt) return;
+        if (rt == null || !right || !left) return;
 
         distanceRight = rt.rect.center + new Vector2(rt.rect.width + (right.rect.width / 2), 0);
         distanceLeft = rt.rect.center + new Vector2(-rt.rect.width - (left.rect.width / 2), 0);
@@ -96,6 +96,8 @@ public class Selectors : MonoBehaviour
     //
     internal void ChangeSelected(GameObject obj, bool instant = false) 
     {
+        if (obj == null) return;
+
         this.instant = instant;
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(obj);
         if (instant) SetSelector(obj.GetComponent<RectTransform>(), instant);

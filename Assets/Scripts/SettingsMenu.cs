@@ -99,6 +99,7 @@ public class SettingsMenu : MonoBehaviour
             case 1:
                 ToggleFullscreen(true);
                 ChangeResolution(0);
+                resolutionDropdown.value = 0;
                 settingsToggle.isOn = true;
                 break;
             case 2:

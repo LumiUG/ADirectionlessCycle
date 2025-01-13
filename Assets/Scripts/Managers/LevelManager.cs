@@ -60,10 +60,11 @@ public class LevelManager : MonoBehaviour
     internal Vector3 originalPosition;
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
-    internal GameObject directionPrefab;
+    // internal GameObject directionPrefab;
     internal Sprite emptyBox;
     internal Sprite emptyCircle;
     internal Sprite emptyHex;
+    private Color slightlyTransparent;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -131,10 +132,11 @@ public class LevelManager : MonoBehaviour
         npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
 
         // Defaults
-        directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
+        // directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
         emptyBox = Resources.Load<Sprite>("Sprites/BlankBox");
         emptyCircle = Resources.Load<Sprite>("Sprites/BlankBall");
         emptyHex = Resources.Load<Sprite>("Sprites/BlankHexagon");
+        slightlyTransparent = new(1, 1, 1, 0.85f);
         defaultAreaLayer = areaRenderer.sortingOrder;
         defaultObjectsLayer = objectRenderer.sortingOrder;
         defaultEffectsLayer = effectRenderer.sortingOrder;
@@ -394,7 +396,7 @@ public class LevelManager : MonoBehaviour
             ClearUndoFrames();
         }
 
-        directionPrefab.transform.Find("AnimationSprite").gameObject.SetActive(false);
+        // directionPrefab.transform.Find("AnimationSprite").gameObject.SetActive(false);
         InputManager.Instance.latestTile = ObjectTypes.Hexagon;
         movementBlacklist.Clear();
         customTileInfo.Clear();
@@ -953,14 +955,16 @@ public class LevelManager : MonoBehaviour
     {
         if (status)
         {
-            areaRenderer.sortingOrder = 5;
-            effectRenderer.sortingOrder = 4;
+            // areaRenderer.sortingOrder = 5;
+            effectRenderer.sortingOrder = 10;
             objectRenderer.sortingOrder = 3;
+            tilemapEffects.color = slightlyTransparent;
         } else
         {
-            areaRenderer.sortingOrder = defaultAreaLayer;
+            // areaRenderer.sortingOrder = defaultAreaLayer;
             effectRenderer.sortingOrder = defaultEffectsLayer;
             objectRenderer.sortingOrder = defaultObjectsLayer;
+            tilemapEffects.color = Color.white;
         }
     }
 
@@ -1075,6 +1079,7 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.completedColor);
                 RefreshObjectTile(currTile);
+                currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
             }
             return false;
@@ -1086,6 +1091,7 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.remixColor);
                 RefreshObjectTile(currTile);
+                currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
             }
             return false;
@@ -1097,17 +1103,17 @@ public class LevelManager : MonoBehaviour
             {
                 currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.outboundColor);
                 RefreshObjectTile(currTile);
+                currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
             }
             return false;
         });
 
         // Outbound overlaps
-        Debug.Log(outboundOverlaps);
         if (outboundOverlaps > 0)
         {
             UI.Instance.ingame.SetAreaCount(
-                outboundOverlaps,
+                outboundOverlaps + normalOverlaps,
                 levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.OutboundArea; }) + levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }),
                 3 // thats a funny 3
             );
