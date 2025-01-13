@@ -9,6 +9,8 @@ public class Selectors : MonoBehaviour
     internal RectTransform right;
     internal Image leftImage;
     internal Image rightImage;
+    internal Canvas leftCanvas;
+    internal Canvas rightCanvas;
 
     private GameObject tracking = null;
     private RectTransform trackRT = null;
@@ -45,6 +47,13 @@ public class Selectors : MonoBehaviour
         {
             rightImage.enabled = true;
             leftImage.enabled = true;
+        }
+
+        // Is its canvas disabled??????? what????
+        if (!leftCanvas.enabled || !rightCanvas.enabled) 
+        {
+            rightCanvas.enabled = true;
+            leftCanvas.enabled = true;
         }
 
         // Slowly move towards the target position
@@ -126,5 +135,7 @@ public class Selectors : MonoBehaviour
         right = transform.Find("Right").gameObject.GetComponent<RectTransform>();
         leftImage = left.GetComponent<Image>();
         rightImage = right.GetComponent<Image>();
+        leftCanvas = left.GetComponent<Canvas>();
+        rightCanvas = right.GetComponent<Canvas>();
     }
 }

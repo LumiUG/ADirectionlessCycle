@@ -48,7 +48,7 @@ public abstract class GameTile : TileBase
                 ObjectTypes.Box => LevelManager.Instance.fullOverlapBox,
                 ObjectTypes.Circle => LevelManager.Instance.fullOverlapCircle,
                 ObjectTypes.Hexagon => LevelManager.Instance.fullOverlapHex,
-                _ => null,
+                _ => null
             };
         }
 
@@ -61,7 +61,7 @@ public abstract class GameTile : TileBase
                 ObjectTypes.Box => LevelManager.Instance.dottedOverlapBox,
                 ObjectTypes.Circle => LevelManager.Instance.dottedOverlapCircle,
                 ObjectTypes.Hexagon => LevelManager.Instance.dottedOverlapHex,
-                _ => null,
+                _ => null
             };
         }
 
