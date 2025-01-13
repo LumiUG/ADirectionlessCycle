@@ -137,11 +137,11 @@ public class LevelManager : MonoBehaviour
         // Defaults
         // directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
         dottedOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/DottedBoxOverlap");
-        dottedOverlapCircle = Resources.Load<Sprite>("Sprites/DottedCircleOverlap");
-        dottedOverlapHex = Resources.Load<Sprite>("Sprites/DottedHexOverlap");
+        dottedOverlapCircle = Resources.Load<Sprite>("Sprites/Overlaps/DottedCircleOverlap");
+        dottedOverlapHex = Resources.Load<Sprite>("Sprites/Overlaps/DottedHexOverlap");
         fullOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/FullBoxOverlap");
-        fullOverlapCircle = Resources.Load<Sprite>("Sprites/FullCircleOverlap");
-        fullOverlapHex = Resources.Load<Sprite>("Sprites/FullHexOverlap");
+        fullOverlapCircle = Resources.Load<Sprite>("Sprites/Overlaps/FullCircleOverlap");
+        fullOverlapHex = Resources.Load<Sprite>("Sprites/Overlaps/FullHexOverlap");
         slightlyTransparent = new(1, 1, 1, 0.85f);
         defaultAreaLayer = areaRenderer.sortingOrder;
         defaultObjectsLayer = objectRenderer.sortingOrder;
