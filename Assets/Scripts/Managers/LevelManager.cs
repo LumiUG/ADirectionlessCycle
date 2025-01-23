@@ -730,9 +730,11 @@ public class LevelManager : MonoBehaviour
                     (objectOverlap == null && type == ObjectTypes.OutboundArea);
                 }
             ) && levelWinAreas.Any(area => area.GetTileType() == ObjectTypes.InverseArea) // At least one exists
-            && levelObjects.All(tile => // All level objects are overlapping inverse areas
+            && levelObjects.All(tile => // All level objects are overlapping inverse areas, UNLESS OUT OF SCREEN.
                 {
-                    return tilemapWinAreas.GetTile<InverseWinAreaTile>(tile.position) != null;
+                    var test = tilemapWinAreas.GetTile<InverseWinAreaTile>(tile.position);
+                    if (test == null && !CheckSceneInbounds(tile.position)) return true;
+                    return test != null;
                 }
             ) && !IsStringEmptyOrNull(currentLevel.remixLevel);
 

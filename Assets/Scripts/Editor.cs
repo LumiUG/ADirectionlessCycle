@@ -84,7 +84,13 @@ public class Editor : MonoBehaviour
             foreach (GameTile tile in listVars[i])
             {
                 GameObject currentTile = Instantiate(editorTile, tileList.transform.Find(listStrings[i]));
-                currentTile.GetComponent<Button>().onClick.AddListener(delegate { SelectListTile(tile); });
+
+                Button btn = currentTile.GetComponent<Button>();
+                btn.onClick.AddListener(delegate { SelectListTile(tile); });
+                ColorBlock cVar = btn.colors;
+                cVar.highlightedColor = Color.gray;
+                cVar.pressedColor = Color.gray;
+                btn.colors = cVar;
 
                 // Sprite (and arrows as exceptions)
                 if (tile.GetTileType() == ObjectTypes.Arrow) currentTile.GetComponent<Image>().sprite = colorArrowSprite;

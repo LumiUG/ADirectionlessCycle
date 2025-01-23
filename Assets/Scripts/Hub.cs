@@ -87,13 +87,6 @@ public class Hub : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
             HideRevealUI(false);
-            switch (worldIndex) 
-            {
-                case 0: SetLevelName("World 1"); break;
-                case 1: SetLevelName("World 2"); break;
-                case 2: SetLevelName("World 3"); break;
-                case 3: SetLevelName("SUPER World"); break;
-            }
             return;
         }
 
@@ -286,7 +279,11 @@ public class Hub : MonoBehaviour
         
         // Stuff for super world.
         var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12");
-        if (worldIndex + direction == 3) if (level != null) if (!level.completed) return;
+        if (worldIndex + direction == 3)
+        {
+            if (level == null) return; 
+            if (!level.completed) return;
+        }
 
         // Move!!! (animation, i know im repeating two switches.)
         switch (worldIndex)
@@ -331,6 +328,15 @@ public class Hub : MonoBehaviour
                 hubArrows[0].interactable = true;
                 hubArrows[1].interactable = true;
                 break;
+        }
+
+        // Change display
+        switch (worldIndex) 
+        {
+            case 0: SetLevelName("World 1"); break;
+            case 1: SetLevelName("World 2"); break;
+            case 2: SetLevelName("World 3"); break;
+            case 3: SetLevelName("SUPER World"); break;
         }
 
         // Update world completions
@@ -424,6 +430,7 @@ public class Hub : MonoBehaviour
 
         // We jump to the next level, if current level has a remix level.
         SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
+        if (current == null) return;
         if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
         else if (GameManager.Instance.IsDebug() && !LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
     }
