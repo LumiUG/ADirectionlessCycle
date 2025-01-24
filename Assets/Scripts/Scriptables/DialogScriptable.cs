@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Dialog", menuName = "Dialog Scriptable")]
+[Serializable]
 public class DialogScriptable : ScriptableObject
 {
     // Scriptable settings
@@ -9,6 +11,6 @@ public class DialogScriptable : ScriptableObject
     public DialogScriptable exhaustDialog = null;
     public float textSpeed = 0.05f;
     public AudioClip sfx = null;
-    public bool shouldExhaust = true;
+    public bool shouldExhaust = false;
     public bool canBeSkipped = true;
 }

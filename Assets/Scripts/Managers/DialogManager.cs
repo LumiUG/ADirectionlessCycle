@@ -157,7 +157,9 @@ public class DialogManager : MonoBehaviour
 
 
     // Dialog events
-    [Serializable] public class DialogEvent {
+    [Serializable]
+    public class DialogEvent
+    {
         public EventTextSpeed textSpeedEvent;
         public EventSetTile setTileEvent;
         public int executeAtIndex = 0;
@@ -169,7 +171,8 @@ public class DialogManager : MonoBehaviour
         }
 
         // Change text speed
-        [Serializable] public class EventTextSpeed : EventAction
+        [Serializable]
+        public class EventTextSpeed : EventAction
         {
             public float textSpeed;
             public override void Run()
@@ -180,7 +183,8 @@ public class DialogManager : MonoBehaviour
         }
 
         // Set a tile
-        [Serializable] public class EventSetTile : EventAction
+        [Serializable]
+        public class EventSetTile : EventAction
         {
             public ObjectTypes setAs = new();
             public Vector3Int position = new();

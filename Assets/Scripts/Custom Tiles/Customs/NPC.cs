@@ -31,12 +31,24 @@ public class NPCTile : CustomTile
         // Outbound interaction (ignore?)
         if (tile == null && stringCheck[3] == "1") return;
 
-        // Checks if the dialog exists (too many load calls...)
-        DialogScriptable dialogCheck = Resources.Load<DialogScriptable>($"Dialog/{stringCheck.GetValue(0)}");
-        if (dialogCheck == null) return;
+        // Vanilla handling
+        if (!$"{stringCheck.GetValue(0)}".StartsWith("{") && !$"{stringCheck.GetValue(0)}".EndsWith("}"))
+        {
+            // Checks if the dialog exists (too many load calls...)
+            DialogScriptable dialogCheck = Resources.Load<DialogScriptable>($"Dialog/{stringCheck.GetValue(0)}");
+            if (dialogCheck == null) return;
 
-        // Play the dialog 
-        DialogManager.Instance.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
+            // Play the dialog 
+            DialogManager.Instance.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
+            return;
+        }
+
+        // Userscript (custom user handling)
+        DialogScriptable userDialog = CreateInstance<DialogScriptable>();
+        JsonUtility.FromJsonOverwrite($"{stringCheck.GetValue(0)}", userDialog);
+
+        string customID = userDialog.dialog.Length <= 0 ? (userDialog.dialog[0].Length >= 4 ? userDialog.dialog[0][..4] : userDialog.dialog[0]) : $"EVENT-{Random.Range(0,100)}";
+        DialogManager.Instance.StartDialog(userDialog, $"CUSTOM-{customID}");
     }
 
     // Prepares editor variables.
