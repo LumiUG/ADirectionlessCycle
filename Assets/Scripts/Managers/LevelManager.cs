@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public Tilemap tilemapEffects;
     [HideInInspector] public Tilemap tilemapCustoms;
     [HideInInspector] public Tilemap tilemapLetterbox;
+    [HideInInspector] public Tilemap tilemapScanlines;
     [HideInInspector] public Tilemap extrasOutlines;
     private TilemapRenderer areaRenderer;
     private TilemapRenderer objectRenderer;
@@ -167,6 +168,7 @@ public class LevelManager : MonoBehaviour
         tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
         tilemapCustoms = gridObject != null ? gridObject.Find("Customs").GetComponent<Tilemap>() : null;
         tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
+        tilemapScanlines = tilemapLetterbox != null ? tilemapLetterbox.transform.Find("Scanlines").GetComponent<Tilemap>() : null;
 
         // Extra grids and tilemaps
         Transform extraObject = transform.Find("Extras");
@@ -907,6 +909,7 @@ public class LevelManager : MonoBehaviour
     public void RefreshGameUI()
     {
         if (!currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
+        UI.Instance.effects.gameObject.SetActive(false);
         UI.Instance.pause.Toggle(false);
         // UI.Instance.win.Toggle(false);
         UI.Instance.editor.Toggle(false);
@@ -1175,6 +1178,15 @@ public class LevelManager : MonoBehaviour
 
         RefreshGameVars();
         RefreshGameUI();
+
+        // Custom background ?
+        // if (name.StartsWith("W1/") || name.StartsWith("W2/") || name.StartsWith("W3/"))
+        // {
+        //     tilemapScanlines.gameObject.SetActive(false);
+        //     UI.Instance.effects.gameObject.SetActive(true);
+        //     UI.Instance.effectsBackgrounds.SetActive(true);
+        //     Debug.Log("a");
+        // } else tilemapScanlines.gameObject.SetActive(true);
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);

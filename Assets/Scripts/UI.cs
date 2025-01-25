@@ -19,6 +19,8 @@ public class UI : MonoBehaviour
     [HideInInspector] public DialogUI dialog;
     [HideInInspector] public Selectors selectors;
 
+    internal Animator effects;
+    internal GameObject effectsBackgrounds;
     private Color invisibleColor = new(1, 1, 1, 0);
 
     private void Awake()
@@ -27,7 +29,10 @@ public class UI : MonoBehaviour
         if (!Instance) { Instance = this; }
         else { Destroy(transform.parent.gameObject); return; }
         DontDestroyOnLoad(transform.parent.gameObject);
-        DontDestroyOnLoad(GameObject.Find("Ingame Effects"));
+
+        effects = GameObject.Find("Ingame Effects").GetComponent<Animator>();
+        effectsBackgrounds = effects.transform.Find("Backgrounds").gameObject;
+        DontDestroyOnLoad(effects.gameObject);
 
         // UI References!
         global = new() { self = gameObject };

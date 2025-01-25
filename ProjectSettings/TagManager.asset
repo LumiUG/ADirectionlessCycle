@@ -44,6 +44,9 @@ TagManager:
   - name: Game Tiles
     uniqueID: 3317735933
     locked: 0
+  - name: Void
+    uniqueID: 3540489653
+    locked: 0
   - name: Letterbox
     uniqueID: 1622328197
     locked: 0
