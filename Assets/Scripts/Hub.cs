@@ -275,6 +275,7 @@ public class Hub : MonoBehaviour
     // Change world
     public void ChangeWorld(int direction)
     {
+        if (EventSystem.current == null) return;
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         
         // Stuff for super world.
