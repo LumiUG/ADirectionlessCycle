@@ -1188,6 +1188,12 @@ public class LevelManager : MonoBehaviour
         //     Debug.Log("a");
         // } else tilemapScanlines.gameObject.SetActive(true);
 
+        // Void levels
+        if (name.StartsWith("VOID/"))
+        {
+            DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/VOID/One"), "Dialog/VOID/One");
+        }
+
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
         if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);

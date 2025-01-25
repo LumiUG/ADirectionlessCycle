@@ -138,6 +138,13 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
+        // Delete savedata and generate a new one
+        else if (debugCommand == "void")
+        {
+            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "VOID/VoidTest");
+            debugCommand = null;
+        }
+
         if (debugCommand == null)
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
