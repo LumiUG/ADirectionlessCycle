@@ -19,8 +19,8 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
     internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
-    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Hologram, ObjectTypes.NPC, ObjectTypes.Fake };
-    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Hologram, ObjectTypes.Fake };
+    internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Hologram, ObjectTypes.NPC, ObjectTypes.Fake, ObjectTypes.Mask };
+    internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Hologram, ObjectTypes.Fake, ObjectTypes.Mask };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
     [HideInInspector] public static LevelManager Instance;
     [HideInInspector] public GameTile wallTile;
@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile levelTile;
     [HideInInspector] public GameTile hologramTile;
     [HideInInspector] public GameTile npcTile;
+    [HideInInspector] public GameTile maskTile;
     [HideInInspector] public GameTile hazardTile;
     [HideInInspector] public GameTile voidTile;
     [HideInInspector] public GameTile invertTile;
@@ -134,6 +135,7 @@ public class LevelManager : MonoBehaviour
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
         hologramTile = Resources.Load<HologramTile>("Tiles/Customs/Hologram");
         npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
+        maskTile = Resources.Load<MaskTile>("Tiles/Customs/Mask");
 
         // Defaults
         // directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
@@ -625,6 +627,7 @@ public class LevelManager : MonoBehaviour
             "Hologram" => Instantiate(hologramTile),
             "Fake" => Instantiate(hologramTile), // Hologram tile demo support
             "NPC" => Instantiate(npcTile),
+            "Mask" => Instantiate(maskTile),
             _ => Instantiate(boxTile) // Default, covers box types
         };
 

@@ -74,7 +74,7 @@ public class Editor : MonoBehaviour
         listVars.Add(new() { LevelManager.Instance.areaTile, LevelManager.Instance.inverseAreaTile, LevelManager.Instance.outboundAreaTile });
         listVars.Add(new() { LevelManager.Instance.hazardTile, LevelManager.Instance.voidTile });
         listVars.Add(new() { LevelManager.Instance.invertTile, LevelManager.Instance.arrowTile, LevelManager.Instance.negativeArrowTile, LevelManager.Instance.fragmentTile, LevelManager.Instance.orbTile });
-        listVars.Add(new() { LevelManager.Instance.levelTile, LevelManager.Instance.hologramTile, LevelManager.Instance.npcTile });
+        listVars.Add(new() { LevelManager.Instance.levelTile, LevelManager.Instance.hologramTile, LevelManager.Instance.npcTile, LevelManager.Instance.maskTile });
 
         // Loops for every tile type
         for (int i = 0; i < listStrings.Count; i++)
