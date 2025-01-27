@@ -461,7 +461,6 @@ public class LevelManager : MonoBehaviour
         // Change "scene" if on world map?
         if (currentLevel.freeroam)
         {
-
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
             // TODO: noMove = true; (Freeze object tiles from the new room, except ones coming from old room)
@@ -472,7 +471,6 @@ public class LevelManager : MonoBehaviour
             else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
 
             // Achievement (will retrigger multiple times, maybe bad?)
-            // we don't use "GameManager.save.game.mechanics.hasSwapUpgrade", you can get out without.
             if (ach && !currentLevel.hideUI) GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
         }
 
@@ -642,7 +640,7 @@ public class LevelManager : MonoBehaviour
     public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false, bool hexPushed = false)
     {
         if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
-        if (currentLevel.freeroam && hexSpecial && !hexPushed) return !(position.x < 0 + worldOffsetX - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
+        if (currentLevel.freeroam && hexSpecial && !hexPushed && GameManager.save.game.mechanics.hasSwapUpgrade) return !(position.x < 0 + worldOffsetX - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
         if (currentLevel.freeroam && currentLevel.hideUI) return true;
         return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
     }
