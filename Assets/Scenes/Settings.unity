@@ -615,7 +615,6 @@ GameObject:
   - component: {fileID: 68997496}
   - component: {fileID: 68997495}
   - component: {fileID: 68997494}
-  - component: {fileID: 68997493}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -642,51 +641,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1103, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &68997493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68997491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &68997494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,7 +998,6 @@ GameObject:
   - component: {fileID: 97826833}
   - component: {fileID: 97826832}
   - component: {fileID: 97826831}
-  - component: {fileID: 97826830}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -1071,51 +1024,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1070, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &97826830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97826828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &97826831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2011,7 +1919,6 @@ GameObject:
   - component: {fileID: 335614629}
   - component: {fileID: 335614628}
   - component: {fileID: 335614627}
-  - component: {fileID: 335614626}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -2038,51 +1945,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1001, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &335614626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335614624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &335614627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3008,7 +2870,6 @@ GameObject:
   - component: {fileID: 515039575}
   - component: {fileID: 515039574}
   - component: {fileID: 515039573}
-  - component: {fileID: 515039572}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -3035,51 +2896,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1017, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &515039572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 515039570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &515039573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3149,7 +2965,6 @@ GameObject:
   - component: {fileID: 525479269}
   - component: {fileID: 525479268}
   - component: {fileID: 525479267}
-  - component: {fileID: 525479266}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -3176,51 +2991,6 @@ RectTransform:
   m_AnchoredPosition: {x: 245, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &525479266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525479264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &525479267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4328,7 +4098,6 @@ GameObject:
   - component: {fileID: 757669528}
   - component: {fileID: 757669527}
   - component: {fileID: 757669526}
-  - component: {fileID: 757669525}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -4355,51 +4124,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1029, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &757669525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 757669523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &757669526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4756,7 +4480,6 @@ GameObject:
   - component: {fileID: 861846951}
   - component: {fileID: 861846950}
   - component: {fileID: 861846949}
-  - component: {fileID: 861846948}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -4783,51 +4506,6 @@ RectTransform:
   m_AnchoredPosition: {x: 235, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &861846948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 861846946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &861846949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5889,7 +5567,6 @@ GameObject:
   - component: {fileID: 1160520564}
   - component: {fileID: 1160520563}
   - component: {fileID: 1160520562}
-  - component: {fileID: 1160520561}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -5916,51 +5593,6 @@ RectTransform:
   m_AnchoredPosition: {x: 238, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1160520561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160520559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1160520562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6378,7 +6010,6 @@ GameObject:
   - component: {fileID: 1243879944}
   - component: {fileID: 1243879943}
   - component: {fileID: 1243879942}
-  - component: {fileID: 1243879941}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -6405,51 +6036,6 @@ RectTransform:
   m_AnchoredPosition: {x: 304, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1243879941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1243879939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1243879942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6557,7 +6143,6 @@ GameObject:
   - component: {fileID: 1263999097}
   - component: {fileID: 1263999096}
   - component: {fileID: 1263999095}
-  - component: {fileID: 1263999094}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -6584,51 +6169,6 @@ RectTransform:
   m_AnchoredPosition: {x: 431, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1263999094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263999092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1263999095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6805,7 +6345,6 @@ GameObject:
   - component: {fileID: 1278958156}
   - component: {fileID: 1278958155}
   - component: {fileID: 1278958154}
-  - component: {fileID: 1278958153}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -6832,51 +6371,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1202, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1278958153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278958151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1278958154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7887,7 +7381,6 @@ GameObject:
   - component: {fileID: 1487158782}
   - component: {fileID: 1487158781}
   - component: {fileID: 1487158780}
-  - component: {fileID: 1487158779}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -7914,51 +7407,6 @@ RectTransform:
   m_AnchoredPosition: {x: 245, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1487158779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1487158777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1487158780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8220,7 +7668,6 @@ GameObject:
   - component: {fileID: 1533070340}
   - component: {fileID: 1533070339}
   - component: {fileID: 1533070338}
-  - component: {fileID: 1533070337}
   m_Layer: 5
   m_Name: Keys
   m_TagString: Untagged
@@ -8247,51 +7694,6 @@ RectTransform:
   m_AnchoredPosition: {x: 414, y: 0}
   m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1533070337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533070335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1533070338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9555,7 +8957,6 @@ GameObject:
   - component: {fileID: 1877802888}
   - component: {fileID: 1877802887}
   - component: {fileID: 1877802886}
-  - component: {fileID: 1877802885}
   m_Layer: 5
   m_Name: Long
   m_TagString: Untagged
@@ -9582,51 +8983,6 @@ RectTransform:
   m_AnchoredPosition: {x: -866, y: -50}
   m_SizeDelta: {x: 1400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1877802885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877802883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 15
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1634448443}
-          m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1877802886
 MonoBehaviour:
   m_ObjectHideFlags: 0
