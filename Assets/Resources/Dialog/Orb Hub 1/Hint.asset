@@ -15,7 +15,8 @@ MonoBehaviour:
   dialog:
   - The third fragment lies way below in World 2.
   - 'Past some empty space, you''ll find it. Though, it''ll require a bit of patience. '
-  - And when in doubt... It never hurts to ask for a hint.
+  - And when the path stops being clear...  When in doubt, it never hurts to ask
+    for a hint.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
