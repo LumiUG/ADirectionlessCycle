@@ -22,7 +22,10 @@ public class LevelTile : CustomTile
         if (tile.directions.GetActiveDirectionCount() <= 0) return;
 
         // Loads a level using its custom text
-        if (LevelManager.Instance.LoadLevel(customText))
+        var levelTest = LevelManager.Instance.LoadLevel(customText);
+        if (!levelTest) levelTest = LevelManager.Instance.LoadLevel(customText, true);
+        
+        if (levelTest)
         {
             if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
             LevelManager.Instance.worldOffsetX = 0;
