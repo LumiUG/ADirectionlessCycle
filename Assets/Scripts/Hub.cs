@@ -263,7 +263,7 @@ public class Hub : MonoBehaviour
     // Load level
     public void StaticLoadLevel(string levelName)
     {
-        if (!LevelManager.Instance) return;
+        if (!LevelManager.Instance || TransitionManager.Instance.inTransition) return;
 
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
