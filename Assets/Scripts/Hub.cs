@@ -108,7 +108,7 @@ public class Hub : MonoBehaviour
             if (GameManager.save.game.mechanics.hasSeenRemix || GameManager.Instance.IsDebug())
             {
                 if (level == null) HideRevealUI(false, false);
-                else if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) HideRevealUI(false, false, 0);
+                else if (string.IsNullOrEmpty(level.remixLevel)) HideRevealUI(false, false, 0);
                 else HideRevealUI(false, false, "654321".Contains(lastSelectedlevel.name.Split("-")[1]) ? 1 : 2); // 2:1 is oppsite rows btw
             }
             
@@ -379,7 +379,7 @@ public class Hub : MonoBehaviour
 
         if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.Instance.IsDebug())
         {
-            if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) return;
+            if (string.IsNullOrEmpty(level.remixLevel)) return;
             HideRevealUI(true);
             UIRecursiveRemixes(level.remixLevel, levelID, 1);
         }
@@ -396,7 +396,7 @@ public class Hub : MonoBehaviour
         if (OutboundCheck(level, levelID)) return 2;
 
         // Remix completion?
-        if (LevelManager.Instance.IsStringEmptyOrNull(level.remixLevel)) return 0;
+        if (string.IsNullOrEmpty(level.remixLevel)) return 0;
 
         GameData.Level statCheck = GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel);
         if (statCheck == null) return 1;
@@ -432,8 +432,8 @@ public class Hub : MonoBehaviour
         // We jump to the next level, if current level has a remix level.
         SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
         if (current == null) return;
-        if (!LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
-        else if (GameManager.Instance.IsDebug() && !LevelManager.Instance.IsStringEmptyOrNull(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+        if (!string.IsNullOrEmpty(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+        else if (GameManager.Instance.IsDebug() && !string.IsNullOrEmpty(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
     }
 
     // Check for outbounds on a completed level

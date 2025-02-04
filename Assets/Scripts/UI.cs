@@ -230,7 +230,7 @@ public class UI : MonoBehaviour
         }
 
         // There's no next level.
-        if (LevelManager.Instance.IsStringEmptyOrNull(LevelManager.Instance.currentLevel.nextLevel))
+        if (string.IsNullOrEmpty(LevelManager.Instance.currentLevel.nextLevel))
         {
             GoHub();
             return;
@@ -277,7 +277,7 @@ public class UI : MonoBehaviour
             if (split[0].Contains("REMIX") || split[0].Contains("FRAGMENTS")) hintLevelID = $"HINTS/{split[1]}H";
             else hintLevelID = $"HINTS/W{split[1]}H";
 
-            if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself. -Lumi"); return; }
+            if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself."); return; }
             if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
         } else hintLevelID = null;
 

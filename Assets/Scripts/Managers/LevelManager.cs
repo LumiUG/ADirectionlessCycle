@@ -240,7 +240,7 @@ public class LevelManager : MonoBehaviour
     // Saves a level to the game's persistent path
     public string SaveLevel(string levelName, string levelID = default, bool silent = true, byte[] previewImage = null)
     {
-        if (IsStringEmptyOrNull(levelName)) return null;
+        if (string.IsNullOrEmpty(levelName)) return null;
         levelName = levelName.Trim();
 
         // Level id stuff
@@ -288,7 +288,7 @@ public class LevelManager : MonoBehaviour
     // Load and build a level
     public bool LoadLevel(string levelID, bool external = false, bool silent = true)
     {
-        if (IsStringEmptyOrNull(levelID)) return false;
+        if (string.IsNullOrEmpty(levelID)) return false;
         levelID = levelID.Trim();
 
         // Gets the new level
@@ -739,7 +739,7 @@ public class LevelManager : MonoBehaviour
                     if (test == null && !CheckSceneInbounds(tile.position)) return true;
                     return test != null;
                 }
-            ) && !IsStringEmptyOrNull(currentLevel.remixLevel);
+            ) && !string.IsNullOrEmpty(currentLevel.remixLevel);
 
         // Outbound win condition:
         // All outbound area tiles have some object overlapping them and at least 1 exists,
@@ -822,9 +822,6 @@ public class LevelManager : MonoBehaviour
 
     // Returns if currently in editor
     public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf || UI.Instance.popup.self.activeSelf); }
-
-    // Is string empty or null
-    public bool IsStringEmptyOrNull(string str) { return str == null || str == string.Empty || str == ""; }
 
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external, bool silent = false)
@@ -1199,6 +1196,7 @@ public class LevelManager : MonoBehaviour
         TransitionManager.Instance.ChangeTransition(Triangle);
         if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
         else {
+            UI.Instance.pause.title.text = currentLevel.levelName;
             UI.Instance.ChangeScene("Game", false);
             TransitionManager.Instance.TransitionOut<string>();
         }

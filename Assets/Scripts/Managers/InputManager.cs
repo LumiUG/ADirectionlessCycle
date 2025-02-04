@@ -60,7 +60,8 @@ public class InputManager : MonoBehaviour
         if (Input.anyKeyDown)
         {
             string keyboardInput = Input.inputString.Trim().ToLower();
-            if (LevelManager.Instance.IsStringEmptyOrNull(keyboardInput)) {
+            if (string.IsNullOrEmpty(keyboardInput))
+            {
                 if (Input.GetKeyDown(KeyCode.UpArrow)) keyboardInput = "U";
                 else if (Input.GetKeyDown(KeyCode.DownArrow)) keyboardInput = "D";
                 else if (Input.GetKeyDown(KeyCode.LeftArrow)) keyboardInput = "L";

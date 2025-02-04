@@ -88,7 +88,7 @@ public class CustomLevels : MonoBehaviour
             string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
             if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
             SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
-            if (!LevelManager.Instance.IsStringEmptyOrNull(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
+            if (!string.IsNullOrEmpty(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
 
             // Create prefab and set position
             GameObject entry = Instantiate(customLevelPrefab, holder);
@@ -222,7 +222,7 @@ public class CustomLevels : MonoBehaviour
     // Changes the current level name
     public void ChangeLevelName(string value)
     {
-        if (LevelManager.Instance.IsStringEmptyOrNull(value)) return;
+        if (string.IsNullOrEmpty(value)) return;
 
         selectedLevelAsData.levelName = value;
         File.WriteAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level", JsonUtility.ToJson(selectedLevelAsData, false));
@@ -246,7 +246,7 @@ public class CustomLevels : MonoBehaviour
     // Changes a Level's ID
     public void ChangeLevelID(string newID)
     {
-        if (LevelManager.Instance.IsStringEmptyOrNull(newID) || newID == LevelManager.Instance.levelEditorName) return;
+        if (string.IsNullOrEmpty(newID) || newID == LevelManager.Instance.levelEditorName) return;
 
         // Rename file if level ID changed
         string cleanID = string.Concat(newID.Split(Path.GetInvalidFileNameChars()));
