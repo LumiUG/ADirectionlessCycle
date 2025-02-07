@@ -241,7 +241,7 @@ public class InputManager : MonoBehaviour
     // Places a tile
     private void OnEditorClickGrid()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || TransitionManager.Instance.inTransition) return;
         if (Editor.I.popup.activeSelf) return;
         
         // Checks if you are already multi-placing
@@ -259,7 +259,7 @@ public class InputManager : MonoBehaviour
     // Changes a tile's properties
     private void OnEditorRightClickGrid()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || TransitionManager.Instance.inTransition) return;
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
         
         // Checks mouse position
@@ -333,7 +333,7 @@ public class InputManager : MonoBehaviour
     // Save current level manually
     private void OnEditorSave()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
         UI.Instance.LevelEditorExportLevel();
     }
 

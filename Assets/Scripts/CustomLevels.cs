@@ -165,6 +165,8 @@ public class CustomLevels : MonoBehaviour
     // Load current level
     public void PlayLevel()
     {
+        if (TransitionManager.Instance.inTransition) return;
+        
         TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, selectedLevelID);
     }
 

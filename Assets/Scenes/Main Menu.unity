@@ -1733,7 +1733,7 @@ GameObject:
   - component: {fileID: 1100587224}
   - component: {fileID: 1100587223}
   m_Layer: 5
-  m_Name: Hourglass
+  m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1748,7 +1748,7 @@ RectTransform:
   m_GameObject: {fileID: 1100587221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 32048897}
@@ -1778,7 +1778,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97b9981c09ab2a643bef6b4a478ee704, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34c3909f15a16ab42bcb21b80d0351fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
