@@ -29,7 +29,7 @@ MonoBehaviour:
     setTileEvent:
       enabled: 1
       setAs: 4
-      position: {x: 5, y: 2, z: 0}
+      position: {x: 5, y: -6, z: 0}
       delete: 1
     executeAtIndex: 0
   - textSpeedEvent:
@@ -38,7 +38,7 @@ MonoBehaviour:
     setTileEvent:
       enabled: 1
       setAs: 4
-      position: {x: 5, y: 1, z: 0}
+      position: {x: 11, y: -1, z: 0}
       delete: 0
     executeAtIndex: 0
   exhaustDialog: {fileID: 0}
