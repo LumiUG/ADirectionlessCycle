@@ -286,7 +286,7 @@ public class InputManager : MonoBehaviour
     // Places a tile
     private void OnEditorClickGrid()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.Instance.IsEditor() || TransitionManager.Instance.inTransition) return;
         if (Editor.I.popup.activeSelf) return;
         
         // Checks if you are already multi-placing
@@ -421,28 +421,28 @@ public class InputManager : MonoBehaviour
     // Moving the level screen up/down/left/right
     private void OnEditorUp() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
         LevelManager.Instance.worldOffsetY += 8;
     }
     private void OnEditorDown() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
         LevelManager.Instance.worldOffsetY -= 8;
     }
     private void OnEditorLeft() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
         LevelManager.Instance.worldOffsetX -= 14;
     }
     private void OnEditorRight() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
 
         LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
         LevelManager.Instance.worldOffsetX += 14;
