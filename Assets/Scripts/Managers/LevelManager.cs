@@ -324,13 +324,16 @@ public class LevelManager : MonoBehaviour
 
         // Hide UI?
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
-        if (currentLevel.hideUI) {
+        if (currentLevel.hideUI)
+        {
             tilemapLetterbox.gameObject.SetActive(true);
             UI.Instance.ingame.Toggle(false);
             return true;
         }
 
         // UI Stuff
+        UI.Instance.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
+        UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
         UI.Instance.pause.title.text = currentLevel.levelName;
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
@@ -906,7 +909,13 @@ public class LevelManager : MonoBehaviour
     // Sets all UI's to its defaults
     public void RefreshGameUI()
     {
-        if (!currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
+        if (!currentLevel.hideUI)
+        {
+            UI.Instance.ingame.Toggle(true);
+            UI.Instance.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
+            UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
+        }
+
         UI.Instance.effects.gameObject.SetActive(false);
         UI.Instance.pause.Toggle(false);
         // UI.Instance.win.Toggle(false);

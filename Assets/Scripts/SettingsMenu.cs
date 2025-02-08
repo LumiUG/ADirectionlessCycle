@@ -12,6 +12,8 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown outlineDropdown;
     public Toggle settingsToggle;
     public Toggle repeatInputToggle;
+    public Toggle moveToggle;
+    public Toggle timerToggle;
     public Toggle restartToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
@@ -57,6 +59,8 @@ public class SettingsMenu : MonoBehaviour
         settingsToggle.isOn = Screen.fullScreen;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
         restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
+        moveToggle.isOn = GameManager.save.preferences.showMoves;
+        timerToggle.isOn = GameManager.save.preferences.showTimer;
 
         masterSlider.value = GameManager.save.preferences.masterVolume;
         SFXSlider.value = GameManager.save.preferences.SFXVolume;
@@ -103,6 +107,16 @@ public class SettingsMenu : MonoBehaviour
         GameManager.save.preferences.forceConfirmRestart = toggle;
     }
 
+    public void ToggleTimer(bool toggle)
+    {
+        GameManager.save.preferences.showTimer = toggle;
+    }
+
+    public void ToggleMoves(bool toggle)
+    {
+        GameManager.save.preferences.showMoves = toggle;
+    }
+
     // Resets a setting to its default values (hardcoded, here)
     public void ResetSetting(int index)
     {
@@ -111,8 +125,12 @@ public class SettingsMenu : MonoBehaviour
             case 0:
                 GameManager.save.preferences.forceConfirmRestart = true;
                 GameManager.save.preferences.repeatInput = true;
+                GameManager.save.preferences.showTimer = true;
+                GameManager.save.preferences.showMoves = true;
                 repeatInputToggle.isOn = true;
                 restartToggle.isOn = true;
+                moveToggle.isOn = true;
+                timerToggle.isOn = true;
                 break;
             case 1:
                 ToggleFullscreen(true);
