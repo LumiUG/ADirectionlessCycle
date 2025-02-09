@@ -514,6 +514,7 @@ public class InputManager : MonoBehaviour
 
         LevelManager.Instance.RemoveTile(count[0]);
         if (count[0].GetTileType() == ObjectTypes.Hexagon) {
+            if (latestTile.ToString() == "Hexagon") Debug.Log("A copy of a copy");
             LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
         }
         else {

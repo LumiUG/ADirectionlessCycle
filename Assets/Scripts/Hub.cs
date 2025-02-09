@@ -334,10 +334,10 @@ public class Hub : MonoBehaviour
         // Change display
         switch (worldIndex) 
         {
-            case 0: SetLevelName("World 1"); break;
-            case 1: SetLevelName("World 2"); break;
-            case 2: SetLevelName("World 3"); break;
-            case 3: SetLevelName("SUPER World"); break;
+            case 0: SetLevelName("Area 1"); break;
+            case 1: SetLevelName("Area 2"); break;
+            case 2: SetLevelName("Area 3"); break;
+            case 3: SetLevelName("Void"); break;
         }
 
         // Update world completions
