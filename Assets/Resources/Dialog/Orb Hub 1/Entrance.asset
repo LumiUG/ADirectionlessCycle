@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - wow, should definitely write later.
+  - Ooooh. The entrance! Welcome to one of the deepest levels on this area.
+  - There's other places like these around. They are special levels, where you can
+    move freely throughout it all.
+  - We like to call these places "true freeroam", since you can fully escape from
+    being confined in that little space.
+  - ...
+  - By the way, I have to say, I'm quite impressed that you're actually helping us.
+  - They might not be happy about it, but, thank you.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

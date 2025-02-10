@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Light
+  m_Name: Hello
   m_EditorClassIdentifier: 
   dialog:
-  - 3-12...? Wait, stop. You don't know what this place is.
-  - If you really want to fix things here, you should leave.
-  - Whatever they've been telling you-
+  - A player...? A player! This might just be the best moment of our existence-
+  - Please don't cut communications, don't leave!
+  - It's been so long, and we need fixing.
+  - Just- keep going, you're already doing fine with what you're doing.
+  - Will talk later, this carving is running out of space.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 9a7444ff588fcf74fb48c71c4e0c8c2f, type: 2}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
   shouldExhaust: 1

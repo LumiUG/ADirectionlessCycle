@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Real
   m_EditorClassIdentifier: 
   dialog:
-  - Nothing's lost forever.
+  - '"Nothing''s lost forever."'
+  - See, this is why I tell you to ignore that... other...
+  - Anyways. Good job.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

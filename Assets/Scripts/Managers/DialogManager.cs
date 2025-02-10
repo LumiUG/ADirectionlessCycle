@@ -44,7 +44,12 @@ public class DialogManager : MonoBehaviour
         inDialog = true;
 
         // Check if we should use the exhausted dialog instead
-        if (GameManager.save.game.exhaustedDialog.Contains(dialogPath)) chat = chat.exhaustDialog;
+        while (GameManager.save.game.exhaustedDialog.Contains(dialogPath))
+        {
+            chat = chat.exhaustDialog;
+            dialogPath = $"EXHAUST-{dialogPath}";
+            currentDialogPath = dialogPath;
+        }
 
         // Should we change/load the new scriptable?
         if (!chat) { inDialog = false; return; }
