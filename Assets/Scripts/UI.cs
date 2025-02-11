@@ -78,10 +78,13 @@ public class UI : MonoBehaviour
         // Ingame UI
         ingame = new() { self = transform.Find("Ingame UI").gameObject };
         ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
-        ingame.levelMoves = ingame.self.transform.Find("Moves Info").Find("Level Moves").GetComponent<Text>();
-        ingame.levelTimer = ingame.self.transform.Find("Time Info").Find("Level Time").GetComponent<Text>();
-        ingame.areaIcon = ingame.self.transform.Find("Area Info").Find("Area Sprite").GetComponent<Image>();
-        ingame.areaCount = ingame.self.transform.Find("Area Info").Find("Area Count").GetComponent<Text>();
+        ingame.rArea = ingame.self.transform.Find("Area Info").GetComponent<RectTransform>();
+        ingame.rMoves = ingame.self.transform.Find("Moves Info").GetComponent<RectTransform>();
+        ingame.rTimer = ingame.self.transform.Find("Time Info").GetComponent<RectTransform>();
+        ingame.levelMoves = ingame.rMoves.Find("Level Moves").GetComponent<Text>();
+        ingame.levelTimer = ingame.rTimer.Find("Level Time").GetComponent<Text>();
+        ingame.areaIcon = ingame.rArea.Find("Area Sprite").GetComponent<Image>();
+        ingame.areaCount = ingame.rArea.Find("Area Count").GetComponent<Text>();
         
         // Restart UI
         restart = new() { self = transform.Find("Confirm Restart").gameObject };
@@ -400,6 +403,9 @@ public class UI : MonoBehaviour
 
     public class IngameUI : UIObject
     {
+        public RectTransform rArea;
+        public RectTransform rTimer;
+        public RectTransform rMoves;
         public Text levelName;
         public Text levelMoves;
         public Text levelTimer;

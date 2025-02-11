@@ -167,7 +167,7 @@ public class Serializables
         public float SFXVolume = 0.8f;
         public bool repeatInput = true;
         public bool forceConfirmRestart = true;
-        public bool showTimer = true;
+        public bool showTimer = false;
         public bool showMoves = true;
         public string outlineType = "NONE"; // Dotted, Full, NONE
     }

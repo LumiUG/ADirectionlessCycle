@@ -331,9 +331,15 @@ public class LevelManager : MonoBehaviour
             return true;
         }
 
-        // UI Stuff
+        // Ingame UI setup
         UI.Instance.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
         UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
+        if (!GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) UI.Instance.ingame.rArea.anchoredPosition = new(0, 125);
+        else if (GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(-250, 125); UI.Instance.ingame.rMoves.anchoredPosition = new(250, 125); }
+        else if (!GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(250, 125); UI.Instance.ingame.rTimer.anchoredPosition = new(-275, 125); }
+        else if (GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(0, 125); UI.Instance.ingame.rMoves.anchoredPosition = new(500, 125); UI.Instance.ingame.rTimer.anchoredPosition = new(-500, 125); }
+        
+        // UI etc
         UI.Instance.pause.title.text = currentLevel.levelName;
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);

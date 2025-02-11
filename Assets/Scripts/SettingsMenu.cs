@@ -130,7 +130,7 @@ public class SettingsMenu : MonoBehaviour
                 repeatInputToggle.isOn = true;
                 restartToggle.isOn = true;
                 moveToggle.isOn = true;
-                timerToggle.isOn = true;
+                timerToggle.isOn = false;
                 break;
             case 1:
                 ToggleFullscreen(true);
