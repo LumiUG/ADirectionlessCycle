@@ -489,6 +489,8 @@ public class InputManager : MonoBehaviour
         GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
             npc =>
             {
+                if (npc.GetTileType() != ObjectTypes.NPC) return false;
+
                 GameTile test = null;
                 test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
                 if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
@@ -499,8 +501,8 @@ public class InputManager : MonoBehaviour
                 return false;
             }
         );
-        
-        // Gets the NPC and triggers it 
+
+        // Gets the NPC and triggers it
         if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(tl); }
     }
 
