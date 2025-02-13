@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - TO WRITE
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
