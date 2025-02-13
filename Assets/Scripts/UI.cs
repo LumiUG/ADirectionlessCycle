@@ -269,7 +269,6 @@ public class UI : MonoBehaviour
     {
         if (LevelManager.Instance.currentLevel == null) return;
 
-        // if (LevelManager.Instance.currentLevel.hintOrSomething)
         // Prepare the hint level's ID
         string[] split = LevelManager.Instance.currentLevelID.Split("/");
         string hintLevelID;
@@ -278,6 +277,7 @@ public class UI : MonoBehaviour
         if (split[0] != LevelManager.Instance.currentLevelID)
         {
             if (split[0].Contains("REMIX") || split[0].Contains("FRAGMENTS")) hintLevelID = $"HINTS/{split[1]}H";
+            else if (split[0].Contains("HINTS")) hintLevelID = LevelManager.Instance.currentLevel.nextLevel;
             else hintLevelID = $"HINTS/W{split[1]}H";
 
             if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself."); return; }
@@ -533,8 +533,8 @@ public class UI : MonoBehaviour
     {
         // Loads the level
         LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.LoadLevel(hintLevelID);
+        LevelManager.Instance.RefreshGameUI();
 
         // transition out
         TransitionManager.Instance.ChangeTransition(Triangle);

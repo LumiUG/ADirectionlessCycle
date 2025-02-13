@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesObjectsList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
     internal readonly ObjectTypes[] typesAreas = { ObjectTypes.Area, ObjectTypes.InverseArea, ObjectTypes.OutboundArea };
     internal readonly ObjectTypes[] typesHazardsList = { ObjectTypes.Hazard, ObjectTypes.Void };
-    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
+    internal readonly ObjectTypes[] typesEffectsList = { ObjectTypes.Invert, ObjectTypes.Pull, ObjectTypes.Arrow, ObjectTypes.NegativeArrow, ObjectTypes.Orb, ObjectTypes.Fragment };
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Hologram, ObjectTypes.NPC, ObjectTypes.Fake, ObjectTypes.Mask };
     internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Hologram, ObjectTypes.Fake, ObjectTypes.Mask };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
@@ -41,6 +41,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public GameTile invertTile;
     [HideInInspector] public GameTile arrowTile;
     [HideInInspector] public GameTile negativeArrowTile;
+    [HideInInspector] public GameTile pullTile;
     [HideInInspector] public GameTile orbTile;
     [HideInInspector] public GameTile fragmentTile;
 
@@ -101,6 +102,7 @@ public class LevelManager : MonoBehaviour
     private float levelTimer = 0f;
     private int levelMoves = 0;
     private bool noMove = false;
+    internal Vector3Int currMove = Vector3Int.zero;
     public bool isPaused = false;
     public bool hasWon;
 
@@ -130,6 +132,7 @@ public class LevelManager : MonoBehaviour
         invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
         arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
         negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
+        pullTile = Resources.Load<PullTile>("Tiles/Effects/Pull");
         orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
         fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
         levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
@@ -461,7 +464,8 @@ public class LevelManager : MonoBehaviour
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
         if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed) || noMove) return false; // also re-checking for blacklist
-        MoveTile(startingPosition, newPosition, tile, false);
+        if (tilemapObjects.GetTile(newPosition) == null) MoveTile(startingPosition, newPosition, tile, false);
+        else return false;
 
         // Updates new current position of the tile
         if (beingPushed) doPushSFX = true;
@@ -628,6 +632,7 @@ public class LevelManager : MonoBehaviour
             "Invert" => Instantiate(invertTile),
             "Arrow" => Instantiate(arrowTile),
             "NegativeArrow" => Instantiate(negativeArrowTile),
+            "Pull" => Instantiate(pullTile),
             "Orb" => Instantiate(orbTile),
             "Fragment" => Instantiate(fragmentTile),
             "Level" => Instantiate(levelTile),
@@ -657,6 +662,8 @@ public class LevelManager : MonoBehaviour
     // Applies gravity using a direction
     internal void ApplyGravity(Vector3Int movement)
     {
+        currMove = movement;
+
         // Clears blacklist
         movementBlacklist.Clear();
         toDestroy.Clear();

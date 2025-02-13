@@ -125,12 +125,12 @@ public class SettingsMenu : MonoBehaviour
             case 0:
                 GameManager.save.preferences.forceConfirmRestart = true;
                 GameManager.save.preferences.repeatInput = true;
-                GameManager.save.preferences.showTimer = true;
+                GameManager.save.preferences.showTimer = false;
                 GameManager.save.preferences.showMoves = true;
                 repeatInputToggle.isOn = true;
                 restartToggle.isOn = true;
-                moveToggle.isOn = true;
                 timerToggle.isOn = false;
+                moveToggle.isOn = true;
                 break;
             case 1:
                 ToggleFullscreen(true);
