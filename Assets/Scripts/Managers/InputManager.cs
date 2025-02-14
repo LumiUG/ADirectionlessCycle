@@ -511,12 +511,17 @@ public class InputManager : MonoBehaviour
     {
         if (!LevelManager.Instance.IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
 
+        // Swap check
         List<GameTile> count = GetPlayableObjects();
-        if (count.Count > 1 || count.Count <= 0) return;
+        if (count.Count > 1 || count.Count <= 0) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny); return; }
 
+        // Sfx (change later)
+        AudioManager.Instance.PlaySFX(AudioManager.select);
+
+        // Swap
         LevelManager.Instance.RemoveTile(count[0]);
         if (count[0].GetTileType() == ObjectTypes.Hexagon) {
-            if (latestTile.ToString() == "Hexagon") Debug.Log("A copy of a copy");
+            if (latestTile.ToString() == "Hexagon") GameManager.Instance.EditAchivement("ACH_A_COPY");
             LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
         }
         else {
