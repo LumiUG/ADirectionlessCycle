@@ -382,7 +382,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // Builds the level
-    private void BuildLevel(Tiles level, bool editor = false)
+    private void BuildLevel(Tiles level, bool editor = false, bool undo = false)
     {
         if (level == null) return;
 
@@ -390,13 +390,17 @@ public class LevelManager : MonoBehaviour
         if (GameManager.save.game.collectedOrbs.Contains(currentLevelID)) level.effectTiles = level.effectTiles.FindAll(tile => { return tile.type != "Orb"; });
         if (GameManager.save.game.collectedFragments.Contains(currentLevelID)) level.effectTiles = level.effectTiles.FindAll(tile => { return tile.type != "Fragment"; });
 
-        // Build the level
-        level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        // Build the level (overrides for undoing)
+        if (!undo)
+        {
+            level.solidTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+            level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+            level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
+        }
+
         level.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
-        level.overlapTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
-        level.customTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         
         // Apply all custom tile text
         level.customTileInfo.ForEach(tile => customTileInfo.Add(new(tile.position, tile.text)));
@@ -409,14 +413,27 @@ public class LevelManager : MonoBehaviour
     }
 
     // Clears the current level
-    public void ClearLevel(bool soft = false)
+    public void ClearLevel(bool undo = false)
     {
-        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
-        if (!soft) {
-            if (timerCoroutine != null) { StopCoroutine(timerCoroutine); }
-            InputManager.Instance.latestMovement = Vector3Int.back;
-            ClearUndoFrames();
+        // Override for undoing
+        if (undo)
+        {
+            InputManager.Instance.latestTile = ObjectTypes.Hexagon;
+            tilemapObjects.ClearAllTiles();
+            tilemapEffects.ClearAllTiles();
+            tilemapHazards.ClearAllTiles();
+            levelEffects.Clear();
+            levelObjects.Clear();
+            levelHazards.Clear();
+            movementBlacklist.Clear();
+            customTileInfo.Clear();
+            return;
         }
+
+        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
+        if (timerCoroutine != null) StopCoroutine(timerCoroutine);
+        InputManager.Instance.latestMovement = Vector3Int.back;
+        ClearUndoFrames();
 
         // directionPrefab.transform.Find("AnimationSprite").gameObject.SetActive(false);
         InputManager.Instance.latestTile = ObjectTypes.Hexagon;
@@ -1029,7 +1046,7 @@ public class LevelManager : MonoBehaviour
     {
         // Reload level snapshot (not very efficient)
         ClearLevel(true);
-        BuildLevel(undoSequence[^1]);
+        BuildLevel(undoSequence[^1], false, true);
         InputManager.Instance.latestTile = formQueue[^1];
         worldOffsetX = roomSequence[^1].Item1;
         worldOffsetY = roomSequence[^1].Item2;
