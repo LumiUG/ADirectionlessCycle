@@ -70,11 +70,12 @@ public class Editor : MonoBehaviour
         // Populate tile list
         GameObject editorTile = Resources.Load<GameObject>("Prefabs/Editor Tile");
         listVars.Add(new() { LevelManager.Instance.wallTile, LevelManager.Instance.antiwallTile });
-        listVars.Add(new() { LevelManager.Instance.boxTile, LevelManager.Instance.circleTile, LevelManager.Instance.hexagonTile, LevelManager.Instance.mimicTile });
+        listVars.Add(new() { LevelManager.Instance.boxTile, LevelManager.Instance.circleTile, LevelManager.Instance.hexagonTile });
         listVars.Add(new() { LevelManager.Instance.areaTile, LevelManager.Instance.inverseAreaTile, LevelManager.Instance.outboundAreaTile });
         listVars.Add(new() { LevelManager.Instance.hazardTile, LevelManager.Instance.voidTile });
         listVars.Add(new() { LevelManager.Instance.invertTile, LevelManager.Instance.pullTile, LevelManager.Instance.arrowTile, LevelManager.Instance.negativeArrowTile, LevelManager.Instance.fragmentTile, LevelManager.Instance.orbTile });
         listVars.Add(new() { LevelManager.Instance.levelTile, LevelManager.Instance.hologramTile, LevelManager.Instance.npcTile, LevelManager.Instance.maskTile });
+        if (GameManager.Instance.editormimic || GameManager.Instance.IsDebug()) listVars[1].Add(LevelManager.Instance.mimicTile);
 
         // Loops for every tile type
         for (int i = 0; i < listStrings.Count; i++)

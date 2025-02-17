@@ -106,6 +106,14 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
+        // Mimic editor unlock
+        if (debugCommand == "mimic")
+        {
+            UI.Instance.global.SendMessage("Be good.", 3);
+            GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
+            debugCommand = null;
+        }
+
         // Game completed flag
         if (debugCommand == "imacheater")
         {

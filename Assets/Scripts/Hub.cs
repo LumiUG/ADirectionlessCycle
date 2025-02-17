@@ -29,6 +29,7 @@ public class Hub : MonoBehaviour
     private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealOutbound = new() { 0, 0, 0, 0 };
+    private readonly List<int> totalMainLevels = new() { 12, 12, 10, 3 };
     private readonly List<GameObject> remixList = new();
     private GameObject lastSelectedlevel = null;
     private Animator animator;
@@ -54,9 +55,9 @@ public class Hub : MonoBehaviour
         // Achievements
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2"); // needs testing
-        if (completedReal[2] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3"); // needs testing
-        if (completedReal[3] >= 12) GameManager.Instance.EditAchivement("ACH_ORBS"); // needs testing
-        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 12) GameManager.Instance.EditAchivement("ACH_ALL_MAIN"); // needs testing
+        if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3"); // needs testing
+        if (completedReal[3] >= 3) GameManager.Instance.EditAchivement("ACH_ORBS"); // needs testing
+        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_ALL_MAIN"); // needs testing
 
         // Lock screen for levels
         SetupLocks();
@@ -66,7 +67,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
         else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
-        completedCountText.text = $"{completedReal[worldIndex]}/12";
+        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
         outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
     }
@@ -341,7 +342,7 @@ public class Hub : MonoBehaviour
         }
 
         // Update world completions
-        completedCountText.text = $"{completedReal[worldIndex]}/12";
+        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         if (worldIndex <= 2)
         {
             remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
