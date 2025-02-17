@@ -571,6 +571,9 @@ public class InputManager : MonoBehaviour
                 SettingsMenu.I.ToggleMenu(0);
                 UI.Instance.selectors.ChangeSelected(SettingsMenu.I.menus[0].transform.Find("Back Button").gameObject);
                 break;
+            case "Credits":
+                UI.Instance.selectors.ChangeSelected(GameObject.Find("Back Button"));
+                break;
             case "Game":
                 // if (UI.Instance.restart.self.activeSelf) UI.Instance.CloseConfirmRestart();
                 if (UI.Instance.popup.self.activeSelf) UI.Instance.ClosePopup();

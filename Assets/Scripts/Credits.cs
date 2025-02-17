@@ -12,20 +12,20 @@ public class Credits : MonoBehaviour
 
     // void Update()
     // {
-    //     rt.anchoredPosition += Time.deltaTime * (Vector2.up * 22f);  
+    //     // rt.anchoredPosition += Time.deltaTime * (Vector2.up * 22f);  
     // }
 
-    // Moves credits down
-    public void Down()
+    // Moves credits right
+    public void Right()
     {
-        if (rt.anchoredPosition.y >= 1080 * 1) return; // number of screens -1
-        rt.anchoredPosition += new Vector2(0, 1080);
+        if (rt.anchoredPosition.x <= -1920) return;
+        rt.anchoredPosition -= new Vector2(1920, 0);
     }
 
-    // Moves credits up
-    public void Up()
+    // Moves credits left
+    public void Left()
     {
-        if (rt.anchoredPosition.y <= 0) return; 
-        rt.anchoredPosition -= new Vector2(0, 1080);
+        if (rt.anchoredPosition.x == 0) return;
+        rt.anchoredPosition += new Vector2(1920, 0);
     }
 }
