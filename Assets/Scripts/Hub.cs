@@ -158,7 +158,7 @@ public class Hub : MonoBehaviour
                 // Add 1 to the completed level count (if not remix)
                 if (OutboundCheck(levelAsData, levelCheck.levelID, true)) completedRealOutbound[index]++;
                 if (!isRemix) {
-                    if (completedLevelsCount[index] < 12) completedLevelsCount[index]++;
+                    if (completedLevelsCount[index] < totalMainLevels[index]) completedLevelsCount[index]++;
                     completedReal[index]++;
                 } else completedRealRemix[index]++;
 
@@ -175,7 +175,7 @@ public class Hub : MonoBehaviour
 
         // Setting level color for available hub levels
         for (int j = 0; j < completedLevelsCount[index]; j++)
-        { 
+        {
             Transform child = holder.transform.GetChild(j);
             if (child)
             {
