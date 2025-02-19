@@ -326,6 +326,7 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.SetPresence("steam_display", "#Playing");
 
         // Hide UI?
+        UI.Instance.pause.title.text = currentLevel.levelName;
         if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
         if (currentLevel.hideUI)
         {
@@ -343,7 +344,6 @@ public class LevelManager : MonoBehaviour
         else if (GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(0, 125); UI.Instance.ingame.rMoves.anchoredPosition = new(500, 125); UI.Instance.ingame.rTimer.anchoredPosition = new(-500, 125); }
         
         // UI etc
-        UI.Instance.pause.title.text = currentLevel.levelName;
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
         UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
         if (levelAsSave != null) {
@@ -1233,9 +1233,9 @@ public class LevelManager : MonoBehaviour
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
+        UI.Instance.pause.title.text = currentLevel.levelName;
         if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
         else {
-            UI.Instance.pause.title.text = currentLevel.levelName;
             UI.Instance.ChangeScene("Game", false);
             TransitionManager.Instance.TransitionOut<string>();
         }

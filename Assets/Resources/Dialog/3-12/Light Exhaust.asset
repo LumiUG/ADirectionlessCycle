@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Light Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - Shut up, you. So, you're here? Welcome, again.
+  - My turn.
+  - So, you're here? Welcome, again.
   - Apparently, there's a riddle here.
   - Whoever came up with this place surely went out of their way to avoid someone
     from doing what we're doing.

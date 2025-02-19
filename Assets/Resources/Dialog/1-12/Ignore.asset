@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Did they contact you aswell? Oh, please. They only want to end us.
-  - I need you to fix this place and make us stay. Keep playing, keep completing
-    unvoided levels.
-  - Every time you complete a positive level, you're helping us fix this place!
-  - And, yes, we know this is a game for you. But it isn't for us.
-  - Don't listen to them. You're doing great!
+  - I just want you to stay, keep having fun, keep playing...
+  - And, yes, we know this is a game for you, just don't listen to them. You're doing
+    great!
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

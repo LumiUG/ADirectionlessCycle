@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Light
   m_EditorClassIdentifier: 
   dialog:
-  - 3-12...? Wait, stop. You don't know what this place is.
-  - If you really want to fix things here, you should leave.
-  - Whatever they've been telling you-
+  - 3-10...? Wait, stop. You don't know what this place is.
+  - They've... Whatever they've been telling you-
   events: []
   exhaustDialog: {fileID: 11400000, guid: 9a7444ff588fcf74fb48c71c4e0c8c2f, type: 2}
   textSpeed: 0.05

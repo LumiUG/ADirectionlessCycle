@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Hello
   m_EditorClassIdentifier: 
   dialog:
-  - A player...? A player! This might just be the best moment of our existence-
-  - Please don't cut communications, don't leave!
-  - It's been so long, and we need fixing.
-  - Just- keep going, you're already doing fine with what you're doing.
+  - Is this reaching you?
+  - Oooh, it is. We can see you reading. Hi player!!
+  - It's been a long time since someone last played, say, what's your name?
+  - ...
+  - Of course, I'm kidding. We know you can't reply.
   - Will talk later, this carving is running out of space.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}

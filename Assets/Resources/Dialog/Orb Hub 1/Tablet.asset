@@ -17,8 +17,7 @@ MonoBehaviour:
   - '"Do not remove or missplace."'
   - ...
   - Say, it does look a bit out of reach, doesn't it?
-  - That's why I'm making you search for those fragments. Just you wait. Just you
-    wait...
+  - Just you wait. Just you wait...
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
