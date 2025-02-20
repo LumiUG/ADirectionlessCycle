@@ -280,8 +280,10 @@ public class UI : MonoBehaviour
             else if (split[0].Contains("HINTS")) hintLevelID = LevelManager.Instance.currentLevel.nextLevel;
             else hintLevelID = $"HINTS/W{split[1]}H";
 
-            if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself."); return; }
+            // Custom handlings
+            if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
             if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
+            if (split[1] == "3-1") { popup.SetPopup("No."); return; }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly
