@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Gus
+  m_Name: Gus Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - What.
-  - Get out.
+  - I won't say anymore. I've done enough.
+  - Name's Gus, by the way.
+  - Good luck.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: dcfc4647264088846b2abddc7ae8cc34, type: 2}
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 1
+  shouldExhaust: 0
   canBeSkipped: 1
