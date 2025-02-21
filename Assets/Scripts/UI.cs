@@ -284,6 +284,7 @@ public class UI : MonoBehaviour
             if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
             if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
             if (split[1] == "3-1") { popup.SetPopup("No."); return; }
+            if (split[1] == "3-10") { popup.SetPopup("No hints here. You're on your own!"); return; }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly
