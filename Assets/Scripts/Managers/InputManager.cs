@@ -497,7 +497,7 @@ public class InputManager : MonoBehaviour
         GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
             npc =>
             {
-                if (npc.GetTileType() != ObjectTypes.NPC) return false;
+                if (npc.GetTileType() != ObjectTypes.NPC || !LevelManager.Instance.CheckSceneInbounds(npc.position)) return false;
 
                 GameTile test = null;
                 test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));

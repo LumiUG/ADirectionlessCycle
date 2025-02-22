@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: Reply
+  m_EditorClassIdentifier: 
+  dialog:
+  - I don't think they took that very well.
+  - Sorry you had to read that, but trust me, It's the only way.
+  - We are doomed to this 'existence', trapped here waiting to get erased.
+  - They don't want this to end, however hard it gets.
+  - It is... commendable, but we both know it isn't the right thing.
+  - And, heads up. You should come back to this level later to finish it.
+  events: []
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
+  textSpeed: 0.05
+  sfx: {fileID: 0}
+  shouldExhaust: 1
+  canBeSkipped: 1
