@@ -410,6 +410,16 @@ public class LevelManager : MonoBehaviour
             if (realTile) { realTile.customText = tile.text; SetCustomSprite(realTile, false, editor); RefreshCustomTile(realTile); }
             else customTileInfo.Remove(tile);
         }
+
+        // Override for fragments level
+        if (currentLevelID == "FRAGMENTS/Upgrade" && GameManager.save.game.collectedFragments.Count < 4)
+        {
+            int count = GameManager.save.game.collectedFragments.Count;
+            if (count < 4) RemoveTile(tilemapEffects.GetTile<FragmentTile>(new(9, -6)));
+            if (count < 3) RemoveTile(tilemapEffects.GetTile<FragmentTile>(new(4, -1)));
+            if (count < 2) RemoveTile(tilemapEffects.GetTile<FragmentTile>(new(4, -6)));
+            if (count < 1) RemoveTile(tilemapEffects.GetTile<FragmentTile>(new(9, -1)));
+        }
     }
 
     // Clears the current level
@@ -800,6 +810,14 @@ public class LevelManager : MonoBehaviour
         // Outbound win
         if (outboundCondition && !DialogManager.Instance.inDialog)
         {
+            if (currentLevelID == "FRAGMENTS/Upgrade" && GameManager.save.game.collectedFragments.Count >= 4)
+            {
+                TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
+                GameManager.save.game.mechanics.hasSwapUpgrade = true;
+                GameManager.Instance.isEditing = false;
+                return;
+            }
+
             // Level + savedata
             GameData.LevelChanges changes = new(false, true, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);

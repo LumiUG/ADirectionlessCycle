@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Stop
+  m_Name: Between
   m_EditorClassIdentifier: 
   dialog:
-  - Stop!! Don't move.
-  - This entire level is a trick. Don't you see?
-  - Bear with me, hold [SPACE] or [TRIANGLE] and look at that box on your top left.
-  - One wrong move, and you'll get kicked out of here.
-  - Better count your steps...
+  - There's also another way of marking multiple screens.
+  - This one is marked by having no screen end, which means you can jump through
+    it, too.
+  - Basically, anything that isnt a wall counts for this.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

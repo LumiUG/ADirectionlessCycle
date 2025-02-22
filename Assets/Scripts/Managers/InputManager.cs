@@ -107,7 +107,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Mimic editor unlock
-        if (debugCommand == "mimic")
+        if (debugCommand == "overflow")
         {
             UI.Instance.global.SendMessage("Be good.", 3);
             GameManager.Instance.editormimic = !GameManager.Instance.editormimic;

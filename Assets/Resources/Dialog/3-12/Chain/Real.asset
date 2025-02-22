@@ -12,9 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
   m_Name: Real
   m_EditorClassIdentifier: 
-  dialog:
-  - blepp
-  events: []
+  dialog: []
+  events:
+  - textSpeedEvent:
+      enabled: 0
+      textSpeed: 0
+    setTileEvent:
+      enabled: 0
+      setAs: 0
+      position: {x: 0, y: 0, z: 0}
+      delete: 0
+    loadLevelEvent:
+      enabled: 1
+      levelID: FRAGMENTS/Upgrade
+    executeAtIndex: 0
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
   sfx: {fileID: 0}

@@ -89,6 +89,7 @@ public class DialogManager : MonoBehaviour
             {
                 ev.textSpeedEvent.Run();
                 ev.setTileEvent.Run();
+                ev.loadLevelEvent.Run();
             }
         }
 
@@ -167,6 +168,7 @@ public class DialogManager : MonoBehaviour
     {
         public EventTextSpeed textSpeedEvent;
         public EventSetTile setTileEvent;
+        public EventLoadLevel loadLevelEvent;
         public int executeAtIndex = 0;
 
         // Required to have Run() or something idk
@@ -214,7 +216,7 @@ public class DialogManager : MonoBehaviour
                     if (tile) LevelManager.Instance.RemoveTile(tile);
 
                     // Deleting effect
-                    Debug.Log(position);
+                    // Debug.Log(position);
                     return;
                 }
 
@@ -223,6 +225,30 @@ public class DialogManager : MonoBehaviour
 
                 // Placing effect
                 Debug.Log(position);
+            }
+        }
+
+
+        // Change level
+        [Serializable]
+        public class EventLoadLevel : EventAction
+        {
+            public string levelID;
+            public override void Run()
+            {
+                if (!enabled) return;
+
+                // "same" code as Level.cs!!!
+                var levelTest = LevelManager.Instance.LoadLevel(levelID);
+                if (!levelTest) levelTest = LevelManager.Instance.LoadLevel(levelID, true);
+                
+                if (levelTest)
+                {
+                    if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
+                    LevelManager.Instance.worldOffsetX = 0;
+                    LevelManager.Instance.worldOffsetY = 0;
+                    LevelManager.Instance.ReloadLevel();
+                }
             }
         }
     }

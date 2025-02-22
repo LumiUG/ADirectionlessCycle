@@ -66,7 +66,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
-        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/3";
+        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}/4";
         completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
         outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
