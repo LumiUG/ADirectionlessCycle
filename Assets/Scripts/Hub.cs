@@ -21,6 +21,7 @@ public class Hub : MonoBehaviour
     public RectTransform locks;
     public RectTransform outlineHolder;
     public RectTransform backButton;
+    public GameObject masteryOutline;
     public Checker checker;
     public Text levelName;
 
@@ -70,6 +71,7 @@ public class Hub : MonoBehaviour
         completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
         outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
+        MasteryEffect(0);
     }
 
     // Cycle through levels
@@ -84,7 +86,7 @@ public class Hub : MonoBehaviour
             delayOneFrame = false;
         }
 
-        if (EventSystem.current.currentSelectedGameObject == null) return;
+        if (EventSystem.current.currentSelectedGameObject == null) { UI.Instance.selectors.ChangeSelected(backButton.gameObject); return; }
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
             HideRevealUI(false);
@@ -349,7 +351,8 @@ public class Hub : MonoBehaviour
             outboundCountText.text = $"{completedRealOutbound[worldIndex]}/?";
         }
 
-        // Update checker direction
+        // Update ui
+        MasteryEffect(worldIndex);
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
@@ -475,6 +478,16 @@ public class Hub : MonoBehaviour
         // Reactivate buttons
         UI.Instance.selectors.ChangeSelected(backButton.gameObject);
         foreach (Transform level in worldHolders[index].transform) { level.GetComponent<Button>().interactable = true; }
+    }
+
+    internal void MasteryEffect(int world)
+    {
+        if (
+            (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
+            (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[0] >= 1 && world == 1) ||
+            (completedReal[1] >= 10 && completedRealRemix[1] >= 5 && world == 2)
+        ) masteryOutline.SetActive(true);
+        else masteryOutline.SetActive(false);
     }
 
     // Actions //
