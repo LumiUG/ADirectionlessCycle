@@ -54,10 +54,10 @@ public class Hub : MonoBehaviour
 
         // Achievements
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
-        if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2"); // needs testing
-        if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3"); // needs testing
+        if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
+        if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
         if (completedReal[3] >= 3) GameManager.Instance.EditAchivement("ACH_ORBS"); // needs testing
-        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_ALL_MAIN"); // needs testing
+        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
 
         // Lock screen for levels
         SetupLocks();
@@ -280,7 +280,7 @@ public class Hub : MonoBehaviour
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         
         // Stuff for super world.
-        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-12");
+        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-10");
         if (worldIndex + direction == 3)
         {
             if (level == null) return; 
