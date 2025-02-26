@@ -32,6 +32,6 @@ public class MainMenu : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         UI.Instance.ChangeScene("Game", false);
         
-        DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/Prologue/Start"), "Dialog/Prologue/Start");
+        // DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/Prologue/Start"), "Dialog/Prologue/Start");
     }
 }

@@ -281,6 +281,13 @@ public class UI : MonoBehaviour
             else hintLevelID = $"HINTS/W{split[1]}H";
 
             // Custom handlings
+            if (split[1] == "Orb One")
+            {
+                if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
+                else popup.SetPopup("\"Seek the path of light.\"");
+                return;
+            }
+            if (split[1] == "Orb Two") { popup.SetPopup("\"Make a gap, and cycle through the void. Seek the dark.\""); return; }
             if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
             if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
             if (split[1] == "3-1") { popup.SetPopup("You aren't getting in this easily."); return; }

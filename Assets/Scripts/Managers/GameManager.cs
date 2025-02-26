@@ -70,8 +70,8 @@ public class GameManager : MonoBehaviour
         if (!SteamManager.Initialized) return;
         SetPresence("steam_display", "#Menuing");
         
-        Debug.Log(SteamFriends.GetPersonaName());
-        SteamUserStats.ResetAllStats(true);
+        // Debug.Log(SteamFriends.GetPersonaName());
+        // SteamUserStats.ResetAllStats(true);
     }
 
     // Save game on leaving
