@@ -57,13 +57,13 @@ public class Hub : MonoBehaviour
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
         if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
-        if (completedReal[3] >= 3) GameManager.Instance.EditAchivement("ACH_ORBS"); // needs testing
         if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
 
         // Lock screen for levels
         SetupLocks();
 
         // Initial variables!
+        if (GameManager.save.game.unlockedWorldSuper) GameObject.Find("FINALE").GetComponent<Button>().interactable = true;
         if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
@@ -240,7 +240,7 @@ public class Hub : MonoBehaviour
         } else wLock.gameObject.SetActive(false);
 
         // add debug later please
-        // if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
+        if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
     }
 
     // Now as a function for mouse hovers!
@@ -282,11 +282,10 @@ public class Hub : MonoBehaviour
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         
         // Stuff for super world.
-        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-10");
+        bool level = GameManager.save.game.unlockedWorldSuper;
         if (worldIndex + direction == 3)
         {
-            if (level == null) return; 
-            if (!level.completed) return;
+            if (!level) return;
         }
 
         // Move!!! (animation, i know im repeating two switches.)
@@ -316,7 +315,7 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
+                if (level) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
