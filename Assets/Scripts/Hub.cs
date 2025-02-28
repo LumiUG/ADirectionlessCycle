@@ -30,7 +30,7 @@ public class Hub : MonoBehaviour
     private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealOutbound = new() { 0, 0, 0, 0 };
-    private readonly List<int> totalMainLevels = new() { 12, 12, 10, 3 };
+    private readonly List<int> totalMainLevels = new() { 12, 12, 10, 1 };
     private readonly List<GameObject> remixList = new();
     private GameObject lastSelectedlevel = null;
     private Animator animator;
@@ -378,7 +378,7 @@ public class Hub : MonoBehaviour
         {
             remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
             // outboundCountText.text = $"{completedRealOutbound[worldIndex]}";
-        }
+        } else remixCountText.text = "?????";
 
         // Update ui
         MasteryEffect(worldIndex);
