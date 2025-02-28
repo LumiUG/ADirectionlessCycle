@@ -103,6 +103,10 @@ public class Serializables
         public bool unlockedWorldSuper = false;
         public bool doPrologue = true;
         public bool hasCompletedGame = false;
+        public bool hasMasteredGame = false;
+        public bool completedAllMainLevels = false;
+        public bool completedAllRemixLevels = false;
+        public bool completedAllOutboundLevels = false;
         public bool seenHintPopup = false;
 
         // A level

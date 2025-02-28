@@ -858,8 +858,6 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition && !DialogManager.Instance.inDialog)
         {
-            if (currentLevelID == "W3/3-10") GameManager.save.game.unlockedWorldSuper = true;
-
             // Level 1 achievement
             if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.Instance.EditAchivement("ACH_SIXMOVES");
 

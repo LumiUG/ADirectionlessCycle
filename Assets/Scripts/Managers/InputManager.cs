@@ -84,10 +84,12 @@ public class InputManager : MonoBehaviour
             {
                 GameManager.Instance.buildDebugMode = true;
                 UI.Instance.global.SendMessage("Debug enabled.", 3);
+                
             } else {
                 GameManager.Instance.buildDebugMode = false;
                 UI.Instance.global.SendMessage("Then so be it!", 3);
             }
+            MainMenu.I.SetupBadges();
             debugCommand = null;
         }
 
@@ -111,6 +113,7 @@ public class InputManager : MonoBehaviour
         {
             UI.Instance.global.SendMessage("Be good.", 3);
             GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
+            MainMenu.I.SetupBadges();
             debugCommand = null;
         }
 
@@ -135,6 +138,7 @@ public class InputManager : MonoBehaviour
             GameManager.Instance.DeleteSave();
             GameManager.Instance.CreateSave(true);
             UI.Instance.global.SendMessage("[ Game reset ]", 4);
+            MainMenu.I.SetupBadges();
             debugCommand = null;
         }
 

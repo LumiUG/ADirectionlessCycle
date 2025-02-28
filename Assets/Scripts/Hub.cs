@@ -57,13 +57,31 @@ public class Hub : MonoBehaviour
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
         if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
-        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
+        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10)
+        {
+            GameManager.save.game.completedAllMainLevels = true;
+            GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
+        }
+        if (completedReal[0] == 99)
+        {
+            GameManager.save.game.completedAllRemixLevels = true;
+            GameManager.Instance.EditAchivement("ACH_ALL_INVERSE");
+        }
+        if (completedReal[0] == 99)
+        {
+            GameManager.save.game.completedAllOutboundLevels = true;
+            GameManager.Instance.EditAchivement("ACH_ALL_OUTER");
+        }
+        if (completedReal[0] == 99 && completedReal[0] == 99 && completedReal[0] == 99)
+        {
+            GameManager.save.game.hasMasteredGame = true;
+            GameManager.Instance.EditAchivement("ACH_MASTERY");
+        }
 
         // Lock screen for levels
         SetupLocks();
 
         // Initial variables!
-        if (GameManager.save.game.unlockedWorldSuper) GameObject.Find("FINALE").GetComponent<Button>().interactable = true;
         if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
@@ -239,8 +257,17 @@ public class Hub : MonoBehaviour
                 { level.GetComponent<Button>().interactable = false; }
         } else wLock.gameObject.SetActive(false);
 
-        // add debug later please
-        if (!GameManager.save.game.unlockedWorldSuper) Debug.Log("Not yet! (SW)");
+        // add debug later please / no i wont im lazy
+        wLock = locks.Find("VOID");
+        if (GameManager.save.game.unlockedWorldSuper)
+        {
+            wLock.gameObject.SetActive(false);
+        } else {
+            Sprite spr = Resources.Load<Sprite>("Sprites/OrbDisabled");
+            if (GameManager.save.game.collectedOrbs.Count <= 2) wLock.Find("Orb 1").GetComponent<Image>().sprite = spr;
+            if (GameManager.save.game.collectedOrbs.Count <= 1) wLock.Find("Orb 2").GetComponent<Image>().sprite = spr;
+            if (GameManager.save.game.collectedOrbs.Count <= 0) wLock.Find("Orb 3").GetComponent<Image>().sprite = spr;
+        }
     }
 
     // Now as a function for mouse hovers!
@@ -267,6 +294,7 @@ public class Hub : MonoBehaviour
     public void StaticLoadLevel(string levelName)
     {
         if (!LevelManager.Instance || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.save.game.unlockedWorldSuper && levelName == "FINALE LEVEL ID GOES HERE") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
@@ -282,10 +310,12 @@ public class Hub : MonoBehaviour
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         
         // Stuff for super world.
-        bool level = GameManager.save.game.unlockedWorldSuper;
+        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-10");
         if (worldIndex + direction == 3)
         {
-            if (!level) return;
+            if (level == null) return; 
+            if (!level.completed) return;
+            GameObject.Find("FINALE").GetComponent<Button>().interactable = true;
         }
 
         // Move!!! (animation, i know im repeating two switches.)
@@ -315,7 +345,7 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (level) { hubArrows[1].interactable = true; break; };
+                if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
                 UI.Instance.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
