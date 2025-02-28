@@ -24,6 +24,7 @@ public class Hub : MonoBehaviour
     public GameObject masteryOutline;
     public Checker checker;
     public Text levelName;
+    public Image orbFake;
 
     private readonly int[] positions = { 0, -2200, -4400, -6600 };
     private readonly List<int> completedLevelsCount = new() { 3, 3, 3, 0 };
@@ -259,20 +260,20 @@ public class Hub : MonoBehaviour
 
         // add debug later please / no i wont im lazy
         wLock = locks.Find("VOID");
-        if (GameManager.save.game.unlockedWorldSuper)
+        if (!GameManager.save.game.unlockedWorldSuper) 
         {
-            wLock.gameObject.SetActive(false);
-        } else {
             Sprite spr = Resources.Load<Sprite>("Sprites/OrbDisabled");
-            if (GameManager.save.game.collectedOrbs.Count <= 2) wLock.Find("Orb 1").GetComponent<Image>().sprite = spr;
-            if (GameManager.save.game.collectedOrbs.Count <= 1) wLock.Find("Orb 2").GetComponent<Image>().sprite = spr;
-            if (GameManager.save.game.collectedOrbs.Count <= 0) wLock.Find("Orb 3").GetComponent<Image>().sprite = spr;
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb One")) { wLock.Find("Orb 1").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Two")) { wLock.Find("Orb 2").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Three")) { wLock.Find("Orb 3").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
         }
     }
 
     // Now as a function for mouse hovers!
     public void PreviewText(string levelID)
     {
+        if (!GameManager.save.game.unlockedWorldSuper && levelID == "FINALE LEVEL ID GOES HERE") return;
+
         // Set the preview text
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
         if (level != null)
