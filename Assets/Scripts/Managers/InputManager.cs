@@ -158,10 +158,19 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
+        // Custom handling for achievement name
+        else if (debugCommand == "code")
+        {
+            UI.Instance.global.SendMessage("...Come on now.", 4);
+            debugCommand = null;
+            return;
+        }
+
         if (debugCommand == null)
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command
         }
     }
 

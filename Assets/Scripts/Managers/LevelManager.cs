@@ -511,7 +511,7 @@ public class LevelManager : MonoBehaviour
             else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
 
             // Achievement (will retrigger multiple times, maybe bad?)
-            if (ach && !currentLevel.hideUI) GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
+            if (ach && !currentLevel.hideUI && currentLevelID != "FRAGMENTS/Tutorial") GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
         }
 
         // Removes from movement queue
