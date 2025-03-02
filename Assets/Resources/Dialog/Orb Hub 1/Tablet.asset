@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Tablet
   m_EditorClassIdentifier: 
   dialog:
-  - '"Here lies one of the three pieces needed to *****."'
-  - '"Do not remove or missplace."'
-  - ...
   - Say, it does look a bit out of reach, doesn't it?
   - Just you wait. Just you wait...
   events: []

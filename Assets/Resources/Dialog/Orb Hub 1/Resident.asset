@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Resident
   m_EditorClassIdentifier: 
   dialog:
-  - write later!
+  - I'm not exactly happy with you two, but...
+  - There's someone in here that you could meet, you'll find him where the light
+    doesnt pass through.
+  - As in... the void, I mean. Just keep moving into it.
+  - Thought he'd like some company, even if for a little.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

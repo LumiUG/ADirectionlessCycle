@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - Sometimes we wonder what would've been if we didn't get scrapped.
+  - Would you be here? Would it be different?
+  - Oh, ignore my ramblings, It'll be over soon enough thanks to you.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: a7282d3311f0c6047b207451bfa0ea9f, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

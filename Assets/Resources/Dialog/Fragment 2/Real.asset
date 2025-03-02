@@ -16,7 +16,7 @@ MonoBehaviour:
   - '"Nothing''s lost forever."'
   - By the way, I've added a warp on "3-10", just interact 5 times with the broken
     wall on your right.
-  - That's where you'll need to go after getting the last fragment!
+  - That's where you'll need to go after getting the last fragment.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

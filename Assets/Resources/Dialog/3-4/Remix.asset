@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - It looks like this exit was blocked by void, hm.
+  - I'm sure you'll figure it out later. Probably.
+  - For now, let's keep moving forward. You're close to the end.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

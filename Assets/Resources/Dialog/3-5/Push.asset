@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Push
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - Oh, It's this mechanic again.
+  - Come to think of it, this is only present in two levels.
+  - What was the developer thinking about when creating this?
+  - We'll never know.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

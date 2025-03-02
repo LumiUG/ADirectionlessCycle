@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Hi
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
+  - Welcome to Area 3.
+  - Here you'll play with the Hex, as you can see, it jumps over twice.
+  - It's the most interesting shape, as it will always move first!
+  - ...Among other stuff.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: dbab05b42dc0a0449825af4a09113f98, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

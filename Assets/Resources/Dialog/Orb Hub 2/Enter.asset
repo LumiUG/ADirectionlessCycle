@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Enter
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
+  - I'm not fully on board with the idea, but I've come to accept it.
+  - I'm not... entirely happy about helping you both. But I've come to realize you
+    are just trying to help.
+  - ...
+  - This is the artifact level, we don't know where it is.
+  - If you must know, this is another "true freeroam" level.
+  - Your cycling won't work the same, here.
+  - If there's another "alive" shape, anywhere, you won't be able to cycle.
+  - I hope that's enough help. Go get 'em.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

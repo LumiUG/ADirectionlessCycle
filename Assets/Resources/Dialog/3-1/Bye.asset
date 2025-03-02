@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Orb
+  m_Name: Bye
   m_EditorClassIdentifier: 
   dialog:
-  - '"In a place with two clones and two hexes, jump west and clear the path."'
-  - Nothing else? I suppose you'll have to find this artifact yourself.
+  - I don't have much to say. I just don't like this place much.
+  - As you can see, it'll degrade more and more the closer you get to the core.
+  - Which I'm guessing you're on your way there, of course.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

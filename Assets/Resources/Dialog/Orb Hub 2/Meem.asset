@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Meem
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
+  - miau
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

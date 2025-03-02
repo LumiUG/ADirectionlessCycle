@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
+  - Dead end. We think we saw something back on the beginning, maybe a jumpable wall?
+  - It doesn't seem reachable, though. You'll have to make your way.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

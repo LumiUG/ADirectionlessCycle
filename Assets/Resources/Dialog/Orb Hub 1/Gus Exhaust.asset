@@ -15,10 +15,10 @@ MonoBehaviour:
   dialog:
   - I won't say anymore. I've done enough.
   - Name's Gus, by the way.
-  - Good luck.
+  - Good luck, may you end us all.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1
