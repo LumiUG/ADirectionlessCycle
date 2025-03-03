@@ -115,6 +115,7 @@ public class InputManager : MonoBehaviour
             GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
             MainMenu.I.SetupBadges();
             debugCommand = null;
+            return;
         }
 
         // Game completed flag
@@ -129,17 +130,19 @@ public class InputManager : MonoBehaviour
                 UI.Instance.global.SendMessage("You've been redeemed.", 3);
             }
             debugCommand = null;
+            return;
         }
 
         // Delete savedata and generate a new one
         else if (debugCommand == "zero")
         {
-            if (DebugConfirm()) return;
+            if (DebugConfirm("This will delete all your data!!")) return;
             GameManager.Instance.DeleteSave();
             GameManager.Instance.CreateSave(true);
             UI.Instance.global.SendMessage("[ Game reset ]", 4);
             MainMenu.I.SetupBadges();
             debugCommand = null;
+            return;
         }
 
         // Delete savedata and generate a new one
@@ -151,7 +154,7 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
-        // Delete savedata and generate a new one
+        // void testing
         else if (debugCommand == "void")
         {
             TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "VOID/VoidTest");
@@ -170,7 +173,7 @@ public class InputManager : MonoBehaviour
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command
+            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "zero", "overflow", "imacheater")
         }
     }
 
@@ -624,11 +627,11 @@ public class InputManager : MonoBehaviour
     }
 
     // Confirm a command
-    private bool DebugConfirm()
+    private bool DebugConfirm(string message = "Are you sure about that?")
     {
         if (confirmCommand != debugCommand)
         {
-            UI.Instance.global.SendMessage("Are you sure about that?", 2);
+            UI.Instance.global.SendMessage(message, 2);
             AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.30f);
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             confirmCommand = $"{debugCommand}";

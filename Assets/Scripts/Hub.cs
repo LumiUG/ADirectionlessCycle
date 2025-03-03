@@ -370,7 +370,7 @@ public class Hub : MonoBehaviour
             case 0: SetLevelName("Area 1"); break;
             case 1: SetLevelName("Area 2"); break;
             case 2: SetLevelName("Area 3"); break;
-            case 3: SetLevelName("Void"); break;
+            case 3: SetLevelName("?????"); break;
         }
 
         // Update world completions

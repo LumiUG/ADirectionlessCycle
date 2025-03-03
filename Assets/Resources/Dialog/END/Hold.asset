@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Secret
+  m_Name: Hold
   m_EditorClassIdentifier: 
   dialog:
-  - '"In a place where all shapes meet, burn everything below."'
-  - '"Finally, make the roamer dissapear out of view. Then and only then you''ll
-    cycle."'
+  - Final step, hold yourself together. This might get weird.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -1246,7 +1246,7 @@ public class LevelManager : MonoBehaviour
         // Void levels
         if (name.StartsWith("VOID/"))
         {
-            DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/VOID/One"), "Dialog/VOID/One");
+            if (name == "VOID/VoidTest") DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/VOID/One"), "Dialog/VOID/One");
         }
 
         // Preload screen
