@@ -18,7 +18,8 @@ MonoBehaviour:
   - We are doomed to this 'existence', trapped here waiting to get erased.
   - They don't want this to end, however hard it gets.
   - It is... commendable, but we both know it isn't the right thing.
-  - And, heads up. You should come back to this level later to finish it.
+  - And, heads up. You should come back to this level later to finish it. I doubt
+    you'd understand half these mechanics.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Light Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - My turn.
-  - So, you're here? Welcome, again.
-  - Apparently, there's a riddle here.
+  - My turn!
+  - You're here? Welcome, again. Apparently, there's a riddle here.
   - Whoever came up with this place surely went out of their way to avoid someone
     from doing what we're doing.
-  - 'Hmph. I''ll read it out for you:'
+  - 'I''ll read it out for you:'
   - '"The depths of Area 1 holds the second of the fragments you seek."'
   - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
   - '"Once there, seek the path of light."'
