@@ -547,10 +547,12 @@ public class InputManager : MonoBehaviour
         if (count[0].GetTileType() == ObjectTypes.Hexagon) {
             if (latestTile.ToString() == "Hexagon") GameManager.Instance.EditAchivement("ACH_A_COPY");
             LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
+            UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
         }
         else {
             LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile("Hexagon", count[0].directions, count[0].position));
             latestTile = count[0].GetTileType();
+            UI.Instance.ingame.SetCycleIcon(latestTile);
         }
     }
 
@@ -647,19 +649,20 @@ public class InputManager : MonoBehaviour
     internal void ActionRestart(string _)
     {
         // Hint popup
-        if (!GameManager.save.game.seenHintPopup)
-        {
-            restartCount++;
-            if (restartCount >= 5)
-            {
-                UI.Instance.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
-                GameManager.save.game.seenHintPopup = true;
-            }
-        }
-        
+        // if (!GameManager.save.game.seenHintPopup)
+        // {
+        //     restartCount++;
+        //     if (restartCount >= 5)
+        //     {
+        //         UI.Instance.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
+        //         GameManager.save.game.seenHintPopup = true;
+        //     }
+        // }
+            
         LevelManager.Instance.ReloadLevel();
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
+        UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

@@ -314,9 +314,14 @@ public class LevelManager : MonoBehaviour
         UI.Instance.ingame.SetLevelMoves(levelMoves);
 
         // Swapping mechanic startup
-        var playables = InputManager.Instance.GetPlayableObjects();
-        if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
-        else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
+        // UI.Instance.ingame.cycleIcon.gameObject.SetActive(GameManager.save.game.mechanics.hasSwapUpgrade);
+        if (GameManager.save.game.mechanics.hasSwapUpgrade)
+        {
+            var playables = InputManager.Instance.GetPlayableObjects();
+            if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
+            else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
+            UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
+        }
 
         // Reset hint popup (if applicable)
         if (!GameManager.save.game.seenHintPopup) InputManager.Instance.restartCount = 0;
@@ -812,8 +817,8 @@ public class LevelManager : MonoBehaviour
         {
             if (currentLevelID == "FRAGMENTS/Upgrade" && GameManager.save.game.collectedFragments.Count >= 4)
             {
-                TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
                 GameManager.save.game.mechanics.hasSwapUpgrade = true;
+                TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
                 GameManager.Instance.isEditing = false;
                 return;
             }

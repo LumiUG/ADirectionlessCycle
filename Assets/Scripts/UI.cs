@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TransitionManager.Transitions;
+using static GameTile;
 
 public class UI : MonoBehaviour
 {
@@ -84,6 +85,7 @@ public class UI : MonoBehaviour
         ingame.levelMoves = ingame.rMoves.Find("Level Moves").GetComponent<Text>();
         ingame.levelTimer = ingame.rTimer.Find("Level Time").GetComponent<Text>();
         ingame.areaIcon = ingame.rArea.Find("Area Sprite").GetComponent<Image>();
+        ingame.cycleIcon = ingame.self.transform.Find("Cycle Icon").GetComponent<Image>();
         ingame.areaCount = ingame.rArea.Find("Area Count").GetComponent<Text>();
         
         // Restart UI
@@ -423,6 +425,7 @@ public class UI : MonoBehaviour
         public Text levelMoves;
         public Text levelTimer;
         public Image areaIcon;
+        public Image cycleIcon;
         public Text areaCount;
 
         public void SetAreaIcon(int icon)
@@ -465,6 +468,28 @@ public class UI : MonoBehaviour
             // Update UI
             areaCount.text = $"{current}/{max}";
             SetAreaIcon(type);
+        }
+        public void SetCycleIcon(ObjectTypes tile)
+        {
+            Sprite spr;
+            switch (tile)
+            {
+                case ObjectTypes.Box:
+                    spr = LevelManager.Instance.boxTile.tileSprite;
+                    break;
+                case ObjectTypes.Circle:
+                    spr = LevelManager.Instance.circleTile.tileSprite;
+                    break;
+                case ObjectTypes.Hexagon:
+                    spr = LevelManager.Instance.hexagonTile.tileSprite;
+                    break;
+                case ObjectTypes.Mimic:
+                    spr = LevelManager.Instance.mimicTile.tileSprite;
+                    break;
+                default:
+                    return;
+            }
+            cycleIcon.sprite = spr;
         }
     }
 
