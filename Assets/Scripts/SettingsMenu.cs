@@ -17,6 +17,7 @@ public class SettingsMenu : MonoBehaviour
     public Toggle restartToggle;
     public Slider masterSlider;
     public Slider SFXSlider;
+    public Text cycleControls;
     public List<GameObject> menus = new();
     public List<GameObject> buttons = new();
 
@@ -56,6 +57,7 @@ public class SettingsMenu : MonoBehaviour
         if (currentIndex != -1) outlineDropdown.value = currentIndex;
 
         // Update UI
+        if (GameManager.save.game.mechanics.hasSwapUpgrade) cycleControls.text = "Cycle";
         settingsToggle.isOn = Screen.fullScreen;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
         restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
