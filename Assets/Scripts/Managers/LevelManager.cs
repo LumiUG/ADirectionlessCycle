@@ -849,7 +849,7 @@ public class LevelManager : MonoBehaviour
                 GameManager.Instance.EditAchivement("ACH_FIRST_INVERSE");
                 GameManager.save.game.mechanics.hasSeenRemix = true;
             }
-
+            
             // Level + savedata
             GameData.LevelChanges changes = new(false, false, -1, -1);
             GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
@@ -1269,6 +1269,7 @@ public class LevelManager : MonoBehaviour
         var save = GameManager.save.game.levels.Find(level => level.levelID == remixID);
         
         // Loads the level (Load internal level first, if it fails, load external)
+        RefreshGameVars(); // necessary.
         if (!LoadLevel(remixID)) LoadLevel(remixID, true);
 
         // Preload screen

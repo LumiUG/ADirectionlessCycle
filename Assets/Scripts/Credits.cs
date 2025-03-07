@@ -12,13 +12,13 @@ public class Credits : MonoBehaviour
 
     // void Update()
     // {
-    //     // rt.anchoredPosition += Time.deltaTime * (Vector2.up * 22f);  
+    //     // rt.anchoredPosition += Time.deltaTime * (Vector2.up * 22f);
     // }
 
     // Moves credits right
     public void Right()
     {
-        if (rt.anchoredPosition.x <= -1920 * 2) return;
+        if (rt.anchoredPosition.x <= -1920 * 3) return;
         rt.anchoredPosition -= new Vector2(1920, 0);
     }
 
