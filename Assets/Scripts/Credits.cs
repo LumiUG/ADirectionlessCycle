@@ -18,7 +18,7 @@ public class Credits : MonoBehaviour
     // Moves credits right
     public void Right()
     {
-        if (rt.anchoredPosition.x <= -1920) return;
+        if (rt.anchoredPosition.x <= -1920 * 2) return;
         rt.anchoredPosition -= new Vector2(1920, 0);
     }
 

@@ -159,6 +159,8 @@ public class Editor : MonoBehaviour
         {
             if (UI.Instance.editor.self.activeSelf || tileList.activeSelf) yield break;
 
+            if (popup.activeSelf) { multiClick = null; yield break; }
+
             // Checks mouse position
             Vector3Int gridPos = GetMousePositionOnGrid();
             if (gridPos != Vector3.back)
