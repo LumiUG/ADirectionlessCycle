@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Debug input
-        if (!canInputCommands) return;
+        if (!canInputCommands || SceneManager.GetActiveScene().name != "Main Menu") return;
 
         // Write a command
         if (Input.anyKeyDown)
@@ -157,8 +157,10 @@ public class InputManager : MonoBehaviour
         // void testing
         else if (debugCommand == "void")
         {
-            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "VOID/Dive/1");
+            LevelManager.Instance.ActionLoadLevel("VOID/END");
+            LevelManager.Instance.ActionDiveIn("1");
             debugCommand = null;
+            return;
         }
 
         // Custom handling for achievement name

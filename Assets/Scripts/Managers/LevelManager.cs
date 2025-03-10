@@ -815,6 +815,7 @@ public class LevelManager : MonoBehaviour
         // Outbound win
         if (outboundCondition && !DialogManager.Instance.inDialog)
         {
+            // Victory overrides
             if (currentLevelID == "FRAGMENTS/Upgrade" && GameManager.save.game.collectedFragments.Count >= 4)
             {
                 GameManager.save.game.mechanics.hasSwapUpgrade = true;
@@ -822,6 +823,13 @@ public class LevelManager : MonoBehaviour
                 GameManager.Instance.isEditing = false;
                 return;
             }
+
+            else if (currentLevelID == "VOID/END") 
+            {
+                ActionDiveIn("1");
+                return;
+            }
+
 
             // Level + savedata
             GameData.LevelChanges changes = new(false, true, -1, -1);
@@ -1248,12 +1256,6 @@ public class LevelManager : MonoBehaviour
         //     Debug.Log("a");
         // } else tilemapScanlines.gameObject.SetActive(true);
 
-        // Void levels
-        if (name.StartsWith("VOID/"))
-        {
-            if (name == "VOID/VoidTest") DialogManager.Instance.StartDialog(Resources.Load<DialogScriptable>("Dialog/VOID/One"), "Dialog/VOID/One");
-        }
-
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
         UI.Instance.pause.title.text = currentLevel.levelName;
@@ -1276,5 +1278,24 @@ public class LevelManager : MonoBehaviour
         TransitionManager.Instance.ChangeTransition(Unknown);
         if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
         else TransitionManager.Instance.TransitionOut<string>();
+    }
+
+    internal void ActionDiveIn(string count)
+    {
+        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
+        int.TryParse(count, out int numberCount);
+
+        if (count == "5") { TransitionManager.Instance.TransitionIn(Triangle, ActionLoadLevel, "VOID/Entry"); return; }
+        TransitionManager.Instance.TransitionIn(effects[numberCount - 1], ActionDiveOut, count);
+    }
+
+    internal void ActionDiveOut(string count)
+    {
+        LoadLevel($"VOID/Dive/{count}");
+
+        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
+        int.TryParse(count, out int numberCount);
+
+        TransitionManager.Instance.TransitionOut(effects[numberCount - 1], ActionDiveIn, $"{numberCount + 1}");
     }
 }

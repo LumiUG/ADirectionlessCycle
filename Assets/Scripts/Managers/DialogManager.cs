@@ -224,7 +224,7 @@ public class DialogManager : MonoBehaviour
                 LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(setAs.ToString(), new(), position));
 
                 // Placing effect
-                Debug.Log(position);
+                // Debug.Log(position);
             }
         }
 
