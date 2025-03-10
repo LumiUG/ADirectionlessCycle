@@ -157,7 +157,7 @@ public class InputManager : MonoBehaviour
         // void testing
         else if (debugCommand == "void")
         {
-            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "VOID/VoidTest");
+            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "VOID/Dive/1");
             debugCommand = null;
         }
 

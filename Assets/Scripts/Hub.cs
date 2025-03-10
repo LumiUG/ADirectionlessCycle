@@ -430,6 +430,7 @@ public class Hub : MonoBehaviour
         remixList.ForEach(item => item.SetActive(false));
         remixList.Clear();
 
+        if (level.levelName == "Seeing Double") { HideRevealUI(false); return; }
         if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.Instance.IsDebug())
         {
             if (string.IsNullOrEmpty(level.remixLevel)) return;

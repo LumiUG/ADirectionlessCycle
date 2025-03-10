@@ -749,7 +749,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Best Time: {time}'
+  m_Text: 'Best Time: ??'
 --- !u!1 &1410781262128677865
 GameObject:
   m_ObjectHideFlags: 0
@@ -4805,7 +4805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Best moves: {moves}'
+  m_Text: 'Best moves: ??'
 --- !u!1 &6964762903373995379
 GameObject:
   m_ObjectHideFlags: 0
