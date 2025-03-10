@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public RectTransform allMainIcon;
     public RectTransform allRemixIcon;
     public RectTransform allOutboundIcon;
+    public GameObject scorchingStupid;
     public GameObject badgeHolder;
     public Text version;
     public Text debug;
@@ -52,6 +53,9 @@ public class MainMenu : MonoBehaviour
         if (allMainIcon.gameObject.activeSelf) { allMainIcon.anchoredPosition = new(offset, 0); offset -= 125; }
         if (allRemixIcon.gameObject.activeSelf) { allRemixIcon.anchoredPosition = new(offset, 0); offset -= 125; }
         if (allOutboundIcon.gameObject.activeSelf) { allOutboundIcon.anchoredPosition = new(offset, 0); }
+
+        // Scorching thing
+        scorchingStupid.SetActive(GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-EXHAUST-Dialog/Scorch/Hi") != null);
     }
 
     // Actions //

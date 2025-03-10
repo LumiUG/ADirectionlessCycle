@@ -58,23 +58,42 @@ public class Hub : MonoBehaviour
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
         if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
-        if (completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10)
+
+        // All main levels
+        bool mainLevels = completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10;
+        if (!GameManager.save.game.completedAllMainLevels && mainLevels)
         {
             GameManager.save.game.completedAllMainLevels = true;
             GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
         }
-        if (completedReal[0] == 99)
+
+        // All remix levels
+        bool remixCount = completedRealRemix[0] + completedRealRemix[1] + completedRealRemix[2] >= 21;
+        if (!GameManager.save.game.completedAllRemixLevels && remixCount)
         {
             GameManager.save.game.completedAllRemixLevels = true;
             GameManager.Instance.EditAchivement("ACH_ALL_INVERSE");
         }
-        if (completedReal[0] == 99)
+
+        // All outbound levels
+        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 6;
+        if (!GameManager.save.game.completedAllOutboundLevels && outboundCount)
         {
             GameManager.save.game.completedAllOutboundLevels = true;
             GameManager.Instance.EditAchivement("ACH_ALL_OUTER");
         }
-        if (completedReal[0] == 99 && completedReal[0] == 99 && completedReal[0] == 99)
+        
+        // EVERYTHING.
+        if (!GameManager.save.game.hasMasteredGame && mainLevels && remixCount && outboundCount)
         {
+            // Specific levels (this'll be a pain for players :3)
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb One").completed) return;
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two").completed) return;
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three").completed) return;
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem").completed) return;
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial").outboundCompletion) return;
+
+            // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
             GameManager.Instance.EditAchivement("ACH_MASTERY");
         }
