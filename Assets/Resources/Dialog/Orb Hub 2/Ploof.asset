@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Ploof
   m_EditorClassIdentifier: 
   dialog:
-  - miau
+  - '[The cat has stopped guarding the artifact.]'
+  - '[You pet the cat.]'
+  - '[Wait what how]'
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: 7b0bc9d7635d6fc4682dcd91ecba9b73, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

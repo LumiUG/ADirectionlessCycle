@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I'm not fully on board with the idea, but I've come to accept it.
-  - I'm not... entirely happy about helping you both. But I've come to realize you
-    are just trying to help.
+  - Definitely not... entirely happy about helping you both. But I've come to realize
+    you are just trying to help.
   - ...
   - This is the artifact level, we don't know where it is.
   - If you must know, this is another "true freeroam" level.

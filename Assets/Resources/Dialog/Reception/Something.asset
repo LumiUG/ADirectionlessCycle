@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Something
   m_EditorClassIdentifier: 
   dialog:
-  - WRITE LATER!!
+  - You know, you aren't so bad, player.
+  - It's just... been difficult. Can you imagine being here for years?
+  - Nothing to do, other than watch and change little things.
+  - We aren't actually "allowed" to edit any levels, or at least much, since you've
+    seen what they can do.
+  - I could've helped them, but I didn't.
+  - ...Anyways, this level has always given me World 1 vibes.
+  - Sorry for rambling, you've got this.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1
