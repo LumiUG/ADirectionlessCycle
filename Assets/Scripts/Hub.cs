@@ -48,6 +48,9 @@ public class Hub : MonoBehaviour
         UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
 
+        // Unlock finale?
+        GameManager.save.game.unlockedWorldSuper = GameManager.save.game.collectedOrbs.Count >= 3;
+
         // Iterate all non-remix levels.
         for (int count = 0; count < worldHolders.Count; count++) { PrepareHub(worldHolders[count], false, count); }
 
@@ -291,7 +294,7 @@ public class Hub : MonoBehaviour
     // Now as a function for mouse hovers!
     public void PreviewText(string levelID)
     {
-        if (!GameManager.save.game.unlockedWorldSuper && levelID == "FINALE LEVEL ID GOES HERE") return;
+        if (!GameManager.save.game.unlockedWorldSuper && levelID == "VOID/END") return;
 
         // Set the preview text
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
@@ -314,7 +317,7 @@ public class Hub : MonoBehaviour
     public void StaticLoadLevel(string levelName)
     {
         if (!LevelManager.Instance || TransitionManager.Instance.inTransition) return;
-        if (!GameManager.save.game.unlockedWorldSuper && levelName == "FINALE LEVEL ID GOES HERE") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
@@ -393,12 +396,15 @@ public class Hub : MonoBehaviour
         }
 
         // Update world completions
-        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         if (worldIndex <= 2)
         {
+            completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
             remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
             // outboundCountText.text = $"{completedRealOutbound[worldIndex]}";
-        } else remixCountText.text = "?????";
+        } else {
+            completedCountText.text = "?????";
+            remixCountText.text = "?????";
+        }
 
         // Update ui
         MasteryEffect(worldIndex);
@@ -413,6 +419,7 @@ public class Hub : MonoBehaviour
     {
         if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
         if (GameManager.Instance.IsDebug()) return false;
+        if (fullLevelID == "VOID/END") return false;
 
         // Custom handling for remix levels
         if (fullLevelID.StartsWith("REMIX/")) return GameManager.save.game.levels.Find(l => l.levelID == fullLevelID) == null;
