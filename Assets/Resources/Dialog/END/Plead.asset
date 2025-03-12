@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Plead
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - This isn't that easy. Check it out yourself.
+  - If this fails, we've made another exit, hopefully it'll still work.
+  - Surely it wouldn't have degraded.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

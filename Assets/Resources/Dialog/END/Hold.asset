@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Hold
   m_EditorClassIdentifier: 
   dialog:
-  - Final step, hold yourself together. This might get weird.
+  - Wait!
+  - ...The final step, hold yourself together. Things might get weird.
+  - This might be the last time we can communicate with you, too.
+  - So... good luck. And if you need a hint...
+  - We'll be with you.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

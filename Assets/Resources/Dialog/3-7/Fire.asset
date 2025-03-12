@@ -19,6 +19,6 @@ MonoBehaviour:
   events: []
   exhaustDialog: {fileID: 11400000, guid: a7282d3311f0c6047b207451bfa0ea9f, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
   shouldExhaust: 1
   canBeSkipped: 1

@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I'm back, congrats on making it into area two.
-  - They want you to keep playing, don't they? I'd say you could entertain them,
-    even if only for a little.
+  - I know they want you to play, so I'd say you could entertain them, even if only
+    for a little.
   - Sorry for leaving before, I was consulting some stuff.
-  - There's a forced entry in this area, I'll explain everything there.
+  - There's a forced entry in this area, I'll explain everything there. Toodle pip!
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
   shouldExhaust: 1
   canBeSkipped: 1

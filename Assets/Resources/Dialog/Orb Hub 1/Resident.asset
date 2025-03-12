@@ -19,8 +19,8 @@ MonoBehaviour:
   - As in... the void, I mean. Just keep moving into it.
   - Thought he'd like some company, even if for a little.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
-  shouldExhaust: 1
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
+  shouldExhaust: 0
   canBeSkipped: 1

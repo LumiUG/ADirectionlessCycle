@@ -24,6 +24,9 @@ MonoBehaviour:
       setAs: 1
       position: {x: 6, y: -21, z: 0}
       delete: 1
+    loadLevelEvent:
+      enabled: 0
+      levelID: 
     executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
@@ -33,6 +36,9 @@ MonoBehaviour:
       setAs: 1
       position: {x: 7, y: -21, z: 0}
       delete: 1
+    loadLevelEvent:
+      enabled: 0
+      levelID: 
     executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
@@ -42,6 +48,9 @@ MonoBehaviour:
       setAs: 20
       position: {x: 6, y: -21, z: 0}
       delete: 0
+    loadLevelEvent:
+      enabled: 0
+      levelID: 
     executeAtIndex: 0
   - textSpeedEvent:
       enabled: 0
@@ -51,9 +60,12 @@ MonoBehaviour:
       setAs: 20
       position: {x: 7, y: -21, z: 0}
       delete: 0
+    loadLevelEvent:
+      enabled: 0
+      levelID: 
     executeAtIndex: 0
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 76c5636752690d34f857214c648f21a3, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

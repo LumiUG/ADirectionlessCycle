@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - '"In a place with two clones and two hexes, jump west and clear the path."'
+  - ...
   - Nothing else? I suppose you'll have to find this artifact yourself.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: d8b779e530c982447ba8aadeaad899d1, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 0}
-  shouldExhaust: 0
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
+  shouldExhaust: 1
   canBeSkipped: 1

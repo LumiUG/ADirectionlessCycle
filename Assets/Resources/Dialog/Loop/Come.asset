@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Hell
+  m_Name: Come
   m_EditorClassIdentifier: 
   dialog:
-  - This entire level is just a maze.
-  - An invisible maze.
-  - It is around ~12 screens with width + height combined, and you need to find two
-    buttons.
-  - Then, head down, straight middle.
-  - You will get NOTHING from beating this, this is merely torture.
-  - btw,
-  - I am NOT sorry.
+  - Oh, come on, I won't give it up. Keep going, go on!
+  - 'I''ll repeat it, just incase:'
+  - '"In a place with two clones and two hexes, jump west and clear the path."'
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: 76c5636752690d34f857214c648f21a3, type: 3}
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1
