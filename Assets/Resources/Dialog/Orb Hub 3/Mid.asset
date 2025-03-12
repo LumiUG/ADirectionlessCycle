@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Mid
   m_EditorClassIdentifier: 
   dialog:
-  - WRITE LATER GRAHHH
+  - '"We"? I''ve actually seen this one before, mind you.'
+  - That being said, this is definitely not how I remember it.
+  - So, yeah, sure. No tips.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 0}
-  shouldExhaust: 0
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
+  shouldExhaust: 1
   canBeSkipped: 1

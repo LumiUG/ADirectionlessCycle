@@ -299,7 +299,7 @@ public class UI : MonoBehaviour
             if (split[1] == "Meem") { popup.SetPopup("The Gravix dog? ...thing? It was here the entire time???"); return; }
             if (split[1] == "Upgrade") { popup.SetPopup("I'm... Definitely not giving you a hint here. Please stop."); return; }
             if (split[1] == "Tutorial") { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
-            if (split[1] == "END") { popup.SetPopup("% GUMMI CODE GOES HERE (as carvings) %"); return; }
+            if (split[1] == "END") { popup.SetPopup("The core's entrance. The point of no return."); return; }
             if (split[1] == "Entry") { popup.SetPopup("%begin% Pla!!^ We ccc, ba##re- reach $y-yy u,, %end%"); return; }
             if (split[1] == "Corridor") { popup.SetPopup("--n% vfluy,ij kthankjxf rstf ytyougvc! %----"); return; }
         } else hintLevelID = null;
