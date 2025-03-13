@@ -121,7 +121,7 @@ public class DialogManager : MonoBehaviour
         foreach (char c in dialog[dialogIndex])
         {
             UI.Instance.dialog.SetText(c.ToString(), true);
-            if (loadedDial.sfx != null) AudioManager.Instance.PlaySFX(loadedDial.sfx, 0.60f);
+            if (loadedDial.sfx != null) AudioManager.Instance.PlaySFX(loadedDial.sfx, 0.35f);
             if (waitExtraLong.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.25f);
             if (waitExtraMedium.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.175f);
             if (waitExtraSmall.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.1f);

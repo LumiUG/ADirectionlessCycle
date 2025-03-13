@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
     internal Color remixColor;
     internal Color outboundColor;
     internal Color completedColor;
-    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub" };
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
     private string dataPath;
 
     void Awake()
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         SetPresence("steam_display", "#Menuing");
         
         // Debug.Log(SteamFriends.GetPersonaName());
-        SteamUserStats.ResetAllStats(true);
+        // SteamUserStats.ResetAllStats(true);
     }
 
     // Save game on leaving

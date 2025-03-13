@@ -96,8 +96,9 @@ public class InputManager : MonoBehaviour
         // Secret title command
         if (debugCommand == "UDLRLRUR")
         {
-            UI.Instance.global.SendMessage("Sneaky!", 3);
+            canInputCommands = false;
             debugCommand = null;
+            UI.Instance.ChangeScene("Bonus");
         }
 
         // Chess battle advanced
@@ -157,9 +158,10 @@ public class InputManager : MonoBehaviour
         // void testing
         else if (debugCommand == "void")
         {
+            canInputCommands = false;
+            debugCommand = null;
             LevelManager.Instance.ActionLoadLevel("VOID/END");
             LevelManager.Instance.ActionDiveIn("1");
-            debugCommand = null;
             return;
         }
 
@@ -539,10 +541,10 @@ public class InputManager : MonoBehaviour
 
         // Swap check
         List<GameTile> count = GetPlayableObjects();
-        if (count.Count > 1 || count.Count <= 0) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny); return; }
+        if (count.Count > 1 || count.Count <= 0) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
 
         // Sfx (change later)
-        AudioManager.Instance.PlaySFX(AudioManager.select);
+        AudioManager.Instance.PlaySFX(AudioManager.select, 0.50f);
 
         // Swap
         LevelManager.Instance.RemoveTile(count[0]);
@@ -592,6 +594,7 @@ public class InputManager : MonoBehaviour
                 UI.Instance.selectors.ChangeSelected(SettingsMenu.I.menus[0].transform.Find("Back Button").gameObject);
                 break;
             case "Credits":
+            case "Bonus":
                 UI.Instance.selectors.ChangeSelected(GameObject.Find("Back Button"));
                 break;
             case "Game":

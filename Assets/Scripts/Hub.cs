@@ -57,6 +57,19 @@ public class Hub : MonoBehaviour
         // Iterate all remix levels.
         for (int count = 0; count < remixHolders.Count; count++) { PrepareHub(remixHolders[count], true, count); }
 
+        // Lock screen for levels
+        SetupLocks();
+
+        // Initial variables!
+        if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
+        if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
+        if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
+        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}";
+        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
+        remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+        outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
+        MasteryEffect(0);
+
         // Achievements
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
@@ -100,19 +113,6 @@ public class Hub : MonoBehaviour
             GameManager.save.game.hasMasteredGame = true;
             GameManager.Instance.EditAchivement("ACH_MASTERY");
         }
-
-        // Lock screen for levels
-        SetupLocks();
-
-        // Initial variables!
-        if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
-        if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
-        if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
-        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}";
-        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
-        remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
-        outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
-        MasteryEffect(0);
     }
 
     // Cycle through levels
@@ -294,7 +294,7 @@ public class Hub : MonoBehaviour
     // Now as a function for mouse hovers!
     public void PreviewText(string levelID)
     {
-        if (!GameManager.save.game.unlockedWorldSuper && levelID == "VOID/END") return;
+        if (levelID == "VOID/END") return;
 
         // Set the preview text
         SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
@@ -392,7 +392,7 @@ public class Hub : MonoBehaviour
             case 0: SetLevelName("Area 1"); break;
             case 1: SetLevelName("Area 2"); break;
             case 2: SetLevelName("Area 3"); break;
-            case 3: SetLevelName("?????"); break;
+            case 3: SetLevelName("The Core"); break;
         }
 
         // Update world completions
@@ -524,10 +524,6 @@ public class Hub : MonoBehaviour
                 GameManager.save.game.unlockedWorldThree = true;
                 locks.Find("W3").gameObject.SetActive(false);
                 break;
-            case 3:
-                Debug.Log("Not yet unlockeable.");
-                break;
-
             default:
                 return;
         }
@@ -542,7 +538,7 @@ public class Hub : MonoBehaviour
         if (
             (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
             (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 2 && world == 1) ||
-            (completedReal[2] >= 10 && completedRealRemix[2] >= 5 && completedRealOutbound[2] >= 3 && world == 2)
+            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2)
         ) masteryOutline.SetActive(true);
         else masteryOutline.SetActive(false);
     }

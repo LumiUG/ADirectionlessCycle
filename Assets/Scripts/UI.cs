@@ -302,6 +302,7 @@ public class UI : MonoBehaviour
             if (split[1] == "END") { popup.SetPopup("The core's entrance. The point of no return."); return; }
             if (split[1] == "Entry") { popup.SetPopup("%begin% Pla!!^ We ccc, ba##re- reach $y-yy u,, %end%"); return; }
             if (split[1] == "Corridor") { popup.SetPopup("--n% vfluy,ij kthankjxf rstf ytyougvc! %----"); return; }
+            if (split[1] == "Despair") { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly
