@@ -104,6 +104,7 @@ public class Serializables
         public bool doPrologue = true;
         public bool hasCompletedGame = false;
         public bool hasMasteredGame = false;
+        public bool seenSpoilerWarning = false;
         public bool completedAllMainLevels = false;
         public bool completedAllRemixLevels = false;
         public bool completedAllOutboundLevels = false;

@@ -83,11 +83,11 @@ public class InputManager : MonoBehaviour
             if (!GameManager.Instance.buildDebugMode)
             {
                 GameManager.Instance.buildDebugMode = true;
-                UI.Instance.global.SendMessage("Debug enabled.", 3);
+                MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile! (Debug enabled)");
                 
             } else {
                 GameManager.Instance.buildDebugMode = false;
-                UI.Instance.global.SendMessage("Then so be it!", 3);
+                UI.Instance.global.SendMessage("Starlight fades...", 3);
             }
             MainMenu.I.SetupBadges();
             debugCommand = null;
@@ -112,24 +112,9 @@ public class InputManager : MonoBehaviour
         // Mimic editor unlock
         if (debugCommand == "overflow")
         {
-            UI.Instance.global.SendMessage("Be good.", 3);
+            MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor. These are the buggiest object tiles in the game. You have been warned.");
             GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
             MainMenu.I.SetupBadges();
-            debugCommand = null;
-            return;
-        }
-
-        // Game completed flag
-        if (debugCommand == "imacheater")
-        {
-            if (!GameManager.save.game.hasCompletedGame)
-            {
-                GameManager.save.game.hasCompletedGame = true;
-                UI.Instance.global.SendMessage("Ready for some challenges?", 3);
-            } else {
-                GameManager.save.game.hasCompletedGame = false;
-                UI.Instance.global.SendMessage("You've been redeemed.", 3);
-            }
             debugCommand = null;
             return;
         }
@@ -137,7 +122,7 @@ public class InputManager : MonoBehaviour
         // Delete savedata and generate a new one
         else if (debugCommand == "zero")
         {
-            if (DebugConfirm("This will delete all your data!!")) return;
+            if (DebugConfirm("This will delete all your data!! Are you sure? (Send the command again)")) return;
             GameManager.Instance.DeleteSave();
             GameManager.Instance.CreateSave(true);
             UI.Instance.global.SendMessage("[ Game reset ]", 4);
@@ -149,7 +134,7 @@ public class InputManager : MonoBehaviour
         // Delete savedata and generate a new one
         else if (debugCommand == "swap" && GameManager.Instance.buildDebugMode)
         {
-            if (DebugConfirm()) return;
+            if (DebugConfirm("This will unlock an endgame mechanic, if you're sure, run this command again.")) return;
             GameManager.save.game.mechanics.hasSwapUpgrade = true;
             UI.Instance.global.SendMessage("[ New Ability Unlocked ]", 4);
             debugCommand = null;
@@ -168,7 +153,7 @@ public class InputManager : MonoBehaviour
         // Custom handling for achievement name
         else if (debugCommand == "code")
         {
-            UI.Instance.global.SendMessage("...Come on now.", 4);
+            MainMenu.I.ShowPopup("...Come on now.");
             debugCommand = null;
             return;
         }
@@ -177,7 +162,7 @@ public class InputManager : MonoBehaviour
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "zero", "overflow", "imacheater")
+            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "zero", "overflow")
         }
     }
 
@@ -240,7 +225,7 @@ public class InputManager : MonoBehaviour
 
         // Undo latest move
         if (!holding) return;
-        if (undoCoro != null) StopCoroutine(undoCoro); 
+        if (undoCoro != null) StopCoroutine(undoCoro);
         undoCoro = StartCoroutine(RepeatUndo());
     }
 
@@ -642,7 +627,7 @@ public class InputManager : MonoBehaviour
     {
         if (confirmCommand != debugCommand)
         {
-            UI.Instance.global.SendMessage(message, 2);
+            MainMenu.I.ShowPopup(message);
             AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.30f);
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             confirmCommand = $"{debugCommand}";

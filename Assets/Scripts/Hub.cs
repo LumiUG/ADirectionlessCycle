@@ -74,6 +74,7 @@ public class Hub : MonoBehaviour
         if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
         if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
+        if (!GameManager.save.game.hasCompletedGame && GameManager.save.game.levels.Find(level => level.levelID == "VOID/CYCLE") != null) { GameManager.save.game.hasCompletedGame = true; GameManager.Instance.EditAchivement("ACH_DEATH"); }
 
         // All main levels
         bool mainLevels = completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10;
@@ -108,6 +109,7 @@ public class Hub : MonoBehaviour
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial").outboundCompletion) return;
+            if (!GameManager.save.game.levels.Find(level => level.levelID == $"VOID/CYCLE").completed) return;
 
             // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
@@ -254,7 +256,7 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
-        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)");
+        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)", 2f);
 
         // World 2
         bool spikes = false;
