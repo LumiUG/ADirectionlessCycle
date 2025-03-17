@@ -231,6 +231,10 @@ public class InputManager : MonoBehaviour
     private void OnUndo(InputValue ctx)
     {
         if (!LevelManager.Instance.IsAllowedToPlay()) return;
+
+        // That one void level
+        if (LevelManager.Instance.currentLevelID == "VOID/Loop") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+
         bool holding = ctx.Get<float>() == 1f;
         isHoldingUndo = holding;
 
