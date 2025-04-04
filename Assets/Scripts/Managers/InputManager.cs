@@ -83,7 +83,7 @@ public class InputManager : MonoBehaviour
             if (!GameManager.Instance.buildDebugMode)
             {
                 GameManager.Instance.buildDebugMode = true;
-                MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile! (Debug enabled)");
+                MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile!");
                 
             } else {
                 GameManager.Instance.buildDebugMode = false;

@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 462714301}
   - component: {fileID: 462714300}
   m_Layer: 5
-  m_Name: Icy
+  m_Name: Raiza
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1603,7 +1603,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: IcyIg
+  m_Text: Raiza
 --- !u!222 &462714302
 CanvasRenderer:
   m_ObjectHideFlags: 0
