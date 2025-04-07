@@ -125,6 +125,28 @@ public class UI : MonoBehaviour
         // Change scene after transition
         if (doTransition) TransitionManager.Instance.TransitionIn(Reveal, ActionChangeScene, sceneName);
         else SceneManager.LoadScene(sceneName);
+
+        // Anything music related
+        if (!AudioManager.Instance) return;
+        switch (sceneName)
+        {
+            case "Main Menu":
+            case "Settings":
+            case "Hub":
+            case "Bonus":
+            case "Credits":
+            case "Custom Levels":
+                AudioManager.Instance.PlayBGM(AudioManager.titleBGM);
+                break;
+            case "Level Editor":
+                AudioManager.Instance.PlayBGM(AudioManager.editorBGM);
+                break;
+            case "Game": // Do nothing, handle internally with LevelManager.
+                break;
+            default:
+                Debug.LogWarning("No audio scene found");
+                break;
+        }
     }
 
     // Exit application
@@ -286,7 +308,7 @@ public class UI : MonoBehaviour
             if (split[1] == "Orb One")
             {
                 if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
-                else popup.SetPopup("\"Seek the path of light.\"");
+                else popup.SetPopup("... \"Seek the path of light.\"");
                 return;
             }
             if (split[1] == "Orb Two") { popup.SetPopup("...We've got no idea how to get there."); return; }
@@ -300,8 +322,13 @@ public class UI : MonoBehaviour
             if (split[1] == "Upgrade") { popup.SetPopup("I'm... Definitely not giving you a hint here. Please stop."); return; }
             if (split[1] == "Tutorial") { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
             if (split[1] == "END") { popup.SetPopup("The core's entrance. The point of no return."); return; }
-            if (split[1] == "Entry") { popup.SetPopup("%begin% Pla!!^ We ccc, ba##re- reach $y-yy u,, %end%"); return; }
-            if (split[1] == "Corridor") { popup.SetPopup("--n% vfluy,ij kthankjxf rstf ytyougvc! %----"); return; }
+            if (split[1] == "Entry") { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
+            if (split[1] == "Corridor") { popup.SetPopup("gin% ENTERING *##$$! AREA"); return; }
+            if (split[1] == "Right") { popup.SetPopup("%end%end%end%end%endddddd"); return; }
+            if (split[1] == "Down") { popup.SetPopup("WRITE LATER"); return; }
+            if (split[1] == "Left") { popup.SetPopup("WRITE LATER"); return; }
+            if (split[1] == "Up") { popup.SetPopup("WRITE LATER"); return; }
+            if (split[1] == "Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
             if (split[1] == "Despair") { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
         } else hintLevelID = null;
 

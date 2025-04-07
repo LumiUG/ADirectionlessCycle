@@ -112,8 +112,8 @@ public class InputManager : MonoBehaviour
         // Mimic editor unlock
         if (debugCommand == "overflow")
         {
-            MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor. These are the buggiest object tiles in the game. You have been warned.");
             GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
+            if (GameManager.Instance.editormimic) MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor, expect bugs and overflows. You've been warned.");
             MainMenu.I.SetupBadges();
             debugCommand = null;
             return;
@@ -217,14 +217,15 @@ public class InputManager : MonoBehaviour
     {
         if (!LevelManager.Instance.IsAllowedToPlay()) return;
 
-        // That one void level
-        if (LevelManager.Instance.currentLevelID == "VOID/Loop") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
-
         bool holding = ctx.Get<float>() == 1f;
         isHoldingUndo = holding;
 
-        // Undo latest move
         if (!holding) return;
+        
+        // That one void level
+        if (LevelManager.Instance.currentLevelID == "VOID/Loop") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+
+        // Undo latest move
         if (undoCoro != null) StopCoroutine(undoCoro);
         undoCoro = StartCoroutine(RepeatUndo());
     }

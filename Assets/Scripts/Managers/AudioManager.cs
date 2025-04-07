@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -7,9 +8,12 @@ public class AudioManager : MonoBehaviour
     // BGM //
     [HideInInspector] public static AudioClip titleBGM;
     [HideInInspector] public static AudioClip editorBGM;
+    [HideInInspector] public static AudioClip remixBGM;
+    [HideInInspector] public static AudioClip voidBGM;
     [HideInInspector] public static AudioClip W1BGM;
     [HideInInspector] public static AudioClip W2BGM;
     [HideInInspector] public static AudioClip W3BGM;
+    private Coroutine switchCoro = null;
 
     // SFX //
     internal static AudioClip tileDeath;
@@ -35,11 +39,13 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Get audio references
-        titleBGM = null;
-        editorBGM = null;
-        W1BGM = null;
-        W2BGM = null;
-        W3BGM = null;
+        titleBGM = Resources.Load<AudioClip>("Audio/BGM/Test1");
+        editorBGM = Resources.Load<AudioClip>("Audio/BGM/Test2");
+        W1BGM = Resources.Load<AudioClip>("Audio/BGM/Test3");
+        W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
+        W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");
+        remixBGM = Resources.Load<AudioClip>("Audio/BGM/Test6");
+        voidBGM = Resources.Load<AudioClip>("Audio/BGM/Test0");
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
@@ -50,8 +56,8 @@ public class AudioManager : MonoBehaviour
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
         cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
 
-        // Default looping BGM
-        // PlayBGM(cba);
+        // Default title BGM
+        PlayBGM(titleBGM);
     }
 
     // Dunno yet
@@ -60,14 +66,14 @@ public class AudioManager : MonoBehaviour
         if (master != null) return;
     }
 
-    // Pause music volume
+    // Pause BGM's controller
     public void ToggleBGM(bool toggle)
     {
         if (toggle) master.Pause();
         else master.UnPause();
     }
 
-    // Pause sfx volume
+    // Pause SFX's controller
     public void ToggleSFX(bool toggle)
     {
         if (toggle) sfx.Pause();
@@ -77,6 +83,18 @@ public class AudioManager : MonoBehaviour
     // Plays BGM
     public void PlayBGM(AudioClip clip)
     {
+        if (clip == master.clip || clip == null) return;
+
+        // Coroutine to switch song
+        if (master.isPlaying)
+        {
+            if (switchCoro != null) StopCoroutine(switchCoro);
+            SetMasterVolume(GameManager.save.preferences.masterVolume);
+            switchCoro = StartCoroutine(TransitionSong(clip));
+            return;
+        }
+
+        // Runs one-time
         master.clip = clip;
         master.Play();
     }
@@ -100,4 +118,35 @@ public class AudioManager : MonoBehaviour
 
     // Volume setters
     public void SetMasterVolume(float volume) { master.volume = volume; }
+
+    // Transition into a different clip
+    private IEnumerator TransitionSong(AudioClip clip)
+    {
+        bool down = true;
+
+        // Lower volume until 0 is reached
+        while (down)
+        {
+            master.volume -= 0.02f;
+            yield return new WaitForSeconds(0.01f);
+            if (master.volume <= 0) { master.volume = 0; down = false; }
+        }
+
+        // Change with the new clip
+        master.clip = clip;
+        if (!master.isPlaying) master.Play();
+        
+        // Up volume up until the user's choice
+        while (true)
+        {
+            master.volume += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+            if (master.volume >= GameManager.save.preferences.masterVolume)
+            {
+                master.volume = GameManager.save.preferences.masterVolume;
+                switchCoro = null;
+                yield break;
+            }
+        }
+    }
 }

@@ -142,9 +142,9 @@ public class SettingsMenu : MonoBehaviour
                 settingsToggle.isOn = true;
                 break;
             case 2:
-                GameManager.save.preferences.masterVolume = 1f;
+                GameManager.save.preferences.masterVolume = 0.6f;
                 GameManager.save.preferences.SFXVolume = 0.80f;
-                masterSlider.value = 1f;
+                masterSlider.value = 0.6f;
                 SFXSlider.value = 0.80f;
                 break;
             case 3:

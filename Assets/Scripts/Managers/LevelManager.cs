@@ -313,6 +313,13 @@ public class LevelManager : MonoBehaviour
         timerCoroutine = StartCoroutine(LevelTimer());
         UI.Instance.ingame.SetLevelMoves(levelMoves);
 
+        // BGM?
+        if (levelID.StartsWith("W1")) AudioManager.Instance.PlayBGM(AudioManager.W1BGM);
+        else if (levelID.StartsWith("W2")) AudioManager.Instance.PlayBGM(AudioManager.W2BGM);
+        else if (levelID.StartsWith("W3")) AudioManager.Instance.PlayBGM(AudioManager.W3BGM);
+        else if (levelID.StartsWith("REMIX")) AudioManager.Instance.PlayBGM(AudioManager.remixBGM);
+        else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) AudioManager.Instance.PlayBGM(AudioManager.voidBGM);
+
         // Swapping mechanic startup
         // UI.Instance.ingame.cycleIcon.gameObject.SetActive(GameManager.save.game.mechanics.hasSwapUpgrade);
         if (GameManager.save.game.mechanics.hasSwapUpgrade)

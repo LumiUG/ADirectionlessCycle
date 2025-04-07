@@ -168,7 +168,7 @@ public class Serializables
     public class Preferences
     {
         public List<ObjectTypes> editorTiles = new() { ObjectTypes.Wall, ObjectTypes.Box, ObjectTypes.Hazard, ObjectTypes.Area };
-        public float masterVolume = 1f;
+        public float masterVolume = 0.6f;
         public float SFXVolume = 0.8f;
         public bool repeatInput = true;
         public bool forceConfirmRestart = true;
