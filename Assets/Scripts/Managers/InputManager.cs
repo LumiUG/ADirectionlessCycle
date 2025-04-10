@@ -212,10 +212,10 @@ public class InputManager : MonoBehaviour
         movementCoro = StartCoroutine(RepeatMovement(movement));
     }
 
-    // Undo move
+    // Undo move (also editor)
     private void OnUndo(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() && !GameManager.Instance.IsEditor()) return;
 
         bool holding = ctx.Get<float>() == 1f;
         isHoldingUndo = holding;
@@ -287,6 +287,21 @@ public class InputManager : MonoBehaviour
             if (performed >= 5) { performed = 0; speed -= 0.015f; }
             if (speed <= 0.05f) speed = 0.05f; // speed cap
         }
+
+        // Editor override
+        if (GameManager.Instance.IsEditor())
+        {
+            while (isHoldingUndo && Editor.I.IsUndoQueueValid())
+            {
+                Editor.I.Undo();
+                yield return new WaitForSeconds(speed);
+
+                // Speedup undoing gradually
+                performed++;
+                if (performed >= 5) { performed = 0; speed -= 0.015f; }
+                if (speed <= 0.05f) speed = 0.05f; // speed cap
+            }   
+        }
     }
 
     // External (GameManager) //
@@ -345,8 +360,10 @@ public class InputManager : MonoBehaviour
         Editor.I.ignoreUpdateEvent = true;
 
         // Custom tiles field (missing loading custom text automatically)
-        if (LevelManager.Instance.typesCustomsList.Contains(Editor.I.editingTile.GetTileType())) {
+        CustomTile custom = LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(Editor.I.editingTile.position);
+        if (custom != null) {
             Editor.I.customInputField.interactable = true;
+            Editor.I.customInputField.text = custom.customText;
         } else {
             Editor.I.customInputField.interactable = false;
             Editor.I.customInputField.text = string.Empty;

@@ -585,32 +585,32 @@ public class LevelManager : MonoBehaviour
         {
             case ObjectTypes t when typesSolidsList.Contains(t):
                 tilemapCollideable.SetTile(tile.position, tile);
-                levelSolids.Add(tile);
+                AddToCollideableList(tile);
                 break;
 
             case ObjectTypes t when typesAreas.Contains(t):
                 tilemapWinAreas.SetTile(tile.position, tile);
-                levelWinAreas.Add(tile);
+                AddToWinAreasList(tile);
                 break;
 
             case ObjectTypes t when typesHazardsList.Contains(t):
                 tilemapHazards.SetTile(tile.position, tile);
-                levelHazards.Add(tile);
+                AddToHazardsList(tile);
                 break;
 
             case ObjectTypes t when typesEffectsList.Contains(t):
                 tilemapEffects.SetTile(tile.position, tile);
-                levelEffects.Add(tile);
+                AddToEffectsList(tile);
                 break;
 
             case ObjectTypes t when typesCustomsList.Contains(t):
                 tilemapCustoms.SetTile(tile.position, tile);
-                levelCustoms.Add(tile);
+                AddToCustomsList(tile);
                 break;
 
             default:
                 tilemapObjects.SetTile(tile.position, tile);
-                levelObjects.Add(tile);
+                AddToObjectList(tile);
                 break;
         }
     }

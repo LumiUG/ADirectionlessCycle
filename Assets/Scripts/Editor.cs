@@ -29,6 +29,7 @@ public class Editor : MonoBehaviour
     private Sprite colorArrowSprite;
     private readonly List<string> listStrings = new() { "Solids", "Objects", "Areas", "Hazards", "Effects", "Customs" };
     private readonly List<List<GameTile>> listVars = new();
+    private List<ICommand> commandHistory = new();
     private int selectedTileIndex = 0;
 
     // UI //
@@ -166,68 +167,13 @@ public class Editor : MonoBehaviour
             if (gridPos != Vector3.back)
             {
                 // Places the tile
-                if (isPlacing) EditorPlaceTile(gridPos);
-                else EditorDeleteTile(gridPos);
+                if (isPlacing) AddCommand(new EditorPlace(tileToPlace, gridPos));
+                else AddCommand(new EditorDelete(gridPos));
             }
 
             // Waits and does another loop
             yield return new WaitForSeconds(0.005f);
         }
-    }
-
-    // Places a tile on the corresponding grid
-    private void EditorPlaceTile(Vector3Int position)
-    {
-        // Creates the tile (this creates a tile every frame the button is held! very bad!)
-        GameTile tileToCreate = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), position);
-
-        // Sets the tile
-        switch (tileToPlace)
-        {
-            case ObjectTypes t when LevelManager.Instance.typesSolidsList.Contains(t):
-                if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToCollideableList(tileToCreate);
-                break;
-
-            case ObjectTypes t when LevelManager.Instance.typesAreas.Contains(t):
-                if (LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapWinAreas.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToWinAreasList(tileToCreate);
-                break;
-
-            case ObjectTypes t when LevelManager.Instance.typesHazardsList.Contains(t):
-                if (LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapHazards.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToHazardsList(tileToCreate);
-                break;
-
-            case ObjectTypes t when LevelManager.Instance.typesEffectsList.Contains(t):
-                if (LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapEffects.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToEffectsList(tileToCreate);
-                break;
-
-            case ObjectTypes t when LevelManager.Instance.typesCustomsList.Contains(t):
-                if (LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(position)) break;
-                CustomTile custom = (CustomTile)tileToCreate;
-                LevelManager.Instance.tilemapCustoms.SetTile(custom.position, custom);
-                LevelManager.Instance.AddToCustomsList(custom);
-                break;
-
-            default:
-                if (LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position)) break;
-                LevelManager.Instance.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToObjectList(tileToCreate);
-                break;
-        }
-    }
-
-    // Deletes a tile from the corresponding grid (holy shit kill me)
-    private void EditorDeleteTile(Vector3Int position)
-    {
-        GameTile tile = GetEditorTile(position);
-        if (tile) LevelManager.Instance.RemoveTile(tile);
     }
 
     // Returns a tile from the level tilemap
@@ -340,5 +286,21 @@ public class Editor : MonoBehaviour
 
         if (tileList.activeSelf) tileList.SetActive(false);
         else tileList.SetActive(true);
+    }
+
+    // Undoing
+    internal bool IsUndoQueueValid() { return commandHistory.Count > 0; }
+
+    internal void Undo()
+    {
+        commandHistory[^1].Undo();
+        commandHistory.RemoveAt(commandHistory.Count - 1);
+    }
+
+    // Execute a command, and add to history    
+    private void AddCommand(ICommand command)
+    {
+        bool result = command.Execute();
+        if (result) commandHistory.Add(command);
     }
 }
