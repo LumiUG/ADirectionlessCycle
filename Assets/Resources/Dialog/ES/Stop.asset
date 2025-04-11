@@ -16,6 +16,7 @@ MonoBehaviour:
   - Stop!! Don't move.
   - This entire level is a trick. Don't you see?
   - Bear with me, hold [SPACE] or [TRIANGLE] and look at that box on your top left.
+  - No, don't try it now. Do it outside of this interaction.
   - One wrong move, and you'll get kicked out of here.
   - Better count your steps...
   events: []

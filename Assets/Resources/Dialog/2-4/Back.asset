@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I'm back, congrats on making it into area two.
-  - I know they want you to play, so I'd say you could entertain them, even if only
-    for a little.
+  - They seem kind of excited, so I'd say you could entertain them, for now.
+  - It doesn't matter right now, you'll have to go through everything, anwyays.
   - Sorry for leaving before, I was consulting some stuff.
   - There's a forced entry in this area, I'll explain everything there. Toodle pip!
   events: []

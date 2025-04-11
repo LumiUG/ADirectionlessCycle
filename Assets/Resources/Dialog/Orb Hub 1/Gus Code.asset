@@ -22,7 +22,7 @@ MonoBehaviour:
   - Something might happen if you find the right combination.
   - ...
   - I've heard- no, I've seen it. Some levels have some sort of carvings.
-  - Outside of your view, you'll find and decypher them.
+  - They're outside of your view, you'll have to find and decypher them.
   - ... That's all.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 80b8d701e506bf34ba5b161a60fd1b0f, type: 2}

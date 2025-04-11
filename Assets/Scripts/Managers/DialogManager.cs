@@ -18,7 +18,7 @@ public class DialogManager : MonoBehaviour
 
     private readonly string[] waitExtraSmall = { ",", "-", "\"" };
     private readonly string[] waitExtraMedium = { ".", ":", ";" };
-    private readonly string[] waitExtraLong = { "!", "?", ":", ";" };
+    private readonly string[] waitExtraLong = { "!", "?" }; // ":", ";"
     private bool ignoreNewChatSource;
     private bool hasDialogStarted;
     private bool canInteract;

@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - One of the more interesting levels!
   - There's so much in here that you can't see...
-  - Let's see if you can find everything later. See you there!
+  - Let's see if you can find everything later.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

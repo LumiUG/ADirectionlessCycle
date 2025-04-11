@@ -29,7 +29,7 @@ public class Editor : MonoBehaviour
     private Sprite colorArrowSprite;
     private readonly List<string> listStrings = new() { "Solids", "Objects", "Areas", "Hazards", "Effects", "Customs" };
     private readonly List<List<GameTile>> listVars = new();
-    private List<ICommand> commandHistory = new();
+    private readonly List<ICommand> commandHistory = new();
     private int selectedTileIndex = 0;
 
     // UI //
@@ -295,6 +295,8 @@ public class Editor : MonoBehaviour
     {
         commandHistory[^1].Undo();
         commandHistory.RemoveAt(commandHistory.Count - 1);
+        
+        AudioManager.Instance.PlaySFX(AudioManager.undo, 1f, true);
     }
 
     // Execute a command, and add to history    

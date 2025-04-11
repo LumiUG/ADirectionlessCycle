@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Favorite
   m_EditorClassIdentifier: 
   dialog:
-  - '"Sequence breaking", this is their favorite level.'
+  - '"Sequence breaking", oh yes, this is their favorite level.'
   - Which is... kind of funny, considering what hides in here.
   - I won't lie, this level is one of my favorites, too.
   - Don't forget to ask us for a hint if you need it.

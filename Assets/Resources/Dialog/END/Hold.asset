@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Wait!
-  - ...The final step, hold yourself together. Things might get weird.
+  - Just one more step, so hold yourself together. Things might get weird.
   - This might be the last time we can communicate with you, too.
   - So... good luck. And if you need a hint...
   - We'll be with you.
