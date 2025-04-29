@@ -33,8 +33,8 @@ public class MainMenu : MonoBehaviour
     // Play button event
     public void Play()
     {
-        if (GameManager.save.game.doPrologue) TransitionManager.Instance.TransitionIn<string>(Reveal, ActionPrologue);
-        else UI.Instance.ChangeScene("Hub");
+        // if (GameManager.save.game.doPrologue) TransitionManager.Instance.TransitionIn<string>(Reveal, ActionPrologue);
+        UI.Instance.ChangeScene("Hub");
     }
 
     // Shows main menu badges

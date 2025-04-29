@@ -624,7 +624,7 @@ public class UI : MonoBehaviour
     }
     private void ActionRestartLevel(string _)
     {
-        // Hint popup (same as inputmanager's)
+        // Hint popup
         if (!GameManager.save.game.seenHintPopup)
         {
             InputManager.Instance.restartCount++;

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -252,7 +250,7 @@ public class InputManager : MonoBehaviour
     // Restart the level
     private void OnRestart()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!LevelManager.Instance.IsAllowedToPlay() || LevelManager.Instance.voidedCutscene) return;
 
         // Confirm restart screen
         if (GameManager.save.preferences.forceConfirmRestart)
@@ -320,7 +318,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf) return;
+        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf || LevelManager.Instance.voidedCutscene) return;
         if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
         else LevelManager.Instance.PauseResumeGame(false);
     }
@@ -670,18 +668,7 @@ public class InputManager : MonoBehaviour
 
     // Actions //
     internal void ActionRestart(string _)
-    {
-        // Hint popup
-        // if (!GameManager.save.game.seenHintPopup)
-        // {
-        //     restartCount++;
-        //     if (restartCount >= 5)
-        //     {
-        //         UI.Instance.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
-        //         GameManager.save.game.seenHintPopup = true;
-        //     }
-        // }
-            
+    {            
         LevelManager.Instance.ReloadLevel();
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);

@@ -103,6 +103,7 @@ public class LevelManager : MonoBehaviour
     private int levelMoves = 0;
     private bool noMove = false;
     internal Vector3Int currMove = Vector3Int.zero;
+    internal bool voidedCutscene = false;
     public bool isPaused = false;
     public bool hasWon;
 
@@ -833,6 +834,7 @@ public class LevelManager : MonoBehaviour
 
             else if (currentLevelID == "VOID/END") 
             {
+                voidedCutscene = true;
                 ActionDiveIn("1");
                 return;
             }
@@ -919,6 +921,8 @@ public class LevelManager : MonoBehaviour
     // Pauses or resumes the game.
     public void PauseResumeGame(bool status)
     {
+        if (voidedCutscene) return;
+
         if (status) {
             UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
             UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
@@ -1292,7 +1296,13 @@ public class LevelManager : MonoBehaviour
         TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
         int.TryParse(count, out int numberCount);
 
-        if (count == "5") { TransitionManager.Instance.TransitionIn(Triangle, ActionLoadLevel, "VOID/Entry"); return; }
+        if (count == "5")
+        {
+            TransitionManager.Instance.TransitionIn(Triangle, ActionLoadLevel, "VOID/Entry");
+            voidedCutscene = false;
+            return;
+        }
+
         TransitionManager.Instance.TransitionIn(effects[numberCount - 1], ActionDiveOut, count);
     }
 

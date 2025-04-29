@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Gus Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - I won't say anymore. I've done enough.
-  - Name's Gus, by the way.
+  - I won't say anymore, I've done enough.
   - Good luck, may you end us all.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
