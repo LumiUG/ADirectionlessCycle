@@ -84,7 +84,6 @@ public class InputManager : MonoBehaviour
             {
                 GameManager.Instance.buildDebugMode = true;
                 MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile!");
-                
             } else {
                 GameManager.Instance.buildDebugMode = false;
                 UI.Instance.global.SendMessage("Starlight fades...", 3);
@@ -141,7 +140,7 @@ public class InputManager : MonoBehaviour
         }
 
         // void testing
-        else if (debugCommand == "void")
+        else if (debugCommand == "void" && GameManager.Instance.buildDebugMode)
         {
             canInputCommands = false;
             debugCommand = null;
@@ -150,10 +149,22 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        // Custom handling for achievement name
+        // Custom handlings
         else if (debugCommand == "code")
         {
             MainMenu.I.ShowPopup("...Come on now.");
+            debugCommand = null;
+            return;
+        }
+        else if (debugCommand == "help")
+        {
+            MainMenu.I.ShowPopup("Help? You want help? You'd better check the discord server, then.");
+            debugCommand = null;
+            return;
+        }
+        else if (debugCommand == "please")
+        {
+            MainMenu.I.ShowPopup("That's some potent magic. But really, try a different magic word.");
             debugCommand = null;
             return;
         }
@@ -162,7 +173,7 @@ public class InputManager : MonoBehaviour
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "zero", "overflow")
+            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "zero", "overflow")
         }
     }
 

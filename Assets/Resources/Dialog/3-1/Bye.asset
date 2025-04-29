@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bye
   m_EditorClassIdentifier: 
   dialog:
-  - I don't have much to say. I just don't like this place much.
+  - Sorry, I don't have much to say. I just don't like this place much.
   - As you can see, it'll degrade more and more the closer you get to the core.
   - Which I'm guessing you're on your way there, because of course you are.
   events: []

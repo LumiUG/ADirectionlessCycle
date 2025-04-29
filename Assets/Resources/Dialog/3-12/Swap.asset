@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Swap
   m_EditorClassIdentifier: 
   dialog:
-  - As you might have noticed, your swap won't sometimes work.
-  - To be able to swap properly, you'll need to be the only active shape on a screen.
-  - If there is more than one shape active, you'll have to... dispose of one of them.
+  - Godammit! Let me talk with the player, will you?!
+  - I hate it when you do this! We've talked about this bef- %end%
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: 28f469cb658692c4eb62190334402c1f, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
-  shouldExhaust: 0
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
+  shouldExhaust: 1
   canBeSkipped: 1

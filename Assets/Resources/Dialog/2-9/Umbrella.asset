@@ -18,7 +18,6 @@ MonoBehaviour:
   - Just now, I'm noticing that on the left.
   - Doesn't it kind of look like an umbrella? That's funny.
   - You'd think that in all the time we've been here we would've spotted that before.
-  - But no.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

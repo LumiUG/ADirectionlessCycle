@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Areas
   m_EditorClassIdentifier: 
   dialog:
-  - As a last thing!!
+  - And, as a last thing.
   - There are now outbound areas. These work differently than inverse ones.
-  - To complete levels with it, you'll have to fill in green and purple (for clarity).
-  - Good luck, player.
+  - To complete levels with it, you'll have to fill in both positive aswell. Do be
+    careful with your order!
+  - That's about it, good luck, player.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

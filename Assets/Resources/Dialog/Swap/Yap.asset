@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - That's it. Just as simple.
-  - Now every time you see a broken wall next to the border of the screen, you know
-    what to do!
-  - There's also different cases, try going backwards.
+  - Now every time you see something like this, you know what to do!
+  - There's also different cases, try going forward again. Hah.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

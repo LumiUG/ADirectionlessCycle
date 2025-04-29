@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: Push
   m_EditorClassIdentifier: 
   dialog:
-  - Oh, It's this mechanic again.
-  - Come to think of it, this is only present in two levels.
-  - What was the developer thinking about when creating this?
-  - It's... pretty well used, though. Yeah.
+  - Don't think we've talked too much about the core, have we?
+  - Well, where to begin...
+  - 'The core was created as the last area in the game, a sort of "maze" showcasing
+    everything you''ve seen. '
+  - Unfortunately for you, everything is degraded. So there's no easy way in.
+  - I do have some sort of plan, though. But it requires you to go exploring some
+    places.
+  - Don't stress about it right now, there's no use. I'll try to make it fun for
+    you.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -39,7 +39,7 @@ public class DialogManager : MonoBehaviour
     // Starts the dialog with the NPC
     public void StartDialog(DialogScriptable chat, string dialogPath)
     {
-        if (!canInteract || !chat) return;
+        if (!canInteract || !chat || TransitionManager.Instance.inTransition) return;
         currentDialogPath = dialogPath;
         inDialog = true;
 
@@ -82,7 +82,7 @@ public class DialogManager : MonoBehaviour
     // Changes dialog line to a next one or ends the conversation
     private void NextLine()
     {
-        // Executes a dialog event
+        // Executes all dialog events
         foreach (DialogEvent ev in events)
         {
             if (ev.executeAtIndex == dialogIndex)

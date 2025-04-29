@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Enter
   m_EditorClassIdentifier: 
   dialog:
-  - Aaaand this should be the last one!
+  - This should be the last one!
   - Hey, I'll meet you again where I've told you before.
-  - After you have all four, that is.
+  - After you have all of them, that is.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

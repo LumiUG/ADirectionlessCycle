@@ -138,7 +138,7 @@ public class SettingsMenu : MonoBehaviour
                 ToggleFullscreen(true);
                 ChangeResolution(0);
                 resolutionDropdown.value = 0;
-                outlineDropdown.value = 2;
+                outlineDropdown.value = 0;
                 settingsToggle.isOn = true;
                 break;
             case 2:

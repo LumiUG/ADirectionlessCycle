@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Oh, come on, I won't give it up. Keep going, go on!
-  - 'I''ll repeat it, just incase:'
+  - I'll repeat it, just incase you forgot.
   - '"In a place with two clones and two hexes, jump west and clear the path."'
   events: []
   exhaustDialog: {fileID: 0}

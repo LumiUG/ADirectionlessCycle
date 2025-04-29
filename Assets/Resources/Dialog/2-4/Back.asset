@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Back
   m_EditorClassIdentifier: 
   dialog:
-  - I'm back, congrats on making it into area two.
-  - They seem kind of excited, so I'd say you could entertain them, for now.
-  - It doesn't matter right now, you'll have to go through everything, anwyays.
+  - Hey, I'm back. Congrats on making it into area two.
+  - I'm quite surprised that they are enjoying this as much as they are, hah.
+  - 'Well, It doesn''t matter right now. '
+  - You'll end up going through everything, anwyays. So they'll better be happy afterwards.
   - Sorry for leaving before, I was consulting some stuff.
-  - There's a forced entry in this area, I'll explain everything there. Toodle pip!
+  - There's a forced entry in this area, I'll explain everything there.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

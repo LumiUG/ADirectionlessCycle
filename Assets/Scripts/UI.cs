@@ -308,18 +308,18 @@ public class UI : MonoBehaviour
             if (split[1] == "Orb One")
             {
                 if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
-                else popup.SetPopup("... \"Seek the path of light.\"");
+                else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
                 return;
             }
             if (split[1] == "Orb Two") { popup.SetPopup("...We've got no idea how to get there."); return; }
             if (split[1] == "Orb Three") { popup.SetPopup("Pretty straightforward!"); return; }
             if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
-            if (split[1] == "Fragment Three") { popup.SetPopup("I'd disallow it, but there's really nothing."); return; }
+            if (split[1] == "Fragment Three") { popup.SetPopup("I'd disallow it, but there's really nothing, sorry!"); return; }
             if (split[1] == "3-1") { popup.SetPopup("You aren't getting in this easily."); return; }
-            if (split[1] == "3-10") { popup.SetPopup("No hints here. You're on your own!"); return; }
+            if (split[1] == "3-10") { popup.SetPopup("No, no, and no. You're not getting a hint."); return; }
             if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
-            if (split[1] == "Meem") { popup.SetPopup("The Gravix dog? ...thing? It was here the entire time???"); return; }
-            if (split[1] == "Upgrade") { popup.SetPopup("I'm... Definitely not giving you a hint here. Please stop."); return; }
+            if (split[1] == "Meem") { popup.SetPopup("The Gravix dog? ...Thing? It was here the entire time???"); return; }
+            if (split[1] == "Upgrade") { popup.SetPopup("I'm... Definitely not serving you a hint here. Please stop."); return; }
             if (split[1] == "Tutorial") { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
             if (split[1] == "END") { popup.SetPopup("The core's entrance. The point of no return."); return; }
             if (split[1] == "Entry") { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
@@ -328,8 +328,8 @@ public class UI : MonoBehaviour
             if (split[1] == "Down") { popup.SetPopup("WRITE LATER"); return; }
             if (split[1] == "Left") { popup.SetPopup("WRITE LATER"); return; }
             if (split[1] == "Up") { popup.SetPopup("WRITE LATER"); return; }
-            if (split[1] == "Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
             if (split[1] == "Despair") { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
+            if (LevelManager.Instance.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly

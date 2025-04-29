@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - '%begin% My turn!'
-  - Welcome, again. This is "the last stop" before the end.
-  - ...There's a riddle here.
-  - Whoever came up with this place surely went out of their way to avoid someone
-    from doing what we're doing.
-  - 'I''ll read it out for you:'
+  - Welcome, again. This is the "last stop" before the end.
+  - And there's a... Cypher, here? Annoying. I'll decypher it myself.
+  - Whoever came up with this surely went out of their way to make this difficult.
+  - 'Aaand, done. I''ll read it out for you:'
   - '"The depths of Area 1 holds the second of the fragments you seek."'
   - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
   - '"Once there, seek the path of light."'

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Praise
   m_EditorClassIdentifier: 
   dialog:
-  - Welcome to world two! I really like this area!!
-  - Here, the developer started experimenting with different styles using multiple
-    types of tiles.
+  - Welcome to world two! I really like this area.
+  - 'Just for a small intro: In here, you''ll experiment with different puzzle styles
+    using multiple types of tiles.'
   - It does get way too tricky at the end, though...
   - Still, we hope you enjoy this world!!
   events: []

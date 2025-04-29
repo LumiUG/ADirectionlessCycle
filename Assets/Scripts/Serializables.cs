@@ -174,6 +174,6 @@ public class Serializables
         public bool forceConfirmRestart = true;
         public bool showTimer = false;
         public bool showMoves = true;
-        public string outlineType = "NONE"; // Dotted, Full, NONE
+        public string outlineType = "Dotted"; // Dotted, Full, NONE
     }
 }

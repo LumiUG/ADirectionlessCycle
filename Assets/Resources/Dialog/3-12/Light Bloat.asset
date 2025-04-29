@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Why should you go on a scavenger hunt, you might be thinking?
-  - Well, if we tell you now, it would ruin the surprise now, wouldn't it?
-  - Besides, it's the only way forward if you ever want to end things right.
+  - It's fun! Besides, if I tell you now, it would ruin the surprise now, wouldn't
+    it?
+  - Regardless, it's the only way forward if you ever want to end things right.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 8de5ce74c19ac944799117af9ad45878, type: 2}
   textSpeed: 0.05

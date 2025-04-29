@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   dialog:
-  - Sometimes we wonder what would've been if we didn't get scrapped.
-  - Would you be here? Would it be different?
-  - Oh, ignore my ramblings, It'll be over soon enough thanks to you.
+  - I'm well aware why they want you to reach the core.
+  - You don't seem so aware though. Would you like some explaining?
+  - Of course.
+  - They believe that the core has some sort of function to delete everything.
+  - And, I mean, they aren't wrong. We know for a fact it exists. It's just...
+  - It's definitely degraded! It has to be. So, there's no... There's no use in risking
+    losing you, yeah?
+  - You're way too valuable. We wouldn't want you degrading or losing contact.
+  - So... Stay here, will you?
   events: []
   exhaustDialog: {fileID: 11400000, guid: a7282d3311f0c6047b207451bfa0ea9f, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
   shouldExhaust: 1
   canBeSkipped: 1

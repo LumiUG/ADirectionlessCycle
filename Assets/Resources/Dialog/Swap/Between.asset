@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Between
   m_EditorClassIdentifier: 
   dialog:
-  - There's also another way of marking multiple screens.
-  - This one is marked by having no screen end, which means you can jump through
-    it, too.
-  - Basically, anything that isnt a wall counts for this.
+  - Well? What do you think? Getting the hang of it, I pressume?
+  - I like that attitude, surely you've just gotten some new ideas.
+  - Told you this would be worth the detour. Go on, then, have fun.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
