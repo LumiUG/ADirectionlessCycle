@@ -1,6 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static TransitionManager.Transitions;
 
 public class MainMenu : MonoBehaviour
 {
@@ -22,12 +22,20 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         I = this; // No persistence!
-        
+
         // Version text
         version.text = $"v{Application.version}";
 
         // Savefile icons
         SetupBadges();
+    }
+
+    private void Update()
+    {
+        if (!EventSystem.current) return;
+        
+        if (EventSystem.current.currentSelectedGameObject.name == "Discord") UI.Instance.selectors.SetEffect(1);
+        else UI.Instance.selectors.SetEffect(0);
     }
 
     // Play button event

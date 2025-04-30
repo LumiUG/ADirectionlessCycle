@@ -95,6 +95,21 @@ public class GameManager : MonoBehaviour
         return buildDebugMode || Application.isEditor;
     }
 
+    // Pauses or resumes the game.
+    public void PauseResumeGame(bool status)
+    {
+        if (LevelManager.Instance.voidedCutscene) return;
+
+        if (status) {
+            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
+            UI.Instance.pause.ToggleEditButton(isEditing || IsDebug());
+            UI.Instance.effectsUIE.SetActive(false);
+        } else UI.Instance.effectsUIE.SetActive(true);
+
+        UI.Instance.pause.Toggle(status);
+        LevelManager.Instance.isPaused = status;
+    }
+
     // Stuff with savedata //
     
     // Creates a savefile

@@ -2068,8 +2068,8 @@ MonoBehaviour:
   m_GradationMode: 3
   m_GradationIntensity: 1
   m_GradationColorFilter: 1
-  m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
-  m_GradationColor2: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor1: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor2: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
   m_GradationColor3: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor4: {r: 1, g: 1, b: 1, a: 1}
   m_GradationGradient:
@@ -2102,7 +2102,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  m_GradationOffset: 0
+  m_GradationOffset: -0.28
   m_GradationScale: 1
   m_GradationRotation: 0
   m_AllowToModifyMeshShape: 1
@@ -3513,8 +3513,8 @@ MonoBehaviour:
   m_GradationMode: 3
   m_GradationIntensity: 1
   m_GradationColorFilter: 1
-  m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
-  m_GradationColor2: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor1: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor2: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
   m_GradationColor3: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor4: {r: 1, g: 1, b: 1, a: 1}
   m_GradationGradient:
@@ -3547,7 +3547,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  m_GradationOffset: 0
+  m_GradationOffset: -0.28
   m_GradationScale: 1
   m_GradationRotation: 0
   m_AllowToModifyMeshShape: 1
@@ -5533,8 +5533,8 @@ MonoBehaviour:
   m_GradationMode: 3
   m_GradationIntensity: 1
   m_GradationColorFilter: 1
-  m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
-  m_GradationColor2: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor1: {r: 0.42352942, g: 0.42352942, b: 0.42352942, a: 1}
+  m_GradationColor2: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
   m_GradationColor3: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor4: {r: 1, g: 1, b: 1, a: 1}
   m_GradationGradient:
@@ -5567,7 +5567,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  m_GradationOffset: 0
+  m_GradationOffset: -0.28
   m_GradationScale: 1
   m_GradationRotation: 0
   m_AllowToModifyMeshShape: 1

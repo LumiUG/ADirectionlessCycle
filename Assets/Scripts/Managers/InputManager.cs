@@ -319,8 +319,8 @@ public class InputManager : MonoBehaviour
     private void OnPause()
     {
         if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf || LevelManager.Instance.voidedCutscene) return;
-        if (!UI.Instance.pause.self.activeSelf) LevelManager.Instance.PauseResumeGame(true);
-        else LevelManager.Instance.PauseResumeGame(false);
+        if (!UI.Instance.pause.self.activeSelf) GameManager.Instance.PauseResumeGame(true);
+        else GameManager.Instance.PauseResumeGame(false);
     }
 
     // Level Editor (Editor) //
@@ -673,6 +673,7 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
         UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
+        UI.Instance.effectsUIE.SetActive(true); // ???
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

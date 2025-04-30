@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
+using Coffee.UIEffects;
 
 public class Hub : MonoBehaviour
 {
@@ -287,9 +288,13 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.unlockedWorldSuper) 
         {
             Sprite spr = Resources.Load<Sprite>("Sprites/OrbDisabled");
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb One")) { wLock.Find("Orb 1").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Two")) { wLock.Find("Orb 2").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Three")) { wLock.Find("Orb 3").GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; }
+            Transform o1 = wLock.Find("Orb 1");
+            Transform o2 = wLock.Find("Orb 2");
+            Transform o3 = wLock.Find("Orb 3");
+
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb One")) { o1.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o1.GetComponent<UIEffect>().enabled = false; }
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Two")) { o2.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o2.GetComponent<UIEffect>().enabled = false; }
+            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Three")) { o3.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o3.GetComponent<UIEffect>().enabled = false; }
         }
     }
 

@@ -370,6 +370,7 @@ public class LevelManager : MonoBehaviour
             UI.Instance.pause.SetBestTime(0f);
             UI.Instance.pause.SetBestMoves(0);
         }
+        UI.Instance.effectsUIE.SetActive(true); // ???
 
         return true;
     }
@@ -922,20 +923,6 @@ public class LevelManager : MonoBehaviour
         return JsonUtility.FromJson<SerializableLevel>(level);
     }
 
-    // Pauses or resumes the game.
-    public void PauseResumeGame(bool status)
-    {
-        if (voidedCutscene) return;
-
-        if (status) {
-            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
-            UI.Instance.pause.ToggleEditButton(GameManager.Instance.isEditing || GameManager.Instance.IsDebug());
-        }
-
-        UI.Instance.pause.Toggle(status);
-        isPaused = status;
-    }
-
     // Refreshes an object tile
     public void RefreshObjectTile(GameTile tile)
     {
@@ -992,7 +979,11 @@ public class LevelManager : MonoBehaviour
             UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
         }
 
-        UI.Instance.effects.gameObject.SetActive(false);
+        if (SceneManager.GetActiveScene().name != "Game")
+        {
+            UI.Instance.effects.gameObject.SetActive(false);
+            UI.Instance.effectsUIE.SetActive(false);
+        }
         UI.Instance.pause.Toggle(false);
         // UI.Instance.win.Toggle(false);
         UI.Instance.editor.Toggle(false);
@@ -1012,6 +1003,7 @@ public class LevelManager : MonoBehaviour
         {
             tilemapLetterbox.gameObject.SetActive(false);
             extrasOutlines.gameObject.SetActive(false);
+            UI.Instance.effectsUIE.SetActive(false);
             UI.Instance.ingame.Toggle(false);
             return;
         }
@@ -1270,6 +1262,8 @@ public class LevelManager : MonoBehaviour
         //     UI.Instance.effectsBackgrounds.SetActive(true);
         //     Debug.Log("a");
         // } else tilemapScanlines.gameObject.SetActive(true);
+        UI.Instance.effects.gameObject.SetActive(true);
+        UI.Instance.effectsUIE.SetActive(true);
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);

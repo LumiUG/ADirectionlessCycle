@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -57,7 +58,12 @@ public class AudioManager : MonoBehaviour
         cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
 
         // Default title BGM
-        PlayBGM(titleBGM);
+        try
+        {
+            if (GameManager.save != null) master.volume = GameManager.save.preferences.masterVolume;
+            PlayBGM(titleBGM);
+        }
+        catch(Exception e) { Debug.LogWarning(e); } // Errors out on editor ocassionaly
     }
 
     // Dunno yet
@@ -106,7 +112,7 @@ public class AudioManager : MonoBehaviour
 
         if (pitchShift)
         {
-            sfxPitch.pitch = Random.Range(0.95f, 1.05f);
+            sfxPitch.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             sfxPitch.volume = volume * GameManager.save.preferences.SFXVolume;
             sfxPitch.PlayOneShot(clip);
             return;

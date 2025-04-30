@@ -22,6 +22,7 @@ public class UI : MonoBehaviour
 
     internal Animator effects;
     internal GameObject effectsBackgrounds;
+    internal GameObject effectsUIE;
     private Color invisibleColor = new(1, 1, 1, 0);
 
     private void Awake()
@@ -33,6 +34,7 @@ public class UI : MonoBehaviour
 
         effects = GameObject.Find("Ingame Effects").GetComponent<Animator>();
         effectsBackgrounds = effects.transform.Find("Backgrounds").gameObject;
+        effectsUIE = effectsBackgrounds.transform.Find("UIEffect").gameObject;
         DontDestroyOnLoad(effects.gameObject);
 
         // UI References!
@@ -179,7 +181,7 @@ public class UI : MonoBehaviour
     // Pause/Unpause game
     public void PauseUnpauseGame(bool status)
     {
-        LevelManager.Instance.PauseResumeGame(status);
+        GameManager.Instance.PauseResumeGame(status);
     }
 
     // Clears the UI (disables everything)
@@ -204,7 +206,7 @@ public class UI : MonoBehaviour
         if (!GameManager.Instance.IsEditor()) return;
 
         // Export level
-        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, GameManager.Instance.currentEditorLevelID, false, GameManager.Instance.SaveLevelPreview());
+        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, GameManager.Instance.currentEditorLevelID, true, GameManager.Instance.SaveLevelPreview());
     }
 
     // Playtest level
@@ -533,6 +535,7 @@ public class UI : MonoBehaviour
         public override void Toggle(bool toggle)
         {
             self.SetActive(toggle);
+            Instance.effectsUIE.SetActive(!toggle);
             if (toggle) Instance.selectors.ChangeSelected(restartButton.gameObject, true);
         }
     }
@@ -607,6 +610,7 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.LoadLevel(hintLevelID);
         LevelManager.Instance.RefreshGameUI();
+        effectsUIE.SetActive(true); // ???
 
         // transition out
         TransitionManager.Instance.ChangeTransition(Triangle);
@@ -639,6 +643,7 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.ReloadLevel(true);
+        effectsUIE.SetActive(true); // ???
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 

@@ -11,19 +11,33 @@ ShaderVariantCollection:
   - first: {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}
     second:
       variants:
+      - keywords: 
+        passType: 0
       - keywords: COLOR_FILTER
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_MASKING GRADATION_COLOR2 UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_MASKING UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR2
         passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR4
         passType: 0
+      - keywords: COLOR_FILTER GRADATION_GRADIENT
+        passType: 0
       - keywords: COLOR_FILTER GRADATION_RADIAL
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_RADIAL UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_BLUR_DETAIL
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_BLUR_FAST
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_BLUR_MEDIUM
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_BLUR_MEDIUM UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_EDGE_ALPHA
         passType: 0
@@ -35,11 +49,25 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER TRANSITION_PATTERN
         passType: 0
+      - keywords: COLOR_FILTER UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: DETAIL_MASKING
+        passType: 0
+      - keywords: DETAIL_MASKING GRADATION_COLOR2 UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: DETAIL_MASKING TRANSITION_PATTERN
+        passType: 0
+      - keywords: DETAIL_MULTIPLY EDGE_SHINY
+        passType: 0
+      - keywords: DETAIL_MULTIPLY_ADDITIVE EDGE_SHINY
         passType: 0
       - keywords: EDGE_PLAIN
         passType: 0
       - keywords: EDGE_SHINY
+        passType: 0
+      - keywords: EDGE_SHINY TRANSITION_PATTERN
         passType: 0
       - keywords: GRADATION_COLOR2
         passType: 0
@@ -49,15 +77,45 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_RADIAL
         passType: 0
+      - keywords: GRADATION_RADIAL TONE_GRAYSCALE UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: GRADATION_RADIAL TRANSITION_PATTERN
+        passType: 0
+      - keywords: GRADATION_RADIAL UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: SAMPLING_BLUR_DETAIL UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: SAMPLING_BLUR_FAST
         passType: 0
+      - keywords: SAMPLING_BLUR_FAST TRANSITION_PATTERN
+        passType: 0
+      - keywords: SAMPLING_BLUR_FAST UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: SAMPLING_BLUR_MEDIUM UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: SAMPLING_EDGE_LUMINANCE TRANSITION_PATTERN
+        passType: 0
+      - keywords: SAMPLING_EDGE_LUMINANCE UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: SAMPLING_PIXELATION
+        passType: 0
+      - keywords: SAMPLING_PIXELATION TRANSITION_PATTERN
+        passType: 0
+      - keywords: SAMPLING_RGB_SHIFT TRANSITION_PATTERN
+        passType: 0
+      - keywords: TARGET_HUE TRANSITION_PATTERN
         passType: 0
       - keywords: TONE_NEGATIVE
         passType: 0
       - keywords: TONE_RETRO
         passType: 0
+      - keywords: TRANSITION_CUTOFF
+        passType: 0
+      - keywords: TRANSITION_DISSOLVE
+        passType: 0
       - keywords: TRANSITION_PATTERN
+        passType: 0
+      - keywords: TRANSITION_SHINY
         passType: 0
 --- !u!114 &11400000
 MonoBehaviour:
