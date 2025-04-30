@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Coffee.UIEffects;
 
 public class Selectors : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Selectors : MonoBehaviour
     internal Image rightImage;
     internal Canvas leftCanvas;
     internal Canvas rightCanvas;
+    internal UIEffect leftEffect;
+    internal UIEffect rightEffect;
 
     private GameObject tracking = null;
     private RectTransform trackRT = null;
@@ -113,6 +116,12 @@ public class Selectors : MonoBehaviour
         this.instant = false;
     }
 
+    internal void SetEffect(int tone)
+    {
+        leftEffect.toneIntensity = tone;
+        rightEffect.toneIntensity = tone;
+    }
+
     // Moves the selector to a target direction
     private void MoveSelector()
     {
@@ -137,5 +146,7 @@ public class Selectors : MonoBehaviour
         rightImage = right.GetComponent<Image>();
         leftCanvas = left.GetComponent<Canvas>();
         rightCanvas = right.GetComponent<Canvas>();
+        leftEffect = left.GetComponent<UIEffect>();
+        rightEffect = right.GetComponent<UIEffect>();
     }
 }

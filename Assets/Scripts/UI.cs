@@ -109,6 +109,7 @@ public class UI : MonoBehaviour
     public void ChangeScene(string sceneName, bool doTransition = true)
     {
         // Move the UI selectors to its default place
+        if (sceneName != "Game") selectors.SetEffect(0);
         if (selectors)
         {
             if (!selectors.left || !selectors.right) return;

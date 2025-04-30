@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &-4261719274451243493
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ShaderVariants
+  m_Shaders:
+  - first: {fileID: 4800000, guid: 96246b1ead49a4c5a996fd477bc5a117, type: 3}
+    second:
+      variants:
+      - keywords: COLOR_FILTER
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_COLOR2
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_COLOR4
+        passType: 0
+      - keywords: COLOR_FILTER GRADATION_RADIAL
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_BLUR_DETAIL
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_BLUR_FAST
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_BLUR_MEDIUM
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_EDGE_ALPHA
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_EDGE_LUMINANCE
+        passType: 0
+      - keywords: COLOR_FILTER SAMPLING_RGB_SHIFT
+        passType: 0
+      - keywords: COLOR_FILTER TRANSITION_FADE
+        passType: 0
+      - keywords: COLOR_FILTER TRANSITION_PATTERN
+        passType: 0
+      - keywords: DETAIL_MASKING
+        passType: 0
+      - keywords: EDGE_PLAIN
+        passType: 0
+      - keywords: EDGE_SHINY
+        passType: 0
+      - keywords: GRADATION_COLOR2
+        passType: 0
+      - keywords: GRADATION_COLOR4
+        passType: 0
+      - keywords: GRADATION_GRADIENT
+        passType: 0
+      - keywords: GRADATION_RADIAL
+        passType: 0
+      - keywords: SAMPLING_BLUR_FAST
+        passType: 0
+      - keywords: SAMPLING_PIXELATION
+        passType: 0
+      - keywords: TONE_NEGATIVE
+        passType: 0
+      - keywords: TONE_RETRO
+        passType: 0
+      - keywords: TRANSITION_PATTERN
+        passType: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d43f626d9b5f4d729097092ded48bdb, type: 3}
+  m_Name: UIEffectProjectSettings
+  m_EditorClassIdentifier: 
+  m_RuntimePresets: []
+  m_RuntimePresetsV2: []
+  m_UseHDRColorPicker: 1
+  m_ShaderVariantCollection: {fileID: 0}
+  m_ShaderVariantRegistry:
+    m_OptionalShaders:
+    - key: Hidden/UI/Default (SoftMaskable)
+      value: Hidden/UI/Default (UIEffect)
+    m_Asset: {fileID: -4261719274451243493}
+    m_ErrorOnUnregisteredVariant: 0
+    m_UnregisteredVariants: []

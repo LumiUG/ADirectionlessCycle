@@ -321,6 +321,10 @@ public class LevelManager : MonoBehaviour
         else if (levelID.StartsWith("REMIX")) AudioManager.Instance.PlayBGM(AudioManager.remixBGM);
         else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) AudioManager.Instance.PlayBGM(AudioManager.voidBGM);
 
+        // Selector effect
+        if (levelID.StartsWith("REMIX") || levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) UI.Instance.selectors.SetEffect(1);
+        else UI.Instance.selectors.SetEffect(0);
+
         // Swapping mechanic startup
         // UI.Instance.ingame.cycleIcon.gameObject.SetActive(GameManager.save.game.mechanics.hasSwapUpgrade);
         if (GameManager.save.game.mechanics.hasSwapUpgrade)
