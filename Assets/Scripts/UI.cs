@@ -21,8 +21,8 @@ public class UI : MonoBehaviour
     [HideInInspector] public Selectors selectors;
 
     internal Animator effects;
-    internal GameObject effectsBackgrounds;
     internal GameObject effectsUIE;
+    private GameObject effectsBackgrounds;
     private Color invisibleColor = new(1, 1, 1, 0);
 
     private void Awake()

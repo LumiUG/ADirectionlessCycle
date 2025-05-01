@@ -420,6 +420,8 @@ public class LevelManager : MonoBehaviour
         level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         
+        StopVoidEffectFromMaskingOutsideOfGameBounds();
+
         // Apply all custom tile text
         level.customTileInfo.ForEach(tile => customTileInfo.Add(new(tile.position, tile.text)));
         foreach (var tile in level.customTileInfo)
@@ -747,6 +749,8 @@ public class LevelManager : MonoBehaviour
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
         if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
 
+        StopVoidEffectFromMaskingOutsideOfGameBounds();
+
         // Achievement (will retrigger multiple times, maybe bad?)
         if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.Instance.EditAchivement("ACH_DIRECTIONLESS");
 
@@ -755,6 +759,19 @@ public class LevelManager : MonoBehaviour
         else RemoveUndoFrame();
         if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
         CheckCompletion();
+    }
+
+    // i am sorry for the performance byt fuck thisssssss
+    private void StopVoidEffectFromMaskingOutsideOfGameBounds()
+    {
+        foreach (GameTile tile in levelHazards.FindAll(tile => tile.GetTileType() == ObjectTypes.Void))
+        {
+            // COPIED FROM SCENEINBOUND
+            bool pos = tile.position.x < 0 + worldOffsetX || tile.position.x > boundsX + worldOffsetX || tile.position.y > 0 + worldOffsetY || tile.position.y < boundsY + worldOffsetY;
+            if (pos) tile.tileObject.SetActive(false);
+            else tile.tileObject.SetActive(true);
+            RefreshHazardTile(tile);
+        }
     }
 
     // Checks if you've won
@@ -949,6 +966,13 @@ public class LevelManager : MonoBehaviour
     {
         tilemapCustoms.SetTile(tile.position, null);
         tilemapCustoms.SetTile(tile.position, tile);
+    }
+
+    // Refreshes a hazard tile
+    public void RefreshHazardTile(GameTile tile)
+    {
+        tilemapHazards.SetTile(tile.position, null);
+        tilemapHazards.SetTile(tile.position, tile);
     }
 
     // Refreshes the game and closes all UI's
@@ -1243,7 +1267,7 @@ public class LevelManager : MonoBehaviour
         // Loads the level
         try {
             LoadLevel(name, SceneManager.GetActiveScene().name == "Custom Levels");
-        } catch(Exception e) {
+        } catch (Exception e) {
             Debug.LogException(e, this);
             UI.Instance.global.SendMessage("An error ocurred while loading!", 10f);
             UI.Instance.ChangeScene("Main Menu", false);
