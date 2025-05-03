@@ -21,7 +21,6 @@ public class UI : MonoBehaviour
     [HideInInspector] public Selectors selectors;
 
     internal Animator effects;
-    internal GameObject effectsUIE;
     private GameObject effectsBackgrounds;
     private Color invisibleColor = new(1, 1, 1, 0);
 
@@ -34,7 +33,6 @@ public class UI : MonoBehaviour
 
         effects = GameObject.Find("Ingame Effects").GetComponent<Animator>();
         effectsBackgrounds = effects.transform.Find("Backgrounds").gameObject;
-        effectsUIE = effectsBackgrounds.transform.Find("UIEffect").gameObject;
         DontDestroyOnLoad(effects.gameObject);
 
         // UI References!
@@ -535,7 +533,6 @@ public class UI : MonoBehaviour
         public override void Toggle(bool toggle)
         {
             self.SetActive(toggle);
-            Instance.effectsUIE.SetActive(!toggle);
             if (toggle) Instance.selectors.ChangeSelected(restartButton.gameObject, true);
         }
     }
@@ -610,7 +607,6 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.LoadLevel(hintLevelID);
         LevelManager.Instance.RefreshGameUI();
-        effectsUIE.SetActive(true); // ???
 
         // transition out
         TransitionManager.Instance.ChangeTransition(Triangle);
@@ -643,7 +639,6 @@ public class UI : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.RefreshGameUI();
         LevelManager.Instance.ReloadLevel(true);
-        effectsUIE.SetActive(true); // ???
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 

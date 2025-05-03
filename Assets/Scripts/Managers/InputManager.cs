@@ -673,7 +673,6 @@ public class InputManager : MonoBehaviour
         LevelManager.Instance.RefreshGameVars();
         LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
         UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
-        UI.Instance.effectsUIE.SetActive(true); // ???
         TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

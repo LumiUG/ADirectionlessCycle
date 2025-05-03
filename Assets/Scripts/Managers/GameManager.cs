@@ -103,8 +103,7 @@ public class GameManager : MonoBehaviour
         if (status) {
             UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
             UI.Instance.pause.ToggleEditButton(isEditing || IsDebug());
-            UI.Instance.effectsUIE.SetActive(false);
-        } else UI.Instance.effectsUIE.SetActive(true);
+        }
 
         UI.Instance.pause.Toggle(status);
         LevelManager.Instance.isPaused = status;

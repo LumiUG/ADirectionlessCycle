@@ -370,7 +370,6 @@ public class LevelManager : MonoBehaviour
             UI.Instance.pause.SetBestTime(0f);
             UI.Instance.pause.SetBestMoves(0);
         }
-        UI.Instance.effectsUIE.SetActive(true); // ???
 
         return true;
     }
@@ -419,8 +418,6 @@ public class LevelManager : MonoBehaviour
         level.objectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         level.hazardTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
         level.effectTiles.ForEach(tile => PlaceTile(CreateTile(tile.type, tile.directions, tile.position)));
-        
-        StopVoidEffectFromMaskingOutsideOfGameBounds();
 
         // Apply all custom tile text
         level.customTileInfo.ForEach(tile => customTileInfo.Add(new(tile.position, tile.text)));
@@ -749,8 +746,6 @@ public class LevelManager : MonoBehaviour
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
         if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
 
-        StopVoidEffectFromMaskingOutsideOfGameBounds();
-
         // Achievement (will retrigger multiple times, maybe bad?)
         if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.Instance.EditAchivement("ACH_DIRECTIONLESS");
 
@@ -759,19 +754,6 @@ public class LevelManager : MonoBehaviour
         else RemoveUndoFrame();
         if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
         CheckCompletion();
-    }
-
-    // i am sorry for the performance byt fuck thisssssss
-    private void StopVoidEffectFromMaskingOutsideOfGameBounds()
-    {
-        foreach (GameTile tile in levelHazards.FindAll(tile => tile.GetTileType() == ObjectTypes.Void))
-        {
-            // COPIED FROM SCENEINBOUND
-            bool pos = tile.position.x < 0 + worldOffsetX || tile.position.x > boundsX + worldOffsetX || tile.position.y > 0 + worldOffsetY || tile.position.y < boundsY + worldOffsetY;
-            if (pos) tile.tileObject.SetActive(false);
-            else tile.tileObject.SetActive(true);
-            RefreshHazardTile(tile);
-        }
     }
 
     // Checks if you've won
@@ -1006,7 +988,6 @@ public class LevelManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "Game")
         {
             UI.Instance.effects.gameObject.SetActive(false);
-            UI.Instance.effectsUIE.SetActive(false);
         }
         UI.Instance.pause.Toggle(false);
         // UI.Instance.win.Toggle(false);
@@ -1027,7 +1008,6 @@ public class LevelManager : MonoBehaviour
         {
             tilemapLetterbox.gameObject.SetActive(false);
             extrasOutlines.gameObject.SetActive(false);
-            UI.Instance.effectsUIE.SetActive(false);
             UI.Instance.ingame.Toggle(false);
             return;
         }
@@ -1287,7 +1267,6 @@ public class LevelManager : MonoBehaviour
         //     Debug.Log("a");
         // } else tilemapScanlines.gameObject.SetActive(true);
         UI.Instance.effects.gameObject.SetActive(true);
-        UI.Instance.effectsUIE.SetActive(true);
 
         // Preload screen
         TransitionManager.Instance.ChangeTransition(Triangle);
