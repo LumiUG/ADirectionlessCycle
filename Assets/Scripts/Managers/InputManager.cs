@@ -147,6 +147,15 @@ public class InputManager : MonoBehaviour
             return;
         }
 
+        // Livic
+        else if (debugCommand == "caos")
+        {
+            canInputCommands = false;
+            debugCommand = null;
+            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "CODE/Caos");
+            return;
+        }
+
         // Custom handlings
         else if (debugCommand == "code")
         {
