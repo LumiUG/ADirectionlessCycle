@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: Level
   m_EditorClassIdentifier: 
   dialog:
-  - Damn, there was a level here before.
-  - One of the best ones, too! We really liked this one.
-  - But it looks like you got here a bit too late. We're sorry for that.
-  - Maybe another time?
+  - Sheesh. They really wiped this whole place.
+  - A shame-
+  - Wait, give me a second, they're talking.
+  - ...
+  - ...
+  - Ah.
+  - Apparently there was an exit here, tells me it degraded not too long after you
+    got here.
+  - Sorry about that. Thankfully we didn't need this one.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

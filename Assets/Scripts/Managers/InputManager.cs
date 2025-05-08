@@ -156,6 +156,15 @@ public class InputManager : MonoBehaviour
             return;
         }
 
+        // Developer room
+        else if (debugCommand == "lumi")
+        {
+            canInputCommands = false;
+            debugCommand = null;
+            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "CODE/Developer");
+            return;
+        }
+
         // Custom handlings
         else if (debugCommand == "code")
         {
@@ -175,12 +184,18 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
             return;
         }
+        else if (debugCommand == "gravix")
+        {
+            MainMenu.I.ShowPopup("Gravix? I don't know what you're talking about.");
+            debugCommand = null;
+            return;
+        }
 
         if (debugCommand == null)
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "zero", "overflow")
+            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "zero", "overflow")
         }
     }
 

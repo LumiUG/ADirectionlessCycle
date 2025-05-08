@@ -330,6 +330,7 @@ public class UI : MonoBehaviour
             if (split[1] == "Left") { popup.SetPopup("WRITE LATER"); return; }
             if (split[1] == "Up") { popup.SetPopup("WRITE LATER"); return; }
             if (split[1] == "Despair") { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
+            if (split[1] == "Developer") { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
             if (LevelManager.Instance.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
         } else hintLevelID = null;
 

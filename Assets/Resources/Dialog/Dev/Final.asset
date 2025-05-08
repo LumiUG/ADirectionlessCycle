@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: Final
+  m_EditorClassIdentifier: 
+  dialog:
+  - Before you go, I'm incredibly grateful for people like you playing my game.
+  - You are one of the few people that most likely managed to get this far to see
+    this room.
+  - This "two" year long journey has been very special to me, and I am happy to have
+    been able to share it.
+  - From the bottom of my heart, thank you. I hope you've had your fun playing this
+    stupid passion project of mine.
+  - And for those of you that can hear me. I can hear you, too.
+  events: []
+  exhaustDialog: {fileID: 0}
+  textSpeed: 0.05
+  sfx: {fileID: 8300000, guid: 76c5636752690d34f857214c648f21a3, type: 3}
+  shouldExhaust: 0
+  canBeSkipped: 1

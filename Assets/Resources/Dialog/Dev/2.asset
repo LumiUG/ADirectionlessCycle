@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  dialog:
+  - This is most of the game's flowchart!
+  - It has been under very heavy reworks, due to the project scope changing.
+  - One of the things that I really, REALLY wanted to do, was to add secrets inside
+    hint levels.
+  - Sadly, I don't think it would've hit as good as I felt, so I had to scrap it.
+  - There was also supposed to be one "level" per orb collected, that would be required
+    to enter the core.
+  - ...I was running out of level ideas by that point, haha.
+  - Lastly, I also wanted to hide more codes in plain sight, like the one you used
+    to get here.
+  - That would've been wayyyy too much work. So I settled for this instead.
+  events: []
+  exhaustDialog: {fileID: 0}
+  textSpeed: 0.05
+  sfx: {fileID: 8300000, guid: 76c5636752690d34f857214c648f21a3, type: 3}
+  shouldExhaust: 0
+  canBeSkipped: 1
