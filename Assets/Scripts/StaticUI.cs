@@ -6,16 +6,16 @@ public class StaticUI : MonoBehaviour
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") return;
-        UI.Instance.selectors.ChangeSelected(GameObject.Find("Play Button"), true);
+        UI.I.selectors.ChangeSelected(GameObject.Find("Play Button"), true);
     }
 
     // Change scene to the level editor
-    public void StaticGoLevelEditor() { if (UI.Instance) UI.Instance.GoLevelEditor(); }
+    public void StaticGoLevelEditor() { if (UI.I) UI.I.GoLevelEditor(); }
 
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {
-        if (UI.Instance) UI.Instance.ChangeScene(sceneName);
+        if (UI.I) UI.I.ChangeScene(sceneName);
         else SceneManager.LoadScene(sceneName);
     }
 
@@ -25,7 +25,7 @@ public class StaticUI : MonoBehaviour
     // Master Slider
     public void StaticUpdateMasterSlider(float value)
     {
-        if (AudioManager.Instance) AudioManager.Instance.SetMasterVolume(value);
+        if (AudioManager.I) AudioManager.I.SetMasterVolume(value);
         GameManager.save.preferences.masterVolume = value;
     }
 
@@ -44,6 +44,6 @@ public class StaticUI : MonoBehaviour
     // Play submit sound
     public void StaticSubmitSound()
     {
-        if (UI.Instance) UI.Instance.ConfirmSound();
+        if (UI.I) UI.I.ConfirmSound();
     }
 }

@@ -29,11 +29,11 @@ public class ArrowTile : EffectTile
         if (directions.right && !tile.directions.right) { tile.directions.SetNewDirections(tile.directions.up, tile.directions.down, tile.directions.left, true); directions.SetNewDirections(directions.up, directions.down, directions.left, false); }
 
         // Update sprites of the object that triggered this
-        LevelManager.Instance.RefreshObjectTile(tile);
+        LevelManager.I.RefreshObjectTile(tile);
 
         // Delete or update itself
-        if (!directions.up && !directions.down && !directions.left && !directions.right) LevelManager.Instance.RemoveTile(this);
-        else LevelManager.Instance.RefreshEffectTile(this);
+        if (!directions.up && !directions.down && !directions.left && !directions.right) LevelManager.I.RemoveTile(this);
+        else LevelManager.I.RefreshEffectTile(this);
     }
     
     // Prepares editor variables.

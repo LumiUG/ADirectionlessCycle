@@ -70,13 +70,13 @@ public class Editor : MonoBehaviour
 
         // Populate tile list
         GameObject editorTile = Resources.Load<GameObject>("Prefabs/Editor Tile");
-        listVars.Add(new() { LevelManager.Instance.wallTile, LevelManager.Instance.antiwallTile });
-        listVars.Add(new() { LevelManager.Instance.boxTile, LevelManager.Instance.circleTile, LevelManager.Instance.hexagonTile });
-        listVars.Add(new() { LevelManager.Instance.areaTile, LevelManager.Instance.inverseAreaTile, LevelManager.Instance.outboundAreaTile });
-        listVars.Add(new() { LevelManager.Instance.hazardTile, LevelManager.Instance.voidTile });
-        listVars.Add(new() { LevelManager.Instance.invertTile, LevelManager.Instance.pullTile, LevelManager.Instance.arrowTile, LevelManager.Instance.negativeArrowTile, LevelManager.Instance.fragmentTile, LevelManager.Instance.orbTile });
-        listVars.Add(new() { LevelManager.Instance.levelTile, LevelManager.Instance.hologramTile, LevelManager.Instance.npcTile, LevelManager.Instance.maskTile });
-        if (GameManager.Instance.editormimic || GameManager.Instance.IsDebug()) listVars[1].Add(LevelManager.Instance.mimicTile);
+        listVars.Add(new() { LevelManager.I.wallTile, LevelManager.I.antiwallTile });
+        listVars.Add(new() { LevelManager.I.boxTile, LevelManager.I.circleTile, LevelManager.I.hexagonTile });
+        listVars.Add(new() { LevelManager.I.areaTile, LevelManager.I.inverseAreaTile, LevelManager.I.outboundAreaTile });
+        listVars.Add(new() { LevelManager.I.hazardTile, LevelManager.I.voidTile });
+        listVars.Add(new() { LevelManager.I.invertTile, LevelManager.I.pullTile, LevelManager.I.arrowTile, LevelManager.I.negativeArrowTile, LevelManager.I.fragmentTile, LevelManager.I.orbTile });
+        listVars.Add(new() { LevelManager.I.levelTile, LevelManager.I.hologramTile, LevelManager.I.npcTile, LevelManager.I.maskTile });
+        if (GameManager.I.editormimic || GameManager.I.IsDebug()) listVars[1].Add(LevelManager.I.mimicTile);
 
         // Loops for every tile type
         for (int i = 0; i < listStrings.Count; i++)
@@ -111,12 +111,12 @@ public class Editor : MonoBehaviour
         for (int i = 0; i < menuTiles.Count; i++) { SetMenuSprite(i); }
 
         // Editor menu default values
-        UI.Instance.editor.nextLevelField.text = LevelManager.Instance.currentLevel.nextLevel;
-        UI.Instance.editor.remixLevelField.text = LevelManager.Instance.currentLevel.remixLevel;
-        UI.Instance.editor.freeroamToggle.isOn = LevelManager.Instance.currentLevel.freeroam;
+        UI.I.editor.nextLevelField.text = LevelManager.I.currentLevel.nextLevel;
+        UI.I.editor.remixLevelField.text = LevelManager.I.currentLevel.remixLevel;
+        UI.I.editor.freeroamToggle.isOn = LevelManager.I.currentLevel.freeroam;
 
         // Debug import level
-        if (GameManager.Instance.IsDebug()) UI.Instance.editor.import.SetActive(true);
+        if (GameManager.I.IsDebug()) UI.I.editor.import.SetActive(true);
     }
 
     void OnDisable() { I = null; }
@@ -129,27 +129,27 @@ public class Editor : MonoBehaviour
         {
             if (tileToPlace == ObjectTypes.Arrow) spriteRenderer.sprite = colorArrowSprite;
             else if (tileToPlace == ObjectTypes.NegativeArrow) spriteRenderer.sprite = badArrowSprite;
-            else spriteRenderer.sprite = LevelManager.Instance.CreateTile(tileToPlace.ToString(), new(), Vector3Int.zero).tileSprite;
+            else spriteRenderer.sprite = LevelManager.I.CreateTile(tileToPlace.ToString(), new(), Vector3Int.zero).tileSprite;
         } else spriteRenderer.sprite = deletionSprite;
 
         // Move mouse selector (on tilemap)
-        if (UI.Instance.editor.self.activeSelf || tileList.activeSelf) return;
+        if (UI.I.editor.self.activeSelf || tileList.activeSelf) return;
         Vector3Int mousePos = GetMousePositionOnGrid();
         if (mousePos == Vector3.back) return;
 
-        mousePos -= new Vector3Int(LevelManager.Instance.worldOffsetX, LevelManager.Instance.worldOffsetY);
+        mousePos -= new Vector3Int(LevelManager.I.worldOffsetX, LevelManager.I.worldOffsetY);
         spriteRenderer.transform.position = editorTilemap.GetCellCenterWorld(mousePos);
     }
 
     // Returns the mouse position on the playable grid
     internal Vector3Int GetMousePositionOnGrid()
     {
-        if (LevelManager.Instance.currentLevel == null) return Vector3Int.back;
+        if (LevelManager.I.currentLevel == null) return Vector3Int.back;
         
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int gridPos = LevelManager.Instance.tilemapCollideable.WorldToCell(worldPoint);
+        Vector3Int gridPos = LevelManager.I.tilemapCollideable.WorldToCell(worldPoint);
 
-        if (!LevelManager.Instance.CheckSceneInbounds(gridPos)) return Vector3Int.back;
+        if (!LevelManager.I.CheckSceneInbounds(gridPos)) return Vector3Int.back;
         return gridPos;
     }
 
@@ -158,7 +158,7 @@ public class Editor : MonoBehaviour
     {
         while (true)
         {
-            if (UI.Instance.editor.self.activeSelf || tileList.activeSelf) yield break;
+            if (UI.I.editor.self.activeSelf || tileList.activeSelf) yield break;
 
             if (popup.activeSelf) { multiClick = null; yield break; }
 
@@ -179,12 +179,12 @@ public class Editor : MonoBehaviour
     // Returns a tile from the level tilemap
     public GameTile GetEditorTile(Vector3Int position)
     {
-        GameTile tile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position);
-        if (!tile) tile = LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position);
+        GameTile tile = LevelManager.I.tilemapObjects.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.I.tilemapCollideable.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.I.tilemapWinAreas.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.I.tilemapHazards.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.I.tilemapEffects.GetTile<GameTile>(position);
+        if (!tile) tile = LevelManager.I.tilemapCustoms.GetTile<GameTile>(position);
         return tile;
     }
 
@@ -194,13 +194,13 @@ public class Editor : MonoBehaviour
         if (!editingTile) return;
 
         // stupid ren was here
-        if (!LevelManager.Instance.typesCustomsList.Contains(editingTile.GetTileType())) return;
+        if (!LevelManager.I.typesCustomsList.Contains(editingTile.GetTileType())) return;
 
         // Get the real tile that you can edit
-        var existingRule = LevelManager.Instance.customTileInfo.Find(rule => { return rule.position == editingTile.position; });
+        var existingRule = LevelManager.I.customTileInfo.Find(rule => { return rule.position == editingTile.position; });
         if (existingRule != null) existingRule.text = text;
-        else LevelManager.Instance.customTileInfo.Add(new(editingTile.position, text));
-        UI.Instance.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
+        else LevelManager.I.customTileInfo.Add(new(editingTile.position, text));
+        UI.I.global.SendMessage($"Set custom text to \"{text}\".", 2.25f);
         customInputField.interactable = false;
     }
 
@@ -210,7 +210,7 @@ public class Editor : MonoBehaviour
         if (!editingTile || !editingTile.directions.editorPushable || ignoreUpdateEvent) return;
         editingTile.directions.pushable = value;
         editingTile.directions.UpdateSprites();
-        LevelManager.Instance.RefreshObjectTile(editingTile);
+        LevelManager.I.RefreshObjectTile(editingTile);
     }
 
     public void UpdateDirection(Toggle toggle)
@@ -239,8 +239,8 @@ public class Editor : MonoBehaviour
         }
     
         // Refresh tile
-        if (editingTile.GetTileType() == ObjectTypes.Arrow || editingTile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.Instance.RefreshEffectTile(editingTile);
-        else LevelManager.Instance.RefreshObjectTile(editingTile);
+        if (editingTile.GetTileType() == ObjectTypes.Arrow || editingTile.GetTileType() == ObjectTypes.NegativeArrow) LevelManager.I.RefreshEffectTile(editingTile);
+        else LevelManager.I.RefreshObjectTile(editingTile);
     }
 
     // Turn on/off a toggle without evoking an event
@@ -254,7 +254,7 @@ public class Editor : MonoBehaviour
     // Sets one of the menu sprites
     private void SetMenuSprite(int index)
     {
-        GameTile tile = LevelManager.Instance.CreateTile(GameManager.save.preferences.editorTiles[index].ToString(), new(), Vector3Int.zero);
+        GameTile tile = LevelManager.I.CreateTile(GameManager.save.preferences.editorTiles[index].ToString(), new(), Vector3Int.zero);
         if (tile.GetTileType() == ObjectTypes.Arrow) menuTiles[index].sprite = colorArrowSprite;
         else if (tile.GetTileType() == ObjectTypes.NegativeArrow) menuTiles[index].sprite = badArrowSprite;
         else menuTiles[index].sprite = tile.tileSprite;
@@ -281,7 +281,7 @@ public class Editor : MonoBehaviour
     // Toggles the tile list on/off
     public void ToggleTileMenu()
     {
-        if (UI.Instance.editor.self.activeSelf) return;
+        if (UI.I.editor.self.activeSelf) return;
         if (popup.activeSelf) { popup.SetActive(false); return; }
 
         if (tileList.activeSelf) tileList.SetActive(false);
@@ -296,7 +296,7 @@ public class Editor : MonoBehaviour
         commandHistory[^1].Undo();
         commandHistory.RemoveAt(commandHistory.Count - 1);
         
-        AudioManager.Instance.PlaySFX(AudioManager.undo, 1f, true);
+        AudioManager.I.PlaySFX(AudioManager.undo, 1f, true);
     }
 
     // Execute a command, and add to history    

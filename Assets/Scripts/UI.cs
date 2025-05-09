@@ -8,55 +8,37 @@ using static GameTile;
 
 public class UI : MonoBehaviour
 {
-    [HideInInspector] public static UI Instance;
-    [HideInInspector] public GlobalUI global;
-    [HideInInspector] public LevelEditorUI editor;
+    [HideInInspector] public static UI I;
+    [SerializeField] public GlobalUI global;
+    [SerializeField] public LevelEditorUI editor;
     [HideInInspector] public PreloadUI preload; 
-    [HideInInspector] public PauseUI pause;
-    // [HideInInspector] public WinUI win;
-    [HideInInspector] public IngameUI ingame;
-    [HideInInspector] public ConfirmRestartUI restart;
-    [HideInInspector] public PopupUI popup;
-    [HideInInspector] public DialogUI dialog;
+    [SerializeField] public PauseUI pause;
+    [SerializeField] public IngameUI ingame;
+    [SerializeField] public ConfirmRestartUI restart;
+    [SerializeField] public PopupUI popup;
+    [SerializeField] public DialogUI dialog;
     [HideInInspector] public Selectors selectors;
 
     internal Animator effects;
-    private GameObject effectsBackgrounds;
     private Color invisibleColor = new(1, 1, 1, 0);
 
     private void Awake()
     {
         // Singleton (UI has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(transform.parent.gameObject); return; }
         DontDestroyOnLoad(transform.parent.gameObject);
 
         effects = GameObject.Find("Ingame Effects").GetComponent<Animator>();
-        effectsBackgrounds = effects.transform.Find("Backgrounds").gameObject;
         DontDestroyOnLoad(effects.gameObject);
 
-        // UI References!
+        // Global UI
         global = new() { self = gameObject };
         global.debugger = global.self.transform.Find("Debugger").GetComponent<Text>();
         global.debugger.CrossFadeAlpha(0, 0, true);
         global.camera = Camera.main;
 
-        // Editor menu
-        editor = new() { self = transform.Find("Level Editor Menu").gameObject };
-        editor.import = editor.self.transform.Find("Import Field").gameObject;
-        editor.playtest = editor.self.transform.Find("Play Button").gameObject;
-        editor.nextLevelField = editor.self.transform.Find("Next Level").Find("NL Field").GetComponent<InputField>();
-        editor.remixLevelField = editor.self.transform.Find("Remix Level").Find("RL Field").GetComponent<InputField>();
-        editor.freeroamToggle = editor.self.transform.Find("Freeroam Toggle").GetComponent<Toggle>();
-
-        // Win screen (intermission)
-        // win = new() { self = transform.parent.Find("Intermissions").Find("Win Screen").gameObject };
-        // win.animator = win.self.transform.parent.GetComponent<Animator>();
-        // win.stats = win.self.transform.Find("Level Stats");
-        // win.time = win.stats.Find("Win Time").GetComponent<Text>();
-        // win.moves = win.stats.Find("Win Moves").GetComponent<Text>();
-
-        // Preload (intermission)
+        // Preload UI
         preload = new() { self = transform.parent.Find("Intermissions").Find("Level Load").gameObject };
         preload.animator = preload.self.transform.parent.GetComponent<Animator>();
         preload.levelName = preload.self.transform.Find("Level Name").gameObject.GetComponent<Text>();
@@ -65,41 +47,6 @@ public class UI : MonoBehaviour
         preload.starHollowGraphic = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         preload.time = preload.self.transform.Find("Best Time").gameObject.GetComponent<Text>();
         preload.moves = preload.self.transform.Find("Best Moves").gameObject.GetComponent<Text>();
-
-        // Pause menu
-        pause = new() { self = transform.Find("Pause Menu").gameObject };
-        pause.title = pause.self.transform.Find("Pause Title").GetComponent<Text>();
-        pause.resumeButton = pause.self.transform.Find("Resume Button").gameObject;
-        pause.editorButton = pause.self.transform.Find("Edit Level Button").gameObject;
-        pause.backToMenu = pause.self.transform.Find("Menu Button").gameObject;
-        pause.levelInfo = pause.self.transform.Find("Level Info");
-        pause.levelBestMoves = pause.levelInfo.Find("Best Moves").GetComponent<Text>();
-        pause.levelBestTime = pause.levelInfo.Find("Best Time").GetComponent<Text>();
-
-        // Ingame UI
-        ingame = new() { self = transform.Find("Ingame UI").gameObject };
-        ingame.levelName = ingame.self.transform.Find("Level Name").Find("Text").GetComponent<Text>();
-        ingame.rArea = ingame.self.transform.Find("Area Info").GetComponent<RectTransform>();
-        ingame.rMoves = ingame.self.transform.Find("Moves Info").GetComponent<RectTransform>();
-        ingame.rTimer = ingame.self.transform.Find("Time Info").GetComponent<RectTransform>();
-        ingame.levelMoves = ingame.rMoves.Find("Level Moves").GetComponent<Text>();
-        ingame.levelTimer = ingame.rTimer.Find("Level Time").GetComponent<Text>();
-        ingame.areaIcon = ingame.rArea.Find("Area Sprite").GetComponent<Image>();
-        ingame.cycleIcon = ingame.self.transform.Find("Cycle Icon").GetComponent<Image>();
-        ingame.areaCount = ingame.rArea.Find("Area Count").GetComponent<Text>();
-        
-        // Restart UI
-        restart = new() { self = transform.Find("Confirm Restart").gameObject };
-        restart.restartButton = restart.self.transform.Find("Restart").GetComponent<Button>();
-
-        // Popup UI
-        popup = new() { self = transform.Find("Popup").gameObject };
-        popup.popupBtn = popup.self.transform.Find("Any Key").gameObject;
-        popup.popupText = popup.self.transform.Find("Text").GetComponent<Text>();
-
-        // Dialog UI
-        dialog = new() { self = transform.Find("Dialog UI").gameObject };
-        dialog.text = dialog.self.transform.Find("Text").GetComponent<Text>();
 
         // Change from preload scene?
         SceneManager.LoadScene("Main Menu");
@@ -124,11 +71,11 @@ public class UI : MonoBehaviour
         }
 
         // Change scene after transition
-        if (doTransition) TransitionManager.Instance.TransitionIn(Reveal, ActionChangeScene, sceneName);
+        if (doTransition) TransitionManager.I.TransitionIn(Reveal, Actions.ChangeScene, sceneName);
         else SceneManager.LoadScene(sceneName);
 
         // Anything music related
-        if (!AudioManager.Instance) return;
+        if (!AudioManager.I) return;
         switch (sceneName)
         {
             case "Main Menu":
@@ -137,10 +84,10 @@ public class UI : MonoBehaviour
             case "Bonus":
             case "Credits":
             case "Custom Levels":
-                AudioManager.Instance.PlayBGM(AudioManager.titleBGM);
+                AudioManager.I.PlayBGM(AudioManager.titleBGM);
                 break;
             case "Level Editor":
-                AudioManager.Instance.PlayBGM(AudioManager.editorBGM);
+                AudioManager.I.PlayBGM(AudioManager.editorBGM);
                 break;
             case "Game": // Do nothing, handle internally with LevelManager.
                 break;
@@ -156,34 +103,34 @@ public class UI : MonoBehaviour
     // Goes to main menu (scary)
     public void GoMainMenu()
     {
-        if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
-        TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoMainMenu);
-        GameManager.Instance.SetPresence("steam_display", "#Menuing");
+        if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
+        TransitionManager.I.TransitionIn<string>(Reveal, Actions.GoMainMenu);
+        GameManager.I.SetPresence("steam_display", "#Menuing");
     }
 
     // Goes to hub (scarier)
     public void GoHub()
     {
-        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionReturnHub);
+        TransitionManager.I.TransitionIn<string>(Swipe, Actions.ReturnHub);
     }
 
     // Go from a level to the editor
     public void GoLevelEditor()
     {
-        // if (!GameManager.Instance.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
+        // if (!GameManager.I.IsDebug() && !GameManager.save.game.hasCompletedGame) { global.SendMessage("Complete the game first!"); return; }
 
         // Transition in
-        TransitionManager.Instance.TransitionIn<string>(Reveal, ActionGoLevelEditor);
+        TransitionManager.I.TransitionIn<string>(Reveal, Actions.GoLevelEditor);
     }
 
     // Pause/Unpause game
     public void PauseUnpauseGame(bool status)
     {
-        GameManager.Instance.PauseResumeGame(status);
+        GameManager.I.PauseResumeGame(status);
     }
 
     // Clears the UI (disables everything)
-    private void ClearUI()
+    public void ClearUI()
     {
         ingame.Toggle(false);
         editor.Toggle(false);
@@ -194,87 +141,87 @@ public class UI : MonoBehaviour
     // Import level
     public void LevelEditorImportLevel(string levelName)
     {
-        if (!GameManager.Instance.IsEditor()) return;
-        LevelManager.Instance.LoadLevel(levelName, true, false);
+        if (!GameManager.I.IsEditor()) return;
+        LevelManager.I.LoadLevel(levelName, true, false);
     }
 
     // Export level
     public void LevelEditorExportLevel()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
 
         // Export level
-        LevelManager.Instance.SaveLevel(GameManager.Instance.currentEditorLevelName, GameManager.Instance.currentEditorLevelID, true, GameManager.Instance.SaveLevelPreview());
+        LevelManager.I.SaveLevel(GameManager.I.currentEditorLevelName, GameManager.I.currentEditorLevelID, true, GameManager.I.SaveLevelPreview());
     }
 
     // Playtest level
     public void LevelEditorPlaytest()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
 
-        LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
-        LevelManager.Instance.currentLevel = LevelManager.Instance.GetLevel(LevelManager.Instance.levelEditorName, true);
-        LevelManager.Instance.currentLevelID = LevelManager.Instance.levelEditorName;
-        GameManager.Instance.isEditing = true;
-        LevelManager.Instance.worldOffsetX = 0;
-        LevelManager.Instance.worldOffsetY = 0;
-        LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
+        LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
+        LevelManager.I.currentLevel = LevelManager.I.GetLevel(LevelManager.I.levelEditorName, true);
+        LevelManager.I.currentLevelID = LevelManager.I.levelEditorName;
+        GameManager.I.isEditing = true;
+        LevelManager.I.worldOffsetX = 0;
+        LevelManager.I.worldOffsetY = 0;
+        LevelManager.I.MoveTilemaps(LevelManager.I.originalPosition, true);
         editor.Toggle(false);
         ingame.Toggle(true);
         
-        LevelManager.Instance.LoadLevel(LevelManager.Instance.levelEditorName, true);
+        LevelManager.I.LoadLevel(LevelManager.I.levelEditorName, true);
         ChangeScene("Game");
     }
 
     // Sets the next level (sanitize input?)
     public void LevelEditorSetNextLevel(string value)
     {
-        if (!GameManager.Instance.IsEditor()) return;
-        LevelManager.Instance.currentLevel.nextLevel = value;
+        if (!GameManager.I.IsEditor()) return;
+        LevelManager.I.currentLevel.nextLevel = value;
     }
 
     // Sets the REMIX level (sanitize input?)
     public void LevelEditorSetRemixLevel(string value)
     {
-        if (!GameManager.Instance.IsEditor()) return;
-        LevelManager.Instance.currentLevel.remixLevel = value;
+        if (!GameManager.I.IsEditor()) return;
+        LevelManager.I.currentLevel.remixLevel = value;
     }
 
     // Set freeroam value
     public void LevelEditorSetFreeroam(bool value)
     {
-        if (!GameManager.Instance.IsEditor()) return;
-        LevelManager.Instance.currentLevel.freeroam = value;
+        if (!GameManager.I.IsEditor()) return;
+        LevelManager.I.currentLevel.freeroam = value;
     }
 
     // Goto next level
     public void GoNextLevel()
     {
         // Player is playtesting
-        if (GameManager.Instance.isEditing)
+        if (GameManager.I.isEditing)
         {
             GoLevelEditor();
             return;   
         }
 
         // There's no next level.
-        if (string.IsNullOrEmpty(LevelManager.Instance.currentLevel.nextLevel))
+        if (string.IsNullOrEmpty(LevelManager.I.currentLevel.nextLevel))
         {
             GoHub();
             return;
         }
         
         // Next level.
-        TransitionManager.Instance.TransitionIn<string>(Triangle, ActionGoNextLevel);
-        GameManager.Instance.isEditing = false;
+        TransitionManager.I.TransitionIn<string>(Triangle, Actions.GoNextLevel);
+        GameManager.I.isEditing = false;
     }
 
     // Restart current level
     public void RestartLevel(bool restartScreen = false)
     {
-        if (LevelManager.Instance.currentLevel == null) return;
+        if (LevelManager.I.currentLevel == null) return;
         if (restartScreen) CloseConfirmRestart();
-        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestartLevel);
+        TransitionManager.I.TransitionIn<string>(Swipe, Actions.UIRestartLevel);
     }
 
     // Remove restart screen
@@ -286,57 +233,62 @@ public class UI : MonoBehaviour
     // UI confirm sound
     public void ConfirmSound()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.select, 0.35f, true);
+        AudioManager.I.PlaySFX(AudioManager.select, 0.35f, true);
     }
 
     // Goes to the current level's
     public void CurrentLevelHint()
     {
-        if (LevelManager.Instance.currentLevel == null) return;
+        if (LevelManager.I.currentLevel == null) return;
 
         // Prepare the hint level's ID
-        string[] split = LevelManager.Instance.currentLevelID.Split("/");
+        string[] split = LevelManager.I.currentLevelID.Split("/");
         string hintLevelID;
 
         // Check for custom levels
-        if (split[0] != LevelManager.Instance.currentLevelID)
+        if (split[0] != LevelManager.I.currentLevelID)
         {
             if (split[0].Contains("REMIX") || split[0].Contains("FRAGMENTS")) hintLevelID = $"HINTS/{split[1]}H";
-            else if (split[0].Contains("HINTS")) hintLevelID = LevelManager.Instance.currentLevel.nextLevel;
+            else if (split[0].Contains("HINTS")) hintLevelID = LevelManager.I.currentLevel.nextLevel;
             else hintLevelID = $"HINTS/W{split[1]}H";
 
             // Custom handlings
-            if (split[1] == "Orb One")
+            switch (split[1])
             {
-                if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
-                else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
-                return;
+                case "Orb One":
+                {
+                    if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
+                    else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
+                    return;
+                }
+                case "Orb Two": { popup.SetPopup("...We've got no idea how to get there."); return; }
+                case "Orb Three": { popup.SetPopup("Pretty straightforward!"); return; }
+                case "Fragment TwoH": { popup.SetPopup("I won't let you go deeper."); return; }
+                case "Fragment Three": { popup.SetPopup("I'd disallow it, but there's really nothing, sorry!"); return; }
+                case "3-1": { popup.SetPopup("You aren't getting in this easily."); return; }
+                case "3-10": { popup.SetPopup("No, no, and no. You're not getting a hint."); return; }
+                case "Industrial": { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
+                case "Meem": { popup.SetPopup("The Gravix dog? ...Thing? It was here the entire time???"); return; }
+                case "Upgrade": { popup.SetPopup("I'm... Definitely not serving you a hint here. Please stop."); return; }
+                case "Tutorial": { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
+                case "END": { popup.SetPopup("The core's entrance. The point of no return."); return; }
+                case "Entry": { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
+                case "Corridor": { popup.SetPopup("gin% ENTERING *##$$! AREA"); return; }
+                case "Right": { popup.SetPopup("%end%end%end%end%endddddd"); return; }
+                case "Down": { popup.SetPopup("WRITE LATER"); return; }
+                case "Left": { popup.SetPopup("WRITE LATER"); return; }
+                case "Up": { popup.SetPopup("WRITE LATER"); return; }
+                case "Despair": { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
+                case "Developer": { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
+                default: // Custom cases
+                    if (LevelManager.I.currentLevelID == "VOID/Loop") popup.SetPopup("internal abstract GameTile Loop();");
+                    return;
             }
-            if (split[1] == "Orb Two") { popup.SetPopup("...We've got no idea how to get there."); return; }
-            if (split[1] == "Orb Three") { popup.SetPopup("Pretty straightforward!"); return; }
-            if (split[1] == "Fragment TwoH") { popup.SetPopup("I won't let you go deeper."); return; }
-            if (split[1] == "Fragment Three") { popup.SetPopup("I'd disallow it, but there's really nothing, sorry!"); return; }
-            if (split[1] == "3-1") { popup.SetPopup("You aren't getting in this easily."); return; }
-            if (split[1] == "3-10") { popup.SetPopup("No, no, and no. You're not getting a hint."); return; }
-            if (split[1] == "Industrial") { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
-            if (split[1] == "Meem") { popup.SetPopup("The Gravix dog? ...Thing? It was here the entire time???"); return; }
-            if (split[1] == "Upgrade") { popup.SetPopup("I'm... Definitely not serving you a hint here. Please stop."); return; }
-            if (split[1] == "Tutorial") { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
-            if (split[1] == "END") { popup.SetPopup("The core's entrance. The point of no return."); return; }
-            if (split[1] == "Entry") { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
-            if (split[1] == "Corridor") { popup.SetPopup("gin% ENTERING *##$$! AREA"); return; }
-            if (split[1] == "Right") { popup.SetPopup("%end%end%end%end%endddddd"); return; }
-            if (split[1] == "Down") { popup.SetPopup("WRITE LATER"); return; }
-            if (split[1] == "Left") { popup.SetPopup("WRITE LATER"); return; }
-            if (split[1] == "Up") { popup.SetPopup("WRITE LATER"); return; }
-            if (split[1] == "Despair") { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
-            if (split[1] == "Developer") { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
-            if (LevelManager.Instance.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly
-        if (LevelManager.Instance.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("This level has no hints available."); return; }
-        TransitionManager.Instance.TransitionIn(Triangle, ActionGoHintLevel, hintLevelID);
+        if (LevelManager.I.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("This level has no hints available."); return; }
+        TransitionManager.I.TransitionIn(Triangle, Actions.GoHintLevel, hintLevelID);
     }
 
     // Object classes //
@@ -361,6 +313,7 @@ public class UI : MonoBehaviour
         }
     }
 
+    [Serializable]
     public class LevelEditorUI : UIObject
     {
         public GameObject import;
@@ -415,8 +368,8 @@ public class UI : MonoBehaviour
 
         internal void PreparePreloadScreen(Serializables.GameData.Level save)
         {
-            SetLevelName(LevelManager.Instance.currentLevel.levelName);
-            SetStars(LevelManager.Instance.currentLevel.difficulty);
+            SetLevelName(LevelManager.I.currentLevel.levelName);
+            SetStars(LevelManager.I.currentLevel.difficulty);
             if (save != null) { SetBestTime(save.stats.bestTime); SetBestMoves(save.stats.totalMoves); }
             else { SetBestTime(-1); SetBestMoves(-1); }
             Toggle(true);
@@ -424,6 +377,7 @@ public class UI : MonoBehaviour
         }
     }
 
+    [Serializable]
     public class WinUI : UIObject
     {
         public Animator animator;
@@ -436,6 +390,7 @@ public class UI : MonoBehaviour
         public void SetTotalMoves(int newMoves) { moves.text = $"Total moves: {newMoves}"; }
     }
 
+    [Serializable]
     public class PauseUI : UIObject
     {
         public GameObject resumeButton;
@@ -451,6 +406,7 @@ public class UI : MonoBehaviour
         public void SetBestMoves(int newMoves) { levelBestMoves.text = $"Best moves: {newMoves}"; }
     }
 
+    [Serializable]
     public class IngameUI : UIObject
     {
         public RectTransform rArea;
@@ -468,13 +424,13 @@ public class UI : MonoBehaviour
             switch (icon)
             {
                 case 1:
-                    areaIcon.sprite = LevelManager.Instance.areaTile.tileSprite;
+                    areaIcon.sprite = LevelManager.I.areaTile.tileSprite;
                     break;
                 case 2:
-                    areaIcon.sprite = LevelManager.Instance.inverseAreaTile.tileSprite;
+                    areaIcon.sprite = LevelManager.I.inverseAreaTile.tileSprite;
                     break;
                 case 3:
-                    areaIcon.sprite = LevelManager.Instance.outboundAreaTile.tileSprite;
+                    areaIcon.sprite = LevelManager.I.outboundAreaTile.tileSprite;
                     break;
             }
         }
@@ -484,18 +440,18 @@ public class UI : MonoBehaviour
         {
             // Area overlapped SFX
             int.TryParse(areaCount.text.Split("/")[0], out int areaNum);
-            if (AudioManager.Instance && current > areaNum)
+            if (AudioManager.I && current > areaNum)
             {
                 switch (type)
                 {
                     case 1:
-                        AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
                         break;
                     case 2:
-                        AudioManager.Instance.PlaySFX(AudioManager.inverseOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.inverseOverlap, 0.35f);
                         break;
                     case 3:
-                        AudioManager.Instance.PlaySFX(AudioManager.outboundOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.outboundOverlap, 0.35f);
                         break;
                 }
             }
@@ -510,16 +466,16 @@ public class UI : MonoBehaviour
             switch (tile)
             {
                 case ObjectTypes.Box:
-                    spr = LevelManager.Instance.boxTile.tileSprite;
+                    spr = LevelManager.I.boxTile.tileSprite;
                     break;
                 case ObjectTypes.Circle:
-                    spr = LevelManager.Instance.circleTile.tileSprite;
+                    spr = LevelManager.I.circleTile.tileSprite;
                     break;
                 case ObjectTypes.Hexagon:
-                    spr = LevelManager.Instance.hexagonTile.tileSprite;
+                    spr = LevelManager.I.hexagonTile.tileSprite;
                     break;
                 case ObjectTypes.Mimic:
-                    spr = LevelManager.Instance.mimicTile.tileSprite;
+                    spr = LevelManager.I.mimicTile.tileSprite;
                     break;
                 default:
                     return;
@@ -528,28 +484,31 @@ public class UI : MonoBehaviour
         }
     }
 
+    [Serializable]
     public class ConfirmRestartUI : UIObject
     {
         public Button restartButton;
         public override void Toggle(bool toggle)
         {
             self.SetActive(toggle);
-            if (toggle) Instance.selectors.ChangeSelected(restartButton.gameObject, true);
+            if (toggle) I.selectors.ChangeSelected(restartButton.gameObject, true);
         }
     }
 
+    [Serializable]
     public class PopupUI : UIObject
     {
         public GameObject popupBtn;
         public Text popupText;
         public void SetPopup(string content)
         {
-            Instance.selectors.ChangeSelected(popupBtn, true);
+            I.selectors.ChangeSelected(popupBtn, true);
             popupText.text = content;
             Toggle(true);
         }
     }
 
+    [Serializable]
     public class DialogUI : UIObject
     {
         public Text text;
@@ -558,98 +517,5 @@ public class UI : MonoBehaviour
             if (additive) text.text += $"{newText}";
             else text.text = $"{newText}";
         }
-    }
-
-    // Actions //
-    internal void ActionChangeScene(string sceneName)
-    {
-        // Load the scene
-        SceneManager.LoadScene(sceneName);
-    }
-
-    private void ActionGoLevelEditor(string _)
-    {
-        if (SceneManager.GetActiveScene().name == "Game") LevelManager.Instance.ReloadLevel(true, true);
-        else if (!LevelManager.Instance.LoadLevel("EditorSession", true))
-        {
-            // Create EditorSession if the file does not exist.
-            LevelManager.Instance.SaveLevel("Editor Mode!", LevelManager.Instance.levelEditorName);
-            LevelManager.Instance.LoadLevel("EditorSession", true);
-        } else {
-            LevelManager.Instance.ReloadLevel(true, true); // reload for custom sprites (very stupid!)
-        }
-
-        // Rich presence
-        GameManager.Instance.SetPresence("editorlevel", LevelManager.Instance.currentLevel.levelName);
-        GameManager.Instance.SetPresence("steam_display", "#Editor");
-
-        LevelManager.Instance.RefreshGameVars();
-        ChangeScene("Level Editor", false);
-        ClearUI();
-    }
-    private void ActionGoNextLevel(string _)
-    {
-        var save = GameManager.save.game.levels.Find(level => level.levelID == LevelManager.Instance.currentLevel.nextLevel);
-
-        // Loads the level (Load internal level first, if it fails, load external)
-        LevelManager.Instance.RefreshGameVars();
-        if (!LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel)) LevelManager.Instance.LoadLevel(LevelManager.Instance.currentLevel.nextLevel, true);
-        LevelManager.Instance.RefreshGameUI();
-
-        // Preload screen
-        TransitionManager.Instance.ChangeTransition(Triangle);
-        if (!LevelManager.Instance.currentLevel.hideUI) preload.PreparePreloadScreen(save);
-        else TransitionManager.Instance.TransitionOut<string>();
-    }
-
-    private void ActionGoHintLevel(string hintLevelID)
-    {
-        // Loads the level
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.LoadLevel(hintLevelID);
-        LevelManager.Instance.RefreshGameUI();
-
-        // transition out
-        TransitionManager.Instance.ChangeTransition(Triangle);
-        TransitionManager.Instance.TransitionOut<string>();
-    }
-
-    private void ActionGoMainMenu(string _)
-    {
-        LevelManager.Instance.ClearLevel();
-        LevelManager.Instance.hasWon = false;
-        GameManager.Instance.isEditing = false;
-        LevelManager.Instance.currentLevel = null;
-        ClearUI();
-
-        ChangeScene("Main Menu", false);
-    }
-    private void ActionRestartLevel(string _)
-    {
-        // Hint popup
-        if (!GameManager.save.game.seenHintPopup)
-        {
-            InputManager.Instance.restartCount++;
-            if (InputManager.Instance.restartCount >= 5)
-            {
-                popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
-                GameManager.save.game.seenHintPopup = true;
-            }
-        }
-
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.RefreshGameUI();
-        LevelManager.Instance.ReloadLevel(true);
-        TransitionManager.Instance.TransitionOut<string>(Swipe);
-    }
-
-    private void ActionReturnHub(string _)
-    {
-        LevelManager.Instance.ClearLevel();
-        LevelManager.Instance.hasWon = false;
-        GameManager.Instance.isEditing = false;
-        LevelManager.Instance.currentLevel = null;
-        ClearUI();
-        ChangeScene("Hub");
     }
 }

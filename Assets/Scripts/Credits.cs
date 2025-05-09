@@ -6,7 +6,7 @@ public class Credits : MonoBehaviour
 
     void Start()
     {
-        UI.Instance.selectors.ChangeSelected(transform.Find("Back Button").gameObject, true);
+        UI.I.selectors.ChangeSelected(transform.Find("Back Button").gameObject, true);
         rt = transform.Find("Holder").GetComponent<RectTransform>();
     }
 

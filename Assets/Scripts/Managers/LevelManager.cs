@@ -10,9 +10,12 @@ using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
 using static TransitionManager.Transitions;
+using System.Diagnostics;
 
 public class LevelManager : MonoBehaviour
 {
+    [HideInInspector] public static LevelManager I;
+
     // Tile References & Others //
     internal readonly ObjectTypes[] typesSolidsList = { ObjectTypes.Wall, ObjectTypes.AntiWall };
     internal readonly ObjectTypes[] typesObjectsList = { ObjectTypes.Box, ObjectTypes.Circle, ObjectTypes.Hexagon, ObjectTypes.Mimic };
@@ -22,54 +25,59 @@ public class LevelManager : MonoBehaviour
     internal readonly ObjectTypes[] typesCustomsList = { ObjectTypes.Level, ObjectTypes.Hologram, ObjectTypes.NPC, ObjectTypes.Fake, ObjectTypes.Mask };
     internal readonly ObjectTypes[] customSpriters = { ObjectTypes.NPC, ObjectTypes.Hologram, ObjectTypes.Fake, ObjectTypes.Mask };
     internal readonly ObjectTypes[] customMovers = { ObjectTypes.Hexagon, ObjectTypes.Mimic };
-    [HideInInspector] public static LevelManager Instance;
-    [HideInInspector] public GameTile wallTile;
-    [HideInInspector] public GameTile antiwallTile;
-    [HideInInspector] public GameTile boxTile;
-    [HideInInspector] public GameTile circleTile;
-    [HideInInspector] public GameTile hexagonTile;
-    [HideInInspector] public GameTile mimicTile;
-    [HideInInspector] public GameTile areaTile;
-    [HideInInspector] public GameTile inverseAreaTile;
-    [HideInInspector] public GameTile outboundAreaTile;
-    [HideInInspector] public GameTile levelTile;
-    [HideInInspector] public GameTile hologramTile;
-    [HideInInspector] public GameTile npcTile;
-    [HideInInspector] public GameTile maskTile;
-    [HideInInspector] public GameTile hazardTile;
-    [HideInInspector] public GameTile voidTile;
-    [HideInInspector] public GameTile invertTile;
-    [HideInInspector] public GameTile arrowTile;
-    [HideInInspector] public GameTile negativeArrowTile;
-    [HideInInspector] public GameTile pullTile;
-    [HideInInspector] public GameTile orbTile;
-    [HideInInspector] public GameTile fragmentTile;
+
+    // Game Tiles //
+    [Header("Game Tiles")]
+    public GameTile wallTile;
+    public GameTile antiwallTile;
+    public GameTile boxTile;
+    public GameTile circleTile;
+    public GameTile hexagonTile;
+    public GameTile mimicTile;
+    public GameTile areaTile;
+    public GameTile inverseAreaTile;
+    public GameTile outboundAreaTile;
+    public GameTile levelTile;
+    public GameTile hologramTile;
+    public GameTile npcTile;
+    public GameTile maskTile;
+    public GameTile hazardTile;
+    public GameTile voidTile;
+    public GameTile invertTile;
+    public GameTile arrowTile;
+    public GameTile negativeArrowTile;
+    public GameTile pullTile;
+    public GameTile orbTile;
+    public GameTile fragmentTile;
 
     // Grids and tilemaps //
     private Grid levelGrid;
-    private Grid extraGrid;
-    [HideInInspector] public Tilemap tilemapCollideable;
-    [HideInInspector] public Tilemap tilemapObjects;
-    [HideInInspector] public Tilemap tilemapWinAreas;
-    [HideInInspector] public Tilemap tilemapHazards;
-    [HideInInspector] public Tilemap tilemapEffects;
-    [HideInInspector] public Tilemap tilemapCustoms;
-    [HideInInspector] public Tilemap tilemapLetterbox;
-    [HideInInspector] public Tilemap tilemapScanlines;
-    [HideInInspector] public Tilemap extrasOutlines;
+    [Header("Tilemaps")]
+    public Tilemap tilemapCollideable;
+    public Tilemap tilemapObjects;
+    public Tilemap tilemapWinAreas;
+    public Tilemap tilemapHazards;
+    public Tilemap tilemapEffects;
+    public Tilemap tilemapCustoms;
+    public Tilemap tilemapLetterbox;
+    public Tilemap tilemapScanlines;
+    public Tilemap extrasOutlines;
+
+    // Renderers //
     private TilemapRenderer areaRenderer;
     private TilemapRenderer objectRenderer;
     private TilemapRenderer effectRenderer;
     internal Vector3 originalPosition;
     internal int worldOffsetX = 0;
     internal int worldOffsetY = 0;
-    // internal GameObject directionPrefab;
-    internal Sprite dottedOverlapBox;
-    internal Sprite dottedOverlapCircle;
-    internal Sprite dottedOverlapHex;
-    internal Sprite fullOverlapBox;
-    internal Sprite fullOverlapCircle;
-    internal Sprite fullOverlapHex;
+
+    [Header("Renderers")]
+    public Sprite dottedOverlapBox;
+    public Sprite dottedOverlapCircle;
+    public Sprite dottedOverlapHex;
+    public Sprite fullOverlapBox;
+    public Sprite fullOverlapCircle;
+    public Sprite fullOverlapHex;
     private Color slightlyTransparent;
 
     // Level data //
@@ -94,7 +102,6 @@ public class LevelManager : MonoBehaviour
     private int defaultAreaLayer;
     private int defaultObjectsLayer;
     private int defaultEffectsLayer;
-    private Checker background;
 
     // Player //
     private Coroutine timerCoroutine = null;
@@ -104,87 +111,49 @@ public class LevelManager : MonoBehaviour
     private bool noMove = false;
     internal Vector3Int currMove = Vector3Int.zero;
     internal bool voidedCutscene = false;
-    public bool isPaused = false;
-    public bool hasWon;
+    internal bool isPaused = false;
+    internal bool hasWon;
+    internal int overflowCycles = 0;
 
     void Awake()
     {
         // Singleton (LevelManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
 
-        // Getting grids and tilemap references
+        // References + Setup
         SceneManager.sceneLoaded += RefreshGameOnSceneLoad;
-        TryGetSceneReferences();
+        SetupDefaults();
+    }
 
-        // Getting tile references
-        wallTile = Resources.Load<WallTile>("Tiles/Solids/Wall");
-        antiwallTile = Resources.Load<AntiWallTile>("Tiles/Solids/Anti Wall");
-        boxTile = Resources.Load<BoxTile>("Tiles/Objects/Box");
-        circleTile = Resources.Load<CircleTile>("Tiles/Objects/Circle");
-        hexagonTile = Resources.Load<HexagonTile>("Tiles/Objects/Hexagon");
-        mimicTile = Resources.Load<MimicTile>("Tiles/Objects/Mimic");
-        areaTile = Resources.Load<WinAreaTile>("Tiles/Areas/Area");
-        inverseAreaTile = Resources.Load<InverseWinAreaTile>("Tiles/Areas/Inverse Area");
-        outboundAreaTile = Resources.Load<OutboundAreaTile>("Tiles/Areas/Outbound Area");
-        hazardTile = Resources.Load<HazardTile>("Tiles/Hazards/Hazard");
-        voidTile = Resources.Load<VoidTile>("Tiles/Hazards/Void");
-        invertTile = Resources.Load<InvertTile>("Tiles/Effects/Invert");
-        arrowTile = Resources.Load<ArrowTile>("Tiles/Effects/Arrow");
-        negativeArrowTile = Resources.Load<NegativeArrowTile>("Tiles/Effects/Negative Arrow");
-        pullTile = Resources.Load<PullTile>("Tiles/Effects/Pull");
-        orbTile = Resources.Load<OrbTile>("Tiles/Effects/Orb");
-        fragmentTile = Resources.Load<FragmentTile>("Tiles/Effects/Fragment");
-        levelTile = Resources.Load<LevelTile>("Tiles/Customs/Level");
-        hologramTile = Resources.Load<HologramTile>("Tiles/Customs/Hologram");
-        npcTile = Resources.Load<NPCTile>("Tiles/Customs/NPC");
-        maskTile = Resources.Load<MaskTile>("Tiles/Customs/Mask");
+    // Sets initial variables
+    private void SetupDefaults()
+    {
+        // Level grids and tilemaps
+        Transform gridObject = transform.Find("Level Grid");
+        levelGrid = gridObject?.GetComponent<Grid>();
 
-        // Defaults
-        // directionPrefab = Resources.Load<GameObject>("Prefabs/Tile Properties");
-        dottedOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/DottedBoxOverlap");
-        dottedOverlapCircle = Resources.Load<Sprite>("Sprites/Overlaps/DottedCircleOverlap");
-        dottedOverlapHex = Resources.Load<Sprite>("Sprites/Overlaps/DottedHexOverlap");
-        fullOverlapBox = Resources.Load<Sprite>("Sprites/Overlaps/FullBoxOverlap");
-        fullOverlapCircle = Resources.Load<Sprite>("Sprites/Overlaps/FullCircleOverlap");
-        fullOverlapHex = Resources.Load<Sprite>("Sprites/Overlaps/FullHexOverlap");
+        // Renderers
+        Transform extraObject = transform.Find("Extras");
+        extrasOutlines = extraObject?.Find("Outlines").GetComponent<Tilemap>();
+
+        areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
+        objectRenderer = tilemapObjects.GetComponent<TilemapRenderer>();
+        effectRenderer = tilemapEffects.GetComponent<TilemapRenderer>();
         slightlyTransparent = new(1, 1, 1, 0.85f);
-        defaultAreaLayer = areaRenderer.sortingOrder;
-        defaultObjectsLayer = objectRenderer.sortingOrder;
-        defaultEffectsLayer = effectRenderer.sortingOrder;
-        hasWon = false;
 
         // Editor (with file persistence per session)
         levelEditorName = "EditorSession";
         currentLevelID = null;
         currentLevel = null;
-    }
 
-    // Gets the scene references for later use (should be called every time on scene change (actually no i lied))
-    private void TryGetSceneReferences()
-    {
-        // Level grids and tilemaps
-        Transform gridObject = transform.Find("Level Grid");
-        levelGrid = gridObject != null ? gridObject.GetComponent<Grid>() : null;
-        tilemapCollideable = gridObject != null ? gridObject.Find("Collideable").GetComponent<Tilemap>() : null;
-        tilemapObjects = gridObject != null ? gridObject.Find("Objects").GetComponent<Tilemap>() : null;
-        tilemapWinAreas = gridObject != null ? gridObject.Find("Overlaps").GetComponent<Tilemap>() : null;
-        tilemapHazards = gridObject != null ? gridObject.Find("Hazards").GetComponent<Tilemap>() : null;
-        tilemapEffects = gridObject != null ? gridObject.Find("Effects").GetComponent<Tilemap>() : null;
-        tilemapCustoms = gridObject != null ? gridObject.Find("Customs").GetComponent<Tilemap>() : null;
-        tilemapLetterbox = gridObject != null ? gridObject.Find("Letterbox").GetComponent<Tilemap>() : null;
-        tilemapScanlines = tilemapLetterbox != null ? tilemapLetterbox.transform.Find("Scanlines").GetComponent<Tilemap>() : null;
-
-        // Extra grids and tilemaps
-        Transform extraObject = transform.Find("Extras");
-        extraGrid = extraObject != null ? extraObject.GetComponent<Grid>() : null;
-        extrasOutlines = extraObject != null ? extraObject.Find("Outlines").GetComponent<Tilemap>() : null;
-
-        areaRenderer = tilemapWinAreas.GetComponent<TilemapRenderer>();
-        objectRenderer = tilemapObjects.GetComponent<TilemapRenderer>();
-        effectRenderer = tilemapEffects.GetComponent<TilemapRenderer>();
+        // Misc startups
+        defaultAreaLayer = areaRenderer.sortingOrder;
+        defaultObjectsLayer = objectRenderer.sortingOrder;
+        defaultEffectsLayer = effectRenderer.sortingOrder;
         originalPosition = new Vector3(tilemapObjects.transform.position.x, tilemapObjects.transform.position.y, tilemapObjects.transform.position.z);
+        hasWon = false;
     }
 
     // Adds a tile to the private objects list
@@ -262,7 +231,8 @@ public class LevelManager : MonoBehaviour
         levelCustoms.ForEach(tile => level.tiles.customTiles.Add(new(tile.GetTileType(), tile.directions, tile.position)));
 
         // Set some flags
-        if (currentLevel != null) {
+        if (currentLevel != null)
+        {
             if (previewImage != null) level.previewImage = Convert.ToBase64String(previewImage);
             else level.previewImage = null;
             level.nextLevel = currentLevel.nextLevel;
@@ -285,7 +255,7 @@ public class LevelManager : MonoBehaviour
         // byte[] levelAsBytes = System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(level, false));
         // File.WriteAllText(levelPath, Convert.ToBase64String(levelAsBytes));
 
-        if (!silent) UI.Instance.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\".", 4.0f);
+        if (!silent) UI.I.global.SendMessage($"Saved level \"{levelName}\" with ID \"{levelID}\".", 4.0f);
         return levelID;
     }
 
@@ -312,63 +282,63 @@ public class LevelManager : MonoBehaviour
         levelTimer = 0;
         levelMoves = 0;
         timerCoroutine = StartCoroutine(LevelTimer());
-        UI.Instance.ingame.SetLevelMoves(levelMoves);
+        UI.I.ingame.SetLevelMoves(levelMoves);
 
         // BGM?
-        if (levelID.StartsWith("W1")) AudioManager.Instance.PlayBGM(AudioManager.W1BGM);
-        else if (levelID.StartsWith("W2")) AudioManager.Instance.PlayBGM(AudioManager.W2BGM);
-        else if (levelID.StartsWith("W3")) AudioManager.Instance.PlayBGM(AudioManager.W3BGM);
-        else if (levelID.StartsWith("REMIX")) AudioManager.Instance.PlayBGM(AudioManager.remixBGM);
-        else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) AudioManager.Instance.PlayBGM(AudioManager.voidBGM);
+        if (levelID.StartsWith("W1")) AudioManager.I.PlayBGM(AudioManager.W1BGM);
+        else if (levelID.StartsWith("W2")) AudioManager.I.PlayBGM(AudioManager.W2BGM);
+        else if (levelID.StartsWith("W3")) AudioManager.I.PlayBGM(AudioManager.W3BGM);
+        else if (levelID.StartsWith("REMIX")) AudioManager.I.PlayBGM(AudioManager.remixBGM);
+        else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) AudioManager.I.PlayBGM(AudioManager.voidBGM);
 
         // Selector effect
-        if (levelID.StartsWith("REMIX") || levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) UI.Instance.selectors.SetEffect(1);
-        else UI.Instance.selectors.SetEffect(0);
+        if (levelID.StartsWith("REMIX") || levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) UI.I.selectors.SetEffect(1);
+        else UI.I.selectors.SetEffect(0);
 
         // Swapping mechanic startup
-        // UI.Instance.ingame.cycleIcon.gameObject.SetActive(GameManager.save.game.mechanics.hasSwapUpgrade);
+        // UI.I.ingame.cycleIcon.gameObject.SetActive(GameManager.save.game.mechanics.hasSwapUpgrade);
         if (GameManager.save.game.mechanics.hasSwapUpgrade)
         {
-            var playables = InputManager.Instance.GetPlayableObjects();
+            var playables = InputManager.I.GetPlayableObjects();
             if (playables.Count == 1) { formQueue.Add(playables[0].GetTileType()); }
             else formQueue.Add(ObjectTypes.Mimic); // should never happen anyways.
-            UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
+            UI.I.ingame.SetCycleIcon(ObjectTypes.Hexagon);
         }
 
         // Reset hint popup (if applicable)
-        if (!GameManager.save.game.seenHintPopup) InputManager.Instance.restartCount = 0;
+        if (!GameManager.save.game.seenHintPopup) InputManager.I.restartCount = 0;
 
         // Rich presence
-        GameManager.Instance.SetPresence("playinglevel", currentLevel.levelName);
-        GameManager.Instance.SetPresence("steam_display", "#Playing");
+        GameManager.I.SetPresence("playinglevel", currentLevel.levelName);
+        GameManager.I.SetPresence("steam_display", "#Playing");
 
         // Hide UI?
-        UI.Instance.pause.title.text = currentLevel.levelName;
-        if (!silent) UI.Instance.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
+        UI.I.pause.title.text = currentLevel.levelName;
+        if (!silent) UI.I.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
         if (currentLevel.hideUI)
         {
             tilemapLetterbox.gameObject.SetActive(true);
-            UI.Instance.ingame.Toggle(false);
+            UI.I.ingame.Toggle(false);
             return true;
         }
 
         // Ingame UI setup
-        UI.Instance.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
-        UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
-        if (!GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) UI.Instance.ingame.rArea.anchoredPosition = new(0, 125);
-        else if (GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(-250, 125); UI.Instance.ingame.rMoves.anchoredPosition = new(250, 125); }
-        else if (!GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(250, 125); UI.Instance.ingame.rTimer.anchoredPosition = new(-275, 125); }
-        else if (GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.Instance.ingame.rArea.anchoredPosition = new(0, 125); UI.Instance.ingame.rMoves.anchoredPosition = new(500, 125); UI.Instance.ingame.rTimer.anchoredPosition = new(-500, 125); }
-        
+        UI.I.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
+        UI.I.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
+        if (!GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) UI.I.ingame.rArea.anchoredPosition = new(0, 125);
+        else if (GameManager.save.preferences.showMoves && !GameManager.save.preferences.showTimer) { UI.I.ingame.rArea.anchoredPosition = new(-250, 125); UI.I.ingame.rMoves.anchoredPosition = new(250, 125); }
+        else if (!GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.I.ingame.rArea.anchoredPosition = new(250, 125); UI.I.ingame.rTimer.anchoredPosition = new(-275, 125); }
+        else if (GameManager.save.preferences.showMoves && GameManager.save.preferences.showTimer) { UI.I.ingame.rArea.anchoredPosition = new(0, 125); UI.I.ingame.rMoves.anchoredPosition = new(500, 125); UI.I.ingame.rTimer.anchoredPosition = new(-500, 125); }
+
         // UI etc
         GameData.Level levelAsSave = GameManager.save.game.levels.Find(l => l.levelID == levelID);
-        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
+        UI.I.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
         if (levelAsSave != null) {
-            UI.Instance.pause.SetBestTime(levelAsSave.stats.bestTime);
-            UI.Instance.pause.SetBestMoves(levelAsSave.stats.totalMoves);
+            UI.I.pause.SetBestTime(levelAsSave.stats.bestTime);
+            UI.I.pause.SetBestMoves(levelAsSave.stats.totalMoves);
         } else {
-            UI.Instance.pause.SetBestTime(0f);
-            UI.Instance.pause.SetBestMoves(0);
+            UI.I.pause.SetBestTime(0f);
+            UI.I.pause.SetBestMoves(0);
         }
 
         return true;
@@ -385,17 +355,17 @@ public class LevelManager : MonoBehaviour
         // Restart timer and level stats
         levelTimer = 0f;
         levelMoves = 0;
-        UI.Instance.ingame.SetLevelMoves(levelMoves);
+        UI.I.ingame.SetLevelMoves(levelMoves);
         timerCoroutine = StartCoroutine(LevelTimer());
 
         // Soft "loads" the new level (doesnt use LoadLevel)
-        if (!silent) UI.Instance.global.SendMessage("Reloaded level.");
+        if (!silent) UI.I.global.SendMessage("Reloaded level.");
         currentLevel = GetLevel(currentLevelID, true);
         BuildLevel(currentLevel.tiles, isLevelEditor);
 
         // UI!
         if (currentLevel.hideUI) return;
-        UI.Instance.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
+        UI.I.ingame.SetAreaCount(0, levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1);
     }
 
     // Builds the level
@@ -445,25 +415,26 @@ public class LevelManager : MonoBehaviour
         // Override for undoing
         if (undo)
         {
-            InputManager.Instance.latestTile = ObjectTypes.Hexagon;
+            InputManager.I.latestTile = ObjectTypes.Hexagon;
             tilemapObjects.ClearAllTiles();
             tilemapEffects.ClearAllTiles();
             tilemapHazards.ClearAllTiles();
             levelEffects.Clear();
             levelObjects.Clear();
             levelHazards.Clear();
-            movementBlacklist.Clear();
             customTileInfo.Clear();
+            movementBlacklist.Clear();
             return;
         }
 
-        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer => { if(layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
+        levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer =>
+            { if (layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
+
         if (timerCoroutine != null) StopCoroutine(timerCoroutine);
-        InputManager.Instance.latestMovement = Vector3Int.back;
+        InputManager.I.latestMovement = Vector3Int.back;
         ClearUndoFrames();
 
-        // directionPrefab.transform.Find("AnimationSprite").gameObject.SetActive(false);
-        InputManager.Instance.latestTile = ObjectTypes.Hexagon;
+        InputManager.I.latestTile = ObjectTypes.Hexagon;
         movementBlacklist.Clear();
         customTileInfo.Clear();
         levelSolids.Clear();
@@ -508,7 +479,7 @@ public class LevelManager : MonoBehaviour
         // Moves the tile if all collision checks pass
         newPosition = tile.CollisionHandler(newPosition, direction, tilemapObjects, tilemapCollideable, beingPushed);
         if (newPosition == Vector3.back || newPosition == startingPosition || (movementBlacklist.Contains(tile) && !beingPushed) || noMove) return false; // also re-checking for blacklist
-        if (tilemapObjects.GetTile(newPosition) == null) MoveTile(startingPosition, newPosition, tile, false);
+        if (tilemapObjects.GetTile(newPosition) == null) MoveTile(startingPosition, newPosition, tile);
         else return false;
 
         // Updates new current position of the tile
@@ -528,7 +499,7 @@ public class LevelManager : MonoBehaviour
             else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
 
             // Achievement (will retrigger multiple times, maybe bad?)
-            if (ach && !currentLevel.hideUI && currentLevelID != "FRAGMENTS/Tutorial") GameManager.Instance.EditAchivement("ACH_FIRST_OUTERBOUND");
+            if (ach && !currentLevel.hideUI && currentLevelID != "FRAGMENTS/Tutorial") GameManager.I.EditAchivement("ACH_FIRST_OUTERBOUND");
         }
 
         // Removes from movement queue
@@ -552,33 +523,8 @@ public class LevelManager : MonoBehaviour
     }
 
     // Moves a tile, no other cases
-    public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile, bool doAnimation = true)
+    public void MoveTile(Vector3Int startingPos, Vector3Int newPos, GameTile tile)
     {
-        if (doAnimation) // Will always be false!! caller is set to false rn.
-        {
-            // Vector3 lastPosAsWorld = tilemapObjects.CellToWorld(newPos);
-
-            // Moves tile to new position
-            tilemapObjects.SetTile(newPos, tile);
-            tilemapObjects.SetTile(startingPos, null);
-
-            // Plays tile's animation, towards target position after moving a tile (ONLY OBJECT TILES)
-            switch (tile.GetTileType())
-            {
-                case ObjectTypes.Mimic:
-                case ObjectTypes.Box:
-                    break;
-
-                case ObjectTypes.Circle:
-                    break;
-
-                case ObjectTypes.Hexagon:
-                    break;
-            }
-            return;
-        }
-
-        // Only sets the new tile and removes the old one
         tilemapObjects.SetTile(newPos, tile);
         tilemapObjects.SetTile(startingPos, null);
     }
@@ -697,7 +643,7 @@ public class LevelManager : MonoBehaviour
     // Returns if a position is inside or outside the level bounds
     public bool CheckSceneInbounds(Vector3Int position, bool hexSpecial = false, bool hexPushed = false)
     {
-        if (GameManager.Instance.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
+        if (GameManager.I.IsEditor()) return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
         if (currentLevel.freeroam && hexSpecial && !hexPushed && GameManager.save.game.mechanics.hasSwapUpgrade) return !(position.x < 0 + worldOffsetX - 2 || position.x > boundsX + worldOffsetX + 2 || position.y > 0 + worldOffsetY + 2 || position.y < boundsY + worldOffsetY - 2);
         if (currentLevel.freeroam && currentLevel.hideUI) return true;
         return !(position.x < 0 + worldOffsetX || position.x > boundsX + worldOffsetX || position.y > 0 + worldOffsetY || position.y < boundsY + worldOffsetY);
@@ -712,6 +658,7 @@ public class LevelManager : MonoBehaviour
         movementBlacklist.Clear();
         toDestroy.Clear();
         lateMove.Clear();
+        overflowCycles = 0;
         doPushSFX = false;
         noMove = false;
 
@@ -740,19 +687,19 @@ public class LevelManager : MonoBehaviour
         }
 
         // Tile pushed SFX
-        if (doPushSFX) AudioManager.Instance.PlaySFX(AudioManager.tilePush, 0.45f);
+        if (doPushSFX) AudioManager.I.PlaySFX(AudioManager.tilePush, 0.45f);
 
         // Destroys all marked object tiles.
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
-        if (toDestroy.Count > 0) AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.45f);
+        if (toDestroy.Count > 0) AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.45f);
 
         // Achievement (will retrigger multiple times, maybe bad?)
-        if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.Instance.EditAchivement("ACH_DIRECTIONLESS");
+        if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.I.EditAchivement("ACH_DIRECTIONLESS");
 
         // Win check, add one move to the player
-        if (validation.Contains(true)) levelMoves++;
+        if (validation.Contains(true) || overflowCycles >= 100) levelMoves++;
         else RemoveUndoFrame();
-        if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
+        if (UI.I) UI.I.ingame.SetLevelMoves(levelMoves);
         CheckCompletion();
     }
 
@@ -762,7 +709,7 @@ public class LevelManager : MonoBehaviour
         // Level win condition:
         // All area tiles have some object overlapping them and at least 1 exists,
         // no other areas are being overlapped.
-        bool winCondition = 
+        bool winCondition =
             levelWinAreas.All(overlap =>
                 {
                     if (!typesAreas.Contains(overlap.GetTileType())) return true;
@@ -804,7 +751,7 @@ public class LevelManager : MonoBehaviour
         // Outbound win condition:
         // All outbound area tiles have some object overlapping them and at least 1 exists,
         // All area tiles have some object overlapping them.
-        bool outboundCondition = 
+        bool outboundCondition =
             levelWinAreas.All(overlap =>
                 {
                     if (!typesAreas.Contains(overlap.GetTileType())) return true;
@@ -822,83 +769,80 @@ public class LevelManager : MonoBehaviour
         SetUIAreaCount();
 
         // Save current game status when beating a level (doesnt store new stats)
-        if (winCondition || remixCondition || outboundCondition) { GameManager.Instance.SaveDataJSON(GameManager.save); }
+        if (winCondition || remixCondition || outboundCondition) { GameManager.I.SaveDataJSON(GameManager.save); }
 
         // Outbound win
-        if (outboundCondition && !DialogManager.Instance.inDialog)
+        if (outboundCondition && !DialogManager.I.inDialog)
         {
             // Victory overrides
             if (currentLevelID == "FRAGMENTS/Upgrade" && GameManager.save.game.collectedFragments.Count >= 4)
             {
                 GameManager.save.game.mechanics.hasSwapUpgrade = true;
-                TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
-                GameManager.Instance.isEditing = false;
+                TransitionManager.I.TransitionIn(Unknown, Actions.RemixCondition, currentLevel.remixLevel);
+                GameManager.I.isEditing = false;
                 return;
             }
 
-            else if (currentLevelID == "VOID/END") 
+            else if (currentLevelID == "VOID/END")
             {
                 voidedCutscene = true;
-                ActionDiveIn("1");
+                Actions.DiveIn("1");
                 return;
             }
 
 
             // Level + savedata
             GameData.LevelChanges changes = new(false, true, -1, -1);
-            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+            GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            UI.Instance.GoNextLevel();
+            UI.I.GoNextLevel();
             hasWon = true;
             return;
         }
 
         // Load remix level!
-        if (remixCondition && !DialogManager.Instance.inDialog)
+        if (remixCondition && !DialogManager.I.inDialog)
         {
             // Check if the player is playtesting a level
-            if (GameManager.Instance.isEditing)
+            if (GameManager.I.isEditing)
             {
-                UI.Instance.GoLevelEditor();
-                return;   
+                UI.I.GoLevelEditor();
+                return;
             }
 
             // First remix level?
             if (!GameManager.save.game.mechanics.hasSeenRemix)
             {
-                GameManager.Instance.EditAchivement("ACH_FIRST_INVERSE");
+                GameManager.I.EditAchivement("ACH_FIRST_INVERSE");
                 GameManager.save.game.mechanics.hasSeenRemix = true;
             }
-            
+
             // Level + savedata
             GameData.LevelChanges changes = new(false, false, -1, -1);
-            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
-            GameManager.Instance.UpdateSavedLevel(currentLevel.remixLevel, changes, false); // create a remix entry (therefore its discovered)
+            GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
+            GameManager.I.UpdateSavedLevel(currentLevel.remixLevel, changes, false); // create a remix entry (therefore its discovered)
 
-            TransitionManager.Instance.TransitionIn(Unknown, ActionRemixCondition, currentLevel.remixLevel);
-            GameManager.Instance.isEditing = false;
+            TransitionManager.I.TransitionIn(Unknown, Actions.RemixCondition, currentLevel.remixLevel);
+            GameManager.I.isEditing = false;
             return;
         }
 
         // If won, do the thing
-        if (winCondition && !DialogManager.Instance.inDialog)
+        if (winCondition && !DialogManager.I.inDialog)
         {
             // Level 1 achievement
-            if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.Instance.EditAchivement("ACH_SIXMOVES");
+            if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.I.EditAchivement("ACH_SIXMOVES");
 
             // Level savedata
             GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
-            GameManager.Instance.UpdateSavedLevel(currentLevelID, changes, true);
+            GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
 
             // UI
-            UI.Instance.GoNextLevel();
+            UI.I.GoNextLevel();
             hasWon = true;
         }
     }
-
-    // Returns if currently in editor
-    public bool IsAllowedToPlay() { return !(GameManager.Instance.IsBadScene() || isPaused || hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf || UI.Instance.popup.self.activeSelf); }
 
     // Gets a level and returns it as a serialized object
     public SerializableLevel GetLevel(string levelID, bool external, bool silent = false)
@@ -914,7 +858,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Invalid level!
-        if (level == null) { if (!silent) UI.Instance.global.SendMessage($"Invalid level! ({levelID})", 2.5f); return null; }
+        if (level == null) { if (!silent) UI.I.global.SendMessage($"Invalid level! ({levelID})", 2.5f); return null; }
 
         // Gets the level as readable data
         // byte[] levelAsBytes = Convert.FromBase64String(level);
@@ -967,11 +911,11 @@ public class LevelManager : MonoBehaviour
         worldOffsetX = 0;
         worldOffsetY = 0;
 
-        DialogManager.Instance.loadedDial = null;
+        DialogManager.I.loadedDial = null;
         tilemapLetterbox.gameObject.SetActive(true);
         extrasOutlines.gameObject.SetActive(true);
-        UI.Instance.ingame.SetLevelTimer(levelTimer);
-        UI.Instance.ingame.SetLevelMoves(levelMoves);
+        UI.I.ingame.SetLevelTimer(levelTimer);
+        UI.I.ingame.SetLevelMoves(levelMoves);
         MoveTilemaps(originalPosition, true);
     }
 
@@ -980,40 +924,36 @@ public class LevelManager : MonoBehaviour
     {
         if (!currentLevel.hideUI)
         {
-            UI.Instance.ingame.Toggle(true);
-            UI.Instance.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
-            UI.Instance.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
+            UI.I.ingame.Toggle(true);
+            UI.I.ingame.levelMoves.transform.parent.gameObject.SetActive(GameManager.save.preferences.showMoves);
+            UI.I.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
         }
 
         if (SceneManager.GetActiveScene().name != "Game")
         {
-            UI.Instance.effects.gameObject.SetActive(false);
+            UI.I.effects.gameObject.SetActive(false);
         }
-        UI.Instance.pause.Toggle(false);
-        // UI.Instance.win.Toggle(false);
-        UI.Instance.editor.Toggle(false);
+        UI.I.pause.Toggle(false);
+        UI.I.editor.Toggle(false);
     }
 
     // Gets called whenever you change scenes
     private void RefreshGameOnSceneLoad(Scene scene, LoadSceneMode sceneMode)
     {
-        if (UI.Instance.selectors)
+        if (UI.I.selectors)
         {
-            UI.Instance.selectors.right.SetParent(UI.Instance.selectors.gameObject.transform);
-            UI.Instance.selectors.left.SetParent(UI.Instance.selectors.gameObject.transform);
-            // UI.Instance.selectors.instant = true;
+            UI.I.selectors.right.SetParent(UI.I.selectors.gameObject.transform);
+            UI.I.selectors.left.SetParent(UI.I.selectors.gameObject.transform);
+            // UI.I.selectors.instant = true;
         }
 
-        if (GameManager.Instance.noGameplayScenes.Contains(scene.name))
+        if (GameManager.I.noGameplayScenes.Contains(scene.name))
         {
             tilemapLetterbox.gameObject.SetActive(false);
             extrasOutlines.gameObject.SetActive(false);
-            UI.Instance.ingame.Toggle(false);
+            UI.I.ingame.Toggle(false);
             return;
         }
-
-        // Get game background reference
-        if (SceneManager.GetActiveScene().name == "Game" && !background) background = GameObject.Find("Static Background").GetComponent<Checker>();
     }
 
     // Level timer speedrun any%
@@ -1022,7 +962,7 @@ public class LevelManager : MonoBehaviour
         while (!hasWon)
         {
             levelTimer += Time.deltaTime;
-            if (UI.Instance) UI.Instance.ingame.SetLevelTimer(levelTimer);
+            if (UI.I) UI.I.ingame.SetLevelTimer(levelTimer);
             yield return null;
         }
     }
@@ -1064,7 +1004,7 @@ public class LevelManager : MonoBehaviour
     internal void AddUndoFrame()
     {
         if (undoSequence.Count >= undoSequence.Capacity) RemoveUndoFrame(true);
-        formQueue.Add(InputManager.Instance.latestTile);
+        formQueue.Add(InputManager.I.latestTile);
         roomSequence.Add((worldOffsetX, worldOffsetY));
         undoSequence.Add(new Tiles(levelSolids, levelObjects, levelWinAreas, levelHazards, levelEffects, levelCustoms, customTileInfo));
     }
@@ -1083,24 +1023,24 @@ public class LevelManager : MonoBehaviour
     // Undo check
     internal bool IsUndoQueueValid() { return undoSequence.Count > 0; }
 
-    // Undoes a move
+    // Undo a move
     internal void Undo()
     {
         // Reload level snapshot (not very efficient)
         ClearLevel(true);
         BuildLevel(undoSequence[^1], false, true);
-        InputManager.Instance.latestTile = formQueue[^1];
+        InputManager.I.latestTile = formQueue[^1];
         worldOffsetX = roomSequence[^1].Item1;
         worldOffsetY = roomSequence[^1].Item2;
         MoveTilemaps(originalPosition - new Vector3(worldOffsetX, worldOffsetY), true);
         SetUIAreaCount();
 
         // Undo SFX
-        AudioManager.Instance.PlaySFX(AudioManager.undo, 1f, true);
-        
+        AudioManager.I.PlaySFX(AudioManager.undo, 1f, true);
+
         // Remove a move
         levelMoves--;
-        if (UI.Instance) UI.Instance.ingame.SetLevelMoves(levelMoves);
+        if (UI.I) UI.I.ingame.SetLevelMoves(levelMoves);
     }
 
     // No more moving!
@@ -1127,7 +1067,7 @@ public class LevelManager : MonoBehaviour
                     if (tile.customText.Split(";").Length < 2) return;
                     stringCheck = (string)tile.customText.Split(";").GetValue(1);
                     break;
-                
+
                 case ObjectTypes.Hologram:
                 case ObjectTypes.Fake:
                     stringCheck = tile.customText;
@@ -1147,17 +1087,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Returns the list of object tiles
-    internal List<GameTile> GetObjectTiles()
-    {
-        return levelObjects;
-    }
-
-    // Returns the list of custom tiles
-    internal List<GameTile> GetCustomTiles()
-    {
-        return levelCustoms;
-    }
+    // Returns the list of X tiles
+    internal List<GameTile> GetObjectTiles() { return levelObjects; }
+    internal List<GameTile> GetCustomTiles() { return levelCustoms; }
 
     // Finds all overlapped areas and sets the amount on the UI
     private void SetUIAreaCount()
@@ -1169,7 +1101,7 @@ public class LevelManager : MonoBehaviour
             currTile = tilemapObjects.GetTile<GameTile>(area.position);
             if (area.GetTileType() == ObjectTypes.Area && currTile != null)
             {
-                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.completedColor);
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.I.completedColor);
                 RefreshObjectTile(currTile);
                 currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
@@ -1181,7 +1113,7 @@ public class LevelManager : MonoBehaviour
             currTile = tilemapObjects.GetTile<GameTile>(area.position);
             if (area.GetTileType() == ObjectTypes.InverseArea && currTile != null)
             {
-                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.remixColor);
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.I.remixColor);
                 RefreshObjectTile(currTile);
                 currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
@@ -1193,7 +1125,7 @@ public class LevelManager : MonoBehaviour
             currTile = tilemapObjects.GetTile<GameTile>(area.position);
             if (area.GetTileType() == ObjectTypes.OutboundArea && currTile != null)
             {
-                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.Instance.outboundColor);
+                currTile.directions.SetAnimationSprite(currTile.GetOverlapSprite(), GameManager.I.outboundColor);
                 RefreshObjectTile(currTile);
                 currTile.directions.animationSprite.gameObject.SetActive(false);
                 return true;
@@ -1204,7 +1136,7 @@ public class LevelManager : MonoBehaviour
         // Outbound overlaps
         if (outboundOverlaps > 0)
         {
-            UI.Instance.ingame.SetAreaCount(
+            UI.I.ingame.SetAreaCount(
                 outboundOverlaps + normalOverlaps,
                 levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.OutboundArea; }) + levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }),
                 3 // thats a funny 3
@@ -1215,7 +1147,7 @@ public class LevelManager : MonoBehaviour
         // Normal overlaps
         if (normalOverlaps > 0 && !GameManager.save.game.mechanics.hasSeenRemix || (normalOverlaps > remixOverlaps && GameManager.save.game.mechanics.hasSeenRemix))
         {
-            UI.Instance.ingame.SetAreaCount(
+            UI.I.ingame.SetAreaCount(
                 normalOverlaps,
                 levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1
             );
@@ -1225,7 +1157,7 @@ public class LevelManager : MonoBehaviour
         // Remix overlaps
         if (remixOverlaps > 0 && GameManager.save.game.mechanics.hasSeenRemix)
         {
-            UI.Instance.ingame.SetAreaCount(
+            UI.I.ingame.SetAreaCount(
                 remixOverlaps,
                 levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.InverseArea; }), 2
             );
@@ -1233,87 +1165,9 @@ public class LevelManager : MonoBehaviour
         }
 
         // if nothing applies, use default (normal overlaps, copied code)
-        UI.Instance.ingame.SetAreaCount(
+        UI.I.ingame.SetAreaCount(
             normalOverlaps,
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1
         );
-    }
-
-    // Actions //
-    public void ActionLoadLevel(string name)
-    {
-        var save = GameManager.save.game.levels.Find(level => level.levelID == name);
-
-        // Loads the level
-        try {
-            LoadLevel(name, SceneManager.GetActiveScene().name == "Custom Levels");
-        } catch (Exception e) {
-            Debug.LogException(e, this);
-            UI.Instance.global.SendMessage("An error ocurred while loading!", 10f);
-            UI.Instance.ChangeScene("Main Menu", false);
-            ClearLevel();
-            return;
-        }
-
-        RefreshGameVars();
-        RefreshGameUI();
-
-        // Custom background ?
-        // if (name.StartsWith("W1/") || name.StartsWith("W2/") || name.StartsWith("W3/"))
-        // {
-        //     tilemapScanlines.gameObject.SetActive(false);
-        //     UI.Instance.effects.gameObject.SetActive(true);
-        //     UI.Instance.effectsBackgrounds.SetActive(true);
-        //     Debug.Log("a");
-        // } else tilemapScanlines.gameObject.SetActive(true);
-        UI.Instance.effects.gameObject.SetActive(true);
-
-        // Preload screen
-        TransitionManager.Instance.ChangeTransition(Triangle);
-        UI.Instance.pause.title.text = currentLevel.levelName;
-        if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
-        else {
-            UI.Instance.ChangeScene("Game", false);
-            TransitionManager.Instance.TransitionOut<string>();
-        }
-    }
-
-    public void ActionRemixCondition(string remixID)
-    {
-        var save = GameManager.save.game.levels.Find(level => level.levelID == remixID);
-        
-        // Loads the level (Load internal level first, if it fails, load external)
-        RefreshGameVars(); // necessary.
-        if (!LoadLevel(remixID)) LoadLevel(remixID, true);
-
-        // Preload screen
-        TransitionManager.Instance.ChangeTransition(Unknown);
-        if (!currentLevel.hideUI) UI.Instance.preload.PreparePreloadScreen(save);
-        else TransitionManager.Instance.TransitionOut<string>();
-    }
-
-    internal void ActionDiveIn(string count)
-    {
-        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
-        int.TryParse(count, out int numberCount);
-
-        if (count == "5")
-        {
-            TransitionManager.Instance.TransitionIn(Triangle, ActionLoadLevel, "VOID/Entry");
-            voidedCutscene = false;
-            return;
-        }
-
-        TransitionManager.Instance.TransitionIn(effects[numberCount - 1], ActionDiveOut, count);
-    }
-
-    internal void ActionDiveOut(string count)
-    {
-        LoadLevel($"VOID/Dive/{count}");
-
-        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
-        int.TryParse(count, out int numberCount);
-
-        TransitionManager.Instance.TransitionOut(effects[numberCount - 1], ActionDiveIn, $"{numberCount + 1}");
     }
 }

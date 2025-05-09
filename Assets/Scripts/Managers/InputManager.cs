@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static GameTile;
 using static TransitionManager.Transitions;
+using static GameTile;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
+    public static InputManager I;
     public Vector3Int latestMovement = Vector3Int.back;
 
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
@@ -33,18 +33,17 @@ public class InputManager : MonoBehaviour
     void Awake()
     {       
         // Singleton (InputManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
 
         // Defaults
         latestMovement = Vector3Int.back;
     }
-
     
     void Update()
     {
         // Next level / Load level intermission
-        if (TransitionManager.Instance.inTransition && UI.Instance.preload.self.activeSelf && Input.anyKeyDown)
+        if (TransitionManager.I.inTransition && UI.I.preload.self.activeSelf && Input.anyKeyDown)
         {
             if (outCoro != null) return;
             outCoro = StartCoroutine(OutTransition());
@@ -78,13 +77,13 @@ public class InputManager : MonoBehaviour
         // Enable debug command
         if (debugCommand == "adastra")
         {
-            if (!GameManager.Instance.buildDebugMode)
+            if (!GameManager.I.buildDebugMode)
             {
-                GameManager.Instance.buildDebugMode = true;
+                GameManager.I.buildDebugMode = true;
                 MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile!");
             } else {
-                GameManager.Instance.buildDebugMode = false;
-                UI.Instance.global.SendMessage("Starlight fades...", 3);
+                GameManager.I.buildDebugMode = false;
+                UI.I.global.SendMessage("Starlight fades...", 3);
             }
             MainMenu.I.SetupBadges();
             debugCommand = null;
@@ -95,22 +94,22 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
-            UI.Instance.ChangeScene("Bonus");
+            UI.I.ChangeScene("Bonus");
         }
 
         // Chess battle advanced
         if (debugCommand == "cba")
         {
-            UI.Instance.global.SendMessage("Chess Battle Advanced", 3);
-            GameManager.Instance.chessbattleadvanced = !GameManager.Instance.chessbattleadvanced;
+            UI.I.global.SendMessage("Chess Battle Advanced", 3);
+            GameManager.I.chessbattleadvanced = !GameManager.I.chessbattleadvanced;
             debugCommand = null;
         }
 
         // Mimic editor unlock
         if (debugCommand == "overflow")
         {
-            GameManager.Instance.editormimic = !GameManager.Instance.editormimic;
-            if (GameManager.Instance.editormimic) MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor, expect bugs and overflows. You've been warned.");
+            GameManager.I.editormimic = !GameManager.I.editormimic;
+            if (GameManager.I.editormimic) MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor, expect bugs and overflows. You've been warned.");
             MainMenu.I.SetupBadges();
             debugCommand = null;
             return;
@@ -120,30 +119,30 @@ public class InputManager : MonoBehaviour
         else if (debugCommand == "zero")
         {
             if (DebugConfirm("This will delete all your data!! Are you sure? (Send the command again)")) return;
-            GameManager.Instance.DeleteSave();
-            GameManager.Instance.CreateSave(true);
-            UI.Instance.global.SendMessage("[ Game reset ]", 4);
+            GameManager.I.DeleteSave();
+            GameManager.I.CreateSave(true);
+            UI.I.global.SendMessage("[ Game reset ]", 4);
             MainMenu.I.SetupBadges();
             debugCommand = null;
             return;
         }
 
         // Delete savedata and generate a new one
-        else if (debugCommand == "swap" && GameManager.Instance.buildDebugMode)
+        else if (debugCommand == "swap" && GameManager.I.buildDebugMode)
         {
             if (DebugConfirm("This will unlock an endgame mechanic, if you're sure, run this command again.")) return;
             GameManager.save.game.mechanics.hasSwapUpgrade = true;
-            UI.Instance.global.SendMessage("[ New Ability Unlocked ]", 4);
+            UI.I.global.SendMessage("[ New Ability Unlocked ]", 4);
             debugCommand = null;
         }
 
         // void testing
-        else if (debugCommand == "void" && GameManager.Instance.buildDebugMode)
+        else if (debugCommand == "void" && GameManager.I.buildDebugMode)
         {
             canInputCommands = false;
             debugCommand = null;
-            LevelManager.Instance.ActionLoadLevel("VOID/END");
-            LevelManager.Instance.ActionDiveIn("1");
+            Actions.LoadLevel("VOID/END");
+            Actions.DiveIn("1");
             return;
         }
 
@@ -152,7 +151,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
-            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "CODE/Caos");
+            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Caos");
             return;
         }
 
@@ -161,7 +160,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
-            TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, "CODE/Developer");
+            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Developer");
             return;
         }
 
@@ -194,8 +193,8 @@ public class InputManager : MonoBehaviour
         if (debugCommand == null)
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
-            AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.Instance.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "zero", "overflow")
+            AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
+            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "zero", "overflow")
         }
     }
 
@@ -210,7 +209,7 @@ public class InputManager : MonoBehaviour
     // Player movement
     private void OnMove(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay()) return;
+        if (!IsAllowedToPlay()) return;
 
         // Input prevention logic
         Vector3Int movCheck = Vector3Int.RoundToInt(ctx.Get<Vector2>());
@@ -231,8 +230,8 @@ public class InputManager : MonoBehaviour
 
         if ((doSingle && !isHoldingMovement && GameManager.save.preferences.repeatInput) || doSingle && !GameManager.save.preferences.repeatInput)
         {
-            LevelManager.Instance.AddUndoFrame();
-            LevelManager.Instance.ApplyGravity(movement);
+            LevelManager.I.AddUndoFrame();
+            LevelManager.I.ApplyGravity(movement);
             currentMovementCD = Time.time;
         }
 
@@ -248,7 +247,7 @@ public class InputManager : MonoBehaviour
     // Undo move (also editor)
     private void OnUndo(InputValue ctx)
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() && !GameManager.Instance.IsEditor()) return;
+        if (!IsAllowedToPlay() && !GameManager.I.IsEditor()) return;
 
         bool holding = ctx.Get<float>() == 1f;
         isHoldingUndo = holding;
@@ -256,7 +255,7 @@ public class InputManager : MonoBehaviour
         if (!holding) return;
         
         // That one void level
-        if (LevelManager.Instance.currentLevelID == "VOID/Loop") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        if (LevelManager.I.currentLevelID == "VOID/Loop") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
 
         // Undo latest move
         if (undoCoro != null) StopCoroutine(undoCoro);
@@ -267,24 +266,24 @@ public class InputManager : MonoBehaviour
     private void OnShowOverlaps(InputValue ctx)
     {
         // Shows overlaps
-        if (!LevelManager.Instance.IsAllowedToPlay() && !TransitionManager.Instance.inTransition) { LevelManager.Instance.ShowOverlaps(false); return; }
-        LevelManager.Instance.ShowOverlaps(ctx.Get<float>() == 1f);
+        if (!IsAllowedToPlay() && !TransitionManager.I.inTransition) { LevelManager.I.ShowOverlaps(false); return; }
+        LevelManager.I.ShowOverlaps(ctx.Get<float>() == 1f);
     }
 
     // Restart the level
     private void OnRestart()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || LevelManager.Instance.voidedCutscene) return;
+        if (!IsAllowedToPlay() || LevelManager.I.voidedCutscene) return;
 
         // Confirm restart screen
         if (GameManager.save.preferences.forceConfirmRestart)
         {
-            UI.Instance.restart.Toggle(true);
+            UI.I.restart.Toggle(true);
             return;
         }
 
         // Transition in and out while restarting the level
-        TransitionManager.Instance.TransitionIn<string>(Swipe, ActionRestart);
+        TransitionManager.I.TransitionIn<string>(Swipe, Actions.Restart);
     }
 
     // Repeats a movement
@@ -292,13 +291,13 @@ public class InputManager : MonoBehaviour
     {
         if (!GameManager.save.preferences.repeatInput) yield break;
 
-        while (direction == latestMovement && isHoldingMovement && LevelManager.Instance.IsAllowedToPlay())
+        while (direction == latestMovement && isHoldingMovement && IsAllowedToPlay())
         {
             if (!MoveCDCheck(repeatMovementCD))
             {
                 // Move
-                LevelManager.Instance.AddUndoFrame();
-                LevelManager.Instance.ApplyGravity(direction);
+                LevelManager.I.AddUndoFrame();
+                LevelManager.I.ApplyGravity(direction);
                 currentMovementCD = Time.time;
             }
             yield return new WaitForSeconds(speed);
@@ -309,10 +308,10 @@ public class InputManager : MonoBehaviour
     private IEnumerator RepeatUndo(float speed = 0.22f)
     {
         int performed = 0;
-        while (isHoldingUndo && LevelManager.Instance.IsAllowedToPlay() && LevelManager.Instance.IsUndoQueueValid())
+        while (isHoldingUndo && IsAllowedToPlay() && LevelManager.I.IsUndoQueueValid())
         {
-            LevelManager.Instance.Undo();
-            LevelManager.Instance.RemoveUndoFrame();
+            LevelManager.I.Undo();
+            LevelManager.I.RemoveUndoFrame();
             yield return new WaitForSeconds(speed);
 
             // Speedup undoing gradually
@@ -322,7 +321,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Editor override
-        if (GameManager.Instance.IsEditor())
+        if (GameManager.I.IsEditor())
         {
             while (isHoldingUndo && Editor.I.IsUndoQueueValid())
             {
@@ -342,9 +341,9 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.hasWon || DialogManager.Instance.inDialog || TransitionManager.Instance.inTransition || UI.Instance.restart.self.activeSelf || LevelManager.Instance.voidedCutscene) return;
-        if (!UI.Instance.pause.self.activeSelf) GameManager.Instance.PauseResumeGame(true);
-        else GameManager.Instance.PauseResumeGame(false);
+        if (GameManager.I.IsBadScene() || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || LevelManager.I.voidedCutscene) return;
+        if (!UI.I.pause.self.activeSelf) GameManager.I.PauseResumeGame(true);
+        else GameManager.I.PauseResumeGame(false);
     }
 
     // Level Editor (Editor) //
@@ -352,7 +351,7 @@ public class InputManager : MonoBehaviour
     // Places a tile
     private void OnEditorClickGrid()
     {
-        if (!GameManager.Instance.IsEditor() || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.I.IsEditor() || TransitionManager.I.inTransition) return;
         if (Editor.I.popup.activeSelf) return;
         
         // Checks if you are already multi-placing
@@ -370,18 +369,18 @@ public class InputManager : MonoBehaviour
     // Changes a tile's properties
     private void OnEditorRightClickGrid()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
         
         // Checks mouse position
         Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
-        if (gridPos == Vector3.back || UI.Instance.editor.self.activeSelf) return;
+        if (gridPos == Vector3.back || UI.I.editor.self.activeSelf) return;
 
         // Tile validation and selection
-        Editor.I.editingTile = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(gridPos);
-        if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(gridPos);
-        if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.Instance.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
-        if (!Editor.I.editingTile) { UI.Instance.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
+        Editor.I.editingTile = LevelManager.I.tilemapObjects.GetTile<GameTile>(gridPos);
+        if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.I.tilemapCustoms.GetTile<CustomTile>(gridPos);
+        if (!Editor.I.editingTile) Editor.I.editingTile = LevelManager.I.tilemapEffects.GetTile<EffectTile>(gridPos); // Only arrow tiles
+        if (!Editor.I.editingTile) { UI.I.global.SendMessage($"Invalid tile at position \"{gridPos}\""); return; }
 
         // Set popup position
         Vector3 screenPos = Input.mousePosition;
@@ -393,7 +392,7 @@ public class InputManager : MonoBehaviour
         Editor.I.ignoreUpdateEvent = true;
 
         // Custom tiles field (missing loading custom text automatically)
-        CustomTile custom = LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(Editor.I.editingTile.position);
+        CustomTile custom = LevelManager.I.tilemapCustoms.GetTile<CustomTile>(Editor.I.editingTile.position);
         if (custom != null) {
             Editor.I.customInputField.interactable = true;
             Editor.I.customInputField.text = custom.customText;
@@ -419,7 +418,7 @@ public class InputManager : MonoBehaviour
     // Selects a tile on the editor
     private void OnEditorMiddleClick()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
         Vector3Int gridPos = Editor.I.GetMousePositionOnGrid();
@@ -432,88 +431,88 @@ public class InputManager : MonoBehaviour
     // Toggles menu
     private void OnEscape()
     {
-        if (!UI.Instance || !EventSystem.current) return;
+        if (!UI.I || !EventSystem.current) return;
 
         // Editor scene
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
         if (Editor.I.tileList.activeSelf) { Editor.I.ToggleTileMenu(); return; }
         if (Editor.I.popup.activeSelf) { Editor.I.popup.SetActive(false); return; }
 
-        if (!UI.Instance.editor.self.activeSelf) UI.Instance.selectors.ChangeSelected(UI.Instance.editor.playtest, true);
-        UI.Instance.editor.Toggle(!UI.Instance.editor.self.activeSelf);
+        if (!UI.I.editor.self.activeSelf) UI.I.selectors.ChangeSelected(UI.I.editor.playtest, true);
+        UI.I.editor.Toggle(!UI.I.editor.self.activeSelf);
     }
 
     // Save current level manually
     private void OnEditorSave()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
-        UI.Instance.LevelEditorExportLevel();
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        UI.I.LevelEditorExportLevel();
     }
 
     // Select deleting/placing tiles
     private void OnEditorDelete(InputValue ctx)
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf) return;
         Editor.I.isPlacing = ctx.Get<float>() != 1f;
     }
 
     // Editor toggle tile menu
     private void OnEditorTileMenu()
     {
-        if (!GameManager.Instance.IsEditor()) return;
+        if (!GameManager.I.IsEditor()) return;
         Editor.I.ToggleTileMenu();
     }
 
     // Editor select tiles 1/2/3/4
     private void OnEditorSelectOne()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(0);
     }
     private void OnEditorSelectTwo()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(1);
     }
     private void OnEditorSelectThree()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(2);
     }
     private void OnEditorSelectFour()
     {
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf) return;
         Editor.I.SelectMenuTile(3);
     }
 
     // Moving the level screen up/down/left/right
     private void OnEditorUp() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.I.inTransition) return;
 
-        LevelManager.Instance.MoveTilemaps(new Vector3(0, -8));
-        LevelManager.Instance.worldOffsetY += 8;
+        LevelManager.I.MoveTilemaps(new Vector3(0, -8));
+        LevelManager.I.worldOffsetY += 8;
     }
     private void OnEditorDown() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.I.inTransition) return;
 
-        LevelManager.Instance.MoveTilemaps(new Vector3(0, 8));
-        LevelManager.Instance.worldOffsetY -= 8;
+        LevelManager.I.MoveTilemaps(new Vector3(0, 8));
+        LevelManager.I.worldOffsetY -= 8;
     }
     private void OnEditorLeft() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.I.inTransition) return;
 
-        LevelManager.Instance.MoveTilemaps(new Vector3(14, 0));
-        LevelManager.Instance.worldOffsetX -= 14;
+        LevelManager.I.MoveTilemaps(new Vector3(14, 0));
+        LevelManager.I.worldOffsetX -= 14;
     }
     private void OnEditorRight() 
     { 
-        if (!GameManager.Instance.IsEditor() || UI.Instance.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.Instance.inTransition) return;
+        if (!GameManager.I.IsEditor() || UI.I.editor.self.activeSelf || Editor.I.popup.activeSelf || TransitionManager.I.inTransition) return;
 
-        LevelManager.Instance.MoveTilemaps(new Vector3(-14, 0));
-        LevelManager.Instance.worldOffsetX += 14;
+        LevelManager.I.MoveTilemaps(new Vector3(-14, 0));
+        LevelManager.I.worldOffsetX += 14;
     }
 
     // Hub //
@@ -550,53 +549,53 @@ public class InputManager : MonoBehaviour
 
     private void OnInteract()
     {
-        if (GameManager.Instance.IsBadScene() || LevelManager.Instance.isPaused) return;
+        if (GameManager.I.IsBadScene() || LevelManager.I.isPaused) return;
 
         // Searches for a first valid NPC
         GameTile tl = null; // (garbage collector tysm)
-        GameTile npc = LevelManager.Instance.GetCustomTiles().Find(
+        GameTile npc = LevelManager.I.GetCustomTiles().Find(
             npc =>
             {
-                if (npc.GetTileType() != ObjectTypes.NPC || !LevelManager.Instance.CheckSceneInbounds(npc.position)) return false;
+                if (npc.GetTileType() != ObjectTypes.NPC || !LevelManager.I.CheckSceneInbounds(npc.position)) return false;
 
                 GameTile test = null;
-                test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
-                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
-                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
-                if (!test) test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
-                if (!test) { test = LevelManager.Instance.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
+                test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
+                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
+                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
+                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
+                if (!test) { test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
                 if (test) { if (test.directions.GetActiveDirectionCount() > 0) return npc; }
                 return false;
             }
         );
 
         // Gets the NPC and triggers it
-        if (npc) { LevelManager.Instance.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(tl); }
+        if (npc) { LevelManager.I.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(tl); }
     }
 
     // Changes the only tile active's form (might cause issues in the future?)
     private void OnChangeForms()
     {
-        if (!LevelManager.Instance.IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
+        if (!IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
 
         // Swap check
         List<GameTile> count = GetPlayableObjects();
-        if (count.Count > 1 || count.Count <= 0) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        if (count.Count > 1 || count.Count <= 0) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
 
         // Sfx (change later)
-        AudioManager.Instance.PlaySFX(AudioManager.select, 0.50f);
+        AudioManager.I.PlaySFX(AudioManager.select, 0.50f);
 
         // Swap
-        LevelManager.Instance.RemoveTile(count[0]);
+        LevelManager.I.RemoveTile(count[0]);
         if (count[0].GetTileType() == ObjectTypes.Hexagon) {
-            if (latestTile.ToString() == "Hexagon") GameManager.Instance.EditAchivement("ACH_A_COPY");
-            LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
-            UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
+            if (latestTile.ToString() == "Hexagon") GameManager.I.EditAchivement("ACH_A_COPY");
+            LevelManager.I.PlaceTile(LevelManager.I.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
+            UI.I.ingame.SetCycleIcon(ObjectTypes.Hexagon);
         }
         else {
-            LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile("Hexagon", count[0].directions, count[0].position));
+            LevelManager.I.PlaceTile(LevelManager.I.CreateTile("Hexagon", count[0].directions, count[0].position));
             latestTile = count[0].GetTileType();
-            UI.Instance.ingame.SetCycleIcon(latestTile);
+            UI.I.ingame.SetCycleIcon(latestTile);
         }
     }
 
@@ -624,40 +623,41 @@ public class InputManager : MonoBehaviour
         {
             case "Custom Levels":
                 if (CustomLevels.I.popup.activeSelf) CustomLevels.I.CloseLevelMenu();
-                else UI.Instance.selectors.ChangeSelected(CustomLevels.I.backButton);
+                else UI.I.selectors.ChangeSelected(CustomLevels.I.backButton);
                 break;
             case "Hub":
-                UI.Instance.selectors.ChangeSelected(Hub.I.backButton.gameObject);
+                UI.I.selectors.ChangeSelected(Hub.I.backButton.gameObject);
                 break;
             case "Settings":
                 SettingsMenu.I.ToggleMenu(0);
-                UI.Instance.selectors.ChangeSelected(SettingsMenu.I.menus[0].transform.Find("Back Button").gameObject);
+                UI.I.selectors.ChangeSelected(SettingsMenu.I.menus[0].transform.Find("Back Button").gameObject);
                 break;
             case "Credits":
             case "Bonus":
-                UI.Instance.selectors.ChangeSelected(GameObject.Find("Back Button"));
+                UI.I.selectors.ChangeSelected(GameObject.Find("Back Button"));
                 break;
             case "Game":
-                // if (UI.Instance.restart.self.activeSelf) UI.Instance.CloseConfirmRestart();
-                if (UI.Instance.popup.self.activeSelf) UI.Instance.ClosePopup();
+                // if (UI.I.restart.self.activeSelf) UI.I.CloseConfirmRestart();
+                if (UI.I.popup.self.activeSelf) UI.I.ClosePopup();
                 break;
             default:
                 break;
         }
     }
 
-    internal List<GameTile> GetPlayableObjects() { return LevelManager.Instance.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.Instance.CheckSceneInbounds(tile.position); }); }
+    internal bool IsAllowedToPlay() { return !(GameManager.I.IsBadScene() || LevelManager.I.isPaused || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || UI.I.popup.self.activeSelf); }
+    internal List<GameTile> GetPlayableObjects() { return LevelManager.I.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.I.CheckSceneInbounds(tile.position); }); }
 
     // Plays an "out" transition
     private IEnumerator OutTransition()
     {
-        UI.Instance.preload.animator.SetTrigger("Out");
+        UI.I.preload.animator.SetTrigger("Out");
 
         yield return new WaitForSeconds(0.5f);
 
-        UI.Instance.preload.Toggle(false);
-        if (SceneManager.GetActiveScene().name != "Game") UI.Instance.ChangeScene("Game", false);
-        else TransitionManager.Instance.TransitionOut<string>();
+        UI.I.preload.Toggle(false);
+        if (SceneManager.GetActiveScene().name != "Game") UI.I.ChangeScene("Game", false);
+        else TransitionManager.I.TransitionOut<string>();
 
         outCoro = null;
     }
@@ -679,7 +679,7 @@ public class InputManager : MonoBehaviour
         if (confirmCommand != debugCommand)
         {
             MainMenu.I.ShowPopup(message);
-            AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.30f);
+            AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.30f);
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             confirmCommand = $"{debugCommand}";
             debugCommand = null;
@@ -688,15 +688,5 @@ public class InputManager : MonoBehaviour
         
         confirmCommand = null;
         return false;
-    }
-
-    // Actions //
-    internal void ActionRestart(string _)
-    {            
-        LevelManager.Instance.ReloadLevel();
-        LevelManager.Instance.RefreshGameVars();
-        LevelManager.Instance.MoveTilemaps(LevelManager.Instance.originalPosition, true);
-        UI.Instance.ingame.SetCycleIcon(ObjectTypes.Hexagon);
-        TransitionManager.Instance.TransitionOut<string>(Swipe);
     }
 }

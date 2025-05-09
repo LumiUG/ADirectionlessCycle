@@ -22,17 +22,17 @@ public class CircleTile : GameTile
         bool objectCollision = tilemapObjects.GetTile<GameTile>(checkPosition) != null;
 
         // Check if the position is valid, if not, return the same tile you're at
-        if (collideableCollision || !LevelManager.Instance.CheckSceneInbounds(checkPosition)) { steps = 0; return checkPosition - direction; }
+        if (collideableCollision || !LevelManager.I.CheckSceneInbounds(checkPosition)) { steps = 0; return checkPosition - direction; }
 
         // Moves the tile infront if able, this DOES NOT PUSH.
         if (objectCollision)
         {
             if (!beingPushed) {
-                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) { steps = 0; return checkPosition - direction; }
+                if (!LevelManager.I.TryMove(checkPosition, checkPosition + direction, direction, true)) { steps = 0; return checkPosition - direction; }
             }
             else {
                 // Push if being pushed
-                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) { steps = 0; return checkPosition - direction; }
+                if (!LevelManager.I.TryMove(checkPosition, checkPosition + direction, direction, false, true)) { steps = 0; return checkPosition - direction; }
             }
         }
 

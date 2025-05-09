@@ -46,7 +46,7 @@ public class Hub : MonoBehaviour
 
     private void Start()
     {
-        UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
+        UI.I.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
 
         // Unlock finale?
@@ -72,17 +72,17 @@ public class Hub : MonoBehaviour
         MasteryEffect(0);
 
         // Achievements
-        if (completedReal[0] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W1");
-        if (completedReal[1] >= 12) GameManager.Instance.EditAchivement("ACH_COMPLETE_W2");
-        if (completedReal[2] >= 10) GameManager.Instance.EditAchivement("ACH_COMPLETE_W3");
-        if (!GameManager.save.game.hasCompletedGame && GameManager.save.game.levels.Find(level => level.levelID == "VOID/CYCLE") != null) { GameManager.save.game.hasCompletedGame = true; GameManager.Instance.EditAchivement("ACH_DEATH"); }
+        if (completedReal[0] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W1");
+        if (completedReal[1] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W2");
+        if (completedReal[2] >= 10) GameManager.I.EditAchivement("ACH_COMPLETE_W3");
+        if (!GameManager.save.game.hasCompletedGame && GameManager.save.game.levels.Find(level => level.levelID == "VOID/CYCLE") != null) { GameManager.save.game.hasCompletedGame = true; GameManager.I.EditAchivement("ACH_DEATH"); }
 
         // All main levels
         bool mainLevels = completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10;
         if (!GameManager.save.game.completedAllMainLevels && mainLevels)
         {
             GameManager.save.game.completedAllMainLevels = true;
-            GameManager.Instance.EditAchivement("ACH_ALL_MAIN");
+            GameManager.I.EditAchivement("ACH_ALL_MAIN");
         }
 
         // All remix levels
@@ -90,7 +90,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.completedAllRemixLevels && remixCount)
         {
             GameManager.save.game.completedAllRemixLevels = true;
-            GameManager.Instance.EditAchivement("ACH_ALL_INVERSE");
+            GameManager.I.EditAchivement("ACH_ALL_INVERSE");
         }
 
         // All outbound levels
@@ -98,7 +98,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.completedAllOutboundLevels && outboundCount)
         {
             GameManager.save.game.completedAllOutboundLevels = true;
-            GameManager.Instance.EditAchivement("ACH_ALL_OUTER");
+            GameManager.I.EditAchivement("ACH_ALL_OUTER");
         }
         
         // EVERYTHING.
@@ -114,7 +114,7 @@ public class Hub : MonoBehaviour
 
             // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
-            GameManager.Instance.EditAchivement("ACH_MASTERY");
+            GameManager.I.EditAchivement("ACH_MASTERY");
         }
     }
 
@@ -130,7 +130,7 @@ public class Hub : MonoBehaviour
             delayOneFrame = false;
         }
 
-        if (EventSystem.current.currentSelectedGameObject == null) { UI.Instance.selectors.ChangeSelected(backButton.gameObject); return; }
+        if (EventSystem.current.currentSelectedGameObject == null) { UI.I.selectors.ChangeSelected(backButton.gameObject); return; }
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
             HideRevealUI(false);
@@ -146,13 +146,13 @@ public class Hub : MonoBehaviour
         string levelID = $"{lastSelectedlevel.transform.parent.name}/{lastSelectedlevel.name}";
         if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
 
-        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
+        SerializableLevel level = LevelManager.I.GetLevel(levelID, false, true);
         PreviewText(levelID);
 
         // Show proper remix levels attached
         if (!levelID.Contains("REMIX"))
         {
-            if (GameManager.save.game.mechanics.hasSeenRemix || GameManager.Instance.IsDebug())
+            if (GameManager.save.game.mechanics.hasSeenRemix || GameManager.I.IsDebug())
             {
                 if (level == null) HideRevealUI(false, false);
                 else if (string.IsNullOrEmpty(level.remixLevel)) HideRevealUI(false, false, 0);
@@ -198,7 +198,7 @@ public class Hub : MonoBehaviour
                 }
 
                 // Get level data
-                var levelAsData = LevelManager.Instance.GetLevel(levelCheck.levelID, false, true);
+                var levelAsData = LevelManager.I.GetLevel(levelCheck.levelID, false, true);
                 int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
 
                 // Add 1 to the completed level count (if not remix)
@@ -210,9 +210,9 @@ public class Hub : MonoBehaviour
 
                 // Check for the correct outline to use
                 Image outlineImg = outline.GetComponent<Image>();
-                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = GameManager.Instance.remixColor;
-                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = GameManager.Instance.outboundColor;
-                else outlineImg.color = GameManager.Instance.completedColor; // for remixes!
+                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = GameManager.I.remixColor;
+                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = GameManager.I.outboundColor;
+                else outlineImg.color = GameManager.I.completedColor; // for remixes!
             }
         }
         
@@ -225,7 +225,7 @@ public class Hub : MonoBehaviour
             Transform child = holder.transform.GetChild(j);
             if (child)
             {
-                if (LevelManager.Instance.GetLevel($"{holder.name}/{child.name}", false, true) == null) return;
+                if (LevelManager.I.GetLevel($"{holder.name}/{child.name}", false, true) == null) return;
                 child.GetComponent<Image>().color = Color.white;
             }
         }
@@ -257,12 +257,12 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
-        if (GameManager.Instance.IsDebug()) UI.Instance.global.SendMessage("(Hub debug unlock)", 2f);
+        if (GameManager.I.IsDebug()) UI.I.global.SendMessage("(Hub debug unlock)", 2f);
 
         // World 2
         bool spikes = false;
         Transform wLock = locks.Find("W2");
-        if (!GameManager.save.game.unlockedWorldTwo && !GameManager.Instance.IsDebug())
+        if (!GameManager.save.game.unlockedWorldTwo && !GameManager.I.IsDebug())
         {
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[0]}/9";
             foreach (Transform level in worldHolders[1].transform)
@@ -276,7 +276,7 @@ public class Hub : MonoBehaviour
         // World 3
         wLock = locks.Find("W3");
         if (spikes) { wLock.Find("Spikes").gameObject.SetActive(true); wLock.Find("Filler").gameObject.SetActive(false); }
-        if (!GameManager.save.game.unlockedWorldThree && !GameManager.Instance.IsDebug())
+        if (!GameManager.save.game.unlockedWorldThree && !GameManager.I.IsDebug())
         {
             wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
             foreach (Transform level in worldHolders[2].transform)
@@ -304,7 +304,7 @@ public class Hub : MonoBehaviour
         if (levelID == "VOID/END") return;
 
         // Set the preview text
-        SerializableLevel level = LevelManager.Instance.GetLevel(levelID, false, true);
+        SerializableLevel level = LevelManager.I.GetLevel(levelID, false, true);
         if (level != null)
         {
             // Locked level?
@@ -323,14 +323,14 @@ public class Hub : MonoBehaviour
     // Load level
     public void StaticLoadLevel(string levelName)
     {
-        if (!LevelManager.Instance || TransitionManager.Instance.inTransition) return;
-        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (!LevelManager.I || TransitionManager.I.inTransition) return;
+        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Is the level locked?
-        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.Instance.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Plays the transition
-        TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, levelName);
+        TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, levelName);
     }
 
     // Change world
@@ -376,15 +376,15 @@ public class Hub : MonoBehaviour
         {
             case 2:
                 if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
-                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                UI.I.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
             case 3:
-                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                UI.I.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
             case 0:
-                UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+                UI.I.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[0].interactable = false;
                 break;
             default:
@@ -418,14 +418,14 @@ public class Hub : MonoBehaviour
         checker.dirX = direction;
         
         if (EventSystem.current.currentSelectedGameObject == hubArrows[0].gameObject || EventSystem.current.currentSelectedGameObject == hubArrows[1].gameObject) return;
-        if (hubArrows[0].interactable && hubArrows[1].interactable) UI.Instance.selectors.ChangeSelected(backButton.gameObject, true);
+        if (hubArrows[0].interactable && hubArrows[1].interactable) UI.I.selectors.ChangeSelected(backButton.gameObject, true);
     }
 
     // Returns true if a level is locked. (FALSE = good)
     public bool AbsurdLockedLevelDetection(string fullLevelID)
     {
-        if (LevelManager.Instance.GetLevel(fullLevelID, false, true) == null) return true;
-        if (GameManager.Instance.IsDebug()) return false;
+        if (LevelManager.I.GetLevel(fullLevelID, false, true) == null) return true;
+        if (GameManager.I.IsDebug()) return false;
         if (fullLevelID == "VOID/END") return false;
 
         // Custom handling for remix levels
@@ -439,13 +439,13 @@ public class Hub : MonoBehaviour
     private void RemixUIChecks(SerializableLevel level, string levelID)
     {
         if (levelID.Contains("REMIX") || level == null) return;
-        if (!GameManager.Instance.IsDebug() && !GameManager.save.game.mechanics.hasSeenRemix) return;
+        if (!GameManager.I.IsDebug() && !GameManager.save.game.mechanics.hasSeenRemix) return;
 
         remixList.ForEach(item => item.SetActive(false));
         remixList.Clear();
 
         if (level.levelName == "Seeing Double") { HideRevealUI(false); return; }
-        if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.Instance.IsDebug())
+        if (GameManager.save.game.levels.Find(l => l.levelID == level.remixLevel) != null || GameManager.I.IsDebug())
         {
             if (string.IsNullOrEmpty(level.remixLevel)) return;
             HideRevealUI(true);
@@ -498,10 +498,10 @@ public class Hub : MonoBehaviour
         }
 
         // We jump to the next level, if current level has a remix level.
-        SerializableLevel current = LevelManager.Instance.GetLevel(remix, false, true);
+        SerializableLevel current = LevelManager.I.GetLevel(remix, false, true);
         if (current == null) return;
         if (!string.IsNullOrEmpty(current.remixLevel) && GameManager.save.game.levels.Find(l => l.levelID == current.remixLevel) != null) UIRecursiveRemixes(current.remixLevel, level, count + 1);
-        else if (GameManager.Instance.IsDebug() && !string.IsNullOrEmpty(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
+        else if (GameManager.I.IsDebug() && !string.IsNullOrEmpty(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
     }
 
     // Check for outbounds on a completed level
@@ -536,7 +536,7 @@ public class Hub : MonoBehaviour
         }
 
         // Reactivate buttons
-        UI.Instance.selectors.ChangeSelected(backButton.gameObject);
+        UI.I.selectors.ChangeSelected(backButton.gameObject);
         foreach (Transform level in worldHolders[index].transform) { level.GetComponent<Button>().interactable = true; }
     }
 

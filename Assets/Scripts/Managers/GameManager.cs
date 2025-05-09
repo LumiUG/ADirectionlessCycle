@@ -8,7 +8,7 @@ using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
-    [HideInInspector] public static GameManager Instance;
+    [HideInInspector] public static GameManager I;
     
     // Game data // 
     [HideInInspector] public bool isEditing;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         // Singleton (GameManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
 
@@ -61,17 +61,14 @@ public class GameManager : MonoBehaviour
         ColorUtility.TryParseHtmlString("#4CF832", out completedColor);
 
         // Set master and SFX values
-        if (AudioManager.Instance) {
-            AudioManager.Instance.SetMasterVolume(save.preferences.masterVolume);
-            // AudioManager.Instance.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
+        if (AudioManager.I) {
+            AudioManager.I.SetMasterVolume(save.preferences.masterVolume);
+            // AudioManager.I.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
 
         // Steam integration initial stuff
         if (!SteamManager.Initialized) return;
         SetPresence("steam_display", "#Menuing");
-        
-        // Debug.Log(SteamFriends.GetPersonaName());
-        // SteamUserStats.ResetAllStats(true);
     }
 
     // Save game on leaving
@@ -98,15 +95,15 @@ public class GameManager : MonoBehaviour
     // Pauses or resumes the game.
     public void PauseResumeGame(bool status)
     {
-        if (LevelManager.Instance.voidedCutscene) return;
+        if (LevelManager.I.voidedCutscene) return;
 
         if (status) {
-            UI.Instance.selectors.ChangeSelected(UI.Instance.pause.resumeButton, true);
-            UI.Instance.pause.ToggleEditButton(isEditing || IsDebug());
+            UI.I.selectors.ChangeSelected(UI.I.pause.resumeButton, true);
+            UI.I.pause.ToggleEditButton(isEditing || IsDebug());
         }
 
-        UI.Instance.pause.Toggle(status);
-        LevelManager.Instance.isPaused = status;
+        UI.I.pause.Toggle(status);
+        LevelManager.I.isPaused = status;
     }
 
     // Stuff with savedata //

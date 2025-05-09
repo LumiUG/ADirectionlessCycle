@@ -16,10 +16,10 @@ public class OrbTile : EffectTile
     // The tile's effect
     public override void Effect(GameTile tile)
     {
-        if (tile.directions.GetActiveDirectionCount() <= 0 || LevelManager.Instance.currentLevelID == LevelManager.Instance.levelEditorName) return;
+        if (tile.directions.GetActiveDirectionCount() <= 0 || LevelManager.I.currentLevelID == LevelManager.I.levelEditorName) return;
 
-        if (!GameManager.save.game.collectedOrbs.Contains(LevelManager.Instance.currentLevelID)) GameManager.save.game.collectedOrbs.Add(LevelManager.Instance.currentLevelID);
-        LevelManager.Instance.RemoveTile(LevelManager.Instance.tilemapEffects.GetTile<OrbTile>(position));
+        if (!GameManager.save.game.collectedOrbs.Contains(LevelManager.I.currentLevelID)) GameManager.save.game.collectedOrbs.Add(LevelManager.I.currentLevelID);
+        LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<OrbTile>(position));
     }
     
     // Prepares editor variables.

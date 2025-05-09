@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [HideInInspector] public static AudioManager Instance;
+    [HideInInspector] public static AudioManager I;
 
     // BGM //
     [HideInInspector] public static AudioClip titleBGM;
@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         // Singleton (AudioManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
 
@@ -108,7 +108,7 @@ public class AudioManager : MonoBehaviour
     // Plays an SFX
     public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false)
     {
-        if (GameManager.Instance.chessbattleadvanced) clip = cba;
+        if (GameManager.I.chessbattleadvanced) clip = cba;
 
         if (pitchShift)
         {

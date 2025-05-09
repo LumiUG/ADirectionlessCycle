@@ -12,7 +12,7 @@ public class HexagonTile : GameTile
     {
         // Move double, check inbounds
         checkPosition += !beingPushed ? direction : Vector3Int.zero;
-        if (!LevelManager.Instance.CheckSceneInbounds(checkPosition, true, beingPushed)) return Vector3Int.back;
+        if (!LevelManager.I.CheckSceneInbounds(checkPosition, true, beingPushed)) return Vector3Int.back;
 
         // Get the collissions
         GameTile objectCollidedWith = tilemapObjects.GetTile<GameTile>(checkPosition);
@@ -25,15 +25,15 @@ public class HexagonTile : GameTile
         // Object collission, NEVER pushes, NEVER moves an unpushable object (except other hex)
         if (objectCollision && !beingPushed && !objectCollidedWith.directions.pushable && objectCollidedWith.GetTileType() != ObjectTypes.Hexagon)
         {
-            LevelManager.Instance.AddToLateMove(this);
+            LevelManager.I.AddToLateMove(this);
             return Vector3Int.back;
         }
         if (objectCollision)
         {
             if (!beingPushed) {
-                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
+                if (!LevelManager.I.TryMove(checkPosition, checkPosition + direction, direction, true)) return Vector3Int.back;
             } else {
-                if (!LevelManager.Instance.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
+                if (!LevelManager.I.TryMove(checkPosition, checkPosition + direction, direction, false, true)) return Vector3Int.back;
             }
         }
 

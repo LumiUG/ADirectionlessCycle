@@ -21,7 +21,7 @@ public class InvertTile : EffectTile
         tile.directions.left = !tile.directions.left;
         tile.directions.right = !tile.directions.right;
         tile.directions.UpdateSprites();
-        LevelManager.Instance.RefreshObjectTile(tile);
+        LevelManager.I.RefreshObjectTile(tile);
     }
     
     // Prepares editor variables.

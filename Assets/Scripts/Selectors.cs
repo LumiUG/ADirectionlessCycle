@@ -24,7 +24,7 @@ public class Selectors : MonoBehaviour
 
     void Start()
     {
-        if (UI.Instance) UI.Instance.selectors = this;
+        if (UI.I) UI.I.selectors = this;
         GetSelectors();
         instant = false;
     }
@@ -70,7 +70,7 @@ public class Selectors : MonoBehaviour
         if (tracking == EventSystem.current.currentSelectedGameObject) return;
 
         // Select SFX
-        // if (!instant) AudioManager.Instance.PlaySFX(AudioManager.select, 0.20f, true);
+        // if (!instant) AudioManager.I.PlaySFX(AudioManager.select, 0.20f, true);
 
         // Get the new reference
         tracking = EventSystem.current.currentSelectedGameObject;

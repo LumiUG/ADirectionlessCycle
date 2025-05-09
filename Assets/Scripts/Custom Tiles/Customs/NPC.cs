@@ -39,7 +39,7 @@ public class NPCTile : CustomTile
             if (dialogCheck == null) return;
 
             // Play the dialog 
-            DialogManager.Instance.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
+            DialogManager.I.StartDialog(dialogCheck, $"Dialog/{stringCheck.GetValue(0)}");
             return;
         }
 
@@ -48,7 +48,7 @@ public class NPCTile : CustomTile
         JsonUtility.FromJsonOverwrite($"{stringCheck.GetValue(0)}", userDialog);
 
         string customID = userDialog.dialog.Length <= 0 ? (userDialog.dialog[0].Length >= 4 ? userDialog.dialog[0][..4] : userDialog.dialog[0]) : $"EVENT-{Random.Range(0,100)}";
-        DialogManager.Instance.StartDialog(userDialog, $"CUSTOM-{customID}");
+        DialogManager.I.StartDialog(userDialog, $"CUSTOM-{customID}");
     }
 
     // Prepares editor variables.

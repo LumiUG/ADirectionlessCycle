@@ -16,14 +16,14 @@ public class FragmentTile : EffectTile
     // The tile's effect
     public override void Effect(GameTile tile)
     {
-        if (tile.directions.GetActiveDirectionCount() <= 0 || LevelManager.Instance.currentLevelID == LevelManager.Instance.levelEditorName) return;
+        if (tile.directions.GetActiveDirectionCount() <= 0 || LevelManager.I.currentLevelID == LevelManager.I.levelEditorName) return;
 
-        if (!GameManager.save.game.collectedFragments.Contains(LevelManager.Instance.currentLevelID))
+        if (!GameManager.save.game.collectedFragments.Contains(LevelManager.I.currentLevelID))
         {
-            GameManager.save.game.collectedFragments.Add(LevelManager.Instance.currentLevelID);
-            if (GameManager.save.game.collectedFragments.Count >= 4) GameManager.Instance.EditAchivement("ACH_DEFRAGMENTED");
+            GameManager.save.game.collectedFragments.Add(LevelManager.I.currentLevelID);
+            if (GameManager.save.game.collectedFragments.Count >= 4) GameManager.I.EditAchivement("ACH_DEFRAGMENTED");
         }
-        LevelManager.Instance.RemoveTile(LevelManager.Instance.tilemapEffects.GetTile<FragmentTile>(position));
+        LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<FragmentTile>(position));
     }
     
     // Prepares editor variables.

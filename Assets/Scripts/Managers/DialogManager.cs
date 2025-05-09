@@ -6,7 +6,7 @@ using static GameTile;
 
 public class DialogManager : MonoBehaviour
 {
-    [HideInInspector] public static DialogManager Instance;
+    [HideInInspector] public static DialogManager I;
 
     public DialogScriptable loadedDial;
     public string[] dialog;
@@ -28,7 +28,7 @@ public class DialogManager : MonoBehaviour
     public void Awake()
     {
         // Singleton (DialogManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
 
@@ -39,7 +39,7 @@ public class DialogManager : MonoBehaviour
     // Starts the dialog with the NPC
     public void StartDialog(DialogScriptable chat, string dialogPath)
     {
-        if (!canInteract || !chat || TransitionManager.Instance.inTransition) return;
+        if (!canInteract || !chat || TransitionManager.I.inTransition) return;
         currentDialogPath = dialogPath;
         inDialog = true;
 
@@ -59,10 +59,10 @@ public class DialogManager : MonoBehaviour
         if (hasDialogStarted) { ProceedChat(); return; }
 
         // Toggles the dialog box on
-        UI.Instance.dialog.Toggle(true);
+        UI.I.dialog.Toggle(true);
     
         // Resets the dialog box
-        UI.Instance.dialog.text.text = string.Empty;
+        UI.I.dialog.text.text = string.Empty;
         hasDialogStarted = true;
 
         // Reads a line
@@ -72,7 +72,7 @@ public class DialogManager : MonoBehaviour
     private void ProceedChat(bool forceNext = false)
     {
         // Go to the next line of dialog
-        if (UI.Instance.dialog.text.text == dialog[dialogIndex] || forceNext) { dialogIndex++; NextLine(); return; }
+        if (UI.I.dialog.text.text == dialog[dialogIndex] || forceNext) { dialogIndex++; NextLine(); return; }
 
         // Stop showing text and show it all instantly
         if (!canBeSkipped) return;
@@ -102,12 +102,12 @@ public class DialogManager : MonoBehaviour
         }
 
         // Ends dialog
-        UI.Instance.dialog.Toggle(false);
+        UI.I.dialog.Toggle(false);
         ResetPrivatesToDefaultState();
         inDialog = false;
 
         // Has the chat ended? Exhaust the chat
-        if (!shouldExhaust || LevelManager.Instance.currentLevelID == LevelManager.Instance.levelEditorName) return;
+        if (!shouldExhaust || LevelManager.I.currentLevelID == LevelManager.I.levelEditorName) return;
         if (!GameManager.save.game.exhaustedDialog.Contains(currentDialogPath)) GameManager.save.game.exhaustedDialog.Add(currentDialogPath);
     }
 
@@ -115,13 +115,13 @@ public class DialogManager : MonoBehaviour
     public IEnumerator ReadLine()
     {
         // Resets dialogbox text
-        UI.Instance.dialog.SetText(string.Empty);
+        UI.I.dialog.SetText(string.Empty);
 
         // Draws every character on the dialogbox
         foreach (char c in dialog[dialogIndex])
         {
-            UI.Instance.dialog.SetText(c.ToString(), true);
-            if (loadedDial.sfx != null) AudioManager.Instance.PlaySFX(loadedDial.sfx, 0.35f);
+            UI.I.dialog.SetText(c.ToString(), true);
+            if (loadedDial.sfx != null) AudioManager.I.PlaySFX(loadedDial.sfx, 0.35f);
             if (waitExtraLong.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.25f);
             if (waitExtraMedium.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.175f);
             if (waitExtraSmall.Contains(c.ToString())) yield return new WaitForSecondsRealtime(textSpeed + 0.1f);
@@ -157,7 +157,7 @@ public class DialogManager : MonoBehaviour
     // Instantly shows the entire line
     private void ShowEntireLine()
     {
-        UI.Instance.dialog.SetText(dialog[dialogIndex]);
+        UI.I.dialog.SetText(dialog[dialogIndex]);
         StopAllCoroutines();
     }
 
@@ -185,7 +185,7 @@ public class DialogManager : MonoBehaviour
             public override void Run()
             {
                 if (!enabled) return;
-                Instance.textSpeed = textSpeed;
+                I.textSpeed = textSpeed;
             }
         }
 
@@ -206,22 +206,22 @@ public class DialogManager : MonoBehaviour
                     GameTile tile;
                     tile = setAs switch
                     {
-                        var t when LevelManager.Instance.typesSolidsList.Contains(t) => LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position),
-                        var t when LevelManager.Instance.typesAreas.Contains(t) => LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position),
-                        var t when LevelManager.Instance.typesHazardsList.Contains(t) => LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position),
-                        var t when LevelManager.Instance.typesEffectsList.Contains(t) => LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position),
-                        var t when LevelManager.Instance.typesCustomsList.Contains(t) => LevelManager.Instance.tilemapCustoms.GetTile<GameTile>(position),
-                        _ => LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position),
+                        var t when LevelManager.I.typesSolidsList.Contains(t) => LevelManager.I.tilemapCollideable.GetTile<GameTile>(position),
+                        var t when LevelManager.I.typesAreas.Contains(t) => LevelManager.I.tilemapWinAreas.GetTile<GameTile>(position),
+                        var t when LevelManager.I.typesHazardsList.Contains(t) => LevelManager.I.tilemapHazards.GetTile<GameTile>(position),
+                        var t when LevelManager.I.typesEffectsList.Contains(t) => LevelManager.I.tilemapEffects.GetTile<GameTile>(position),
+                        var t when LevelManager.I.typesCustomsList.Contains(t) => LevelManager.I.tilemapCustoms.GetTile<GameTile>(position),
+                        _ => LevelManager.I.tilemapObjects.GetTile<GameTile>(position),
                     };
-                    if (tile) LevelManager.Instance.RemoveTile(tile);
+                    if (tile) LevelManager.I.RemoveTile(tile);
 
                     // Deleting effect
                     // Debug.Log(position);
                     return;
                 }
 
-                // Place a tile
-                LevelManager.Instance.PlaceTile(LevelManager.Instance.CreateTile(setAs.ToString(), new(), position));
+                // Place a tile (MEMORY LEAKS, FIX TODO)
+                LevelManager.I.PlaceTile(LevelManager.I.CreateTile(setAs.ToString(), new(), position));
 
                 // Placing effect
                 // Debug.Log(position);
@@ -239,15 +239,15 @@ public class DialogManager : MonoBehaviour
                 if (!enabled) return;
 
                 // "same" code as Level.cs!!!
-                var levelTest = LevelManager.Instance.LoadLevel(levelID);
-                if (!levelTest) levelTest = LevelManager.Instance.LoadLevel(levelID, true);
+                var levelTest = LevelManager.I.LoadLevel(levelID);
+                if (!levelTest) levelTest = LevelManager.I.LoadLevel(levelID, true);
                 
                 if (levelTest)
                 {
-                    if (!LevelManager.Instance.currentLevel.hideUI) UI.Instance.ingame.Toggle(true);
-                    LevelManager.Instance.worldOffsetX = 0;
-                    LevelManager.Instance.worldOffsetY = 0;
-                    LevelManager.Instance.ReloadLevel();
+                    if (!LevelManager.I.currentLevel.hideUI) UI.I.ingame.Toggle(true);
+                    LevelManager.I.worldOffsetX = 0;
+                    LevelManager.I.worldOffsetY = 0;
+                    LevelManager.I.ReloadLevel();
                 }
             }
         }

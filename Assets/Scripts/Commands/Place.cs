@@ -14,46 +14,46 @@ public class EditorPlace : ICommand
     internal override bool Execute()
     {
         // Creates the tile (this creates a tile every frame the button is held! very bad!)
-        GameTile tileToCreate = LevelManager.Instance.CreateTile(tile.ToString(), new(), position);
+        GameTile tileToCreate = LevelManager.I.CreateTile(tile.ToString(), new(), position);
 
         // Sets the tile
         switch (tile)
         {
-            case ObjectTypes t when LevelManager.Instance.typesSolidsList.Contains(t):
-                if (LevelManager.Instance.tilemapCollideable.GetTile<GameTile>(position)) return false;
-                LevelManager.Instance.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToCollideableList(tileToCreate);
+            case ObjectTypes t when LevelManager.I.typesSolidsList.Contains(t):
+                if (LevelManager.I.tilemapCollideable.GetTile<GameTile>(position)) return false;
+                LevelManager.I.tilemapCollideable.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.I.AddToCollideableList(tileToCreate);
                 break;
 
-            case ObjectTypes t when LevelManager.Instance.typesAreas.Contains(t):
-                if (LevelManager.Instance.tilemapWinAreas.GetTile<GameTile>(position)) return false;
-                LevelManager.Instance.tilemapWinAreas.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToWinAreasList(tileToCreate);
+            case ObjectTypes t when LevelManager.I.typesAreas.Contains(t):
+                if (LevelManager.I.tilemapWinAreas.GetTile<GameTile>(position)) return false;
+                LevelManager.I.tilemapWinAreas.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.I.AddToWinAreasList(tileToCreate);
                 break;
 
-            case ObjectTypes t when LevelManager.Instance.typesHazardsList.Contains(t):
-                if (LevelManager.Instance.tilemapHazards.GetTile<GameTile>(position)) return false;
-                LevelManager.Instance.tilemapHazards.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToHazardsList(tileToCreate);
+            case ObjectTypes t when LevelManager.I.typesHazardsList.Contains(t):
+                if (LevelManager.I.tilemapHazards.GetTile<GameTile>(position)) return false;
+                LevelManager.I.tilemapHazards.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.I.AddToHazardsList(tileToCreate);
                 break;
 
-            case ObjectTypes t when LevelManager.Instance.typesEffectsList.Contains(t):
-                if (LevelManager.Instance.tilemapEffects.GetTile<GameTile>(position)) return false;
-                LevelManager.Instance.tilemapEffects.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToEffectsList(tileToCreate);
+            case ObjectTypes t when LevelManager.I.typesEffectsList.Contains(t):
+                if (LevelManager.I.tilemapEffects.GetTile<GameTile>(position)) return false;
+                LevelManager.I.tilemapEffects.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.I.AddToEffectsList(tileToCreate);
                 break;
 
-            case ObjectTypes t when LevelManager.Instance.typesCustomsList.Contains(t):
-                if (LevelManager.Instance.tilemapCustoms.GetTile<CustomTile>(position)) return false;
+            case ObjectTypes t when LevelManager.I.typesCustomsList.Contains(t):
+                if (LevelManager.I.tilemapCustoms.GetTile<CustomTile>(position)) return false;
                 CustomTile custom = (CustomTile)tileToCreate;
-                LevelManager.Instance.tilemapCustoms.SetTile(custom.position, custom);
-                LevelManager.Instance.AddToCustomsList(custom);
+                LevelManager.I.tilemapCustoms.SetTile(custom.position, custom);
+                LevelManager.I.AddToCustomsList(custom);
                 break;
 
             default:
-                if (LevelManager.Instance.tilemapObjects.GetTile<GameTile>(position)) return false;
-                LevelManager.Instance.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
-                LevelManager.Instance.AddToObjectList(tileToCreate);
+                if (LevelManager.I.tilemapObjects.GetTile<GameTile>(position)) return false;
+                LevelManager.I.tilemapObjects.SetTile(tileToCreate.position, tileToCreate);
+                LevelManager.I.AddToObjectList(tileToCreate);
                 break;
         }
 

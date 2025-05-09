@@ -14,7 +14,7 @@ public class EditorDelete : ICommand
         if (!tile) return false;
         
         // Delete the tile
-        LevelManager.Instance.RemoveTile(tile);
+        LevelManager.I.RemoveTile(tile);
         this.tile = tile.GetTileType();
         return true;
     }

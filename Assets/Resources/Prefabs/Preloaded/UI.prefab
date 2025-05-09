@@ -6054,6 +6054,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9ff74ada42f4348965bb3f4b27ee54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editor:
+    self: {fileID: 7408764889314615005}
+    import: {fileID: 2119102271315738447}
+    playtest: {fileID: 2182566123846302836}
+    nextLevelField: {fileID: 9011402281843554295}
+    remixLevelField: {fileID: 134616231322901290}
+    freeroamToggle: {fileID: 2834015626987348518}
+  pause:
+    self: {fileID: 2790068325999992121}
+    resumeButton: {fileID: 5842420801247640804}
+    editorButton: {fileID: 3213810864627154259}
+    backToMenu: {fileID: 8383824016339911378}
+    levelInfo: {fileID: 3050657256873055673}
+    title: {fileID: 6048929097718217386}
+    levelBestTime: {fileID: 8505884743863050498}
+    levelBestMoves: {fileID: 3508410464516637350}
+  ingame:
+    self: {fileID: 1469989504739894103}
+    rArea: {fileID: 1553019122098860605}
+    rTimer: {fileID: 5267326235946499022}
+    rMoves: {fileID: 8803854708499214254}
+    levelName: {fileID: 197249231410081836}
+    levelMoves: {fileID: 4313548512459363900}
+    levelTimer: {fileID: 2811259919021965283}
+    areaIcon: {fileID: 5627539690904710409}
+    cycleIcon: {fileID: 7627529933734932712}
+    areaCount: {fileID: 4922829344092991057}
+  restart:
+    self: {fileID: 1410781262128677865}
+    restartButton: {fileID: 1845235402239239408}
+  popup:
+    self: {fileID: 3078554624484081041}
+    popupBtn: {fileID: 8050346434367372967}
+    popupText: {fileID: 4362657960199011344}
+  dialog:
+    self: {fileID: 2632609098223844071}
+    text: {fileID: 5152348880194315926}
   selectors: {fileID: 0}
 --- !u!1 &7697570793881476441
 GameObject:
@@ -7352,7 +7389,7 @@ MonoBehaviour:
   m_ShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_ShadowColorGlow: 1
   m_GradationMode: 2
-  m_GradationIntensity: 0.4
+  m_GradationIntensity: 0.2
   m_GradationColorFilter: 1
   m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor2: {r: 1, g: 1, b: 1, a: 1}

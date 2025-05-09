@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
-    [HideInInspector] public static TransitionManager Instance;
+    [HideInInspector] public static TransitionManager I;
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = false;
@@ -14,17 +14,18 @@ public class TransitionManager : MonoBehaviour
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
 
-    private AnimatorOverrideController crossfade;
-    private AnimatorOverrideController reveal;
-    private AnimatorOverrideController swipe;
-    private AnimatorOverrideController triangle;
-    private AnimatorOverrideController unknown;
-    private AnimatorOverrideController refresh;
+    [Header("Transitions")]
+    [SerializeField] private AnimatorOverrideController crossfade;
+    [SerializeField] private AnimatorOverrideController reveal;
+    [SerializeField] private AnimatorOverrideController swipe;
+    [SerializeField] private AnimatorOverrideController triangle;
+    [SerializeField] private AnimatorOverrideController unknown;
+    [SerializeField] private AnimatorOverrideController refresh;
 
     void Awake()
     {
         // Singleton (TransManager has persistence)
-        if (!Instance) { Instance = this; }
+        if (!I) { I = this; }
         else { Destroy(gameObject); return; }
         DontDestroyOnLoad(gameObject);
 
@@ -34,12 +35,6 @@ public class TransitionManager : MonoBehaviour
         // Get overrides & animator
         eventReference = eventReference = EventSystem.current;
         animator = GetComponent<Animator>();
-        crossfade = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Crossfade/Base");
-        reveal = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Reveal/Base");
-        swipe = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Swipe/Base");
-        triangle = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Triangle/Base");
-        unknown = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Unknown/Base");
-        refresh = Resources.Load<AnimatorOverrideController>("Animations/Transitions/Refresh/Base");
 
         // Play default
         ChangeTransition(Transitions.Reveal);

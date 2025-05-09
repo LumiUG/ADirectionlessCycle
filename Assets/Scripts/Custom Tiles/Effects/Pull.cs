@@ -16,7 +16,7 @@ public class PullTile : EffectTile
     // The tile's effect
     public override void Effect(GameTile tile)
     {
-        LevelManager.Instance.TryMove(tile.position, tile.position - LevelManager.Instance.currMove, -LevelManager.Instance.currMove, false, true);
+        LevelManager.I.TryMove(tile.position, tile.position - LevelManager.I.currMove, -LevelManager.I.currMove, false, true);
     }
     
     // Prepares editor variables.

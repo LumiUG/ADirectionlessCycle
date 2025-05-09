@@ -39,16 +39,16 @@ public class CustomLevels : MonoBehaviour
     void Start()
     {
         I = this; // No persistence!
-        UI.Instance.selectors.ChangeSelected(backButton, true);
+        UI.I.selectors.ChangeSelected(backButton, true);
         customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
         starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
         hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         popupAnimator = popup.GetComponent<Animator>();
 
-        if (GameManager.Instance.IsDebug()) lastSessionButton.interactable = true;
+        if (GameManager.I.IsDebug()) lastSessionButton.interactable = true;
 
         // Rich presence
-        GameManager.Instance.SetPresence("steam_display", "#Customs");
+        GameManager.I.SetPresence("steam_display", "#Customs");
 
         // Load all custom levels
         LoadCustomLevels();
@@ -67,7 +67,7 @@ public class CustomLevels : MonoBehaviour
     // Refreshes custom levels
     public void RefreshCustomLevels(string filter = null)
     {
-        TransitionManager.Instance.TransitionIn(Refresh, ActionRefreshLevels, filter);
+        TransitionManager.I.TransitionIn(Refresh, Actions.RefreshCustomLevels, filter);
     }
 
     // Loads all custom levels
@@ -79,7 +79,7 @@ public class CustomLevels : MonoBehaviour
         foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
         {
             if (!fileName.EndsWith(".level")) continue;
-            if (fileName.Contains($"{LevelManager.Instance.levelEditorName}.level") && !GameManager.Instance.IsDebug()) continue;
+            if (fileName.Contains($"{LevelManager.I.levelEditorName}.level") && !GameManager.I.IsDebug()) continue;
             if (count == 0) rowCount++;
             Texture2D preview = null;
             count++;
@@ -87,8 +87,8 @@ public class CustomLevels : MonoBehaviour
             // Get level info & preview image
             string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
             if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
-            SerializableLevel level = LevelManager.Instance.GetLevel(levelID, true);
-            if (!string.IsNullOrEmpty(level.previewImage)) preview = GameManager.Instance.Base64ToTexture(level.previewImage);
+            SerializableLevel level = LevelManager.I.GetLevel(levelID, true);
+            if (!string.IsNullOrEmpty(level.previewImage)) preview = GameManager.I.Base64ToTexture(level.previewImage);
 
             // Create prefab and set position
             GameObject entry = Instantiate(customLevelPrefab, holder);
@@ -117,10 +117,10 @@ public class CustomLevels : MonoBehaviour
     // Open a level's menu
     private void OpenLevelMenu(string levelID, string levelName)
     {
-        UI.Instance.selectors.ChangeSelected(popupPlay.gameObject);
+        UI.I.selectors.ChangeSelected(popupPlay.gameObject);
         selectedLevelName = levelName;
         selectedLevelID = levelID;
-        selectedLevelAsData = LevelManager.Instance.GetLevel(selectedLevelID, true);
+        selectedLevelAsData = LevelManager.I.GetLevel(selectedLevelID, true);
         foreach (Image star in popupStars) { star.GetComponent<Button>().interactable = true; }
         SetStarSprites(selectedLevelAsData.difficulty);
         popupPlay.interactable = true;
@@ -137,7 +137,7 @@ public class CustomLevels : MonoBehaviour
     // Close a level's menu
     public void CreateLevel()
     {
-        selectedLevelID = LevelManager.Instance.SaveLevel("New level", default, true, null);
+        selectedLevelID = LevelManager.I.SaveLevel("New level", default, true, null);
         selectedLevelName = "New level";
         EditLevel();
     }
@@ -148,7 +148,7 @@ public class CustomLevels : MonoBehaviour
         popupTitle.text = "Level Menu";
         selectedLevelAsData = null;
         confirmDeletion = false;
-        UI.Instance.selectors.ChangeSelected(backButton);
+        UI.I.selectors.ChangeSelected(backButton);
         popup.SetActive(false);
 
         if (shouldReloadLevels) RefreshCustomLevels();
@@ -158,21 +158,21 @@ public class CustomLevels : MonoBehaviour
     // Load current level
     public void PlayLevel()
     {
-        if (TransitionManager.Instance.inTransition) return;
+        if (TransitionManager.I.inTransition) return;
         
-        TransitionManager.Instance.TransitionIn(Reveal, LevelManager.Instance.ActionLoadLevel, selectedLevelID);
+        TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, selectedLevelID);
     }
 
     // Edit current level
     public void EditLevel()
     {
-        GameManager.Instance.currentEditorLevelID = selectedLevelID;
-        GameManager.Instance.currentEditorLevelName = selectedLevelName;
+        GameManager.I.currentEditorLevelID = selectedLevelID;
+        GameManager.I.currentEditorLevelName = selectedLevelName;
 
         string content = File.ReadAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level");
-        File.WriteAllText($"{GameManager.customLevelPath}/{LevelManager.Instance.levelEditorName}.level", content);
+        File.WriteAllText($"{GameManager.customLevelPath}/{LevelManager.I.levelEditorName}.level", content);
 
-        UI.Instance.GoLevelEditor();
+        UI.I.GoLevelEditor();
     }
 
     // Delete current level
@@ -181,20 +181,20 @@ public class CustomLevels : MonoBehaviour
         // Confirm to the user if they really want to delete the level
         if (!confirmDeletion)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.tileDeath, 0.30f);
+            AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.30f);
             popupTitle.text = "Are you sure?";
             confirmDeletion = true;
             return;
         }
 
         // Delete the level!
-        UI.Instance.selectors.ChangeSelected(popupExit);
+        UI.I.selectors.ChangeSelected(popupExit);
         string deletionPath = $"{GameManager.customLevelPath}/{selectedLevelID}.level";
         if (File.Exists(deletionPath)) File.Delete(deletionPath);
         RefreshCustomLevels();
 
         // Deletion visuals
-        AudioManager.Instance.PlaySFX(AudioManager.areaOverlap, 0.30f);
+        AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.30f);
         foreach (Image star in popupStars) { star.GetComponent<Button>().interactable = false; }
         popupTitle.text = "Level deleted!";
         popupPlay.interactable = false;
@@ -213,7 +213,7 @@ public class CustomLevels : MonoBehaviour
         selectedLevelAsData.levelName = value;
         File.WriteAllText($"{GameManager.customLevelPath}/{selectedLevelID}.level", JsonUtility.ToJson(selectedLevelAsData, false));
         
-        UI.Instance.global.SendMessage($"Level name set to \"{value}\"", 5f);
+        UI.I.global.SendMessage($"Level name set to \"{value}\"", 5f);
         CloseLevelMenu();
         RefreshCustomLevels();
     }
@@ -232,7 +232,7 @@ public class CustomLevels : MonoBehaviour
     // Changes a Level's ID
     public void ChangeLevelID(string newID)
     {
-        if (string.IsNullOrEmpty(newID) || newID == LevelManager.Instance.levelEditorName) return;
+        if (string.IsNullOrEmpty(newID) || newID == LevelManager.I.levelEditorName) return;
 
         // Rename file if level ID changed
         string cleanID = string.Concat(newID.Split(Path.GetInvalidFileNameChars()));
@@ -244,7 +244,7 @@ public class CustomLevels : MonoBehaviour
             $"{GameManager.customLevelPath}/{cleanID}.level");
         selectedLevelID = cleanID;
 
-        UI.Instance.global.SendMessage($"Level ID set to \"{newID}\"", 5f);
+        UI.I.global.SendMessage($"Level ID set to \"{newID}\"", 5f);
         shouldReloadLevels = true;
         CloseLevelMenu();
     }
@@ -260,15 +260,5 @@ public class CustomLevels : MonoBehaviour
     {
         popupStars.ForEach(star => star.sprite = hollowStarSprite);
         for (int i = 0; i < index; i++) { popupStars[i].sprite = starSprite; }
-    }
-
-    // Actions //
-    private void ActionRefreshLevels(string filter)
-    {
-        // Clear all levels and re-load everything
-        foreach (Transform level in holder.transform) { Destroy(level.gameObject); }
-        holder.anchoredPosition = new Vector2(holder.anchoredPosition.x, -540);
-        LoadCustomLevels(filter);
-        TransitionManager.Instance.TransitionOut<string>(Refresh);
     }
 }

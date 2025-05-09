@@ -13,6 +13,6 @@ public abstract class AreaTile : GameTile
     public void Ping()
     {
         tileObject.GetComponent<SpriteRenderer>().sprite = tileSprite;
-        LevelManager.Instance.RefreshAreaTile(this);
+        LevelManager.I.RefreshAreaTile(this);
     }
 }
