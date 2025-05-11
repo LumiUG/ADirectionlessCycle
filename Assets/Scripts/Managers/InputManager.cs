@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
 
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
     internal int restartCount = 0;
+    internal bool canRestart = true;
+    internal bool canPause = true;
 
     private bool isHoldingMovement = false;
     private bool isHoldingUndo = false;
@@ -256,6 +258,7 @@ public class InputManager : MonoBehaviour
         
         // That one void level
         if (LevelManager.I.currentLevelID == "VOID/Loop") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        if (LevelManager.I.currentLevelID == "VOID/Outro") return;
 
         // Undo latest move
         if (undoCoro != null) StopCoroutine(undoCoro);
@@ -273,7 +276,7 @@ public class InputManager : MonoBehaviour
     // Restart the level
     private void OnRestart()
     {
-        if (!IsAllowedToPlay() || LevelManager.I.voidedCutscene) return;
+        if (!IsAllowedToPlay() || !canRestart || LevelManager.I.voidedCutscene) return;
 
         // Confirm restart screen
         if (GameManager.save.preferences.forceConfirmRestart)
@@ -341,7 +344,7 @@ public class InputManager : MonoBehaviour
     // Pause event
     private void OnPause()
     {
-        if (GameManager.I.IsBadScene() || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || LevelManager.I.voidedCutscene) return;
+        if (GameManager.I.IsBadScene() || !canPause || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || LevelManager.I.voidedCutscene) return;
         if (!UI.I.pause.self.activeSelf) GameManager.I.PauseResumeGame(true);
         else GameManager.I.PauseResumeGame(false);
     }

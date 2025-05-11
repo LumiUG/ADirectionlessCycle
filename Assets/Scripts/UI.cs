@@ -256,11 +256,11 @@ public class UI : MonoBehaviour
             switch (split[1])
             {
                 case "Orb One":
-                {
-                    if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
-                    else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
-                    return;
-                }
+                    {
+                        if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
+                        else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
+                        return;
+                    }
                 case "Orb Two": { popup.SetPopup("...We've got no idea how to get there."); return; }
                 case "Orb Three": { popup.SetPopup("Pretty straightforward!"); return; }
                 case "Fragment TwoH": { popup.SetPopup("I won't let you go deeper."); return; }
@@ -281,8 +281,8 @@ public class UI : MonoBehaviour
                 case "Despair": { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
                 case "Developer": { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
                 default: // Custom cases
-                    if (LevelManager.I.currentLevelID == "VOID/Loop") popup.SetPopup("internal abstract GameTile Loop();");
-                    return;
+                    if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
+                    break;
             }
         } else hintLevelID = null;
 

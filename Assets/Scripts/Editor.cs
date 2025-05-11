@@ -33,6 +33,7 @@ public class Editor : MonoBehaviour
     private int selectedTileIndex = 0;
 
     // UI //
+    public Text coords; 
     internal GameObject popup;
     internal GameObject tileList;
     internal Toggle upToggle;
@@ -124,6 +125,9 @@ public class Editor : MonoBehaviour
     // Set the preview image (right now, creates a tile every frame for rendering sprites, ow...)
     void Update()
     {
+        // Coordinates
+        coords.text = $"({LevelManager.I.worldOffsetX / 14},{LevelManager.I.worldOffsetY / 8})";
+
         // Preview sprite (on tilemap)
         if (isPlacing)
         {

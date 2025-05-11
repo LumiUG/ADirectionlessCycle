@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Entry
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - Pay attention to your surroundings, follow that where the light does not pass.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

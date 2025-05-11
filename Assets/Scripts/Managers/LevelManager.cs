@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 using static Serializables;
 using static GameTile;
 using static TransitionManager.Transitions;
-using System.Diagnostics;
 
 public class LevelManager : MonoBehaviour
 {
@@ -511,6 +510,27 @@ public class LevelManager : MonoBehaviour
         {
             AddToDestroyQueue(tile);
             if (hazard.GetTileType() == ObjectTypes.Void) RemoveTile(hazard);
+        }
+
+        // Ending level startup (before effects)
+        if (currentLevelID == "VOID/CYCLE")
+        {
+            if (tile.position.y >= 17 || tile.position.y <= -24 || tile.position.x >= 42 || tile.position.x <= -29)
+            {
+                LoadLevel("VOID/Outro");
+                StartCoroutine(OutroCutscene());
+                worldOffsetX = 0;
+                worldOffsetY = 0;
+                StopMovements();
+            } else return true;
+
+            if (tile.position.y >= 17) tile.position = new(tile.position.x, -7);
+            else if (tile.position.y <= -24) tile.position = new(tile.position.x, 0);
+            else if (tile.position.x >= 42) tile.position = new(0, tile.position.y);
+            else if (tile.position.x <= -29) tile.position = new(13, tile.position.y);
+            PlaceTile(tile);
+            
+            return true;
         }
 
         // Tile effect?
@@ -1169,5 +1189,37 @@ public class LevelManager : MonoBehaviour
             normalOverlaps,
             levelWinAreas.Count(area => { return area.GetTileType() == ObjectTypes.Area; }), 1
         );
+    }
+
+    private IEnumerator OutroCutscene()
+    {
+        var tiles = GetObjectTiles();
+        InputManager.I.canPause = false;
+        InputManager.I.canRestart = false;
+
+        yield return new WaitForSeconds(5.8f);
+        tiles[0].directions.up = false;
+        RefreshObjectTile(tiles[0]);
+
+        yield return new WaitForSeconds(4.4f);
+        tiles[0].directions.down = false;
+        RefreshObjectTile(tiles[0]);
+
+        yield return new WaitForSeconds(6.5f);
+        tiles[0].directions.left = false;
+        RefreshObjectTile(tiles[0]);
+
+        yield return new WaitForSeconds(5.5f);
+        tiles[0].directions.right = false;
+        RefreshObjectTile(tiles[0]);
+
+        yield return new WaitForSeconds(7);
+        tiles[0].directions.pushable = false;
+        RefreshObjectTile(tiles[0]);
+
+        yield return new WaitForSeconds(4.2f);
+        RemoveTile(tiles[0]);
+        InputManager.I.canPause = true;
+        InputManager.I.canRestart = true;
     }
 }
