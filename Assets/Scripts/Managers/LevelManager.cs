@@ -519,18 +519,17 @@ public class LevelManager : MonoBehaviour
             {
                 LoadLevel("VOID/Outro");
                 StartCoroutine(OutroCutscene());
+                StopMovements();
+
+                if (tile.position.y >= 17) tile.position = new(tile.position.x - worldOffsetX, -7);
+                else if (tile.position.y <= -24) tile.position = new(tile.position.x - worldOffsetX, 0);
+                else if (tile.position.x >= 42) tile.position = new(0, tile.position.y - worldOffsetY);
+                else if (tile.position.x <= -29) tile.position = new(13, tile.position.y - worldOffsetY);
+
                 worldOffsetX = 0;
                 worldOffsetY = 0;
-                StopMovements();
+                PlaceTile(tile);
             } else return true;
-
-            if (tile.position.y >= 17) tile.position = new(tile.position.x, -7);
-            else if (tile.position.y <= -24) tile.position = new(tile.position.x, 0);
-            else if (tile.position.x >= 42) tile.position = new(0, tile.position.y);
-            else if (tile.position.x <= -29) tile.position = new(13, tile.position.y);
-            PlaceTile(tile);
-            
-            return true;
         }
 
         // Tile effect?
@@ -1219,6 +1218,9 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(4.2f);
         RemoveTile(tiles[0]);
+
+        yield return new WaitForSeconds(3.2f);
+        UI.I.effects.gameObject.SetActive(false);
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
     }

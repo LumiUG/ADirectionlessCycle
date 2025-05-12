@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
             }
             debugCommand += keyboardInput;
 
-            if (debugCommand.Length > 10) debugCommand = debugCommand[..10];
+            if (debugCommand.Length > 13) debugCommand = debugCommand[..13];
             MainMenu.I.debug.CrossFadeAlpha(1f, 0f, true);
             MainMenu.I.debug.text = debugCommand;
         }
@@ -97,6 +97,13 @@ public class InputManager : MonoBehaviour
             canInputCommands = false;
             debugCommand = null;
             UI.I.ChangeScene("Bonus");
+        }
+
+        // Secret arg,,
+        if (debugCommand == "LLLRRRDDDUUU")
+        {
+            MainMenu.I.ShowPopup("\"/terminal > eos\"");
+            debugCommand = null;
         }
 
         // Chess battle advanced
