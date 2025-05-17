@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     public RectTransform allRemixIcon;
     public RectTransform allOutboundIcon;
     public GameObject scorchingStupid;
+    public GameObject postgameChecker;
     public GameObject badgeHolder;
     public Button playBtn;
     public Button popupBtn;
@@ -22,6 +23,8 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         I = this; // No persistence!
+
+        if (GameManager.save.game.hasCompletedGame) postgameChecker.SetActive(true);
 
         // Version text
         version.text = $"v{Application.version}";

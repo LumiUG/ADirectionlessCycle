@@ -253,6 +253,7 @@ public class UI : MonoBehaviour
             else hintLevelID = $"HINTS/W{split[1]}H";
 
             // Custom handlings
+            if (GameManager.save.game.hasCompletedGame && !split[0].Contains("VOID") && LevelManager.I.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("..."); return; }
             switch (split[1])
             {
                 case "Orb One":
