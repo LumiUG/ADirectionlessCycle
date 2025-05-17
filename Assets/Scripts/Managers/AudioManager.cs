@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip select;
     internal static AudioClip undo;
     internal static AudioClip cba;
+    internal static AudioClip ego1;
+    internal static AudioClip ego2;
 
     // AudioSources //
     [SerializeField] private AudioSource master;
@@ -56,6 +58,8 @@ public class AudioManager : MonoBehaviour
         select = Resources.Load<AudioClip>("Audio/SFX/Select");
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
         cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
+        ego1 = Resources.Load<AudioClip>("Audio/Dialog/Ego 1");
+        ego2 = Resources.Load<AudioClip>("Audio/Dialog/Ego 2");
 
         // Default title BGM
         try

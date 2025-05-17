@@ -40,6 +40,15 @@ public class DialogManager : MonoBehaviour
     public void StartDialog(DialogScriptable chat, string dialogPath)
     {
         if (!canInteract || !chat || TransitionManager.I.inTransition) return;
+        if (GameManager.save.game.hasCompletedGame && !dialogPath.Contains("CUSTOM"))
+        {
+            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
+            {
+                chat = Resources.Load<DialogScriptable>("Dialog/Empty");
+                dialogPath = "Empty";
+            }
+        }
+
         currentDialogPath = dialogPath;
         inDialog = true;
 

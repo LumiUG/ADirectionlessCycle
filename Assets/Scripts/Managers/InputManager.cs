@@ -99,10 +99,15 @@ public class InputManager : MonoBehaviour
             UI.I.ChangeScene("Bonus");
         }
 
-        // Secret arg,,
-        if (debugCommand == "LLLRRRDDDUUU")
+        // Secret arg,, (maybe change it later, add a level or something.)
+        if (debugCommand == "thankyou")
         {
             MainMenu.I.ShowPopup("\"/terminal > eos\"");
+            debugCommand = null;
+        }
+        if (debugCommand == "LLLRRRDDDUUU")
+        {
+            MainMenu.I.ShowPopup("Try outside?");
             debugCommand = null;
         }
 
@@ -155,12 +160,26 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        // Livic
+        // Guests
         else if (debugCommand == "caos")
         {
             canInputCommands = false;
             debugCommand = null;
             TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Caos");
+            return;
+        }
+        else if (debugCommand == "r3n")
+        {
+            canInputCommands = false;
+            debugCommand = null;
+            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Ren");
+            return;
+        }
+        else if (debugCommand == "gummi")
+        {
+            canInputCommands = false;
+            debugCommand = null;
+            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Gummi");
             return;
         }
 
