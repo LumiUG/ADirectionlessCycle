@@ -16,6 +16,7 @@ MonoBehaviour:
   - Hey, thank you.
   - It's been a while since I've seen something... Alive?
   - You can leave now, I'll go back to watching the void.
+  - It's... comforting.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 80b8d701e506bf34ba5b161a60fd1b0f, type: 2}
   textSpeed: 0.05

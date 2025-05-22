@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sorry
   m_EditorClassIdentifier: 
   dialog:
-  - Hey, player.
+  - Hey.
   - Just wanted to let you know that this is the hardest level in the game.
   - We would help you, but we are forbidden to give hints here.
   - Sorry, not sorry.

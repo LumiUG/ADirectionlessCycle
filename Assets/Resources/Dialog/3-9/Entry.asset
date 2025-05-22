@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - One of the more interesting levels. Oh the reaction you'll have when it clicks.
   - There's so much in here that you can't see...
-  - Let's see if you can find everything later.
+  - Sorry, just being a tease. Carry on!
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

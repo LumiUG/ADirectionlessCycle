@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - 'Let me write... '
-  - Finally- Hi player!! I love this level. Really makes you think outside the box-
+  - Finally- Hi player! I love this level. Really makes you think outside the box-
   - Actually, I would love to give you hints, but I won't!
   - This is better experienced yourself.
   - And don't you dare try the lightbulb.
   - I'll know.
-  - Oh, I will.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

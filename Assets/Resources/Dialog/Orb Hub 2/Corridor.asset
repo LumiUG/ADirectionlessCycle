@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corridor
   m_EditorClassIdentifier: 
   dialog:
-  - Find anything yet? This place is weeeeeeeeird.
+  - The terrain... I can't believe it's gotten this bad.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

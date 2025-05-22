@@ -15,7 +15,6 @@ MonoBehaviour:
   dialog:
   - You made it. The artifact you are looking for is on the next level.
   - We don't have any tips on this one, but you can probably figure it out.
-  - Good luck, player!
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

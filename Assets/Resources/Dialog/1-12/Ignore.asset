@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Ignore
   m_EditorClassIdentifier: 
   dialog:
-  - Did they contact you aswell? Oh please, as if they ever wanted anything good
-    for us.
+  - They contacted you? Oh please, as if they ever wanted anything good for us.
   - As much as I'd like for this to end, I don't want to know what's after this.
-  - Yes, we know this is a game for you. And it's a game I- we want you to keep playing.
+  - Let me make one thing very clear, do not do what they say.
+  - It will only bring finality to this world.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Hey, I'm back. Congrats on making it into area two.
-  - I'm quite surprised that they are enjoying this as much as they are, hah.
+  - They didn't give you too much trouble, I hope?
   - 'Well, It doesn''t matter right now. '
-  - You'll end up going through everything, anwyays. So they'll better be happy afterwards.
-  - Sorry for leaving before, I was consulting some stuff.
-  - There's a forced entry in this area, I'll explain everything there.
+  - Sorry for leaving before, I was consulting some stuff, and making sure everything
+    is ready for you.
+  - There's a "forced entry" in this area, I'll explain everything there.
+  - For now, just try to follow along! Enjoy while you're at it. There won't be anything
+    soon.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

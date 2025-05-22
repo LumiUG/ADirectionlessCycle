@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Another one of these... We'll come back later to finish the job.
-  - '...Wait. '
-  - Just now, I'm noticing that on the left.
-  - Doesn't it kind of look like an umbrella? That's funny.
-  - You'd think that in all the time we've been here we would've spotted that before.
+  - I'm such a tease, though. How about some...
+  - Foreshadowing!
+  - '"How do you like that umbrella?"'
+  - Truthfully, it's been a while since I've been there. We'll revisit it with you.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

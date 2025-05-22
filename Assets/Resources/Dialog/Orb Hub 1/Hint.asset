@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hint
   m_EditorClassIdentifier: 
   dialog:
-  - 'It''s another one of those. Let me read it for you:'
+  - 'It''s another one of those. Let me decode it for you:'
   - '"The third fragment lies way below in Area two."'
   - '"Past some empty space, you''ll find it. Though, it''ll require a bit of patience."'
   - '"And when the path stops being clear...  When in doubt, it never hurts to ask

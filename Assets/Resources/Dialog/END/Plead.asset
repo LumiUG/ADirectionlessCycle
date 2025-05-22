@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Plead
   m_EditorClassIdentifier: 
   dialog:
-  - This isn't that easy. Check it out yourself.
-  - If this fails, we've made another exit, hopefully it'll still work.
-  - Surely it wouldn't have degraded.
+  - Well? Welcome to the core. It all ends here.
+  - This isn't as easy as taking the exit on the top.
+  - I've monitored this level closely, and it's definitely broken.
+  - I did make another exit, but it's way down there. Hopefully it'll still work.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

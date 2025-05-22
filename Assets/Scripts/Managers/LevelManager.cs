@@ -1221,6 +1221,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(3.2f);
         UI.I.effects.gameObject.SetActive(false);
+        GameManager.save.game.hasCompletedGame = true;
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
     }

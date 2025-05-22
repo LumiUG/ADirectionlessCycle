@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Praise
   m_EditorClassIdentifier: 
   dialog:
-  - Welcome to world two! I really like this area.
-  - 'Just for a small intro: In here, you''ll experiment with different puzzle styles
-    using multiple types of tiles.'
-  - It does get way too tricky at the end, though...
-  - Still, we hope you enjoy this world!!
+  - Welcome to world two, I really like this area.
+  - 'Just for a small intro, as the guides we are:'
+  - '"In here, you''ll experiment with different puzzle styles using multiple types
+    of tiles."'
+  - Im sure you'll get it, though it sure does get tricky at the end.
+  - Still, we hope you enjoy this world!
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

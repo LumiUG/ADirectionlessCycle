@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Hey, just popping in!
-  - Just wanted to say, if something feels impossible... it probably is!
-  - Feel free to come back later- Or better, just don't!
+  - Just wanted to say, if something feels impossible... It probably is!
+  - Feel free to come back later- Or better, just don't.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

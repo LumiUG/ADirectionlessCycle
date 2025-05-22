@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Light
   m_EditorClassIdentifier: 
   dialog:
-  - 3-10... You don't know what this place is.
+  - 3-10... How I've come to hate this place.
   - They've... Look, whatever they've been telling you- %end%
   events: []
   exhaustDialog: {fileID: 11400000, guid: 9a7444ff588fcf74fb48c71c4e0c8c2f, type: 2}
