@@ -7,13 +7,13 @@ public class AudioManager : MonoBehaviour
     [HideInInspector] public static AudioManager I;
 
     // BGM //
-    [HideInInspector] public static AudioClip titleBGM;
-    [HideInInspector] public static AudioClip editorBGM;
-    [HideInInspector] public static AudioClip remixBGM;
-    [HideInInspector] public static AudioClip voidBGM;
-    [HideInInspector] public static AudioClip W1BGM;
-    [HideInInspector] public static AudioClip W2BGM;
-    [HideInInspector] public static AudioClip W3BGM;
+    internal static AudioClip titleBGM;
+    internal static AudioClip editorBGM;
+    internal static AudioClip remixBGM;
+    internal static AudioClip voidBGM;
+    internal static AudioClip W1BGM;
+    internal static AudioClip W2BGM;
+    internal static AudioClip W3BGM;
     private Coroutine switchCoro = null;
 
     // SFX //
@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip ego2;
 
     // AudioSources //
+    [Header("Audio Sources")]
     [SerializeField] private AudioSource master;
     [SerializeField] private AudioSource sfx;
     [SerializeField] private AudioSource sfxPitch;

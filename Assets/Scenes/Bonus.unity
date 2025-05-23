@@ -1477,7 +1477,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trivia (Unfinished)
+  m_Text: Trivia
 --- !u!222 &979763763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2472,7 +2472,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1605045146}
   m_OnClick:
     m_PersistentCalls:
@@ -2486,7 +2486,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: CODE/Trivia
+          m_StringArgument: CODE/Quiz
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1605045146

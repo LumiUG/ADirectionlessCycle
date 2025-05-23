@@ -350,7 +350,7 @@ public class InputManager : MonoBehaviour
         }
 
         // Editor override
-        if (GameManager.I.IsEditor())
+        if (GameManager.I.IsEditor() && !Editor.I.popup.activeSelf && !UI.I.editor.self.activeSelf)
         {
             while (isHoldingUndo && Editor.I.IsUndoQueueValid())
             {
