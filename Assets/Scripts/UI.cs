@@ -279,7 +279,9 @@ public class UI : MonoBehaviour
                 case "Down": { popup.SetPopup("WRITE LATER"); return; }
                 case "Left": { popup.SetPopup("WRITE LATER"); return; }
                 case "Up": { popup.SetPopup("WRITE LATER"); return; }
+                case "Outro": { popup.SetPopup("[Nothing]"); return; }
                 case "Despair": { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
+                case "Quiz": { popup.SetPopup("Missed opportunity to make an answer rely on the level hint. Shame on me."); return; }
                 case "Developer": { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
                 default: // Custom cases
                     if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
