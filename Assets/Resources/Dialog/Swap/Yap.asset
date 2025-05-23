@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - That's it. Just as simple.
   - Now every time you see something like this, you know what to do!
-  - There's also different cases, try going forward again. Hah.
+  - There's also different cases, try stuff out!
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Great. Now here's the fun part...
-  - Cycle into a Hex, and move into that broken wall on your right.
+  - By cycling, you can now access areas you couldn't reach before.
+  - Yes... You couldn't do it before. Only after getting the fragments it unlocks
+    it.
+  - You'll see! Cycle into a Hex, and move into that broken wall on your right.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
