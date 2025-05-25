@@ -10,7 +10,7 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = false;
-    internal enum Transitions { Ignore, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh };
+    internal enum Transitions { Ignore = 0, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh, Dive, Load };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
 
@@ -21,6 +21,8 @@ public class TransitionManager : MonoBehaviour
     [SerializeField] private AnimatorOverrideController triangle;
     [SerializeField] private AnimatorOverrideController unknown;
     [SerializeField] private AnimatorOverrideController refresh;
+    [SerializeField] private AnimatorOverrideController dive;
+    [SerializeField] private AnimatorOverrideController load;
 
     void Awake()
     {
@@ -37,7 +39,7 @@ public class TransitionManager : MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Play default
-        ChangeTransition(Transitions.Reveal);
+        ChangeTransition(Transitions.Load);
     }
 
     // Transitions out of a black screen
@@ -46,29 +48,20 @@ public class TransitionManager : MonoBehaviour
     // Change the current animator controller
     internal void ChangeTransition(Transitions transition)
     {
-        switch (transition)
+        RuntimeAnimatorController controller = transition switch
         {
-            case Transitions.Crossfade:
-                animator.runtimeAnimatorController = crossfade;
-                break;
-            case Transitions.Reveal:
-                animator.runtimeAnimatorController = reveal;
-                break;
-            case Transitions.Swipe:
-                animator.runtimeAnimatorController = swipe;
-                break;
-            case Transitions.Triangle:
-                animator.runtimeAnimatorController = triangle;
-                break;
-            case Transitions.Unknown:
-                animator.runtimeAnimatorController = unknown;
-                break;
-            case Transitions.Refresh:
-                animator.runtimeAnimatorController = refresh;
-                break;
-            default: // Transitions.Ignore
-                break;
-        }
+            Transitions.Crossfade => crossfade,
+            Transitions.Reveal => reveal,
+            Transitions.Swipe => swipe,
+            Transitions.Triangle => triangle,
+            Transitions.Unknown => unknown,
+            Transitions.Refresh => refresh,
+            Transitions.Dive => dive,
+            Transitions.Load => load,
+            _ => null
+        };
+
+        if (controller != null) animator.runtimeAnimatorController = controller;
     }
 
     // Get the CORRECT clip length
@@ -83,6 +76,7 @@ public class TransitionManager : MonoBehaviour
     internal void TransitionIn<T>(Transitions transition = Transitions.Ignore, Action<T> doAfter = null, T parameters = default)
     {
         if (inTransition) { doAfter?.Invoke(parameters); return; }
+        if (transition == Transitions.Load) transition = Transitions.Reveal;
 
         ChangeTransition(transition);
         StartCoroutine(CoroIn(transition, doAfter, parameters));

@@ -169,7 +169,7 @@ public sealed class Actions : MonoBehaviour
 
     public static void DiveIn(string count)
     {
-        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
+        TransitionManager.Transitions[] effects = { Dive, Unknown, Dive, Crossfade };
         int.TryParse(count, out int numberCount);
 
         if (count == "5")
@@ -186,7 +186,7 @@ public sealed class Actions : MonoBehaviour
     {
         LevelManager.I.LoadLevel($"VOID/Dive/{count}");
 
-        TransitionManager.Transitions[] effects = { Crossfade, Reveal, Swipe, Unknown };
+        TransitionManager.Transitions[] effects = { Dive, Unknown, Dive, Crossfade };
         int.TryParse(count, out int numberCount);
 
         TransitionManager.I.TransitionOut(effects[numberCount - 1], DiveIn, $"{numberCount + 1}");

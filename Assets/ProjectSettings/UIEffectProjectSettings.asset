@@ -71,6 +71,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_COLOR2
         passType: 0
+      - keywords: GRADATION_COLOR2 TONE_GRAYSCALE
+        passType: 0
       - keywords: GRADATION_COLOR4
         passType: 0
       - keywords: GRADATION_GRADIENT

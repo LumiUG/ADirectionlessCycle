@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Icon
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 199
+        height: 200
+      alignment: 9
+      pivot: {x: 0.48, y: 0.66}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a25e2b38b5d5dae418898a6cf39307f8
+      internalID: -300970773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Half Sun
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 90
+        width: 430
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7916e3d2beb9061408f26986e979ba73
+      internalID: -1757179170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Games
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 270
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 035fb73326cb8764d930e23ecca6ea71
+      internalID: 1090143047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +195,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Games: 1090143047
+      Half Sun: -1757179170
+      Icon: -300970773
+      Studio Banner_10: 292376286
+      Studio Banner_11: -1447347664
+      Studio Banner_12: 580952399
+      Studio Banner_13: -813816715
+      Studio Banner_14: 427300703
+      Studio Banner_15: 931484493
+      Studio Banner_16: 1534700598
+      Studio Banner_17: 952674985
+      Studio Banner_18: 1563186337
+      Studio Banner_19: -1663341665
+      Studio Banner_2: -1681277652
+      Studio Banner_3: -579680620
+      Studio Banner_4: -31140611
+      Studio Banner_5: 1899020033
+      Studio Banner_6: 2047531247
+      Studio Banner_7: 1432579310
+      Studio Banner_8: -341922756
+      Studio Banner_9: -292704780
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
