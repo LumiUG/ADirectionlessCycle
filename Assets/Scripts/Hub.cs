@@ -104,13 +104,19 @@ public class Hub : MonoBehaviour
         // EVERYTHING.
         if (!GameManager.save.game.hasMasteredGame && mainLevels && remixCount && outboundCount)
         {
+            if (!GameManager.save.game.hasCompletedGame) return;
+
             // Specific levels (this'll be a pain for players :3)
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb One").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem").completed) return;
             if (!GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial").outboundCompletion) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"VOID/CYCLE").completed) return;
+
+            // ?
+            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Caos").completed) return;
+            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Ren").completed) return;
+            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Gummi").completed) return;
 
             // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
