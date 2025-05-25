@@ -242,7 +242,7 @@ public class GameManager : MonoBehaviour
             else if (LevelManager.I.currentLevelID.Contains("W2")) { assets.LargeImage = "two"; assets.LargeText = "Currently in Area Two"; }
             else if (LevelManager.I.currentLevelID.Contains("W3")) { assets.LargeImage = "three"; assets.LargeText = "Currently in Area Three"; }
             else if (LevelManager.I.currentLevelID.Contains("REMIX")) { assets.LargeImage = "remix"; assets.LargeText = "Currently inverted."; }
-            else if (LevelManager.I.currentLevelID.Contains("VOID")) { assets.LargeImage = "core"; assets.LargeText = "Currently gazing nothingness."; }
+            else if (LevelManager.I.currentLevelID.Contains("VOID") || LevelManager.I.currentLevelID.Contains("ORB") || LevelManager.I.currentLevelID.Contains("FRAGMENT")) { assets.LargeImage = "core"; assets.LargeText = "Currently gazing nothingness."; }
             else { assets.LargeImage = "custom"; assets.LargeText = "Currently on a special/custom level."; }
             assets.SmallImage = "star";
             assets.SmallText = $"Time: {Math.Round(LevelManager.I.levelTimer, 2)}s.\nMoves: {LevelManager.I.levelMoves}";
