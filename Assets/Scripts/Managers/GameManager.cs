@@ -4,12 +4,15 @@ using System.Linq;
 using System.IO;
 using System;
 using Steamworks;
+using Discord;
+using Rect = UnityEngine.Rect;
 using static Serializables;
 
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager I;
-    
+    [HideInInspector] public static Discord.Discord rcp = null;
+
     // Game data // 
     [HideInInspector] public bool isEditing;
     [HideInInspector] public bool buildDebugMode;
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
     internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
     private string dataPath;
+    private ActivityTimestamps sessionTime = new();
 
     void Awake()
     {
@@ -66,13 +70,38 @@ public class GameManager : MonoBehaviour
             // AudioManager.I.SetSFXVolume(save.preferences.SFXVolume); // not needed, we already use the variable!
         }
 
-        // Steam integration initial stuff
-        if (!SteamManager.Initialized) return;
+        // Init Discord RCP
+        try {
+            rcp = new Discord.Discord(1244697907723108362, (ulong)CreateFlags.NoRequireDiscord);
+            sessionTime.Start = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+        }
+        catch { } // Dont care.
+        
+    }
+
+    // Setup all the initial presences
+    private void Start()
+    {
         SetPresence("steam_display", "#Menuing");
+        UpdateActivity("On the main menu.");
+    }
+
+    // Exclusively for Discord's bad SDK
+    private void Update()
+    {
+        if (rcp == null) return;
+
+        try { rcp.RunCallbacks(); }
+        catch (ResultException) { rcp?.Dispose(); rcp = null; }
+        catch { } // Dont care.
     }
 
     // Save game on leaving
-    void OnDisable() { SaveDataJSON(save); }
+    void OnDisable()
+    {
+        SaveDataJSON(save);
+        rcp?.GetActivityManager().ClearActivity(null);
+    }
 
     // Returns if the current scene shouldn't be taken into account
     public bool IsBadScene()
@@ -197,5 +226,36 @@ public class GameManager : MonoBehaviour
         if (!SteamManager.Initialized) return;
 
         SteamFriends.SetRichPresence(key, display);
+    }
+
+    // Discord RCP //
+    public void UpdateActivity(string details)
+    {
+        if (rcp == null || string.IsNullOrEmpty(details)) return;
+		var activityManager = rcp.GetActivityManager();
+
+        // Setup activity
+        var assets = new ActivityAssets();
+        if (LevelManager.I.currentLevel != null && details.Contains("Playing"))
+        {
+            if (LevelManager.I.currentLevelID.Contains("W1")) { assets.LargeImage = "one"; assets.LargeText = "Currently in Area One"; }
+            else if (LevelManager.I.currentLevelID.Contains("W2")) { assets.LargeImage = "two"; assets.LargeText = "Currently in Area Two"; }
+            else if (LevelManager.I.currentLevelID.Contains("W3")) { assets.LargeImage = "three"; assets.LargeText = "Currently in Area Three"; }
+            else if (LevelManager.I.currentLevelID.Contains("REMIX")) { assets.LargeImage = "remix"; assets.LargeText = "Currently inverted."; }
+            else if (LevelManager.I.currentLevelID.Contains("VOID")) { assets.LargeImage = "core"; assets.LargeText = "Currently gazing nothingness."; }
+            else { assets.LargeImage = "custom"; assets.LargeText = "Currently on a special/custom level."; }
+            assets.SmallImage = "star";
+            assets.SmallText = $"Time: {Math.Round(LevelManager.I.levelTimer, 2)}s.\nMoves: {LevelManager.I.levelMoves}";
+        } else activityManager.ClearActivity(null);
+
+        // Update activity
+		var activity = new Activity
+		{
+            Type = ActivityType.Playing,
+			Details = details,
+            Timestamps = sessionTime,
+            Assets = assets
+		};
+		activityManager.UpdateActivity(activity, null);
     }
 }

@@ -105,9 +105,9 @@ public class LevelManager : MonoBehaviour
     // Player //
     private Coroutine timerCoroutine = null;
     private bool doPushSFX = false;
-    private float levelTimer = 0f;
-    private int levelMoves = 0;
     private bool noMove = false;
+    internal int levelMoves = 0;
+    internal float levelTimer = 0f;
     internal Vector3Int currMove = Vector3Int.zero;
     internal bool voidedCutscene = false;
     internal bool isPaused = false;
@@ -310,6 +310,7 @@ public class LevelManager : MonoBehaviour
         // Rich presence
         GameManager.I.SetPresence("playinglevel", currentLevel.levelName);
         GameManager.I.SetPresence("steam_display", "#Playing");
+        GameManager.I.UpdateActivity($"Playing a level: {currentLevel.levelName}");
 
         // Hide UI?
         UI.I.pause.title.text = currentLevel.levelName;

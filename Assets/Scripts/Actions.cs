@@ -85,6 +85,7 @@ public sealed class Actions : MonoBehaviour
         // Rich presence
         GameManager.I.SetPresence("editorlevel", LevelManager.I.currentLevel.levelName);
         GameManager.I.SetPresence("steam_display", "#Editor");
+        GameManager.I.UpdateActivity($"Editing a level: {LevelManager.I.currentLevel.levelName}");
 
         LevelManager.I.RefreshGameVars();
         UI.I.ChangeScene("Level Editor", false);

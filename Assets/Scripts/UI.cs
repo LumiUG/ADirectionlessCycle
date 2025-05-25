@@ -106,12 +106,15 @@ public class UI : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
         TransitionManager.I.TransitionIn<string>(Reveal, Actions.GoMainMenu);
         GameManager.I.SetPresence("steam_display", "#Menuing");
+        GameManager.I.UpdateActivity("On the main menu.");
     }
 
     // Goes to hub (scarier)
     public void GoHub()
     {
         TransitionManager.I.TransitionIn<string>(Swipe, Actions.ReturnHub);
+        GameManager.I.SetPresence("steam_display", "#Menuing");
+        GameManager.I.UpdateActivity("On the main menu.");
     }
 
     // Go from a level to the editor

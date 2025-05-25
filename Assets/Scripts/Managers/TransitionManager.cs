@@ -9,10 +9,11 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public static TransitionManager I;
     [HideInInspector] public Animator animator;
 
-    internal bool inTransition = false;
+    internal bool inTransition = true;
     internal enum Transitions { Ignore = 0, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh, Dive, Load };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
+    private bool firstTransition = true;
 
     [Header("Transitions")]
     [SerializeField] private AnimatorOverrideController crossfade;
@@ -41,6 +42,8 @@ public class TransitionManager : MonoBehaviour
         // Play default
         ChangeTransition(Transitions.Load);
     }
+
+    private void Start() => eventReference.enabled = false;
 
     // Transitions out of a black screen
     private void SceneLoad(Scene scene, LoadSceneMode sceneMode) { TransitionOut<string>(); }
@@ -105,6 +108,7 @@ public class TransitionManager : MonoBehaviour
         animator.Play("OUT");
 
         yield return new WaitForSeconds(GetClipLength($"{transition} OUT"));
+        if (firstTransition) { firstTransition = false; yield return new WaitForSeconds(3f); eventReference.enabled = true; }
         inTransition = false;
         doAfter?.Invoke(parameters);
     }

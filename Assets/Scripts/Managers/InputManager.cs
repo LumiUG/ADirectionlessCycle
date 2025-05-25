@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 using static TransitionManager.Transitions;
 using static GameTile;
 
@@ -26,6 +27,7 @@ public class InputManager : MonoBehaviour
     private readonly float repeatMovementCD = 0.14f; // 0.12f default
     private readonly float manualMovementCD = 0.04f; // 0.12f default
     private float currentMovementCD = 0f;
+    private int rpcCounter = 0;
 
     // Debug //
     private bool canInputCommands = false;
@@ -242,6 +244,14 @@ public class InputManager : MonoBehaviour
         // Input prevention logic
         Vector3Int movCheck = Vector3Int.RoundToInt(ctx.Get<Vector2>());
         if (movCheck == Vector3Int.zero) { isHoldingMovement = false; return; }
+
+        // Update RPC (Discord)
+        rpcCounter++;
+        if (rpcCounter >= 16)
+        {
+            GameManager.I.UpdateActivity($"Playing a level: {LevelManager.I.currentLevel.levelName}");
+            rpcCounter = 0;
+        }
 
         // Better input handler
         Vector3Int movement = movCheck;

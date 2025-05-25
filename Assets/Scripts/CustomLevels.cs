@@ -49,6 +49,7 @@ public class CustomLevels : MonoBehaviour
 
         // Rich presence
         GameManager.I.SetPresence("steam_display", "#Customs");
+        GameManager.I.UpdateActivity($"Browsing custom levels.");
 
         // Load all custom levels
         LoadCustomLevels();

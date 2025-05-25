@@ -36,6 +36,7 @@ public class MainMenu : MonoBehaviour
     private void Update()
     {
         if (!EventSystem.current) return;
+        if (EventSystem.current.currentSelectedGameObject == null) UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
         
         if (EventSystem.current.currentSelectedGameObject.name == "Discord") UI.I.selectors.SetEffect(1);
         else UI.I.selectors.SetEffect(0);
