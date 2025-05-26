@@ -5088,7 +5088,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1634448443}
           m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
+          m_MethodName: StaticBadSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5104,7 +5104,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1634448443}
           m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
+          m_MethodName: StaticBadSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8807,7 +8807,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1634448443}
           m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
+          m_MethodName: StaticBadSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8823,7 +8823,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1634448443}
           m_TargetAssemblyTypeName: StaticUI, Assembly-CSharp
-          m_MethodName: StaticSubmitSound
+          m_MethodName: StaticBadSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

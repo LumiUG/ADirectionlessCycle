@@ -50,4 +50,10 @@ public class StaticUI : MonoBehaviour
     {
         if (UI.I) UI.I.ConfirmSound();
     }
+
+    // Play bad sound
+    public void StaticBadSound()
+    {
+        if (UI.I) UI.I.BadSound();
+    }
 }

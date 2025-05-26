@@ -239,6 +239,12 @@ public class UI : MonoBehaviour
         AudioManager.I.PlaySFX(AudioManager.select, 0.35f, true);
     }
 
+    // UI bad sound
+    public void BadSound()
+    {
+        AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.5f);
+    }
+
     // Goes to the current level's
     public void CurrentLevelHint()
     {
