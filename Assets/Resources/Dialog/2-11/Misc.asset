@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Misc
   m_EditorClassIdentifier: 
   dialog:
-  - Yo! You're barely there. This is the toughest level, though.
-  - I would understand if you...
-  - No, actually, you can beat this level. We believe in you.
-  - I'll be watching you closely, silently judging you!
+  - Yo! You're almost there. This is the toughest level, though.
+  - Wouldn't blame you if you took a hint.
+  - I'll be watching you closely, silently judging you.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 23c03d4a8318c5c44b2e3b1922f493ec, type: 2}
   textSpeed: 0.05
