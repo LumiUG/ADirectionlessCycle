@@ -1086,6 +1086,7 @@ public class LevelManager : MonoBehaviour
                 case ObjectTypes.NPC:
                     if (tile.customText.Split(";").Length < 2) return;
                     stringCheck = (string)tile.customText.Split(";").GetValue(1);
+                    if (stringCheck == "Carvings/Light" && GameManager.save.game.hasCompletedGame) stringCheck = "Carvings/Gone";
                     break;
 
                 case ObjectTypes.Hologram:
