@@ -12,6 +12,10 @@ public class StaticUI : MonoBehaviour
     // Change scene to the level editor
     public void StaticGoLevelEditor() { if (UI.I) UI.I.GoLevelEditor(); }
 
+
+    // Change scene to the main menu
+    public void StaticGoMainMenu() { if (UI.I) UI.I.GoMainMenu(); }
+
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {

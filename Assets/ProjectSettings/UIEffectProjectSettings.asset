@@ -23,6 +23,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR2
         passType: 0
+      - keywords: COLOR_FILTER GRADATION_COLOR2 TRANSITION_PATTERN
+        passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR4
         passType: 0
       - keywords: COLOR_FILTER GRADATION_GRADIENT
@@ -73,6 +75,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_COLOR2 TONE_GRAYSCALE
         passType: 0
+      - keywords: GRADATION_COLOR2 TRANSITION_PATTERN
+        passType: 0
       - keywords: GRADATION_COLOR4
         passType: 0
       - keywords: GRADATION_GRADIENT
@@ -80,6 +84,8 @@ ShaderVariantCollection:
       - keywords: GRADATION_RADIAL
         passType: 0
       - keywords: GRADATION_RADIAL TONE_GRAYSCALE UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: GRADATION_RADIAL TRANSITION_FADE
         passType: 0
       - keywords: GRADATION_RADIAL TRANSITION_PATTERN
         passType: 0

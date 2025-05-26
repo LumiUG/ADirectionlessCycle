@@ -132,18 +132,6 @@ public class InputManager : MonoBehaviour
         }
 
         // Delete savedata and generate a new one
-        else if (debugCommand == "zero")
-        {
-            if (DebugConfirm("This will delete all your data!! Are you sure? (Send the command again)")) return;
-            GameManager.I.DeleteSave();
-            GameManager.I.CreateSave(true);
-            UI.I.global.SendMessage("[ Game reset ]", 4);
-            MainMenu.I.SetupBadges();
-            debugCommand = null;
-            return;
-        }
-
-        // Delete savedata and generate a new one
         else if (debugCommand == "swap" && GameManager.I.buildDebugMode)
         {
             if (DebugConfirm("This will unlock an endgame mechanic, if you're sure, run this command again.")) return;
@@ -224,7 +212,7 @@ public class InputManager : MonoBehaviour
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "zero", "overflow")
+            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "overflow")
         }
     }
 

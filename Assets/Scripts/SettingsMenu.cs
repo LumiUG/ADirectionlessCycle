@@ -18,11 +18,14 @@ public class SettingsMenu : MonoBehaviour
     public Slider masterSlider;
     public Slider SFXSlider;
     public Text cycleControls;
+    public GameObject eraseObject;
+    public Text eraseCounter;
     public List<GameObject> menus = new();
     public List<GameObject> buttons = new();
 
     private readonly List<string> resolutions = new();
     private readonly List<string> outlines = new();
+    private int eraseClicks = 3;
 
     private void Awake() { I = this; }
 
@@ -119,6 +122,26 @@ public class SettingsMenu : MonoBehaviour
         GameManager.save.preferences.showMoves = toggle;
     }
 
+    public void EraseSave()
+    {
+        eraseClicks--;
+        eraseCounter.text = $"({eraseClicks})";
+
+        if (eraseClicks <= 0)
+        {
+            eraseClicks = 3;
+            eraseCounter.text = $"Savefile ERASED!";
+
+            GameManager.I.DeleteSave();
+            GameManager.I.CreateSave(true);
+
+            ResetSetting(0);
+            ResetSetting(1);
+            ResetSetting(2);
+            ResetSetting(3);
+        }
+    }
+
     // Resets a setting to its default values (hardcoded, here)
     public void ResetSetting(int index)
     {
@@ -159,6 +182,7 @@ public class SettingsMenu : MonoBehaviour
         foreach (GameObject menu in menus) { menu.SetActive(false); }
 
         if (buttons[index] != EventSystem.current.currentSelectedGameObject) UI.I.selectors.ChangeSelected(buttons[index]);
+        eraseObject.SetActive(menus[index].name == "Gameplay Menu");
         menus[index].SetActive(true);
         menuIndex = index;
     }
