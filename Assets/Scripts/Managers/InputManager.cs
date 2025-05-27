@@ -5,15 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 using static TransitionManager.Transitions;
 using static GameTile;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager I;
-    public Vector3Int latestMovement = Vector3Int.back;
 
+    internal Vector3Int latestMovement = Vector3Int.back;
     internal ObjectTypes latestTile = ObjectTypes.Hexagon;
     internal int restartCount = 0;
     internal bool canRestart = true;

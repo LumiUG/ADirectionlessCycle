@@ -76,7 +76,7 @@ public sealed class Actions : MonoBehaviour
         else if (!LevelManager.I.LoadLevel("EditorSession", true))
         {
             // Create EditorSession if the file does not exist.
-            LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
+            LevelManager.I.SaveLevel(LevelManager.I.currentLevel.levelName, LevelManager.I.levelEditorName);
             LevelManager.I.LoadLevel("EditorSession", true);
         } else {
             LevelManager.I.ReloadLevel(true, true); // reload for custom sprites (very stupid!)
@@ -118,7 +118,7 @@ public sealed class Actions : MonoBehaviour
         TransitionManager.I.TransitionOut<string>();
     }
 
-    public static void GoMainMenu(string _)
+    public static void GoScene(string scene)
     {
         LevelManager.I.ClearLevel();
         LevelManager.I.hasWon = false;
@@ -126,7 +126,7 @@ public sealed class Actions : MonoBehaviour
         LevelManager.I.currentLevel = null;
         UI.I.ClearUI();
 
-        UI.I.ChangeScene("Main Menu", false);
+        UI.I.ChangeScene(scene, false);
     }
     public static void UIRestartLevel(string _)
     {

@@ -3280,9 +3280,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'X (KB)
+  m_Text: 'X: Keyboard
 
-    A (Controller)'
+    A: Controller'
 --- !u!222 &525479269
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4797,9 +4797,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Z (KB)
+  m_Text: 'Z: Keyboard
 
-    X (Controller)'
+    X: Controller'
 --- !u!222 &861846951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6056,9 +6056,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'R (KB)
+  m_Text: 'R: Keyboard
 
-    B (Controller)'
+    B: Controller'
 --- !u!222 &1160520564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6638,9 +6638,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'C (KB)
+  m_Text: 'C: Keyboard
 
-    RT (Controller)'
+    RT: Controller'
 --- !u!222 &1263999097
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8126,9 +8126,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Space (KB)
+  m_Text: 'Space: Keyboard
 
-    Y (Controller)'
+    Y: Controller'
 --- !u!222 &1487158782
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8415,9 +8415,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Escape (KB)
+  m_Text: 'Escape: Keyboard
 
-    Menu (Controller)'
+    Menu: Controller'
 --- !u!222 &1533070340
 CanvasRenderer:
   m_ObjectHideFlags: 0

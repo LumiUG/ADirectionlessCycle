@@ -103,8 +103,14 @@ public class UI : MonoBehaviour
     // Goes to main menu (scary)
     public void GoMainMenu()
     {
-        if (SceneManager.GetActiveScene().name == "Level Editor") LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
-        TransitionManager.I.TransitionIn<string>(Reveal, Actions.GoMainMenu);
+        if (SceneManager.GetActiveScene().name == "Level Editor")
+        {
+            LevelManager.I.SaveLevel(LevelManager.I.currentLevel.levelName, LevelManager.I.levelEditorName);
+            TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Custom Levels");
+            return;
+        }
+
+        TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Main Menu");
         GameManager.I.SetPresence("steam_display", "#Menuing");
         GameManager.I.UpdateActivity("On the main menu.");
     }
@@ -112,6 +118,8 @@ public class UI : MonoBehaviour
     // Goes to hub (scarier)
     public void GoHub()
     {
+        if (LevelManager.I.currentLevelID.Contains("CODE")) { GoMainMenu(); return; }
+
         TransitionManager.I.TransitionIn<string>(Swipe, Actions.ReturnHub);
         GameManager.I.SetPresence("steam_display", "#Menuing");
         GameManager.I.UpdateActivity("On the main menu.");
@@ -162,7 +170,7 @@ public class UI : MonoBehaviour
     {
         if (!GameManager.I.IsEditor()) return;
 
-        LevelManager.I.SaveLevel("Editor Mode!", LevelManager.I.levelEditorName);
+        LevelManager.I.SaveLevel(LevelManager.I.currentLevel.levelName, LevelManager.I.levelEditorName);
         LevelManager.I.currentLevel = LevelManager.I.GetLevel(LevelManager.I.levelEditorName, true);
         LevelManager.I.currentLevelID = LevelManager.I.levelEditorName;
         GameManager.I.isEditing = true;
@@ -210,7 +218,8 @@ public class UI : MonoBehaviour
         // There's no next level.
         if (string.IsNullOrEmpty(LevelManager.I.currentLevel.nextLevel))
         {
-            GoHub();
+            if (LevelManager.I.currentLevelID.Contains("CODE")) GoMainMenu();
+            else GoHub();
             return;
         }
         
