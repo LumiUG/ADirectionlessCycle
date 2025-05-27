@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Hold
   m_EditorClassIdentifier: 
   dialog:
-  - Wait!
-  - It's just one more step, so hold yourself together. Things might get weird.
-  - This might be the last time we can communicate with you, too.
   - So... good luck. And if you need a hint...
   - We'll be with you.
   - Er, in spirit, I mean. Or whatever you believe in.

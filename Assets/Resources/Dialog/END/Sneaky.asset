@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Plead
+  m_Name: Sneaky
   m_EditorClassIdentifier: 
   dialog:
-  - Well? Welcome to the core. It all ends here.
-  - This entire place is a mess, the function to get into it is completely ruined.
-  - Thankfully, I've been monitoring this level closely.
-  - I did make another entry, but... It's not so easy.
+  - 'Sneaky! '
+  - I've never understood how these work, or what they are. Do you?
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

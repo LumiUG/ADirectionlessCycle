@@ -11,7 +11,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public static UI I;
     [SerializeField] public GlobalUI global;
     [SerializeField] public LevelEditorUI editor;
-    [HideInInspector] public PreloadUI preload; 
+    [HideInInspector] public PreloadUI preload;
     [SerializeField] public PauseUI pause;
     [SerializeField] public IngameUI ingame;
     [SerializeField] public ConfirmRestartUI restart;
@@ -294,15 +294,16 @@ public class UI : MonoBehaviour
                 case "Entry": { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
                 case "Corridor": { popup.SetPopup("gin% ENTERING *##$$! AREA"); return; }
                 case "Right": { popup.SetPopup("%end%end%end%end%endddddd"); return; }
-                case "Down": { popup.SetPopup("WRITE LATER"); return; }
-                case "Left": { popup.SetPopup("WRITE LATER"); return; }
-                case "Up": { popup.SetPopup("WRITE LATER"); return; }
-                case "Outro": { popup.SetPopup("[Nothing]"); return; }
+                case "Down":
+                case "Left": { popup.SetPopup("Creating FTP connection..."); return; }
+                case "Up": { popup.SetPopup("Preparing uploads..."); return; }
+                case "Outro": { popup.SetPopup("[A Directionless Cycle]"); return; }
                 case "Despair": { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
                 case "Quiz": { popup.SetPopup("Missed opportunity to make an answer rely on the level hint. Shame on me."); return; }
                 case "Developer": { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
                 default: // Custom cases
                     if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
+                    if (LevelManager.I.currentLevelID == "VOID/CYCLE") { popup.SetPopup("202 Accepted"); return; }
                     break;
             }
         } else hintLevelID = null;

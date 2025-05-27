@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Gus Code
   m_EditorClassIdentifier: 
   dialog:
-  - I know what you are, where you come from.
   - Do you happen to know of any... Title screens?
   - Yes? Good.
   - I don't think they have access there, so listen closely.

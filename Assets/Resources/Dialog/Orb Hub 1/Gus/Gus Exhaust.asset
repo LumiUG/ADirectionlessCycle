@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I won't say anymore, I've done enough.
-  - Good luck, may you end us all.
+  - Good luck, may you save them.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
   textSpeed: 0.05
