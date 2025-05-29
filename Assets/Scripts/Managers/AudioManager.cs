@@ -53,8 +53,8 @@ public class AudioManager : MonoBehaviour
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
-        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap"); // Change to new sound
-        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap"); // Change to new sound
+        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Inverse Overlap"); // Change to new sound
+        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Outbound Overlap"); // Change to new sound
         uiDeny = Resources.Load<AudioClip>("Audio/SFX/UI Deny");
         select = Resources.Load<AudioClip>("Audio/SFX/Select");
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");

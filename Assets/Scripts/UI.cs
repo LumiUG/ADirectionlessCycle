@@ -467,13 +467,13 @@ public class UI : MonoBehaviour
                 switch (type)
                 {
                     case 1:
-                        AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.80f);
                         break;
                     case 2:
-                        AudioManager.I.PlaySFX(AudioManager.inverseOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.inverseOverlap, 0.80f);
                         break;
                     case 3:
-                        AudioManager.I.PlaySFX(AudioManager.outboundOverlap, 0.35f);
+                        AudioManager.I.PlaySFX(AudioManager.outboundOverlap, 0.80f);
                         break;
                 }
             }
