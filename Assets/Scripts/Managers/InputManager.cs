@@ -575,7 +575,7 @@ public class InputManager : MonoBehaviour
 
     private void OnInteract()
     {
-        if (GameManager.I.IsBadScene() || LevelManager.I.isPaused) return;
+        if (GameManager.I.IsBadScene() || LevelManager.I.isPaused || UI.I.restart.self.activeSelf || TransitionManager.I.inTransition) return;
 
         // Searches for a first valid NPC
         GameTile tl = null; // (garbage collector tysm)
