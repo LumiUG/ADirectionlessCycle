@@ -24,8 +24,6 @@ public class MainMenu : MonoBehaviour
     {
         I = this; // No persistence!
 
-        if (GameManager.save.game.hasCompletedGame) postgameChecker.SetActive(true);
-
         // Version text
         version.text = $"v{Application.version}";
 
@@ -55,10 +53,6 @@ public class MainMenu : MonoBehaviour
         // Toggle on/off
         debugIcon.gameObject.SetActive(GameManager.I.IsDebug());
         mimicIcon.gameObject.SetActive(GameManager.I.editormimic);
-        masteryIcon.gameObject.SetActive(GameManager.save.game.hasMasteredGame);
-        allMainIcon.gameObject.SetActive(GameManager.save.game.completedAllMainLevels);
-        allRemixIcon.gameObject.SetActive(GameManager.save.game.completedAllRemixLevels);
-        allOutboundIcon.gameObject.SetActive(GameManager.save.game.completedAllOutboundLevels);
 
         // Apply offset
         int offset = 0;
@@ -81,10 +75,10 @@ public class MainMenu : MonoBehaviour
 
     public void GoCustoms()
     {
-        if (!GameManager.save.game.hasCompletedGame && !GameManager.save.game.seenSpoilerWarning)
+        if (!GameManager.save.game.seenSpoilerWarning)
         {
             GameManager.save.game.seenSpoilerWarning = true;
-            ShowPopup("The level editor is recommended for players who've completed the game, though, if you'd like to use it, be mindful of spoilers.\nThis popup won't appear again!");
+            ShowPopup("The DEMO editor is limited, but has full support with the full version.\nThis popup won't appear again!");
             return;
         }
         UI.I.ChangeScene("Custom Levels");

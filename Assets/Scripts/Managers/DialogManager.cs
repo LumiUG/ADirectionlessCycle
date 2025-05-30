@@ -40,18 +40,6 @@ public class DialogManager : MonoBehaviour
     public void StartDialog(DialogScriptable chat, string dialogPath)
     {
         if (!canInteract || !chat || TransitionManager.I.inTransition) return;
-        if (GameManager.save.game.hasCompletedGame && !dialogPath.Contains("CUSTOM"))
-        {
-            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
-            {
-                chat = Resources.Load<DialogScriptable>("Dialog/Empty");
-                dialogPath = "Empty";
-            } else if (dialogPath == "Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("Gus Exhaust"))
-            {
-                chat = Resources.Load<DialogScriptable>("Dialog/Orb Hub 1/Post/PG");
-                dialogPath = "Orb Hub 1/Post/PG";
-            }
-        }
 
         currentDialogPath = dialogPath;
         inDialog = true;

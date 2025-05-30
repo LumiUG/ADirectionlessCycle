@@ -10,21 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Trigger
+  m_Name: Demo
   m_EditorClassIdentifier: 
-  dialog: []
-  events:
-  - textSpeedEvent:
-      enabled: 0
-      textSpeed: 0
-    setTileEvent:
-      enabled: 1
-      setAs: 0
-      position: {x: 11, y: -5, z: 0}
-      delete: 1
-    executeAtIndex: 0
-  exhaustDialog: {fileID: 11400000}
+  dialog:
+  - Hey.
+  - Just wanted to let you know that this is the hardest level in the demo.
+  - We would help you, but we are forbidden to give hints here.
+  - Good luck, now!
+  events: []
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
   shouldExhaust: 0
-  canBeSkipped: 0
+  canBeSkipped: 1

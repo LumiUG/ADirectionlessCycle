@@ -73,28 +73,6 @@ public class UI : MonoBehaviour
         // Change scene after transition
         if (doTransition) TransitionManager.I.TransitionIn(Reveal, Actions.ChangeScene, sceneName);
         else SceneManager.LoadScene(sceneName);
-
-        // Anything music related
-        if (!AudioManager.I) return;
-        switch (sceneName)
-        {
-            case "Main Menu":
-            case "Settings":
-            case "Hub":
-            case "Bonus":
-            case "Credits":
-            case "Custom Levels":
-                AudioManager.I.PlayBGM(AudioManager.titleBGM);
-                break;
-            case "Level Editor":
-                AudioManager.I.PlayBGM(AudioManager.editorBGM);
-                break;
-            case "Game": // Do nothing, handle internally with LevelManager.
-                break;
-            default:
-                Debug.LogWarning("No audio scene found");
-                break;
-        }
     }
 
     // Exit application
@@ -271,7 +249,6 @@ public class UI : MonoBehaviour
             else hintLevelID = $"HINTS/W{split[1]}H";
 
             // Custom handlings
-            if (GameManager.save.game.hasCompletedGame && !split[0].Contains("VOID") && !split[0].Contains("CODE") && LevelManager.I.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("..."); return; }
             switch (split[1])
             {
                 case "Orb One":

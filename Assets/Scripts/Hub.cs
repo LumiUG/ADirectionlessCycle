@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using Coffee.UIEffects;
 
 public class Hub : MonoBehaviour
 {
@@ -28,11 +27,11 @@ public class Hub : MonoBehaviour
     public Image orbFake;
 
     private readonly int[] positions = { 0, -2200, -4400, -6600 };
-    private readonly List<int> completedLevelsCount = new() { 3, 3, 3, 0 };
+    private readonly List<int> completedLevelsCount = new() { 3, 0, 0, 0 };
     private readonly List<int> completedReal = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealRemix = new() { 0, 0, 0, 0 };
     private readonly List<int> completedRealOutbound = new() { 0, 0, 0, 0 };
-    private readonly List<int> totalMainLevels = new() { 12, 12, 10, 1 };
+    private readonly List<int> totalMainLevels = new() { 12, 0, 0, 0 };
     private readonly List<GameObject> remixList = new();
     private GameObject lastSelectedlevel = null;
     private Animator animator;
@@ -49,9 +48,6 @@ public class Hub : MonoBehaviour
         UI.I.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
 
-        // Unlock finale?
-        GameManager.save.game.unlockedWorldSuper = GameManager.save.game.collectedOrbs.Count >= 3;
-
         // Iterate all non-remix levels.
         for (int count = 0; count < worldHolders.Count; count++) { PrepareHub(worldHolders[count], false, count); }
 
@@ -63,65 +59,14 @@ public class Hub : MonoBehaviour
 
         // Initial variables!
         if (!GameManager.save.game.mechanics.hasSeenRemix) remixCountText.gameObject.SetActive(false);
-        if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
-        if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
-        else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}";
+        outboundCountText.gameObject.SetActive(false);
+        fragmentCountText.gameObject.SetActive(false);
         completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
         remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
-        outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
         MasteryEffect(0);
 
         // Achievements
-        if (completedReal[0] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W1");
-        if (completedReal[1] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W2");
-        if (completedReal[2] >= 10) GameManager.I.EditAchivement("ACH_COMPLETE_W3");
-        if (!GameManager.save.game.hasCompletedGame && GameManager.save.game.levels.Find(level => level.levelID == "VOID/CYCLE") != null) { GameManager.save.game.hasCompletedGame = true; GameManager.I.EditAchivement("ACH_DEATH"); }
-
-        // All main levels
-        bool mainLevels = completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10;
-        if (!GameManager.save.game.completedAllMainLevels && mainLevels)
-        {
-            GameManager.save.game.completedAllMainLevels = true;
-            GameManager.I.EditAchivement("ACH_ALL_MAIN");
-        }
-
-        // All remix levels
-        bool remixCount = completedRealRemix[0] + completedRealRemix[1] + completedRealRemix[2] >= 21;
-        if (!GameManager.save.game.completedAllRemixLevels && remixCount)
-        {
-            GameManager.save.game.completedAllRemixLevels = true;
-            GameManager.I.EditAchivement("ACH_ALL_INVERSE");
-        }
-
-        // All outbound levels
-        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 7;
-        if (!GameManager.save.game.completedAllOutboundLevels && outboundCount)
-        {
-            GameManager.save.game.completedAllOutboundLevels = true;
-            GameManager.I.EditAchivement("ACH_ALL_OUTER");
-        }
-        
-        // EVERYTHING.
-        if (!GameManager.save.game.hasMasteredGame && mainLevels && remixCount && outboundCount)
-        {
-            if (!GameManager.save.game.hasCompletedGame) return;
-
-            // Specific levels (this'll be a pain for players :3)
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb One").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial").outboundCompletion) return;
-
-            // ?
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Caos").completed) return;
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Ren").completed) return;
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Gummi").completed) return;
-
-            // Grant it, im not a monster.
-            GameManager.save.game.hasMasteredGame = true;
-            GameManager.I.EditAchivement("ACH_MASTERY");
-        }
+        if (completedReal[0] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_DEMO");
     }
 
     // Cycle through levels
@@ -263,45 +208,13 @@ public class Hub : MonoBehaviour
 
     private void SetupLocks()
     {
-        if (GameManager.I.IsDebug()) UI.I.global.SendMessage("(Hub debug unlock)", 2f);
-
         // World 2
-        bool spikes = false;
-        Transform wLock = locks.Find("W2");
-        if (!GameManager.save.game.unlockedWorldTwo && !GameManager.I.IsDebug())
-        {
-            wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[0]}/9";
-            foreach (Transform level in worldHolders[1].transform)
-                { level.GetComponent<Button>().interactable = false; }
-        }
-        else {
-            spikes = true;
-            wLock.gameObject.SetActive(false);
-        }
+        foreach (Transform level in worldHolders[1].transform)
+            { level.GetComponent<Button>().interactable = false; }
 
         // World 3
-        wLock = locks.Find("W3");
-        if (spikes) { wLock.Find("Spikes").gameObject.SetActive(true); wLock.Find("Filler").gameObject.SetActive(false); }
-        if (!GameManager.save.game.unlockedWorldThree && !GameManager.I.IsDebug())
-        {
-            wLock.Find("Amount").GetComponent<Text>().text = $"{completedReal[1]}/9";
-            foreach (Transform level in worldHolders[2].transform)
-                { level.GetComponent<Button>().interactable = false; }
-        } else wLock.gameObject.SetActive(false);
-
-        // add debug later please / no i wont im lazy
-        wLock = locks.Find("VOID");
-        if (!GameManager.save.game.unlockedWorldSuper) 
-        {
-            Sprite spr = Resources.Load<Sprite>("Sprites/OrbDisabled");
-            Transform o1 = wLock.Find("Orb 1");
-            Transform o2 = wLock.Find("Orb 2");
-            Transform o3 = wLock.Find("Orb 3");
-
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb One")) { o1.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o1.GetComponent<UIEffect>().enabled = false; }
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Two")) { o2.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o2.GetComponent<UIEffect>().enabled = false; }
-            if (!GameManager.save.game.collectedOrbs.Contains("ORB/Orb Three")) { o3.GetComponent<Image>().sprite = spr; orbFake.fillAmount += 0.33f; o3.GetComponent<UIEffect>().enabled = false; }
-        }
+        foreach (Transform level in worldHolders[2].transform)
+            { level.GetComponent<Button>().interactable = false; }
     }
 
     // Now as a function for mouse hovers!
@@ -320,7 +233,7 @@ public class Hub : MonoBehaviour
             // Also show other levels (if applicable)
             // RemixUIChecks(level, levelID);
         }
-        else SetLevelName("UNDER DEVELOPMENT");
+        else SetLevelName("COMING SOON");
     }
 
     // Set level name on the hub
@@ -330,7 +243,7 @@ public class Hub : MonoBehaviour
     public void StaticLoadLevel(string levelName)
     {
         if (!LevelManager.I || TransitionManager.I.inTransition) return;
-        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
@@ -409,7 +322,7 @@ public class Hub : MonoBehaviour
         }
 
         // Update world completions
-        if (worldIndex <= 2)
+        if (worldIndex <= 0)
         {
             completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
             remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
@@ -520,38 +433,13 @@ public class Hub : MonoBehaviour
     // Unlocks a world, setting a variable to your savefile for easy access
     public void UnlockWorld(int index)
     {
-        Transform nextWorld;
-        switch (index)
-        {
-            case 1:
-                if (completedLevelsCount[0] < 12) return;
-                GameManager.save.game.unlockedWorldTwo = true;
-                locks.Find("W2").gameObject.SetActive(false);
 
-                nextWorld = locks.Find("W3");
-                nextWorld.Find("Spikes").gameObject.SetActive(true);
-                nextWorld.Find("Filler").gameObject.SetActive(false);
-                break;
-            case 2:
-                if (completedLevelsCount[1] < 12) return;
-                GameManager.save.game.unlockedWorldThree = true;
-                locks.Find("W3").gameObject.SetActive(false);
-                break;
-            default:
-                return;
-        }
-
-        // Reactivate buttons
-        UI.I.selectors.ChangeSelected(backButton.gameObject);
-        foreach (Transform level in worldHolders[index].transform) { level.GetComponent<Button>().interactable = true; }
     }
 
     internal void MasteryEffect(int world)
     {
         if (
-            (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
-            (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 2 && world == 1) ||
-            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2)
+            completedReal[0] >= 12 && completedRealRemix[0] >= 8 && world == 0
         ) masteryOutline.SetActive(true);
         else masteryOutline.SetActive(false);
     }

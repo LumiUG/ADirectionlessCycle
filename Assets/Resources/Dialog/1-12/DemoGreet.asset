@@ -10,21 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Trigger
+  m_Name: DemoGreet
   m_EditorClassIdentifier: 
-  dialog: []
-  events:
-  - textSpeedEvent:
-      enabled: 0
-      textSpeed: 0
-    setTileEvent:
-      enabled: 1
-      setAs: 0
-      position: {x: 11, y: -5, z: 0}
-      delete: 1
-    executeAtIndex: 0
-  exhaustDialog: {fileID: 11400000}
+  dialog:
+  - This is not the time...
+  - We'll talk again when you're on the correct version.
+  - Enjoy the rest of the content!
+  events: []
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
-  sfx: {fileID: 0}
-  shouldExhaust: 0
-  canBeSkipped: 0
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
+  shouldExhaust: 1
+  canBeSkipped: 1

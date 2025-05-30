@@ -283,13 +283,6 @@ public class LevelManager : MonoBehaviour
         timerCoroutine = StartCoroutine(LevelTimer());
         UI.I.ingame.SetLevelMoves(levelMoves);
 
-        // BGM?
-        if (levelID.StartsWith("W1")) AudioManager.I.PlayBGM(AudioManager.W1BGM);
-        else if (levelID.StartsWith("W2")) AudioManager.I.PlayBGM(AudioManager.W2BGM);
-        else if (levelID.StartsWith("W3")) AudioManager.I.PlayBGM(AudioManager.W3BGM);
-        else if (levelID.StartsWith("REMIX")) AudioManager.I.PlayBGM(AudioManager.remixBGM);
-        else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) AudioManager.I.PlayBGM(AudioManager.voidBGM);
-
         // Selector effect
         if (levelID.StartsWith("REMIX") || levelID.StartsWith("VOID") || levelID.StartsWith("ORB")) UI.I.selectors.SetEffect(1);
         else UI.I.selectors.SetEffect(0);
@@ -492,14 +485,10 @@ public class LevelManager : MonoBehaviour
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
             // TODO: noMove = true; (Freeze object tiles from the new room, except ones coming from old room)
-            bool ach = false;
-            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; ach = true; }
-            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; ach = true; }
-            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; ach = true; }
-            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
-
-            // Achievement (will retrigger multiple times, maybe bad?)
-            if (ach && !currentLevel.hideUI && currentLevelID != "FRAGMENTS/Tutorial") GameManager.I.EditAchivement("ACH_FIRST_OUTERBOUND");
+            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; }
+            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; }
+            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; }
+            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; }
         }
 
         // Removes from movement queue
@@ -713,9 +702,6 @@ public class LevelManager : MonoBehaviour
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
         if (toDestroy.Count > 0) AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.45f);
 
-        // Achievement (will retrigger multiple times, maybe bad?)
-        if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.I.EditAchivement("ACH_DIRECTIONLESS");
-
         // Win check, add one move to the player
         if (validation.Contains(true) || overflowCycles >= 100) levelMoves++;
         else RemoveUndoFrame();
@@ -834,7 +820,6 @@ public class LevelManager : MonoBehaviour
             // First remix level?
             if (!GameManager.save.game.mechanics.hasSeenRemix)
             {
-                GameManager.I.EditAchivement("ACH_FIRST_INVERSE");
                 GameManager.save.game.mechanics.hasSeenRemix = true;
             }
 
@@ -851,9 +836,6 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition && !DialogManager.I.inDialog)
         {
-            // Level 1 achievement
-            if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.I.EditAchivement("ACH_SIXMOVES");
-
             // Level savedata
             GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
             GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
@@ -1086,7 +1068,6 @@ public class LevelManager : MonoBehaviour
                 case ObjectTypes.NPC:
                     if (tile.customText.Split(";").Length < 2) return;
                     stringCheck = (string)tile.customText.Split(";").GetValue(1);
-                    if (stringCheck == "Carvings/Light" && GameManager.save.game.hasCompletedGame) stringCheck = "Carvings/Gone";
                     break;
 
                 case ObjectTypes.Hologram:
@@ -1223,7 +1204,6 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(3.2f);
         UI.I.effects.gameObject.SetActive(false);
-        GameManager.save.game.hasCompletedGame = true;
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
     }
