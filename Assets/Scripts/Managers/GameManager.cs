@@ -11,7 +11,7 @@ using static Serializables;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager I;
-    [HideInInspector] public static Discord.Discord rcp = null;
+    [HideInInspector] public static Discord.Discord rpc = null;
 
     // Game data // 
     [HideInInspector] public bool isEditing;
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         // Init Discord RCP
         try {
-            rcp = new Discord.Discord(1244697907723108362, (ulong)CreateFlags.NoRequireDiscord);
+            rpc = new Discord.Discord(1244697907723108362, (ulong)CreateFlags.NoRequireDiscord);
             sessionTime.Start = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
         }
         catch { } // Dont care.
@@ -89,10 +89,10 @@ public class GameManager : MonoBehaviour
     // Exclusively for Discord's bad SDK
     private void Update()
     {
-        if (rcp == null) return;
+        if (rpc == null) return;
 
-        try { rcp.RunCallbacks(); }
-        catch (ResultException) { rcp?.Dispose(); rcp = null; }
+        try { rpc.RunCallbacks(); }
+        catch (ResultException) { rpc?.Dispose(); rpc = null; }
         catch { } // Dont care.
     }
 
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     void OnDisable()
     {
         SaveDataJSON(save);
-        rcp?.GetActivityManager().ClearActivity(null);
+        rpc?.GetActivityManager().ClearActivity(null);
     }
 
     // Returns if the current scene shouldn't be taken into account
@@ -228,11 +228,11 @@ public class GameManager : MonoBehaviour
         SteamFriends.SetRichPresence(key, display);
     }
 
-    // Discord RCP //
+    // Discord RPC //
     public void UpdateActivity(string details)
     {
-        if (rcp == null || string.IsNullOrEmpty(details)) return;
-		var activityManager = rcp.GetActivityManager();
+        if (rpc == null || string.IsNullOrEmpty(details)) return;
+		var activityManager = rpc.GetActivityManager();
 
         // Setup activity
         var assets = new ActivityAssets();
@@ -243,6 +243,7 @@ public class GameManager : MonoBehaviour
             else if (LevelManager.I.currentLevelID.Contains("W3")) { assets.LargeImage = "three"; assets.LargeText = "Currently in Area Three"; }
             else if (LevelManager.I.currentLevelID.Contains("REMIX")) { assets.LargeImage = "remix"; assets.LargeText = "Currently inverted."; }
             else if (LevelManager.I.currentLevelID.Contains("VOID") || LevelManager.I.currentLevelID.Contains("ORB") || LevelManager.I.currentLevelID.Contains("FRAGMENT")) { assets.LargeImage = "core"; assets.LargeText = "Currently gazing nothingness."; }
+            else if (LevelManager.I.currentLevelID.Contains("HINT")) { assets.LargeImage = "custom"; assets.LargeText = "Currently viewing a hint!"; }
             else { assets.LargeImage = "custom"; assets.LargeText = "Currently on a special/custom level."; }
             assets.SmallImage = "star";
             assets.SmallText = $"Time: {Math.Round(LevelManager.I.levelTimer, 2)}s.\nMoves: {LevelManager.I.levelMoves}";
