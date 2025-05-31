@@ -46,10 +46,10 @@ public class DialogManager : MonoBehaviour
             {
                 chat = Resources.Load<DialogScriptable>("Dialog/Empty");
                 dialogPath = "Empty";
-            } else if (dialogPath == "Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("Gus Exhaust"))
+            } else if (dialogPath == "Dialog/Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-Dialog/Orb Hub 1/Gus"))
             {
                 chat = Resources.Load<DialogScriptable>("Dialog/Orb Hub 1/Post/PG");
-                dialogPath = "Orb Hub 1/Post/PG";
+                dialogPath = "Dialog/Orb Hub 1/Post/PG";
             }
         }
 
