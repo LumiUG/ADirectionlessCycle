@@ -6,6 +6,7 @@ using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
 using Coffee.UIEffects;
+using System;
 
 public class Hub : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Hub : MonoBehaviour
     public Text remixCountText;
     public Text outboundCountText;
     public Text fragmentCountText;
+    public Text completedExtraText;
     public GameObject worldHolder;
     public RectTransform backgrounds;
     public RectTransform locks;
@@ -71,6 +73,9 @@ public class Hub : MonoBehaviour
         outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
         MasteryEffect(0);
 
+        // Extra levels (this'll be a pain for players :3)
+        int masterExtras = ExtraLevelsCount();
+
         // Achievements
         if (completedReal[0] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W2");
@@ -105,18 +110,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.hasMasteredGame && mainLevels && remixCount && outboundCount)
         {
             if (!GameManager.save.game.hasCompletedGame) return;
-
-            // Specific levels (this'll be a pain for players :3)
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb One").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem").completed) return;
-            if (!GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial").outboundCompletion) return;
-
-            // ?
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Caos").completed) return;
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Ren").completed) return;
-            // if (!GameManager.save.game.levels.Find(level => level.levelID == $"CODE/Gummi").completed) return;
+            if (masterExtras < 7) return; // Hardcoded, edit if function is edited aswell.
 
             // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
@@ -556,5 +550,28 @@ public class Hub : MonoBehaviour
         else masteryOutline.SetActive(false);
     }
 
-    // Actions //
+    private int ExtraLevelsCount()
+    {
+        int extraWins = 0;
+        GameData.Level[] list = {
+            GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb One"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Fragment Two"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Fragment Three"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial"),
+            GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem")
+        };
+        foreach (var level in list)
+        {
+            if (level == null) continue;
+            if (level.completed) extraWins++;
+        };
+        if (extraWins > 0)
+        {
+            completedExtraText.gameObject.SetActive(true);
+            completedExtraText.text = $"+{extraWins}";
+        }
+        return extraWins;
+    }
 }
