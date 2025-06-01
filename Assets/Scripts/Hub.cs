@@ -210,8 +210,8 @@ public class Hub : MonoBehaviour
 
                 // Check for the correct outline to use
                 Image outlineImg = outline.GetComponent<Image>();
-                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1) outlineImg.color = GameManager.I.remixColor;
-                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2) outlineImg.color = GameManager.I.outboundColor;
+                if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1 && GameManager.save.preferences.missingHighlighter) outlineImg.color = GameManager.I.remixColor;
+                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2 && GameManager.save.preferences.missingHighlighter) outlineImg.color = GameManager.I.outboundColor;
                 else outlineImg.color = GameManager.I.completedColor; // for remixes!
             }
         }
