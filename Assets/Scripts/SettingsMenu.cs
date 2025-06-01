@@ -167,6 +167,7 @@ public class SettingsMenu : MonoBehaviour
             case 1:
                 ToggleFullscreen(true);
                 ChangeResolution(0);
+                GameManager.save.preferences.missingHighlighter = false;
                 resolutionDropdown.value = 0;
                 outlineDropdown.value = 0;
                 settingsToggle.isOn = true;

@@ -9494,7 +9494,7 @@ MonoBehaviour:
   resolutionDropdown: {fileID: 1493868224}
   outlineDropdown: {fileID: 207312340}
   settingsToggle: {fileID: 1039081930}
-  missingToggle: {fileID: 0}
+  missingToggle: {fileID: 426256202}
   repeatInputToggle: {fileID: 1699346215}
   moveToggle: {fileID: 136010046}
   timerToggle: {fileID: 1816442737}
