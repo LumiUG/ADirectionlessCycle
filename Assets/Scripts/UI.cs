@@ -161,8 +161,9 @@ public class UI : MonoBehaviour
     {
         if (!GameManager.I.IsEditor()) return;
 
-        // Export level
+        // Export level (kinda wish i had UniTask rn, runs on main thread, bad.)
         LevelManager.I.SaveLevel(GameManager.I.currentEditorLevelName, GameManager.I.currentEditorLevelID, true, GameManager.I.SaveLevelPreview());
+        global.SendMessage($"Level \"{GameManager.I.currentEditorLevelName}\" saved!", 2f);
     }
 
     // Playtest level
