@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 76621204}
   - component: {fileID: 76621203}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -974,7 +974,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 238436360}
   m_OnClick:
     m_PersistentCalls:
@@ -3781,7 +3781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6501,6 +6501,7 @@ MonoBehaviour:
   rowCount: 0
   holder: {fileID: 1062814774}
   backButton: {fileID: 247285165}
+  newLevelRT: {fileID: 895107290}
   lastSessionButton: {fileID: 238436359}
   popup: {fileID: 1230291201}
   popupTitle: {fileID: 1106863066}

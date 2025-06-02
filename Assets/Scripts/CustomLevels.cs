@@ -12,6 +12,7 @@ public class CustomLevels : MonoBehaviour
     [HideInInspector] public int rowCount;
     public RectTransform holder;
     public GameObject backButton;
+    public RectTransform newLevelRT;
     public Button lastSessionButton;
     public GameObject popup;
     public Text popupTitle;
@@ -45,7 +46,11 @@ public class CustomLevels : MonoBehaviour
         hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         popupAnimator = popup.GetComponent<Animator>();
 
-        if (GameManager.I.IsDebug()) lastSessionButton.interactable = true;
+        if (!GameManager.I.IsDebug())
+        {
+            newLevelRT.anchoredPosition = new(100, newLevelRT.anchoredPosition.y);
+            lastSessionButton.gameObject.SetActive(false);
+        }
 
         // Rich presence
         GameManager.I.SetPresence("steam_display", "#Customs");

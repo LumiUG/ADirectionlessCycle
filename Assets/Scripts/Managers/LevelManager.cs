@@ -1192,7 +1192,7 @@ public class LevelManager : MonoBehaviour
         );
     }
 
-    private IEnumerator OutroCutscene()
+    internal IEnumerator OutroCutscene()
     {
         var tiles = GetObjectTiles();
         InputManager.I.canPause = false;
@@ -1215,16 +1215,17 @@ public class LevelManager : MonoBehaviour
         RefreshObjectTile(tiles[0]);
 
         yield return new WaitForSeconds(7);
-        tiles[0].directions.pushable = false;
-        RefreshObjectTile(tiles[0]);
-
-        yield return new WaitForSeconds(4.2f);
         RemoveTile(tiles[0]);
 
-        yield return new WaitForSeconds(3.2f);
-        UI.I.effects.gameObject.SetActive(false);
+        yield return new WaitForSeconds(4f);
+        TransitionManager.I.TransitionIn<string>(Finale);
+
+        yield return new WaitForSeconds(13f);
         GameManager.save.game.hasCompletedGame = true;
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
+        
+        ClearLevel();
+        UI.I.ChangeScene("Credits", false);
     }
 }

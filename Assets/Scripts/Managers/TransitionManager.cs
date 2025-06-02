@@ -10,7 +10,7 @@ public class TransitionManager : MonoBehaviour
     [HideInInspector] public Animator animator;
 
     internal bool inTransition = true;
-    internal enum Transitions { Ignore = 0, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh, Dive, Load };
+    internal enum Transitions { Ignore = 0, Crossfade, Reveal, Swipe, Triangle, Unknown, Refresh, Dive, Load, Finale };
     internal EventSystem eventReference;
     internal Coroutine currentTransition = null;
     private bool firstTransition = true;
@@ -24,6 +24,7 @@ public class TransitionManager : MonoBehaviour
     [SerializeField] private AnimatorOverrideController refresh;
     [SerializeField] private AnimatorOverrideController dive;
     [SerializeField] private AnimatorOverrideController load;
+    [SerializeField] private AnimatorOverrideController finale;
 
     void Awake()
     {
@@ -61,6 +62,7 @@ public class TransitionManager : MonoBehaviour
             Transitions.Refresh => refresh,
             Transitions.Dive => dive,
             Transitions.Load => load,
+            Transitions.Finale => finale,
             _ => null
         };
 

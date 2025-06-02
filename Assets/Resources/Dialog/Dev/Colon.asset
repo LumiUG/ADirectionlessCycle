@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Colon
   m_EditorClassIdentifier: 
   dialog:
-  - Colon three
-  - :3
   - (Art by @Holidalo/Twitter)
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 76c5636752690d34f857214c648f21a3, type: 3}
   shouldExhaust: 0
-  canBeSkipped: 0
+  canBeSkipped: 1

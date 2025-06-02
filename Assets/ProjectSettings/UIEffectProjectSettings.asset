@@ -75,6 +75,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_COLOR2 TONE_GRAYSCALE
         passType: 0
+      - keywords: GRADATION_COLOR2 TRANSITION_BURN
+        passType: 0
       - keywords: GRADATION_COLOR2 TRANSITION_PATTERN
         passType: 0
       - keywords: GRADATION_COLOR4
@@ -117,9 +119,17 @@ ShaderVariantCollection:
         passType: 0
       - keywords: TONE_RETRO
         passType: 0
+      - keywords: TRANSITION_BURN
+        passType: 0
       - keywords: TRANSITION_CUTOFF
         passType: 0
       - keywords: TRANSITION_DISSOLVE
+        passType: 0
+      - keywords: TRANSITION_FADE
+        passType: 0
+      - keywords: TRANSITION_MASK
+        passType: 0
+      - keywords: TRANSITION_MELT
         passType: 0
       - keywords: TRANSITION_PATTERN
         passType: 0
