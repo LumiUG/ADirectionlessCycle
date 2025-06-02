@@ -4,10 +4,13 @@ using static TransitionManager.Transitions;
 public class BonusLevels : MonoBehaviour
 {
     public GameObject backButton;
+    public GameObject[] outlines; 
 
     void Start()
     {
         UI.I.selectors.ChangeSelected(backButton, true);
+        outlines[0].SetActive(GameManager.save.game.levels.Find(level => level.levelID == "CODE/Maze") != null);
+        outlines[1].SetActive(GameManager.save.game.levels.Find(level => level.levelID == "CODE/Quiz") != null);
     }
 
     // Load a level
