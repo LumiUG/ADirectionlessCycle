@@ -6532,7 +6532,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1536587447}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 587365359}
     m_SelectOnLeft: {fileID: 491618300}
     m_SelectOnRight: {fileID: 744228269}
   m_Transition: 1
