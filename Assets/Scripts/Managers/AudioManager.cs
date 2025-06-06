@@ -53,8 +53,8 @@ public class AudioManager : MonoBehaviour
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
-        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Inverse Overlap"); // Change to new sound
-        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Outbound Overlap"); // Change to new sound
+        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Inverse Overlap");
+        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Outbound Overlap");
         uiDeny = Resources.Load<AudioClip>("Audio/SFX/UI Deny");
         select = Resources.Load<AudioClip>("Audio/SFX/Select");
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
@@ -71,10 +71,12 @@ public class AudioManager : MonoBehaviour
         catch(Exception e) { Debug.LogWarning(e); } // Errors out on editor ocassionaly
     }
 
-    // Dunno yet
     private void FixedUpdate()
     {
-        if (master != null) return;
+        // if (master == null || TransitionManager.I.inTransition || switchCoro != null) return;
+
+        // if (DialogManager.I.inDialog) master.volume = GameManager.save.preferences.masterVolume - (GameManager.save.preferences.masterVolume * 0.50f);
+        // else master.volume = GameManager.save.preferences.masterVolume;
     }
 
     // Pause BGM's controller

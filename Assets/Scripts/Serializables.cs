@@ -101,7 +101,7 @@ public class Serializables
         public bool unlockedWorldTwo = false;
         public bool unlockedWorldThree = false;
         public bool unlockedWorldSuper = false;
-        public bool doPrologue = true;
+        public bool doPrologue = false;
         public bool hasCompletedGame = false;
         public bool hasMasteredGame = false;
         public bool seenSpoilerWarning = false;
@@ -109,6 +109,7 @@ public class Serializables
         public bool completedAllRemixLevels = false;
         public bool completedAllOutboundLevels = false;
         public bool seenHintPopup = false;
+        public int timesKickedEmptyspace = 0;
 
         // A level
         [Serializable]

@@ -23,7 +23,7 @@ public class NPCTile : CustomTile
     {
         // Checks if there is a string
         string[] stringCheck = customText.Split(";");
-        if (stringCheck.Length != 4) return; // TODO: move to 4 for support
+        if (stringCheck.Length != 4) return;
 
         // Collission check
         if (tile && stringCheck[2] == "0") return;

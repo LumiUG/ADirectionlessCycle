@@ -821,7 +821,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        // Load remix level!
+        // Remix win!
         if (remixCondition && !DialogManager.I.inDialog)
         {
             // Check if the player is playtesting a level
@@ -851,8 +851,13 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition && !DialogManager.I.inDialog)
         {
-            // Level 1 achievement
+            // Achievements
             if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.I.EditAchivement("ACH_SIXMOVES");
+            if (currentLevelID == "REMIX/Empty Space" && GameManager.save.game.timesKickedEmptyspace < 5)
+            {
+                GameManager.save.game.timesKickedEmptyspace++;
+                if (GameManager.save.game.timesKickedEmptyspace >= 5) GameManager.I.EditAchivement("ACH_SORRY");
+            }
 
             // Level savedata
             GameData.LevelChanges changes = new(true, false, (float)Math.Round(levelTimer, 2), levelMoves);
