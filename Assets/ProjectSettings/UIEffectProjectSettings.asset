@@ -67,6 +67,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: EDGE_PLAIN
         passType: 0
+      - keywords: EDGE_PLAIN SAMPLING_BLUR_FAST
+        passType: 0
       - keywords: EDGE_SHINY
         passType: 0
       - keywords: EDGE_SHINY TRANSITION_PATTERN
@@ -96,6 +98,8 @@ ShaderVariantCollection:
       - keywords: SAMPLING_BLUR_DETAIL UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: SAMPLING_BLUR_FAST
+        passType: 0
+      - keywords: SAMPLING_BLUR_FAST TARGET_HUE
         passType: 0
       - keywords: SAMPLING_BLUR_FAST TRANSITION_PATTERN
         passType: 0

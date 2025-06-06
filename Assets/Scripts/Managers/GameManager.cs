@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     public static string customLevelPath;
 
+    internal int lastSelectedWorld = 0;
     internal Color remixColor;
     internal Color outboundColor;
     internal Color completedColor;

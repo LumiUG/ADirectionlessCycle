@@ -6,6 +6,7 @@ using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
 using Coffee.UIEffects;
+using System;
 
 public class Hub : MonoBehaviour
 {
@@ -40,15 +41,15 @@ public class Hub : MonoBehaviour
     private int worldIndex = 0;
     private bool delayOneFrame = false;
 
-    private void Awake()
-    {
-        I = this; // No persistence!
-    }
+    private void Awake() => I = this; // No persistence!
 
     private void Start()
     {
         UI.I.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
+ 
+        // Go back to the last world you selected.
+        for (int shift = 0; shift < GameManager.I.lastSelectedWorld; shift++ ) ChangeWorld(1);
 
         // Unlock finale?
         GameManager.save.game.unlockedWorldSuper = GameManager.save.game.collectedOrbs.Count >= 3;
@@ -329,6 +330,7 @@ public class Hub : MonoBehaviour
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
 
         // Plays the transition
+        GameManager.I.lastSelectedWorld = worldIndex;
         TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, levelName);
     }
 

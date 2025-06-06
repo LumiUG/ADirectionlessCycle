@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour
     private readonly float manualMovementCD = 0.04f; // 0.12f default
     private float currentMovementCD = 0f;
     private int rpcCounter = 0;
+    internal float endingExtraCD = 0;
 
     // Debug //
     private bool canInputCommands = false;
@@ -108,7 +109,7 @@ public class InputManager : MonoBehaviour
         }
         if (debugCommand == "LLLRRRDDDUUU")
         {
-            MainMenu.I.ShowPopup("Try outside?");
+            MainMenu.I.ShowPopup("You might be looking in the wrong place. Try outside?");
             debugCommand = null;
         }
 
@@ -194,12 +195,6 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
             return;
         }
-        else if (debugCommand == "please")
-        {
-            MainMenu.I.ShowPopup("That's some potent magic. But really, try a different magic word.");
-            debugCommand = null;
-            return;
-        }
         else if (debugCommand == "gravix")
         {
             MainMenu.I.ShowPopup("Gravix? I don't know what you're talking about.");
@@ -211,14 +206,14 @@ public class InputManager : MonoBehaviour
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "please", "gravix", "overflow")
+            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "gravix", "overflow")
         }
     }
 
     // Returns if you are past the move cooldown timer
     private bool MoveCDCheck(float cooldown)
     {
-        return Time.time < currentMovementCD + cooldown;
+        return Time.time < currentMovementCD + endingExtraCD +cooldown;
     }
 
     // INGAME (LevelManager) //

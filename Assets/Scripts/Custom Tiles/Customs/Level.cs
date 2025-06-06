@@ -21,6 +21,14 @@ public class LevelTile : CustomTile
     {
         if (tile.directions.GetActiveDirectionCount() <= 0) return;
 
+        if (customText == "Void/Trigger")
+        {
+            LevelManager.I.MoveTilemaps(new Vector3(0, -8));
+            LevelManager.I.voidedCutscene = true;
+            Actions.ExtraDiveIn("5");
+            return;
+        }
+
         // Loads a level using its custom text
         var levelTest = LevelManager.I.LoadLevel(customText);
         if (!levelTest) levelTest = LevelManager.I.LoadLevel(customText, true);

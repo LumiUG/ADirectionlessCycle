@@ -120,6 +120,7 @@ public sealed class Actions : MonoBehaviour
 
     public static void GoScene(string scene)
     {
+        if (scene == "Main Menu") GameManager.I.lastSelectedWorld = 0;
         LevelManager.I.ClearLevel();
         LevelManager.I.hasWon = false;
         GameManager.I.isEditing = false;
@@ -183,6 +184,21 @@ public sealed class Actions : MonoBehaviour
         TransitionManager.I.TransitionIn(effects[numberCount - 1], DiveOut, count);
     }
 
+    public static void ExtraDiveIn(string count)
+    {
+        TransitionManager.Transitions[] effects = { Dive, Dive };
+        int.TryParse(count, out int numberCount);
+
+        if (count == "7")
+        {
+            TransitionManager.I.TransitionIn(Dive, LoadLevel, "VOID/Right");
+            LevelManager.I.voidedCutscene = false;
+            return;
+        }
+
+        TransitionManager.I.TransitionIn(effects[numberCount - 5], DiveOut, count);
+    }
+
     public static void DiveOut(string count)
     {
         LevelManager.I.LoadLevel($"VOID/Dive/{count}");
@@ -190,6 +206,7 @@ public sealed class Actions : MonoBehaviour
         TransitionManager.Transitions[] effects = { Dive, Unknown, Dive, Crossfade };
         int.TryParse(count, out int numberCount);
 
-        TransitionManager.I.TransitionOut(effects[numberCount - 1], DiveIn, $"{numberCount + 1}");
+        if (numberCount >= 5) TransitionManager.I.TransitionOut(Dive, ExtraDiveIn, $"{numberCount + 1}");
+        else TransitionManager.I.TransitionOut(effects[numberCount - 1], DiveIn, $"{numberCount + 1}");
     }
 }

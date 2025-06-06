@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Remix
+  m_Name: Oops
   m_EditorClassIdentifier: 
   dialog:
-  - The void was able to claim this exit. Can you see it?
-  - You'll figure it out later, let's keep moving forward. You're close to the end.
+  - So uh, there wasn't anything here.
+  - But to make you feel better, I've decided to add this carving here!
+  - Yeah, sorry. Not everything you see has something worthwhile.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

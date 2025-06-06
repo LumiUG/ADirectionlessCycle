@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour
     public bool shouldExhaust = true;
     public bool inDialog = false;
 
-    private readonly string[] waitExtraSmall = { ",", "-", "\"" };
+    private readonly string[] waitExtraSmall = { ",", "-" }; // "\""
     private readonly string[] waitExtraMedium = { ".", ":", ";" };
     private readonly string[] waitExtraLong = { "!", "?" }; // ":", ";"
     private bool ignoreNewChatSource;
@@ -44,6 +44,7 @@ public class DialogManager : MonoBehaviour
         {
             if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
             {
+                if (chat.shouldExhaust && chat.exhaustDialog == null) return;
                 chat = Resources.Load<DialogScriptable>("Dialog/Empty");
                 dialogPath = "Empty";
             } else if (dialogPath == "Dialog/Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-Dialog/Orb Hub 1/Gus"))
