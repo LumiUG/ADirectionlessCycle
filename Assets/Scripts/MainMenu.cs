@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public RectTransform allMainIcon;
     public RectTransform allRemixIcon;
     public RectTransform allOutboundIcon;
+    public RectTransform trialIcon;
     public GameObject scorchingStupid;
     public GameObject postgameChecker;
     public GameObject badgeHolder;
@@ -59,6 +60,7 @@ public class MainMenu : MonoBehaviour
         allMainIcon.gameObject.SetActive(GameManager.save.game.completedAllMainLevels);
         allRemixIcon.gameObject.SetActive(GameManager.save.game.completedAllRemixLevels);
         allOutboundIcon.gameObject.SetActive(GameManager.save.game.completedAllOutboundLevels);
+        trialIcon.gameObject.SetActive(GameManager.I.isDoingTrial);
 
         // Apply offset
         int offset = 0;
@@ -67,7 +69,8 @@ public class MainMenu : MonoBehaviour
         if (masteryIcon.gameObject.activeSelf) { masteryIcon.anchoredPosition = new(offset, 0); offset -= 125; }
         if (allMainIcon.gameObject.activeSelf) { allMainIcon.anchoredPosition = new(offset, 0); offset -= 125; }
         if (allRemixIcon.gameObject.activeSelf) { allRemixIcon.anchoredPosition = new(offset, 0); offset -= 125; }
-        if (allOutboundIcon.gameObject.activeSelf) { allOutboundIcon.anchoredPosition = new(offset, 0); }
+        if (allOutboundIcon.gameObject.activeSelf) { allOutboundIcon.anchoredPosition = new(offset, 0); offset -= 125; }
+        if (trialIcon.gameObject.activeSelf) { trialIcon.anchoredPosition = new(offset, 0); }
 
         // Scorching thing
         scorchingStupid.SetActive(GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-EXHAUST-Dialog/Scorch/Hi") != null);

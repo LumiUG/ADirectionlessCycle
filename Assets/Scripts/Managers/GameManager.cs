@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     public static string customLevelPath;
 
+    internal bool isDoingTrial = false;
     internal int lastSelectedWorld = 0;
     internal Color remixColor;
     internal Color outboundColor;
@@ -77,7 +78,6 @@ public class GameManager : MonoBehaviour
             sessionTime.Start = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
         }
         catch { } // Dont care.
-        
     }
 
     // Setup all the initial presences

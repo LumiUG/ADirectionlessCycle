@@ -56,4 +56,10 @@ public class StaticUI : MonoBehaviour
     {
         if (UI.I) UI.I.BadSound();
     }
+
+    // MEOW
+    public void StaticMeow()
+    {
+        if (UI.I) AudioManager.I.PlaySFX(AudioManager.meow, 0.7f, true);
+    }
 }

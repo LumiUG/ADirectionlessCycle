@@ -93,23 +93,27 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
-        // Secret title command
+        // Secret extra scenes
         if (debugCommand == "UDLRLRUR")
         {
             canInputCommands = false;
             debugCommand = null;
             UI.I.ChangeScene("Bonus");
         }
-
-        // Secret arg,, (maybe change it later, add a level or something.)
         if (debugCommand == "thankyou")
         {
-            MainMenu.I.ShowPopup("\"/terminal > eos\"");
+            GameManager.I.isDoingTrial = !GameManager.I.isDoingTrial;
+            if (GameManager.I.isDoingTrial) UI.I.global.SendMessage("Let the trials begin.", 2);
+            else UI.I.global.SendMessage("We'll go back to normal...", 2);
+            MainMenu.I.SetupBadges();
             debugCommand = null;
         }
+
+        // Secret arg,, (maybe change it later, add a level or something.)
         if (debugCommand == "LLLRRRDDDUUU")
         {
-            MainMenu.I.ShowPopup("You might be looking in the wrong place. Try outside?");
+            MainMenu.I.ShowPopup("You might be looking in the wrong place.");
+            Application.OpenURL("https://ugdev.xyz/terminal?cmd=eos");
             debugCommand = null;
         }
 
