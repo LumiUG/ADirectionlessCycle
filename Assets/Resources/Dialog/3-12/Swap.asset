@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Swap
   m_EditorClassIdentifier: 
   dialog:
-  - Godammit! Let me talk with the player, will you?!
+  - Goddammit! Let me talk with the player, will you?!
   - I hate it when you do this! We've talked about this bef- %end%
   events: []
   exhaustDialog: {fileID: 11400000, guid: 28f469cb658692c4eb62190334402c1f, type: 2}

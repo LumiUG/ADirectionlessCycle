@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Again? Get ahold of yourself.
-  - 'I''ll repeat myself:'
   - '"The depths of Area 1 holds the second of the fragments you seek."'
   - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
   - '"Once there, seek the path of light."'

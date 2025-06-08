@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Light Bloat
   m_EditorClassIdentifier: 
   dialog:
-  - Why should you go on a scavenger hunt, you might be thinking?
+  - You might be thinking why go on a scavenger hunt?
   - It's fun! Besides, if I tell you now, it would ruin the surprise now, wouldn't
     it?
-  - Regardless, it's the only way forward if you ever want to end things right.
+  - I'm still working on it. You'll see, you'll see.
+  - It's the only way forward if you ever want to end things right, anyways.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 8de5ce74c19ac944799117af9ad45878, type: 2}
   textSpeed: 0.05

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f06a6da21d484b14990312fda20c3715, type: 3}
-  m_Name: Placeholder
+  m_Name: Barricade
   m_EditorClassIdentifier: 
-  levelID: NONE
-  vanillaMoves: 10
-  cycleMoves: 10
+  levelID: REMIX/Barricade
+  vanillaMoves: 35
+  cycleMoves: 14
