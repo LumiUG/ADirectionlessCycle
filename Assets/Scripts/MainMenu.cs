@@ -161,8 +161,8 @@ public class MainMenu : MonoBehaviour
             {
                 var level = GameManager.save.game.levels.Find(l => l.levelID == trial.levelID);
                 if (level == null) return false;
-                if (trialVanilla && level.stats.totalMovesNormal > trial.vanillaMoves) return false;
-                if (!trialVanilla && level.stats.totalMovesCycle > trial.cycleMoves || level.stats.totalMovesCycle == 0) return false;
+                if (trialVanilla && (level.stats.totalMovesNormal > trial.vanillaMoves || level.stats.totalMovesNormal == 0)) return false;
+                if (!trialVanilla && (level.stats.totalMovesCycle > trial.cycleMoves || level.stats.totalMovesCycle == 0)) return false;
                 return true;
             });
 
