@@ -56,6 +56,7 @@ public class InputManager : MonoBehaviour
 
         // Debug input
         if (!canInputCommands || SceneManager.GetActiveScene().name != "Main Menu") return;
+        if (MainMenu.I.trialInfo.activeSelf || MainMenu.I.popupBtn.transform.parent.gameObject.activeSelf) return;
 
         // Write a command
         if (Input.anyKeyDown)
@@ -606,6 +607,8 @@ public class InputManager : MonoBehaviour
         // Swap check
         List<GameTile> count = GetPlayableObjects();
         if (count.Count > 1 || count.Count <= 0) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        LevelManager.I.hasCycledInCurrentAttempt = true;
+        if (GameManager.I.isDoingTrial) UI.I.ingame.trialCross.gameObject.SetActive(false);
 
         // Sfx (change later)
         AudioManager.I.PlaySFX(AudioManager.select, 0.50f);

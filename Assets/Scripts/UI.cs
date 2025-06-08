@@ -440,6 +440,10 @@ public class UI : MonoBehaviour
         public Text levelTimer;
         public Image areaIcon;
         public Image cycleIcon;
+        public Image trialStatus;
+        public Image trialCross;
+        public Text trialVanilla;
+        public Text trialCycle;
         public Text areaCount;
 
         public void SetAreaIcon(int icon)

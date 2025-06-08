@@ -134,6 +134,7 @@ public class Serializables
         {
             public float bestTime = 0f;
             public int totalMoves = 0;
+            public int totalMovesCycle = 0;
         }
 
         // Not serializable!!

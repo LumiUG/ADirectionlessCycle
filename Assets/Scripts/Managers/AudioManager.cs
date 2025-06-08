@@ -115,13 +115,13 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays an SFX
-    public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false)
+    public void PlaySFX(AudioClip clip, float volume = 1f, bool pitchShift = false, float customPitch = -1)
     {
         if (GameManager.I.chessbattleadvanced) clip = cba;
 
         if (pitchShift)
         {
-            sfxPitch.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
+            sfxPitch.pitch = (customPitch == -1) ? UnityEngine.Random.Range(0.95f, 1.05f) : customPitch;
             sfxPitch.volume = volume * GameManager.save.preferences.SFXVolume;
             sfxPitch.PlayOneShot(clip);
             return;

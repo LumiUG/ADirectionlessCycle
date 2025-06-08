@@ -7,6 +7,7 @@ using Steamworks;
 using Discord;
 using Rect = UnityEngine.Rect;
 using static Serializables;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,8 +24,13 @@ public class GameManager : MonoBehaviour
     public static Savedata save;
     public static string customLevelPath;
 
+    internal List<TrialScriptable> trialsAreaOne;
+    internal List<TrialScriptable> trialsAreaTwo;
+    internal List<TrialScriptable> trialsAreaThree;
+    internal List<TrialScriptable> trialsRemix;
     internal bool isDoingTrial = false;
     internal int lastSelectedWorld = 0;
+    internal Color boxColor;
     internal Color remixColor;
     internal Color outboundColor;
     internal Color completedColor;
@@ -54,6 +60,10 @@ public class GameManager : MonoBehaviour
         LoadDataJSON();
 
         // Default variables
+        trialsAreaOne = Resources.LoadAll<TrialScriptable>("Trials/Area 1").ToList();
+        trialsAreaTwo = Resources.LoadAll<TrialScriptable>("Trials/Area 2").ToList();
+        trialsAreaThree = Resources.LoadAll<TrialScriptable>("Trials/Area 3").ToList();
+        trialsRemix = Resources.LoadAll<TrialScriptable>("Trials/Remix").ToList();
         currentEditorLevelID = null;
         currentEditorLevelName = null;
         chessbattleadvanced = false;
@@ -62,6 +72,7 @@ public class GameManager : MonoBehaviour
         isEditing = false;
 
         // Colors!!
+        ColorUtility.TryParseHtmlString("#62C7FF", out boxColor);
         ColorUtility.TryParseHtmlString("#E5615F", out remixColor);
         ColorUtility.TryParseHtmlString("#A22BE3", out outboundColor);
         ColorUtility.TryParseHtmlString("#4CF832", out completedColor);
@@ -136,6 +147,15 @@ public class GameManager : MonoBehaviour
         LevelManager.I.isPaused = status;
     }
 
+    public TrialScriptable IngameTrialSetup(string levelID)
+    {
+        if (levelID.StartsWith("W1")) return trialsAreaOne.Find(t => { return t.levelID == levelID; });
+        if (levelID.StartsWith("W2")) return trialsAreaTwo.Find(t => { return t.levelID == levelID; });
+        if (levelID.StartsWith("W3")) return trialsAreaThree.Find(t => { return t.levelID == levelID; });
+        if (levelID.StartsWith("REMIX")) return trialsRemix.Find(t => { return t.levelID == levelID; });
+        return null;
+    }
+
     // Stuff with savedata //
     
     // Creates a savefile
@@ -176,7 +196,11 @@ public class GameManager : MonoBehaviour
         if (!level.completed) level.completed = changes.completed;
         if (!level.outboundCompletion) level.outboundCompletion = changes.outbound;
         if (changes.time != -1) level.stats.bestTime = (compareBest && (changes.time < level.stats.bestTime || level.stats.bestTime == 0f)) ? changes.time : level.stats.bestTime;
-        if (changes.moves != -1) level.stats.totalMoves = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
+
+        // (moves)
+        int calc = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
+        if (changes.moves != -1) level.stats.totalMoves = calc;
+        if (LevelManager.I.hasCycledInCurrentAttempt && changes.moves != -1) level.stats.totalMovesCycle = calc;
     }
 
     // Saves a level preview when exporting from the editor

@@ -111,6 +111,7 @@ public class LevelManager : MonoBehaviour
     internal Vector3Int currMove = Vector3Int.zero;
     internal bool voidedCutscene = false;
     internal bool isPaused = false;
+    internal bool hasCycledInCurrentAttempt = false;
     internal bool hasWon;
     internal int overflowCycles = 0;
 
@@ -312,6 +313,24 @@ public class LevelManager : MonoBehaviour
         GameManager.I.SetPresence("steam_display", "#Playing");
         GameManager.I.UpdateActivity($"Playing a level: {currentLevel.levelName}");
 
+        // Trial
+        UI.I.ingame.trialStatus.gameObject.SetActive(GameManager.I.isDoingTrial);
+        if (GameManager.I.isDoingTrial)
+        {
+            UI.I.ingame.trialCross.gameObject.SetActive(true);
+            var trial = GameManager.I.IngameTrialSetup(currentLevelID);
+            if (trial == null)
+            {
+                UI.I.ingame.trialVanilla.text = "Vanilla ???";
+                UI.I.ingame.trialCycle.text = "Cycle ???";
+            } else {
+                if (trial.vanillaMoves != -1) UI.I.ingame.trialVanilla.text = $"Vanilla {trial.vanillaMoves}";
+                else UI.I.ingame.trialVanilla.text = "Vanilla X";
+                if (trial.cycleMoves != -1) UI.I.ingame.trialCycle.text = $"Cycle {trial.cycleMoves}";
+                else UI.I.ingame.trialCycle.text = "Cycle X";
+            }
+        }
+
         // Hide UI?
         UI.I.pause.title.text = currentLevel.levelName;
         if (!silent) UI.I.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
@@ -435,6 +454,7 @@ public class LevelManager : MonoBehaviour
         ClearUndoFrames();
 
         InputManager.I.latestTile = ObjectTypes.Hexagon;
+        hasCycledInCurrentAttempt = false;
         movementBlacklist.Clear();
         customTileInfo.Clear();
         levelSolids.Clear();

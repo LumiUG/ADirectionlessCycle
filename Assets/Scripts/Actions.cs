@@ -59,6 +59,8 @@ public sealed class Actions : MonoBehaviour
         LevelManager.I.RefreshGameVars();
         LevelManager.I.MoveTilemaps(LevelManager.I.originalPosition, true);
         UI.I.ingame.SetCycleIcon(ObjectTypes.Hexagon);
+        UI.I.ingame.trialStatus.gameObject.SetActive(GameManager.I.isDoingTrial);
+        if (GameManager.I.isDoingTrial) UI.I.ingame.trialCross.gameObject.SetActive(true);
         TransitionManager.I.TransitionOut<string>(Swipe);
     }
 
@@ -142,10 +144,8 @@ public sealed class Actions : MonoBehaviour
             }
         }
 
-        LevelManager.I.RefreshGameVars();
         LevelManager.I.RefreshGameUI();
-        LevelManager.I.ReloadLevel(true);
-        TransitionManager.I.TransitionOut<string>(Swipe);
+        Restart(null);
     }
 
     public static void ReturnHub(string _)
