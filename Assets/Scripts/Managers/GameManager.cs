@@ -201,6 +201,7 @@ public class GameManager : MonoBehaviour
         int calc = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
         if (changes.moves != -1) level.stats.totalMoves = calc;
         if (LevelManager.I.hasCycledInCurrentAttempt && changes.moves != -1) level.stats.totalMovesCycle = calc;
+        if (!LevelManager.I.hasCycledInCurrentAttempt && changes.moves != -1) level.stats.totalMovesNormal = calc;
     }
 
     // Saves a level preview when exporting from the editor
