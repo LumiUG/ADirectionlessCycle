@@ -200,6 +200,8 @@ public class GameManager : MonoBehaviour
         // (moves)
         int calc = (compareBest && (changes.moves < level.stats.totalMoves || level.stats.totalMoves == 0)) ? changes.moves : level.stats.totalMoves;
         if (changes.moves != -1) level.stats.totalMoves = calc;
+
+        if (!changes.completed) return;
         if (LevelManager.I.hasCycledInCurrentAttempt && changes.moves != -1) level.stats.totalMovesCycle = calc;
         if (!LevelManager.I.hasCycledInCurrentAttempt && changes.moves != -1) level.stats.totalMovesNormal = calc;
     }

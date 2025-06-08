@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - The Gummi version of ADC... The best version.
-  - A relic of the past- Okay, I'm joking, we've got GitHub.
+  - A relic of the past- Okay, I'm joking, we've got Github.
   - ADC was meant to be a simple sokoban game to test the waters with Unity.
   - It still is, but it's grown a lot closer to me that I expected.
   - That has been mostly because of how much time I've poured into this.

@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Yo!
-  - Welcome to the dev room. In here, you'll hear me (Lumi, the developer) talk about
-    the game.
+  - Welcome to the dev room. In here, you'll hear me (Lumi, the developer) talk briefly
+    about the game.
   - Did you get here by accident? I would recommend to leave and find your way after
     beating the game!
   - The code for this level is very well hidden, but in plain sight.
-  - Anyways... Have at you!
+  - If you haven't found it, don't worry! You're welcome here anyways.
+  - So... Have at you!
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
