@@ -78,6 +78,7 @@ public class LevelManager : MonoBehaviour
     public Sprite fullOverlapCircle;
     public Sprite fullOverlapHex;
     private Color slightlyTransparent;
+    private Color defaultColor;
 
     // Level data //
     [HideInInspector] public SerializableLevel currentLevel = null;
@@ -142,6 +143,7 @@ public class LevelManager : MonoBehaviour
         objectRenderer = tilemapObjects.GetComponent<TilemapRenderer>();
         effectRenderer = tilemapEffects.GetComponent<TilemapRenderer>();
         slightlyTransparent = new(1, 1, 1, 0.85f);
+        defaultColor = new(1, 1, 1);
 
         // Editor (with file persistence per session)
         levelEditorName = "EditorSession";
@@ -324,10 +326,22 @@ public class LevelManager : MonoBehaviour
                 UI.I.ingame.trialVanilla.text = "Vanilla ???";
                 UI.I.ingame.trialCycle.text = "Cycle ???";
             } else {
-                if (trial.vanillaMoves != -1) UI.I.ingame.trialVanilla.text = $"Vanilla {trial.vanillaMoves}";
-                else UI.I.ingame.trialVanilla.text = "Vanilla X";
-                if (trial.cycleMoves != -1) UI.I.ingame.trialCycle.text = $"Cycle {trial.cycleMoves}";
-                else UI.I.ingame.trialCycle.text = "Cycle X";
+                // Eyesore! sorry, cant break out of LoadLevel.
+                var level = GameManager.save.game.levels.Find(l => l.levelID == trial.levelID);
+
+                if (trial.vanillaMoves != -1)
+                {
+                    UI.I.ingame.trialVanilla.color = defaultColor;
+                    UI.I.ingame.trialVanilla.text = $"Vanilla {trial.vanillaMoves}";
+                    if (level != null) if (level.stats.totalMovesNormal <= trial.vanillaMoves && level.stats.totalMovesNormal > 0) UI.I.ingame.trialVanilla.color = GameManager.I.completedColor;
+                } else UI.I.ingame.trialVanilla.text = "Vanilla X";
+
+                if (trial.cycleMoves != -1)
+                {
+                    UI.I.ingame.trialCycle.color = defaultColor;
+                    UI.I.ingame.trialCycle.text = $"Cycle {trial.cycleMoves}";
+                    if (level != null) if (level.stats.totalMovesCycle <= trial.cycleMoves && level.stats.totalMovesCycle > 0) UI.I.ingame.trialCycle.color = GameManager.I.completedColor;
+                } else UI.I.ingame.trialCycle.text = "Cycle X";
             }
         }
 
