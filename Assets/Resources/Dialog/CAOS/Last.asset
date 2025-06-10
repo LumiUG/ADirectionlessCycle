@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Last
   m_EditorClassIdentifier: 
   dialog:
-  - WRITE LATER
-  - WRITE LATER
-  - WRITE LATER
+  - You seem surprised to see me here?
+  - I'm just recouping information, nothing too drastic.
+  - This place seems really unstable though, so get going before it's too late.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

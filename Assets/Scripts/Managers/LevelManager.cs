@@ -325,6 +325,8 @@ public class LevelManager : MonoBehaviour
             {
                 UI.I.ingame.trialVanilla.text = "Vanilla ???";
                 UI.I.ingame.trialCycle.text = "Cycle ???";
+                UI.I.ingame.trialVanilla.color = defaultColor;
+                UI.I.ingame.trialCycle.color = defaultColor;
             } else {
                 // Eyesore! sorry, cant break out of LoadLevel.
                 var level = GameManager.save.game.levels.Find(l => l.levelID == trial.levelID);
