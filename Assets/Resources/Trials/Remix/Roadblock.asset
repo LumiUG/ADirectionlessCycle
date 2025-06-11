@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Roadblock
   m_EditorClassIdentifier: 
   levelID: REMIX/Roadblock
-  vanillaMoves: 64
+  vanillaMoves: 35
   cycleMoves: 15

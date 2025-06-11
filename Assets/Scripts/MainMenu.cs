@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Coffee.UIEffects;
 using UnityEngine;
@@ -42,6 +43,8 @@ public class MainMenu : MonoBehaviour
     public Image trialFillRemix;
     private bool trialVanilla = true;
     private int mewCount = 0;
+    private readonly int[] trialClearsVanilla = { 12, 11, 9, 16 };
+    private readonly int[] trialClearsCycle = { 5, 9, 3, 9 };
 
     private void Start()
     {
@@ -125,11 +128,23 @@ public class MainMenu : MonoBehaviour
     public void Meow()
     {
         if (trialInfo.activeSelf || popupBtn.transform.parent.gameObject.activeSelf) return;
+        AudioManager.I.PlaySFX(AudioManager.meow, 0.7f, true);
 
         mewCount++;
-        if (mewCount < 3) { AudioManager.I.PlaySFX(AudioManager.meow, 0.7f, true); return; }
-        AudioManager.I.PlaySFX(AudioManager.meow, 0.8f, true, 0.8f);
+        if (mewCount < 3) return;
 
+        // Achievement
+        trialVanilla = false; var validationC = LoadTrial(true);
+        trialVanilla = true; var validationV = LoadTrial(true);
+
+        bool ach = true;
+        for (int i = 0; i < validationV.Count(); i++)
+        {
+            if (validationV[i] < trialClearsVanilla[i]) { ach = false; break; }
+            if (validationC[i] < trialClearsCycle[i]) { ach = false; break; }
+        } if (ach) GameManager.I.EditAchivement("ACH_TRIALS");
+
+        // Activation
         trialInfo.SetActive(true);
         UI.I.selectors.ChangeSelected(trialBack.gameObject, true);
         mewCount = 0;
@@ -142,14 +157,18 @@ public class MainMenu : MonoBehaviour
         trialInfo.SetActive(false);
     }
 
-    private void LoadTrial()
+    private List<int> LoadTrial(bool ignore = false)
     {
-        if (trialVanilla) trialEffect.shadowColor = GameManager.I.boxColor;
-        else trialEffect.shadowColor = GameManager.I.outboundColor;
-
         TrialScriptable[][] ts = { GameManager.I.trialsAreaOne.ToArray(), GameManager.I.trialsAreaTwo.ToArray(), GameManager.I.trialsAreaThree.ToArray(), GameManager.I.trialsRemix.ToArray() };
         Text[] fields = { trialCountOne, trialCountTwo, trialCountThree, trialCountRemix };
         Image[] amounts = { trialFillOne, trialFillTwo, trialFillThree, trialFillRemix };
+        List<int> validation = new();
+
+        if (!ignore)
+        {
+            if (trialVanilla) trialEffect.shadowColor = GameManager.I.boxColor;
+            else trialEffect.shadowColor = GameManager.I.outboundColor;            
+        }
 
         for (int i = 0; i < fields.Count(); i++)
         {
@@ -165,10 +184,14 @@ public class MainMenu : MonoBehaviour
                 if (!trialVanilla && (level.stats.totalMovesCycle > trial.cycleMoves || level.stats.totalMovesCycle == 0)) return false;
                 return true;
             });
+            validation.Add(count);
 
+            if (ignore) continue;
             fields[i].text = $"{count} / {totalCount}";
             amounts[i].fillAmount = (float)count / totalCount;
         }
+
+        return validation;
     }
 
     public void TrialType(bool type)

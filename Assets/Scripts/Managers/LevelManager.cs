@@ -887,6 +887,22 @@ public class LevelManager : MonoBehaviour
         // If won, do the thing
         if (winCondition && !DialogManager.I.inDialog)
         {
+            // Special ren level
+            if (currentLevelID == "CODE/Ren")
+            {
+                RemoveTile(tilemapCollideable.GetTile<GameTile>(new(20, 0)));
+                RemoveTile(tilemapCollideable.GetTile<GameTile>(new(21, 0)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(-11, -2)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(-9, -3)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(-10, -5)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(34, -3)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(36, -4)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(40, -6)));
+                RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(20, -13)));
+                AudioManager.I.PlaySFX(AudioManager.boom, 0.5f);
+                return;
+            }
+
             // Achievements
             if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.I.EditAchivement("ACH_SIXMOVES");
             if (currentLevelID == "REMIX/Empty Space" && GameManager.save.game.timesKickedEmptyspace < 5)

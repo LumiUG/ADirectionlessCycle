@@ -170,6 +170,7 @@ public class UI : MonoBehaviour
     public void LevelEditorPlaytest()
     {
         if (!GameManager.I.IsEditor()) return;
+        LevelEditorExportLevel();
 
         LevelManager.I.SaveLevel(LevelManager.I.currentLevel.levelName, LevelManager.I.levelEditorName);
         LevelManager.I.currentLevel = LevelManager.I.GetLevel(LevelManager.I.levelEditorName, true);

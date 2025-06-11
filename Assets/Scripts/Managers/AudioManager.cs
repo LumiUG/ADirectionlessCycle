@@ -29,6 +29,7 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip ego1;
     internal static AudioClip ego2;
     internal static AudioClip meow;
+    internal static AudioClip boom;
 
     // AudioSources //
     [Header("Audio Sources")]
@@ -61,6 +62,7 @@ public class AudioManager : MonoBehaviour
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
         cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
         meow = Resources.Load<AudioClip>("Audio/SFX/Meow");
+        boom = Resources.Load<AudioClip>("Audio/SFX/Boom");
         ego1 = Resources.Load<AudioClip>("Audio/Dialog/Ego 1");
         ego2 = Resources.Load<AudioClip>("Audio/Dialog/Ego 2");
 
