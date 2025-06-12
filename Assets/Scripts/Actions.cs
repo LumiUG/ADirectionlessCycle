@@ -134,15 +134,15 @@ public sealed class Actions : MonoBehaviour
     public static void UIRestartLevel(string _)
     {
         // Hint popup
-        if (!GameManager.save.game.seenHintPopup)
-        {
-            InputManager.I.restartCount++;
-            if (InputManager.I.restartCount >= 5)
-            {
-                UI.I.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
-                GameManager.save.game.seenHintPopup = true;
-            }
-        }
+        // if (!GameManager.save.game.seenHintPopup)
+        // {
+        //     InputManager.I.restartCount++;
+        //     if (InputManager.I.restartCount >= 5)
+        //     {
+        //         UI.I.popup.SetPopup("You seem stuck, need a hint? Press the lightbulb on the pause menu!");
+        //         GameManager.save.game.seenHintPopup = true;
+        //     }
+        // }
 
         LevelManager.I.RefreshGameUI();
         Restart(null);

@@ -7813,7 +7813,7 @@ MonoBehaviour:
   m_ShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_ShadowColorGlow: 1
   m_GradationMode: 2
-  m_GradationIntensity: 0.2
+  m_GradationIntensity: 0.25
   m_GradationColorFilter: 1
   m_GradationColor1: {r: 1, g: 1, b: 1, a: 1}
   m_GradationColor2: {r: 1, g: 1, b: 1, a: 1}
