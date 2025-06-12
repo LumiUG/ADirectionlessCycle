@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -82,39 +83,47 @@ public class CustomLevels : MonoBehaviour
         rowCount = -1;
         count = 0;
 
-        foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
+        try
         {
-            if (!fileName.EndsWith(".level")) continue;
-            if (fileName.Contains($"{LevelManager.I.levelEditorName}.level") && !GameManager.I.IsDebug()) continue;
-            if (count == 0) rowCount++;
-            Texture2D preview = null;
-            count++;
+            foreach (string fileName in Directory.GetFiles(GameManager.customLevelPath))
+            {
+                if (!fileName.EndsWith(".level")) continue;
+                if (fileName.Contains($"{LevelManager.I.levelEditorName}.level") && !GameManager.I.IsDebug()) continue;
+                if (count == 0) rowCount++;
+                Texture2D preview = null;
+                count++;
 
-            // Get level info & preview image
-            string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
-            if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
-            SerializableLevel level = LevelManager.I.GetLevel(levelID, true);
-            if (!string.IsNullOrEmpty(level.previewImage)) preview = GameManager.I.Base64ToTexture(level.previewImage);
+                // Get level info & preview image
+                string levelID = fileName.Replace(".level", "").Replace(GameManager.customLevelPath, "").Replace("\\", "");
+                if (filter != null && !levelID.ToLower().Contains(filter.ToLower())) { if (count == 1) rowCount--; count--; continue; }
+                SerializableLevel level = LevelManager.I.GetLevel(levelID, true);
+                if (!string.IsNullOrEmpty(level.previewImage)) preview = GameManager.I.Base64ToTexture(level.previewImage);
 
-            // Create prefab and set position
-            GameObject entry = Instantiate(customLevelPrefab, holder);
-            entry.name = level.levelName;
-            if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, vertical * rowCount);
-            else {
-                entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(550, vertical * rowCount);
-                count = 0;
-            }
+                // Create prefab and set position
+                GameObject entry = Instantiate(customLevelPrefab, holder);
+                entry.name = level.levelName;
+                if (count == 1) entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, vertical * rowCount);
+                else {
+                    entry.GetComponent<RectTransform>().anchoredPosition = new Vector2(550, vertical * rowCount);
+                    count = 0;
+                }
 
-            // Prefab basic data
-            entry.transform.Find("Name").GetComponent<Text>().text = $"\"{level.levelName}\"";
-            if (preview != null) entry.transform.Find("Preview").GetComponent<RawImage>().texture = preview;
+                // Prefab basic data
+                entry.transform.Find("Name").GetComponent<Text>().text = $"\"{level.levelName}\"";
+                if (preview != null) entry.transform.Find("Preview").GetComponent<RawImage>().texture = preview;
 
-            // Prefab stars
-            Transform stars = entry.transform.Find("Stars");
-            for (int i = 0; i < level.difficulty; i++) { stars.Find($"{i + 1}").GetComponent<Image>().sprite = starSprite; }
+                // Prefab stars
+                Transform stars = entry.transform.Find("Stars");
+                for (int i = 0; i < level.difficulty; i++) { stars.Find($"{i + 1}").GetComponent<Image>().sprite = starSprite; }
 
-            // Prefab load level
-            entry.GetComponent<Button>().onClick.AddListener(delegate { OpenLevelMenu(levelID, level.levelName); });
+                // Prefab load level
+                entry.GetComponent<Button>().onClick.AddListener(delegate { OpenLevelMenu(levelID, level.levelName); });
+            }   
+        } catch (Exception) {
+            UI.I.global.SendMessage("Customs fetching error.", 10f);
+            UI.I.ChangeScene("Main Menu", false);
+            LevelManager.I.ClearLevel();
+            return;
         }
     }
 

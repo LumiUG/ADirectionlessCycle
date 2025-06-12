@@ -18,8 +18,7 @@ public sealed class Actions : MonoBehaviour
         // Loads the level (catching exceptions)
         try {
             LevelManager.I.LoadLevel(name, SceneManager.GetActiveScene().name == "Custom Levels");
-        } catch (Exception e) {
-            Debug.LogError(e);
+        } catch (Exception) {
             UI.I.global.SendMessage("An error ocurred while loading!", 10f);
             UI.I.ChangeScene("Main Menu", false);
             LevelManager.I.ClearLevel();
