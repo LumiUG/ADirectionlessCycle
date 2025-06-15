@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip editorBGM;
     internal static AudioClip remixBGM;
     internal static AudioClip voidBGM;
+    internal static AudioClip unveilingBGM;
     internal static AudioClip W1BGM;
     internal static AudioClip W2BGM;
     internal static AudioClip W3BGM;
@@ -51,7 +52,9 @@ public class AudioManager : MonoBehaviour
         W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
         W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");
         remixBGM = Resources.Load<AudioClip>("Audio/BGM/Test6");
-        voidBGM = Resources.Load<AudioClip>("Audio/BGM/Test0");
+        voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
+        voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
+        unveilingBGM = Resources.Load<AudioClip>("Audio/BGM/Unveiling");
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
         areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");

@@ -218,7 +218,7 @@ public class InputManager : MonoBehaviour
     // Returns if you are past the move cooldown timer
     private bool MoveCDCheck(float cooldown)
     {
-        return Time.time < currentMovementCD + endingExtraCD +cooldown;
+        return Time.time < currentMovementCD + endingExtraCD + cooldown;
     }
 
     // INGAME (LevelManager) //

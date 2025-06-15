@@ -1251,38 +1251,39 @@ public class LevelManager : MonoBehaviour
 
     internal IEnumerator OutroCutscene()
     {
+        AudioManager.I.PlayBGM(AudioManager.unveilingBGM);
+
         var tiles = GetObjectTiles();
         InputManager.I.canPause = false;
         InputManager.I.canRestart = false;
 
         InputManager.I.endingExtraCD = 0.05f;
-        yield return new WaitForSeconds(5.8f);
+        yield return new WaitForSeconds(4.4f);
         tiles[0].directions.up = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.15f;
-        yield return new WaitForSeconds(4.4f);
+        yield return new WaitForSeconds(3.2f);
         tiles[0].directions.down = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.3f;
-        yield return new WaitForSeconds(6.5f);
+        yield return new WaitForSeconds(5.8f);
         tiles[0].directions.left = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.5f;
-        yield return new WaitForSeconds(5.5f);
+        yield return new WaitForSeconds(4.6f);
         tiles[0].directions.right = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.7f;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(7f);
         InputManager.I.endingExtraCD = 0f;
         RemoveTile(tiles[0]);
 
         yield return new WaitForSeconds(4f);
-        TransitionManager.I.TransitionIn<string>(Finale);
-        
+        TransitionManager.I.TransitionIn<string>(Finale);        
 
         yield return new WaitForSeconds(13f);
         GameManager.save.game.hasCompletedGame = true;

@@ -74,6 +74,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Manual
-Test[0-9].mp3
-Test[0-9].mp3.meta
+/[Aa]ssets/[Rr]esources/[Aa]udio/BGM/*
 steam_appid.txt
