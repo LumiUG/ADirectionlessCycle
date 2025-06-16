@@ -16,6 +16,8 @@ MonoBehaviour:
   - Last thing you should know!
   - The function to 'delete everything' should start as soon as you get past the
     entrance.
+  - It's degraded so badly we believe everything has started looping itself.
+  - If you get to the center, the bottom, it'll be done. Just like that.
   - After that, we- nothing will be here anymore.
   events: []
   exhaustDialog: {fileID: 0}

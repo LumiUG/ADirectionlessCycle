@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Welcome to Area 3.
-  - '"Here you''ll play with the Hex,, it jumps over twice!"'
+  - '"Here you''ll play with the Hex, it jumps over twice!"'
   - '"It''s the most interesting shape, as it will always move first!"'
   - ...Among other stuff.
   events: []

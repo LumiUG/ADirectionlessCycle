@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Enter
   m_EditorClassIdentifier: 
   dialog:
-  - This should be the last one!
-  - Hey, I'll meet you again where I've told you before.
+  - This should be your last one.
+  - I'll meet you again where I've told you before.
   - After you have all of them, that is.
+  - It won't have enough power to open a rift if you don't!
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

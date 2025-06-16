@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - '%begin% My turn!'
-  - Welcome, again. This is the "last stop" before the end.
+  - This'll be your "last stop" before the end.
   - It's filled with cyphers, which are annoying. I'll decypher them for you myself.
+  - Starting with this one!
   - ...
   - 'Aaand, done. I''ll read it out for you:'
   - '"The depths of Area 1 holds the second of the fragments you seek."'

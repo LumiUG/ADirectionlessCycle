@@ -17,7 +17,7 @@ MonoBehaviour:
   - Which is... kind of funny, considering what hides in here.
   - I won't lie, this level is one of my favorites, too.
   - Don't forget to ask us for a hint if you need it.
-  - Or, well, I meant "not" us. You can use the lightbulb from the pause menu for
+  - Or, well, I meant "not" us. You can use the lightbulb from your pause menu for
     that.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 9244ba4648d75c540ab8e8f1e2758afa, type: 2}

@@ -17,7 +17,10 @@ MonoBehaviour:
   - '? ?  ?'
   - 
   - 
+  - .,,,,    ,..   .,,      ,..
+  - 
   - ---
+  - 
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

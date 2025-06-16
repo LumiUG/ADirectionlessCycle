@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PG 4
   m_EditorClassIdentifier: 
   dialog:
-  - And... Thank you?
+  - Thank you for giving them rest.
   events: []
   exhaustDialog: {fileID: 11400000, guid: bcbfcb42c13ecb242b84570c35c3e29a, type: 2}
   textSpeed: 0.05

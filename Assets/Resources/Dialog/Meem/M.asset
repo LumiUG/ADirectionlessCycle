@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: M
   m_EditorClassIdentifier: 
   dialog:
-  - :3
+  - '[It made some sort of barking sound.]'
+  - '[It looks happy...]'
+  - '[It looks neglected.]'
+  - '[Maybe someday...]'
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

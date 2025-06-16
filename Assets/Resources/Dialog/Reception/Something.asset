@@ -19,7 +19,6 @@ MonoBehaviour:
   - We aren't actually "allowed" to edit any levels, or at least much, since you've
     seen what they can do.
   - I could've helped them, but I didn't.
-  - ...Anyways, this level has always given me World 1 vibes.
   - Sorry for rambling, you've got this.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}

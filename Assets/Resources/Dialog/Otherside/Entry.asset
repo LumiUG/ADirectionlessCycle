@@ -18,7 +18,7 @@ MonoBehaviour:
   - Do you hate us? Do you dislike me so much that you'd like to see me cease to
     be?
   - '... '
-  - Just keep playing. Please. And stay away from this.
+  - Just keep playing. Please. And stay away from all this.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 22dbfd60396864c4f912c316a0fa8bf3, type: 2}
   textSpeed: 0.05

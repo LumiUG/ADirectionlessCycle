@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - One of the more interesting levels. Oh the reaction you'll have when it clicks.
-  - There's so much in here that you can't see...
-  - Sorry, just being a tease. Carry on!
+  - What? You didn't think this would be one of the last levels, did you?
+  - The core waits, the core waits.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

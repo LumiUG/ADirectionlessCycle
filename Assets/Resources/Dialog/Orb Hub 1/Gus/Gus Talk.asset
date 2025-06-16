@@ -17,7 +17,7 @@ MonoBehaviour:
   - Lore?
   - Artifacts?
   - A way out?
-  - Well, you're getting none of that.
+  - Well...
   events: []
   exhaustDialog: {fileID: 11400000, guid: 831c0a443d0390a418af4c21698725c1, type: 2}
   textSpeed: 0.05

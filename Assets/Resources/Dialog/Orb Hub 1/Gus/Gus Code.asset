@@ -19,8 +19,8 @@ MonoBehaviour:
   - Hold [SPACE] there, and start typing.
   - Something might happen if you find the right combination.
   - ...
-  - I've heard- no, I've seen it. Some levels have some sort of carvings.
-  - They're outside of your view, you'll have to find and decypher them.
+  - I've heard- no, I've seen it. Some levels have some sort of "carvings".
+  - They're outside of your view, you'll have to find and decypher them yourself.
   - ... That's all.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 911624d1231d13b439c2325b3919501c, type: 2}

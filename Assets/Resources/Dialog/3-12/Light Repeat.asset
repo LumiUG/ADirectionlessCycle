@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Light Repeat
   m_EditorClassIdentifier: 
   dialog:
-  - Again? Get ahold of yourself.
+  - 'Do you need me to repeat it? Here you go:'
   - '"The depths of Area 1 holds the second of the fragments you seek."'
   - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
   - '"Once there, seek the path of light."'

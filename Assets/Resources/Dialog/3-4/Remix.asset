@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - The void was able to claim this exit. Can you see it?
-  - You'll figure it out later, let's keep moving forward. You're close to the end.
+  - I remember the developer being specially fond of this area.
+  - They really took their sweet time with it, to really flesh everything out-
+  - Oh? The exit? You don't have what you need yet.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
