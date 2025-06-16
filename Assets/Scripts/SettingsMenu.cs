@@ -175,9 +175,9 @@ public class SettingsMenu : MonoBehaviour
                 break;
             case 2:
                 GameManager.save.preferences.masterVolume = 0.6f;
-                GameManager.save.preferences.SFXVolume = 0.80f;
-                masterSlider.value = 0.6f;
-                SFXSlider.value = 0.80f;
+                GameManager.save.preferences.SFXVolume = 0.8f;
+                masterSlider.value = 0.5f;
+                SFXSlider.value = 0.8f;
                 break;
             case 3:
                 break;

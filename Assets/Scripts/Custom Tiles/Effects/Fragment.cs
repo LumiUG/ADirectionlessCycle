@@ -23,7 +23,9 @@ public class FragmentTile : EffectTile
             GameManager.save.game.collectedFragments.Add(LevelManager.I.currentLevelID);
             if (GameManager.save.game.collectedFragments.Count >= 4) GameManager.I.EditAchivement("ACH_DEFRAGMENTED");
         }
+
         LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<FragmentTile>(position));
+        AudioManager.I.PlaySFX(AudioManager.fragmentPickup, 0.6f);
     }
     
     // Prepares editor variables.

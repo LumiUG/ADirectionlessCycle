@@ -18,17 +18,27 @@ public class AudioManager : MonoBehaviour
     private Coroutine switchCoro = null;
 
     // SFX //
+    internal static AudioClip undo;
+    internal static AudioClip cycle;
+    internal static AudioClip cycleDeny;
     internal static AudioClip tileDeath;
     internal static AudioClip tilePush;
     internal static AudioClip areaOverlap;
     internal static AudioClip inverseOverlap;
     internal static AudioClip outboundOverlap;
+
+    internal static AudioClip normalWin;
+    internal static AudioClip inverseWin;
+    internal static AudioClip outerWin;
+
     internal static AudioClip uiDeny;
     internal static AudioClip select;
-    internal static AudioClip undo;
-    internal static AudioClip cba;
     internal static AudioClip ego1;
     internal static AudioClip ego2;
+
+    internal static AudioClip fragmentPickup;
+    internal static AudioClip orbPickup;
+    internal static AudioClip cba;
     internal static AudioClip meow;
     internal static AudioClip boom;
 
@@ -53,19 +63,29 @@ public class AudioManager : MonoBehaviour
         W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");
         remixBGM = Resources.Load<AudioClip>("Audio/BGM/Test6");
         voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
-        voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
         unveilingBGM = Resources.Load<AudioClip>("Audio/BGM/Unveiling");
+
+        undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
+        cycle = Resources.Load<AudioClip>("Audio/SFX/Cycle");
+        cycleDeny = Resources.Load<AudioClip>("Audio/SFX/CycleDeny");
         tileDeath = Resources.Load<AudioClip>("Audio/SFX/Tile Death");
         tilePush = Resources.Load<AudioClip>("Audio/SFX/Tile Push");
-        areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Area Overlap");
-        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Inverse Overlap");
-        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Outbound Overlap");
-        uiDeny = Resources.Load<AudioClip>("Audio/SFX/UI Deny");
-        select = Resources.Load<AudioClip>("Audio/SFX/Select");
-        undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
-        cba = Resources.Load<AudioClip>("Audio/SFX/CBA");
-        meow = Resources.Load<AudioClip>("Audio/SFX/Meow");
-        boom = Resources.Load<AudioClip>("Audio/SFX/Boom");
+        areaOverlap = Resources.Load<AudioClip>("Audio/SFX/Overlap/Area");
+        inverseOverlap = Resources.Load<AudioClip>("Audio/SFX/Overlap/Inverse");
+        outboundOverlap = Resources.Load<AudioClip>("Audio/SFX/Overlap/Outbound");
+
+        normalWin = Resources.Load<AudioClip>("Audio/SFX/Win/Normal");
+        inverseWin = Resources.Load<AudioClip>("Audio/SFX/Win/Inverse");
+        outerWin = Resources.Load<AudioClip>("Audio/SFX/Win/Outerbound");
+
+        uiDeny = Resources.Load<AudioClip>("Audio/SFX/UI/Deny");
+        select = Resources.Load<AudioClip>("Audio/SFX/UI/Select");
+
+        fragmentPickup = Resources.Load<AudioClip>("Audio/SFX/Extra/FragmentPickup");
+        orbPickup = Resources.Load<AudioClip>("Audio/SFX/Extra/OrbPickup");
+        cba = Resources.Load<AudioClip>("Audio/SFX/Extra/CBA");
+        meow = Resources.Load<AudioClip>("Audio/SFX/Extra/Meow");
+        boom = Resources.Load<AudioClip>("Audio/SFX/Extra/Boom");
         ego1 = Resources.Load<AudioClip>("Audio/Dialog/Ego 1");
         ego2 = Resources.Load<AudioClip>("Audio/Dialog/Ego 2");
 

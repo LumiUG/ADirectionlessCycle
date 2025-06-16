@@ -606,12 +606,12 @@ public class InputManager : MonoBehaviour
 
         // Swap check
         List<GameTile> count = GetPlayableObjects();
-        if (count.Count > 1 || count.Count <= 0) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        if (count.Count > 1 || count.Count <= 0) { AudioManager.I.PlaySFX(AudioManager.cycleDeny, 0.20f); return; }
         LevelManager.I.hasCycledInCurrentAttempt = true;
         if (GameManager.I.isDoingTrial) UI.I.ingame.trialCross.gameObject.SetActive(false);
 
-        // Sfx (change later)
-        AudioManager.I.PlaySFX(AudioManager.select, 0.50f);
+        // Cycle SFX
+        AudioManager.I.PlaySFX(AudioManager.cycle, 0.28f, true);
 
         // Swap
         LevelManager.I.RemoveTile(count[0]);

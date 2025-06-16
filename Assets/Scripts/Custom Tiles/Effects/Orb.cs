@@ -20,6 +20,7 @@ public class OrbTile : EffectTile
 
         if (!GameManager.save.game.collectedOrbs.Contains(LevelManager.I.currentLevelID)) GameManager.save.game.collectedOrbs.Add(LevelManager.I.currentLevelID);
         LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<OrbTile>(position));
+        AudioManager.I.PlaySFX(AudioManager.orbPickup, 0.6f);
     }
     
     // Prepares editor variables.
