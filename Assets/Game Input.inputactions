@@ -231,6 +231,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "DebugControllerType",
+                    "type": "Button",
+                    "id": "6043995f-376c-4131-9453-28bbebb4be6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CustomUIExits",
                     "type": "Button",
                     "id": "5cdf829a-7fbc-4db9-9faf-177a1ed1144e",
@@ -832,6 +841,72 @@
                     "action": "CustomUIExits",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fb204df-053d-4104-beae-af11266ca5c4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DebugEnable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Controller Arrows",
+                    "id": "890224c4-04d1-43a2-8653-e4c81aa38b7d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugControllerType",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "c0e7b0df-4919-407d-81ec-4af80461e036",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DebugControllerType",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "29c12fe1-fda2-461b-bb7a-a7e621117ec5",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DebugControllerType",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "607c9028-4e39-48e0-b3a9-300e929e662f",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DebugControllerType",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "0e6e89c2-cf12-4429-b296-d1da6f2f4edb",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DebugControllerType",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
