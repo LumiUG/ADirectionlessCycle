@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
+  m_Name: Frag 1
+  m_EditorClassIdentifier: 
+  dialog:
+  - Here's... Wait, how'd you know this was in here?
+  - No, no, no. I'm not decyphering whatever's in here, you're missing knowledge!
+  - I suppose you've got this one, but you'll have to do better than that to find
+    the others.
+  - Come back after you get more knowledge, I don't want you to get lost. You'll
+    know.
+  events: []
+  exhaustDialog: {fileID: 0}
+  textSpeed: 0.05
+  sfx: {fileID: 8300000, guid: f66de1a7e7a00464d83688d14e17a4f2, type: 3}
+  shouldExhaust: 0
+  canBeSkipped: 1

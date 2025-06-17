@@ -40,20 +40,10 @@ public class DialogManager : MonoBehaviour
     public void StartDialog(DialogScriptable chat, string dialogPath)
     {
         if (!canInteract || !chat || TransitionManager.I.inTransition) return;
-        if (GameManager.save.game.hasCompletedGame && !dialogPath.Contains("CUSTOM"))
-        {
-            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
-            {
-                if (chat.shouldExhaust && chat.exhaustDialog == null) return;
-                chat = Resources.Load<DialogScriptable>("Dialog/Empty");
-                dialogPath = "Empty";
-            } else if (dialogPath == "Dialog/Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-Dialog/Orb Hub 1/Gus"))
-            {
-                chat = Resources.Load<DialogScriptable>("Dialog/Orb Hub 1/Post/PG");
-                dialogPath = "Dialog/Orb Hub 1/Post/PG";
-            }
-        }
 
+        var changes = CustomHandlings(chat, dialogPath);
+        if (changes.Item1 != null) chat = changes.Item1;
+        if (changes.Item2 != null) dialogPath = changes.Item2;
         currentDialogPath = dialogPath;
         inDialog = true;
 
@@ -175,6 +165,44 @@ public class DialogManager : MonoBehaviour
         StopAllCoroutines();
     }
 
+    // Custom handlings for secrets or oddities.
+    private (DialogScriptable, string) CustomHandlings(DialogScriptable chat, string path)
+    {
+        // Postgame changes
+        if (GameManager.save.game.hasCompletedGame && !path.Contains("CUSTOM"))
+        {
+            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
+            {
+                if (chat.shouldExhaust && chat.exhaustDialog == null) return (null, null);
+                chat = Resources.Load<DialogScriptable>("Dialog/Empty");
+                path = "Empty";
+                return (chat, path);
+            }
+
+            if (path == "Dialog/Orb Hub 1/Gus" && GameManager.save.game.exhaustedDialog.Contains("EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-EXHAUST-Dialog/Orb Hub 1/Gus"))
+            {
+                chat = Resources.Load<DialogScriptable>("Dialog/Orb Hub 1/Post/PG");
+                path = "Dialog/Orb Hub 1/Post/PG";
+                return (chat, path);
+            }
+        }
+
+        // Fragments sequence breaking
+        if (path == "Dialog/Orb Hub 1/Hint" && !GameManager.save.game.exhaustedDialog.Contains("Dialog/3-12/Light"))
+        {
+            chat = Resources.Load<DialogScriptable>("Dialog/SB/Frag 1");
+            path = "Dialog/SB/Frag 1";
+            return (chat, path);
+        }
+        if (path == "Dialog/Fragment 3/Enter" && !GameManager.save.game.exhaustedDialog.Contains("Dialog/3-12/Light"))
+        {
+            chat = Resources.Load<DialogScriptable>("Dialog/SB/Frag 3");
+            path = "Dialog/SB/Frag 3";
+            return (chat, path);
+        }
+
+        return (null, null);
+    }
 
     // Dialog events
     [Serializable]
