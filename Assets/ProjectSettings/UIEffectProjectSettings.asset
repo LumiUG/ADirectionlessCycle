@@ -57,11 +57,17 @@ ShaderVariantCollection:
         passType: 0
       - keywords: DETAIL_MASKING GRADATION_COLOR2 UNITY_UI_ALPHACLIP
         passType: 0
+      - keywords: DETAIL_MASKING GRADATION_GRADIENT
+        passType: 0
+      - keywords: DETAIL_MASKING GRADATION_GRADIENT UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_MASKING TRANSITION_PATTERN
         passType: 0
       - keywords: DETAIL_MULTIPLY EDGE_SHINY
+        passType: 0
+      - keywords: DETAIL_MULTIPLY GRADATION_GRADIENT UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_MULTIPLY_ADDITIVE EDGE_SHINY
         passType: 0
@@ -84,6 +90,10 @@ ShaderVariantCollection:
       - keywords: GRADATION_COLOR4
         passType: 0
       - keywords: GRADATION_GRADIENT
+        passType: 0
+      - keywords: GRADATION_GRADIENT TONE_SEPIA UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: GRADATION_GRADIENT UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: GRADATION_RADIAL
         passType: 0
