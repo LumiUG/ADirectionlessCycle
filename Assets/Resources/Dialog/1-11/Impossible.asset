@@ -16,6 +16,8 @@ MonoBehaviour:
   - Hey, just popping in!
   - Just wanted to say, if something feels impossible... It probably is!
   - Feel free to come back later- Or better, just don't.
+  - Oh, and If you're confused, try holding [SPACEBAR] or [TRIANGLE]!
+  - Well, that's usually the key most players have assigned.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
