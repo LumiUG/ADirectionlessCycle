@@ -52,6 +52,17 @@ public class MainMenu : MonoBehaviour
 
         if (GameManager.save.game.hasCompletedGame) postgameChecker.SetActive(true);
 
+        // Setup font changes
+        if (GameManager.save.preferences.accessibleFont)
+        {
+            popupText.font = GameManager.I.acessibilityFont;
+            UI.I.dialog.text.font = GameManager.I.acessibilityFont;
+            UI.I.popup.popupText.font = GameManager.I.acessibilityFont;
+        } else {
+            UI.I.dialog.text.font = GameManager.I.originalFont;
+            UI.I.popup.popupText.font = GameManager.I.originalFont;
+        }
+
         // Version text
         version.text = $"v{Application.version}";
 

@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager I;
     [HideInInspector] public static Discord.Discord rpc = null;
+    public Font originalFont;
+    public Font acessibilityFont;
 
     // Game data // 
     [HideInInspector] public bool isEditing;

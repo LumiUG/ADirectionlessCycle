@@ -12,6 +12,7 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown outlineDropdown;
     public Toggle settingsToggle;
     public Toggle missingToggle;
+    public Toggle accessibleFontToggle;
     public Toggle repeatInputToggle;
     public Toggle moveToggle;
     public Toggle timerToggle;
@@ -64,6 +65,7 @@ public class SettingsMenu : MonoBehaviour
         if (GameManager.save.game.mechanics.hasSwapUpgrade) cycleControls.text = "Cycle";
         settingsToggle.isOn = Screen.fullScreen;
         missingToggle.isOn = GameManager.save.preferences.missingHighlighter;
+        accessibleFontToggle.isOn = GameManager.save.preferences.accessibleFont;
         repeatInputToggle.isOn = GameManager.save.preferences.repeatInput;
         restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
         moveToggle.isOn = GameManager.save.preferences.showMoves;
@@ -129,6 +131,11 @@ public class SettingsMenu : MonoBehaviour
         GameManager.save.preferences.missingHighlighter = toggle;
     }
 
+    public void ToggleFont(bool toggle)
+    {
+        GameManager.save.preferences.accessibleFont = toggle;
+    }
+
     public void EraseSave()
     {
         eraseClicks--;
@@ -172,6 +179,7 @@ public class SettingsMenu : MonoBehaviour
                 outlineDropdown.value = 0;
                 settingsToggle.isOn = true;
                 missingToggle.isOn = false;
+                accessibleFontToggle.isOn = false;
                 break;
             case 2:
                 GameManager.save.preferences.masterVolume = 0.6f;

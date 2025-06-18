@@ -178,6 +178,7 @@ public class Serializables
         public bool showTimer = false;
         public bool showMoves = true;
         public bool missingHighlighter = false;
+        public bool accessibleFont = false;
         public string outlineType = "Dotted"; // Dotted, Full, NONE
     }
 }
