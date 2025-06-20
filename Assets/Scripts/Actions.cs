@@ -45,6 +45,7 @@ public sealed class Actions : MonoBehaviour
         // Loads the level (Load internal level first, if it fails, load external)
         LevelManager.I.RefreshGameVars(); // necessary.
         if (!LevelManager.I.LoadLevel(remixID)) LevelManager.I.LoadLevel(remixID, true);
+        if (LevelManager.I.currentLevelID == "W2/2-12") LevelManager.I.RefreshGameUI();
 
         // Preload screen
         TransitionManager.I.ChangeTransition(Unknown);

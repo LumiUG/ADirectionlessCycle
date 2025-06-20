@@ -58,7 +58,7 @@ public class AudioManager : MonoBehaviour
         // Get audio references
         titleBGM = Resources.Load<AudioClip>("Audio/BGM/Test1");
         editorBGM = Resources.Load<AudioClip>("Audio/BGM/Test2");
-        W1BGM = Resources.Load<AudioClip>("Audio/BGM/Test3");
+        W1BGM = Resources.Load<AudioClip>("Audio/BGM/New Game");
         W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
         W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");
         remixBGM = Resources.Load<AudioClip>("Audio/BGM/Test6");
