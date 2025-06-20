@@ -851,7 +851,7 @@ public class LevelManager : MonoBehaviour
             GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
 
             // Win SFX
-            AudioManager.I.PlaySFX(AudioManager.normalWin, 1);
+            AudioManager.I.PlaySFX(AudioManager.normalWin, 0.6f);
 
             // UI
             UI.I.GoNextLevel();
@@ -882,7 +882,7 @@ public class LevelManager : MonoBehaviour
             GameManager.I.UpdateSavedLevel(currentLevel.remixLevel, changes, false); // create a remix entry (therefore its discovered)
 
             // Win SFX
-            AudioManager.I.PlaySFX(AudioManager.inverseWin, 1);
+            AudioManager.I.PlaySFX(AudioManager.inverseWin, 0.6f);
 
             TransitionManager.I.TransitionIn(Unknown, Actions.RemixCondition, currentLevel.remixLevel);
             GameManager.I.isEditing = false;
@@ -921,7 +921,7 @@ public class LevelManager : MonoBehaviour
             GameManager.I.UpdateSavedLevel(currentLevelID, changes, true);
 
             // Win SFX
-            AudioManager.I.PlaySFX(AudioManager.outerWin, 1);
+            AudioManager.I.PlaySFX(AudioManager.outerWin, 0.6f);
 
             // UI
             UI.I.GoNextLevel();

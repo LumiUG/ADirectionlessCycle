@@ -25,7 +25,7 @@ public class FragmentTile : EffectTile
         }
 
         LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<FragmentTile>(position));
-        AudioManager.I.PlaySFX(AudioManager.fragmentPickup, 0.6f);
+        AudioManager.I.PlaySFX(AudioManager.fragmentPickup, 0.4f);
     }
     
     // Prepares editor variables.

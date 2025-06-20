@@ -175,7 +175,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Repeats undoing
-    private IEnumerator RepeatUndo(float speed = 0.22f)
+    private IEnumerator RepeatUndo(float speed = 0.18f)
     {
         int performed = 0;
         while (isHoldingUndo && IsAllowedToPlay() && LevelManager.I.IsUndoQueueValid())
