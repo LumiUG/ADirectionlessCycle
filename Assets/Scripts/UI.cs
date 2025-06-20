@@ -284,15 +284,15 @@ public class UI : MonoBehaviour
                         else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
                         return;
                     }
-                case "Orb Two": { popup.SetPopup("...We've got no idea how to get there."); return; }
+                case "Orb Two": { popup.SetPopup("...No idea how to get there."); return; }
                 case "Orb Three": { popup.SetPopup("Pretty straightforward!"); return; }
                 case "Fragment TwoH": { popup.SetPopup("I won't let you go deeper."); return; }
                 case "Fragment Three": { popup.SetPopup("I'd disallow it, but there's really nothing, sorry!"); return; }
                 case "3-1": { popup.SetPopup("You aren't getting in this easily."); return; }
                 case "3-10": { popup.SetPopup("No, no, and no. You're not getting a hint."); return; }
                 case "Industrial": { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
-                case "Meem": { popup.SetPopup("The Gravix dog? ...Thing? It was here the entire time???"); return; }
-                case "Upgrade": { popup.SetPopup("I'm... Definitely not serving you a hint here. Please stop."); return; }
+                case "Meem": { popup.SetPopup("Gravix? How did anything Gravix related get here?"); return; }
+                case "Upgrade": { popup.SetPopup("I'm... Definitely not giving you a hint here. Please stop."); return; }
                 case "Tutorial": { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
                 case "END": { popup.SetPopup("The core's entrance. The point of no return."); return; }
                 case "Entry": { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }

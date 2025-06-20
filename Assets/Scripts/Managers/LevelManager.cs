@@ -870,11 +870,8 @@ public class LevelManager : MonoBehaviour
             }
 
             // First remix level?
-            if (!GameManager.save.game.mechanics.hasSeenRemix)
-            {
-                GameManager.I.EditAchivement("ACH_FIRST_INVERSE");
-                GameManager.save.game.mechanics.hasSeenRemix = true;
-            }
+            GameManager.I.EditAchivement("ACH_FIRST_INVERSE"); // Retrigger for DEMO players...
+            if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
 
             // Level + savedata
             GameData.LevelChanges changes = new(false, false, -1, -1);
