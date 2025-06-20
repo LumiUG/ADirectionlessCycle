@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Misc
+  m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - Yo! You're almost there.
-  - Remember if we ever said there was a hardest level? If so, we lied. This is worse.
-  - Wouldn't blame you if you took a hint or skipped this.
-  - I'll be watching you closely, silently judging you.
+  - Hello, world.
+  - Programmed to work and not to feel.
+  - Not even sure that this is real.
+  - Hello, world.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 23c03d4a8318c5c44b2e3b1922f493ec, type: 2}
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
-  shouldExhaust: 1
+  sfx: {fileID: 0}
+  shouldExhaust: 0
   canBeSkipped: 1
