@@ -99,7 +99,7 @@ public class Hub : MonoBehaviour
         }
 
         // All outbound levels
-        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 7;
+        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 8;
         if (!GameManager.save.game.completedAllOutboundLevels && outboundCount)
         {
             GameManager.save.game.completedAllOutboundLevels = true;
@@ -545,7 +545,7 @@ public class Hub : MonoBehaviour
     {
         if (
             (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
-            (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 2 && world == 1) ||
+            (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 4 && world == 1) ||
             (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2)
         ) masteryOutline.SetActive(true);
         else masteryOutline.SetActive(false);

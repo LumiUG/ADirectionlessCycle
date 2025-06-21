@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
         W1BGM = Resources.Load<AudioClip>("Audio/BGM/New Game");
         W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
         W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");
-        remixBGM = Resources.Load<AudioClip>("Audio/BGM/Test6");
+        remixBGM = Resources.Load<AudioClip>("Audio/BGM/Integer Overflow");
         voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
         unveilingBGM = Resources.Load<AudioClip>("Audio/BGM/Unveiling");
 
