@@ -80,7 +80,6 @@ public class Hub : MonoBehaviour
         if (completedReal[0] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W1");
         if (completedReal[1] >= 12) GameManager.I.EditAchivement("ACH_COMPLETE_W2");
         if (completedReal[2] >= 10) GameManager.I.EditAchivement("ACH_COMPLETE_W3");
-        if (!GameManager.save.game.hasCompletedGame && GameManager.save.game.levels.Find(level => level.levelID == "VOID/CYCLE") != null) { GameManager.save.game.hasCompletedGame = true; GameManager.I.EditAchivement("ACH_DEATH"); }
 
         // All main levels
         bool mainLevels = completedReal[0] >= 12 && completedReal[1] >= 12 && completedReal[2] >= 10;
@@ -110,7 +109,7 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.hasMasteredGame && mainLevels && remixCount && outboundCount)
         {
             if (!GameManager.save.game.hasCompletedGame) return;
-            if (masterExtras < 7) return; // Hardcoded, edit if function is edited aswell.
+            if (masterExtras < 6) return; // Hardcoded, edit if function is edited aswell.
 
             // Grant it, im not a monster.
             GameManager.save.game.hasMasteredGame = true;
@@ -559,14 +558,13 @@ public class Hub : MonoBehaviour
             GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Two"),
             GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three"),
             GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Fragment Two"),
-            GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Fragment Three"),
             GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial"),
             GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem")
         };
         foreach (var level in list)
         {
             if (level == null) continue;
-            if (level.completed) extraWins++;
+            if (level.completed || level.outboundCompletion) extraWins++;
         };
         if (extraWins > 0)
         {

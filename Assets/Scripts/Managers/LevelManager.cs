@@ -1296,6 +1296,7 @@ public class LevelManager : MonoBehaviour
         InputManager.I.canRestart = true;
         
         ClearLevel();
+        GameManager.I.EditAchivement("ACH_DEATH");
         UI.I.ChangeScene("Credits", false);
     }
 }
