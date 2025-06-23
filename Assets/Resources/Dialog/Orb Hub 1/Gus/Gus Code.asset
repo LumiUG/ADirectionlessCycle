@@ -23,7 +23,7 @@ MonoBehaviour:
   - They're outside of your "view", but you'll have to find and decypher them yourself.
   - ... That's all.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 911624d1231d13b439c2325b3919501c, type: 2}
+  exhaustDialog: {fileID: 11400000, guid: 80b8d701e506bf34ba5b161a60fd1b0f, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 2024d0ce6bec5f143b05dfac34dfde99, type: 3}
   shouldExhaust: 1
