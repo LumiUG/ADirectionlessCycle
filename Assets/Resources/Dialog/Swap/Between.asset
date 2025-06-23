@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Between
   m_EditorClassIdentifier: 
   dialog:
-  - Well? What do you think? Getting the hang of it, I pressume?
+  - Well? What do you think? Getting the hang of it?
   - I like that attitude, surely you've just gotten some new ideas.
-  - Told you this would be worth the detour. Go on, then, have fun.
+  - Just keep in mind, broken walls indicate new screens.
+  - Aaand, told you this would be worth the detour! Go on, then, have fun.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

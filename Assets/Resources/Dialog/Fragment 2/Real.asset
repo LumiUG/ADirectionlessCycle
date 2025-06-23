@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - 'As I like to say: "Nothing''s lost forever".'
-  - By the way, I've added a warp on "3-10", just interact five times with the broken
+  - I've created a wrong warp on "3-10", just interact five times with the broken
     wall on your right.
   - That's where you'll need to go after getting the last fragment.
   - 'That being said- here''s the last cypher:'

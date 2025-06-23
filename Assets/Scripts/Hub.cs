@@ -340,11 +340,9 @@ public class Hub : MonoBehaviour
         if (worldIndex + direction >= positions.Length || worldIndex + direction < 0) return;
         
         // Stuff for super world.
-        var level = GameManager.save.game.levels.Find(level => level.levelID == "W3/3-10");
         if (worldIndex + direction == 3)
         {
-            if (level == null) return; 
-            if (!level.completed) return;
+            if (!GameManager.save.game.mechanics.hasSwapUpgrade) return;
             GameObject.Find("FINALE").GetComponent<Button>().interactable = true;
         }
 
@@ -375,7 +373,7 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (level != null) if (level.completed) { hubArrows[1].interactable = true; break; };
+                if (GameManager.save.game.mechanics.hasSwapUpgrade) { hubArrows[1].interactable = true; break; };
                 UI.I.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;

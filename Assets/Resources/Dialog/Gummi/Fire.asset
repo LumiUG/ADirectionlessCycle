@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   dialog:
-  - '[You decide to move on, they look warm and comfy.]'
+  - '[You decide to move on, they look warm and comfy]'
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - And, as a last thing.
-  - There are now outbound areas. These work differently than inverse ones.
-  - To complete levels with it, you'll have to fill in both positive aswell. Do be
-    careful with your order!
+  - There are now "outbound" areas. These work differently than inverse ones.
+  - To complete levels with it... Hm, actually you'll figure it out. Be careful with
+    your order!
   - That's about it, good luck, player.
   events: []
   exhaustDialog: {fileID: 0}
