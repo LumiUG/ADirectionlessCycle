@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: PG 4
   m_EditorClassIdentifier: 
   dialog:
-  - Thank you for giving them rest.
+  - Okay! Don't look at me like that. There's only one that I know of.
+  - Let's move on, 'kay? Treat that as a thank you for helping them.
+  - And as far as that goes... I guess I really am the only sentient being here now.
+  - Well, I don't think Meem or Ploof count.
+  - Oh, and don't worry, they do come visit sometime.
+  - So... That's all you'll get from this version of me.
+  - Thank you for giving them rest. See you around!
   events: []
   exhaustDialog: {fileID: 11400000, guid: bcbfcb42c13ecb242b84570c35c3e29a, type: 2}
   textSpeed: 0.05

@@ -19,7 +19,6 @@ MonoBehaviour:
   - But if you'd like to know... It's a mechanic that was abandoned by the developer.
   - It'll allow you to unlock the core despite the degradation.
   - But! I'm still working on it. So you'll see, you'll see.
-  - It's the only way forward if you ever want to end things right, anyways.
   events: []
   exhaustDialog: {fileID: 11400000, guid: 8de5ce74c19ac944799117af9ad45878, type: 2}
   textSpeed: 0.05

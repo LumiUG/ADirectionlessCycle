@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - The void was able to claim this exit. Can you see it?
-  - I remember the developer being specially fond of this area.
+  - I remember the developer being specially fond of this third area.
   - They really took their sweet time with it, to really flesh everything out-
   - Oh? The exit? You don't have what you need yet.
   events: []

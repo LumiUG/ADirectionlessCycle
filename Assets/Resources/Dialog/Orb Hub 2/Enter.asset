@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I'm not fully on board with the idea, but I've come to accept it.
-  - Definitely not... entirely happy about helping you both. But I've come to realize
-    you are just trying to help.
+  - Definitely not... "happy" about helping you both. But I've come to realize you
+    are just trying to help.
   - ...
   - This is the artifact level, I don't know where it is.
   - If you must know, this is another "true freeroam" level.
   - Your cycling won't work the same, here.
   - If there's another "alive" shape, anywhere, you won't be able to cycle.
-  - I hope that's enough help. Go get 'em.
+  - 'I hope that''s enough help. '
+  - ...
+  - Go get 'em.
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

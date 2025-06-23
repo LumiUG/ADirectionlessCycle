@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Umbrella
   m_EditorClassIdentifier: 
   dialog:
-  - Another one of these... We'll come back later to finish the job.
-  - I'm such a tease, though. How about some...
-  - Foreshadowing!
-  - '"How do you like that umbrella?"'
-  - Truthfully, it's been a while since I've been there. We'll revisit it with you.
+  - It really makes me think... Did you find this off a scan? You sure as hell don't
+    seem qualified to.
+  - I suppose it does not matter as long as you finish what was started, that is.
+  - Of course, I wouldn't ask of you to delete your copy of the game, just...
+  - Ah, forget it.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

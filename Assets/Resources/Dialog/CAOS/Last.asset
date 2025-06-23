@@ -17,8 +17,8 @@ MonoBehaviour:
   - I'm just recouping information, nothing too drastic.
   - This place seems really unstable though, so get going before it's too late.
   events: []
-  exhaustDialog: {fileID: 0}
-  textSpeed: 0.05
+  exhaustDialog: {fileID: 11400000, guid: 6b7037979d75c964f9258cb37ee77d8c, type: 2}
+  textSpeed: 0.06
   sfx: {fileID: 0}
-  shouldExhaust: 0
+  shouldExhaust: 1
   canBeSkipped: 1

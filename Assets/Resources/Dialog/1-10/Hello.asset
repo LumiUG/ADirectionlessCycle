@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - '[You look closely into the wall...]'
-  - '[Slowly, carvings are being ingrained...]'
+  - '[Slowly, carvings are forming...]'
   events: []
   exhaustDialog: {fileID: 11400000, guid: bf4c055273611254083174b3c454cd45, type: 2}
   textSpeed: 0.05

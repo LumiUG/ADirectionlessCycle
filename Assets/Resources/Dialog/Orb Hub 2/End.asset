@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: 
   dialog:
-  - Dead end. I think I saw something back on the beginning. Check your walls.
+  - Dead end. I think I saw something back on your beginning screen. Check your walls.
   - It doesn't seem reachable, though. You'll have to make your way.
   events: []
   exhaustDialog: {fileID: 0}

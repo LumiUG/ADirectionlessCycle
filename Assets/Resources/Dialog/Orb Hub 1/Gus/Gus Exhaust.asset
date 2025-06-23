@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: Gus Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - I won't say anymore, I've done enough.
-  - Good luck, may they get their happy ending.
+  - By the way, are you trying to save them?
+  - ...
+  - ...
+  - Oh, sorry. I forgot you can't talk.
+  - Suppose... I could ask you to try and help them?
+  - There's some sort of function... Why do I get the feeling you already know this?
+  - Regardless, it'll delete them painlessly from this game. So we can... still exist.
+  - So if you can hear me, do that for me- them! Do that for them, godammit.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
+  exhaustDialog: {fileID: 11400000, guid: 911624d1231d13b439c2325b3919501c, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 2024d0ce6bec5f143b05dfac34dfde99, type: 3}
   shouldExhaust: 1

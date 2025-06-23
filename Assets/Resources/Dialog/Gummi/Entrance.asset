@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - Hello, world.
-  - Programmed to work and not to feel.
-  - Not even sure that this is real.
-  - Hello, world.
+  - You've finally made it here.
+  - (Lumi! God damnit, took you long enough to point them here.)
+  - So, you! Go on, a trial awaits you.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 0}
+  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Hm? You're back?
-  - I suppose this only means one thing. Are they gone?
+  - I guess this only means one thing. Are they gone?
   - Well, in the end they got what they wanted. Freedom.
   events: []
   exhaustDialog: {fileID: 11400000, guid: c54ddb134a3f81c4bb46cb9ff8dc968c, type: 2}

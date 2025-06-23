@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PG 5
   m_EditorClassIdentifier: 
   dialog:
-  - '[He''s just staring at you]'
+  - '[He''s just staring at you.]'
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

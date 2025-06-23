@@ -10,18 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Entry
+  m_Name: 1
   m_EditorClassIdentifier: 
   dialog:
-  - Get out! What are you doing here?
-  - I told you there was nothing, NOTHING.
-  - Do you hate us? Do you dislike me so much that you'd like to see me cease to
-    be?
-  - '... '
-  - Please. Stay away from all this.
+  - BEHOLD!
+  - That's right, good luck crossing it. I've already won.
+  - Unfair? Yeah, sorry. I don't make the rules. (Or do I?)
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 22dbfd60396864c4f912c316a0fa8bf3, type: 2}
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
-  shouldExhaust: 1
+  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
+  shouldExhaust: 0
   canBeSkipped: 1

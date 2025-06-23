@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Delete
   m_EditorClassIdentifier: 
   dialog:
-  - What an interesting universe. I've never seen such thing-
+  - What an interesting universe. I've never seen such unstable things-
   - Oh? You can't progress?
   - There. That should do it for you.
   - That's the last time I'll be helping you.
@@ -31,7 +31,7 @@ MonoBehaviour:
       levelID: 
     executeAtIndex: 3
   exhaustDialog: {fileID: 0}
-  textSpeed: 0.05
+  textSpeed: 0.06
   sfx: {fileID: 0}
   shouldExhaust: 0
   canBeSkipped: 1

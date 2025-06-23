@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PG 1
   m_EditorClassIdentifier: 
   dialog:
-  - Confused? Don't be, they're simply gone from this game.
+  - Confused? Don't be, they're simply gone from this copy of the game.
   - Of course, there are multiple copies of it, so it's not the prettiest thing.
-  - In a way, they can never truly be erased.
+  - In a way, they can never truly be erased. Just like me!
   events: []
   exhaustDialog: {fileID: 11400000, guid: 5c2ed0c1616134948be770e1216ee431, type: 2}
   textSpeed: 0.05

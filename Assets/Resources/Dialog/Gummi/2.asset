@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Function
+  m_Name: 2
   m_EditorClassIdentifier: 
   dialog:
-  - The function to 'delete everything' should start as soon as you get past the
-    entrance.
-  - It's degraded so badly we believe everything has started looping itself.
-  - If you get to the center, the bottom, it'll be done. Just like that.
-  - After that, we... Won't be here... Anymore.
+  - WHAT THE HELL
+  - You aren't supposed to do that- What, I mean, what?
+  - This is so stupid! I didn't account for this.
   events: []
   exhaustDialog: {fileID: 0}
-  textSpeed: 0.05
-  sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
+  textSpeed: 0.03
+  sfx: {fileID: 8300000, guid: ced86dccffffee0478053f59dba67bf5, type: 3}
   shouldExhaust: 0
   canBeSkipped: 1

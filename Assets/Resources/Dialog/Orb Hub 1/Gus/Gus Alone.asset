@@ -16,10 +16,11 @@ MonoBehaviour:
   - And uh...
   - T-thank you.
   - It's been a while since I've seen something... Alive?
-  - You can leave now, I'll go back to watching the void.
+  - You can leave now, I get the feeling you'll come back.
+  - I'll go back to watching the void now.
   - It's... comforting.
   events: []
-  exhaustDialog: {fileID: 11400000, guid: 80b8d701e506bf34ba5b161a60fd1b0f, type: 2}
+  exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 2024d0ce6bec5f143b05dfac34dfde99, type: 3}
   shouldExhaust: 1

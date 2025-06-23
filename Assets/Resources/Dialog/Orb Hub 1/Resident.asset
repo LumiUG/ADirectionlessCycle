@@ -18,6 +18,7 @@ MonoBehaviour:
     doesnt pass through.
   - As in... the void, I mean. Just move into the void.
   - Thought he'd like some company, even if for a little.
+  - ...
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
