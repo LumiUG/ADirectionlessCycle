@@ -110,9 +110,11 @@ public class UI : MonoBehaviour
             return;
         }
 
-        TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Main Menu");
+        // Presence
         GameManager.I.SetPresence("steam_display", "#Menuing");
         GameManager.I.UpdateActivity("On the main menu.");
+
+        TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Main Menu");
     }
 
     // Goes to hub (scarier)
@@ -120,9 +122,11 @@ public class UI : MonoBehaviour
     {
         if (LevelManager.I.currentLevelID.Contains("CODE")) { GoMainMenu(); return; }
 
-        TransitionManager.I.TransitionIn<string>(Swipe, Actions.ReturnHub);
+        // Presence
         GameManager.I.SetPresence("steam_display", "#Menuing");
         GameManager.I.UpdateActivity("On the main menu.");
+
+        TransitionManager.I.TransitionIn<string>(Swipe, Actions.ReturnHub);
     }
 
     // Go from a level to the editor
@@ -247,13 +251,13 @@ public class UI : MonoBehaviour
     // UI confirm sound
     public void ConfirmSound()
     {
-        AudioManager.I.PlaySFX(AudioManager.select, 0.35f, true);
+        AudioManager.I.PlaySFX(AudioManager.select, 0.20f, true);
     }
 
     // UI bad sound
     public void BadSound()
     {
-        AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.5f);
+        AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.30f);
     }
 
     // Goes to the current level's

@@ -323,10 +323,10 @@ public class Hub : MonoBehaviour
     public void StaticLoadLevel(string levelName)
     {
         if (!LevelManager.I || TransitionManager.I.inTransition) return;
-        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
 
         // Is the level locked?
-        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.25f); return; }
+        if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
 
         // Plays the transition
         GameManager.I.lastSelectedWorld = worldIndex;

@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Get audio references
-        titleBGM = Resources.Load<AudioClip>("Audio/BGM/Test1");
+        titleBGM = Resources.Load<AudioClip>("Audio/BGM/Burdened Existence");
         editorBGM = Resources.Load<AudioClip>("Audio/BGM/Test2");
         W1BGM = Resources.Load<AudioClip>("Audio/BGM/New Game");
         W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
@@ -121,7 +121,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // Plays BGM
-    public void PlayBGM(AudioClip clip)
+    public void PlayBGM(AudioClip clip, float volume = 1f)
     {
         if (clip == master.clip || clip == null) return;
 
@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour
         if (master.isPlaying)
         {
             if (switchCoro != null) StopCoroutine(switchCoro);
-            SetMasterVolume(GameManager.save.preferences.masterVolume);
+            SetMasterVolume(volume * GameManager.save.preferences.masterVolume);
             switchCoro = StartCoroutine(TransitionSong(clip));
             return;
         }

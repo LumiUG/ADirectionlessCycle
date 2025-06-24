@@ -124,7 +124,7 @@ public class InputManager : MonoBehaviour
         if (!holding) return;
         
         // That one void level
-        if (LevelManager.I.currentLevelID == "VOID/Loop") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.20f); return; }
+        if (LevelManager.I.currentLevelID == "VOID/Loop") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
         if (LevelManager.I.currentLevelID == "VOID/Outro") return;
 
         // Undo latest move
