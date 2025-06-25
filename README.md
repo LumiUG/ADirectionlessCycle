@@ -16,7 +16,7 @@ Solve intuitive puzzles, uncover secrets, find collectibles and complete increas
 # Important!!
 If you're cloning the repository to contribute (I'd say don't), or are planning on modding the game, etc...
 
-- Remember that this repository **does NOT** include any of the background music, and it must be aquired separately by visiting the [Bandcamp album](https://ugdev.bandcamp.com/album/a-directionless-cycle-ost) as a free download, until I run out of download credits.
+- Remember that this repository **does NOT** include any of the background music, and it must be aquired separately by visiting the [Bandcamp album](https://ugdev.bandcamp.com/album/a-directionless-cycle-ost), until I run out of download credits.
 - Share! If you make something cool, I'd love to see it.
 Feel free to come by the [Discord server](https://discord.gg/fNcyyES9gB) and share what you created!
 
