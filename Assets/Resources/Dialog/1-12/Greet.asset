@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Greet
   m_EditorClassIdentifier: 
   dialog:
-  - And so it's time.
+  - And so its time.
   - Um, would you mind lending us a hand?
-  - We're probably not the first, or the last, but you need to help us, too!
-  - Since you can't reply, I'll take that as a yes, hopefully.
+  - We're probably not the first, or the last, but you need to help us too.
+  - Since you can't reply I'll take that as a yes, hopefully.
   - Enjoy the game for now. I have to prepare some things.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}

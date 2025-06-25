@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - Welcome to World 3...
   - '"Here you''ll play with the Hex, it jumps over twice!"'
-  - '"Its the most interesting shape, as it will always move first!"'
+  - '"It''s the most interesting shape, as it will always move first!"'
   - ...Among other stuff.
   events: []
   exhaustDialog: {fileID: 11400000, guid: dbab05b42dc0a0449825af4a09113f98, type: 2}

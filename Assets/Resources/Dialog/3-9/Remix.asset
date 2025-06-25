@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - You made it. The artifact you are looking for is on the next level.
+  - You made it. The artifact you are looking for is in the next level.
   - We don't have any tips on this one, but you can probably figure it out.
   events: []
   exhaustDialog: {fileID: 0}

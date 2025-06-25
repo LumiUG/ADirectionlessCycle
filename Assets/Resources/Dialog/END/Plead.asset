@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Well? Welcome to the core. It all ends here.
-  - This entire place is a mess, the way to get into it is completely ruined.
+  - This entire place is a mess. The way to get into it is completely ruined.
   - Thankfully, I've been monitoring this level closely.
   - I did make another entry, but... It's not so easy.
-  - I made a small path for you, hopefully that's enough.
+  - I made a small path for you. Hopefully that's enough.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - Seems like I'll need to spell it out for you.
   - Do you remember this level? Its solution?
-  - Beat the level, but fill in in red.
+  - Beat the level, but fill in red.
   - Do note that there should be no extra shapes not overlapping red.
   - ...It really is that simple.
   events: []

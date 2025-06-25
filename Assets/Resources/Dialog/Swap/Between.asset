@@ -16,7 +16,7 @@ MonoBehaviour:
   - Well? What do you think? Getting the hang of it?
   - I like that attitude, surely you've just gotten some new ideas.
   - Just keep in mind, broken walls indicate new screens.
-  - Aaand, told you this would be worth the detour! Go on, then, have fun.
+  - Aaand, told you this would be worth the detour! Go on then, have fun.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

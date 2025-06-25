@@ -16,7 +16,7 @@ MonoBehaviour:
   - That's an artifact.
   - It's used to unlock the core, your final destination.
   - Usually, you'd be able to get it right now, but...
-  - Yeah, It's definitely not supposed to be walled off.
+  - Yeah, it's definitely not supposed to be walled off.
   - Just you wait, just you wait. I have a plan to get it back.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}

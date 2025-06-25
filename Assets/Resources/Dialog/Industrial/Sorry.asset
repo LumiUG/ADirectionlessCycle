@@ -17,7 +17,7 @@ MonoBehaviour:
   - Just wanted to let you know that this is the hardest level in the game.
   - We would help you, but we are forbidden to give hints here.
   - Sorry, not sorry.
-  - But hey, if it makes you feel better... That's a nice fire down there, go warm
+  - But hey, if it makes you feel better... There's a nice fire down there, go warm
     up.
   events: []
   exhaustDialog: {fileID: 0}

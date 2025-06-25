@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - You're making good progress! I'm happy to see you this far out already.
-  - 'Sadly, due to the degradation, this level is unsolvable. It''s better you skip
-    it and ignore those red areas. '
+  - 'Sadly, due to degradation, this level is unsolvable. It''s better you skip it
+    and ignore those red areas. '
   - Trust me! You're better off skipping this one, I promise, okay?
   events: []
   exhaustDialog: {fileID: 11400000, guid: 54974cf8fada8474081459749cc3283d, type: 2}

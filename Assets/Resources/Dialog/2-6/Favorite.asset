@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - I've been hoping for this moment for way too long.
-  - But oh, I suppose I'll fill you with some basic information.
+  - But oh, I suppose I'll fill you in with some basic information.
   - No one has touched this executable for a long time. I'm unsure as to how your
     time works.
   - And with time, everything erodes. You must've found... Where did you find us?
-  - Odd, last thing we've heard was that this whole thing was being cancelled.
+  - Odd, the last thing we heard was that this whole thing was being cancelled.
   - ...Anyhow, don't forget to ask us for a hint if you need it.
   - Or, well, "not" us. You can use the lightbulb from your pause menu for that.
   events: []

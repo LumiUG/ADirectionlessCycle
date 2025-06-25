@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - Ooooh. The entrance! Welcome to one of the deepest levels on this area.
+  - Ooooh. The entrance! Welcome to one of the deepest levels in this area.
   - There's other places like these around. They are special levels, where you can
     move freely throughout it all.
   - We like to call these places "true freeroam", since you can fully escape from

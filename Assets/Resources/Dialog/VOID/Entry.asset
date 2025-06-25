@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Entry
   m_EditorClassIdentifier: 
   dialog:
-  - Pay attention to your surroundings, follow that where the light does not pass.
+  - Pay attention to your surroundings. Follow that which the light does not pass.
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

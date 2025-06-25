@@ -15,7 +15,7 @@ MonoBehaviour:
   dialog:
   - '"We"? I''ve actually seen this one before, mind you.'
   - That being said, this is definitely not how I remember it.
-  - Artifact is on the right, the void seems somewhat harmless there.
+  - Artifact is on the right. The void seems somewhat harmless there.
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
