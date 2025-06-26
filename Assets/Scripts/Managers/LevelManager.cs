@@ -290,7 +290,7 @@ public class LevelManager : MonoBehaviour
         if (levelID.StartsWith("W1")) AudioManager.I.PlayBGM(AudioManager.W1BGM);
         else if (levelID.StartsWith("W2")) AudioManager.I.PlayBGM(AudioManager.W2BGM);
         else if (levelID.StartsWith("W3")) AudioManager.I.PlayBGM(AudioManager.W3BGM);
-        else if (levelID.StartsWith("REMIX")) AudioManager.I.PlayBGM(AudioManager.remixBGM, 0.7f);
+        else if (levelID.StartsWith("REMIX")) AudioManager.I.PlayBGM(AudioManager.remixBGM, 0.6f);
         else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB") || levelID.StartsWith("FRAGMENTS")) AudioManager.I.PlayBGM(AudioManager.voidBGM);
 
         // Selector effect

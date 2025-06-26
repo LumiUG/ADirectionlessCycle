@@ -143,6 +143,7 @@ public class InputManager : MonoBehaviour
     // Restart the level
     private void OnRestart()
     {
+        if (SceneManager.GetActiveScene().name == "Main Menu") { MainMenu.I.Meow(); return; }
         if (!IsAllowedToPlay() || !canRestart || LevelManager.I.voidedCutscene) return;
 
         // Confirm restart screen

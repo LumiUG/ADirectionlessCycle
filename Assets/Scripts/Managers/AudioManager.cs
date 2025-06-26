@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
 
     // BGM //
     internal static AudioClip titleBGM;
-    internal static AudioClip editorBGM;
     internal static AudioClip remixBGM;
     internal static AudioClip voidBGM;
     internal static AudioClip unveilingBGM;
@@ -57,7 +56,6 @@ public class AudioManager : MonoBehaviour
 
         // Get audio references
         titleBGM = Resources.Load<AudioClip>("Audio/BGM/Burdened Existence");
-        editorBGM = Resources.Load<AudioClip>("Audio/BGM/Test2");
         W1BGM = Resources.Load<AudioClip>("Audio/BGM/New Game");
         W2BGM = Resources.Load<AudioClip>("Audio/BGM/Test4");
         W3BGM = Resources.Load<AudioClip>("Audio/BGM/Test5");

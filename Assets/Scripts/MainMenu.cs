@@ -138,6 +138,7 @@ public class MainMenu : MonoBehaviour
     // MEOW
     public void Meow()
     {
+        if (!trialIcon.gameObject.activeSelf) return;
         if (trialInfo.activeSelf || popupBtn.transform.parent.gameObject.activeSelf) return;
         AudioManager.I.PlaySFX(AudioManager.meow, 0.7f, true);
 

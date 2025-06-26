@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Judging
   m_EditorClassIdentifier: 
   dialog:
-  - '[You feel judged]'
+  - '[You feel judged...]'
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

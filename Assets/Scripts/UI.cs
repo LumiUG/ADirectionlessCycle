@@ -84,10 +84,8 @@ public class UI : MonoBehaviour
             case "Bonus":
             case "Credits":
             case "Custom Levels":
-                AudioManager.I.PlayBGM(AudioManager.titleBGM);
-                break;
             case "Level Editor":
-                AudioManager.I.PlayBGM(AudioManager.editorBGM);
+                AudioManager.I.PlayBGM(AudioManager.titleBGM);
                 break;
             case "Game": // Do nothing, handle internally with LevelManager.
                 break;
