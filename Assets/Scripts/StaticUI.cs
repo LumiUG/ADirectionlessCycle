@@ -19,6 +19,8 @@ public class StaticUI : MonoBehaviour
     // Change scenes
     public void StaticChangeScene(string sceneName)
     {
+        if (TransitionManager.I.inTransition && SceneManager.GetActiveScene().name == "Main Menu") return;
+
         if (UI.I) UI.I.ChangeScene(sceneName);
         else SceneManager.LoadScene(sceneName);
     }

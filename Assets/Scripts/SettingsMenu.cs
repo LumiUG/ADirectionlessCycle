@@ -146,13 +146,16 @@ public class SettingsMenu : MonoBehaviour
             eraseClicks = 3;
             eraseCounter.text = $"Savefile ERASED!";
 
+            var pref = GameManager.save.preferences;
             GameManager.I.DeleteSave();
             GameManager.I.CreateSave(true);
+            GameManager.save.preferences = pref;
+            GameManager.I.SaveDataJSON();
 
-            ResetSetting(0);
-            ResetSetting(1);
-            ResetSetting(2);
-            ResetSetting(3);
+            // ResetSetting(0);
+            // ResetSetting(1);
+            // ResetSetting(2);
+            // ResetSetting(3);
         }
     }
 

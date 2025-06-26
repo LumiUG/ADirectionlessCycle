@@ -82,6 +82,7 @@ public class MainMenu : MonoBehaviour
     // Play button event
     public void Play()
     {
+        if (TransitionManager.I.inTransition) return;
         // if (GameManager.save.game.doPrologue) TransitionManager.I.TransitionIn<string>(Reveal, ActionPrologue);
         UI.I.ChangeScene("Hub");
     }
@@ -114,6 +115,8 @@ public class MainMenu : MonoBehaviour
 
     public void GoCustoms()
     {
+        if (TransitionManager.I.inTransition) return;
+        
         if (!GameManager.save.game.hasCompletedGame && !GameManager.save.game.seenSpoilerWarning)
         {
             GameManager.save.game.seenSpoilerWarning = true;

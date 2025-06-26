@@ -170,7 +170,9 @@ public class GameManager : MonoBehaviour
     // Deletes a savefile
     public void DeleteSave()
     {
-        if (File.Exists(dataPath)) File.Delete(dataPath);
+        if (!File.Exists(dataPath)) return; 
+        
+        File.Delete(dataPath);
     }
 
     // Save user data
