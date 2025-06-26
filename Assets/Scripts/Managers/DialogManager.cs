@@ -200,6 +200,7 @@ public class DialogManager : MonoBehaviour
             path = "Dialog/SB/Frag 3";
             return (chat, path);
         }
+        if (path == "Dialog/END/Fire") AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.4f);
 
         return (null, null);
     }
