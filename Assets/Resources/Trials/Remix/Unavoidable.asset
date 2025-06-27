@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: REMIX/Unavoidable
   vanillaMoves: -1
-  cycleMoves: 75
+  cycleMoves: 78

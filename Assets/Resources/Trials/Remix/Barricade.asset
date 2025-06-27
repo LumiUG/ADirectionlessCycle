@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Barricade
   m_EditorClassIdentifier: 
   levelID: REMIX/Barricade
-  vanillaMoves: 64
+  vanillaMoves: 66
   cycleMoves: -1

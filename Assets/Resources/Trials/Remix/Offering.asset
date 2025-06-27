@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Offering
   m_EditorClassIdentifier: 
   levelID: REMIX/Offering
-  vanillaMoves: 34
+  vanillaMoves: 35
   cycleMoves: 16

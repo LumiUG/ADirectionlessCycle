@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Otherside
   m_EditorClassIdentifier: 
   levelID: REMIX/Otherside
-  vanillaMoves: 78
+  vanillaMoves: 110
   cycleMoves: -1

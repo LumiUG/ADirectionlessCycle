@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   levelID: W3/3-9
-  vanillaMoves: 20
-  cycleMoves: 17
+  vanillaMoves: 23
+  cycleMoves: 18
