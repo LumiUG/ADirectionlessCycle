@@ -288,9 +288,6 @@ public class LevelManager : MonoBehaviour
 
         // BGM?
         if (levelID.StartsWith("W1")) AudioManager.I.PlayBGM(AudioManager.W1BGM);
-        else if (levelID.StartsWith("W2")) AudioManager.I.PlayBGM(AudioManager.W2BGM, 0.85f);
-        else if (levelID.StartsWith("W3") && !GameManager.save.game.mechanics.hasSwapUpgrade) AudioManager.I.PlayBGM(AudioManager.W3BGM);
-        else if (levelID.StartsWith("W3") && GameManager.save.game.mechanics.hasSwapUpgrade) AudioManager.I.PlayBGM(AudioManager.W3BGMAlt);
         else if (levelID.StartsWith("REMIX")) AudioManager.I.PlayBGM(AudioManager.remixBGM, 0.6f);
         else if (levelID.StartsWith("VOID") || levelID.StartsWith("ORB") || levelID.StartsWith("FRAGMENTS")) AudioManager.I.PlayBGM(AudioManager.voidBGM);
 
@@ -529,14 +526,10 @@ public class LevelManager : MonoBehaviour
             // X POSITION: -14 / +14.
             // Y POSITION: -8 / +8.
             // TODO: noMove = true; (Freeze object tiles from the new room, except ones coming from old room)
-            bool ach = false;
-            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; ach = true; }
-            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; ach = true; }
-            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; ach = true; }
-            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; ach = true; }
-
-            // Achievement (will retrigger multiple times, maybe bad?)
-            if (ach && !currentLevel.hideUI && currentLevelID != "FRAGMENTS/Tutorial") GameManager.I.EditAchivement("ACH_FIRST_OUTERBOUND");
+            if (tile.position.x < 0 + worldOffsetX) { MoveTilemaps(new Vector3(14, 0)); worldOffsetX -= 14; }
+            else if (tile.position.x > boundsX + worldOffsetX) { MoveTilemaps(new Vector3(-14, 0)); worldOffsetX += 14; }
+            else if (tile.position.y > 0 + worldOffsetY) { MoveTilemaps(new Vector3(0, -8)); worldOffsetY += 8; }
+            else if (tile.position.y < boundsY + worldOffsetY) { MoveTilemaps(new Vector3(0, 8)); worldOffsetY -= 8; }
         }
 
         // Removes from movement queue
@@ -749,10 +742,6 @@ public class LevelManager : MonoBehaviour
         // Destroys all marked object tiles.
         foreach (GameTile tile in toDestroy) { RemoveTile(tile); }
         if (toDestroy.Count > 0) AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.45f);
-
-        // Achievement (will retrigger multiple times, maybe bad?)
-        if (levelObjects.All(tile => tile.directions.GetActiveDirectionCount() == 0)) GameManager.I.EditAchivement("ACH_DIRECTIONLESS");
-
         // Win check, add one move to the player
         if (validation.Contains(true) || overflowCycles >= 100) levelMoves++;
         else RemoveUndoFrame();
@@ -870,8 +859,7 @@ public class LevelManager : MonoBehaviour
                 return;
             }
 
-            // First remix level?
-            GameManager.I.EditAchivement("ACH_FIRST_INVERSE"); // Retrigger for DEMO players...
+
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
 
             // Level + savedata
@@ -904,14 +892,6 @@ public class LevelManager : MonoBehaviour
                 RemoveTile(tilemapWinAreas.GetTile<GameTile>(new(20, -13)));
                 AudioManager.I.PlaySFX(AudioManager.boom, 0.5f);
                 return;
-            }
-
-            // Achievements
-            if (currentLevelID == "W1/1-1" && levelMoves <= 6) GameManager.I.EditAchivement("ACH_SIXMOVES");
-            if (currentLevelID == "REMIX/Empty Space" && GameManager.save.game.timesKickedEmptyspace < 5)
-            {
-                GameManager.save.game.timesKickedEmptyspace++;
-                if (GameManager.save.game.timesKickedEmptyspace >= 5) GameManager.I.EditAchivement("ACH_SORRY");
             }
 
             // Level savedata
@@ -1257,7 +1237,6 @@ public class LevelManager : MonoBehaviour
 
     internal IEnumerator OutroCutscene()
     {
-        AudioManager.I.PlayBGM(AudioManager.unveilingBGM);
 
         var tiles = GetObjectTiles();
         InputManager.I.canPause = false;
@@ -1297,7 +1276,6 @@ public class LevelManager : MonoBehaviour
         InputManager.I.canRestart = true;
         
         ClearLevel();
-        GameManager.I.EditAchivement("ACH_DEATH");
         UI.I.ChangeScene("Credits", false);
     }
 }

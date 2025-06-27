@@ -21,7 +21,6 @@ public class FragmentTile : EffectTile
         if (!GameManager.save.game.collectedFragments.Contains(LevelManager.I.currentLevelID))
         {
             GameManager.save.game.collectedFragments.Add(LevelManager.I.currentLevelID);
-            if (GameManager.save.game.collectedFragments.Count >= 4) GameManager.I.EditAchivement("ACH_DEFRAGMENTED");
         }
 
         LevelManager.I.RemoveTile(LevelManager.I.tilemapEffects.GetTile<FragmentTile>(position));

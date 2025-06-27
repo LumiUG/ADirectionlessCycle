@@ -72,17 +72,12 @@ public class Editor : MonoBehaviour
         // Populate tile list
         GameObject editorTile = Resources.Load<GameObject>("Prefabs/Editor Tile");
         listVars.Add(new() { LevelManager.I.wallTile, LevelManager.I.antiwallTile });
-        listVars.Add(new() { LevelManager.I.boxTile, LevelManager.I.circleTile, LevelManager.I.hexagonTile });
-        listVars.Add(new() { LevelManager.I.areaTile, LevelManager.I.inverseAreaTile, LevelManager.I.outboundAreaTile });
+        listVars.Add(new() { LevelManager.I.boxTile, LevelManager.I.circleTile });
+        listVars.Add(new() { LevelManager.I.areaTile, LevelManager.I.inverseAreaTile });
         listVars.Add(new() { LevelManager.I.hazardTile, LevelManager.I.voidTile });
-        listVars.Add(new() { LevelManager.I.invertTile, LevelManager.I.pullTile, LevelManager.I.arrowTile, LevelManager.I.negativeArrowTile });
-        listVars.Add(new() { LevelManager.I.levelTile, LevelManager.I.hologramTile, LevelManager.I.npcTile, LevelManager.I.maskTile });
+        listVars.Add(new() { LevelManager.I.invertTile, LevelManager.I.arrowTile, LevelManager.I.negativeArrowTile });
+        listVars.Add(new() { });
         if (GameManager.I.editormimic || GameManager.I.IsDebug()) listVars[1].Add(LevelManager.I.mimicTile);
-        if (GameManager.I.IsDebug())
-        {
-            listVars[4].Add(LevelManager.I.fragmentTile);
-            listVars[4].Add(LevelManager.I.orbTile);
-        }
 
         // Loops for every tile type
         for (int i = 0; i < listStrings.Count; i++)

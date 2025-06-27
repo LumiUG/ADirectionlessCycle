@@ -10,11 +10,7 @@ public class AudioManager : MonoBehaviour
     internal static AudioClip titleBGM;
     internal static AudioClip remixBGM;
     internal static AudioClip voidBGM;
-    internal static AudioClip unveilingBGM;
     internal static AudioClip W1BGM;
-    internal static AudioClip W2BGM;
-    internal static AudioClip W3BGM;
-    internal static AudioClip W3BGMAlt;
     private Coroutine switchCoro = null;
 
     // SFX //
@@ -58,12 +54,8 @@ public class AudioManager : MonoBehaviour
         // Get audio references
         titleBGM = Resources.Load<AudioClip>("Audio/BGM/Burdened Existence");
         W1BGM = Resources.Load<AudioClip>("Audio/BGM/New Game");
-        W2BGM = Resources.Load<AudioClip>("Audio/BGM/To Keep The Ball Rolling");
-        W3BGM = Resources.Load<AudioClip>("Audio/BGM/Coda");
-        W3BGMAlt = Resources.Load<AudioClip>("Audio/BGM/Coda Alt");
         remixBGM = Resources.Load<AudioClip>("Audio/BGM/Integer Overflow");
         voidBGM = Resources.Load<AudioClip>("Audio/BGM/Void");
-        unveilingBGM = Resources.Load<AudioClip>("Audio/BGM/Unveiling");
 
         undo = Resources.Load<AudioClip>("Audio/SFX/Undo");
         cycle = Resources.Load<AudioClip>("Audio/SFX/Cycle");

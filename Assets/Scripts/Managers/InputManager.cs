@@ -444,34 +444,6 @@ public class InputManager : MonoBehaviour
         if (npc) { LevelManager.I.tilemapCustoms.GetTile<NPCTile>(npc.position).Effect(tl); }
     }
 
-    // Changes the only tile active's form (might cause issues in the future?)
-    private void OnChangeForms()
-    {
-        if (!IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
-
-        // Swap check
-        List<GameTile> count = GetPlayableObjects();
-        if (count.Count > 1 || count.Count <= 0) { AudioManager.I.PlaySFX(AudioManager.cycleDeny, 0.20f); return; }
-        LevelManager.I.hasCycledInCurrentAttempt = true;
-        if (GameManager.I.isDoingTrial) UI.I.ingame.trialCross.gameObject.SetActive(false);
-
-        // Cycle SFX
-        AudioManager.I.PlaySFX(AudioManager.cycle, 0.28f, true);
-
-        // Swap
-        LevelManager.I.RemoveTile(count[0]);
-        if (count[0].GetTileType() == ObjectTypes.Hexagon) {
-            if (latestTile.ToString() == "Hexagon") GameManager.I.EditAchivement("ACH_A_COPY");
-            LevelManager.I.PlaceTile(LevelManager.I.CreateTile(latestTile.ToString(), count[0].directions, count[0].position));
-            UI.I.ingame.SetCycleIcon(ObjectTypes.Hexagon);
-        }
-        else {
-            LevelManager.I.PlaceTile(LevelManager.I.CreateTile("Hexagon", count[0].directions, count[0].position));
-            latestTile = count[0].GetTileType();
-            UI.I.ingame.SetCycleIcon(latestTile);
-        }
-    }
-
     // Custom level scene scrolling
     private void OnScroll(InputValue ctx)
     {
@@ -601,45 +573,6 @@ public class InputManager : MonoBehaviour
         // Null check
         if (debugCommand == null) return;
 
-        // Enable debug command
-        if (debugCommand == "adastra")
-        {
-            if (!GameManager.I.buildDebugMode)
-            {
-                GameManager.I.buildDebugMode = true;
-                MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile!");
-            } else {
-                GameManager.I.buildDebugMode = false;
-                UI.I.global.SendMessage("Starlight fades...", 3);
-            }
-            MainMenu.I.SetupBadges();
-            debugCommand = null;
-        }
-
-        // Secret extra scenes
-        if (debugCommand == "UDLRLRUR")
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            UI.I.ChangeScene("Bonus");
-        }
-        if (debugCommand == "thankyou" || debugCommand == "DUDLRLUDLR")
-        {
-            GameManager.I.isDoingTrial = !GameManager.I.isDoingTrial;
-            if (GameManager.I.isDoingTrial) UI.I.global.SendMessage("Let the trials begin.", 2);
-            else UI.I.global.SendMessage("We'll go back to normal...", 2);
-            MainMenu.I.SetupBadges();
-            debugCommand = null;
-        }
-
-        // Secret arg,, (maybe change it later, add a level or something.)
-        if (debugCommand == "LLLRRRDDDUUU")
-        {
-            MainMenu.I.ShowPopup("You might be looking in the wrong place.");
-            Application.OpenURL("https://ugdev.xyz/terminal?cmd=eos");
-            debugCommand = null;
-        }
-
         // Chess battle advanced
         if (debugCommand == "cba" || debugCommand == "DDUR")
         {
@@ -657,83 +590,10 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
             return;
         }
-
-        // Delete savedata and generate a new one
-        else if (debugCommand == "swap" && GameManager.I.buildDebugMode)
-        {
-            if (DebugConfirm("This will unlock an endgame mechanic, if you're sure, run this command again.")) return;
-            GameManager.save.game.mechanics.hasSwapUpgrade = true;
-            UI.I.global.SendMessage("[ New Ability Unlocked ]", 4);
-            debugCommand = null;
-        }
-
-        // void testing
-        else if (debugCommand == "void" && GameManager.I.buildDebugMode)
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            Actions.LoadLevel("VOID/END");
-            Actions.DiveIn("1");
-            return;
-        }
-
-        // Guests
-        else if (debugCommand == "caos" || debugCommand == "UDLRLDUR")
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Caos");
-            return;
-        }
-        else if (debugCommand == "r3n" || debugCommand == "RUUUD")
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Ren");
-            return;
-        }
-        else if (debugCommand == "gummi" || debugCommand == "RLDDU")
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Gummi");
-            return;
-        }
-
-        // Developer room
-        else if (debugCommand == "lumi" || debugCommand == "URDLDRUL")
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Developer");
-            return;
-        }
-
-        // Custom handlings
-        else if (debugCommand == "code")
-        {
-            MainMenu.I.ShowPopup("...Come on now.");
-            debugCommand = null;
-            return;
-        }
-        else if (debugCommand == "help")
-        {
-            MainMenu.I.ShowPopup("Help? You want help? You'd better check the discord server, then.");
-            debugCommand = null;
-            return;
-        }
-        else if (debugCommand == "gravix")
-        {
-            MainMenu.I.ShowPopup("Gravix? I don't know what you're talking about.");
-            debugCommand = null;
-            return;
-        }
-
         if (debugCommand == null)
         {
             MainMenu.I.debug.CrossFadeAlpha(0f, 1.25f, true);
             AudioManager.I.PlaySFX(AudioManager.areaOverlap, 0.35f);
-            GameManager.I.EditAchivement("ACH_ENCODED"); // granted by using any command (except "code", "help", "gravix", "overflow")
         }
     }
 }

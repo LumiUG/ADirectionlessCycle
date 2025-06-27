@@ -31,20 +31,6 @@ public class MainMenu : MonoBehaviour
 
     [Header("Trials")]
     public GameObject trialInfo;
-    public UIEffect trialEffect;
-    public Button trialBack;
-    public Text trialCountOne;
-    public Image trialFillOne;
-    public Text trialCountTwo;
-    public Image trialFillTwo;
-    public Text trialCountThree;
-    public Image trialFillThree;
-    public Text trialCountRemix;
-    public Image trialFillRemix;
-    private bool trialVanilla = true;
-    private int mewCount = 0;
-    private readonly int[] trialClearsVanilla = { 12, 11, 9, 16 };
-    private readonly int[] trialClearsCycle = { 5, 9, 3, 9 };
 
     private void Start()
     {
@@ -141,77 +127,21 @@ public class MainMenu : MonoBehaviour
     // MEOW
     public void Meow()
     {
-        if (!trialIcon.gameObject.activeSelf) return;
-        if (trialInfo.activeSelf || popupBtn.transform.parent.gameObject.activeSelf) return;
-        AudioManager.I.PlaySFX(AudioManager.meow, 0.7f, true);
-
-        mewCount++;
-        if (mewCount < 3) return;
-
-        // Achievement
-        trialVanilla = false; var validationC = LoadTrial(true);
-        trialVanilla = true; var validationV = LoadTrial(true);
-
-        bool ach = true;
-        for (int i = 0; i < validationV.Count(); i++)
-        {
-            if (validationV[i] < trialClearsVanilla[i]) { ach = false; break; }
-            if (validationC[i] < trialClearsCycle[i]) { ach = false; break; }
-        } if (ach) GameManager.I.EditAchivement("ACH_TRIALS");
-
-        // Activation
-        trialInfo.SetActive(true);
-        UI.I.selectors.ChangeSelected(trialBack.gameObject, true);
-        mewCount = 0;
-        LoadTrial();
+ 
     }
 
     public void UnMeow()
     {
-        UI.I.selectors.ChangeSelected(playBtn.gameObject);
-        trialInfo.SetActive(false);
+
     }
 
     private List<int> LoadTrial(bool ignore = false)
     {
-        TrialScriptable[][] ts = { GameManager.I.trialsAreaOne.ToArray(), GameManager.I.trialsAreaTwo.ToArray(), GameManager.I.trialsAreaThree.ToArray(), GameManager.I.trialsRemix.ToArray() };
-        Text[] fields = { trialCountOne, trialCountTwo, trialCountThree, trialCountRemix };
-        Image[] amounts = { trialFillOne, trialFillTwo, trialFillThree, trialFillRemix };
-        List<int> validation = new();
-
-        if (!ignore)
-        {
-            if (trialVanilla) trialEffect.shadowColor = GameManager.I.boxColor;
-            else trialEffect.shadowColor = GameManager.I.outboundColor;            
-        }
-
-        for (int i = 0; i < fields.Count(); i++)
-        {
-            int totalCount;
-            if (trialVanilla) totalCount = ts[i].Count(trial => { return trial.vanillaMoves != -1; });
-            else totalCount = ts[i].Count(trial => { return trial.cycleMoves != -1; });
-
-            int count = ts[i].Count(trial =>
-            {
-                var level = GameManager.save.game.levels.Find(l => l.levelID == trial.levelID);
-                if (level == null) return false;
-                if (trialVanilla && (level.stats.totalMovesNormal > trial.vanillaMoves || level.stats.totalMovesNormal == 0)) return false;
-                if (!trialVanilla && (level.stats.totalMovesCycle > trial.cycleMoves || level.stats.totalMovesCycle == 0)) return false;
-                return true;
-            });
-            validation.Add(count);
-
-            if (ignore) continue;
-            fields[i].text = $"{count} / {totalCount}";
-            amounts[i].fillAmount = (float)count / totalCount;
-        }
-
-        return validation;
+        return null;
     }
 
     public void TrialType(bool type)
     {
-        trialVanilla = type;
-        LoadTrial();
+
     }
 }
