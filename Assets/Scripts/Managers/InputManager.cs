@@ -682,6 +682,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
+            GameManager.I.EditAchivement("ACH_ENCODED");
             TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Caos");
             return;
         }
@@ -689,6 +690,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
+            GameManager.I.EditAchivement("ACH_ENCODED");
             TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Ren");
             return;
         }
@@ -696,6 +698,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
+            GameManager.I.EditAchivement("ACH_ENCODED");
             TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Gummi");
             return;
         }
@@ -705,6 +708,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
+            GameManager.I.EditAchivement("ACH_ENCODED");
             TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "CODE/Developer");
             return;
         }
