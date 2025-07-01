@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
             UI.I.pause.ToggleEditButton(isEditing || IsDebug());
         }
 
+        UI.I.settings.Toggle(false);
         UI.I.pause.Toggle(status);
         LevelManager.I.isPaused = status;
     }

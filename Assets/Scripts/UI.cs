@@ -17,6 +17,7 @@ public class UI : MonoBehaviour
     [SerializeField] public ConfirmRestartUI restart;
     [SerializeField] public PopupUI popup;
     [SerializeField] public DialogUI dialog;
+    [SerializeField] public SettingsUI settings;
     [HideInInspector] public Selectors selectors;
 
     internal Animator effects;
@@ -147,6 +148,7 @@ public class UI : MonoBehaviour
     {
         ingame.Toggle(false);
         editor.Toggle(false);
+        settings.Toggle(false);
         pause.Toggle(false);
         // win.Toggle(false);
     }
@@ -246,6 +248,8 @@ public class UI : MonoBehaviour
     // Remove popup
     public void ClosePopup() { selectors.ChangeSelected(pause.backToMenu, true); popup.Toggle(false); }
 
+    public void ToggleSettings(bool toggle) { settings.Toggle(toggle); }
+
     // UI confirm sound
     public void ConfirmSound()
     {
@@ -256,6 +260,20 @@ public class UI : MonoBehaviour
     public void BadSound()
     {
         AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.30f);
+    }
+
+
+    // Master Slider
+    public void UpdateMasterSlider(float value)
+    {
+        if (AudioManager.I) AudioManager.I.SetMasterVolume(value);
+        GameManager.save.preferences.masterVolume = value;
+    }
+
+    // SFX Slider
+    public void UpdateSFXSlider(float value)
+    {
+        GameManager.save.preferences.SFXVolume = value;
     }
 
     // Goes to the current level's
@@ -280,6 +298,7 @@ public class UI : MonoBehaviour
             
             switch (split[1])
             {
+                case "Rybb":  { popup.SetPopup("Will be added in a future update! Forgot..."); return; }
                 case "Orb One":
                     {
                         if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
@@ -548,6 +567,35 @@ public class UI : MonoBehaviour
         {
             if (additive) text.text += $"{newText}";
             else text.text = $"{newText}";
+        }
+    }
+
+    [Serializable]
+    public class SettingsUI : UIObject
+    {
+        public Slider masterSlider;
+        public Slider sfxSlider;
+        public Button backBtn;
+
+        public override void Toggle(bool toggle)
+        {
+            if (toggle) { I.selectors.ChangeSelected(backBtn.gameObject); SetupSettings(); }
+            else {
+                if (I.pause.self.activeSelf) I.selectors.ChangeSelected(I.pause.backToMenu.gameObject);
+                ApplySettings();
+            }
+
+           self.SetActive(toggle);
+        }
+
+        internal void SetupSettings()
+        {
+            masterSlider.value = GameManager.save.preferences.masterVolume;
+            sfxSlider.value = GameManager.save.preferences.SFXVolume;
+        }
+        internal void ApplySettings()
+        {
+            // Nothing here yet that needs immediate saving.
         }
     }
 }
