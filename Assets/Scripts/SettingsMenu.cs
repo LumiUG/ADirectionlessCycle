@@ -148,7 +148,7 @@ public class SettingsMenu : MonoBehaviour
 
             var pref = GameManager.save.preferences;
             GameManager.I.DeleteSave();
-            GameManager.I.CreateSave(true);
+            GameManager.I.CreateSave(true, false);
             GameManager.save.preferences = pref;
             GameManager.I.SaveDataJSON();
 

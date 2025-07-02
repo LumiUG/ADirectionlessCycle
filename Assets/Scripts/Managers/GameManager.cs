@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
         // Create a savefile if none exist
         customLevelPath = $"{Application.persistentDataPath}/Custom Levels";
-        CreateSave();
+        CreateSave(false, true);
 
         // Create custom levels directory
         if (!Directory.Exists(customLevelPath)) Directory.CreateDirectory(customLevelPath);
@@ -162,9 +162,13 @@ public class GameManager : MonoBehaviour
     // Stuff with savedata //
     
     // Creates a savefile
-    public void CreateSave(bool load = false)
+    public void CreateSave(bool load = false, bool resolution = false)
     {
-        if (!File.Exists(dataPath)) SaveDataJSON(new Savedata());
+        if (!File.Exists(dataPath))
+        { 
+            SaveDataJSON(new Savedata());
+            if (resolution) { Screen.fullScreen = true; Screen.SetResolution(1920, 1080, true); }
+        }
         if (load) LoadDataJSON();
     }
 

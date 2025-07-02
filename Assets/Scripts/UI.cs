@@ -579,9 +579,9 @@ public class UI : MonoBehaviour
 
         public override void Toggle(bool toggle)
         {
-            if (toggle) { I.selectors.ChangeSelected(backBtn.gameObject); SetupSettings(); }
+            if (toggle) { I.selectors.ChangeSelected(backBtn.gameObject, true); SetupSettings(); }
             else {
-                if (I.pause.self.activeSelf) I.selectors.ChangeSelected(I.pause.backToMenu.gameObject);
+                if (I.pause.self.activeSelf) I.selectors.ChangeSelected(I.pause.backToMenu.gameObject, true);
                 ApplySettings();
             }
 
