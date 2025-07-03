@@ -504,6 +504,7 @@ public class Hub : MonoBehaviour
     // Check for outbounds on a completed level
     private bool OutboundCheck(SerializableLevel level, string levelID, bool completed = false)
     {
+        if (!GameManager.save.game.mechanics.hasSwapUpgrade) return false;
         return level.tiles.overlapTiles.Exists(t => { return t.type == ObjectTypes.OutboundArea.ToString(); })
             && GameManager.save.game.levels.Exists(l => { return l.levelID == levelID && l.outboundCompletion == completed; });
     }
