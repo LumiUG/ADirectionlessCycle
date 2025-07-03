@@ -84,7 +84,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public SerializableLevel currentLevel = null;
     [HideInInspector] public string currentLevelID = null;
     [HideInInspector] public string levelEditorName = null;
-    internal List<ObjectTypes> formQueue = new(capacity: 101); // 100 + 1 form capacity (for now)
+    internal List<ObjectTypes> formQueue = new(capacity: 1001); // 1000 + 1 form capacity (for now)
     internal List<SerializableCustomInfo> customTileInfo = new();
     private readonly List<GameTile> levelSolids = new();
     private readonly List<GameTile> levelObjects = new();
@@ -95,8 +95,8 @@ public class LevelManager : MonoBehaviour
     private readonly List<GameTile> movementBlacklist = new();
     private readonly List<HexagonTile> lateMove = new();
     private readonly List<GameTile> toDestroy = new();
-    private readonly List<Tiles> undoSequence = new(capacity: 100); // 100 undo capacity (for now)
-    private readonly List<(int, int)> roomSequence = new(capacity: 100); // 100 undo capacity (for now)
+    private readonly List<Tiles> undoSequence = new(capacity: 1000); // 1000 undo capacity (for now)
+    private readonly List<(int, int)> roomSequence = new(capacity: 1000); // 1000 undo capacity (for now)
     private readonly int boundsX = 13;
     private readonly int boundsY = -7;
     private int defaultAreaLayer;
