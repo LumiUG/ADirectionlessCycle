@@ -431,11 +431,11 @@ public class InputManager : MonoBehaviour
 
                 GameTile test = null;
                 test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(1, 0, 0));
-                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
-                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
-                if (!test) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
-                if (!test) { test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
-                if (test) { if (test.directions.GetActiveDirectionCount() > 0) return npc; }
+                if (!test || test.directions.GetActiveDirectionCount() == 0) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(-1, 0, 0));
+                if (!test || test.directions.GetActiveDirectionCount() == 0) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, 1, 0));
+                if (!test || test.directions.GetActiveDirectionCount() == 0) test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position + new Vector3Int(0, -1, 0));
+                if (!test || test.directions.GetActiveDirectionCount() == 0) { test = LevelManager.I.tilemapObjects.GetTile<GameTile>(npc.position); tl = test; } // inner
+                if (test) return npc;
                 return false;
             }
         );

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Loop
   m_EditorClassIdentifier: 
   levelID: REMIX/Loop
-  vanillaMoves: 70
+  vanillaMoves: 72
   cycleMoves: -1

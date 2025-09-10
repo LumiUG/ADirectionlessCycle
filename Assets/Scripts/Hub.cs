@@ -67,8 +67,11 @@ public class Hub : MonoBehaviour
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) outboundCountText.gameObject.SetActive(false);
         if (GameManager.save.game.collectedFragments.Count <= 0) fragmentCountText.gameObject.SetActive(false);
         else fragmentCountText.text = $"{GameManager.save.game.collectedFragments.Count}";
-        completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
-        remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+        if (worldIndex != 3)
+        {
+            completedCountText.text = $"{completedReal[worldIndex]}/{totalMainLevels[worldIndex]}";
+            remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
+        }
         outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
         MasteryEffect(0);
 
@@ -322,7 +325,7 @@ public class Hub : MonoBehaviour
     public void StaticLoadLevel(string levelName)
     {
         if (!LevelManager.I || TransitionManager.I.inTransition) return;
-        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END") { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
+        if (!GameManager.save.game.unlockedWorldSuper && levelName == "VOID/END" && !GameManager.I.IsDebug()) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
 
         // Is the level locked?
         if (AbsurdLockedLevelDetection(levelName)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
@@ -410,7 +413,7 @@ public class Hub : MonoBehaviour
             remixCountText.text = "?????";
         }
 
-        // Update ui
+        // Update UI
         MasteryEffect(worldIndex);
         checker.dirX = direction;
         
@@ -543,7 +546,8 @@ public class Hub : MonoBehaviour
         if (
             (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
             (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 4 && world == 1) ||
-            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2)
+            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2) ||
+            (GameManager.save.game.hasCompletedGame && world == 3)
         ) masteryOutline.SetActive(true);
         else masteryOutline.SetActive(false);
     }

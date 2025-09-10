@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
     private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
     private string dataPath;
+    private string backupPath;
     private ActivityTimestamps sessionTime = new();
 
     void Awake()
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
 
         // Game data
         dataPath = $"{Application.persistentDataPath}/userdata.save";
+        backupPath = $"{Application.persistentDataPath}/Backups/{DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}.back";
 
         // Create a savefile if none exist
         customLevelPath = $"{Application.persistentDataPath}/Custom Levels";
@@ -115,6 +117,10 @@ public class GameManager : MonoBehaviour
     {
         SaveDataJSON(save);
         rpc?.GetActivityManager().ClearActivity(null);
+
+        // Backups folder
+        if (!Directory.Exists($"{Application.persistentDataPath}/Backups")) Directory.CreateDirectory($"{Application.persistentDataPath}/Backups");
+        if (!File.Exists(backupPath)) File.WriteAllText(backupPath, JsonUtility.ToJson(save));
     }
 
     // Returns if the current scene shouldn't be taken into account
