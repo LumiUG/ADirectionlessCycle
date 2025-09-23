@@ -188,33 +188,35 @@ public class Hub : MonoBehaviour
             // Level doesnt exist? Leave.
             if (levelCheck == null) continue;
 
-            // Add an outline to the level
+            // Get level data
+            var levelAsData = LevelManager.I.GetLevel(levelCheck.levelID, false, true);
+            int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
+
+            Transform outline;
+            if (isRemix) outline = outlineHolder.Find("REMIX").Find(holder.name).GetChild(childnNum);
+            else {
+                outline = outlineHolder.Find(holder.name).Find(cname);
+                outline.gameObject.SetActive(true);
+            }
+            Image outlineImg = outline.GetComponent<Image>();
+
+            // Add 1 to the completed level count (if not remix)
             if (levelCheck.completed)
             {
-                Transform outline;
-                if (isRemix) outline = outlineHolder.Find("REMIX").Find(holder.name).GetChild(childnNum);
-                else {
-                    outline = outlineHolder.Find(holder.name).Find(cname);
-                    outline.gameObject.SetActive(true);
-                }
-
-                // Get level data
-                var levelAsData = LevelManager.I.GetLevel(levelCheck.levelID, false, true);
-                int displayCheck = HubCheck(levelAsData, levelCheck.levelID);
-
-                // Add 1 to the completed level count (if not remix)
                 if (OutboundCheck(levelAsData, levelCheck.levelID, true)) completedRealOutbound[index]++;
                 if (!isRemix) {
                     if (completedLevelsCount[index] < totalMainLevels[index]) completedLevelsCount[index]++;
                     completedReal[index]++;
                 } else completedRealRemix[index]++;
 
-                // Check for the correct outline to use
-                Image outlineImg = outline.GetComponent<Image>();
+                outlineImg.color = GameManager.I.completedColor; // for remixes!
                 if (GameManager.save.game.mechanics.hasSeenRemix && displayCheck == 1 && GameManager.save.preferences.missingHighlighter) outlineImg.color = GameManager.I.remixColor;
-                else if (GameManager.save.game.mechanics.hasSwapUpgrade && displayCheck == 2 && GameManager.save.preferences.missingHighlighter) outlineImg.color = GameManager.I.outboundColor;
-                else outlineImg.color = GameManager.I.completedColor; // for remixes!
             }
+
+            // Check for the correct outline to use
+            if (displayCheck == 2 && GameManager.save.preferences.missingHighlighter) outlineImg.color = GameManager.I.outboundColor;
+
+            if (!levelCheck.completed && displayCheck == 0) outline.gameObject.SetActive(false);
         }
         
         // nuh uh
@@ -504,7 +506,7 @@ public class Hub : MonoBehaviour
         else if (GameManager.I.IsDebug() && !string.IsNullOrEmpty(current.remixLevel)) UIRecursiveRemixes(current.remixLevel, level, count + 1);
     }
 
-    // Check for outbounds on a completed level
+    // Check for outbounds on a level
     private bool OutboundCheck(SerializableLevel level, string levelID, bool completed = false)
     {
         if (!GameManager.save.game.mechanics.hasSwapUpgrade) return false;

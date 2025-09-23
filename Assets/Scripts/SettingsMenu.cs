@@ -13,6 +13,7 @@ public class SettingsMenu : MonoBehaviour
     public Toggle settingsToggle;
     public Toggle missingToggle;
     public Toggle accessibleFontToggle;
+    public Toggle scanlineToggle;
     public Toggle repeatInputToggle;
     public Toggle moveToggle;
     public Toggle timerToggle;
@@ -70,6 +71,7 @@ public class SettingsMenu : MonoBehaviour
         restartToggle.isOn = GameManager.save.preferences.forceConfirmRestart;
         moveToggle.isOn = GameManager.save.preferences.showMoves;
         timerToggle.isOn = GameManager.save.preferences.showTimer;
+        scanlineToggle.isOn = GameManager.save.preferences.scanlineAnimation;
 
         masterSlider.value = GameManager.save.preferences.masterVolume;
         SFXSlider.value = GameManager.save.preferences.SFXVolume;
@@ -92,49 +94,22 @@ public class SettingsMenu : MonoBehaviour
     }
 
 
-    // Sets the new tile's outline
-    public void ChangeOutline(int index)
-    {
-        GameManager.save.preferences.outlineType = outlines[index];
-    }
+    public void ToggleScanline(bool toggle) { GameManager.save.preferences.scanlineAnimation = toggle; }
+    public void ChangeOutline(int index) { GameManager.save.preferences.outlineType = outlines[index]; }
+    public void ToggleFullscreen(bool toggle) { Screen.fullScreen = toggle; }
 
-    // Toggle fullscreen
-    public void ToggleFullscreen(bool toggle)
-    {
-        Screen.fullScreen = toggle;
-    }
 
-    // Toggle input repeating
-    public void ToggleRepeatingInput(bool toggle)
-    {
-        GameManager.save.preferences.repeatInput = toggle;
-    }
+    public void ToggleRepeatingInput(bool toggle) { GameManager.save.preferences.repeatInput = toggle; }
 
-    // Toggle input repeating
-    public void ToggleConfirmRestart(bool toggle)
-    {
-        GameManager.save.preferences.forceConfirmRestart = toggle;
-    }
+    public void ToggleConfirmRestart(bool toggle) { GameManager.save.preferences.forceConfirmRestart = toggle; }
 
-    public void ToggleTimer(bool toggle)
-    {
-        GameManager.save.preferences.showTimer = toggle;
-    }
+    public void ToggleTimer(bool toggle) { GameManager.save.preferences.showTimer = toggle; }
 
-    public void ToggleMoves(bool toggle)
-    {
-        GameManager.save.preferences.showMoves = toggle;
-    }
+    public void ToggleMoves(bool toggle) { GameManager.save.preferences.showMoves = toggle; }
 
-    public void ToggleHighlighter(bool toggle)
-    {
-        GameManager.save.preferences.missingHighlighter = toggle;
-    }
+    public void ToggleHighlighter(bool toggle) { GameManager.save.preferences.missingHighlighter = toggle; }
 
-    public void ToggleFont(bool toggle)
-    {
-        GameManager.save.preferences.accessibleFont = toggle;
-    }
+    public void ToggleFont(bool toggle) { GameManager.save.preferences.accessibleFont = toggle; }
 
     public void EraseSave()
     {
@@ -181,6 +156,7 @@ public class SettingsMenu : MonoBehaviour
                 resolutionDropdown.value = 0;
                 outlineDropdown.value = 0;
                 settingsToggle.isOn = true;
+                scanlineToggle.isOn = true;
                 missingToggle.isOn = false;
                 accessibleFontToggle.isOn = false;
                 break;

@@ -59,7 +59,8 @@ public class LevelManager : MonoBehaviour
     public Tilemap tilemapEffects;
     public Tilemap tilemapCustoms;
     public Tilemap tilemapLetterbox;
-    public Tilemap tilemapScanlines;
+    public Tilemap animatedTilemapScanlines;
+    public Tilemap staticTilemapScanlines;
     public Tilemap extrasOutlines;
 
     // Renderers //
@@ -464,7 +465,9 @@ public class LevelManager : MonoBehaviour
         }
 
         levelGrid.GetComponentsInChildren<Tilemap>().ToList().ForEach(layer =>
-            { if (layer.name != "Letterbox" && layer.name != "Scanlines") layer.ClearAllTiles(); });
+            { if (layer.name != "Letterbox" && layer.name != "Animated Scanlines" && layer.name != "Static Scanlines")
+            layer.ClearAllTiles(); 
+        });
 
         if (timerCoroutine != null) StopCoroutine(timerCoroutine);
         InputManager.I.latestMovement = Vector3Int.back;

@@ -9,7 +9,7 @@ public class BonusLevels : MonoBehaviour
     void Start()
     {
         UI.I.selectors.ChangeSelected(backButton, true);
-        outlines[0].SetActive(GameManager.save.game.levels.Find(level => level.levelID == "CODE/Maze") != null);
+        outlines[0].SetActive(GameManager.save.game.levels.Find(level => level.levelID == "CODE/Despair") != null);
         outlines[1].SetActive(GameManager.save.game.levels.Find(level => level.levelID == "CODE/Quiz") != null);
     }
 

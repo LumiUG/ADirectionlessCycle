@@ -52,7 +52,9 @@ public class MainMenu : MonoBehaviour
 
         if (GameManager.save.game.hasCompletedGame) postgameChecker.SetActive(true);
 
-        // Setup font changes
+        // Setup settings changes
+        LevelManager.I.animatedTilemapScanlines.gameObject.SetActive(GameManager.save.preferences.scanlineAnimation);
+        LevelManager.I.staticTilemapScanlines.gameObject.SetActive(!GameManager.save.preferences.scanlineAnimation);
         if (GameManager.save.preferences.accessibleFont)
         {
             popupText.font = GameManager.I.acessibilityFont;

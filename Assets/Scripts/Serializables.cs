@@ -179,6 +179,7 @@ public class Serializables
         public bool showMoves = true;
         public bool missingHighlighter = false;
         public bool accessibleFont = false;
+        public bool scanlineAnimation = true;
         public string outlineType = "Dotted"; // Dotted, Full, NONE
     }
 }
