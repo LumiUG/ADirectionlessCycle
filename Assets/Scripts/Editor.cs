@@ -16,6 +16,12 @@ public class Editor : MonoBehaviour
     public List<GameObject> menuSelectors = new(capacity: 4);
     public Canvas canvas;
 
+    [Header("Sprites")]
+    [SerializeField] private Sprite colorArrowSprite;
+    [SerializeField] private Sprite deletionSprite;
+    [SerializeField] private Sprite badArrowSprite;
+
+    private Tilemap editorTilemap;
     internal SpriteRenderer spriteRenderer;
     internal Coroutine multiClick = null;
     internal bool isPlacing = true;
@@ -23,10 +29,6 @@ public class Editor : MonoBehaviour
     internal ObjectTypes tileToPlace;
     internal RectTransform popupRect;
 
-    private Tilemap editorTilemap;
-    private Sprite deletionSprite;
-    private Sprite badArrowSprite;
-    private Sprite colorArrowSprite;
     private readonly List<string> listStrings = new() { "Solids", "Objects", "Areas", "Hazards", "Effects", "Customs" };
     private readonly List<List<GameTile>> listVars = new();
     private readonly List<ICommand> commandHistory = new();
@@ -49,9 +51,6 @@ public class Editor : MonoBehaviour
         I = this; // No persistence!
         editorTilemap = GameObject.Find("Editor Tilemap").GetComponent<Tilemap>();
         spriteRenderer = GameObject.Find("Tilemap Preview").GetComponent<SpriteRenderer>();
-        deletionSprite = Resources.Load<Sprite>("Sprites/Non Pushable");
-        colorArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/ColorArrows");
-        badArrowSprite = Resources.Load<Sprite>("Sprites/Tiles/BadArrows");
 
         // Tile info
         tileList = transform.Find("Tile List").gameObject;

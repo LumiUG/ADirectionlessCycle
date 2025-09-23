@@ -25,14 +25,14 @@ public class CustomLevels : MonoBehaviour
     public InputField popupLevelName;
     public List<Image> popupStars = new();
     public readonly int vertical = -700;
+    public GameObject customLevelPrefab;
+    public Sprite starSprite;
+    public Sprite hollowStarSprite;
 
     private string selectedLevelID = null;
     private string selectedLevelName = null;
     private SerializableLevel selectedLevelAsData = null;
     private GameObject selectedLevel = null;
-    private GameObject customLevelPrefab;
-    private Sprite starSprite;
-    private Sprite hollowStarSprite;
     private Animator popupAnimator;
     private bool confirmDeletion = false;
     private int count = 0;
@@ -42,9 +42,6 @@ public class CustomLevels : MonoBehaviour
     {
         I = this; // No persistence!
         UI.I.selectors.ChangeSelected(backButton, true);
-        customLevelPrefab = Resources.Load<GameObject>("Prefabs/Custom Level");
-        starSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Filled");
-        hollowStarSprite = Resources.Load<Sprite>("Sprites/UI/Stars/Star_Hollow");
         popupAnimator = popup.GetComponent<Animator>();
 
         if (!GameManager.I.IsDebug())

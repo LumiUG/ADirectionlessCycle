@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     internal int restartCount = 0;
     internal bool canRestart = true;
     internal bool canPause = true;
+    internal bool canSwap = true;
 
     private bool isHoldingMovement = false;
     private bool isHoldingUndo = false;
@@ -42,6 +43,9 @@ public class InputManager : MonoBehaviour
 
         // Defaults
         latestMovement = Vector3Int.back;
+        canSwap = true;
+        canPause = true;
+        canRestart = true;
     }
     
     void Update()
@@ -447,7 +451,7 @@ public class InputManager : MonoBehaviour
     // Changes the only tile active's form (might cause issues in the future?)
     private void OnChangeForms()
     {
-        if (!IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade) return;
+        if (!IsAllowedToPlay() || !GameManager.save.game.mechanics.hasSwapUpgrade || !canSwap) return;
 
         // Swap check
         List<GameTile> count = GetPlayableObjects();

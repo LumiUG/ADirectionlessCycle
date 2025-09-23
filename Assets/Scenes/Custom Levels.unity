@@ -6521,6 +6521,9 @@ MonoBehaviour:
   - {fileID: 1818508758}
   - {fileID: 221761797}
   - {fileID: 625913977}
+  customLevelPrefab: {fileID: 9067058123269436014, guid: 2120966126d5aa743ad312491589b339, type: 3}
+  starSprite: {fileID: 21300000, guid: 34c3909f15a16ab42bcb21b80d0351fb, type: 3}
+  hollowStarSprite: {fileID: 21300000, guid: db059b931d8272644a55be276bc5c74d, type: 3}
 --- !u!1 &1640115404
 GameObject:
   m_ObjectHideFlags: 0

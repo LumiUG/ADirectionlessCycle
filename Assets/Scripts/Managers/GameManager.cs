@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public static Discord.Discord rpc = null;
     public Font originalFont;
     public Font acessibilityFont;
+    public RenderTexture editorPreviewTexture;
 
     // Game data // 
     [HideInInspector] public bool isEditing;
@@ -225,12 +226,11 @@ public class GameManager : MonoBehaviour
     internal byte[] SaveLevelPreview()
     {
         if (SceneManager.GetActiveScene().name != "Level Editor") return null;
-        RenderTexture texture = Resources.Load<RenderTexture>("Misc/Screenshot");
 
         // Convert to Texture2D
         Texture2D tex = new(1920, 1080, TextureFormat.RGB24, false, true);
-        RenderTexture.active = texture;
-        tex.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0);
+        RenderTexture.active = editorPreviewTexture;
+        tex.ReadPixels(new Rect(0, 0, editorPreviewTexture.width, editorPreviewTexture.height), 0, 0);
         tex.Apply();
 
         // Encode and return

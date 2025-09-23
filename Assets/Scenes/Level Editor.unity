@@ -1597,6 +1597,9 @@ MonoBehaviour:
   - {fileID: 543097116}
   - {fileID: 131792950}
   canvas: {fileID: 293672308}
+  colorArrowSprite: {fileID: 21300000, guid: 97b9981c09ab2a643bef6b4a478ee704, type: 3}
+  deletionSprite: {fileID: 21300000, guid: 0fdac397f5b5b834ab8814d6a8a658c1, type: 3}
+  badArrowSprite: {fileID: 21300000, guid: 26c0ec793f427de44ae070d1074cee09, type: 3}
   coords: {fileID: 1288223192}
 --- !u!114 &293672306
 MonoBehaviour:

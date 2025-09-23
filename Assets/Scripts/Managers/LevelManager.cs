@@ -1265,6 +1265,7 @@ public class LevelManager : MonoBehaviour
         var tiles = GetObjectTiles();
         InputManager.I.canPause = false;
         InputManager.I.canRestart = false;
+        InputManager.I.canSwap = false;
 
         InputManager.I.endingExtraCD = 0.05f;
         yield return new WaitForSeconds(4.4f);
@@ -1298,6 +1299,7 @@ public class LevelManager : MonoBehaviour
         GameManager.save.game.hasCompletedGame = true;
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
+        InputManager.I.canSwap = true;
         
         ClearLevel();
         GameManager.I.EditAchivement("ACH_DEATH");
