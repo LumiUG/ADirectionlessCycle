@@ -671,13 +671,12 @@ public class InputManager : MonoBehaviour
             debugCommand = null;
         }
 
-        // void testing
-        else if (debugCommand == "void" && GameManager.I.buildDebugMode)
+        // testing code
+        else if (debugCommand == "loca" && GameManager.I.buildDebugMode)
         {
             canInputCommands = false;
             debugCommand = null;
-            Actions.LoadLevel("VOID/END");
-            Actions.DiveIn("1");
+            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "DEBUG/LocaTest");
             return;
         }
 

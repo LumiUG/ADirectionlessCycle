@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using static GameTile;
 
 public class DialogManager : MonoBehaviour
 {
     [HideInInspector] public static DialogManager I;
+    public LocalizedStringDatabase dialogStrings;
 
     public DialogScriptable loadedDial;
     public string[] dialog;
@@ -37,7 +39,7 @@ public class DialogManager : MonoBehaviour
     }
 
     // Starts the dialog with the NPC
-    public void StartDialog(DialogScriptable chat, string dialogPath)
+    public void StartDialog(DialogScriptable chat, string dialogPath, bool doLocal = false)
     {
         if (!canInteract || !chat || TransitionManager.I.inTransition) return;
 
@@ -58,6 +60,13 @@ public class DialogManager : MonoBehaviour
         // Should we change/load the new scriptable?
         if (!chat) { inDialog = false; return; }
         if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat);
+
+        // Translate strings before serving dialog
+        if (doLocal)
+        {
+            var localizedStr = LocalizationSettings.StringDatabase.GetLocalizedString("Dialog", "test");
+            chat.dialog[dialogIndex] = localizedStr;
+        }
 
         // Not the first time?
         if (hasDialogStarted) { ProceedChat(); return; }
