@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: W1-Dialog_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: cf44451a4c9dd1f4293fb35ff3eddd41, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 11685096198144
+    m_Localized: Bueno bueno bueno.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13532422868992
+    m_Localized: "Ya sab\xEDa yo que alguien encontrar\xEDa esto eventualmente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14249908899840
+    m_Localized: "Sabes qu\xE9? Ya que has encontrado esto, te dar\xE9 un c\xF3digo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14256175190016
+    m_Localized: Toma esto!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14296910270464
+    m_Localized: '"Prioridad: Arriba > Abajo > Izquierda > Derecha"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14708899975168
+    m_Localized: "Sigue hacia la sala de c\xF3digos para ver la pista~"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24824479092736
+    m_Localized: '[Miras atentamente la pared...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24864262066176
+    m_Localized: "[Poco a poco, algo comienza a grabarse...]\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24883652333568
+    m_Localized: "Ahora s\xED. Te podemos ver leyendo. Hola jugador!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29364372770816
+    m_Localized: "Ha pasado mucho tiempo desde que alguien ha estado aqu\xED. Dime,
+      c\xF3mo te llamas?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29366109212672
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29366738358272
+    m_Localized: Claro, estoy de broma. Sabemos que no puedes responder.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29367354920960
+    m_Localized: "Sabes, es rar\xEDsimo. Qui\xE9n eres de verdad? Pareces nuevo aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30624840814592
+    m_Localized: "E-encontraste un ejecutable, una build? No, c\xF3mo funcionar\xEDa\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30783419060224
+    m_Localized: "En cualquier caso, yo- nosotros, no estamos seguros de que-. Oh,
+      ya s\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31079004246016
+    m_Localized: "Te dejar\xE9 adaptarte al entorno durante un rato."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31643825999872
+    m_Localized: "Eso deber\xEDa servir como tu introducci\xF3n. Hasta ahora!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41368437264384
+    m_Localized: "Hey, solo una cosa m\xE1s!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41441971802112
+    m_Localized: "Quer\xEDa decir, si algo parece imposible... Probablemente lo sea!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41443230093312
+    m_Localized: "Si\xE9ntete libre de volver en otro momento. O mejor a\xFAn, simplemente
+      no vuelvas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41444278669312
+    m_Localized: "Preferir\xEDa que no volvieras."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41445297885184
+    m_Localized: "Ah, y si est\xE1s confundido, intenta apretar la [BARRA ESPACIADORA]
+      o [TRI\xC1NGULO]!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42583933980672
+    m_Localized: Bueno, es la tecla que los jugadores normalmente tienen asignada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43937763037184
+    m_Localized: "As\xED que ha llegado la hora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43991768895488
+    m_Localized: "Te importar\xEDa echarnos una mano?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43993077518336
+    m_Localized: "Probablemente no seamos los primeros, ni los \xFAltimos, pero nos
+      tienes que ayudar tambi\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44003731050496
+    m_Localized: "Optim\xEDsticamente, ya que no puedes contestar, me lo voy a tomar
+      como un s\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44004762849280
+    m_Localized: Disfruta del juego por ahora. Tengo que preparar unas cosas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45169848225792
+    m_Localized: Te ha contactado? Ya, claro, como si alguna vez hubiera querido
+      algo bueno para nosotros.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45203973083136
+    m_Localized: "Le dije que no hablara contigo, ya me encargar\xEDa de esto yo
+      mismo. Porque no puede..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45208184164352
+    m_Localized: "Sabes, por mucho que me gustar\xEDa que esto acabara, no quiero
+      saber qu\xE9 pasa al acabar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45209828331520
+    m_Localized: "D\xE9jame dejar una cosa muy clara. No hagas lo que te dice."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45496366403584
+    m_Localized: "S\xF3lo traer\xE1 finalidad a este mundo.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45877150486528
+    m_Localized: Lo has pillado? Bieeeen! Continua.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

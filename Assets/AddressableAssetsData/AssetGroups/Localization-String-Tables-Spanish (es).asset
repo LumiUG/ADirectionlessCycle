@@ -18,7 +18,14 @@ MonoBehaviour:
   m_GUID: 79b771c964f2e9b47ab2ec5edab36e82
   m_SerializeEntries:
   - m_GUID: 0934d7f497ca4d24fbcb5b8dc9f701c2
-    m_Address: Dialog_es
+    m_Address: W1-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17c7549864be9be41bb4cb815eced714
+    m_Address: MISC-Dialog_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es

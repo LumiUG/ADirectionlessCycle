@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: Interact
   m_EditorClassIdentifier: 
   dialog:
-  - There we go. We can see you reading. Hi player!
-  - It's been a long time since someone was last here. Say, what's your name?
-  - ...
-  - Of course, I'm kidding. We know you can't reply.
-  - I'll let you adapt to the environment for a bit.
+  - 1-10:Interact
+  - 1-10:Interact2
+  - 1-10:Interact3
+  - 1-10:Interact4
+  - 1-10:Interact5
+  - 1-10:Interact6
+  - 1-10:Interact7
+  - 1-10:Interact8
+  - 1-10:Interact9
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Ignore
   m_EditorClassIdentifier: 
   dialog:
-  - They contacted you? Oh please, as if they ever wanted anything good for us.
-  - As much as I'd like for this to end, I don't want to know what's after this.
-  - Let me make one thing very clear, do not do what they say.
-  - It will only bring finality to this world.
+  - 1-12:Ignore
+  - 1-12:Ignore2
+  - 1-12:Ignore3
+  - 1-12:Ignore4
+  - 1-12:Ignore5
+  - 1-12:Ignore6
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

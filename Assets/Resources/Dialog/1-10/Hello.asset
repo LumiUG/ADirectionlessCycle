@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hello
   m_EditorClassIdentifier: 
   dialog:
-  - '[You look closely into the wall...]'
-  - '[Slowly, carvings form...]'
+  - 1-10:Hello
+  - 1-10:Hello2
   events: []
   exhaustDialog: {fileID: 11400000, guid: bf4c055273611254083174b3c454cd45, type: 2}
   textSpeed: 0.05

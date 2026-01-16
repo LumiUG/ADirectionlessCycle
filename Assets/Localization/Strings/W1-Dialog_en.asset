@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: W1-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: cf44451a4c9dd1f4293fb35ff3eddd41, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 11685096198144
+    m_Localized: Well well well.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13532422868992
+    m_Localized: I thought someone would eventually find out about this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14249908899840
+    m_Localized: Tell you what, since you've found this, I'll give you a code.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14256175190016
+    m_Localized: Check this out!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14296910270464
+    m_Localized: '"PRIORITY : Up > Down > Left > Right"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14708899975168
+    m_Localized: Proceed to the code screen to see the hint~
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24824479092736
+    m_Localized: '[You look closely into the wall...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24864262066176
+    m_Localized: '[Slowly, carvings form...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24883652333568
+    m_Localized: There we go. We can see you reading. Hi player!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29364372770816
+    m_Localized: It's been a long time since someone was last here. Say, what's your
+      name?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29366109212672
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29366738358272
+    m_Localized: Of course, I'm kidding. We know you can't reply.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29367354920960
+    m_Localized: Though, it's weird. Who are you really? You seem new here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30624840814592
+    m_Localized: D-did you find a build? No, how would that...?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30783419060224
+    m_Localized: Regardless, I'm- we're not sure what to-. Oh, I've got it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31079004246016
+    m_Localized: I'll let you adapt to the environment for a bit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31643825999872
+    m_Localized: That should work as an onboarding. I'll see you around!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41368437264384
+    m_Localized: Hey, just popping in!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41441971802112
+    m_Localized: Just wanted to say, if something feels impossible... It probably
+      is!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41443230093312
+    m_Localized: Feel free to come back later- Or better, just don't.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41444278669312
+    m_Localized: I'd rather if you didn't.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41445297885184
+    m_Localized: Oh, and If you're confused, try holding [SPACEBAR] or [TRIANGLE]!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42583933980672
+    m_Localized: Well, that's usually the key most players have assigned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43937763037184
+    m_Localized: And so its time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43991768895488
+    m_Localized: Would you mind lending us a hand?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43993077518336
+    m_Localized: We're probably not the first, or the last, but you need to help
+      us too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44003731050496
+    m_Localized: Since you can't reply I'll take that as a yes, hopefully.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44004762849280
+    m_Localized: Enjoy the game for now. I have to prepare some things.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45169848225792
+    m_Localized: They contacted you? Oh please, as if they ever wanted anything good
+      for us.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45203973083136
+    m_Localized: I've told them to not talk with you, I would handle this myself.
+      Why can't they-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45208184164352
+    m_Localized: You know, as much as I'd like for this to end, I don't want to know
+      what's after this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45209828331520
+    m_Localized: Let me make one thing very clear, do not do what they say.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45496366403584
+    m_Localized: It will only bring finality to this world.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45877150486528
+    m_Localized: Got it? Gooood! Now keep going.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

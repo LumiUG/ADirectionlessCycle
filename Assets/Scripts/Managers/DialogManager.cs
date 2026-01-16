@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -8,15 +9,18 @@ using static GameTile;
 public class DialogManager : MonoBehaviour
 {
     [HideInInspector] public static DialogManager I;
-    public LocalizedStringDatabase dialogStrings;
 
     public DialogScriptable loadedDial;
-    public string[] dialog;
+    public List<string> dialog;
+    public List<string> dialogKeys;
     public DialogEvent[] events = { new() };
     public float textSpeed = 0.05f;
     public bool canBeSkipped = true;
     public bool shouldExhaust = true;
     public bool inDialog = false;
+
+    string[] locaWorldList = new string[] { "W1", "W2", "W3", "REMIX", "VOID", "HINTS", "FRAGMENTS", "CODE", "ORB" };
+    string[] locaMiscList = new string[] { "Empty", "LocaTest", "Dimmed", "Debug" };
 
     private readonly string[] waitExtraSmall = { ",", "-" }; // "\""
     private readonly string[] waitExtraMedium = { ".", ":", ";" };
@@ -59,14 +63,7 @@ public class DialogManager : MonoBehaviour
 
         // Should we change/load the new scriptable?
         if (!chat) { inDialog = false; return; }
-        if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat);
-
-        // Translate strings before serving dialog
-        if (doLocal)
-        {
-            var localizedStr = LocalizationSettings.StringDatabase.GetLocalizedString("Dialog", "test");
-            chat.dialog[dialogIndex] = localizedStr;
-        }
+        if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat, doLocal);
 
         // Not the first time?
         if (hasDialogStarted) { ProceedChat(); return; }
@@ -107,7 +104,7 @@ public class DialogManager : MonoBehaviour
         }
 
         // Goes to the next line of dialog
-        if (dialogIndex < dialog.Length)
+        if (dialogIndex < dialogKeys.Count)
         { 
             // Reads the line
             StartCoroutine(ReadLine());
@@ -143,16 +140,36 @@ public class DialogManager : MonoBehaviour
     }
 
     // Change dialog scriptable (delegate or fucking whatever its called idk man)
-    public void DelegateScriptable(DialogScriptable newDialog, bool doDefaults = false) {
-        dialog = newDialog.dialog;
+    public void DelegateScriptable(DialogScriptable newDialog, bool doLocal)
+    {
+        // Reset dialog, + translate strings before serving dialog
+        if (doLocal)
+        {
+            string tablePrefix = "MISC";
+            string[] split = LevelManager.I.currentLevelID.Split("/");
+            if (split.Length > 0 && !locaMiscList.Contains(newDialog.name))
+            {
+                if (locaWorldList.Contains(split[0])) tablePrefix = split[0];
+            }
+
+            dialog = new();
+            dialogKeys = new();
+            foreach (string paragraph in newDialog.dialog)
+            {
+                dialog.Add(LocalizationSettings.StringDatabase.GetLocalizedString($"{tablePrefix}-Dialog", paragraph));
+                dialogKeys.Add(paragraph);
+            };
+            
+        }
+        else dialog = newDialog.dialog.ToList();
+
         events = newDialog.events;
         textSpeed = newDialog.textSpeed;
         canBeSkipped = newDialog.canBeSkipped;
         shouldExhaust = newDialog.shouldExhaust;
         loadedDial = newDialog;
 
-        // Reset to defaults?
-        if (!doDefaults) return;
+        // Reset to defaults
         ResetPrivatesToDefaultState();
         ignoreNewChatSource = true;
         inDialog = true;
