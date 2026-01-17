@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: W2-Dialog_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 15e6c43d2ac80e4449e15a4b56d8f850, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 212701679616
+    m_Localized: "Bienvenido al mundo dos. Personalmente, me gusta mucho esta \xE1rea."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 215591555072
+    m_Localized: "Solo para una peque\xF1a introducci\xF3n, como los buenos gu\xEDas
+      que somos:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 218758254592
+    m_Localized: "\"Aqu\xED experimentar\xE1s con diferentes estilos de puzles utilizando
+      m\xFAltiples formas\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226731626496
+    m_Localized: Estoy seguro de que lo pillaras, pero la verdad es que se complica
+      mucho al final.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228627451904
+    m_Localized: Igualmente, esperamos que disfrutes de este mundo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1755098255360
+    m_Localized: "Hey, he vuelto. Felicidades por llegar al \xE1rea dos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1759393222656
+    m_Localized: Espero que el no te haya dado mucho problema?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1760106254336
+    m_Localized: Perdoname por haberme ido antes, estaba comprovando y preparando
+      algunas cosas para ti.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1760727011328
+    m_Localized: Ugh, seria mucho mas facil si el juego estubiera acabado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1761356156928
+    m_Localized: Hay una "entrada forzada" en este mundo, explicare algunas cosas
+      cuando llegues.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762014662656
+    m_Localized: "Por ahora, simplemente intenta seguir! Disfruta mientras lo haces.
+      No habr\xE1 nada cuando acabes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2163413749760
+    m_Localized: Realmente no hay prisa cuando todo lo que tenemos es eternidad,
+      asi que tomate tu tiempo.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

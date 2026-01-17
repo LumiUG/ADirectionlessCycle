@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: Back
   m_EditorClassIdentifier: 
   dialog:
-  - Hey, I'm back. Congrats on making it into area two.
-  - They didn't give you too much trouble, I hope?
-  - Sorry for leaving before, I was checking some stuff and making sure everything
-    is ready for you.
-  - Hell, it'd be easier if the game was actually finished.
-  - There's a "forced entry" in this area, I'll explain everything there.
-  - For now, just try to follow along! Enjoy while you're at it. There won't be anything
-    soon.
+  - 2-4:Back
+  - 2-4:Back2
+  - 2-4:Back3
+  - 2-4:Back4
+  - 2-4:Back5
+  - 2-4:Back6
+  - 2-4:Back7
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

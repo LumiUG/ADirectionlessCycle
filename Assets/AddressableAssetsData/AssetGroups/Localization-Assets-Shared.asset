@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 15d62fcac48688e458f55157925900d7
   m_SerializeEntries:
+  - m_GUID: 15e6c43d2ac80e4449e15a4b56d8f850
+    m_Address: Assets/Localization/Strings/W2-Dialog Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 853e0d874aba04e4fa570dd25de024fb
     m_Address: Assets/Localization/Strings/Dialog Shared Data.asset
     m_ReadOnly: 1

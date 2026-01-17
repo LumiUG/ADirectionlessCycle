@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: W2-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 15e6c43d2ac80e4449e15a4b56d8f850, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 212701679616
+    m_Localized: Welcome to world two, I really like this area.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 215591555072
+    m_Localized: 'Just for a small intro, as the good guides that we are:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 218758254592
+    m_Localized: '"In here, you''ll experiment with different puzzle styles using
+      multiple types of shapes."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 226731626496
+    m_Localized: Im sure you'll get it, though it sure does get tricky at the end.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228627451904
+    m_Localized: Still, we hope you enjoy this world!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1755098255360
+    m_Localized: Hey, I'm back. Congrats on making it into area two.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1759393222656
+    m_Localized: They didn't give you too much trouble, I hope?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1760106254336
+    m_Localized: Sorry for leaving before, I was checking some stuff and making sure
+      everything is ready for you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1760727011328
+    m_Localized: Hell, it'd be easier if the game was actually finished.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1761356156928
+    m_Localized: There's a "forced entry" in this world, I'll explain some stuff
+      there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762014662656
+    m_Localized: For now, just try to follow along! Enjoy while you're at it. There
+      won't be anything soon.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2163413749760
+    m_Localized: There's really no rush when all we have is eternity, so do take
+      your time.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -47,6 +47,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_RGB_SHIFT
         passType: 0
+      - keywords: COLOR_FILTER TRANSITION_DISSOLVE
+        passType: 0
       - keywords: COLOR_FILTER TRANSITION_FADE
         passType: 0
       - keywords: COLOR_FILTER TRANSITION_PATTERN
