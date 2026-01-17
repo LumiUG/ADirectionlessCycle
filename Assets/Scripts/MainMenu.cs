@@ -4,6 +4,7 @@ using Coffee.UIEffects;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static TransitionManager.Transitions;
 
 public class MainMenu : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class MainMenu : MonoBehaviour
     public Image trialFillRemix;
     private bool trialVanilla = true;
     private int mewCount = 0;
+    private readonly string[] menuSelectorEffect = { "Discord", "Spanish", "English" };
     private readonly int[] trialClearsVanilla = { 12, 11, 9, 16 };
     private readonly int[] trialClearsCycle = { 5, 9, 3, 9 };
 
@@ -77,7 +79,7 @@ public class MainMenu : MonoBehaviour
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
         
-        if (EventSystem.current.currentSelectedGameObject.name == "Discord") UI.I.selectors.SetEffect(1);
+        if (menuSelectorEffect.Contains(EventSystem.current.currentSelectedGameObject.name)) UI.I.selectors.SetEffect(1);
         else UI.I.selectors.SetEffect(0);
     }
 
@@ -215,5 +217,10 @@ public class MainMenu : MonoBehaviour
     {
         trialVanilla = type;
         LoadTrial();
+    }
+
+    public void SetLocale(int index)
+    {
+        TransitionManager.I.TransitionIn(Refresh, Actions.SetLocale, $"{index}");
     }
 }

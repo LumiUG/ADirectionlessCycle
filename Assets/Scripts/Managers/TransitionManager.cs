@@ -114,4 +114,9 @@ public class TransitionManager : MonoBehaviour
         inTransition = false;
         doAfter?.Invoke(parameters);
     }
+
+    internal void TransitionIn(object refresh, Action<string> refreshCustomLevels, object filter)
+    {
+        throw new NotImplementedException();
+    }
 }

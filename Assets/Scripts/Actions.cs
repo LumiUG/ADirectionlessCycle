@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 using static TransitionManager.Transitions;
 using static GameTile;
 
@@ -208,5 +209,13 @@ public sealed class Actions : MonoBehaviour
 
         if (numberCount >= 5) TransitionManager.I.TransitionOut(Dive, ExtraDiveIn, $"{numberCount + 1}");
         else TransitionManager.I.TransitionOut(effects[numberCount - 1], DiveIn, $"{numberCount + 1}");
+    }
+
+    public static void SetLocale(string count)
+    {
+        int.TryParse(count, out int numberCount);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[numberCount];
+
+        TransitionManager.I.TransitionOut<string>(Refresh);
     }
 }

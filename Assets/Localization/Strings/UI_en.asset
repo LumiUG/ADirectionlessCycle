@@ -10,20 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: MISC-Dialog_es
+  m_Name: UI_en
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: es
-  m_SharedData: {fileID: 11400000, guid: 853e0d874aba04e4fa570dd25de024fb, type: 2}
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: cfb4654d68704cd4c9b2881941386cf3, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 27313442816
-    m_Localized: '[Las grabaciones se han oscurecido...]'
+  - m_Id: 89900847104
+    m_Localized: Credits
     m_Metadata:
       m_Items: []
-  - m_Id: 316376485888
-    m_Localized: '[Se ha desvanecido...]'
+  - m_Id: 6806244036608
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6845334949888
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6901035307008
+    m_Localized: Exit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7987448123392
+    m_Localized: Custom Levels
     m_Metadata:
       m_Items: []
   references:
