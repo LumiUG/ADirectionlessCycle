@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ADC.Localization;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using static GameTile;
@@ -19,8 +20,8 @@ public class DialogManager : MonoBehaviour
     public bool shouldExhaust = true;
     public bool inDialog = false;
 
-    string[] locaWorldList = new string[] { "W1", "W2", "W3", "REMIX", "VOID", "HINTS", "FRAGMENTS", "CODE", "ORB" };
-    string[] locaMiscList = new string[] { "Empty", "LocaTest", "Dimmed", "Debug" };
+    readonly string[] locaWorldList = new string[] { "W1", "W2", "W3", "REMIX", "VOID", "HINTS", "FRAGMENTS", "CODE", "ORB" };
+    readonly string[] locaMiscList = new string[] { "Empty", "LocaTest", "Dimmed", "Debug" };
 
     private readonly string[] waitExtraSmall = { ",", "-" }; // "\""
     private readonly string[] waitExtraMedium = { ".", ":", ";" };
@@ -156,7 +157,7 @@ public class DialogManager : MonoBehaviour
             dialogKeys = new();
             foreach (string paragraph in newDialog.dialog)
             {
-                dialog.Add(LocalizationSettings.StringDatabase.GetLocalizedString($"{tablePrefix}-Dialog", paragraph));
+                dialog.Add(Localization.GetStrings($"{tablePrefix}-Dialog", paragraph));
                 dialogKeys.Add(paragraph);
             };
             

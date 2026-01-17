@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - Seems like I'll need to spell it out for you.
-  - Do you remember this level? Its solution?
-  - Beat the level, but fill in red.
-  - Do note that there should be no extra shapes not overlapping red.
-  - ...It really is that simple.
+  - 2-12:Remix
+  - 2-12:Remix2
+  - 2-12:Remix3
+  - 2-12:Remix4
+  - 2-12:Remix5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

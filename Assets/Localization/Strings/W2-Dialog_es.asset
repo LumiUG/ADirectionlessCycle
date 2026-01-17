@@ -73,6 +73,243 @@ MonoBehaviour:
       asi que tomate tu tiempo.
     m_Metadata:
       m_Items: []
+  - m_Id: 378361935433728
+    m_Localized: '[Las grabaciones se han oscurecido?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378481351462912
+    m_Localized: "Vamos, d\xE9jame escribir..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377038498304000
+    m_Localized: "He estado esperando un momento as\xED desde que el juego fue abandonado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377169146679296
+    m_Localized: "Debes de estar confuso. Supongo que podr\xEDa darte algo de informaci\xF3n
+      b\xE1sica."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377170652434432
+    m_Localized: "Nadie ha tocado este ejecutable durante mucho tiempo. Y, no estoy
+      seguro de c\xF3mo funciona tu tiempo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377171323523072
+    m_Localized: Y con tiempo, todo se degrada. Has debido de encontrar... Donde
+      nos has encontrado?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377171877171200
+    m_Localized: "Raro, la \xFAltima cosa que vimos fue que todo esto iba a ser cancelado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377172707643392
+    m_Localized: "T\xFA estando aqu\xED es, lo dicho, raro. Pero es una grata sorpresa,
+      no me malinterpretes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377173701693440
+    m_Localized: De todos modos, no te olvides de pedirnos pistas si lo necesitas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377878596423680
+    m_Localized: "O, bueno, \"no\" a nosotros. Puedes utilizar la bombilla del men\xFA
+      de pausa para eso."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377919058874368
+    m_Localized: "Fuimos relegados de esa posici\xF3n hace mucho tiempo, jaja."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378481947054080
+    m_Localized: Por fin- Hola jugador! Me encanta este nivel. De verdad, te hace
+      pensar "fuera de la caja"-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378482576199680
+    m_Localized: "As\xED que, um. Espera, no utilizar\xEDas una pista, verdad?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384206698057728
+    m_Localized: "Cuando uno de los testers jug\xF3, estuvo unos 23 loops y... En
+      realidad, probablemente estaba AFK."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378483213733888
+    m_Localized: Este es mejor si lo experiencias tu solo. Sabes...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378483834490880
+    m_Localized: Ni pienses en darle a la bombilla.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378484589465600
+    m_Localized: "Lo sabr\xE9..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378857744109568
+    m_Localized: "Wowwww, no tienes verg\xFCenza."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 379146735849472
+    m_Localized: Es broma! Probablemente lo necesitabas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400019408687104
+    m_Localized: "Realmente me hace pensar... Encontraste esto en alg\xFAn escaneo?
+      La verdad es que no pareces cualificado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400052484968448
+    m_Localized: "Supongo que no importa, siempre y cuando termines lo que se empez\xF3."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400053101531136
+    m_Localized: "Por supuesto, no te pedir\xEDa que elimines tu copia del juego,
+      solo..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400054766669824
+    m_Localized: "Eh, olv\xEDdalo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441332179013632
+    m_Localized: 3 -> C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441372800847872
+    m_Localized: 12 -> L
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441410495057920
+    m_Localized: 23 5 12 3 15 13 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443009581846528
+    m_Localized: "Hey! Ya casi est\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443014371741696
+    m_Localized: "Por desgracia, este es el puzle m\xE1s dif\xEDcil del juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443237110255616
+    m_Localized: "Por qu\xE9 est\xE1 el puzle m\xE1s dif\xEDcil en \xC1rea 2? Ni
+      idea. Simplemente es as\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443014967332864
+    m_Localized: "No te culpar\xEDa si pillaras una pista o te saltaras esto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443015688753152
+    m_Localized: "Te estar\xE9 observando, juzg\xE1ndote en silencio."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444392481624064
+    m_Localized: '[Te sientes juzgado...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444675286765568
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444670354264064
+    m_Localized: "Woah. Este nivel est\xE1 mucho peor de lo que esperaba."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444671096655872
+    m_Localized: Una pena-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444671784521728
+    m_Localized: Espera, dame un segundo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444675995602944
+    m_Localized: Ah.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444676595388416
+    m_Localized: "Al parecer hab\xEDa una salida aqu\xED, me dice que se degrad\xF3
+      no mucho despu\xE9s de que llegaste aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444685550227456
+    m_Localized: Lo siento. Por suerte, no lo necesitabamos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451021826560000
+    m_Localized: "\"Si est\xE1s leyendo esto, he ganado.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451206166220800
+    m_Localized: Ves! Te dije que el jugador iba a comprobarlo, no puede evitarlo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451025609822208
+    m_Localized: Vamos, jugador, te lo acabo de decir.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451027631476736
+    m_Localized: "Lo digo en serio. Aqu\xED no hay nada, sin trucos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451029405667328
+    m_Localized: "Ja, te gusta mucho buscar este tipo de cosas, verdad? Es esa la
+      \xFAnica raz\xF3n por la que has venido aqu\xED?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451031842557952
+    m_Localized: "Lo siento. Pero este lugar est\xE1 hecho un desastre, deber\xEDas
+      irte."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459595210428416
+    m_Localized: "Est\xE1s haciendo buen progreso! Me alegra verte tan avanzado ya."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459595835379712
+    m_Localized: "Lamentablemente, debido a la degradaci\xF3n, este nivel es imposible.
+      Es mejor que lo saltes e ignores esas zonas rojas. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459598138052608
+    m_Localized: "Conf\xEDa en m\xED! Es mejor que te saltes este puzle, te lo prometo,
+      vale?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462120437288960
+    m_Localized: "No te lo creer\xE1s, verdad?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462121083211776
+    m_Localized: Venga, haz lo que siempre has hecho, solo... Haz lo contrario.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462121708163072
+    m_Localized: "\u2026En vez de rellenar verde."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462123775954944
+    m_Localized: Debes saber sobre lo que estoy hablando.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462124614815744
+    m_Localized: "Nos vemos all\xED, ya es hora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462503289163776
+    m_Localized: '"En un lugar donde todas las formas se encuentran, quema todo lo
+      que hay debajo"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462539746054144
+    m_Localized: "\"Por \xFAltimo, haz que el clon desaparezca de tu pantalla. Solo
+      entonces podr\xE1s cambiar\""
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

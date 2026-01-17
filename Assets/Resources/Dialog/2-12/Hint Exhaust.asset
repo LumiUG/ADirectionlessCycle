@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Hint Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - You aren't buying this, right?
-  - Come on, just do what you've always been doing, just... do the opposite.
-  - ...Instead of filling in green.
-  - Surely you know what I'm talking about.
-  - I'll meet you there, it's about time.
+  - 2-12:Exhaust
+  - 2-12:Exhaust2
+  - 2-12:Exhaust3
+  - 2-12:Exhaust4
+  - 2-12:Exhaust5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

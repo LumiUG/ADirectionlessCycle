@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: HINTS-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 4d6d1f96fc9ed2c42831a0577c2592fb, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 39795691520
+    m_Localized: Seems like I'll need to spell it out for you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42123530240
+    m_Localized: Do you remember this puzzle? Its solution?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45013405696
+    m_Localized: Beat the level, but fill in red.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46728876032
+    m_Localized: Do note that there should be no extra shapes not overlapping red.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 121026777088
+    m_Localized: ...It really is that simple.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

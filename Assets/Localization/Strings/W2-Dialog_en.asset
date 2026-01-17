@@ -71,6 +71,241 @@ MonoBehaviour:
       your time.
     m_Metadata:
       m_Items: []
+  - m_Id: 377038498304000
+    m_Localized: I've been hoping for a moment like this since the game was abandoned.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377169146679296
+    m_Localized: You must be confused. I suppose I could fill you in with some basic
+      information.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377170652434432
+    m_Localized: No one has touched this executable for a long time. And, I'm unsure
+      as to how your time works.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377171323523072
+    m_Localized: And with time, everything erodes. You must've found... Where did
+      you find us?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377171877171200
+    m_Localized: Odd, the last thing we saw was that this whole thing was being cancelled.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377172707643392
+    m_Localized: You being here is, well, odd. Though it is a welcome surprise, don't
+      get me wrong.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377173701693440
+    m_Localized: Anyhow, don't forget to ask us for a hint if you need it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377878596423680
+    m_Localized: Or, well, "not" us. You can use the lightbulb from your pause menu
+      for that.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 377919058874368
+    m_Localized: We were relegated from that position a long time ago, haha.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378361935433728
+    m_Localized: '[The carvings have dimmed?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378481351462912
+    m_Localized: 'Cmon, let me write... '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378481947054080
+    m_Localized: Finally- Hi player! Love this level. Really makes you think outside
+      the box-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378482576199680
+    m_Localized: So, um. Wait, you wouldn't go for a hint, right?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378483213733888
+    m_Localized: This is better experienced yourself. You know...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378483834490880
+    m_Localized: Don't you dare try the lightbulb.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378484589465600
+    m_Localized: I'll know...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 378857744109568
+    m_Localized: Wowwww, shame on you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 379146735849472
+    m_Localized: Just kidding! You probably needed it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384206698057728
+    m_Localized: When one of the testers was here, he spent around 23 loops, and...
+      Actually they probably were AFK.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400019408687104
+    m_Localized: It really makes me think... Did you find this off a scan? You sure
+      as hell don't seem qualified to.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400052484968448
+    m_Localized: I suppose it does not matter as long as you finish what was started,
+      that is.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400053101531136
+    m_Localized: Of course, I wouldn't ask of you to delete your copy of the game,
+      just...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 400054766669824
+    m_Localized: Ah, forget it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441332179013632
+    m_Localized: 3 -> C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441372800847872
+    m_Localized: 12 -> L
+    m_Metadata:
+      m_Items: []
+  - m_Id: 441410495057920
+    m_Localized: 23 5 12 3 15 13 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443009581846528
+    m_Localized: Yo! You're almost there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443014371741696
+    m_Localized: Sadly, this the hardest puzzle in the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443014967332864
+    m_Localized: Wouldn't blame you if you took a hint or skipped this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443015688753152
+    m_Localized: I'll be watching you closely, silently judging you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 443237110255616
+    m_Localized: Why is the hardest puzzle in Area 2? Beats me. It just is.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444392481624064
+    m_Localized: '[You feel judged...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444675286765568
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444670354264064
+    m_Localized: Sheesh. They really wiped this whole place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444671096655872
+    m_Localized: A shame-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444671784521728
+    m_Localized: Wait, give me a second.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444675995602944
+    m_Localized: Ah.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444676595388416
+    m_Localized: Apparently there was an exit here, tells me it degraded not too
+      long after you got here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 444685550227456
+    m_Localized: Sorry about that. Thankfully we didn't need this one.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451021826560000
+    m_Localized: '"If you''re reading this, I win."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451025609822208
+    m_Localized: Come on now player, I've just told you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451027631476736
+    m_Localized: I mean what I've said. There's nothing here, no tricks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451029405667328
+    m_Localized: Ha, you really like looking for this kind of stuff right? Is that
+      the only reason you came here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451031842557952
+    m_Localized: Sorry about that. But this place is messed up, you should get going.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 451206166220800
+    m_Localized: See! I told you the player was going to check, they just can't help
+      themselves.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459595210428416
+    m_Localized: You're making good progress! I'm happy to see you this far out already.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459595835379712
+    m_Localized: 'Sadly, due to degradation, this level is unsolvable. It''s better
+      you skip it and ignore those red areas. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 459598138052608
+    m_Localized: Trust me! You're better off skipping this one, I promise, okay?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462120437288960
+    m_Localized: You aren't buying this, right?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462121083211776
+    m_Localized: Come on, just do what you've always been doing, just... do the opposite.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462121708163072
+    m_Localized: ...Instead of filling in green.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462123775954944
+    m_Localized: Surely you know what I'm talking about.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462124614815744
+    m_Localized: I'll meet you there, it's about time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462503289163776
+    m_Localized: '"In a place where all shapes meet, burn everything below."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 462539746054144
+    m_Localized: '"Finally, make the clone dissapear out of view. Then and only then
+      you''ll cycle away."'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

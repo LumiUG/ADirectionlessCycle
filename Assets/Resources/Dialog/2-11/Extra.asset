@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Extra
   m_EditorClassIdentifier: 
   dialog:
-  - '"If you''re reading this, you''re reading this."'
-  - Come on now player, I've just told you.
-  - I mean what I've said. There's nothing here, no tricks.
-  - Ha, you really like looking for this kind of stuff right? Is that the only reason
-    you came here?
-  - Sorry about that really. But this place is messed up, you should get going.
+  - 2-11:Extra
+  - 2-11:Extra2
+  - 2-11:Extra3
+  - 2-11:Extra4
+  - 2-11:Extra5
+  - 2-11:Extra6
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

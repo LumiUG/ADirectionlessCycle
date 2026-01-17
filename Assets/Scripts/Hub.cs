@@ -39,6 +39,7 @@ public class Hub : MonoBehaviour
     private Animator animator;
     private int worldIndex = 0;
     private bool delayOneFrame = false;
+    private bool ignorePreviewEffect = true;
 
     private void Awake() => I = this; // No persistence!
 
@@ -73,7 +74,7 @@ public class Hub : MonoBehaviour
             remixCountText.text = $"{completedRealRemix[worldIndex]}/{remixHolders[worldIndex].transform.childCount}";
         }
         outboundCountText.text = $"{completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2]}";
-        MasteryEffect(0);
+        MasteryEffect(worldIndex);
 
         // Extra levels (this'll be a pain for players :3)
         int masterExtras = ExtraLevelsCount();
@@ -131,6 +132,11 @@ public class Hub : MonoBehaviour
             delayOneFrame = false;
         }
 
+        // Selector effect
+        if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || hubArrows.Find(arrow => arrow.gameObject == EventSystem.current.currentSelectedGameObject))
+            UI.I.selectors.SetEffect(0);
+
+        // Eventsystem related checks
         if (EventSystem.current.currentSelectedGameObject == null) { UI.I.selectors.ChangeSelected(backButton.gameObject); return; }
         if (EventSystem.current.currentSelectedGameObject == backButton.gameObject || EventSystem.current.currentSelectedGameObject.name == "Unlock Button") {
             remixList.ForEach(item => item.SetActive(false));
@@ -148,6 +154,7 @@ public class Hub : MonoBehaviour
         if (levelID.Contains(".")) levelID = $"REMIX/{lastSelectedlevel.name.Split("-")[1]}";
 
         SerializableLevel level = LevelManager.I.GetLevel(levelID, false, true);
+        ignorePreviewEffect = false;
         PreviewText(levelID);
 
         // Show proper remix levels attached
@@ -304,6 +311,8 @@ public class Hub : MonoBehaviour
     // Now as a function for mouse hovers!
     public void PreviewText(string levelID)
     {
+        if (!ignorePreviewEffect) UI.I.selectors.SetEffect(levelID.StartsWith("REMIX") || levelID.StartsWith("VOID") ? 1 : 0);
+        ignorePreviewEffect = true;
         if (levelID == "VOID/END") return;
 
         // Set the preview text

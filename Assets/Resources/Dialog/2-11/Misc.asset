@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Misc
   m_EditorClassIdentifier: 
   dialog:
-  - Yo! You're almost there.
-  - Remember if we ever said there was a hardest level? If so, we lied. This is worse.
-  - Wouldn't blame you if you took a hint or skipped this.
-  - I'll be watching you closely, silently judging you.
+  - 2-11:Misc
+  - 2-11:Misc2
+  - 2-11:Misc3
+  - 2-11:Misc4
+  - 2-11:Misc5
   events: []
   exhaustDialog: {fileID: 11400000, guid: 23c03d4a8318c5c44b2e3b1922f493ec, type: 2}
   textSpeed: 0.05

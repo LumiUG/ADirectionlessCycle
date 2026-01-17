@@ -9400,7 +9400,7 @@ MonoBehaviour:
           value: 440
         - localeIdentifier:
             m_Code: es
-          value: 275
+          value: 280
     - rid: 502597045715468327
       type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
       data:
@@ -9411,7 +9411,7 @@ MonoBehaviour:
           value: 680
         - localeIdentifier:
             m_Code: es
-          value: 350
+          value: 360
     - rid: 502597045715468328
       type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
       data:

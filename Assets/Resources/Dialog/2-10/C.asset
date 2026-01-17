@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: C
   m_EditorClassIdentifier: 
   dialog:
-  - 3 -> C
+  - 2-10:C
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

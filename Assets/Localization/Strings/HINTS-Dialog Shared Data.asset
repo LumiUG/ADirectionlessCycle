@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: HINTS-Dialog Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: HINTS-Dialog
+  m_TableCollectionNameGuidString: 4d6d1f96fc9ed2c42831a0577c2592fb
+  m_Entries:
+  - m_Id: 39795691520
+    m_Key: 2-12:Remix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42123530240
+    m_Key: 2-12:Remix2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45013405696
+    m_Key: 2-12:Remix3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46728876032
+    m_Key: 2-12:Remix4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 121026777088
+    m_Key: 2-12:Remix5
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 502597060119756817
+  references:
+    version: 2
+    RefIds:
+    - rid: 502597060119756817
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1768684494554

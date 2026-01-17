@@ -298,6 +298,7 @@ public class UI : MonoBehaviour
             
             switch (split[1])
             {
+                // LocalizationSettings.StringDatabase.GetLocalizedString("Hints", stringID)
                 case "Rybb":  { popup.SetPopup("Will be added in a future update! Forgot..."); return; }
                 case "Orb One":
                     {

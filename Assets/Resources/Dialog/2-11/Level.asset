@@ -13,15 +13,13 @@ MonoBehaviour:
   m_Name: Level
   m_EditorClassIdentifier: 
   dialog:
-  - Sheesh. They really wiped this whole place.
-  - A shame-
-  - Wait, give me a second.
-  - ...
-  - ...
-  - Ah.
-  - Apparently there was an exit here, tells me it degraded not too long after you
-    got here.
-  - Sorry about that. Thankfully we didn't need this one.
+  - 2-11:Level
+  - 2-11:Level2
+  - 2-11:Level3
+  - 2-11:Level4
+  - 2-11:Level5
+  - 2-11:Level6
+  - 2-11:Level7
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05
