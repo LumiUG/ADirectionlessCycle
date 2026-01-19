@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Umbrella
   m_EditorClassIdentifier: 
   dialog:
-  - It really makes me think... Did you find this off a scan? You sure as hell don't
-    seem qualified to.
-  - I suppose it does not matter as long as you finish what was started, that is.
-  - Of course, I wouldn't ask of you to delete your copy of the game, just...
-  - Ah, forget it.
+  - 2-9:Umbrella
+  - 2-9:Umbrella2
+  - 2-9:Umbrella3
+  - 2-9:Umbrella4
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

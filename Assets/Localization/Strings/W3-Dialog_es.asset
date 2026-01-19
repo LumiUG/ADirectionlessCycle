@@ -140,8 +140,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 511467879272448
-    m_Localized: "\xA1Da igual! Eres demasiado valioso. No queremos que pierdas contacto
-      con nosotros ni que corrompas el juego."
+    m_Localized: Da igual! Eres demasiado valioso. No queremos que pierdas contacto
+      con nosotros ni que corrompas el juego.
     m_Metadata:
       m_Items: []
   - m_Id: 512703189880832
@@ -224,8 +224,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 520058824691712
-    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s Entra en
-      lo negativo.\""
+    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s. Entra
+      en lo negativo.\""
     m_Metadata:
       m_Items: []
   - m_Id: 520059718078464
@@ -264,8 +264,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 520626817339392
-    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s Entra en
-      lo negativo.\""
+    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s. Entra
+      en lo negativo.\""
     m_Metadata:
       m_Items: []
   - m_Id: 520626154639360
@@ -313,7 +313,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 521464684089344
-    m_Localized: "Para poder ciclar correctamente, tienes ser la \xFAnica forma activa
+    m_Localized: "Para poder ciclar correctamente, debes ser la \xFAnica forma activa
       en la pantalla."
     m_Metadata:
       m_Items: []
