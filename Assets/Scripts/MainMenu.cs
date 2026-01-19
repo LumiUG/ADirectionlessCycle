@@ -221,6 +221,6 @@ public class MainMenu : MonoBehaviour
 
     public void SetLocale(int index)
     {
-        TransitionManager.I.TransitionIn(Refresh, Actions.SetLocale, $"{index}");
+        TransitionManager.I.TransitionIn(Reveal, Actions.SetLocale, $"{index}");
     }
 }

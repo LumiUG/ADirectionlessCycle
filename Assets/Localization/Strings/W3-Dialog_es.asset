@@ -17,7 +17,311 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: c572d2439bbdad44795d7372ea9922e6, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 496387406041088
+    m_Localized: Bienvenido al Mundo 3...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496390123950080
+    m_Localized: "\"Aqu\xED jugar\xE1s con el Hex, este salta dos veces!\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496393546502144
+    m_Localized: "\"Es la forma m\xE1s interesante, ya que siempre se mueve primero.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496437930627072
+    m_Localized: ...E-entre otras cosas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496448550604800
+    m_Localized: Lo siento, no tengo mucho que decir. Simplemente no me gusta mucho
+      este lugar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496449129418752
+    m_Localized: "Como puedes ver, todo se degradar\xE1 m\xE1s a medida que te acerques
+      al centro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496450245103616
+    m_Localized: "Supongo que est\xE1s en camino hasta el centro, porque claro que
+      lo est\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500908379213824
+    m_Localized: "El vac\xEDo ha podido reclamar esta salida. Puedes verlo?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500913060057088
+    m_Localized: "Recuerdo que al desarrollador le gustaba especialmente esta zona.
+      Y no voy a mentir, creo que puedo ver su visi\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500913538207744
+    m_Localized: "Se tom\xF3 su tiempo para desarrollar todo a fondo-"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500914695835648
+    m_Localized: "Ah? La salida? Todav\xEDa no tienes lo que necesitas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504384836472832
+    m_Localized: "Jaja, a veces no es tan f\xE1cil como parece."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504921120182272
+    m_Localized: "S\xED... El centro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504921778688000
+    m_Localized: Me parece que no hemos hablado mucho sobre el centro, verdad?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504922462359552
+    m_Localized: "Bueno, por d\xF3nde empiezo..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504923070533632
+    m_Localized: "El centro se cre\xF3 como la \xFAltima \xE1rea del juego, una especie
+      de \"laberinto\" que utiliza todo lo que has visto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504924223967232
+    m_Localized: Desgraciadamente para nosotros, todo se ha degradado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504925385789440
+    m_Localized: "Por suerte, tengo una especie de plan. Lo \xFAnico es que requiere
+      que vayas a explorar algunos lugares."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504926425976832
+    m_Localized: "No te preocupes por eso ahora mismo, no sirve de nada. Intentar\xE9
+      que sea divertido para ti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509084843511808
+    m_Localized: "Soy muy consciente de por qu\xE9 \xE9l quiere que llegues al centro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509085489434624
+    m_Localized: "Pero no pareces saber de qu\xE9 va la cosa. Es como si lo estuvieras
+      haciendo sin motivo alguno. Quieres que te lo explique?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509086177300480
+    m_Localized: Claro.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509087091658752
+    m_Localized: "\xC9l cree que el n\xFAcleo tiene alg\xFAn tipo de funci\xF3n para
+      eliminar datos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509087859216384
+    m_Localized: "Y quiero decir, no est\xE1 equivocado. Sabemos con seguridad que
+      existe. Es solo que..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509088928763904
+    m_Localized: "Tiene que estar roto! Tiene que estarlo, debe estar demasiado deteriorado,
+      o algo podr\xEDa haber..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509089784401920
+    m_Localized: "Ugh! Por qu\xE9 \xEDbamos a ser borrados al activar el final del
+      juego? No tiene sentido! Es imposible que la memoria se haya deteriorado tanto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509090946224128
+    m_Localized: "A menos que... Encontro una forma de activar la funci\xF3n desde
+      all\xED? N-no... Vi a alguien manipulando la memoria, pero..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 511467879272448
+    m_Localized: "\xA1Da igual! Eres demasiado valioso. No queremos que pierdas contacto
+      con nosotros ni que corrompas el juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 512703189880832
+    m_Localized: "As\xED que... Qu\xE9date aqu\xED, vale?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514214087233536
+    m_Localized: Ah...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514219338502144
+    m_Localized: Por cierto, perdona si ves algunas grabaciones sin borrar, jugador.
+      A veces se nos olvida borrarlas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514219908927488
+    m_Localized: "Pero esta no! T\xFA. No vas. A leerlo. Nunca- %fin%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517685049954304
+    m_Localized: "Uno de los niveles m\xE1s interesantes. Oh, la reacci\xF3n que
+      vas a tener cuando lo pilles."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517685712654336
+    m_Localized: "Qu\xE9? No pensar\xEDas que este ser\xEDa uno de los \xFAltimos
+      niveles, verdad?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517687172272128
+    m_Localized: El centro espera, el centro espera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518025342226432
+    m_Localized: "Lo has conseguido. El artefacto que buscamos est\xE1 en el siguiente
+      nivel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518028110467072
+    m_Localized: "No tenemos ning\xFAn consejo sobre este nivel, pero probablemente
+      puedas hacerlo t\xFA solo. Es muy sencillo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 519970601701376
+    m_Localized: "3-10... C\xF3mo he llegado a odiar este sitio."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 519971205681152
+    m_Localized: "\xC9l ha... Mira, sea lo que sea lo que te haya dicho- %fin%"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520053766361088
+    m_Localized: '%inicio% Mi turno!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520054487781376
+    m_Localized: "Esta va a ser tu \"\xFAltima parada\" antes del final."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520055293087744
+    m_Localized: "Y est\xE1 llena de c\xF3digos, lo cual molesta. Yo mismo los descifrar\xE9
+      por ti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520055997730816
+    m_Localized: Empezando con este!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520056731734016
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520057457348608
+    m_Localized: 'Yyyy, hecho. Deja que te lo lea:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520058145214464
+    m_Localized: "\"En las profundidades de \xC1rea 1 se encuentra el segundo de
+      los fragmentos que buscas.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520058824691712
+    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s Entra en
+      lo negativo.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520059718078464
+    m_Localized: "\"Una vez all\xED, encuentra el camino de la luz.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520323049066496
+    m_Localized: "Estar\xE1s pensando, por qu\xE9 hacer esto?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520327209816064
+    m_Localized: "Es divertido! Adem\xE1s, si te lo digo ahora, arruinar\xEDa la
+      sorpresa, no?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520327872516096
+    m_Localized: "Pero si quieres saberlo... Es una mec\xE1nica que fue abandonada
+      por el desarrollador."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520339742396416
+    m_Localized: "Te permitir\xE1 desbloquear el centro a pesar de la degradaci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520343802482688
+    m_Localized: "Pero! A\xFAn estoy trabajando en ello. As\xED que ya lo ver\xE1s,
+      ya lo ver\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520607112499200
+    m_Localized: "Necesitas que lo repita? Aqu\xED lo tienes:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520627966578688
+    m_Localized: "\"Una vez all\xED, encuentra el camino de la luz.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520626817339392
+    m_Localized: "\"Si quieres encontrar la entrada... Ves hacia atr\xE1s Entra en
+      lo negativo.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520626154639360
+    m_Localized: "\"En las profundidades de \xC1rea 1 se encuentra el segundo de
+      los fragmentos que buscas.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521046478426112
+    m_Localized: "Esta ser\xE1 la \xFAltima cosa que necesitas saber."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521047187263488
+    m_Localized: Al moverte entre pantallas, puedes llevar contigo otras formas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521048013541376
+    m_Localized: "Para hacerlo, ambos \"vosotros\" ten\xE9is que salir de la pantalla
+      al mismo tiempo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521049372495872
+    m_Localized: "La otra forma debe estar a una casilla de distancia de la siguiente
+      pantalla, o movi\xE9ndose hacia ella."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521050580455424
+    m_Localized: Confuso? No te lo voy a negar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521051914244096
+    m_Localized: "Solo aseg\xFArate de que sales al mismo tiempo y podr\xE1s hacerlo
+      consistentemente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521403623411712
+    m_Localized: "Venga ya! D\xE9jame hablar con el jugador, quieres?!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521404185448448
+    m_Localized: Odio cuando haces esto! Ya hemos hablado de esto ant- %fin%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521464096886784
+    m_Localized: "%inicio% Ahem, como habr\xE1s notado, a veces tu ciclo no funciona."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521464684089344
+    m_Localized: "Para poder ciclar correctamente, tienes ser la \xFAnica forma activa
+      en la pantalla."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521465292263424
+    m_Localized: "Si hay m\xE1s de una forma activa, tendr\xE1s que... deshacerte
+      de una de ellas."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

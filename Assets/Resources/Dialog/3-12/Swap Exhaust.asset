@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Swap Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - '%begin% So! As you might have noticed, your swap sometimes won''t work.'
-  - To be able to swap properly, you'll need to be the only active shape on a screen.
-  - If there is more than one shape active, you'll have to... dispose of one of them.
+  - 3-12:SwapEx
+  - 3-12:SwapEx2
+  - 3-12:SwapEx3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

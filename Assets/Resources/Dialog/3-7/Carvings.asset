@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Carvings
   m_EditorClassIdentifier: 
   dialog:
-  - Ah...
-  - By the way, sorry if you see some carvings left open, player. Sometimes we forget
-    to erase them.
-  - Not this one, though! You. Aren't. Reading that. Ever- %end%
+  - 3-7:Carvings
+  - 3-7:Carvings2
+  - 3-7:Carvings3
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

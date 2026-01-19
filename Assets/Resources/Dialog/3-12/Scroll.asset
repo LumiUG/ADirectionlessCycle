@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Scroll
   m_EditorClassIdentifier: 
   dialog:
-  - This'll be the last thing you need to know.
-  - When traversing across screens, you can take other shapes with you.
-  - To do so, both of 'you' must move out of the screen at the same time.
-  - The other shape, however, must be one tile away from the next screen, or moving
-    into it.
-  - Confusing? Sure is.
-  - Just make sure to exit at the same time, and you'll be able to pull it off every
-    time.
+  - 3-12:Scroll
+  - 3-12:Scroll2
+  - 3-12:Scroll3
+  - 3-12:Scroll4
+  - 3-12:Scroll5
+  - 3-12:Scroll6
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

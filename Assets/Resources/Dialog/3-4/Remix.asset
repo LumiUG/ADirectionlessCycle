@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - The void was able to claim this exit. Can you see it?
-  - I remember the developer being especially fond of this third area.
-  - They really took their sweet time with it, to really flesh everything out-
-  - Oh? The exit? You don't have what you need yet.
+  - 3-4:Remix
+  - 3-4:Remix2
+  - 3-4:Remix3
+  - 3-4:Remix4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -17,7 +17,306 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: c572d2439bbdad44795d7372ea9922e6, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 496387406041088
+    m_Localized: Welcome to World 3...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496390123950080
+    m_Localized: '"Here you''ll play with the Hex, it jumps over twice!"'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496393546502144
+    m_Localized: '"It''s the most interesting shape, as it will always move first."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496437930627072
+    m_Localized: ...A-among other stuff.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496448550604800
+    m_Localized: Sorry, I don't have much to say. I just don't like this place much.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496449129418752
+    m_Localized: As you can see, it'll degrade more and more the closer you get to
+      the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 496450245103616
+    m_Localized: Which I'm guessing you're on your way there, because of course you
+      are.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500908379213824
+    m_Localized: The void was able to claim this exit. Can you see it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500913060057088
+    m_Localized: I remember the developer being especially fond of this third area.
+      And to be honest, I can kinda see the vision.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500913538207744
+    m_Localized: Took their sweet time with it, too. To really flesh everything out-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 500914695835648
+    m_Localized: Oh? The exit? You don't have what you need yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504384836472832
+    m_Localized: Haha, It's always not as easy at it seems.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504921120182272
+    m_Localized: Yeah... The core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504921778688000
+    m_Localized: Don't think we've talked too much about the core, have we?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504922462359552
+    m_Localized: Well, where to begin...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504923070533632
+    m_Localized: 'The core was created as the last area in the game, a sort of "maze"
+      showcasing everything you''ve seen. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504924223967232
+    m_Localized: Unfortunately for all of us, everything has degraded.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504925385789440
+    m_Localized: I do have some sort of plan, though. But it requires you to go exploring
+      some places.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 504926425976832
+    m_Localized: Don't stress about it right now, there's no use. I'll try to make
+      it fun for you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509084843511808
+    m_Localized: I'm well aware why they want you to reach the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509085489434624
+    m_Localized: You don't seem so aware, though. It's like you're doing this for
+      no reason. Would you like an explanation?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509086177300480
+    m_Localized: Of course.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509087091658752
+    m_Localized: They believe that the core has some sort of function to delete data.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509087859216384
+    m_Localized: And I mean, they aren't wrong. We know for a fact it exists. It's
+      just...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509088928763904
+    m_Localized: It's definitely broken! It has to be, it's just too degraded, or
+      something could've...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509089784401920
+    m_Localized: Ugh! Why would activating the game's ending delete us? It just makes
+      no sense! There's no way the memory addresses got this bad.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 509090946224128
+    m_Localized: Unless... Did they find a way to activate the function from there?
+      N-no, they... I did see someone tampering with memory, but...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 511467879272448
+    m_Localized: Regardless! You're way too valuable. We wouldn't want you losing
+      contact with us, or corrupting the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 512703189880832
+    m_Localized: So... Stay here, will you?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514214087233536
+    m_Localized: Ah...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514219338502144
+    m_Localized: By the way, sorry if you see some carvings left open, player. Sometimes
+      we forget to erase them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 514219908927488
+    m_Localized: Not this one, though! You. Aren't. Reading that. Ever- %end%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517685049954304
+    m_Localized: One of the more interesting levels. Oh the reaction you'll have
+      when it clicks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517685712654336
+    m_Localized: What? You didn't think this would be one of the last levels, did
+      you?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 517687172272128
+    m_Localized: The core waits, the core waits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518025342226432
+    m_Localized: You made it. The artifact you are looking for is in the next level.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 518028110467072
+    m_Localized: We don't have any tips on this one, but you can probably figure
+      it out. It's very straightforward.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 519970601701376
+    m_Localized: 3-10... How I've come to hate this place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 519971205681152
+    m_Localized: They've... Look, whatever they've been telling you- %end%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520053766361088
+    m_Localized: '%begin% My turn!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520054487781376
+    m_Localized: This'll be your "last stop" before the end.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520055293087744
+    m_Localized: It's filled with cyphers, which are annoying. I'll decypher them
+      for you myself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520055997730816
+    m_Localized: Starting with this one!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520056731734016
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520057457348608
+    m_Localized: 'Aaand, done. I''ll read it out for you:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520058145214464
+    m_Localized: '"The depths of Area 1 holds the second of the fragments you seek."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520058824691712
+    m_Localized: '"If you wish to find the entrance... Go backwards. Go into the
+      negatives."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520059718078464
+    m_Localized: '"Once there, seek the path of light."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520323049066496
+    m_Localized: You might be thinking, why do this?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520327209816064
+    m_Localized: It's fun! Besides, if I tell you now, it would ruin the surprise,
+      wouldn't it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520327872516096
+    m_Localized: But if you'd like to know... It's a mechanic that was abandoned
+      by the developer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520339742396416
+    m_Localized: It'll allow you to unlock the core despite the degradation.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520343802482688
+    m_Localized: But! I'm still working on it. So you'll see, you'll see.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520607112499200
+    m_Localized: 'Do you need me to repeat it? Here you go:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520626154639360
+    m_Localized: '"The depths of Area 1 holds the second of the fragments you seek."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520626817339392
+    m_Localized: '"If you wish to find the entrance... Go backwards. Go into the
+      negatives."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 520627966578688
+    m_Localized: '"Once there, seek the path of light."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521046478426112
+    m_Localized: This'll be the last thing you need to know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521047187263488
+    m_Localized: When traversing across screens, you can take other shapes with you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521048013541376
+    m_Localized: To do so, both of 'you' must move out of the screen at the same
+      time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521049372495872
+    m_Localized: The other shape, however, must be one tile away from the next screen,
+      or moving into it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521050580455424
+    m_Localized: Confusing? Sure is.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521051914244096
+    m_Localized: Just make sure to exit at the same time, and you'll be able to pull
+      it off every time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521403623411712
+    m_Localized: Goddammit! Let me talk with the player, will you?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521404185448448
+    m_Localized: I hate it when you do this! We've talked about this bef- %end%
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521464096886784
+    m_Localized: '%begin% So! As you might have noticed, your cycle sometimes won''t
+      work.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521464684089344
+    m_Localized: To be able to swap properly, you'll need to be the only active shape
+      on a screen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 521465292263424
+    m_Localized: If there is more than one shape active, you'll have to... dispose
+      of one of them.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

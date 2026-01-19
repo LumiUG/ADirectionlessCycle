@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Light Bloat
   m_EditorClassIdentifier: 
   dialog:
-  - You might be thinking, why do this?
-  - It's fun! Besides, if I tell you now, it would ruin the surprise, wouldn't it?
-  - But if you'd like to know... It's a mechanic that was abandoned by the developer.
-  - It'll allow you to unlock the core despite the degradation.
-  - But! I'm still working on it. So you'll see, you'll see.
+  - 3-12:Bloat
+  - 3-12:Bloat2
+  - 3-12:Bloat3
+  - 3-12:Bloat4
+  - 3-12:Bloat5
   events: []
   exhaustDialog: {fileID: 11400000, guid: 8de5ce74c19ac944799117af9ad45878, type: 2}
   textSpeed: 0.05

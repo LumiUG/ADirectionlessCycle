@@ -216,6 +216,6 @@ public sealed class Actions : MonoBehaviour
         int.TryParse(count, out int numberCount);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[numberCount];
 
-        TransitionManager.I.TransitionOut<string>(Refresh);
+        TransitionManager.I.TransitionOut<string>(Reveal);
     }
 }

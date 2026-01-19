@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Entry
   m_EditorClassIdentifier: 
   dialog:
-  - One of the more interesting levels. Oh the reaction you'll have when it clicks.
-  - What? You didn't think this would be one of the last levels, did you?
-  - The core waits, the core waits.
+  - 3-9:Entry
+  - 3-9:Entry2
+  - 3-9:Entry3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

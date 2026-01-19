@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Light Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - '%begin% My turn!'
-  - This'll be your "last stop" before the end.
-  - It's filled with cyphers, which are annoying. I'll decypher them for you myself.
-  - Starting with this one!
-  - ...
-  - 'Aaand, done. I''ll read it out for you:'
-  - '"The depths of Area 1 holds the second of the fragments you seek."'
-  - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
-  - '"Once there, seek the path of light."'
+  - 3-12:LightEx
+  - 3-12:LightEx2
+  - 3-12:LightEx3
+  - 3-12:LightEx4
+  - 3-12:LightEx5
+  - 3-12:LightEx6
+  - 3-12:LightEx7
+  - 3-12:LightEx8
+  - 3-12:LightEx9
   events: []
   exhaustDialog: {fileID: 11400000, guid: 57bff38966a43694a936dd9279e9a826, type: 2}
   textSpeed: 0.05

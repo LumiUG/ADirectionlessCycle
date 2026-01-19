@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Remix
   m_EditorClassIdentifier: 
   dialog:
-  - You made it. The artifact you are looking for is in the next level.
-  - We don't have any tips on this one, but you can probably figure it out.
+  - 3-9:Remix
+  - 3-9:Remix2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

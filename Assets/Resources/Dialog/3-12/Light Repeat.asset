@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Light Repeat
   m_EditorClassIdentifier: 
   dialog:
-  - 'Do you need me to repeat it? Here you go:'
-  - '"The depths of Area 1 holds the second of the fragments you seek."'
-  - '"If you wish to find the entrance... Go backwards. Go into the negatives."'
-  - '"Once there, seek the path of light."'
+  - 3-12:Repeat
+  - 3-12:Repeat2
+  - 3-12:Repeat3
+  - 3-12:Repeat4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
