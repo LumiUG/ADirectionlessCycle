@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hi
   m_EditorClassIdentifier: 
   dialog:
-  - Ha! Made you look.
+  - Scorching:Hi
   events: []
   exhaustDialog: {fileID: 11400000, guid: 890dc0391f6117d46b2b167c806058bb, type: 2}
   textSpeed: 0.05

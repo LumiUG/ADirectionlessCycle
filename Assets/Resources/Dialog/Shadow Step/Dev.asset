@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Dev
   m_EditorClassIdentifier: 
   dialog:
-  - It is quite interesting how the developer designed some of the levels.
-  - Apparently, this level's behaviour was a bug, but later was repurposed in as
-    a mechanic.
-  - In my opinion, it is stupid. A bug is a bug.
-  - The developer even made levels with mimics! You've seen them before, right?
-  - Well, apparently if you placed two of them next to eachother, everything would
-    crash!
-  - And it's still in the game! Unbelieveable.
+  - ShadowStep:Dev
+  - ShadowStep:Dev2
+  - ShadowStep:Dev3
+  - ShadowStep:Dev4
+  - ShadowStep:Dev5
+  - ShadowStep:Dev6
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

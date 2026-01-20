@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64891dcf5c95f4048abe3ca80a5a7cea
+    m_Address: Assets/Localization/Strings/REMIX-Dialog Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 853e0d874aba04e4fa570dd25de024fb
     m_Address: Assets/Localization/Strings/Dialog Shared Data.asset
     m_ReadOnly: 1

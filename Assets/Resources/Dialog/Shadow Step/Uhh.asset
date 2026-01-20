@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Uhh
   m_EditorClassIdentifier: 
   dialog:
-  - Uhh...
-  - Yeah...!
-  - There's no more codes left!! How dare you find this area?!
-  - Maybe... Maybe if you're an editor?
-  - Just for you, just for you. Try out "overflow".
+  - ShadowStep:Uhh
+  - ShadowStep:Uhh2
+  - ShadowStep:Uhh3
+  - ShadowStep:Uhh4
+  - ShadowStep:Uhh5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

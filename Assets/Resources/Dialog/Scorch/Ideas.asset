@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Ideas
   m_EditorClassIdentifier: 
   dialog:
-  - Alright, now for real.
-  - I actually ran out of ideas, here. Can you believe it?
-  - Sure, I could've made an entire puzzle here, but... Oh well.
-  - Hey, this is better than a puzzle, riiiiiiiiiiight?
-  - Of course it is!
+  - Scorching:Ideas
+  - Scorching:Ideas2
+  - Scorching:Ideas3
+  - Scorching:Ideas4
+  - Scorching:Ideas5
   events: []
   exhaustDialog: {fileID: 11400000, guid: ce2beeb8e0d709e4bb97ae27dd701f21, type: 2}
   textSpeed: 0.05

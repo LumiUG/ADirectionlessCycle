@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Sorry
   m_EditorClassIdentifier: 
   dialog:
-  - Hey.
-  - Just wanted to let you know that this is the hardest level in the game.
-  - We would help you, but we are forbidden to give hints here.
-  - Sorry, not sorry.
-  - But hey, if it makes you feel better... There's a nice fire down there, go warm
-    up.
+  - Industrial:Sorry
+  - Industrial:Sorry2
+  - Industrial:Sorry3
+  - Industrial:Sorry4
   events: []
-  exhaustDialog: {fileID: 0}
+  exhaustDialog: {fileID: 11400000, guid: 56b49f33395129d47896509a162eb028, type: 2}
   textSpeed: 0.05
   sfx: {fileID: 8300000, guid: 90ea021facc343249b4e23a9ca64b4d7, type: 3}
   shouldExhaust: 0

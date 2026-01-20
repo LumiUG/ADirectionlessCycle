@@ -66,6 +66,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e83e1880c01f24a4fb8c960d747f257f
+    m_Address: REMIX-Dialog_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a4b5de3d8132ceb488ae52f679dc8d4e, type: 2}
   m_SchemaSet:

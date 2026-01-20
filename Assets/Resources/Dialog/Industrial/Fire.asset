@@ -10,15 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb63b0fb03bfa24e83cf94c70c58aa2, type: 3}
-  m_Name: Stop
+  m_Name: Fire
   m_EditorClassIdentifier: 
   dialog:
-  - EmptySpace:Stop
-  - EmptySpace:Stop2
-  - EmptySpace:Stop3
-  - EmptySpace:Stop4
-  - EmptySpace:Stop5
-  - EmptySpace:Stop6
+  - Industrial:Fire
+  - Industrial:Fire2
+  - Industrial:Fire3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

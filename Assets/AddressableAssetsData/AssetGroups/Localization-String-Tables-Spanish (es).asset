@@ -45,6 +45,13 @@ MonoBehaviour:
     - Locale-es
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79864f3851dc6d5418bd9b4b676fb1d1
+    m_Address: REMIX-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b42c10fd9c4a50b44808e52ffcabe790
     m_Address: W3-Dialog_es
     m_ReadOnly: 1
