@@ -3,7 +3,9 @@ using System.Linq;
 using Coffee.UIEffects;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using ADC.Localization;
 using static TransitionManager.Transitions;
 
 public class MainMenu : MonoBehaviour
@@ -221,6 +223,8 @@ public class MainMenu : MonoBehaviour
 
     public void SetLocale(int index)
     {
+        if (LocalizationSettings.SelectedLocale == Localization.GetLocale(index)) { UI.I.BadSound(); return; }
+        
         TransitionManager.I.TransitionIn(Reveal, Actions.SetLocale, $"{index}");
     }
 }

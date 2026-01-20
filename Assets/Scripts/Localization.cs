@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace ADC.Localization
@@ -10,6 +11,11 @@ namespace ADC.Localization
             string localizedString = LocalizationSettings.StringDatabase.GetLocalizedString(table, stringId);
             if (localizedString.StartsWith("No translation found for")) localizedString = stringId;
             return localizedString;
+        }
+
+        public static Locale GetLocale(int index)
+        {
+            return LocalizationSettings.AvailableLocales.Locales[index];
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Localization.Settings;
 using static TransitionManager.Transitions;
 using static GameTile;
+using ADC.Localization;
 
 public sealed class Actions : MonoBehaviour
 {
@@ -214,7 +215,7 @@ public sealed class Actions : MonoBehaviour
     public static void SetLocale(string count)
     {
         int.TryParse(count, out int numberCount);
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[numberCount];
+        LocalizationSettings.SelectedLocale = Localization.GetLocale(numberCount);
 
         TransitionManager.I.TransitionOut<string>(Reveal);
     }

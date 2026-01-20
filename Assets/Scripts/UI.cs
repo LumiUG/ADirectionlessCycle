@@ -276,6 +276,12 @@ public class UI : MonoBehaviour
         GameManager.save.preferences.SFXVolume = value;
     }
 
+    // Font
+    public void UpdateFont(bool toggle) { GameManager.save.preferences.accessibleFont = toggle; }
+
+    // Input
+    public void ToggleRepeatingInput(bool toggle) { GameManager.save.preferences.repeatInput = toggle; }
+
     // Goes to the current level's
     public void CurrentLevelHint()
     {
@@ -576,13 +582,15 @@ public class UI : MonoBehaviour
     {
         public Slider masterSlider;
         public Slider sfxSlider;
+        public Toggle repeatToggle;
+        public Toggle fontToggle;
         public Button backBtn;
 
         public override void Toggle(bool toggle)
         {
             if (toggle) { I.selectors.ChangeSelected(backBtn.gameObject, true); SetupSettings(); }
             else {
-                if (I.pause.self.activeSelf) I.selectors.ChangeSelected(I.pause.backToMenu.gameObject, true);
+                if (I.pause.self.activeSelf) I.selectors.ChangeSelected(I.pause.backToMenu, true);
                 ApplySettings();
             }
 
@@ -593,6 +601,8 @@ public class UI : MonoBehaviour
         {
             masterSlider.value = GameManager.save.preferences.masterVolume;
             sfxSlider.value = GameManager.save.preferences.SFXVolume;
+            repeatToggle.isOn = GameManager.save.preferences.repeatInput;
+            fontToggle.isOn = GameManager.save.preferences.accessibleFont;
         }
         internal void ApplySettings()
         {
