@@ -562,7 +562,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Confirm a command
-    private bool DebugConfirm(string message = "Are you sure about that?")
+    private bool DebugConfirm(string message = "CODEConfirm")
     {
         if (confirmCommand != debugCommand)
         {
@@ -611,10 +611,10 @@ public class InputManager : MonoBehaviour
             if (!GameManager.I.buildDebugMode)
             {
                 GameManager.I.buildDebugMode = true;
-                MainMenu.I.ShowPopup("Hey! This mode is intended for developers/testers only, if you found this, and want to try it, I am not responsible for your savefile!");
+                MainMenu.I.ShowPopup("CODEDebugMode");
             } else {
                 GameManager.I.buildDebugMode = false;
-                UI.I.global.SendMessage("Starlight fades...", 3);
+                UI.I.global.SendMessage("CODEDebugModeOff", 3, true);
             }
             MainMenu.I.SetupBadges();
             debugCommand = null;
@@ -630,8 +630,8 @@ public class InputManager : MonoBehaviour
         if (debugCommand == "thankyou" || debugCommand == "DUDLRLUDLR")
         {
             GameManager.I.isDoingTrial = !GameManager.I.isDoingTrial;
-            if (GameManager.I.isDoingTrial) UI.I.global.SendMessage("Let the trials begin.", 2);
-            else UI.I.global.SendMessage("We'll go back to normal...", 2);
+            if (GameManager.I.isDoingTrial) UI.I.global.SendMessage("CODETrials", 2, true);
+            else UI.I.global.SendMessage("CODETrialsOff", 2, true);
             MainMenu.I.SetupBadges();
             debugCommand = null;
         }
@@ -639,7 +639,7 @@ public class InputManager : MonoBehaviour
         // Secret arg,, (maybe change it later, add a level or something.)
         if (debugCommand == "LLLRRRDDDUUU")
         {
-            MainMenu.I.ShowPopup("You might be looking in the wrong place.");
+            MainMenu.I.ShowPopup("CODEEos");
             Application.OpenURL("https://ugdev.xyz/terminal?cmd=eos");
             debugCommand = null;
         }
@@ -656,7 +656,7 @@ public class InputManager : MonoBehaviour
         if (debugCommand == "overflow")
         {
             GameManager.I.editormimic = !GameManager.I.editormimic;
-            if (GameManager.I.editormimic) MainMenu.I.ShowPopup("\"Mimic\" enabled for the editor, expect bugs and overflows. You've been warned.");
+            if (GameManager.I.editormimic) MainMenu.I.ShowPopup("CODEMimic");
             MainMenu.I.SetupBadges();
             debugCommand = null;
             return;
@@ -665,9 +665,9 @@ public class InputManager : MonoBehaviour
         // Delete savedata and generate a new one
         else if (debugCommand == "swap" && GameManager.I.buildDebugMode)
         {
-            if (DebugConfirm("This will unlock an endgame mechanic, if you're sure, run this command again.")) return;
+            if (DebugConfirm("CODESwapConfirm")) return;
             GameManager.save.game.mechanics.hasSwapUpgrade = true;
-            UI.I.global.SendMessage("[ New Ability Unlocked ]", 4);
+            UI.I.global.SendMessage("CODESwap", 4, true);
             debugCommand = null;
         }
 
@@ -719,19 +719,19 @@ public class InputManager : MonoBehaviour
         // Custom handlings
         else if (debugCommand == "code")
         {
-            MainMenu.I.ShowPopup("...Come on now.");
+            MainMenu.I.ShowPopup("CODECode");
             debugCommand = null;
             return;
         }
         else if (debugCommand == "help")
         {
-            MainMenu.I.ShowPopup("Help? You want help? You'd better check the discord server, then.");
+            MainMenu.I.ShowPopup("CODEHelp");
             debugCommand = null;
             return;
         }
         else if (debugCommand == "gravix")
         {
-            MainMenu.I.ShowPopup("Gravix? I don't know what you're talking about.");
+            MainMenu.I.ShowPopup("CODEGravix");
             debugCommand = null;
             return;
         }

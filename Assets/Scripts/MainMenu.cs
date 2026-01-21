@@ -126,7 +126,7 @@ public class MainMenu : MonoBehaviour
         if (!GameManager.save.game.hasCompletedGame && !GameManager.save.game.seenSpoilerWarning)
         {
             GameManager.save.game.seenSpoilerWarning = true;
-            ShowPopup("The level editor is recommended for players who've completed the game, though, if you'd like to use it, be mindful of spoilers.\nThis popup won't appear again!");
+            ShowPopup("CustomLevelsPopup");
             return;
         }
         UI.I.ChangeScene("Custom Levels");
@@ -141,7 +141,7 @@ public class MainMenu : MonoBehaviour
     {
         popupText.transform.parent.gameObject.SetActive(true);
         UI.I.selectors.ChangeSelected(popupBtn.gameObject);
-        popupText.text = text;
+        popupText.text = Localization.GetStrings("UI", text);
     }
 
     // MEOW

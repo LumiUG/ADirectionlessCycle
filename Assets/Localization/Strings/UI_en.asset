@@ -38,6 +38,131 @@ MonoBehaviour:
     m_Localized: Custom Levels
     m_Metadata:
       m_Items: []
+  - m_Id: 1421555242504192
+    m_Localized: Back to Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1422747389530112
+    m_Localized: Unlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423605644791808
+    m_Localized: LOCKED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1430017770917888
+    m_Localized: '[ Welcome to the level hub! ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1430569082818560
+    m_Localized: The level editor is recommended for players who've completed the
+      game, though, if you'd like to use it, be mindful of spoilers.\nThis popup
+      won't appear again!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431891198742528
+    m_Localized: Are you sure about that?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432119129804800
+    m_Localized: Hey! This mode is intended for developers/testers only, if you found
+      this, and want to try it, I am not responsible for your savefile!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432155498614784
+    m_Localized: Starlight fades...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432944967290880
+    m_Localized: Let the trials begin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432946363994112
+    m_Localized: We'll go back to normal...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433198936592384
+    m_Localized: You might be looking in the wrong place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433458299768832
+    m_Localized: '"Mimic" enabled for the editor, expect bugs and overflows. You''ve
+      been warned.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433818171052032
+    m_Localized: This will unlock an endgame mechanic, if you're sure, run this command
+      again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433812131254272
+    m_Localized: Help? You want help? You'd better check the discord server, then.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433813951582208
+    m_Localized: Gravix? I don't know what you're talking about.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433788127252480
+    m_Localized: ...Come on now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1434196547604480
+    m_Localized: '[ New Ability Unlocked ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437542549426176
+    m_Localized: The Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437476447195136
+    m_Localized: Area 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437475511865344
+    m_Localized: Area 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437474266157056
+    m_Localized: Area 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444987678101504
+    m_Localized: Search
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445012239945728
+    m_Localized: Enter Text...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445875650007040
+    m_Localized: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445857694191616
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445796008562688
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446034177921024
+    m_Localized: Level Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446016595398656
+    m_Localized: 'Level ID:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445935779549184
+    m_Localized: 'Level Name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450740166037504
+    m_Localized: Are you sure?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Coffee.UIEffects;
+using ADC.Localization;
 using static TransitionManager.Transitions;
 using static Serializables;
 using static GameTile;
-using Coffee.UIEffects;
 
 public class Hub : MonoBehaviour
 {
@@ -407,10 +408,10 @@ public class Hub : MonoBehaviour
         // Change display
         switch (worldIndex) 
         {
-            case 0: SetLevelName("Area 1"); break;
-            case 1: SetLevelName("Area 2"); break;
-            case 2: SetLevelName("Area 3"); break;
-            case 3: SetLevelName("The Core"); break;
+            case 0: SetLevelName(Localization.GetStrings("UI", "Area1")); break;
+            case 1: SetLevelName(Localization.GetStrings("UI", "Area2")); break;
+            case 2: SetLevelName(Localization.GetStrings("UI", "Area3")); break;
+            case 3: SetLevelName(Localization.GetStrings("UI", "AreaCore")); break;
         }
 
         // Update world completions

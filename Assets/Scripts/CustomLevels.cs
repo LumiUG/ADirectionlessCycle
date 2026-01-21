@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using ADC.Localization;
 using static Serializables;
 using static TransitionManager.Transitions;
 
@@ -194,7 +195,7 @@ public class CustomLevels : MonoBehaviour
         if (!confirmDeletion)
         {
             AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.30f);
-            popupTitle.text = "Are you sure?";
+            popupTitle.text = Localization.GetStrings("UI", "CustomPopupConfirm");
             confirmDeletion = true;
             return;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ADC.Localization;
 using static TransitionManager.Transitions;
 using static GameTile;
 
@@ -359,9 +360,10 @@ public class UI : MonoBehaviour
         public Text debugger;
 
         // Sends a message log to the editor UI
-        public void SendMessage(string message, float duration = 1.0f)
+        public void SendMessage(string message, float duration = 1.0f, bool localized = false)
         {
-            debugger.text = message;
+            if (localized) debugger.text = Localization.GetStrings("UI", message);
+            else debugger.text = message;
             debugger.CrossFadeAlpha(1, 0, true);
             debugger.CrossFadeAlpha(0, duration, true);
         }

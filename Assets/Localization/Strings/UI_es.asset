@@ -38,6 +38,130 @@ MonoBehaviour:
     m_Localized: Editor
     m_Metadata:
       m_Items: []
+  - m_Id: 1421555242504192
+    m_Localized: "Volver al Men\xFA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1422747389530112
+    m_Localized: Desbloquear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423605644791808
+    m_Localized: BLOQUEADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1430017770917888
+    m_Localized: '[ Bienvenido al mapa! ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1430569082818560
+    m_Localized: "El editor de niveles est\xE1 recomendado para jugadores que hayan
+      acabado el juego, si quieres utilizarlo, recuerda que hay spoilers.\\nEste
+      mensaje no volver\xE1 a aparecer!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431891198742528
+    m_Localized: "Est\xE1s seguro de eso?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432155498614784
+    m_Localized: Las estrellas se desvanecen...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432119129804800
+    m_Localized: Hey! Este modo es para developers/testers. Si has encontrado esto
+      y quieres probarlo, no me hago responsable de tus archivos de guardado!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432944967290880
+    m_Localized: "Que empiecen los desaf\xEDos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432946363994112
+    m_Localized: "Volvemos a lo normal\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433198936592384
+    m_Localized: Estas mirando en el lugar equivocado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433458299768832
+    m_Localized: Mimic activado para el editor, hay errores y overflows. Quedas avisado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1434196547604480
+    m_Localized: '[ Nueva Habilidad Desbloqueada ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433818171052032
+    m_Localized: "Esto desbloquear\xE1 una mec\xE1nica importante. Si est\xE1s seguro,
+      vuelve a ejecutar el comando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433813951582208
+    m_Localized: "Gravix? No s\xE9 de qu\xE9 est\xE1s hablando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433812131254272
+    m_Localized: Ayuda? Quieres ayuda? Mejor entra al servidor de Discord.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433788127252480
+    m_Localized: "\u2026Venga ya."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437542549426176
+    m_Localized: El Centro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437474266157056
+    m_Localized: "\xC1rea 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437475511865344
+    m_Localized: "\xC1rea 2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437476447195136
+    m_Localized: "\xC1rea 3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444987678101504
+    m_Localized: Buscar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445012239945728
+    m_Localized: Escribe...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445796008562688
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445857694191616
+    m_Localized: Editar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445875650007040
+    m_Localized: Borrar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445935779549184
+    m_Localized: 'Nombre:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446016595398656
+    m_Localized: 'ID de Nivel:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446034177921024
+    m_Localized: Opciones Nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450740166037504
+    m_Localized: "Est\xE1s seguro?"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
