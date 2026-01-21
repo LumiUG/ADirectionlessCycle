@@ -21,6 +21,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER DETAIL_MASKING UNITY_UI_ALPHACLIP
         passType: 0
+      - keywords: COLOR_FILTER EDGE_PLAIN
+        passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR2
         passType: 0
       - keywords: COLOR_FILTER GRADATION_COLOR2 TRANSITION_PATTERN
@@ -47,6 +49,10 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER SAMPLING_RGB_SHIFT
         passType: 0
+      - keywords: COLOR_FILTER TARGET_LUMINANCE UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: COLOR_FILTER TONE_RETRO UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: COLOR_FILTER TRANSITION_DISSOLVE
         passType: 0
       - keywords: COLOR_FILTER TRANSITION_FADE
@@ -66,6 +72,8 @@ ShaderVariantCollection:
       - keywords: DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_MASKING TRANSITION_PATTERN
+        passType: 0
+      - keywords: DETAIL_MASKING UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_MULTIPLY EDGE_SHINY
         passType: 0
@@ -89,6 +97,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_COLOR2 TRANSITION_PATTERN
         passType: 0
+      - keywords: GRADATION_COLOR2 UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: GRADATION_COLOR4
         passType: 0
       - keywords: GRADATION_GRADIENT
@@ -107,17 +117,25 @@ ShaderVariantCollection:
         passType: 0
       - keywords: GRADATION_RADIAL UNITY_UI_ALPHACLIP
         passType: 0
+      - keywords: SAMPLING_BLUR_DETAIL
+        passType: 0
       - keywords: SAMPLING_BLUR_DETAIL UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: SAMPLING_BLUR_FAST
         passType: 0
       - keywords: SAMPLING_BLUR_FAST TARGET_HUE
         passType: 0
+      - keywords: SAMPLING_BLUR_FAST TRANSITION_CUTOFF
+        passType: 0
       - keywords: SAMPLING_BLUR_FAST TRANSITION_PATTERN
         passType: 0
       - keywords: SAMPLING_BLUR_FAST UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: SAMPLING_BLUR_MEDIUM UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: SAMPLING_EDGE_ALPHA
+        passType: 0
+      - keywords: SAMPLING_EDGE_LUMINANCE
         passType: 0
       - keywords: SAMPLING_EDGE_LUMINANCE TRANSITION_PATTERN
         passType: 0
@@ -126,6 +144,8 @@ ShaderVariantCollection:
       - keywords: SAMPLING_PIXELATION
         passType: 0
       - keywords: SAMPLING_PIXELATION TRANSITION_PATTERN
+        passType: 0
+      - keywords: SAMPLING_RGB_SHIFT
         passType: 0
       - keywords: SAMPLING_RGB_SHIFT TRANSITION_PATTERN
         passType: 0

@@ -383,6 +383,9 @@ public class LevelManager : MonoBehaviour
             UI.I.pause.SetBestMoves(0);
         }
 
+        // Custom effects on load
+        if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"ERR-Loop", 5f);
+
         return true;
     }
 

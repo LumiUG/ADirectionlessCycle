@@ -14,6 +14,7 @@ public class Hub : MonoBehaviour
     public List<GameObject> worldHolders = new(capacity: 3);
     public List<GameObject> remixHolders = new(capacity: 3);
     public List<Button> hubArrows = new(capacity: 2);
+    public List<Image> hubArrowRenderer = new(capacity: 2);
     public Text completedCountText;
     public Text remixCountText;
     public Text outboundCountText;
@@ -38,6 +39,8 @@ public class Hub : MonoBehaviour
     private readonly List<GameObject> remixList = new();
     private GameObject lastSelectedlevel = null;
     private Animator animator;
+    private Sprite brokenRightArrow;
+    private Sprite normalRightArrow;
     private int worldIndex = 0;
     private bool delayOneFrame = false;
     private bool ignorePreviewEffect = true;
@@ -48,6 +51,8 @@ public class Hub : MonoBehaviour
     {
         UI.I.selectors.ChangeSelected(backButton.gameObject, true);
         animator = GetComponent<Animator>();
+        brokenRightArrow = Resources.Load<Sprite>("Sprites/UI/Arrows/BrokenRightArrow");
+        normalRightArrow = Resources.Load<Sprite>("Sprites/UI/Arrows/RightArrow");
  
         // Go back to the last world you selected.
         for (int shift = 0; shift < GameManager.I.lastSelectedWorld; shift++ ) ChangeWorld(1);
@@ -387,12 +392,17 @@ public class Hub : MonoBehaviour
         switch (worldIndex)
         {
             case 2:
-                if (GameManager.save.game.mechanics.hasSwapUpgrade) { hubArrows[1].interactable = true; break; };
+                if (GameManager.save.game.mechanics.hasSwapUpgrade)
+                {
+                    hubArrows[1].interactable = true; 
+                    hubArrowRenderer[1].sprite = normalRightArrow; break;
+                };
                 UI.I.selectors.ChangeSelected(backButton.gameObject);
                 hubArrows[1].interactable = false;
                 break;
             case 3:
                 UI.I.selectors.ChangeSelected(backButton.gameObject);
+                hubArrowRenderer[1].sprite = brokenRightArrow;
                 hubArrows[1].interactable = false;
                 break;
             case 0:
