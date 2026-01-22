@@ -55,9 +55,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1430569082818560
-    m_Localized: The level editor is recommended for players who've completed the
-      game, though, if you'd like to use it, be mindful of spoilers.\nThis popup
-      won't appear again!
+    m_Localized: 'The level editor is recommended for players who''ve completed the
+      game, though, if you''d like to use it, be mindful of spoilers.
+
+      This
+      popup won''t appear again!'
     m_Metadata:
       m_Items: []
   - m_Id: 1431891198742528
@@ -161,6 +163,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1450740166037504
     m_Localized: Are you sure?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2058434140835840
+    m_Localized: Bonus Levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2058755164475392
+    m_Localized: Back
     m_Metadata:
       m_Items: []
   references:

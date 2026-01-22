@@ -62,7 +62,7 @@ public class UI : MonoBehaviour
         if (selectors)
         {
             if (!selectors.left || !selectors.right) return;
-            
+
             selectors.leftImage.color = invisibleColor;
             selectors.rightImage.color = invisibleColor;
 
@@ -186,7 +186,7 @@ public class UI : MonoBehaviour
         LevelManager.I.MoveTilemaps(LevelManager.I.originalPosition, true);
         editor.Toggle(false);
         ingame.Toggle(true);
-        
+
         LevelManager.I.LoadLevel(LevelManager.I.levelEditorName, true);
         ChangeScene("Game");
     }
@@ -219,7 +219,7 @@ public class UI : MonoBehaviour
         if (GameManager.I.isEditing)
         {
             GoLevelEditor();
-            return;   
+            return;
         }
 
         // There's no next level.
@@ -229,7 +229,7 @@ public class UI : MonoBehaviour
             else GoHub();
             return;
         }
-        
+
         // Next level.
         TransitionManager.I.TransitionIn<string>(Triangle, Actions.GoNextLevel);
         GameManager.I.isEditing = false;
@@ -278,7 +278,16 @@ public class UI : MonoBehaviour
     }
 
     // Font
-    public void UpdateFont(bool toggle) { GameManager.save.preferences.accessibleFont = toggle; }
+    public void UpdateFont(bool toggle) {
+        GameManager.save.preferences.accessibleFont = toggle;
+        if (GameManager.save.preferences.accessibleFont) {
+            dialog.text.font = GameManager.I.acessibilityFont;
+            popup.popupText.font = GameManager.I.acessibilityFont;
+        } else {
+            dialog.text.font = GameManager.I.originalFont;
+            popup.popupText.font = GameManager.I.originalFont;
+        }
+    }
 
     // Input
     public void ToggleRepeatingInput(bool toggle) { GameManager.save.preferences.repeatInput = toggle; }

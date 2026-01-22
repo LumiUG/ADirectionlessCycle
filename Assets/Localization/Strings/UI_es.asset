@@ -56,8 +56,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1430569082818560
     m_Localized: "El editor de niveles est\xE1 recomendado para jugadores que hayan
-      acabado el juego, si quieres utilizarlo, recuerda que hay spoilers.\\nEste
-      mensaje no volver\xE1 a aparecer!"
+      acabado el juego, si quieres utilizarlo, recuerda que hay spoilers.\nEste mensaje
+      no volver\xE1 a aparecer!"
     m_Metadata:
       m_Items: []
   - m_Id: 1431891198742528
@@ -160,6 +160,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1450740166037504
     m_Localized: "Est\xE1s seguro?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2058434140835840
+    m_Localized: Niveles Extra
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2058755164475392
+    m_Localized: Volver
     m_Metadata:
       m_Items: []
   references:

@@ -229,6 +229,13 @@ public class DialogManager : MonoBehaviour
         }
         if (path == "Dialog/END/Fire") AudioManager.I.PlaySFX(AudioManager.tileDeath, 0.4f);
 
+        if (path == "Dialog/2-6/Favorite" && GameManager.save.game.exhaustedDialog.Contains("EXHAUST-EXHAUST-Dialog/2-6/Favorite") && GameManager.save.game.levels.Find(l => l.levelID == "HINTS/W2-6H") != null)
+        {
+            chat = Resources.Load<DialogScriptable>("Dialog/2-6/TheyKnew");
+            path = "Dialog/2-6/TheyKnew";
+            return (chat, path);
+        }
+
         return (null, null);
     }
 
