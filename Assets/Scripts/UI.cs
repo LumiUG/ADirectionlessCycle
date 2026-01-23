@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     [SerializeField] public DialogUI dialog;
     [SerializeField] public SettingsUI settings;
     [HideInInspector] public Selectors selectors;
+    public List<Image> cracks;
 
     internal Animator effects;
     private Color invisibleColor = new(1, 1, 1, 0);
@@ -291,6 +292,16 @@ public class UI : MonoBehaviour
 
     // Input
     public void ToggleRepeatingInput(bool toggle) { GameManager.save.preferences.repeatInput = toggle; }
+
+    public void ShowCracks(int phase)
+    {
+        cracks.ForEach(crack => crack.gameObject.SetActive(false));
+
+        for (int i = 0; i < phase; i++)
+        {
+            cracks[i].gameObject.SetActive(true);
+        }
+    }
 
     // Goes to the current level's
     public void CurrentLevelHint()

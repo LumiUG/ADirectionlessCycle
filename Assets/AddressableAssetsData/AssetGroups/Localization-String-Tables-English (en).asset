@@ -59,6 +59,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8add524c9280644aa996b8789ab4c4d
+    m_Address: VOID-Dialog_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de12f245084878b498e896c3c455473d
     m_Address: W3-Dialog_en
     m_ReadOnly: 1

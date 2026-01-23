@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: VOID-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 11aa380cd273b32458d126e4a01f345d, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 648871546880
+    m_Localized: '[Log 1: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12628072206336
+    m_Localized: '[Log 2: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13066284699648
+    m_Localized: Should it be this painful? I'm opening old wounds just by being
+      here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13390466650112
+    m_Localized: It's funny. I've only but dreamt of being able to modify the code,
+      and now-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13571656388608
+    m_Localized: Shit. I must stop thinking about it. I can't fuck this up.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13770596421632
+    m_Localized: Even if this is for the better, aren't I deciding for them? ...Maybe
+      they want to die?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14083520860160
+    m_Localized: Can't say I didn't consider it, but is this the right choice?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14326379450368
+    m_Localized: Hah, I'll never know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15401387954176
+    m_Localized: I'm just... So tired.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15485664104448
+    m_Localized: ... Let's get it over with.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12547768061952
+    m_Localized: Writing works, just perfect.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12551236751360
+    m_Localized: Hello, whoever's... No one's going to read this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553581367296
+    m_Localized: I've managed to get into this copy of the executable, regrettably
+      with little access.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12587081273344
+    m_Localized: My goal here is simple. I'm getting both of them out.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12601018945536
+    m_Localized: Unfortunately, the only way for me to do so is if a player runs
+      the completion function.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18818822967296
+    m_Localized: Which is... It's the only way I've managed to make this work.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

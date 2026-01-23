@@ -105,6 +105,9 @@ public class LevelManager : MonoBehaviour
     private int defaultEffectsLayer;
 
     // Player //
+    private readonly string[] crackedLevel1 = { "HINTS/W3-9H", "VOID/Logs/TheRoom", "VOID/Dive/2", "VOID/Dive/3" };
+    private readonly string[] crackedLevel2 = { "VOID/Dive/4" };
+    private readonly string[] crackedLevel3 = { "VOID/Dive/5", "VOID/Dive/6", "VOID/Entry", "VOID/Corridor", "VOID/Right", "VOID/Down", "VOID/Left", "VOID/Up", "VOID/Loop", "VOID/CYCLE", "VOID/Outro" };
     private Coroutine timerCoroutine = null;
     private bool doPushSFX = false;
     private bool noMove = false;
@@ -354,6 +357,13 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        // Custom effects on load
+        if (crackedLevel1.Contains(currentLevelID)) UI.I.ShowCracks(1);
+        if (crackedLevel2.Contains(currentLevelID)) UI.I.ShowCracks(2);
+        if (crackedLevel3.Contains(currentLevelID)) UI.I.ShowCracks(3);
+        if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"LOOP BROKEN - LOOP BR0KEN - L0OP BR##KEN / L0O&%P#", 5f);
+        // UI.I.global.SendMessage("ENABLING FREEROAM-", 5f);
+
         // Hide UI?
         UI.I.pause.title.text = currentLevel.levelName;
         if (!silent) UI.I.global.SendMessage($"Loaded level \"{currentLevel.levelName}\"");
@@ -382,9 +392,6 @@ public class LevelManager : MonoBehaviour
             UI.I.pause.SetBestTime(0f);
             UI.I.pause.SetBestMoves(0);
         }
-
-        // Custom effects on load
-        if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"ERR-Loop", 5f);
 
         return true;
     }
@@ -881,6 +888,7 @@ public class LevelManager : MonoBehaviour
                 return;
             }
 
+
             // First remix level?
             GameManager.I.EditAchivement("ACH_FIRST_INVERSE"); // Retrigger for DEMO players...
             if (!GameManager.save.game.mechanics.hasSeenRemix) GameManager.save.game.mechanics.hasSeenRemix = true;
@@ -1027,6 +1035,7 @@ public class LevelManager : MonoBehaviour
         {
             UI.I.effects.gameObject.SetActive(false);
         }
+
         UI.I.pause.Toggle(false);
         UI.I.editor.Toggle(false);
     }
@@ -1046,6 +1055,7 @@ public class LevelManager : MonoBehaviour
             tilemapLetterbox.gameObject.SetActive(false);
             extrasOutlines.gameObject.SetActive(false);
             UI.I.ingame.Toggle(false);
+            UI.I.ShowCracks(0);
             return;
         }
     }

@@ -31,6 +31,13 @@ MonoBehaviour:
     - Locale-es
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f3ad367214871e42bd3f3e1f95b09ce
+    m_Address: VOID-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 657944bd73f05f34c9952ce94750b4df
     m_Address: UI_es
     m_ReadOnly: 1
