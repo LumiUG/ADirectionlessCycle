@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ORB-Dialog_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: a1311a1b57a96844aafe5a3e5f554e6c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 418415513600
+    m_Localized: "Aqu\xED est\xE1s!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 702768353280
+    m_Localized: Es otro de estos, deja que te lo decodifique.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 704479629312
+    m_Localized: "\"El tercer fragmento se encuentra en las profundidades del \xC1rea
+      Dos.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 706522255360
+    m_Localized: "\"M\xE1s all\xE1 de \"Empty Space\", lo encontrar\xE1s. Aunque
+      necesitar\xE1s un poco de paciencia.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 760469393408
+    m_Localized: '"Y cuando el camino deja de ser obvio... Al estar perdido y con
+      dudas, nunca pasa nada por pedir una pista."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11464308035584
+    m_Localized: "Aqu\xED est\xE1... Espera, c\xF3mo sab\xEDas que esto estaba aqu\xED?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11514677432320
+    m_Localized: "No, no, no. No voy a descifrar lo que sea que est\xE9 aqu\xED,
+      te falta informaci\xF3n!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11519756734464
+    m_Localized: "Supongo que puedes quedarte este, pero tendr\xE1s que esforzarte
+      m\xE1s para encontrar los dem\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11548110229504
+    m_Localized: "Vuelve cuando tengas m\xE1s informaci\xF3n, no quiero que te pierdas. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65233553068032
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64471599026176
+    m_Localized: "Oooh. La entrada! Bienvenidos a uno de los niveles m\xE1s profundos
+      de este mundo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64532630343680
+    m_Localized: "Hay otros sitios como estos por aqu\xED. Son niveles especiales,
+      por los que puedes moverte libremente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64533418872832
+    m_Localized: Nos gusta llamar a estos lugares "free roam", ya que te dejan explorar
+      por completo un nivel sin estar atrapado en tu pantalla.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534039629824
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534702329856
+    m_Localized: "Por cierto, tengo que decir que estoy bastante sorprendido de que
+      nos est\xE9s ayudando."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64535386001408
+    m_Localized: "Puede que \xE9l no est\xE9 de acuerdo, pero, gracias."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64871555272704
+    m_Localized: "Conseguiste el artefacto del \xC1rea 1!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64894275817472
+    m_Localized: "Este es el m\xE1s f\xE1cil por ahora, vamos, adelante!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64949967785984
+    m_Localized: Eso es un artefacto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64970578595840
+    m_Localized: Se utiliza para desbloquear el centro, tu destino final.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64975309770752
+    m_Localized: "Normalmente, podr\xEDas conseguirlo ahora mismo, pero\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976022802432
+    m_Localized: "Ya, definitivamente no deber\xEDa estar bloqueado por paredes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976798748672
+    m_Localized: Solo espera, solo espera. Tengo un plan para conseguirlo de vuelta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65230809993216
+    m_Localized: "No estoy exactamente contento con vosotros, pero\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65231455916032
+    m_Localized: "Hay alguien aqu\xED que podr\xEDas conocer. La encontrar\xE1s donde
+      la luz no pasa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232202502144
+    m_Localized: "C\xF3mo te lo digo\u2026 El vac\xEDo, me refiero. Simplemente,
+      mu\xE9vete hacia el."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232932311040
+    m_Localized: "Pensaba que le gustar\xEDa un poco de compa\xF1\xEDa, por poco
+      que sea."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69228132700160
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69221417619456
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69219505016832
+    m_Localized: No estoy totalmente de acuerdo con vuestra idea, pero he llegado
+      a aceptarlo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69220398403584
+    m_Localized: "No estoy\u2026 \"contento\" por tener que ayudaros. Pero me he
+      dado cuenta de que solo est\xE1is intentando ayudar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69222575247360
+    m_Localized: "Este es el nivel del artefacto, y no s\xE9 d\xF3nde est\xE1. Lo
+      cual\u2026 me inquieta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69223598657536
+    m_Localized: Por si te interesa, este es otro de los niveles llamados "true freeoams".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69225985216512
+    m_Localized: "Si hay otra forma \"viva\" en cualquier sitio, no te ser\xE1 posible
+      ciclar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69224806617088
+    m_Localized: "Si intentas ciclar, no funcionar\xE1 de la manera en la que piensas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69226945712128
+    m_Localized: Espero que eso sea suficiente ayuda.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69229219024896
+    m_Localized: "Dale ca\xF1a, conf\xEDo en ti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71793020899328
+    m_Localized: "El terreno\u2026 No me acordaba de que estuviera tan mal."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72889982390272
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72890527649792
+    m_Localized: '"Hell yeah."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73044022398976
+    m_Localized: Miau!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983079161856
+    m_Localized: '[El gato ha dejado de proteger el artefacto...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983712501760
+    m_Localized: "[Acaricias al gato\u2026]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72984278732800
+    m_Localized: '[Espera como-]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72826203803648
+    m_Localized: Sin salida. Creo que vimos algo en la primera pantalla. Mira por
+      la parte inferior.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72828204486656
+    m_Localized: "Hm, pero no parece alcanzable. Tendr\xE1s que abrirte un camino."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74293111296000
+    m_Localized: "\"Hemos\"? Yo ya he visto este, por si no lo sab\xEDas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74334995615744
+    m_Localized: Dicho eso, esto es definitivamente no como lo recuerdo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74335494737920
+    m_Localized: "El artefacto est\xE1 a tu derecha. El vac\xEDo parece inofensivo
+      all\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74399604674560
+    m_Localized: "Siendo justos, ese es su trabajo. \xC9l son las \"pistas\" en los
+      niveles inversos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74400217042944
+    m_Localized: "Y yo deber\xEDa ser las pistas de los niveles principales, pero
+      me he aburrido de ellos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74451463049216
+    m_Localized: "Ver como algo muere lentamente es\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74472669450240
+    m_Localized: "A-ah, s\xED! Nada, perd\xF3name."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77555826823168
+    m_Localized: "Simplemente, a veces me quedo a mirar fijamente al abismo, y cosas
+      as\xED. Te haces la idea...?"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

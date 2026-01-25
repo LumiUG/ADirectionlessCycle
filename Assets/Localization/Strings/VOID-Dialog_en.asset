@@ -87,6 +87,130 @@ MonoBehaviour:
     m_Localized: Which is... It's the only way I've managed to make this work.
     m_Metadata:
       m_Items: []
+  - m_Id: 742470984011776
+    m_Localized: '[Log 3: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 742807916646400
+    m_Localized: 'Update: It... Worked? I can''t say for sure, if only I could test
+      it.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 742848249073664
+    m_Localized: So... That's it? Can't I do more than this?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 743592276660224
+    m_Localized: I don't think they can detect me in their system. That is until
+      I show myself to them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 743871164321792
+    m_Localized: And I'm not going to do that. That would compromise the plan.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744038072455168
+    m_Localized: Can I really not do anything??
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744173619777536
+    m_Localized: This might take them... At this rate, years, at least. And they're
+      alon-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744300635885568
+    m_Localized: Hang on, I could- I have an idea.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744656623243264
+    m_Localized: '[Log 4: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744659446009856
+    m_Localized: ...Not my best work by any means. But it's better than having nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744660830130176
+    m_Localized: Hopefully using scrapped code for his AI won't have any repercusions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744662075838464
+    m_Localized: Hah, just doing this is already a massive risk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744663829057536
+    m_Localized: You need a name, buddy. What about...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744697404461056
+    m_Localized: '"Gus"?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744703263903744
+    m_Localized: Haha, sounds harmless enough. That'll do.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 745887634690048
+    m_Localized: '[Log 5: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 746000100757504
+    m_Localized: It's my time to leave. I'm going back to the terminal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 746004437667840
+    m_Localized: At least I'm not alone anymore, and neither are them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 746283535044608
+    m_Localized: I look forward to meeting both of you, again and again and again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 746389256671232
+    m_Localized: I hope, I really hope this works.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 746768576942080
+    m_Localized: '- The Unfinished // The Original.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754158504382464
+    m_Localized: '[It made some sort of barking sound.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754159699759104
+    m_Localized: '[It looks happy...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754161268428800
+    m_Localized: '[It looks neglected.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754161939517440
+    m_Localized: '[Maybe someday...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754833854435328
+    m_Localized: Well? Welcome to the core. It all ends here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754834462609408
+    m_Localized: This entire place is a mess. The way to get into it is completely
+      ruined.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754835385356288
+    m_Localized: Thankfully, I've been monitoring this level closely.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754836287131648
+    m_Localized: I did make another entry, but... It's not so easy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754928440184832
+    m_Localized: I made a small path for you. Hopefully that's enough.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

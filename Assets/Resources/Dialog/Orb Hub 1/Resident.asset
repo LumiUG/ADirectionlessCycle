@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Resident
   m_EditorClassIdentifier: 
   dialog:
-  - I'm not exactly happy with you two, but...
-  - There's someone in here that you could meet, you'll find him where the light
-    doesn't pass through.
-  - As in... the void, I mean. Just move into the void.
-  - Thought he'd like some company, even if for a little.
-  - ...
+  - Artifact1:Resident
+  - Artifact1:Resident2
+  - Artifact1:Resident3
+  - Artifact1:Resident4
+  - Artifact1:Resident5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -1,0 +1,248 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ORB-Dialog Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ORB-Dialog
+  m_TableCollectionNameGuidString: a1311a1b57a96844aafe5a3e5f554e6c
+  m_Entries:
+  - m_Id: 418415513600
+    m_Key: Artifact1:FragmentHint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 702768353280
+    m_Key: Artifact1:FragmentHint2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 704479629312
+    m_Key: Artifact1:FragmentHint3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 706522255360
+    m_Key: Artifact1:FragmentHint4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 760469393408
+    m_Key: Artifact1:FragmentHint5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11464308035584
+    m_Key: FragmentSB:First
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11514677432320
+    m_Key: FragmentSB:First2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11519756734464
+    m_Key: FragmentSB:First3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11548110229504
+    m_Key: FragmentSB:First4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64471599026176
+    m_Key: Artifact1:Entrance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64532630343680
+    m_Key: Artifact1:Entrance2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64533418872832
+    m_Key: Artifact1:Entrance3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534039629824
+    m_Key: Artifact1:Entrance4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534702329856
+    m_Key: Artifact1:Entrance5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64535386001408
+    m_Key: Artifact1:Entrance6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64871555272704
+    m_Key: Artifact1:Orb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64894275817472
+    m_Key: Artifact1:Orb2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64949967785984
+    m_Key: Artifact1:Tablet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64970578595840
+    m_Key: Artifact1:Tablet2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64975309770752
+    m_Key: Artifact1:Tablet3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976022802432
+    m_Key: Artifact1:Tablet4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976798748672
+    m_Key: Artifact1:Tablet5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65230809993216
+    m_Key: Artifact1:Resident
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65231455916032
+    m_Key: Artifact1:Resident2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232202502144
+    m_Key: Artifact1:Resident3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232932311040
+    m_Key: Artifact1:Resident4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65233553068032
+    m_Key: Artifact1:Resident5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69219505016832
+    m_Key: Artifact2:Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69220398403584
+    m_Key: Artifact2:Enter2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69221417619456
+    m_Key: Artifact2:Enter3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69222575247360
+    m_Key: Artifact2:Enter4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69223598657536
+    m_Key: Artifact2:Enter5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69224806617088
+    m_Key: Artifact2:Enter6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69225985216512
+    m_Key: Artifact2:Enter7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69226945712128
+    m_Key: Artifact2:Enter8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69228132700160
+    m_Key: Artifact2:Enter9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69229219024896
+    m_Key: Artifact2:Enter10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71793020899328
+    m_Key: Artifact2:Corridor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72826203803648
+    m_Key: Artifact2:End
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72828204486656
+    m_Key: Artifact2:End2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72889982390272
+    m_Key: Artifact2:Secret
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72890527649792
+    m_Key: Artifact2:Secret2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983079161856
+    m_Key: Artifact2:Ploof
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983712501760
+    m_Key: Artifact2:Ploof2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72984278732800
+    m_Key: Artifact2:Ploof3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73044022398976
+    m_Key: Artifact2:Miau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74293111296000
+    m_Key: Artifact3:Mid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74334995615744
+    m_Key: Artifact3:Mid2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74335494737920
+    m_Key: Artifact3:Mid3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74399604674560
+    m_Key: Artifact3:End
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74400217042944
+    m_Key: Artifact3:End2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74445809127424
+    m_Key: Artifact3:End3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74451463049216
+    m_Key: Artifact3:End4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74472669450240
+    m_Key: Artifact3:End5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77555826823168
+    m_Key: Artifact3:End6
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 502597221613305861
+  references:
+    version: 2
+    RefIds:
+    - rid: 502597221613305861
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1769281232837

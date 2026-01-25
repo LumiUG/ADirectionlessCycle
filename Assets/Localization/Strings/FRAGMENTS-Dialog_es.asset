@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: FRAGMENTS-Dialog_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 78eb69d100737634384f3c29386e38e7, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6085197041664
+    m_Localized: "Ya no hay nada aqu\xED. Todo se ha ido, se ha perdido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6087055118336
+    m_Localized: "Este nivel se est\xE1 degradando lentamente, y por una buena raz\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6089005469696
+    m_Localized: "Deber\xEDas irte. Ahora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6176360239104
+    m_Localized: 'Como me gusta decir: "Nada es para siempre".'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6178994262016
+    m_Localized: "He creado un warp en \"3-10\", solo interact\xFAa cinco veces con
+      la pared rota a tu derecha."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6179782791168
+    m_Localized: "Ah\xED es donde tendr\xE1s que ir despu\xE9s de conseguir el \xFAltimo
+      fragmento."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6180747481088
+    m_Localized: "Dicho eso- aqu\xED est\xE1 el \xFAltimo c\xF3digo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6181393403904
+    m_Localized: '"Desyncing, desyncing... Encuentra tu marca y salta en ella".'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6182475534336
+    m_Localized: Oooh, ya veo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8521928282112
+    m_Localized: "Este deber\xEDa ser tu \xFAltimo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8525128536064
+    m_Localized: Nos encontraremos otra vez donde te dije.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8525719932928
+    m_Localized: Cuando los tengas todos, eso es.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8526319718400
+    m_Localized: "No tendr\xE9 suficiente fuerza para abrir una grieta, si no!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9855553376256
+    m_Localized: "Y ten\xEDas que saltar aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9856165744640
+    m_Localized: Tienes un tercer sentido para los secretos, verdad?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9856878776320
+    m_Localized: "Da igual, igualmente a\xFAn no tenemos suficiente fuerza para abrir
+      una grieta."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

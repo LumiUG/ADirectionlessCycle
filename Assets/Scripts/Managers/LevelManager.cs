@@ -358,9 +358,9 @@ public class LevelManager : MonoBehaviour
         }
 
         // Custom effects on load
-        if (crackedLevel1.Contains(currentLevelID)) UI.I.ShowCracks(1);
-        if (crackedLevel2.Contains(currentLevelID)) UI.I.ShowCracks(2);
-        if (crackedLevel3.Contains(currentLevelID)) UI.I.ShowCracks(3);
+        if (crackedLevel1.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(0); }
+        if (crackedLevel2.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(2); }
+        if (crackedLevel3.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(1); UI.I.ShowCracks(2); }
         if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"LOOP BROKEN - LOOP BR0KEN - L0OP BR##KEN / L0O&%P#", 5f);
         // UI.I.global.SendMessage("ENABLING FREEROAM-", 5f);
 
@@ -1055,7 +1055,7 @@ public class LevelManager : MonoBehaviour
             tilemapLetterbox.gameObject.SetActive(false);
             extrasOutlines.gameObject.SetActive(false);
             UI.I.ingame.Toggle(false);
-            UI.I.ShowCracks(0);
+            UI.I.ShowCracks(-1);
             return;
         }
     }

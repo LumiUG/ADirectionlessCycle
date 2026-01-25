@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Tablet
   m_EditorClassIdentifier: 
   dialog:
-  - That's an artifact.
-  - It's used to unlock the core, your final destination.
-  - Usually, you'd be able to get it right now, but...
-  - Yeah, it's definitely not supposed to be walled off.
-  - Just you wait, just you wait. I have a plan to get it back.
+  - Artifact1:Tablet
+  - Artifact1:Tablet2
+  - Artifact1:Tablet3
+  - Artifact1:Tablet4
+  - Artifact1:Tablet5
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

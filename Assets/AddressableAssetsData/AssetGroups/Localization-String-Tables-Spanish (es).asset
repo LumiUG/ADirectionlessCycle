@@ -17,6 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 79b771c964f2e9b47ab2ec5edab36e82
   m_SerializeEntries:
+  - m_GUID: 016f32b324aa98446b35b44de5a8093a
+    m_Address: ORB-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0934d7f497ca4d24fbcb5b8dc9f701c2
     m_Address: W1-Dialog_es
     m_ReadOnly: 1
@@ -26,6 +33,13 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 17c7549864be9be41bb4cb815eced714
     m_Address: MISC-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dfbc60a375bbf1438f18c2f459514f4
+    m_Address: FRAGMENTS-Dialog_es
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es

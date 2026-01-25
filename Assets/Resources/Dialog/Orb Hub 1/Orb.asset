@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Orb
   m_EditorClassIdentifier: 
   dialog:
-  - Got the Area 1 artifact!
-  - This is the easiest one yet, come on, get going!
+  - Artifact1:Orb
+  - Artifact1:Orb2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

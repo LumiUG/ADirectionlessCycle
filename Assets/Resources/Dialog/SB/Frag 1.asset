@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Frag 1
   m_EditorClassIdentifier: 
   dialog:
-  - Here's... Wait, how'd you know this was in here?
-  - No, no, no. I'm not decyphering whatever's in here, you're missing knowledge!
-  - I suppose you've got this one, but you'll have to do better than that to find
-    the others.
-  - Come back after you get more knowledge, I don't want you to get lost. You'll
-    know.
+  - FragmentSB:First
+  - FragmentSB:First2
+  - FragmentSB:First3
+  - FragmentSB:First4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

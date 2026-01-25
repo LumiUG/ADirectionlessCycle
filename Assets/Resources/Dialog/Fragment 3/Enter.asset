@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Enter
   m_EditorClassIdentifier: 
   dialog:
-  - This should be your last one.
-  - I'll meet you again where I've told you before.
-  - After you have all of them, that is.
-  - It won't have enough power to open a rift if you don't!
+  - Fragment3:Enter
+  - Fragment3:Enter2
+  - Fragment3:Enter3
+  - Fragment3:Enter4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Frag 3
   m_EditorClassIdentifier: 
   dialog:
-  - And you had to jump in here.
-  - You really have a sense for secrets, don't you?
-  - No matter, we don't have enough power to open a rift yet, anyways.
+  - FragmentSB:Third
+  - FragmentSB:Third2
+  - FragmentSB:Third3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

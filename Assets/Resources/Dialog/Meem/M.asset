@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: M
   m_EditorClassIdentifier: 
   dialog:
-  - '[It made some sort of barking sound.]'
-  - '[It looks happy...]'
-  - '[It looks neglected.]'
-  - '[Maybe someday...]'
+  - Meem:M
+  - Meem:M2
+  - Meem:M3
+  - Meem:M4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

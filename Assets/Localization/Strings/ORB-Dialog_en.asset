@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: ORB-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a1311a1b57a96844aafe5a3e5f554e6c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 418415513600
+    m_Localized: Here you are!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 702768353280
+    m_Localized: 'It''s another one of those. Let me decode it for you:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 704479629312
+    m_Localized: '"The third fragment lies below in Area Two."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 706522255360
+    m_Localized: '"Past some empty space, you''ll find it. Though, it''ll require
+      a bit of patience."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 760469393408
+    m_Localized: '"And when the path stops being clear... When in doubt, it never
+      hurts to ask for a hint."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11464308035584
+    m_Localized: Here's... Wait, how'd you know this was in here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11514677432320
+    m_Localized: No, no, no. I'm not decyphering whatever's in here, you're missing
+      knowledge!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11519756734464
+    m_Localized: I suppose you've got this one, but you'll have to do better than
+      that to find the others.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11548110229504
+    m_Localized: Come back after you get more knowledge, I don't want you to get
+      lost. You'll know.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64535386001408
+    m_Localized: They might not be happy about it, but, thank you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534702329856
+    m_Localized: By the way, I have to say, I'm quite impressed that you're actually
+      helping us.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64534039629824
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64533418872832
+    m_Localized: We like to call these places "true freeroam", since you can fully
+      explore a level without being confined to your screen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64532630343680
+    m_Localized: There's other places like these around. They are special levels,
+      where you can move freely throughout it all.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64471599026176
+    m_Localized: Ooooh. The entrance! Welcome to one of the deepest levels in this
+      area.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64894275817472
+    m_Localized: This is the easiest one yet, come on, get going!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64871555272704
+    m_Localized: Got the Area 1 artifact!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976798748672
+    m_Localized: Just you wait, just you wait. I have a plan to get it back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64976022802432
+    m_Localized: Yeah, it's definitely not supposed to be walled off.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64975309770752
+    m_Localized: Usually, you'd be able to get it right now, but...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64970578595840
+    m_Localized: It's used to unlock the core, your final destination.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64949967785984
+    m_Localized: That's an artifact.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65233553068032
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232932311040
+    m_Localized: Thought he'd like some company, even if for a little.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65232202502144
+    m_Localized: As in... the void, I mean. Just move into the void.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65231455916032
+    m_Localized: There's someone in here that you could meet. You'll find him where
+      the light doesn't pass through.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65230809993216
+    m_Localized: I'm not exactly happy with you two, but...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69229219024896
+    m_Localized: Go get 'em.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69228132700160
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69226945712128
+    m_Localized: 'I hope that''s enough help. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69225985216512
+    m_Localized: If there's another "alive" shape anywhere, you won't be able to
+      cycle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69224806617088
+    m_Localized: Your cycling won't work the same, here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69223598657536
+    m_Localized: If you must know, this is another "true freeroam" level.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69222575247360
+    m_Localized: "This is the artifact level, and I don't know where it is. Which\u2026
+      bothers me."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69221417619456
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69220398403584
+    m_Localized: Definitely not... "happy" about helping you both. But I've come
+      to realize you are just trying to help.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69219505016832
+    m_Localized: I'm not fully on board with the idea, but I've come to accept it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71793020899328
+    m_Localized: The terrain... I can't believe it's gotten this bad.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72826203803648
+    m_Localized: Dead end. I think I we saw something back on your beginning screen.
+      Check the bottom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72828204486656
+    m_Localized: It doesn't seem reachable, though. You'll have to make your way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72889982390272
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72890527649792
+    m_Localized: '"Hell yeah."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983079161856
+    m_Localized: '[The cat has stopped guarding the artifact...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72983712501760
+    m_Localized: '[You pet the cat...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72984278732800
+    m_Localized: '[Wait what how-]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 73044022398976
+    m_Localized: Miau!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74293111296000
+    m_Localized: '"We"? I''ve actually seen this one before, mind you.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74334995615744
+    m_Localized: That being said, this is definitely not how I remember it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74335494737920
+    m_Localized: Artifact is on the right. The void seems somewhat harmless there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74445809127424
+    m_Localized: They're just kind of basic, I like chaos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74451463049216
+    m_Localized: Seeing something slowly die is...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74399604674560
+    m_Localized: To be fair, that's kind of their thing. They're the "hints" over
+      on the inverse levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74400217042944
+    m_Localized: And I should be the hints on the main levels, but I've grown bored
+      of them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74472669450240
+    m_Localized: Y-yeah! Nothing, sorry.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77555826823168
+    m_Localized: I just tend to stare into the abyss, and such. You can imagine...?
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

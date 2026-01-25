@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: 
   dialog:
-  - Dead end. I think I saw something back on your beginning screen. Check your walls.
-  - It doesn't seem reachable, though. You'll have to make your way.
+  - Artifact2:End
+  - Artifact2:End2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

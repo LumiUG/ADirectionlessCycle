@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Mid
   m_EditorClassIdentifier: 
   dialog:
-  - '"We"? I''ve actually seen this one before, mind you.'
-  - That being said, this is definitely not how I remember it.
-  - Artifact is on the right. The void seems somewhat harmless there.
+  - Artifact3:Mid
+  - Artifact3:Mid2
+  - Artifact3:Mid3
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

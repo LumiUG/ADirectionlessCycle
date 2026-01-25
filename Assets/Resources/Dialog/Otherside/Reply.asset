@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Reply
   m_EditorClassIdentifier: 
   dialog:
-  - I don't think they took that very well.
-  - Sorry you had to read that, I'll make sure to overwrite anything next time.
-  - They don't want this to end, however hard it gets.
-  - It is... commendable, but we both know it isn't the right thing.
-  - And, heads up. You should come back to this level later to finish it. I doubt
-    you'd understand half of these mechanics.
+  - Otherside:Reply
+  - Otherside:Reply2
+  - Otherside:Reply3
+  - Otherside:Reply4
+  - Otherside:Reply5
+  - Otherside:Reply6
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

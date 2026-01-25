@@ -583,7 +583,7 @@ public class Hub : MonoBehaviour
             GameManager.save.game.levels.Find(level => level.levelID == $"ORB/Orb Three"),
             GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Fragment Two"),
             GameManager.save.game.levels.Find(level => level.levelID == $"FRAGMENTS/Tutorial"),
-            GameManager.save.game.levels.Find(level => level.levelID == $"REMIX/Meem")
+            GameManager.save.game.levels.Find(level => level.levelID == $"VOID/Meem" || level.levelID == $"REMIX/Meem") // renaming support
         };
         foreach (var level in list)
         {

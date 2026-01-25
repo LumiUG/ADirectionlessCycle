@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Miau
   m_EditorClassIdentifier: 
   dialog:
-  - Miau!
+  - Artifact2:Miau
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

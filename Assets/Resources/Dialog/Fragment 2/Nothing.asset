@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Nothing
   m_EditorClassIdentifier: 
   dialog:
-  - There's nothing here anymore. It's all gone, lost.
-  - 'This level is slowly degrading, and for a good reason. '
-  - You should leave. Now.
+  - Fragment2:Nothing
+  - Fragment2:Nothing2
+  - Fragment2:Nothing3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

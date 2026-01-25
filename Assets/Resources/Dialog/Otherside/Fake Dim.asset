@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fake Dim
   m_EditorClassIdentifier: 
   dialog:
-  - '[The carvings have dimmed?]'
+  - Otherside:FakeDim
   events: []
   exhaustDialog: {fileID: 11400000, guid: 3b475f9142648324891894de67453b5b, type: 2}
   textSpeed: 0.05

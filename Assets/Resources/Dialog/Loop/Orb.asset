@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Orb
   m_EditorClassIdentifier: 
   dialog:
-  - Another- another one! Let me read the cypher...
-  - '"In a place with two clones and two hexes, jump west and clear the path."'
-  - ...
-  - Oh, you definitely know where this one is. Trust me!
+  - Loop:Orb
+  - Loop:Orb2
+  - Loop:Orb3
+  - Loop:Orb4
   events: []
   exhaustDialog: {fileID: 11400000, guid: d8b779e530c982447ba8aadeaad899d1, type: 2}
   textSpeed: 0.05

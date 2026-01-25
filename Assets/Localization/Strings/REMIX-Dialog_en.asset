@@ -171,6 +171,123 @@ MonoBehaviour:
     m_Localized: Better count your steps...
     m_Metadata:
       m_Items: []
+  - m_Id: 1845989468147712
+    m_Localized: Get out! What are you doing here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845990105681920
+    m_Localized: I told you there was nothing, NOTHING.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845990793547776
+    m_Localized: Do you hate us? Do you dislike me so much that you'd like to see
+      me cease to be?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845991443664896
+    m_Localized: '... '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845992106364928
+    m_Localized: Please. Stay away from all this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846401000673280
+    m_Localized: '[The carvings have dimmed?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846402317684736
+    m_Localized: I don't think they took that very well.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846700872437760
+    m_Localized: Sorry you had to read that, I'll make sure to overwrite anything
+      next time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846701887459328
+    m_Localized: They don't want this to end, however hard it gets.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846702743097344
+    m_Localized: It is... commendable, but we both know it isn't the right thing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846703867170816
+    m_Localized: You know, after all this time it'd just be better to dissapear.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846986466791424
+    m_Localized: And, heads up. You should come back to this level later to finish
+      it. I doubt you'd understand half of these mechanics.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1850985840513024
+    m_Localized: Another- another one! Let me read the cypher...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1850986515795968
+    m_Localized: '"In a place with two clones and two hexes, jump west and clear
+      the path."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851052626415616
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851054610321408
+    m_Localized: Oh, you definitely know where this one is. Trust me!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851095186018304
+    m_Localized: Oh, come on, I won't give it up. Keep going, go on!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851097123786752
+    m_Localized: I'll repeat it, just incase you forgot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851098763759616
+    m_Localized: '"In a place with two clones and two hexes, jump west and clear
+      the path."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853774306086912
+    m_Localized: You know, you aren't so bad, player.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853774943621120
+    m_Localized: It's just... been difficult. I'm actually surprised I havent gone
+      mad.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853775614709760
+    m_Localized: The developer... I can't be nothing but sorry for them. They really
+      liked this game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853776289992704
+    m_Localized: It's a shame that this was abandoned, but at least I'd thought they
+      would erase everything, so not to cause pain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853776969469952
+    m_Localized: Nothing to do, other than watch and change little things.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853777632169984
+    m_Localized: This program being dormant is so boring! Everything is in read-only.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853778303258624
+    m_Localized: We aren't actually "allowed" to edit any levels, only when it's
+      on. Well, you've seen what they can do.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853778982735872
+    m_Localized: So, yeah. I'm actually tired of existing. Just end us? Haha...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

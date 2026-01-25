@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 11aa380cd273b32458d126e4a01f345d, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 754158504382464
+    m_Localized: '[Hizo un sonido parecido a un ladrido.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754159699759104
+    m_Localized: "[Parece contento\u2026]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754161268428800
+    m_Localized: '[Parece descuidado.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754161939517440
+    m_Localized: "[Puede que alg\xFAn d\xEDa\u2026]"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

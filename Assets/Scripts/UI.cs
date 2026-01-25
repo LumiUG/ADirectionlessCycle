@@ -295,12 +295,14 @@ public class UI : MonoBehaviour
 
     public void ShowCracks(int phase)
     {
-        cracks.ForEach(crack => crack.gameObject.SetActive(false));
-
-        for (int i = 0; i < phase; i++)
+        if (phase == -1)
         {
-            cracks[i].gameObject.SetActive(true);
+            cracks.ForEach(crack => crack.gameObject.SetActive(false));
+            return;
         }
+
+        cracks[phase].gameObject.SetActive(true);
+        // for (int i = 0; i < phase; i++) cracks[i].gameObject.SetActive(true);
     }
 
     // Goes to the current level's

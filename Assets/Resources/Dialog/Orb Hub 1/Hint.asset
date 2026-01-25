@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Hint
   m_EditorClassIdentifier: 
   dialog:
-  - 'It''s another one of those. Let me decode it for you:'
-  - '"The third fragment lies below in Area Two."'
-  - '"Past some empty space, you''ll find it. Though, it''ll require a bit of patience."'
-  - '"And when the path stops being clear...  When in doubt, it never hurts to ask
-    for a hint."'
+  - Artifact1:FragmentHint
+  - Artifact1:FragmentHint2
+  - Artifact1:FragmentHint3
+  - Artifact1:FragmentHint4
+  - Artifact1:FragmentHint5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

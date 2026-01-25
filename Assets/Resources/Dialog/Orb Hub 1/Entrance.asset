@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - Ooooh. The entrance! Welcome to one of the deepest levels in this area.
-  - There's other places like these around. They are special levels, where you can
-    move freely throughout it all.
-  - We like to call these places "true freeroam", since you can fully escape from
-    being confined in that little space.
-  - ...
-  - By the way, I have to say, I'm quite impressed that you're actually helping us.
-  - They might not be happy about it, but, thank you.
+  - Artifact1:Entrance
+  - Artifact1:Entrance2
+  - Artifact1:Entrance3
+  - Artifact1:Entrance4
+  - Artifact1:Entrance5
+  - Artifact1:Entrance6
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

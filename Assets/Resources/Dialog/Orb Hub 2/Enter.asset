@@ -13,17 +13,16 @@ MonoBehaviour:
   m_Name: Enter
   m_EditorClassIdentifier: 
   dialog:
-  - I'm not fully on board with the idea, but I've come to accept it.
-  - Definitely not... "happy" about helping you both. But I've come to realize you
-    are just trying to help.
-  - ...
-  - This is the artifact level, I don't know where it is.
-  - If you must know, this is another "true freeroam" level.
-  - Your cycling won't work the same, here.
-  - If there's another "alive" shape anywhere, you won't be able to cycle.
-  - 'I hope that''s enough help. '
-  - ...
-  - Go get 'em.
+  - Artifact2:Enter
+  - Artifact2:Enter2
+  - Artifact2:Enter3
+  - Artifact2:Enter4
+  - Artifact2:Enter5
+  - Artifact2:Enter6
+  - Artifact2:Enter7
+  - Artifact2:Enter8
+  - Artifact2:Enter9
+  - Artifact2:Enter10
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

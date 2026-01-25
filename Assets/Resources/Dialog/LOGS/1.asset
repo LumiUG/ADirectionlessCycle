@@ -25,4 +25,4 @@ MonoBehaviour:
   textSpeed: 0.08
   sfx: {fileID: 0}
   shouldExhaust: 0
-  canBeSkipped: 0
+  canBeSkipped: 1

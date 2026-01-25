@@ -13,19 +13,14 @@ MonoBehaviour:
   m_Name: Something
   m_EditorClassIdentifier: 
   dialog:
-  - You know, you aren't so bad, player.
-  - It's just... been difficult. I'm actually surprised I havent gone mad.
-  - The developer... I can't be nothing but sorry for them. They really liked this
-    game.
-  - It's a shame that this was abandoned, but at least I'd thought they would erase
-    everything, so not to cause pain.
-  - Nothing to do, other than watch and change little things.
-  - This program being dormant is so boring! Genuinely, everything is in read-only.
-  - We aren't actually "allowed" to edit any levels, only when this is on. And barely
-    change anything! You've seen what they can do.
-  - So, yeah. I'm actually tired of existing. Just end us "lmao".
-  - I don't know what "lmao" stands for but I saw them using it. Should probably
-    ask...
+  - Reception:Something
+  - Reception:Something2
+  - Reception:Something3
+  - Reception:Something4
+  - Reception:Something5
+  - Reception:Something6
+  - Reception:Something7
+  - Reception:Something8
   events: []
   exhaustDialog: {fileID: 11400000, guid: b2cd860a361248041b9c1b2e78c609aa, type: 2}
   textSpeed: 0.05

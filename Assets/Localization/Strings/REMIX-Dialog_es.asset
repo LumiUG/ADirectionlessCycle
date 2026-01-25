@@ -153,6 +153,151 @@ MonoBehaviour:
     m_Localized: Para ti y solo para ti. Prueba "overflow".
     m_Metadata:
       m_Items: []
+  - m_Id: 11507517755392
+    m_Localized: Para! No te muevas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11508184649728
+    m_Localized: Este nivel entero es una trampa, no lo ves?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11508826378240
+    m_Localized: "Esp\xE9rate, mant\xE9n pulsado [ESPACIO] o [TRI\xC1NGULO] y mira
+      la caja en la parte superior izquierda de tu pantalla."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11509942063104
+    m_Localized: "No, no lo hagas ahora. Hazlo despu\xE9s de esta interacci\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11510835449856
+    m_Localized: "Un paso en falso, y te sacar\xE1n de aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11511858860032
+    m_Localized: "Mejor cuenta tus pasos\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846401000673280
+    m_Localized: '[Las grabaciones se han oscurecido?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846402317684736
+    m_Localized: Me parece que no se lo ha tomado muy bien.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846700872437760
+    m_Localized: "Siento que hayas tenido que leer eso, me har\xE9 cargo de sobreescribirlo
+      la pr\xF3xima vez."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846701887459328
+    m_Localized: "\xC9l no quiere que esto acabe, da igual lo dif\xEDcil que sea."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846702743097344
+    m_Localized: "Es\u2026 Admirable, pero los dos sabemos que no es lo correcto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846703867170816
+    m_Localized: "Sabes, despu\xE9s de todo este tiempo, lo mejor es desaparecer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1846986466791424
+    m_Localized: "Y, por cierto, deber\xEDas volver a este nivel m\xE1s tarde para
+      completarlo. No creo que entiendas la mitad de estas mec\xE1nicas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845989468147712
+    m_Localized: "Vete! Que estas haciendo aqu\xED?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845990105681920
+    m_Localized: "Te he dicho que no hab\xEDa nada, NADA."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845990793547776
+    m_Localized: Nos odias? Tanto me detestas que quieres verme dejar de existir?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845991443664896
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1845992106364928
+    m_Localized: Por favor. Ignora todo esto, no te metas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851052626415616
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1850985840513024
+    m_Localized: "Otro- Otro m\xE1s D\xE9jame leer el cifrado\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1850986515795968
+    m_Localized: "\"En un lugar con dos clones y dos hex\xE1gonos, salta hacia el
+      oeste y despeja el camino.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851054610321408
+    m_Localized: "Oh, estoy 100% seguro de que sabes d\xF3nde est\xE1 este. Conf\xEDa
+      en m\xED!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851095186018304
+    m_Localized: "Oh, venga ya, no te lo voy a dar as\xED sin m\xE1s. Sigue intent\xE1ndolo,
+      vamos!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851097123786752
+    m_Localized: Te lo repito, en el caso de que te hayas olvidado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1851098763759616
+    m_Localized: "\"En un lugar con dos clones y dos hex\xE1gonos, salta hacia el
+      oeste y despeja el camino.\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853774306086912
+    m_Localized: Sabes, no eres tan malo, jugador.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853774943621120
+    m_Localized: "Es solo que... ha sido dif\xEDcil. De hecho, me sorprende no haberme
+      vuelto loco."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853775614709760
+    m_Localized: El desarrollador... No puedo no sentir pena por ellos. Les gustaba
+      mucho este juego.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853776289992704
+    m_Localized: "Es una pena que lo haya abandonado, pero al menos pensaba que borrar\xEDa
+      todo para no causar dolor."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853776969469952
+    m_Localized: Nada que hacer, solamente mirar y cambiar cositas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853777632169984
+    m_Localized: "El programa, estando inactivo, es muy aburrido! Todo est\xE1 en
+      modo de solo lectura."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853778303258624
+    m_Localized: "No se nos \"permite\" editar niveles, solo cuando el juego est\xE1
+      abierto. Bueno, ya has visto lo que \xE9l puede hacer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1853778982735872
+    m_Localized: "As\xED que, bueno. Estoy cansado de existir. Acaba con nosotros?
+      Jaja\u2026"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

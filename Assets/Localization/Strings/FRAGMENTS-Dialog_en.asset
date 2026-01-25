@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: FRAGMENTS-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 78eb69d100737634384f3c29386e38e7, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6085197041664
+    m_Localized: There's nothing here anymore. It's all gone, lost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6087055118336
+    m_Localized: 'This level is slowly degrading, and for a good reason. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6089005469696
+    m_Localized: You should leave. Now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6176360239104
+    m_Localized: 'As I like to say: "Nothing''s lost forever".'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6178994262016
+    m_Localized: I've created a wrong warp on "3-10", just interact five times with
+      the broken wall on your right.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6179782791168
+    m_Localized: That's where you'll need to go after getting the last fragment.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6180747481088
+    m_Localized: 'That being said- here''s the last cypher:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6181393403904
+    m_Localized: '"Desyncing, desyncing... Find your mark and jump into it."'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6182475534336
+    m_Localized: Ooooh, clever.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8521928282112
+    m_Localized: This should be your last one.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8525128536064
+    m_Localized: I'll meet you again where I've told you before.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8525719932928
+    m_Localized: After you have all of them, that is.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8526319718400
+    m_Localized: It won't have enough power to open a rift if you don't!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9855553376256
+    m_Localized: And you had to jump in here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9856165744640
+    m_Localized: You really have a sense for secrets, don't you?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9856878776320
+    m_Localized: No matter, we don't have enough power to open a rift yet, anyways.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

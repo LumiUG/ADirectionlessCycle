@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: End
   m_EditorClassIdentifier: 
   dialog:
-  - To be fair, that's kind of their thing. They're the "hints" over on the inverse
-    levels.
-  - And I should be the hints on the main levels, but I've grown bored of them.
-  - They're just kind of basic, I like chaos.
-  - Seeing something slowly die is...
-  - Y-yeah! Nothing, sorry.
+  - Artifact3:End
+  - Artifact3:End2
+  - Artifact3:End3
+  - Artifact3:End4
+  - Artifact3:End5
+  - Artifact3:End6
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corridor
   m_EditorClassIdentifier: 
   dialog:
-  - The terrain... I can't believe it's gotten this bad.
+  - Artifact2:Corridor
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

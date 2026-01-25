@@ -42,8 +42,18 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78eb69d100737634384f3c29386e38e7
+    m_Address: Assets/Localization/Strings/FRAGMENTS-Dialog Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 853e0d874aba04e4fa570dd25de024fb
     m_Address: Assets/Localization/Strings/Dialog Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1311a1b57a96844aafe5a3e5f554e6c
+    m_Address: Assets/Localization/Strings/ORB-Dialog Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
