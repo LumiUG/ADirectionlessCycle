@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754159699759104
-    m_Localized: "[Parece contento\u2026]"
+    m_Localized: '[Parece contento...]'
     m_Metadata:
       m_Items: []
   - m_Id: 754161268428800
@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754161939517440
-    m_Localized: "[Puede que alg\xFAn d\xEDa\u2026]"
+    m_Localized: "[Puede que alg\xFAn d\xEDa...]"
     m_Metadata:
       m_Items: []
   references:

@@ -63,7 +63,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3033074782834688
-    m_Localized: "Jugador\u2026. Ya te est\xE1n dando un tutorial."
+    m_Localized: "Jugador... Ya te est\xE1n dando un tutorial."
     m_Metadata:
       m_Items: []
   - m_Id: 3033091115454464
@@ -83,11 +83,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3033231859519488
-    m_Localized: "Creando conexi\xF3n FTP\u2026"
+    m_Localized: "Creando conexi\xF3n FTP..."
     m_Metadata:
       m_Items: []
   - m_Id: 3033266558996480
-    m_Localized: "Preparando subidas\u2026"
+    m_Localized: Preparando subidas...
     m_Metadata:
       m_Items: []
   - m_Id: 3033272712040448

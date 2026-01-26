@@ -108,7 +108,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 64975309770752
-    m_Localized: "Normalmente, podr\xEDas conseguirlo ahora mismo, pero\u2026"
+    m_Localized: "Normalmente, podr\xEDas conseguirlo ahora mismo, pero..."
     m_Metadata:
       m_Items: []
   - m_Id: 64976022802432
@@ -120,7 +120,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 65230809993216
-    m_Localized: "No estoy exactamente contento con vosotros, pero\u2026"
+    m_Localized: No estoy exactamente contento con vosotros, pero...
     m_Metadata:
       m_Items: []
   - m_Id: 65231455916032
@@ -129,8 +129,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 65232202502144
-    m_Localized: "C\xF3mo te lo digo\u2026 El vac\xEDo, me refiero. Simplemente,
-      mu\xE9vete hacia el."
+    m_Localized: "C\xF3mo te lo digo... El vac\xEDo, me refiero. Simplemente, mu\xE9vete
+      hacia el."
     m_Metadata:
       m_Items: []
   - m_Id: 65232932311040
@@ -152,13 +152,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 69220398403584
-    m_Localized: "No estoy\u2026 \"contento\" por tener que ayudaros. Pero me he
-      dado cuenta de que solo est\xE1is intentando ayudar."
+    m_Localized: "No estoy... \"contento\" por tener que ayudaros. Pero me he dado
+      cuenta de que solo est\xE1is intentando ayudar."
     m_Metadata:
       m_Items: []
   - m_Id: 69222575247360
     m_Localized: "Este es el nivel del artefacto, y no s\xE9 d\xF3nde est\xE1. Lo
-      cual\u2026 me inquieta."
+      cual... me inquieta."
     m_Metadata:
       m_Items: []
   - m_Id: 69223598657536
@@ -183,7 +183,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 71793020899328
-    m_Localized: "El terreno\u2026 No me acordaba de que estuviera tan mal."
+    m_Localized: El terreno... No me acordaba de que estuviera tan mal.
     m_Metadata:
       m_Items: []
   - m_Id: 72889982390272
@@ -203,7 +203,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 72983712501760
-    m_Localized: "[Acaricias al gato\u2026]"
+    m_Localized: '[Acaricias al gato...]'
     m_Metadata:
       m_Items: []
   - m_Id: 72984278732800
@@ -243,7 +243,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 74451463049216
-    m_Localized: "Ver como algo muere lentamente es\u2026"
+    m_Localized: Ver como algo muere lentamente es...
     m_Metadata:
       m_Items: []
   - m_Id: 74472669450240

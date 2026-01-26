@@ -69,7 +69,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3196823146496
-    m_Localized: "\u2026Tampoco es que tuvieras ninguna otra opci\xF3n."
+    m_Localized: "...Tampoco es que tuvieras ninguna otra opci\xF3n."
     m_Metadata:
       m_Items: []
   - m_Id: 5595621101568
@@ -175,7 +175,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11511858860032
-    m_Localized: "Mejor cuenta tus pasos\u2026"
+    m_Localized: Mejor cuenta tus pasos...
     m_Metadata:
       m_Items: []
   - m_Id: 1846401000673280
@@ -233,7 +233,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1850985840513024
-    m_Localized: "Otro- Otro m\xE1s D\xE9jame leer el cifrado\u2026"
+    m_Localized: "Otro- Otro m\xE1s D\xE9jame leer el cifrado..."
     m_Metadata:
       m_Items: []
   - m_Id: 1850986515795968
@@ -295,7 +295,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1853778982735872
     m_Localized: "As\xED que, bueno. Estoy cansado de existir. Acaba con nosotros?
-      Jaja\u2026"
+      Jaja..."
     m_Metadata:
       m_Items: []
   references:

@@ -113,7 +113,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 431944953368576
-    m_Localized: "Bien. Aqu\xED viene lo divertido\u2026"
+    m_Localized: "Bien. Aqu\xED viene lo divertido..."
     m_Metadata:
       m_Items: []
   - m_Id: 431945620262912
@@ -170,7 +170,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 432750804996096
-    m_Localized: "Para completar niveles con ellas\u2026 Hm, sabes? Ya lo descubrir\xE1s
+    m_Localized: "Para completar niveles con ellas... Hm, sabes? Ya lo descubrir\xE1s
       t\xFA solo. Ten cuidado con tu orden!"
     m_Metadata:
       m_Items: []
