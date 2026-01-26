@@ -211,6 +211,56 @@ MonoBehaviour:
     m_Localized: I made a small path for you. Hopefully that's enough.
     m_Metadata:
       m_Items: []
+  - m_Id: 1122902971912192
+    m_Localized: After that, we... Won't be here... Anymore.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122902065942528
+    m_Localized: If you get to the center, the bottom, it'll be done. Just like that.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122901453574144
+    m_Localized: It's degraded so badly we believe everything has started looping
+      itself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122900925091840
+    m_Localized: The function to 'delete everything' should start as soon as you
+      get past the entrance.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123448298541056
+    m_Localized: Whatever you find down there...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123446058782720
+    m_Localized: So, this might be the last time we can communicate with you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123442774642688
+    m_Localized: We don't really have access down there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123852776247296
+    m_Localized: So... good luck. And if you need a hint...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123855888420864
+    m_Localized: We'll be with you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123857528393728
+    m_Localized: Er, in spirit, I mean. Or whatever you believe in.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123904999526400
+    m_Localized: 'Sneaky! '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123906488504320
+    m_Localized: I've never understood how these work, or what they are. Do you?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

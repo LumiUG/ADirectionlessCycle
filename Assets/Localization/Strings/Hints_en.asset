@@ -17,7 +17,108 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 409320fcd4ac4d04bb3c3f6abdcf3dbd, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 3032237578784768
+    m_Localized: '[Proceed further to reveal this hint]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032284844396544
+    m_Localized: Fine... It's "Seek the path of light."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032473151868928
+    m_Localized: ...No, sorry. You'll have to figure it out yourself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032485919330304
+    m_Localized: Pretty straightforward!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032695609364480
+    m_Localized: I won't let you go deeper.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032709521870848
+    m_Localized: I'd disallow it, but there's really nothing, sorry!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032784922873856
+    m_Localized: You aren't getting in this easily.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032796062945280
+    m_Localized: No, no, and no. You're not getting a hint out of me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032872692879360
+    m_Localized: I'm sure you can figure out this one yourself!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032914514284544
+    m_Localized: Gravix? How did anything Gravix related get here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033037260591104
+    m_Localized: I'm... Definitely not giving you a hint here. Please stop.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033074782834688
+    m_Localized: Player... They're already giving you a tutorial.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033091115454464
+    m_Localized: The core's entrance. The point of no return.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033092411494400
+    m_Localized: '%begin% CO*MU%%CAT$0N %end%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033093019668480
+    m_Localized: gin% ENTERING *##$$! AREA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033093581705216
+    m_Localized: '%end%end%end%end%endddddd'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033231859519488
+    m_Localized: Creating FTP connection...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033266558996480
+    m_Localized: Preparing uploads...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033421525946368
+    m_Localized: 202 Accepted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033420917772288
+    m_Localized: internal abstract GameTile Loop();
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033419504291840
+    m_Localized: Here for a peek? Carry on, carry on.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033273936777216
+    m_Localized: Missed opportunity to make an answer rely on the level hint. Shame
+      on me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033273316020224
+    m_Localized: In an invisible maze, no one can hear you scream.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033272712040448
+    m_Localized: '[A Directionless Cycle]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3052904772669440
+    m_Localized: This level has no hints available.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

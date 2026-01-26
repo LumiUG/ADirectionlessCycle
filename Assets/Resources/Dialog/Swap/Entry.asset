@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Entry
   m_EditorClassIdentifier: 
   dialog:
-  - Finally here! Took you a while.
-  - I've actually managed to make this level just for you, as one of the preparations
-    I was talking about.
-  - We might not have much power here, but at least we can do something.
-  - Okay! Let's start with the basics, you'll understand how it works when you see
-    it.
-  - Go on, and press [C] or [RT] to cycle.
+  - Swap:Entry
+  - Swap:Entry2
+  - Swap:Entry3
+  - Swap:Entry4
+  - Swap:Entry5
   events: []
   exhaustDialog: {fileID: 11400000, guid: fc141c485845e864ba63c93ed6c9d4e2, type: 2}
   textSpeed: 0.05

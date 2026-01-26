@@ -173,6 +173,122 @@ MonoBehaviour:
     m_Localized: Back
     m_Metadata:
       m_Items: []
+  - m_Id: 3250758246076416
+    m_Localized: Confirm Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3250944083103744
+    m_Localized: Repeat Input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3251188342591488
+    m_Localized: Show Timer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3251207946768384
+    m_Localized: Show Moves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3254671431045120
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3254769326100480
+    m_Localized: Outline Type
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3255344436482048
+    m_Localized: Scanline Animation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3255345061433344
+    m_Localized: Accessible Font
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3255342402244608
+    m_Localized: Missing Highlighter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3255340544167936
+    m_Localized: Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3256438642315264
+    m_Localized: (Dialog Only)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3257824159338496
+    m_Localized: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3257825262440448
+    m_Localized: SFX Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3259171495612416
+    m_Localized: ERASE SAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3261800665714688
+    m_Localized: Guest Characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3260187343458304
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3260170985672704
+    m_Localized: SOUND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3260140052680704
+    m_Localized: GRAPHICS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3261712321089536
+    m_Localized: Developer & Publisher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3261737583382528
+    m_Localized: Playtesters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3261810539106304
+    m_Localized: Special Thanks / Moral Support
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3263529411022848
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3263649313591296
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3263991539437568
+    m_Localized: Restart Level?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3264635146997760
+    m_Localized: Best time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3264635805503488
+    m_Localized: Best moves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3264932229550080
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3265298576838656
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3265301563183104
+    m_Localized: Back to Hub
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

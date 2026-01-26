@@ -328,43 +328,42 @@ public class UI : MonoBehaviour
             switch (split[1])
             {
                 // LocalizationSettings.StringDatabase.GetLocalizedString("Hints", stringID)
-                case "Rybb":  { popup.SetPopup("Will be added in a future update! Forgot..."); return; }
                 case "Orb One":
                     {
-                        if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("[Proceed further to reveal this hint]");
-                        else popup.SetPopup("Fine... It's \"Seek the path of light.\"");
+                        if (GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-Dialog/3-12/Light") == null) popup.SetPopup("OrbOneP1");
+                        else popup.SetPopup("OrbOneP2");
                         return;
                     }
-                case "Orb Two": { popup.SetPopup("...No idea how to get there."); return; }
-                case "Orb Three": { popup.SetPopup("Pretty straightforward!"); return; }
-                case "Fragment TwoH": { popup.SetPopup("I won't let you go deeper."); return; }
-                case "Fragment Three": { popup.SetPopup("I'd disallow it, but there's really nothing, sorry!"); return; }
-                case "3-1": { popup.SetPopup("You aren't getting in this easily."); return; }
-                case "3-10": { popup.SetPopup("No, no, and no. You're not getting a hint."); return; }
-                case "Industrial": { popup.SetPopup("I'm sure you can figure out this one yourself!"); return; }
-                case "Meem": { popup.SetPopup("Gravix? How did anything Gravix related get here?"); return; }
-                case "Upgrade": { popup.SetPopup("I'm... Definitely not giving you a hint here. Please stop."); return; }
-                case "Tutorial": { popup.SetPopup("Player... They're already giving you a tutorial."); return; }
-                case "END": { popup.SetPopup("The core's entrance. The point of no return."); return; }
-                case "Entry": { popup.SetPopup("%begin% CO*MU%%CAT$0N %end%"); return; }
-                case "Corridor": { popup.SetPopup("gin% ENTERING *##$$! AREA"); return; }
-                case "Right": { popup.SetPopup("%end%end%end%end%endddddd"); return; }
+                case "Orb Two": { popup.SetPopup("OrbTwo"); return; }
+                case "Orb Three": { popup.SetPopup("OrbThree"); return; }
+                case "Fragment TwoH": { popup.SetPopup("FragmentTwo"); return; }
+                case "Fragment Three": { popup.SetPopup("FragmentThree"); return; }
+                case "3-1": { popup.SetPopup("3-1"); return; }
+                case "3-10": { popup.SetPopup("3-10"); return; }
+                case "Industrial": { popup.SetPopup("Industrial"); return; }
+                case "Meem": { popup.SetPopup("Meem"); return; }
+                case "Upgrade": { popup.SetPopup("Upgrade"); return; }
+                case "Tutorial": { popup.SetPopup("Tutorial"); return; }
+                case "END": { popup.SetPopup("END"); return; }
+                case "Entry": { popup.SetPopup("Entry"); return; }
+                case "Corridor": { popup.SetPopup("Corridor"); return; }
+                case "Right": { popup.SetPopup("Right"); return; }
                 case "Down":
-                case "Left": { popup.SetPopup("Creating FTP connection..."); return; }
-                case "Up": { popup.SetPopup("Preparing uploads..."); return; }
-                case "Outro": { popup.SetPopup("[A Directionless Cycle]"); return; }
-                case "Despair": { popup.SetPopup("In an invisible maze, no one can hear you scream."); return; }
-                case "Quiz": { popup.SetPopup("Missed opportunity to make an answer rely on the level hint. Shame on me."); return; }
-                case "Developer": { popup.SetPopup("Here for a peek? Carry on, carry on."); return; }
+                case "Left": { popup.SetPopup("DownLeft"); return; }
+                case "Up": { popup.SetPopup("Up"); return; }
+                case "Outro": { popup.SetPopup("Outro"); return; }
+                case "Despair": { popup.SetPopup("Despair"); return; }
+                case "Quiz": { popup.SetPopup("Quiz"); return; }
+                case "Developer": { popup.SetPopup("Developer"); return; }
                 default: // Custom cases
-                    if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("internal abstract GameTile Loop();"); return; }
-                    if (LevelManager.I.currentLevelID == "VOID/CYCLE") { popup.SetPopup("202 Accepted"); return; }
+                    if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("Loop"); return; }
+                    if (LevelManager.I.currentLevelID == "VOID/CYCLE") { popup.SetPopup("Cycle"); return; }
                     break;
             }
         } else hintLevelID = null;
 
         // Get the level and load it accordingly
-        if (LevelManager.I.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("This level has no hints available."); return; }
+        if (LevelManager.I.GetLevel(hintLevelID, false, true) == null) { popup.SetPopup("NoHints"); return; }
         TransitionManager.I.TransitionIn(Triangle, Actions.GoHintLevel, hintLevelID);
     }
 
@@ -434,14 +433,14 @@ public class UI : MonoBehaviour
 
         public void SetBestTime(float newTime = -1)
         {
-            if (newTime == -1 ) time.text = "Best time: ???";
-            else time.text = $"Best time: {Math.Round(newTime, 2)}s";
+            if (newTime == -1 ) time.text = $"{Localization.GetStrings("UI", "PauseBestTime")}: ???";
+            else time.text = $"{Localization.GetStrings("UI", "PauseBestTime")}: {Math.Round(newTime, 2)}s";
         }
 
         public void SetBestMoves(int newMoves = -1)
         {
-            if (newMoves == -1) moves.text = "Best moves: ???";
-            else moves.text = $"Best moves: {newMoves}";
+            if (newMoves == -1) moves.text = $"{Localization.GetStrings("UI", "PauseBestMoves")}: ???";
+            else moves.text = $"{Localization.GetStrings("UI", "PauseBestMoves")}: {newMoves}";
         }
 
         internal void PreparePreloadScreen(Serializables.GameData.Level save)
@@ -480,8 +479,8 @@ public class UI : MonoBehaviour
         public Text levelBestMoves;
 
         public void ToggleEditButton(bool toggle) { editorButton.SetActive(toggle); }
-        public void SetBestTime(float newTime) { levelBestTime.text = $"Best time: {Math.Round(newTime, 2)}s"; }
-        public void SetBestMoves(int newMoves) { levelBestMoves.text = $"Best moves: {newMoves}"; }
+        public void SetBestTime(float newTime) { levelBestTime.text = $"{Localization.GetStrings("UI", "PauseBestTime")}: {Math.Round(newTime, 2)}s"; }
+        public void SetBestMoves(int newMoves) { levelBestMoves.text = $"{Localization.GetStrings("UI", "PauseBestMoves")}: {newMoves}"; }
     }
 
     [Serializable]
@@ -585,7 +584,7 @@ public class UI : MonoBehaviour
         public void SetPopup(string content)
         {
             I.selectors.ChangeSelected(popupBtn, true);
-            popupText.text = content;
+            popupText.text = Localization.GetStrings("Hints", content);
             Toggle(true);
         }
     }

@@ -255,6 +255,10 @@ MonoBehaviour:
       as\xED. Te haces la idea...?"
     m_Metadata:
       m_Items: []
+  - m_Id: 74445809127424
+    m_Localized: "Son un poco b\xE1sicos, me gusta el caos."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

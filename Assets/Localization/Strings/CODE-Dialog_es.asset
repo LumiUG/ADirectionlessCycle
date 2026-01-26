@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CODE-Dialog_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 0a78892ee6a7ac44eaef6f692257751c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1686814986240
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1644028891136
+    m_Localized: Ah...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259275231232
+    m_Localized: "Qu\xE9 universo m\xE1s interesante. Nunca hab\xEDa visto algo tan
+      inestable-"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260965535744
+    m_Localized: Oh? No puedes continuar?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263586975744
+    m_Localized: "Venga, eso deber\xEDa ayudarte."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265453441024
+    m_Localized: "Esta es la \xFAltima vez que te ayudar\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420651077632
+    m_Localized: "Qui\xE9n soy? Ni yo lo s\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 422211358720
+    m_Localized: Ah, no te preocupes por eso.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423234768896
+    m_Localized: "Estoy seguro de que nos encontraremos alg\xFAn d\xEDa, simplemente
+      no lo sabr\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475630014464
+    m_Localized: "Pareces sorprendido de verme aqu\xED?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476238188544
+    m_Localized: "Solo estoy recolectando informaci\xF3n, nada muy dr\xE1stico."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476858945536
+    m_Localized: "Bueno, este lugar parece muy inestable, as\xED que deber\xEDas
+      irte antes de que sea muy tarde."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 536212541440
+    m_Localized: "[Tu comunicaci\xF3n con el glifo desaparece\u2026]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1187487289344
+    m_Localized: Al fin has llegado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1190188421120
+    m_Localized: "(Lumi! De verdad, s\xED que te ha costado darles indicaciones aqu\xED.)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1191698370560
+    m_Localized: "As\xED que\u2026 t\xFA! Vamos, te espera un reto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1267736907776
+    m_Localized: CONTEMPLA!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268881952768
+    m_Localized: "As\xED es! Buena suerte pasando, ya he ganado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1282156924928
+    m_Localized: Injusto? Si, y lo siento, yo no hago las reglas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438260531200
+    m_Localized: QUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438847733760
+    m_Localized: "No deber\xEDa ser posible- C\xF3mo??"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439854366720
+    m_Localized: "Esto es una estupidez! No me hab\xEDan avisado de esto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1530740740096
+    m_Localized: "Fuego, entonces! Dale, m\xE1s fuego! M\xE1s! M\xE1s!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1564555218944
+    m_Localized: ME QUEMO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1565188558848
+    m_Localized: DEMASIADO FUEGO, DEMASIADO FUEGO!!!!!!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1566019031040
+    m_Localized: AHHHHHHHHHHHHHHHHHHHH-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1687679012864
+    m_Localized: "M-me has ganado\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1688551428096
+    m_Localized: Pilla t-tu victoria y vete a otro lado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1689314791424
+    m_Localized: "Fuera\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832722239488
+    m_Localized: "[Decides seguir adelante, parece que est\xE1 calentito y c\xF3modo]."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

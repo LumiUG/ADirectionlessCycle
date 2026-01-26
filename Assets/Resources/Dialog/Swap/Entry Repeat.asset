@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Entry Repeat
   m_EditorClassIdentifier: 
   dialog:
-  - Go on, and press [C] or [RT] to cycle.
+  - Swap:EntryRepeat
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

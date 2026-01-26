@@ -38,6 +38,13 @@ MonoBehaviour:
     - Locale-es
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c57dc917ce31c54db73e62d17c17aec
+    m_Address: CODE-Dialog_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5dfbc60a375bbf1438f18c2f459514f4
     m_Address: FRAGMENTS-Dialog_es
     m_ReadOnly: 1

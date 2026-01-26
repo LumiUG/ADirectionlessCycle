@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fizzle
   m_EditorClassIdentifier: 
   dialog:
-  - '[Your communication with this glyph fizzles out...]'
+  - CODE:CaosFizzle
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

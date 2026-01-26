@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   dialog:
-  - I AM ON FIRE
-  - TOO MUCH FIRE, TOO MUCH FIRE!!!!!!!
-  - AHHHHHHHHHHHHHHHHHHHH-
+  - CODE:GummiFour
+  - CODE:GummiFour2
+  - CODE:GummiFour3
   events: []
   exhaustDialog: {fileID: 11400000, guid: 1e83e184689afda4bbe7b0d296c1c813, type: 2}
   textSpeed: 0.02

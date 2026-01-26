@@ -83,6 +83,97 @@ MonoBehaviour:
     m_Localized: No matter, we don't have enough power to open a rift yet, anyways.
     m_Metadata:
       m_Items: []
+  - m_Id: 431660696997888
+    m_Localized: Finally here! Took you a while.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431661984649216
+    m_Localized: I've actually managed to make this level just for you, as one of
+      the preparations I was talking about.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431663997915136
+    m_Localized: We might not have much power here, but at least we can do something.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431665012936704
+    m_Localized: Okay! Let's start with the basics, you'll understand how it works
+      when you see it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431669362429952
+    m_Localized: Go on, and press [C] or [RT] to cycle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431798014316544
+    m_Localized: Go on, and press [C] or [RT] to cycle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431947331538944
+    m_Localized: You'll see! Cycle into a Hex, and move into that broken wall on
+      your right.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431946341683200
+    m_Localized: Yes... You couldn't do it before. Only after getting the fragments
+      it unlocks it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431945620262912
+    m_Localized: By cycling, you can now access areas you couldn't reach before.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431944953368576
+    m_Localized: Great. Now here's the fun part...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432259819769856
+    m_Localized: That's it. Just as simple.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432260432138240
+    m_Localized: Now every time you see something like this, you know what to do!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432261870784512
+    m_Localized: There are also different cases, try stuff out!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432353801539584
+    m_Localized: Aaand, told you this would be worth the detour! Go on then, have
+      fun.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432353004621824
+    m_Localized: Just keep in mind, broken walls indicate new screens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432352383864832
+    m_Localized: I like that attitude, surely you've just gotten some new ideas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432351725359104
+    m_Localized: Well? What do you think? Getting the hang of it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432751572553728
+    m_Localized: That's about it, good luck, player.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432750804996096
+    m_Localized: To complete levels with it... Hm, actually you'll figure it out.
+      Be careful with your order!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432750079381504
+    m_Localized: There are now "outbound" areas. These work differently than inverse
+      ones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432749429264384
+    m_Localized: And, as a last thing.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

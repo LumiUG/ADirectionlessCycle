@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sneaky
   m_EditorClassIdentifier: 
   dialog:
-  - 'Sneaky! '
-  - I've never understood how these work, or what they are. Do you?
+  - END:Sneaky
+  - END:Sneaky2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

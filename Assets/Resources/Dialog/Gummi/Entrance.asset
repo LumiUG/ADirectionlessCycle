@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Entrance
   m_EditorClassIdentifier: 
   dialog:
-  - You've finally made it here.
-  - (Lumi! God damnit, took you long enough to point them here.)
-  - So, you! Go on, a trial awaits you.
+  - CODE:GummiEntrance
+  - CODE:GummiEntrance2
+  - CODE:GummiEntrance3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

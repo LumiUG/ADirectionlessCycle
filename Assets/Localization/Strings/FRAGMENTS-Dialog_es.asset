@@ -85,6 +85,99 @@ MonoBehaviour:
       una grieta."
     m_Metadata:
       m_Items: []
+  - m_Id: 431660696997888
+    m_Localized: Al fin! Has tardado un rato.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431661984649216
+    m_Localized: He conseguido crear este nivel solo para ti, como parte de los preparativos
+      de los que te hablaba.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431663997915136
+    m_Localized: "Puede que no tengamos mucho poder aqu\xED, pero al menos podemos
+      hacer algo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431665012936704
+    m_Localized: "Vale! Empecemos con lo b\xE1sico, ya entender\xE1s c\xF3mo funciona
+      cuando lo veas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431669362429952
+    m_Localized: Vamos, pulsa [C] o [RT] para ciclar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431798014316544
+    m_Localized: Vamos, pulsa [C] o [RT] para ciclar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431944953368576
+    m_Localized: "Bien. Aqu\xED viene lo divertido\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431945620262912
+    m_Localized: "Al ciclar, podr\xE1s acceder a zonas a las que no pod\xEDas llegar
+      antes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431946341683200
+    m_Localized: "S\xED No pod\xEDas hacerlo antes. Solo despu\xE9s de conseguir
+      los fragmentos se desbloquea."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 431947331538944
+    m_Localized: "Ya ver\xE1s! Cicla a un hex\xE1gono y mu\xE9vete hacia la pared
+      rota a tu derecha."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432259819769856
+    m_Localized: "Eso es. As\xED de simple."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432260432138240
+    m_Localized: "Ahora, cada vez que veas algo as\xED, ya sabes lo que hacer!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432261870784512
+    m_Localized: "Tambi\xE9n hay diferentes maneras de utilizarlo, experimenta!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432351725359104
+    m_Localized: "Bueno? Qu\xE9 opinas? Pill\xE1ndole el truco?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432352383864832
+    m_Localized: Me gusta esa actitud, seguro que se te acaban de ocurrir ideas nuevas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432353004621824
+    m_Localized: Ten en cuenta que las paredes rotas indican nuevas pantallas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432353801539584
+    m_Localized: "Yyyyy, te dije que valdr\xEDa la pena el desviarse! Venga, va,
+      disfruta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432749429264384
+    m_Localized: "Y, una \xFAltima cosa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432750079381504
+    m_Localized: "Ahora hay \xE1reas \"outbound\". Estas funcionan de manera diferente
+      a las inversas (rojas)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432750804996096
+    m_Localized: "Para completar niveles con ellas\u2026 Hm, sabes? Ya lo descubrir\xE1s
+      t\xFA solo. Ten cuidado con tu orden!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 432751572553728
+    m_Localized: "Eso deber\xEDa ser todo. Mucha suerte, jugador."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

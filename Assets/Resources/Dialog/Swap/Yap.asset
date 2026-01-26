@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Yap
   m_EditorClassIdentifier: 
   dialog:
-  - That's it. Just as simple.
-  - Now every time you see something like this, you know what to do!
-  - There are also different cases, try stuff out!
+  - Swap:Yap
+  - Swap:Yap2
+  - Swap:Yap3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

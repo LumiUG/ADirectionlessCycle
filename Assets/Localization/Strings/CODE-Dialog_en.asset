@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CODE-Dialog_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 0a78892ee6a7ac44eaef6f692257751c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 259275231232
+    m_Localized: What an interesting universe. I've never seen such unstable things-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260965535744
+    m_Localized: Oh? You can't progress?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263586975744
+    m_Localized: There. That should do it for you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265453441024
+    m_Localized: That's the last time I'll be helping you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420651077632
+    m_Localized: Who am I? That I don't know myself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 422211358720
+    m_Localized: Oh don't worry about that.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423234768896
+    m_Localized: I'm sure we'll meet someday, you just won't know about it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475630014464
+    m_Localized: You seem surprised to see me here?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476238188544
+    m_Localized: I'm just recouping information, nothing too drastic.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476858945536
+    m_Localized: This place seems really unstable though, so get going before it's
+      too late.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 536212541440
+    m_Localized: '[Your communication with this glyph fizzles out...]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1187487289344
+    m_Localized: You've finally made it here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1190188421120
+    m_Localized: (Lumi! God damnit, took you long enough to point them here.)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1191698370560
+    m_Localized: So, you! Go on, a trial awaits you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1267736907776
+    m_Localized: BEHOLD!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268881952768
+    m_Localized: That's right, good luck crossing it. I've already won.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1282156924928
+    m_Localized: Unfair? Yeah, sorry. I don't make the rules.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438260531200
+    m_Localized: WHAT THE HELL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438847733760
+    m_Localized: You aren't supposed to do that- What, I mean, what?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439854366720
+    m_Localized: This is so stupid! I didn't account for this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1530740740096
+    m_Localized: Fire, then! Have at you, more fire! More! More!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1564555218944
+    m_Localized: IM ON FIRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1565188558848
+    m_Localized: TOO MUCH FIRE, TOO MUCH FIRE!!!!!!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1566019031040
+    m_Localized: AHHHHHHHHHHHHHHHHHHHH-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1644028891136
+    m_Localized: Guh...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1686814986240
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1687679012864
+    m_Localized: Y-you've bested me...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1689314791424
+    m_Localized: Scram...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1688551428096
+    m_Localized: Take y-your victory and go somewhere else.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832722239488
+    m_Localized: '[You decide to move on, they look warm and comfy]'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

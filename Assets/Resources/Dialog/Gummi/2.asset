@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   dialog:
-  - WHAT THE HELL
-  - You aren't supposed to do that- What, I mean, what?
-  - This is so stupid! I didn't account for this.
+  - CODE:GummiTwo
+  - CODE:GummiTwo2
+  - CODE:GummiTwo3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.03

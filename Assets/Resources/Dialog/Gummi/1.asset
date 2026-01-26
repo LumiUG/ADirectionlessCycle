@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   dialog:
-  - BEHOLD!
-  - That's right, good luck crossing it. I've already won.
-  - Unfair? Yeah, sorry. I don't make the rules. (Or do I?)
+  - CODE:GummiOne
+  - CODE:GummiOne2
+  - CODE:GummiOne3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

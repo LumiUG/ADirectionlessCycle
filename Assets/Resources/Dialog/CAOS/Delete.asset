@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Delete
   m_EditorClassIdentifier: 
   dialog:
-  - What an interesting universe. I've never seen such unstable things-
-  - Oh? You can't progress?
-  - There. That should do it for you.
-  - That's the last time I'll be helping you.
+  - CODE:CaosDelete
+  - CODE:CaosDelete2
+  - CODE:CaosDelete3
+  - CODE:CaosDelete4
   events:
   - textSpeedEvent:
       enabled: 0

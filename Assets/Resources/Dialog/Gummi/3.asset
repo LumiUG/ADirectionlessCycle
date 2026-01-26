@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   dialog:
-  - Fire, then! Have at you, more fire! More! More!
+  - CODE:GummiThree
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

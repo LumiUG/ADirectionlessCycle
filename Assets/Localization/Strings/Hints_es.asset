@@ -17,7 +17,108 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 409320fcd4ac4d04bb3c3f6abdcf3dbd, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 3032237578784768
+    m_Localized: "[Contin\xFAa para revelar esta pista]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032284844396544
+    m_Localized: Vale... Es "Encuentra el camino de la luz."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032473151868928
+    m_Localized: "No, lo siento. Tendr\xE1s que averiguarlo t\xFA mismo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032485919330304
+    m_Localized: Bastante sencillo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032695609364480
+    m_Localized: "No te dejar\xE9 ir m\xE1s adentro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032709521870848
+    m_Localized: "No te dejar\xEDa, pero de verdad no hay nada. Lo siento!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032784922873856
+    m_Localized: "No vas a entrar as\xED de f\xE1cil."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032796062945280
+    m_Localized: "No, no y no. No vas a conseguir una pista m\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032872692879360
+    m_Localized: "Estoy seguro de que puedes solucionarlo t\xFA mismo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3032914514284544
+    m_Localized: "Gravix? C\xF3mo ha llegado aqu\xED algo relacionado con Gravix?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033037260591104
+    m_Localized: "Yo... No te voy a dar ninguna pista aqu\xED. Por favor, para."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033074782834688
+    m_Localized: "Jugador\u2026. Ya te est\xE1n dando un tutorial."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033091115454464
+    m_Localized: La entrada del centro. El punto de no retorno.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033092411494400
+    m_Localized: '%begin% CO*MU%%CAT$0N %end%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033093019668480
+    m_Localized: gin% ENTERING *##$$! AREA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033093581705216
+    m_Localized: '%end%end%end%end%endddddd'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033231859519488
+    m_Localized: "Creando conexi\xF3n FTP\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033266558996480
+    m_Localized: "Preparando subidas\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033272712040448
+    m_Localized: '[A Directionless Cycle]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033273316020224
+    m_Localized: "En un laberinto invisible, nadie puede o\xEDrte gritar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033273936777216
+    m_Localized: Oportunidad perdida de hacer una respuesta basada en la pista del
+      nivel. Una pena.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033419504291840
+    m_Localized: Echando un vistazo? Adelante, adelante.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033420917772288
+    m_Localized: internal abstract GameTile Loop();
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3033421525946368
+    m_Localized: 202 Aceptado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3052904772669440
+    m_Localized: Este nivel no tiene pistas disponibles.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -80,6 +80,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d28c792bfa982e145bee4b2000b2b1db
+    m_Address: CODE-Dialog_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: de12f245084878b498e896c3c455473d
     m_Address: W3-Dialog_en
     m_ReadOnly: 1

@@ -72,7 +72,7 @@ MonoBehaviour:
       enabled: 0
       levelID: 
     executeAtIndex: 27
-  exhaustDialog: {fileID: 11400000, guid: d7b42574533a71d4cac5540e9bbf0a39, type: 2}
+  exhaustDialog: {fileID: 0}
   textSpeed: 0.05
   sfx: {fileID: 0}
   shouldExhaust: 0

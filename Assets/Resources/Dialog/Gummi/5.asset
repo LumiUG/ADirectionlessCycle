@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   dialog:
-  - Guh...
-  - ...
-  - Y-you've bested me...
-  - Take y-your victory and go somewhere else.
-  - Scram...
+  - CODE:GummiFive
+  - CODE:GummiFive2
+  - CODE:GummiFive3
+  - CODE:GummiFive4
+  - CODE:GummiFive5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

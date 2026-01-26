@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CODE-Dialog Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CODE-Dialog
+  m_TableCollectionNameGuidString: 0a78892ee6a7ac44eaef6f692257751c
+  m_Entries:
+  - m_Id: 259275231232
+    m_Key: CODE:CaosDelete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260965535744
+    m_Key: CODE:CaosDelete2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 263586975744
+    m_Key: CODE:CaosDelete3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 265453441024
+    m_Key: CODE:CaosDelete4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420651077632
+    m_Key: CODE:CaosWho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 422211358720
+    m_Key: CODE:CaosWho2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423234768896
+    m_Key: CODE:CaosWho3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 475630014464
+    m_Key: CODE:CaosLast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476238188544
+    m_Key: CODE:CaosLast2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476858945536
+    m_Key: CODE:CaosLast3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 536212541440
+    m_Key: CODE:CaosFizzle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1187487289344
+    m_Key: CODE:GummiEntrance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1190188421120
+    m_Key: CODE:GummiEntrance2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1191698370560
+    m_Key: CODE:GummiEntrance3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1267736907776
+    m_Key: CODE:GummiOne
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268881952768
+    m_Key: CODE:GummiOne2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1282156924928
+    m_Key: CODE:GummiOne3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438260531200
+    m_Key: CODE:GummiTwo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438847733760
+    m_Key: CODE:GummiTwo2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439854366720
+    m_Key: CODE:GummiTwo3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1530740740096
+    m_Key: CODE:GummiThree
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1564555218944
+    m_Key: CODE:GummiFour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1565188558848
+    m_Key: CODE:GummiFour2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1566019031040
+    m_Key: CODE:GummiFour3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1644028891136
+    m_Key: CODE:GummiFive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1686814986240
+    m_Key: CODE:GummiFive2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1687679012864
+    m_Key: CODE:GummiFive3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1688551428096
+    m_Key: CODE:GummiFive4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1689314791424
+    m_Key: CODE:GummiFive5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1832722239488
+    m_Key: CODE:GummiFire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6631454806016
+    m_Key: Code:Lumi?
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 502597248503250944
+  references:
+    version: 2
+    RefIds:
+    - rid: 502597248503250944
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1769381640831

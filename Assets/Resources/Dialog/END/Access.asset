@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Access
   m_EditorClassIdentifier: 
   dialog:
-  - We don't really have access down there.
-  - So, this might be the last time we can communicate with you.
-  - Whatever you find down there...
+  - END:Access
+  - END:Access2
+  - END:Access3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
