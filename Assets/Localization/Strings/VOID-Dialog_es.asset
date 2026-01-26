@@ -34,6 +34,86 @@ MonoBehaviour:
     m_Localized: "[Puede que alg\xFAn d\xEDa...]"
     m_Metadata:
       m_Items: []
+  - m_Id: 754833854435328
+    m_Localized: "El centro... Todo acaba aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754834462609408
+    m_Localized: "La forma de entrar est\xE1 completamente arruinada. Ugh, es todo
+      un desastre."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754835385356288
+    m_Localized: Por suerte, he estado supervisando este nivel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754836287131648
+    m_Localized: "Hice otra entrada para llegar al \xFAltimo nivel, pero... No es
+      tan f\xE1cil."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754928440184832
+    m_Localized: "He hecho un peque\xF1o camino y algunos portales. Espero que sea
+      suficiente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122900925091840
+    m_Localized: "La funci\xF3n para \"borrarlo todo\" deber\xEDa ejecutarse cuando
+      completes el nivel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122901453574144
+    m_Localized: Se ha degradado tanto que creemos que todo ha empezado a moverse
+      en bucles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122902065942528
+    m_Localized: "Si llegas al centro, la parte m\xE1s profunda, todo se acabar\xE1
+      para nosotros. As\xED de simple."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1122902971912192
+    m_Localized: "Despu\xE9s de eso, nosotros... Ya no estaremos aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123442774642688
+    m_Localized: "La verdad es que no tenemos acceso all\xED abajo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123446058782720
+    m_Localized: "As\xED que puede que esta sea la \xFAltima vez que podamos comunicarnos
+      contigo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123448298541056
+    m_Localized: "Sea lo que sea que encuentres all\xED abajo... S\xE9 fuerte, hazlo
+      por nosotros."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123852776247296
+    m_Localized: "As\xED que... buena suerte. Y si necesitas una pista..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123855888420864
+    m_Localized: Estaremos contigo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123857528393728
+    m_Localized: "Uh, en esp\xEDritu, digo. O en lo que t\xFA creas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123904999526400
+    m_Localized: Aha!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1123906488504320
+    m_Localized: Nunca he entendido estas cosas, o lo que son. Tu lo entiendes?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1342689631145984
+    m_Localized: "Presta atenci\xF3n a tu alrededor. Sigue donde la luz no pasa."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

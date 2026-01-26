@@ -30,31 +30,6 @@ MonoBehaviour:
     m_Localized: You should leave. Now.
     m_Metadata:
       m_Items: []
-  - m_Id: 6176360239104
-    m_Localized: 'As I like to say: "Nothing''s lost forever".'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6178994262016
-    m_Localized: I've created a wrong warp on "3-10", just interact five times with
-      the broken wall on your right.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6179782791168
-    m_Localized: That's where you'll need to go after getting the last fragment.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6180747481088
-    m_Localized: 'That being said- here''s the last cypher:'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6181393403904
-    m_Localized: '"Desyncing, desyncing... Find your mark and jump into it."'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6182475534336
-    m_Localized: Ooooh, clever.
-    m_Metadata:
-      m_Items: []
   - m_Id: 8521928282112
     m_Localized: This should be your last one.
     m_Metadata:

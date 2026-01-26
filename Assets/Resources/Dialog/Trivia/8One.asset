@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 8One
   m_EditorClassIdentifier: 
   dialog:
-  - Screw you. Might aswell ram yourself against the wall, I am NOT helping you.
+  - Trivia:EightRam
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

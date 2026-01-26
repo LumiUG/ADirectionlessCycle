@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   dialog:
-  - Ha! Trick question again, I asked for the level name.
-  - Which... is...
-  - Did I get you twice? I'm really sorry if I did.
-  - I promise, no weird stuff from now on. Let's go!
-  - Is the code "CBA" a valid code you can input on the title screen?
+  - Trivia:Three
+  - Trivia:Three2
+  - Trivia:Three3
+  - Trivia:Three4
+  - Trivia:Three5
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

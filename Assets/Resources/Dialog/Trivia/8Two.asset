@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 8Two
   m_EditorClassIdentifier: 
   dialog:
-  - Yeah, as top said. Go run into a wall or something. That'll teach you.
+  - Trivia:EightYeah
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

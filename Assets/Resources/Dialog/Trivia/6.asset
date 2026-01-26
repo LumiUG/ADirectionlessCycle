@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: 
   dialog:
-  - Okay, fine. You can take that, I guess.
-  - 'Let''s just keep going:'
-  - What are the positions the prompter has been in so far?
+  - Trivia:Six
+  - Trivia:Six2
+  - Trivia:Six3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

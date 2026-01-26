@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4One
   m_EditorClassIdentifier: 
   dialog:
-  - '[The carvings are on fire.]'
+  - Trivia:Fire
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

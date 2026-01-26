@@ -84,7 +84,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18818822967296
-    m_Localized: Which is... It's the only way I've managed to make this work.
+    m_Localized: Which... Borrowing code from the delete function is the only way
+      I've managed to make this work.
     m_Metadata:
       m_Items: []
   - m_Id: 742470984011776
@@ -191,12 +192,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754833854435328
-    m_Localized: Well? Welcome to the core. It all ends here.
+    m_Localized: The core... It all ends here.
     m_Metadata:
       m_Items: []
   - m_Id: 754834462609408
-    m_Localized: This entire place is a mess. The way to get into it is completely
-      ruined.
+    m_Localized: The way to get into it is completely ruined. It's such a mess.
     m_Metadata:
       m_Items: []
   - m_Id: 754835385356288
@@ -204,11 +204,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754836287131648
-    m_Localized: I did make another entry, but... It's not so easy.
+    m_Localized: I did make another entry to get to the last level, but... It's not
+      so easy.
     m_Metadata:
       m_Items: []
   - m_Id: 754928440184832
-    m_Localized: I made a small path for you. Hopefully that's enough.
+    m_Localized: I made a small path, and some warps for you. Hopefully that's enough.
     m_Metadata:
       m_Items: []
   - m_Id: 1122902971912192
@@ -216,7 +217,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1122902065942528
-    m_Localized: If you get to the center, the bottom, it'll be done. Just like that.
+    m_Localized: If you get to the center, the bottom, it'll be done for us. Just
+      like that.
     m_Metadata:
       m_Items: []
   - m_Id: 1122901453574144
@@ -225,12 +227,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1122900925091840
-    m_Localized: The function to 'delete everything' should start as soon as you
-      get past the entrance.
+    m_Localized: The function to "delete everything" should run as soon as you clear
+      the level.
     m_Metadata:
       m_Items: []
   - m_Id: 1123448298541056
-    m_Localized: Whatever you find down there...
+    m_Localized: Whatever you find down there... Be strong, do it for us.
     m_Metadata:
       m_Items: []
   - m_Id: 1123446058782720
@@ -259,6 +261,11 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1123906488504320
     m_Localized: I've never understood how these work, or what they are. Do you?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1342689631145984
+    m_Localized: Pay attention to your surroundings. Follow that which the light
+      does not pass.
     m_Metadata:
       m_Items: []
   references:

@@ -139,6 +139,149 @@ MonoBehaviour:
     m_Localized: '[You decide to move on, they look warm and comfy]'
     m_Metadata:
       m_Items: []
+  - m_Id: 271917223383040
+    m_Localized: Welcome to our "A Directionless Cycle"'s official trivia!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272072446185472
+    m_Localized: I've worked very very very hard on this, and chose only the best
+      questions!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272073175994368
+    m_Localized: Let's start simple.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272073779974144
+    m_Localized: How many main levels are between W1 and The Core?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272282081693696
+    m_Localized: What is the name of the level where you get fragment 4?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272281490296832
+    m_Localized: Let's move on...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272280861151232
+    m_Localized: Trick question! I said between, so inbetween them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272474327617536
+    m_Localized: Ha! Trick question again, I asked for the level name.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272474914820096
+    m_Localized: Which... is...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272475497828352
+    m_Localized: Did I get you twice? I'm really sorry if I did.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272476156334080
+    m_Localized: I promise, no weird stuff from now on. Let's go!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272476760313856
+    m_Localized: Is the code "CBA" a valid code you can input on the title screen?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272671283744768
+    m_Localized: Fire? Surely it can't get any worse than this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272670176448512
+    m_Localized: This isn't supposed to...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272661276135424
+    m_Localized: Uh...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272787935727616
+    m_Localized: '[The carvings are on fire.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272860048396288
+    m_Localized: Yeah! Totally, just come this way!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272912221343744
+    m_Localized: Uh... Please don't break out.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272911613169664
+    m_Localized: Shit! My questions!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272909037867008
+    m_Localized: What is- Wait, oh shit-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273064394887168
+    m_Localized: Okay, fine. You can take that, I guess.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273070598262784
+    m_Localized: What are the positions the prompter has been in so far?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273068446584832
+    m_Localized: 'Let''s just keep going:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273337242750976
+    m_Localized: Do take your time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273334910717952
+    m_Localized: They lie... Can you figure it out? Surely...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273655942746112
+    m_Localized: Of course im lying. But so is the prompt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273606403821568
+    m_Localized: I would never lie. Bottom is lying.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273767284740096
+    m_Localized: Just pick a path! 50/50 chance, right?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273766131306496
+    m_Localized: I'm totally not running out of ideas...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273765443440640
+    m_Localized: Uh... uh!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273850277433344
+    m_Localized: Screw you. Might aswell ram yourself against the wall, I am NOT
+      helping you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273888604983296
+    m_Localized: Yeah, as top said. Go run into a wall or something. That'll teach
+      you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274010239799296
+    m_Localized: And... As for the grand finale!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274012534083584
+    m_Localized: Are you in the same X axis as the screen you started in?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274013091926016
+    m_Localized: No pressure.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

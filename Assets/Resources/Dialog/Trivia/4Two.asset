@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4Two
   m_EditorClassIdentifier: 
   dialog:
-  - Yeah! Totally, just come this way!
+  - Trivia:ThisWay
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

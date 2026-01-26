@@ -141,6 +141,151 @@ MonoBehaviour:
     m_Localized: "[Decides seguir adelante, parece que est\xE1 calentito y c\xF3modo]."
     m_Metadata:
       m_Items: []
+  - m_Id: 271917223383040
+    m_Localized: Bienvenido a la trivia oficial de "A Directionless Cycle"!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272072446185472
+    m_Localized: He trabajado mucho en esto y he seleccionado solo las mejores preguntas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272073175994368
+    m_Localized: Empecemos con algo simple.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272073779974144
+    m_Localized: "Cu\xE1ntos niveles principales hay entre W1 y el centro?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272280861151232
+    m_Localized: "Pregunta trampa! He dicho \"entre\", as\xED que entre ellos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272281490296832
+    m_Localized: Vamos a seguir...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272282081693696
+    m_Localized: "C\xF3mo se llama el nivel donde consigues el fragmento 4?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272474327617536
+    m_Localized: Aha! Otra pregunta trampa, he preguntado por el nombre del nivel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272474914820096
+    m_Localized: El cual... es...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272475497828352
+    m_Localized: "Te he pillado dos veces? Si es as\xED, lo siento mucho."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272476156334080
+    m_Localized: "Te prometo que no va a haber m\xE1s cosas raras a partir de ahora.
+      Vamos!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272476760313856
+    m_Localized: "Es el c\xF3digo \"CBA\" un c\xF3digo v\xE1lido que se puede utilizar
+      en la pantalla principal?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272661276135424
+    m_Localized: Uh...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272670176448512
+    m_Localized: "Esto no deber\xEDa..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272671283744768
+    m_Localized: Fuego? Seguro que esto no puede empeorar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272787935727616
+    m_Localized: "[Las grabaciones est\xE1n en llamas.]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272860048396288
+    m_Localized: "Si! Mhm, ven por aqu\xED!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272909037867008
+    m_Localized: "Qu\xE9 es- Espera, oh no-"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272911613169664
+    m_Localized: Mierda! Mis preguntas!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 272912221343744
+    m_Localized: Uh... Por favor, no te salgas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273064394887168
+    m_Localized: "Vale, est\xE1 bien. Ganas esta vez, supongo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273068446584832
+    m_Localized: 'Vamos a seguir:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273070598262784
+    m_Localized: "Cu\xE1les son las posiciones donde han estado las preguntas hasta
+      ahora?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273334910717952
+    m_Localized: "Mienten... Podr\xE1s resolverlo? Seguro..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273337242750976
+    m_Localized: "T\xF3mate tu tiempo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273606403821568
+    m_Localized: "Yo nunca mentir\xEDa. El de abajo miente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273655942746112
+    m_Localized: "Claro que miento. Pero la pregunta tambi\xE9n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273765443440640
+    m_Localized: Uh... uh!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273766131306496
+    m_Localized: No me estoy quedando sin ideas...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273767284740096
+    m_Localized: Elije un camino! Es un 50/50 verdad?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273850277433344
+    m_Localized: "Nuh, uh. M\xE1s vale que te choques contra la pared, NO te voy
+      a ayudar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273888604983296
+    m_Localized: "Eso, lo que ha dicho el de arriba. Date un golpe contra la pared
+      o algo as\xED. Eso te ense\xF1ar\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274010239799296
+    m_Localized: Y... Para el gran final!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274012534083584
+    m_Localized: "Est\xE1s en la misma posici\xF3n X que la pantalla en la que empezaste?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274013091926016
+    m_Localized: "T\xF3mate tu tiempo."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

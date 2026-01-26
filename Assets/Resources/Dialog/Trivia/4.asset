@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   dialog:
-  - Uh...
-  - This isn't supposed to...
-  - Fire? Surely it can't get any worse than this.
+  - Trivia:Four
+  - Trivia:Four2
+  - Trivia:Four3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

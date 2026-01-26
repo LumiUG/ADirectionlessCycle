@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 8
   m_EditorClassIdentifier: 
   dialog:
-  - Uh... uh!
-  - I'm totally not running out of ideas...
-  - Just pick a path! 50/50 chance, right?
+  - Trivia:Eight
+  - Trivia:Eight2
+  - Trivia:Eight3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

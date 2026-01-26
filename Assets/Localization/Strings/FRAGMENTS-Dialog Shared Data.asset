@@ -27,30 +27,6 @@ MonoBehaviour:
     m_Key: Fragment2:Nothing3
     m_Metadata:
       m_Items: []
-  - m_Id: 6176360239104
-    m_Key: Fragment2:Real
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6178994262016
-    m_Key: Fragment2:Real2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6179782791168
-    m_Key: Fragment2:Real3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6180747481088
-    m_Key: Fragment2:Real4
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6181393403904
-    m_Key: Fragment2:Real5
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6182475534336
-    m_Key: Fragment2:Real6
-    m_Metadata:
-      m_Items: []
   - m_Id: 8521928282112
     m_Key: Fragment3:Enter
     m_Metadata:

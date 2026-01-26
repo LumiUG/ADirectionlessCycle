@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   dialog:
-  - Trick question! I said between, so inbetween them.
-  - Let's move on...
-  - What is the name of the level where you get fragment 4?
+  - Trivia:Two
+  - Trivia:Two2
+  - Trivia:Two3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

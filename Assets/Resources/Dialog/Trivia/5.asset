@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: 
   dialog:
-  - What is- Wait, oh shit-
-  - Shit! My questions!
-  - Uh... Please don't break out.
+  - Trivia:Five
+  - Trivia:Five2
+  - Trivia:Five3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

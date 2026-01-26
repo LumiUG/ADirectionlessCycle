@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 7
   m_EditorClassIdentifier: 
   dialog:
-  - They lie... Can you figure it out? Surely...
-  - Do take your time.
+  - Trivia:Seven
+  - Trivia:Seven2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

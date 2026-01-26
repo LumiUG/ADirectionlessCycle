@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   dialog:
-  - Welcome to our "A Directionless Cycle"'s official trivia!
-  - I've worked very very very hard on this, and chose only the best questions!
-  - Let's start simple.
-  - How many main levels are between W1 and The Core?
+  - Trivia:One
+  - Trivia:One2
+  - Trivia:One3
+  - Trivia:One4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

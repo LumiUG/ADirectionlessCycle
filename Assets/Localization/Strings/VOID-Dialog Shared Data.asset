@@ -247,6 +247,10 @@ MonoBehaviour:
     m_Key: END:Sneaky2
     m_Metadata:
       m_Items: []
+  - m_Id: 1342689631145984
+    m_Key: VOID:Riddle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

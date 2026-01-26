@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   dialog:
-  - And... As for the grand finale!
-  - Are you in the same X axis as the screen you started in?
-  - No pressure.
+  - Trivia:Nine
+  - Trivia:Nine2
+  - Trivia:Nine3
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

@@ -23,7 +23,7 @@ MonoBehaviour:
   - 
   events: []
   exhaustDialog: {fileID: 0}
-  textSpeed: 0.05
+  textSpeed: 0.12
   sfx: {fileID: 0}
   shouldExhaust: 0
   canBeSkipped: 1
