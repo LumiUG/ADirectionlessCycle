@@ -317,6 +317,14 @@ public class LevelManager : MonoBehaviour
             UI.I.ingame.SetCycleIcon(ObjectTypes.Hexagon);
         }
 
+        // Custom effects on load
+        if (crackedLevel1.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(0); }
+        else if (crackedLevel2.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(2); }
+        else if (crackedLevel3.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(1); UI.I.ShowCracks(2); }
+        else UI.I.ShowCracks(-1);
+        // if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"LOOP BROKEN - LOOP BR0KEN - L0OP BR##KEN / L0O&%P#", 5f);
+        // UI.I.global.SendMessage("ENABLING FREEROAM-", 5f);
+
         // Reset hint popup (if applicable)
         if (!GameManager.save.game.seenHintPopup) InputManager.I.restartCount = 0;
 
@@ -356,13 +364,6 @@ public class LevelManager : MonoBehaviour
                 } else UI.I.ingame.trialCycle.text = "Cycle X";
             }
         }
-
-        // Custom effects on load
-        if (crackedLevel1.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(0); }
-        if (crackedLevel2.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(2); }
-        if (crackedLevel3.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(1); UI.I.ShowCracks(2); }
-        // if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"LOOP BROKEN - LOOP BR0KEN - L0OP BR##KEN / L0O&%P#", 5f);
-        // UI.I.global.SendMessage("ENABLING FREEROAM-", 5f);
 
         // Hide UI?
         UI.I.pause.title.text = currentLevel.levelName;

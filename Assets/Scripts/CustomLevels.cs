@@ -265,6 +265,7 @@ public class CustomLevels : MonoBehaviour
     // Open the custom level folder
     public void OpenCustomLevelFolder()
     {
+        if (TransitionManager.I.inTransition) return;
         Application.OpenURL(GameManager.customLevelPath);
     }
 

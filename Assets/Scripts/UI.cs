@@ -358,6 +358,7 @@ public class UI : MonoBehaviour
                 default: // Custom cases
                     if (LevelManager.I.currentLevelID == "VOID/Loop") { popup.SetPopup("Loop"); return; }
                     if (LevelManager.I.currentLevelID == "VOID/CYCLE") { popup.SetPopup("Cycle"); return; }
+                    if (LevelManager.I.currentLevelID == "VOID/Logs/TheRoom") { popup.SetPopup("TheRoom"); return; }
                     break;
             }
         } else hintLevelID = null;

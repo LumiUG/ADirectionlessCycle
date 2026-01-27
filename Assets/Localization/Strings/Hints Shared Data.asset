@@ -115,6 +115,10 @@ MonoBehaviour:
     m_Key: NoHints
     m_Metadata:
       m_Items: []
+  - m_Id: 3631488528683008
+    m_Key: TheRoom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

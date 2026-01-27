@@ -223,8 +223,9 @@ public class MainMenu : MonoBehaviour
 
     public void SetLocale(int index)
     {
+        if (TransitionManager.I.inTransition) return;
         if (LocalizationSettings.SelectedLocale == Localization.GetLocale(index)) { UI.I.BadSound(); return; }
         
-        TransitionManager.I.TransitionIn(Reveal, Actions.SetLocale, $"{index}");
+        TransitionManager.I.TransitionIn(Load, Actions.SetLocale, $"{index}");
     }
 }
