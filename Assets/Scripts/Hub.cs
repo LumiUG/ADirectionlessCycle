@@ -107,7 +107,7 @@ public class Hub : MonoBehaviour
         }
 
         // All outbound levels
-        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 8;
+        bool outboundCount = completedRealOutbound[0] + completedRealOutbound[1] + completedRealOutbound[2] >= 7;
         if (!GameManager.save.game.completedAllOutboundLevels && outboundCount)
         {
             GameManager.save.game.completedAllOutboundLevels = true;

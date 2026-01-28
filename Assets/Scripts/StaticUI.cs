@@ -44,6 +44,7 @@ public class StaticUI : MonoBehaviour
     // Open an URL (unsafe, apparently!)
     public void StaticOpenURL(string url)
     {
+        if (TransitionManager.I.inTransition) return;
         Application.OpenURL(url);
     }
 

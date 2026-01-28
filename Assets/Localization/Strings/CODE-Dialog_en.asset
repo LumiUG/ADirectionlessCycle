@@ -282,6 +282,59 @@ MonoBehaviour:
     m_Localized: No pressure.
     m_Metadata:
       m_Items: []
+  - m_Id: 718000584003584
+    m_Localized: I am NOT sorry.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717999766114304
+    m_Localized: btw,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717998780452864
+    m_Localized: You will get NOTHING from beating this, this is merely torture.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717997908037632
+    m_Localized: Then, head down, straight middle.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717996783964160
+    m_Localized: It is around ~12 screens with width + height combined, and you need
+      to find two buttons.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717996058349568
+    m_Localized: An invisible maze.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717995387260928
+    m_Localized: This entire level is just a maze.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718460468465664
+    m_Localized: There's a button to your left-ish, though.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718459889651712
+    m_Localized: btw this entire room is a dead end <3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718510921748480
+    m_Localized: Are you having fun yet?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718510326157312
+    m_Localized: Button got!!!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718587711066112
+    m_Localized: Go get them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718586813485056
+    m_Localized: Woah.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

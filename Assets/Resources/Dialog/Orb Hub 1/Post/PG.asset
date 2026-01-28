@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PG
   m_EditorClassIdentifier: 
   dialog:
-  - Hm? You're back?
-  - I guess this only means one thing. Are they gone?
-  - Well, in the end they got what they wanted. Freedom.
+  - GusPG:One
+  - GusPG:One2
+  - GusPG:One3
   events: []
   exhaustDialog: {fileID: 11400000, guid: c54ddb134a3f81c4bb46cb9ff8dc968c, type: 2}
   textSpeed: 0.05

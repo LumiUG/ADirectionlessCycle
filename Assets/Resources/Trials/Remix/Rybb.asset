@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Rybb
   m_EditorClassIdentifier: 
   levelID: REMIX/Rybb
-  vanillaMoves: 22
-  cycleMoves: 15
+  vanillaMoves: 92
+  cycleMoves: -1

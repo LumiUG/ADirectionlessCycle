@@ -4162,6 +4162,7 @@ MonoBehaviour:
         m_TrackedProperties:
           items:
           - rid: 502597248503251076
+          - rid: 502597293684031491
     - rid: 502597248503251076
       type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
       data:
@@ -4173,6 +4174,17 @@ MonoBehaviour:
         - localeIdentifier:
             m_Code: es
           value: 380
+    - rid: 502597293684031491
+      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_PropertyPath: m_AnchoredPosition.x
+        m_VariantData:
+        - localeIdentifier:
+            m_Code: en
+          value: 200
+        - localeIdentifier:
+            m_Code: es
+          value: 250
 --- !u!1 &3733928747318989342
 GameObject:
   m_ObjectHideFlags: 0
@@ -10163,6 +10175,7 @@ MonoBehaviour:
         m_TrackedProperties:
           items:
           - rid: 502597248503251074
+          - rid: 502597293684031490
     - rid: 502597248503251074
       type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
       data:
@@ -10174,6 +10187,17 @@ MonoBehaviour:
         - localeIdentifier:
             m_Code: es
           value: 375
+    - rid: 502597293684031490
+      type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_PropertyPath: m_AnchoredPosition.x
+        m_VariantData:
+        - localeIdentifier:
+            m_Code: en
+          value: -200
+        - localeIdentifier:
+            m_Code: es
+          value: -250
 --- !u!1 &7449503043548113385
 GameObject:
   m_ObjectHideFlags: 0

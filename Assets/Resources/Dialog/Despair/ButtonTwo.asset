@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ButtonTwo
   m_EditorClassIdentifier: 
   dialog:
-  - Woah.
-  - Go get them.
+  - Despair:ButtonTwo
+  - Despair:ButtonTwo2
   events:
   - textSpeedEvent:
       enabled: 0

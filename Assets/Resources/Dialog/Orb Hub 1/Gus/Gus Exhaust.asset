@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Gus Exhaust
   m_EditorClassIdentifier: 
   dialog:
-  - By the way, are you trying to save them?
-  - ...
-  - ...
-  - Oh, sorry. I forgot you can't talk.
-  - Suppose... I could ask you to try and help them?
-  - There's some sort of function... Why do I get the feeling you already know this?
-  - Regardless, it'll delete them painlessly from this game. So we can... still exist.
-  - So if you can hear me, do that for me- them! Do that for them, godammit.
+  - Gus:Exhaust
+  - Gus:Exhaust2
+  - Gus:Exhaust3
+  - Gus:Exhaust4
+  - Gus:Exhaust5
+  - Gus:Exhaust6
+  - Gus:Exhaust7
+  - Gus:Exhaust8
   events: []
   exhaustDialog: {fileID: 11400000, guid: 911624d1231d13b439c2325b3919501c, type: 2}
   textSpeed: 0.05

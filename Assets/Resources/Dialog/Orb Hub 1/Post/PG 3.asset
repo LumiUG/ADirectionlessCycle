@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: PG 3
   m_EditorClassIdentifier: 
   dialog:
-  - You might have not noticed, but I'm not the best with conversations.
-  - One sided conversations, actually.
-  - D-did you ever figure out the codes? I'm aware you have achievements, but those
-    don't count.
-  - ...
-  - (I think it would be very funny...)
-  - (I really shouldn't...)
-  - ... Did you know there are inbound ones?
-  - Boy does this level have some weird asthetics!
-  - Haha...
+  - GusPG:Four
+  - GusPG:Four2
+  - GusPG:Four3
+  - GusPG:Four4
+  - GusPG:Four5
+  - GusPG:Four6
+  - GusPG:Four7
+  - GusPG:Four8
+  - GusPG:Four9
   events: []
   exhaustDialog: {fileID: 11400000, guid: fe232bd508683c8419918a953cddb2c4, type: 2}
   textSpeed: 0.05

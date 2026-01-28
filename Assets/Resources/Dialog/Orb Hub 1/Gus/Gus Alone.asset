@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Gus Alone
   m_EditorClassIdentifier: 
   dialog:
-  - And uh...
-  - T-thank you.
-  - It's been a while since I've seen something... Alive?
-  - You can leave now, I get the feeling you'll come back.
-  - I'll go back to watching the void now.
-  - It's... comforting.
+  - Gus:Alone
+  - Gus:Alone2
+  - Gus:Alone3
+  - Gus:Alone4
+  - Gus:Alone5
+  - Gus:Alone6
   events: []
   exhaustDialog: {fileID: 11400000, guid: 33de5a146ded45b4f83dc360aa1ec420, type: 2}
   textSpeed: 0.05

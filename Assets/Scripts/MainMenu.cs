@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
     private int mewCount = 0;
     private readonly string[] menuSelectorEffect = { "Discord", "Spanish", "English" };
     private readonly int[] trialClearsVanilla = { 12, 11, 9, 16 };
-    private readonly int[] trialClearsCycle = { 5, 9, 3, 9 };
+    private readonly int[] trialClearsCycle = { 5, 9, 3, 8 }; // 9 -> 8 (rybb?)
 
     private void Start()
     {

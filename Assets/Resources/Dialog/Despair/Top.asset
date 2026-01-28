@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Top
   m_EditorClassIdentifier: 
   dialog:
-  - btw this entire room is a dead end <3
-  - There's a button to your left-ish, though.
+  - Despair:Top
+  - Despair:Top2
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

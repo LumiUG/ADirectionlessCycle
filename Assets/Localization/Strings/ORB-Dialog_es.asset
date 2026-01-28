@@ -259,6 +259,124 @@ MonoBehaviour:
     m_Localized: "Son un poco b\xE1sicos, me gusta el caos."
     m_Metadata:
       m_Items: []
+  - m_Id: 1398049440141312
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398830142722048
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399097680596992
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399098561400832
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404050801299456
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404803230076928
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404807508267008
+    m_Localized: Jaja...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1397892510257152
+    m_Localized: Que?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1397910516404224
+    m_Localized: Fuera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398100484820992
+    m_Localized: Vale!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398407516262400
+    m_Localized: "Que quieres de m\xED?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398409034600448
+    m_Localized: Artefactos?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398408178962432
+    m_Localized: "Informaci\xF3n?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398511665025024
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398512323530752
+    m_Localized: ......
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398410024456192
+    m_Localized: Una salida?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398410611658752
+    m_Localized: Pues...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398513003008000
+    m_Localized: Ni siquiera puedes responderme! Estoy hablando con una pared.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398513640542208
+    m_Localized: "Qu\xE9 tal esto..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398827131211776
+    m_Localized: Si? Bien.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398514387128320
+    m_Localized: "Te contar\xE9 un secreto. Pero solo si me ayudas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398515393761280
+    m_Localized: "Te lo dir\xE9 una vez, y no me repetir\xE9. Entendido?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398826472706048
+    m_Localized: "Sabes de una... pantalla de t\xEDtulo?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398827823271936
+    m_Localized: "No creo que ellos tengan acceso, as\xED que esc\xFAchame atentamente."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398828557275136
+    m_Localized: "Mant\xE9n pulsado [ESPACIO] o [TRI\xC1NGULO] y escribe."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398829228363776
+    m_Localized: "Puede que pase algo si encuentras la combinaci\xF3n correcta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398830918668288
+    m_Localized: "He o\xEDdo- no, lo he visto yo mismo. Algunos niveles tienen un
+      tipo de \"grabaciones\"."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398831728168960
+    m_Localized: "Est\xE1n fuera de tu \"vista\", pero tendr\xE1s que encontrarlos
+      y descifrarlos t\xFA mismo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398832617361408
+    m_Localized: ... Eso es todo. No es mucho, solo contenido extra.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

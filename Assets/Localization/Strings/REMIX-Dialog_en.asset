@@ -288,6 +288,58 @@ MonoBehaviour:
     m_Localized: So, yeah. I'm actually tired of existing. Just end us? Haha...
     m_Metadata:
       m_Items: []
+  - m_Id: 3302336604803072
+    m_Localized: '[Log 4: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302351565885440
+    m_Localized: ...Not my best work by any means. But it's better than having nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302352530575360
+    m_Localized: Hopefully using scrapped code for his AI won't have any repercusions.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302353335881728
+    m_Localized: Hah, just doing this is already a massive risk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302354216685568
+    m_Localized: You need a name, buddy. What about...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302354917134336
+    m_Localized: '"Gus"?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302436584427520
+    m_Localized: Haha, sounds harmless enough. That'll do.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319068039974912
+    m_Localized: '[Log 5: -/-/--]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319101812510720
+    m_Localized: It's my time to leave. I'm going back to the terminal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319102882058240
+    m_Localized: At least I'm not alone anymore, and neither are them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319103628644352
+    m_Localized: I look forward to meeting both of you, again and again and again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319104320704512
+    m_Localized: I hope, I really hope this works.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3320000836407296
+    m_Localized: '- The Unfinished // The Original.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

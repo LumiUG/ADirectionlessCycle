@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PG 2
   m_EditorClassIdentifier: 
   dialog:
-  - So... Did you have your fun?
-  - You seem like you did.
-  - ...
+  - GusPG:Three
+  - GusPG:Three2
+  - GusPG:Three3
   events: []
   exhaustDialog: {fileID: 11400000, guid: 8faadc14cc5019d41bf163314bffc180, type: 2}
   textSpeed: 0.05

@@ -6388,7 +6388,7 @@ MonoBehaviour:
             m_KeyId: 6806244036608
             m_Key: 
           m_FallbackState: 0
-          m_WaitForCompletion: 0
+          m_WaitForCompletion: 1
           m_LocalVariables: []
         m_PropertyPath: m_Text
     - rid: 502597045715468317

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Gus Code
   m_EditorClassIdentifier: 
   dialog:
-  - Do you happen to know of any... Title screens?
-  - Yes? Good.
-  - I don't think they have access there, so listen closely.
-  - Hold [SPACE] or [TRIANGLE] there, and start typing.
-  - Something might happen if you find the right combination.
-  - ...
-  - I've heard- no, I've seen it. Some levels have some sort of "carvings".
-  - They're outside of your "view", but you'll have to find and decypher them yourself.
-  - ... That's all.
+  - Gus:Code
+  - Gus:Code2
+  - Gus:Code3
+  - Gus:Code4
+  - Gus:Code5
+  - Gus:Code6
+  - Gus:Code7
+  - Gus:Code8
+  - Gus:Code9
   events: []
   exhaustDialog: {fileID: 11400000, guid: 80b8d701e506bf34ba5b161a60fd1b0f, type: 2}
   textSpeed: 0.05

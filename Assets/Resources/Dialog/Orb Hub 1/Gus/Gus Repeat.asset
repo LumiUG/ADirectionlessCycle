@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gus Repeat
   m_EditorClassIdentifier: 
   dialog:
-  - '[Does he ever blink?]'
+  - Gus:Repeat
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

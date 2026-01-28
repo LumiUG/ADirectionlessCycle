@@ -286,6 +286,58 @@ MonoBehaviour:
     m_Localized: "T\xF3mate tu tiempo."
     m_Metadata:
       m_Items: []
+  - m_Id: 718586813485056
+    m_Localized: Woah.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718587711066112
+    m_Localized: Venga, dale.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718510921748480
+    m_Localized: "Te lo est\xE1s pasando bien?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718510326157312
+    m_Localized: "Bot\xF3n conseguido!!!!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718460468465664
+    m_Localized: "Hay un bot\xF3n sobre tu izquierda, m\xE1s o menos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718459889651712
+    m_Localized: por cierto, no hay salidas en esta pantalla <3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717999766114304
+    m_Localized: por cierto,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718000584003584
+    m_Localized: NO lo siento.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717995387260928
+    m_Localized: El nivel entero es un laberinto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717996058349568
+    m_Localized: Un laberinto invisible.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717996783964160
+    m_Localized: Son 12 pantallas combinadas, donde tienes que encontrar dos botones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717997908037632
+    m_Localized: Y, al final, ves recto por el medio.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717998780452864
+    m_Localized: "No ganar\xE1s NADA al completar esto, solo es tortura."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

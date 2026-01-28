@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Gus Fine
   m_EditorClassIdentifier: 
   dialog:
-  - ...
-  - ...
-  - ...
-  - Fine!
+  - Gus:Fine
+  - Gus:Fine
+  - Gus:Fine
+  - Gus:Fine2
   events: []
   exhaustDialog: {fileID: 11400000, guid: 18fc2ed59f734fe4ca03536215998280, type: 2}
   textSpeed: 0.05

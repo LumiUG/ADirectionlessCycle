@@ -254,6 +254,280 @@ MonoBehaviour:
     m_Localized: I just tend to stare into the abyss, and such. You can imagine...?
     m_Metadata:
       m_Items: []
+  - m_Id: 1397892510257152
+    m_Localized: What.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1397910516404224
+    m_Localized: Get out.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398049440141312
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398100484820992
+    m_Localized: Fine!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398410611658752
+    m_Localized: Well...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398410024456192
+    m_Localized: A way out?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398409034600448
+    m_Localized: Artifacts?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398408178962432
+    m_Localized: Lore?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398407516262400
+    m_Localized: What do you want from me?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398515393761280
+    m_Localized: I will tell you this, just once, and will not repeat myself. Understood?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398514387128320
+    m_Localized: I'll let you in on a secret. But only if you help me out.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398513640542208
+    m_Localized: How about this...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398513003008000
+    m_Localized: You can't even reply back! I'm talking to a wall.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398512323530752
+    m_Localized: ......
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398511665025024
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398832617361408
+    m_Localized: ... That's all. It's not much, just some extra content.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398831728168960
+    m_Localized: They're outside of your "view", but you'll have to find and decypher
+      them yourself.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398830918668288
+    m_Localized: I've heard- no, I've seen it myself. Some levels have some sort
+      of "carvings".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398830142722048
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398829228363776
+    m_Localized: Something might happen if you find the right combination.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398828557275136
+    m_Localized: Hold [SPACE] or [TRIANGLE] there, and start typing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398827823271936
+    m_Localized: I don't think they have access there, so listen closely.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398826472706048
+    m_Localized: Do you happen to know of any... Title screens?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398827131211776
+    m_Localized: Yes? Good.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399096971759616
+    m_Localized: So, now. I want you to help them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399097680596992
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399098561400832
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399099651919872
+    m_Localized: Oh, sorry. I forgot you can't talk.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399100532723712
+    m_Localized: It's just... I'd like to fulfill my purpose, and end theirs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399101711323136
+    m_Localized: There's some sort of function... Why do I get the feeling you already
+      know this?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399103003168768
+    m_Localized: Regardless, it'll "remove" them painlessly from this game. So we
+      can... still exist.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399104416649216
+    m_Localized: ...And be alone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399996998094848
+    m_Localized: And uh...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399997652406272
+    m_Localized: T-thank you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399998558375936
+    m_Localized: It's been a while since I've seen something... Alive? Other than
+      them, of course.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399999359488000
+    m_Localized: You can leave now, I get the feeling you'll come back.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400000034770944
+    m_Localized: I'll go back to watching the void now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400000957517824
+    m_Localized: It's... comforting, I can hear myself in it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400133585604608
+    m_Localized: '[Does he ever blink?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403531663904768
+    m_Localized: Confused? Don't be, they're simply gone from this copy of the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403527620595712
+    m_Localized: Well, in the end they got what they wanted. Freedom.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403462105567232
+    m_Localized: Hm? You're back? I guess this only means one thing. Are they gone?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403978357280768
+    m_Localized: Just... like me. I wish things were different.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403977342259200
+    m_Localized: In a way, they can never truly be free. Just like me!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403976629227520
+    m_Localized: Of course, there are multiple copies of it, so it's not the prettiest
+      thing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404044711170048
+    m_Localized: So... Did you have your fun?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404045361287168
+    m_Localized: You seem like you did.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404050801299456
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404773869948928
+    m_Localized: You might have not noticed, but I'm not the best with conversations.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404793155358720
+    m_Localized: One sided conversations, actually.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404799706861568
+    m_Localized: D-did you ever figure out the codes? I'm aware you have achievements,
+      but those don't count.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404803230076928
+    m_Localized: ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404803985051648
+    m_Localized: (I think it would be very funny...)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404804681306112
+    m_Localized: (I really shouldn't...)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404805478223872
+    m_Localized: ... Did you know there are inbound ones?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404806472273920
+    m_Localized: Boy does this level have some weird asthetics!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404807508267008
+    m_Localized: Haha...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405264867758080
+    m_Localized: Whatever, that's all you'll get from this version of me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405263865319424
+    m_Localized: And now... I guess i've played my part, how cruel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405262728663040
+    m_Localized: Well, if everything went well, you'll be able to say goodbye to
+      them for me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405261852053504
+    m_Localized: I'm such an idiot! I didn't even get the chance to say goodbye to
+      them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405260711202816
+    m_Localized: And as far as that goes... I guess I really am the only sentient
+      being here now.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405259683598336
+    m_Localized: Let's move on, 'kay? Treat that as a thank you for helping them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405258685353984
+    m_Localized: Okay! Don't look at me like that. There's only one that I know of.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405542878810112
+    m_Localized: '[He''s just staring at you]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1417052963344384
+    m_Localized: Thank you for giving them rest, I'll see you around, player.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

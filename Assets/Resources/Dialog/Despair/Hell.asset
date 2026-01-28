@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: Hell
   m_EditorClassIdentifier: 
   dialog:
-  - This entire level is just a maze.
-  - An invisible maze.
-  - It is around ~12 screens with width + height combined, and you need to find two
-    buttons.
-  - Then, head down, straight middle.
-  - You will get NOTHING from beating this, this is merely torture.
-  - btw,
-  - I am NOT sorry.
+  - Despair:Hell
+  - Despair:Hell2
+  - Despair:Hell3
+  - Despair:Hell4
+  - Despair:Hell5
+  - Despair:Hell6
+  - Despair:Hell7
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
