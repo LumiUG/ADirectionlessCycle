@@ -71,6 +71,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
         passType: 0
+      - keywords: DETAIL_MASKING TRANSITION_DISSOLVE UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: DETAIL_MASKING TRANSITION_PATTERN
         passType: 0
       - keywords: DETAIL_MASKING UNITY_UI_ALPHACLIP

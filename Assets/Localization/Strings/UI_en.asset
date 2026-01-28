@@ -297,6 +297,10 @@ MonoBehaviour:
     m_Localized: Exit Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 4271107653898240
+    m_Localized: Exit Settings
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

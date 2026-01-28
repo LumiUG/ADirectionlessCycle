@@ -294,6 +294,10 @@ MonoBehaviour:
     m_Localized: Cerrar Menu
     m_Metadata:
       m_Items: []
+  - m_Id: 4271107653898240
+    m_Localized: Cerrar Opciones
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

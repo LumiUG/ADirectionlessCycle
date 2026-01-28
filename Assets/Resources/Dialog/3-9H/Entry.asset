@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Entry
   m_EditorClassIdentifier: 
   dialog:
-  - Oh.
-  - Seems like the degradation actually reached some of the hint levels too.
-  - It does make sense that this would happen here, since we're closer to the core.
-  - ...Surely you didn't need this hint, right?
+  - 3-9H:Entry
+  - 3-9H:Entry2
+  - 3-9H:Entry3
+  - 3-9H:Entry4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

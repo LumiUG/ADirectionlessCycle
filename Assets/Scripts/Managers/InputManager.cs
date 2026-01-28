@@ -676,7 +676,7 @@ public class InputManager : MonoBehaviour
         {
             canInputCommands = false;
             debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.LoadLevel, "DEBUG/LocaTest");
+            TransitionManager.I.TransitionIn(Reveal, Actions.DiveIn, "1");
             return;
         }
 

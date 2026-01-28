@@ -63,6 +63,24 @@ MonoBehaviour:
     m_Localized: Ooooh, clever.
     m_Metadata:
       m_Items: []
+  - m_Id: 3971625565425664
+    m_Localized: Oh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971631559086080
+    m_Localized: Seems like the degradation actually reached some of the hint levels
+      too.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971632129511424
+    m_Localized: It does make sense that this would happen here, since we're closer
+      to the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971632834154496
+    m_Localized: ...Surely you didn't need this hint, right?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

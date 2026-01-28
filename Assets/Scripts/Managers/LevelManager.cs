@@ -1034,7 +1034,7 @@ public class LevelManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "Game")
         {
-            UI.I.effects.gameObject.SetActive(false);
+            // UI.I.effects.gameObject.SetActive(false);
         }
 
         UI.I.pause.Toggle(false);

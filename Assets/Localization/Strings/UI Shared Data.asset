@@ -287,6 +287,10 @@ MonoBehaviour:
     m_Key: TrialExit
     m_Metadata:
       m_Items: []
+  - m_Id: 4271107653898240
+    m_Key: ExitMiniSettings
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
