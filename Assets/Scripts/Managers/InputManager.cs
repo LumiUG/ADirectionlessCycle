@@ -672,13 +672,13 @@ public class InputManager : MonoBehaviour
         }
 
         // testing code
-        else if (debugCommand == "loca" && GameManager.I.buildDebugMode)
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.DiveIn, "1");
-            return;
-        }
+        // else if (debugCommand == "loca" && GameManager.I.buildDebugMode)
+        // {
+        //     canInputCommands = false;
+        //     debugCommand = null;
+        //     TransitionManager.I.TransitionIn(Reveal, Actions.DiveIn, "1");
+        //     return;
+        // }
 
         // Guests
         else if (debugCommand == "caos" || debugCommand == "UDLRLDUR")

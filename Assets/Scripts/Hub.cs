@@ -568,7 +568,7 @@ public class Hub : MonoBehaviour
         if (
             (completedReal[0] >= 12 && completedRealRemix[0] >= 10 && completedRealOutbound[0] >= 1 && world == 0) ||
             (completedReal[1] >= 12 && completedRealRemix[1] >= 7 && completedRealOutbound[1] >= 4 && world == 1) ||
-            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 3 && world == 2) ||
+            (completedReal[2] >= 10 && completedRealRemix[2] >= 4 && completedRealOutbound[2] >= 2 && world == 2) ||
             (GameManager.save.game.hasCompletedGame && world == 3)
         ) masteryOutline.SetActive(true);
         else masteryOutline.SetActive(false);

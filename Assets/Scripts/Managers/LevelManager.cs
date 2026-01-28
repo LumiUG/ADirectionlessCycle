@@ -107,7 +107,8 @@ public class LevelManager : MonoBehaviour
     // Player //
     private readonly string[] crackedLevel1 = { "HINTS/W3-9H", "VOID/Logs/TheRoom", "VOID/Dive/2", "VOID/Dive/3", "FRAGMENTS/Upgrade" };
     private readonly string[] crackedLevel2 = { "VOID/Dive/4", "FRAGMENTS/Fragment Two", "FRAGMENTS/Fragment Three", "FRAGMENTS/Tutorial" };
-    private readonly string[] crackedLevel3 = { "HINTS/Fragment TwoH", "VOID/Dive/5", "VOID/Dive/6", "VOID/Entry", "VOID/Corridor", "VOID/Right", "VOID/Down", "VOID/Left", "VOID/Up", "VOID/Loop", "VOID/CYCLE", "VOID/Outro" };
+    private readonly string[] crackedLevel3 = { "HINTS/Fragment TwoH", "VOID/Dive/5", "VOID/Dive/6", "VOID/Entry", "VOID/Corridor", "VOID/Right", "VOID/Down", "VOID/Left", "VOID/Up", "VOID/Loop" };
+    private readonly string[] crackedLevel4 = { "VOID/CYCLE", "VOID/Outro" };
     private Coroutine timerCoroutine = null;
     private bool doPushSFX = false;
     private bool noMove = false;
@@ -321,6 +322,7 @@ public class LevelManager : MonoBehaviour
         if (crackedLevel1.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(0); }
         else if (crackedLevel2.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(2); }
         else if (crackedLevel3.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(1); UI.I.ShowCracks(2); }
+        else if (crackedLevel4.Contains(currentLevelID)) { UI.I.ShowCracks(-1); UI.I.ShowCracks(0); UI.I.ShowCracks(1); UI.I.ShowCracks(2); }
         else UI.I.ShowCracks(-1);
         // if (currentLevelID == "VOID/CYCLE") UI.I.global.SendMessage($"LOOP BROKEN - LOOP BR0KEN - L0OP BR##KEN / L0O&%P#", 5f);
         // UI.I.global.SendMessage("ENABLING FREEROAM-", 5f);
@@ -1032,10 +1034,10 @@ public class LevelManager : MonoBehaviour
             UI.I.ingame.levelTimer.transform.parent.gameObject.SetActive(GameManager.save.preferences.showTimer);
         }
 
-        if (SceneManager.GetActiveScene().name != "Game")
-        {
-            // UI.I.effects.gameObject.SetActive(false);
-        }
+        // if (SceneManager.GetActiveScene().name != "Game")
+        // {
+        //     UI.I.effects.gameObject.SetActive(false);
+        // }
 
         UI.I.pause.Toggle(false);
         UI.I.editor.Toggle(false);

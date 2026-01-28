@@ -16,10 +16,9 @@ public class CracksMover : MonoBehaviour
         if (!GameManager.save.preferences.scanlineAnimation) return;
 
         // (this code is horrible look away)
-        masks.FindAll(mask => mask.anchoredPosition.x <= -1180f).ForEach(mask => mask.anchoredPosition = new(1180, mask.anchoredPosition.y));
-        foreach (RectTransform mask in masks)
-        {
-            mask.anchoredPosition = new(mask.anchoredPosition.x + speed * Time.deltaTime * -1, mask.anchoredPosition.y);
-        }
+        if (speed > 0) masks.FindAll(mask => mask.anchoredPosition.x <= -1180f).ForEach(mask => mask.anchoredPosition = new(1180, mask.anchoredPosition.y));
+        else masks.FindAll(mask => mask.anchoredPosition.x >= 1180f).ForEach(mask => mask.anchoredPosition = new(-1180, mask.anchoredPosition.y));
+        
+        foreach (RectTransform mask in masks) mask.anchoredPosition = new(mask.anchoredPosition.x + speed * Time.deltaTime * -1, mask.anchoredPosition.y);
     }
 }
