@@ -279,6 +279,14 @@ MonoBehaviour:
     m_Key: PauseBackToHub
     m_Metadata:
       m_Items: []
+  - m_Id: 4263207086723072
+    m_Key: TrialModes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4263316486754304
+    m_Key: TrialExit
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

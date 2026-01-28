@@ -289,6 +289,14 @@ MonoBehaviour:
     m_Localized: Back to Hub
     m_Metadata:
       m_Items: []
+  - m_Id: 4263207086723072
+    m_Localized: 'Modes:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4263316486754304
+    m_Localized: Exit Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

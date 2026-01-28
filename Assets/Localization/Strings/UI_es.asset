@@ -286,6 +286,14 @@ MonoBehaviour:
     m_Localized: Volver al Mapa
     m_Metadata:
       m_Items: []
+  - m_Id: 4263207086723072
+    m_Localized: 'Modos:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4263316486754304
+    m_Localized: Cerrar Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
