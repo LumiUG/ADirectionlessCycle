@@ -120,6 +120,8 @@ public class LevelManager : MonoBehaviour
     internal bool hasCycledInCurrentAttempt = false;
     internal bool hasWon;
     internal int overflowCycles = 0;
+    internal bool endingTransition = false;
+    public ParticleSystem endingParticleSystem;
 
     void Awake()
     {
@@ -1283,7 +1285,11 @@ public class LevelManager : MonoBehaviour
     {
         AudioManager.I.PlayBGM(AudioManager.unveilingBGM);
 
+        endingParticleSystem.Clear();
+        TransitionManager.I.TransitionIn<string>(Finale);
+
         var tiles = GetObjectTiles();
+        endingTransition = true;
         InputManager.I.canPause = false;
         InputManager.I.canRestart = false;
         InputManager.I.canSwap = false;
@@ -1299,30 +1305,29 @@ public class LevelManager : MonoBehaviour
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.3f;
-        yield return new WaitForSeconds(5.8f);
+        yield return new WaitForSeconds(6.3f);
         tiles[0].directions.left = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.5f;
-        yield return new WaitForSeconds(4.6f);
+        yield return new WaitForSeconds(4.1f);
         tiles[0].directions.right = false;
         RefreshObjectTile(tiles[0]);
 
         InputManager.I.endingExtraCD = 0.7f;
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(8f);
         InputManager.I.endingExtraCD = 0f;
         RemoveTile(tiles[0]);
 
-        yield return new WaitForSeconds(4f);
-        TransitionManager.I.TransitionIn<string>(Finale);        
 
-        yield return new WaitForSeconds(13f);
+        yield return new WaitForSeconds(15f);
         GameManager.save.game.hasCompletedGame = true;
         InputManager.I.canPause = true;
         InputManager.I.canRestart = true;
         InputManager.I.canSwap = true;
         
         ClearLevel();
+        endingTransition = false;
         GameManager.I.EditAchivement("ACH_DEATH");
         UI.I.ChangeScene("Credits", false);
     }

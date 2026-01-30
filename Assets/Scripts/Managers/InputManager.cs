@@ -522,7 +522,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    internal bool IsAllowedToPlay() { return !(GameManager.I.IsBadScene() || LevelManager.I.isPaused || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || UI.I.popup.self.activeSelf); }
+    internal bool IsAllowedToPlay() { return !(GameManager.I.IsBadScene() || LevelManager.I.isPaused || LevelManager.I.hasWon || DialogManager.I.inDialog || TransitionManager.I.inTransition || UI.I.restart.self.activeSelf || UI.I.popup.self.activeSelf) || LevelManager.I.endingTransition; }
     internal List<GameTile> GetPlayableObjects() { return LevelManager.I.GetObjectTiles().FindAll(tile => { return tile.directions.GetActiveDirectionCount() > 0 && LevelManager.I.CheckSceneInbounds(tile.position); }); }
 
     // Plays an "out" transition
