@@ -20,8 +20,6 @@ MonoBehaviour:
   - GusPG:Four5
   - GusPG:Four6
   - GusPG:Four7
-  - GusPG:Four8
-  - GusPG:Four9
   events: []
   exhaustDialog: {fileID: 11400000, guid: fe232bd508683c8419918a953cddb2c4, type: 2}
   textSpeed: 0.05

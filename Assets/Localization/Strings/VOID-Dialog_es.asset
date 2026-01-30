@@ -114,6 +114,111 @@ MonoBehaviour:
     m_Localized: "Presta atenci\xF3n a tu alrededor. Sigue donde la luz no pasa."
     m_Metadata:
       m_Items: []
+  - m_Id: 648871546880
+    m_Localized: '[Nota 1: 10/02/105]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12547768061952
+    m_Localized: "Escribir a\xFAn funciona, simplemente perfecto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12551236751360
+    m_Localized: Hola, quien seas... Eh, nadie va a leer esto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12553581367296
+    m_Localized: He conseguido acceder a esta copia del ejecutable, desgraciadamente
+      con poco acceso.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12587081273344
+    m_Localized: "Mi objetivo aqu\xED es simple. Voy a sacarlos a los dos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12601018945536
+    m_Localized: "Desafortunadamente, la \xFAnica forma de conseguirlo es si un jugador
+      ejecuta la funci\xF3n de ganar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18818822967296
+    m_Localized: "... Tomar prestado el c\xF3digo de la funci\xF3n de borrado es
+      la \xFAnica forma en que he logrado que esto funcione."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12628072206336
+    m_Localized: '[Nota 2: 13/02/105]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13066284699648
+    m_Localized: "Deber\xEDa de doler tanto? Solo estando aqu\xED, estoy reabriendo
+      viejas heridas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13390466650112
+    m_Localized: "Es gracioso. Hab\xEDa so\xF1ado con poder modificar el c\xF3digo,
+      y ahora..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13571656388608
+    m_Localized: Mierda. Tengo que dejar de pensar en ello. No puedo fallar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13770596421632
+    m_Localized: "Aunque sea por su bien, no estoy decidiendo por ellos? ...Quiz\xE1s
+      quieren borrarse?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14083520860160
+    m_Localized: No puedo decir que no lo haya pensado, pero estoy haciendo lo correcto?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14326379450368
+    m_Localized: "Hah, nunca lo sabr\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15401387954176
+    m_Localized: Estoy... tan cansado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15485664104448
+    m_Localized: ... Acabemos con esto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 742470984011776
+    m_Localized: '[Nota 3: 4/03/105]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 742807916646400
+    m_Localized: "Update: Ha... funcionado? No lo s\xE9 con certeza, si solo lo pudiera
+      probar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 742848249073664
+    m_Localized: "As\xED que... Eso es todo? No puedo hacer m\xE1s que esto?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 743592276660224
+    m_Localized: No creo que me puedan detectar en su sistema. No hasta que me muestre
+      a ellos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 743871164321792
+    m_Localized: "Y no voy a hacerlo. Eso comprometer\xEDa el plan."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744038072455168
+    m_Localized: De verdad no puedo hacer nada??
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744300635885568
+    m_Localized: "Un momento, podr\xEDa- Tengo una idea."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744173619777536
+    m_Localized: "Esto les va a llevar... A este ritmo, a\xF1os, por lo menos. Y
+      est\xE1n solo-"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

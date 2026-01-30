@@ -15,6 +15,10 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER
         passType: 0
+      - keywords: COLOR_FILTER DETAIL_ADDITIVE GRADATION_COLOR2
+        passType: 0
+      - keywords: COLOR_FILTER DETAIL_ADDITIVE GRADATION_COLOR4
+        passType: 0
       - keywords: COLOR_FILTER DETAIL_MASKING GRADATION_COLOR2 UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: COLOR_FILTER DETAIL_MASKING GRADATION_RADIAL UNITY_UI_ALPHACLIP
@@ -61,6 +65,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER UNITY_UI_ALPHACLIP
         passType: 0
+      - keywords: DETAIL_ADDITIVE GRADATION_COLOR2
+        passType: 0
       - keywords: DETAIL_MASKING
         passType: 0
       - keywords: DETAIL_MASKING GRADATION_COLOR2 UNITY_UI_ALPHACLIP
@@ -84,6 +90,8 @@ ShaderVariantCollection:
       - keywords: DETAIL_MULTIPLY_ADDITIVE EDGE_SHINY
         passType: 0
       - keywords: EDGE_PLAIN
+        passType: 0
+      - keywords: EDGE_PLAIN GRADATION_COLOR2
         passType: 0
       - keywords: EDGE_PLAIN SAMPLING_BLUR_FAST
         passType: 0

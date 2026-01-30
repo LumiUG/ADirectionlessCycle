@@ -377,6 +377,156 @@ MonoBehaviour:
     m_Localized: ... Eso es todo. No es mucho, solo contenido extra.
     m_Metadata:
       m_Items: []
+  - m_Id: 1399099651919872
+    m_Localized: "Oh, perd\xF3n. Olvidaba que no puedes hablar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399100532723712
+    m_Localized: "Es solo... Me gustar\xEDa completar mi prop\xF3sito y acabar los
+      suyos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399101711323136
+    m_Localized: "Hay una especie de funci\xF3n... Por qu\xE9 me parece que ya sabes
+      sobre esto?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399103003168768
+    m_Localized: "Da igual, los \"quitar\xE1\" sin dolor de este juego. Y as\xED
+      podr\xE9.. seguir existiendo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399104416649216
+    m_Localized: ...Y estar solo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399996998094848
+    m_Localized: Y, uh...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399997652406272
+    m_Localized: G-gracias.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399998558375936
+    m_Localized: Hace tiempo que no veo nada... Vivo? Aparte de ellos, claro.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399999359488000
+    m_Localized: "Ya puedes irte, algo me dice que volver\xE1s."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400000034770944
+    m_Localized: "Voy a volver a quedarme mirando el vac\xEDo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400000957517824
+    m_Localized: "Es... muy c\xF3modo, puedo escucharme a m\xED mismo en \xE9l."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1400133585604608
+    m_Localized: '[Alguna vez parpadea?]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403462105567232
+    m_Localized: Hm? Has vuelto? Supongo que eso solo significa una cosa. Se han
+      ido?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403527620595712
+    m_Localized: "Bueno, al final consiguieron lo que quer\xEDan. Libertad."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403531663904768
+    m_Localized: "Confudido? No lo est\xE9s, simplemente ya no est\xE1n en esta copia
+      del juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403976629227520
+    m_Localized: "Por supuesto, hay m\xFAltiples copias del juego, as\xED que no
+      es super bonito."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403977342259200
+    m_Localized: Si lo piensas, nunca pueden ser libres de verdad. Igual que yo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1403978357280768
+    m_Localized: "Igual... que yo. Ojal\xE1 las cosas fueran diferentes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404044711170048
+    m_Localized: "As\xED que... Te lo has pasado bien?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404045361287168
+    m_Localized: "A m\xED me parece que s\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404799706861568
+    m_Localized: "Conseguiste entender los c\xF3digos S\xE9 que tienes logros, pero
+      eso no cuenta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404803985051648
+    m_Localized: "(Ser\xEDa muy gracioso...)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404804681306112
+    m_Localized: "(No deber\xEDa...)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404805478223872
+    m_Localized: "... Sab\xEDas que hay c\xF3digos que no est\xE1n fuera?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1404806472273920
+    m_Localized: "S\xED que este nivel se ve muy raro!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405258685353984
+    m_Localized: "Vale! No me mires as\xED. Solo hay uno que yo conozca."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405259683598336
+    m_Localized: "Vamos a seguir, vale? T\xF3malo como mis gracias por ayudarlos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405260711202816
+    m_Localized: "Y, uh... Supongo que ahora soy la \xFAnica criatura consciente
+      aqu\xED. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405261852053504
+    m_Localized: Soy un idiota! Ni siquiera tuve la oportunidad de despedirme.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405262728663040
+    m_Localized: "Bueno, si todo ha ido bien, podr\xE1s despedirte de ellos de mi
+      parte."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405263865319424
+    m_Localized: "Y ahora... Supongo que he cumplido mi parte, qu\xE9 cruel."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405264867758080
+    m_Localized: "Da igual, da igual. Bueno, esto es todo lo que obtendr\xE1s de
+      esta versi\xF3n de m\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1417052963344384
+    m_Localized: "Gracias por dejarlos descansar. Ya nos veremos por all\xED, jugador."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1405542878810112
+    m_Localized: '[Simplemente te mira.]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1399096971759616
+    m_Localized: "As\xED que ahora, quiero que los ayudes."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

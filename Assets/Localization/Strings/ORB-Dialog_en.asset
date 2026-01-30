@@ -452,14 +452,6 @@ MonoBehaviour:
     m_Localized: ...
     m_Metadata:
       m_Items: []
-  - m_Id: 1404773869948928
-    m_Localized: You might have not noticed, but I'm not the best with conversations.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1404793155358720
-    m_Localized: One sided conversations, actually.
-    m_Metadata:
-      m_Items: []
   - m_Id: 1404799706861568
     m_Localized: D-did you ever figure out the codes? I'm aware you have achievements,
       but those don't count.

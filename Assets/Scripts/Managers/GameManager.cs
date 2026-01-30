@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
@@ -7,7 +8,6 @@ using Steamworks;
 using Discord;
 using Rect = UnityEngine.Rect;
 using static Serializables;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {

@@ -291,6 +291,58 @@ MonoBehaviour:
     m_Key: ExitMiniSettings
     m_Metadata:
       m_Items: []
+  - m_Id: 4692847152467968
+    m_Key: EditorSelectors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4692979805720576
+    m_Key: EditorTab
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693006724763648
+    m_Key: EditorD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693014618443776
+    m_Key: EditorS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693021278998528
+    m_Key: EditorZ
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693033203404800
+    m_Key: EditorLC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693048441311232
+    m_Key: EditorRC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693056989302784
+    m_Key: EditorArrows
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695399633915904
+    m_Key: EditorPopupUP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695429237313536
+    m_Key: EditorPopupLEFT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695439236534272
+    m_Key: EditorPopupRIGHT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695453715271680
+    m_Key: EditorPopupDOWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695465371242496
+    m_Key: EditorPopupPUSHABLE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

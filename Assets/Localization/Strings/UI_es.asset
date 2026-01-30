@@ -298,6 +298,58 @@ MonoBehaviour:
     m_Localized: Cerrar Opciones
     m_Metadata:
       m_Items: []
+  - m_Id: 4692847152467968
+    m_Localized: '1 ~ 4: Escojer'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4692979805720576
+    m_Localized: 'TAB: Lista Tiles'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693006724763648
+    m_Localized: 'D (Manten): Borrar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693014618443776
+    m_Localized: 'S: Guardar'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693021278998528
+    m_Localized: 'Z: Deshacer'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693033203404800
+    m_Localized: 'Click: Colocar Tile'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693048441311232
+    m_Localized: 'Click (2): Propiedades'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4693056989302784
+    m_Localized: 'Flechas: Mover Pantalla'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695465371242496
+    m_Localized: Empujable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695453715271680
+    m_Localized: Abajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695439236534272
+    m_Localized: Derecha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695429237313536
+    m_Localized: Izquierda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4695399633915904
+    m_Localized: Arriba
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

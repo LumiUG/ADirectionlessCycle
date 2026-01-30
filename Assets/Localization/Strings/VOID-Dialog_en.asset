@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 648871546880
-    m_Localized: '[Log 1: -/-/--]'
+    m_Localized: '[Log 1: 10/02/105]'
     m_Metadata:
       m_Items: []
   - m_Id: 12628072206336
-    m_Localized: '[Log 2: -/-/--]'
+    m_Localized: '[Log 2: 13/02/105]'
     m_Metadata:
       m_Items: []
   - m_Id: 13066284699648
@@ -42,7 +42,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13770596421632
     m_Localized: Even if this is for the better, aren't I deciding for them? ...Maybe
-      they want to die?
+      they want to get erased?
     m_Metadata:
       m_Items: []
   - m_Id: 14083520860160
@@ -62,7 +62,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12547768061952
-    m_Localized: Writing works, just perfect.
+    m_Localized: Writing still works, just perfect.
     m_Metadata:
       m_Items: []
   - m_Id: 12551236751360
@@ -89,11 +89,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 742470984011776
-    m_Localized: '[Log 3: -/-/--]'
+    m_Localized: '[Log 3: 4/03/105]'
     m_Metadata:
       m_Items: []
   - m_Id: 742807916646400
-    m_Localized: 'Update: It... Worked? I can''t say for sure, if only I could test
+    m_Localized: 'Update: It... worked? I can''t say for sure, if only I could test
       it.'
     m_Metadata:
       m_Items: []

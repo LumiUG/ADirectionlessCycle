@@ -65,6 +65,24 @@ MonoBehaviour:
     m_Localized: Oooh, ya veo.
     m_Metadata:
       m_Items: []
+  - m_Id: 3971625565425664
+    m_Localized: Oh.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971631559086080
+    m_Localized: "Parece que la degradaci\xF3n ha llegado a algunos de los niveles
+      con pistas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971632129511424
+    m_Localized: "Tiene sentido que est\xE9 pasando por aqu\xED, ya que estamos m\xE1s
+      cerca del centro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3971632834154496
+    m_Localized: ...No necesitabas esta pista, verdad?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ADC.Localization;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 using static GameTile;
 
 public class DialogManager : MonoBehaviour

@@ -196,7 +196,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1846702743097344
-    m_Localized: "Es\u2026 Admirable, pero los dos sabemos que no es lo correcto."
+    m_Localized: Es... Admirable, pero los dos sabemos que no es lo correcto.
     m_Metadata:
       m_Items: []
   - m_Id: 1846703867170816
@@ -296,6 +296,59 @@ MonoBehaviour:
   - m_Id: 1853778982735872
     m_Localized: "As\xED que, bueno. Estoy cansado de existir. Acaba con nosotros?
       Jaja..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3320000836407296
+    m_Localized: '- El Inacabado // El Original.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302336604803072
+    m_Localized: '[Nota 4: 22/03/105]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302351565885440
+    m_Localized: ...No es mi mejor trabajo, ni mucho menos. Pero es mejor que no
+      tener nada.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302352530575360
+    m_Localized: "Espero que utilizar c\xF3digo descartado para su IA no tenga repercusiones."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302354917134336
+    m_Localized: '"Gus"?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302353335881728
+    m_Localized: "Hah, solo hacer esto ya es un riesgo incre\xEDble."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302354216685568
+    m_Localized: "Necesitas un nombre, cosita. Qu\xE9 tal..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3302436584427520
+    m_Localized: Jaja, suena suficientemente inofensivo. Me vale.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319068039974912
+    m_Localized: '[Nota 5: 8/04/105]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319101812510720
+    m_Localized: Es mi hora de irme. Me vuelvo al terminal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319102882058240
+    m_Localized: "\rAl menos ya no estoy solo, y ellos tampoco."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319103628644352
+    m_Localized: Espero poder volver veros a los dos una, y otra, y otra vez.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3319104320704512
+    m_Localized: Espero, de verdad espero que esto funcione.
     m_Metadata:
       m_Items: []
   references:
