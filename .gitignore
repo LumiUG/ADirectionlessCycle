@@ -76,3 +76,4 @@ crashlytics-build.properties
 # Manual
 /[Aa]ssets/[Rr]esources/[Aa]udio/BGM/*
 steam_appid.txt
+*.lscache

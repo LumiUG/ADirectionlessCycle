@@ -50,8 +50,8 @@ public class MainMenu : MonoBehaviour
     public Image trialFillThree;
     public Text trialCountRemix;
     public Image trialFillRemix;
+    internal int mewCount = 0;
     private bool trialVanilla = true;
-    private int mewCount = 0;
     private readonly string[] menuSelectorEffect = { "Discord", "Spanish", "English" };
     private readonly int[] trialClearsVanilla = { 12, 11, 9, 16 };
     private readonly int[] trialClearsCycle = { 5, 9, 3, 8 }; // 9 -> 8 (rybb?)
@@ -125,6 +125,7 @@ public class MainMenu : MonoBehaviour
             UI.I.dialog.text.font = GameManager.I.acessibilityFont;
             UI.I.popup.popupText.font = GameManager.I.acessibilityFont;
         } else {
+            popupText.font = GameManager.I.originalFont;
             UI.I.dialog.text.font = GameManager.I.originalFont;
             UI.I.popup.popupText.font = GameManager.I.originalFont;
         }
