@@ -23,10 +23,16 @@ public class MainMenu : MonoBehaviour
     
     [Header("Misc")]
     public GameObject scorchingStupid;
+    public GameObject normalChecker;
     public GameObject postgameChecker;
     public Button playBtn;
     public Text version;
     public Text debug;
+
+    [Header("Save Slots")]
+    public Button slotLeft;
+    public Button slotRight;
+    public Text slotDisplay;
 
     [Header("Popup")]
     public Button popupBtn;
@@ -54,32 +60,18 @@ public class MainMenu : MonoBehaviour
     {
         I = this; // No persistence!
 
-        if (GameManager.save.game.hasCompletedGame) postgameChecker.SetActive(true);
-
-        // Setup settings changes
-        LevelManager.I.animatedTilemapScanlines.gameObject.SetActive(GameManager.save.preferences.scanlineAnimation);
-        LevelManager.I.staticTilemapScanlines.gameObject.SetActive(!GameManager.save.preferences.scanlineAnimation);
-        if (GameManager.save.preferences.accessibleFont)
-        {
-            popupText.font = GameManager.I.acessibilityFont;
-            UI.I.dialog.text.font = GameManager.I.acessibilityFont;
-            UI.I.popup.popupText.font = GameManager.I.acessibilityFont;
-        } else {
-            UI.I.dialog.text.font = GameManager.I.originalFont;
-            UI.I.popup.popupText.font = GameManager.I.originalFont;
-        }
+        LoadChecks();
 
         // Version text
         version.text = $"v{Application.version}";
-
-        // Savefile icons
-        SetupBadges();
     }
 
     private void Update()
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
+        if (EventSystem.current.currentSelectedGameObject == slotRight.gameObject) { UI.I.selectors.ChangeSelected(playBtn.gameObject, true); ChangeSaveSlot(1); }
+        if (EventSystem.current.currentSelectedGameObject == slotLeft.gameObject) { UI.I.selectors.ChangeSelected(playBtn.gameObject, true); ChangeSaveSlot(-1); }
         
         if (menuSelectorEffect.Contains(EventSystem.current.currentSelectedGameObject.name)) UI.I.selectors.SetEffect(1);
         else UI.I.selectors.SetEffect(0);
@@ -119,6 +111,40 @@ public class MainMenu : MonoBehaviour
         scorchingStupid.SetActive(GameManager.save.game.exhaustedDialog.Find(dialog => dialog == "EXHAUST-EXHAUST-Dialog/Scorch/Hi") != null);
     }
 
+    internal void LoadChecks()
+    {
+        normalChecker.SetActive(!GameManager.save.game.hasCompletedGame);
+        postgameChecker.SetActive(GameManager.save.game.hasCompletedGame);
+
+        // Setup settings changes
+        LevelManager.I.animatedTilemapScanlines.gameObject.SetActive(GameManager.save.preferences.scanlineAnimation);
+        LevelManager.I.staticTilemapScanlines.gameObject.SetActive(!GameManager.save.preferences.scanlineAnimation);
+        if (GameManager.save.preferences.accessibleFont)
+        {
+            popupText.font = GameManager.I.acessibilityFont;
+            UI.I.dialog.text.font = GameManager.I.acessibilityFont;
+            UI.I.popup.popupText.font = GameManager.I.acessibilityFont;
+        } else {
+            UI.I.dialog.text.font = GameManager.I.originalFont;
+            UI.I.popup.popupText.font = GameManager.I.originalFont;
+        }
+
+        // Savefile icons
+        SetupBadges();
+
+        // Slots
+        if (GameManager.I.currentSavefileSlot == 4 || GameManager.I.currentSavefileSlot == 1) UI.I.selectors.ChangeSelected(playBtn.gameObject);
+        slotRight.interactable = GameManager.I.currentSavefileSlot != 4;
+        slotLeft.interactable = GameManager.I.currentSavefileSlot != 1;
+        slotDisplay.text = $"Slot {GameManager.I.currentSavefileSlot}";
+
+        Color slotColor = GameManager.I.boxColor;
+        if (GameManager.I.currentSavefileSlot == 2) slotColor = GameManager.I.completedColor;
+        else if (GameManager.I.currentSavefileSlot == 3) slotColor = GameManager.I.remixColor;
+        else if (GameManager.I.currentSavefileSlot == 4) slotColor = GameManager.I.outboundColor;
+        slotDisplay.color = slotColor;
+    }
+
     public void GoCustoms()
     {
         if (TransitionManager.I.inTransition) return;
@@ -132,11 +158,22 @@ public class MainMenu : MonoBehaviour
         UI.I.ChangeScene("Custom Levels");
     }
 
+    public void ChangeSaveSlot(int index)
+    {
+        if ((index == -1 && GameManager.I.currentSavefileSlot + index < 1) || (index == 1 && GameManager.I.currentSavefileSlot + index > 4))
+            { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
+
+        AudioManager.I.PlaySFX(AudioManager.undo, 0.15f);
+        GameManager.I.ChangeSaveDataSlot(index);
+        LoadChecks();
+    }
+    
     public void HidePopup()
     {
         UI.I.selectors.ChangeSelected(playBtn.gameObject);
         popupText.transform.parent.gameObject.SetActive(false);
     }
+
     internal void ShowPopup(string text)
     {
         popupText.transform.parent.gameObject.SetActive(true);

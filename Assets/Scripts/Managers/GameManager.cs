@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     internal List<TrialScriptable> trialsRemix;
     internal bool isDoingTrial = false;
     internal int lastSelectedWorld = 0;
+    internal int currentSavefileSlot = 1;
     internal Color boxColor;
     internal Color remixColor;
     internal Color outboundColor;
@@ -236,7 +237,7 @@ public class GameManager : MonoBehaviour
         // Encode and return
         return tex.EncodeToPNG(); 
     }
-    
+
     // Converts a base 64 string to a texture, usually used with level preview textures
     public Texture2D Base64ToTexture(string image)
     {
@@ -244,6 +245,20 @@ public class GameManager : MonoBehaviour
         byte[] bytes = Convert.FromBase64String(image);
         ImageConversion.LoadImage(texture, bytes);
         return texture;
+    }
+    
+    public void ChangeSaveDataSlot(int slot)
+    {
+        SaveDataJSON(save); // Save current file
+        
+        currentSavefileSlot += slot;
+
+        if (currentSavefileSlot == 1) dataPath = $"{Application.persistentDataPath}/userdata.save";
+        else dataPath = $"{Application.persistentDataPath}/userdata-{currentSavefileSlot}.save";
+
+        // Create a savefile if none exist
+        CreateSave(false, true);
+        LoadDataJSON();
     }
 
     // Steam Integration //

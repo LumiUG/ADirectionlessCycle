@@ -630,7 +630,7 @@ public class InputManager : MonoBehaviour
         if (debugCommand == "thankyou" || debugCommand == "DUDLRLUDLR")
         {
             GameManager.I.isDoingTrial = !GameManager.I.isDoingTrial;
-            if (GameManager.I.isDoingTrial) UI.I.global.SendMessage("CODETrials", 2, true);
+            if (GameManager.I.isDoingTrial) { UI.I.global.SendMessage("CODETrials", 2, true); MainMenu.I.Meow(); }
             else UI.I.global.SendMessage("CODETrialsOff", 2, true);
             MainMenu.I.SetupBadges();
             debugCommand = null;
