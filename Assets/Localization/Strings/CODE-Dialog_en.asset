@@ -335,6 +335,32 @@ MonoBehaviour:
     m_Localized: Woah.
     m_Metadata:
       m_Items: []
+  - m_Id: 40853726998695936
+    m_Localized: Yo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860066936655872
+    m_Localized: Welcome to the dev room. In here, you'll hear me (Lumi, the developer)
+      talk briefly about the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860085248987136
+    m_Localized: Did you get here by accident? I would recommend to leave and find
+      your way after beating the game!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860096024154112
+    m_Localized: The code for this level is very well hidden, but in plain sight.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860107889840128
+    m_Localized: If you haven't found it, don't worry! You're welcome here anyways.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860112268693504
+    m_Localized: So... Have at you!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

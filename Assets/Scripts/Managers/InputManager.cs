@@ -561,6 +561,14 @@ public class InputManager : MonoBehaviour
         TypeCode(arrow);
     }
 
+    private void OnF1Secret()
+    {
+        if (canInputCommands || SceneManager.GetActiveScene().name != "Main Menu") return;
+        if (MainMenu.I.trialInfo.activeSelf || MainMenu.I.popupBtn.transform.parent.gameObject.activeSelf) return;
+
+        MainMenu.I.ShowPopup("CODEHelp");
+    }
+
     // Confirm a command
     private bool DebugConfirm(string message = "CODEConfirm")
     {

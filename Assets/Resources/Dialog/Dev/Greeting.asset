@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: Greeting
   m_EditorClassIdentifier: 
   dialog:
-  - Yo!
-  - Welcome to the dev room. In here, you'll hear me (Lumi, the developer) talk briefly
-    about the game.
-  - Did you get here by accident? I would recommend to leave and find your way after
-    beating the game!
-  - The code for this level is very well hidden, but in plain sight.
-  - If you haven't found it, don't worry! You're welcome here anyways.
-  - So... Have at you!
+  - Dev:Greeting
+  - Dev:Greeting2
+  - Dev:Greeting3
+  - Dev:Greeting4
+  - Dev:Greeting5
+  - Dev:Greeting6
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

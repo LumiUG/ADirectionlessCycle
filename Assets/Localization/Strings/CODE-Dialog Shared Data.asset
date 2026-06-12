@@ -327,6 +327,30 @@ MonoBehaviour:
     m_Key: Despair:ButtonTwo2
     m_Metadata:
       m_Items: []
+  - m_Id: 40853726998695936
+    m_Key: Dev:Greeting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860066936655872
+    m_Key: Dev:Greeting2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860085248987136
+    m_Key: Dev:Greeting3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860096024154112
+    m_Key: Dev:Greeting4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860107889840128
+    m_Key: Dev:Greeting5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860112268693504
+    m_Key: Dev:Greeting6
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -256,6 +256,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "F1Secret",
+                    "type": "Button",
+                    "id": "7d94449d-3043-4f7a-be1f-1fb090feaf08",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -907,6 +916,17 @@
                     "action": "DebugControllerType",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c7b8a1a5-52b5-4cc9-8fcd-2364485e3adf",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "F1Secret",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

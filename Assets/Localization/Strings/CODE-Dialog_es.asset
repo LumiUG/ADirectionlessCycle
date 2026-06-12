@@ -338,6 +338,10 @@ MonoBehaviour:
     m_Localized: "No ganar\xE1s NADA al completar esto, solo es tortura."
     m_Metadata:
       m_Items: []
+  - m_Id: 40853726998695936
+    m_Localized: Hey!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
