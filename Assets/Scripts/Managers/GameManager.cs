@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     internal Color remixColor;
     internal Color outboundColor;
     internal Color completedColor;
-    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
-    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub", "Bonus" };
+    internal readonly string[] noGameplayScenes = { "Main Menu", "Custom Levels", "Settings", "Credits", "Hub", "Bonus", "Ending" };
+    private readonly string[] badScenes = { "Main Menu", "Level Editor", "Custom Levels", "Settings", "Credits", "Hub", "Bonus", "Ending" };
     private string dataPath;
     private string backupPath;
     private ActivityTimestamps sessionTime = new();

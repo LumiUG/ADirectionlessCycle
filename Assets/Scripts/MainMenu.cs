@@ -70,8 +70,16 @@ public class MainMenu : MonoBehaviour
     {
         if (!EventSystem.current) return;
         if (EventSystem.current.currentSelectedGameObject == null) UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
-        if (EventSystem.current.currentSelectedGameObject == slotRight.gameObject) { UI.I.selectors.ChangeSelected(playBtn.gameObject, true); ChangeSaveSlot(1); }
-        if (EventSystem.current.currentSelectedGameObject == slotLeft.gameObject) { UI.I.selectors.ChangeSelected(playBtn.gameObject, true); ChangeSaveSlot(-1); }
+        if (EventSystem.current.currentSelectedGameObject == slotRight.gameObject)
+        {
+            UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
+            if (!InputManager.I.canInputCommands) ChangeSaveSlot(1);
+        }
+        if (EventSystem.current.currentSelectedGameObject == slotLeft.gameObject)
+        {
+            UI.I.selectors.ChangeSelected(playBtn.gameObject, true);
+            if (!InputManager.I.canInputCommands) ChangeSaveSlot(-1);
+        }
         
         if (menuSelectorEffect.Contains(EventSystem.current.currentSelectedGameObject.name)) UI.I.selectors.SetEffect(1);
         else UI.I.selectors.SetEffect(0);

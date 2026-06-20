@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: Final
   m_EditorClassIdentifier: 
   dialog:
-  - Before you go, I'm incredibly grateful for people like you playing my game.
-  - You are one of the few people that most likely managed to get this far to see
-    this room.
-  - This "two" year long journey has been very special to me, and I am happy to have
-    been able to share it.
-  - From the bottom of my heart, thank you. I hope you've had your fun playing this
-    stupid passion project of mine.
-  - And for those of you that can hear me. I can hear you, too.
+  - Dev:Final
+  - Dev:Final1
+  - Dev:Final2
+  - Dev:Final3
+  - Dev:Final4
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

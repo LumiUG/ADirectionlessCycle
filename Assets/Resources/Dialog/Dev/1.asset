@@ -13,20 +13,18 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   dialog:
-  - The Gummi version of ADC... The best version.
-  - A relic of the past- Okay, I'm joking, we've got Github.
-  - ADC was meant to be a simple sokoban game to test the waters with Unity.
-  - It still is, but it's grown a lot closer to me that I expected.
-  - That has been mostly because of how much time I've poured into this.
-  - The game started to spiral out of control after deciding to make the cycle ability
-    go into other screens.
-  - Why?? The game was already finished, why would I ever do that???
-  - I suppose, part of me wanted to make something bigger. And hey, it paid off.
-  - After adding cycling, and multiple screens, I think it took me around 3-4 months
-    to rework everything.
-  - Would definitely do it all again! That was really fun.
-  - Hopefully no one ruined the cycling reveal for you. I would... bite them.
-  - ...Yeah, not much to see here, let's keep the ball rolling!
+  - Dev:One
+  - Dev:One1
+  - Dev:One2
+  - Dev:One3
+  - Dev:One4
+  - Dev:One5
+  - Dev:One6
+  - Dev:One7
+  - Dev:One8
+  - Dev:One9
+  - Dev:One10
+  - Dev:One11
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

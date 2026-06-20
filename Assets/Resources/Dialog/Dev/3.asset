@@ -13,16 +13,14 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   dialog:
-  - Did you know?
-  - ADC was meant to be my final school project!
-  - I actually got a good grade, and a lot of feedback to expand upon it.
-  - I will say, I probably didn't add as many mechanics as I thought from the beginning,
-    but that's a good thing.
-  - Trust me.
-  - So, this project was supposed to be a month only, but ended up taking wayyy too
-    long.
-  - Overscoping and overscoping until I had to cut content! It was too exhausting.
-  - I'm very satisfied, though.
+  - Dev:Three
+  - Dev:Three2
+  - Dev:Three3
+  - Dev:Three4
+  - Dev:Three5
+  - Dev:Three6
+  - Dev:Three7
+  - Dev:Three8
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05

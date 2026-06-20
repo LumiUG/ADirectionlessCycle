@@ -291,7 +291,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 718587711066112
-    m_Localized: Venga, dale.
+    m_Localized: Venga, a por todas.
     m_Metadata:
       m_Items: []
   - m_Id: 718510921748480
@@ -340,6 +340,240 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 40853726998695936
     m_Localized: Hey!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860066936655872
+    m_Localized: "Bienvenido a la \"dev room\". Aqu\xED, me escuchar\xE9is a m\xED
+      (Lumi, el desarrollador) hablar un poco sobre el juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860085248987136
+    m_Localized: "Has llegado sin querer? Te recomendar\xEDa que salgas y busques
+      el camino despu\xE9s de acabar el juego!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860096024154112
+    m_Localized: "El c\xF3digo para este nivel est\xE1 muy bien escondido, pero a
+      plena vista."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860107889840128
+    m_Localized: Si no lo has encontrado, no te preocupes! Eres bienvenido igualmente.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40860112268693504
+    m_Localized: "As\xED que... Adelante!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719719635095552
+    m_Localized: "La versi\xF3n Gummi de ADC... La mejor versi\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719775180263424
+    m_Localized: Una reliquia del pasado- Vale, solo bromeo, tenemos Github.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719783484985344
+    m_Localized: "ADC deber\xEDa haber sido un Sokoban simple para probar un poco
+      el funcionamiento de Unity."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719788845305856
+    m_Localized: "Y creo que sigue si\xE9ndolo, solo que ha crecido a algo m\xE1s
+      personal de lo que pensaba."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719794327261184
+    m_Localized: Eso ha sido principalmente por todo el tiempo que le he dedicado
+      a esto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719800522248192
+    m_Localized: "El juego empez\xF3 a descontrolarse despu\xE9s de decidir que la
+      habilidad de ciclar pudiera ir a otras pantallas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719806335553536
+    m_Localized: "Por qu\xE9??? El juego ya estaba acabado, en qu\xE9 mundo iba a
+      hacer algo as\xED???"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719811402272768
+    m_Localized: "Supongo que una parte de m\xED quer\xEDa hacer un juego m\xE1s
+      grande. Y bueno, ha merecido la pena."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719817232355328
+    m_Localized: "Despu\xE9s de incluir ciclar, y m\xFAltiples pantallas, creo que
+      me llevo unos 3-4 meses para rehacerlo todo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719823423148032
+    m_Localized: "Y lo volver\xEDa a hacer todo otra vez! Fue muy divertido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719829270007808
+    m_Localized: "Espero que nadie te haya arruinado la sorpresa de la habilidad
+      para ti. Les... moreder\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52720401725394944
+    m_Localized: "...Bueno, no hay mucho que ver aqu\xED, vamos a seguir!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725279080189952
+    m_Localized: "Esta es la mayor\xEDa del diagrama de flujo del juego!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725307404324864
+    m_Localized: Ha estado bajo cambios intensos y constantes, dado que el juego
+      no paraba de crecer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725313905496064
+    m_Localized: "Una de las cosas que ten\xEDa muchas, MUCHAS ganas de hacer era
+      incluir secretos dentro de los niveles pista."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725318796054528
+    m_Localized: "Desgraciadamente, no creo que hubiera quedado tan bien como yo
+      quer\xEDa, as\xED que lo dej\xE9 como estaba."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725322424127488
+    m_Localized: "Tambi\xE9n ten\xEDa que haber un \"nivel\" por artefacto, que ser\xEDa
+      necesario para acceder al centro."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725327331463168
+    m_Localized: ...Me estaba quedando sin ideas para niveles sobre este punto, jaja.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725358407061504
+    m_Localized: "Finalmente, tambi\xE9n quer\xEDa esconder m\xE1s c\xF3digos a plena
+      vista, como el que has utilizado para entrar aqu\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725363779964928
+    m_Localized: "Pero eso habr\xEDa sido muuuucho trabajo. As\xED que nos quedamos
+      con esto."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727719259148288
+    m_Localized: "Sab\xEDas?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727738372591616
+    m_Localized: "ADC ten\xEDa que ser mi proyecto final del instituto!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727746173997056
+    m_Localized: "De hecho, saqu\xE9 muy buena nota y recib\xED mucho feedback para
+      expandir."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727754285780992
+    m_Localized: "Eso s\xED, probablemente no inclu\xED tantas mec\xE1nicas como
+      pensaba que estar\xEDan aqu\xED, pero eso es algo bueno."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727759159562240
+    m_Localized: "Cr\xE9eme."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727764251447296
+    m_Localized: "As\xED que, este proyecto deber\xEDa haber sido un mes solo, pero
+      acab\xF3 siendo un proyecto muyyy largo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727768680632320
+    m_Localized: "Ampliaba y ampliaba hasta que ten\xEDa que quitar contenido! Era
+      muy agotador."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727775198580736
+    m_Localized: "Eso s\xED, estoy muy satisfecho."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729490564059136
+    m_Localized: Lumi!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729516992368640
+    m_Localized: La historia del juego original era sobre-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729523615174656
+    m_Localized: "No, no era sobre Lumi. Pero a veces me gusta pensar que s\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729528954523648
+    m_Localized: Era sobre "intentar que el universo no colapsara".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729532427407360
+    m_Localized: Al parecer, en el universo del juego, era algo bastante normal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729537330548736
+    m_Localized: "Bastante gracioso c\xF3mo la historia cambi\xF3 a \"destruye lo
+      que queda de un juego\", ir\xF3nico."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729542741200896
+    m_Localized: "Te preguntas qui\xE9n es el desarrollador del juego de verdad?
+      No lo s\xE9!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729547371712512
+    m_Localized: "Mi teor\xEDa es que Lumi lo hizo... Pero, oh bueno."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729551842840576
+    m_Localized: "Estoy seguro de que acabar\xE1 saliendo a la luz alg\xFAn d\xEDa
+      en el pr\xF3ximo juego que haga..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729556322357248
+    m_Localized: No exactamente el siguiente, simplemente alguno de ellos, estoy
+      seguro!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729560726376448
+    m_Localized: "Tampoco sab\xEDa qu\xE9 imagen utilizar aqu\xED, as\xED que...
+      Lumi?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729572352987136
+    m_Localized: Vale, dile adios! Vamos a acabar esto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731873826312192
+    m_Localized: (Arte por @Holidalo/Twitter)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731967048912896
+    m_Localized: "Antes de que te vayas, estoy muy agradecido a personas como t\xFA
+      por jugar a mi juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731984061009920
+    m_Localized: "Eres una de las pocas personas que muy probablemente han conseguido
+      llegar hasta aqu\xED para ver esta sala."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731988502777856
+    m_Localized: "Este viaje de \"dos\" a\xF1os ha sido muy especial para m\xED,
+      y me alegro de haber podido compartirlo contigo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731992135045120
+    m_Localized: "Desde mi coraz\xF3n, gracias. Espero que te lo hayas pasado bien
+      jugando a este est\xFApido proyecto hecho con pura pasi\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52732008446693376
+    m_Localized: "Y para los que me pueden o\xEDr. Os escucho, tambi\xE9n."
     m_Metadata:
       m_Items: []
   references:

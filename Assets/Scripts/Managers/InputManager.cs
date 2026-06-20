@@ -31,7 +31,7 @@ public class InputManager : MonoBehaviour
     internal float endingExtraCD = 0;
 
     // Debug //
-    private bool canInputCommands = false;
+    internal bool canInputCommands = false;
     private string confirmCommand = null;
     private string debugCommand = null;
 
@@ -685,13 +685,13 @@ public class InputManager : MonoBehaviour
         }
 
         // testing code
-        // else if (debugCommand == "loca" && GameManager.I.buildDebugMode)
-        // {
-        //     canInputCommands = false;
-        //     debugCommand = null;
-        //     TransitionManager.I.TransitionIn(Reveal, Actions.DiveIn, "1");
-        //     return;
-        // }
+        else if (debugCommand == "end" && GameManager.I.buildDebugMode)
+        {
+            canInputCommands = false;
+            debugCommand = null;
+            TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Ending");
+            return;
+        }
 
         // Guests
         else if (debugCommand == "caos" || debugCommand == "UDLRLDUR")

@@ -361,6 +361,210 @@ MonoBehaviour:
     m_Localized: So... Have at you!
     m_Metadata:
       m_Items: []
+  - m_Id: 52719719635095552
+    m_Localized: The Gummi version of ADC... The best version.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719775180263424
+    m_Localized: A relic of the past- Okay, I'm joking, we've got Github.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719783484985344
+    m_Localized: ADC was meant to be a simple sokoban game to test the waters with
+      Unity.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719788845305856
+    m_Localized: It still is, but it's grown a lot closer to me that I expected.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719794327261184
+    m_Localized: That has been mostly because of how much time I've poured into this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719800522248192
+    m_Localized: The game started to spiral out of control after deciding to make
+      the cycle ability go into other screens.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719806335553536
+    m_Localized: Why?? The game was already finished, why would I ever do that???
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719811402272768
+    m_Localized: I suppose, part of me wanted to make something bigger. And hey,
+      it paid off.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719817232355328
+    m_Localized: After adding cycling, and multiple screens, I think it took me around
+      3-4 months to rework everything.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719823423148032
+    m_Localized: Would definitely do it all again! That was really fun.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52719829270007808
+    m_Localized: Hopefully no one ruined the cycling reveal for you. I would... bite
+      them.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52720401725394944
+    m_Localized: ...Yeah, not much to see here, let's keep the ball rolling!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725279080189952
+    m_Localized: This is most of the game's flowchart!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725307404324864
+    m_Localized: It has been under very heavy reworks, due to the project scope changing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725313905496064
+    m_Localized: One of the things that I really, REALLY wanted to do, was to add
+      secrets inside hint levels.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725318796054528
+    m_Localized: Sadly, I don't think it would've hit as good as I felt, so I had
+      to scrap it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725322424127488
+    m_Localized: There was also supposed to be one "level" per artifact collected,
+      that would be required to enter the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725327331463168
+    m_Localized: ...I was running out of level ideas by that point, haha.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725358407061504
+    m_Localized: Lastly, I also wanted to hide more codes in plain sight, like the
+      one you used to get here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52725363779964928
+    m_Localized: That would've been wayyyy too much work. So I settled for this instead.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727719259148288
+    m_Localized: Did you know?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727738372591616
+    m_Localized: ADC was meant to be my final school project!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727746173997056
+    m_Localized: I actually got a good grade, and a lot of feedback to expand upon
+      it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727754285780992
+    m_Localized: I will say, I probably didn't add as many mechanics as I thought
+      from the beginning, but that's a good thing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727759159562240
+    m_Localized: Trust me.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727764251447296
+    m_Localized: So, this project was supposed to be a month only, but ended up taking
+      wayyy too long.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727768680632320
+    m_Localized: Overscoping and overscoping until I had to cut content! It was too
+      exhausting.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52727775198580736
+    m_Localized: I'm very satisfied, though.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729490564059136
+    m_Localized: Lumi!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729516992368640
+    m_Localized: The original game's story was about-
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729523615174656
+    m_Localized: No, it wasn't about Lumi. But sometimes I'd like to think it was.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729528954523648
+    m_Localized: It was about "trying to stop the universe from collapsing".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729532427407360
+    m_Localized: Apparently from whatever universe this was from, that was like a
+      super common thing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729537330548736
+    m_Localized: Funny how the entire story changed to "destroy what's left of a
+      game", ironic.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729542741200896
+    m_Localized: Wondering who the canon game developer is? I don't know!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729547371712512
+    m_Localized: My headcanon is that Lumi made it... But, oh well.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729551842840576
+    m_Localized: I'm sure It'll end up surfacing someday in whatever next game I
+      make...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729556322357248
+    m_Localized: Not exactly the next one, just one of them, I'm sure!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729560726376448
+    m_Localized: I actually wasn't sure what image to use here, so... Have Lumi?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52729572352987136
+    m_Localized: Alright, say bye to him! We're ending this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731873826312192
+    m_Localized: (Art by @Holidalo/Twitter)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731967048912896
+    m_Localized: Before you go, I'm incredibly grateful for people like you playing
+      my game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731984061009920
+    m_Localized: You are one of the few people that most likely managed to get this
+      far to see this room.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731988502777856
+    m_Localized: This "two" year long journey has been very special to me, and I
+      am happy to have been able to share it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52731992135045120
+    m_Localized: From the bottom of my heart, thank you. I hope you've had your fun
+      playing this stupid passion project of mine.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52732008446693376
+    m_Localized: And for those of you that can hear me. I can hear you, too.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

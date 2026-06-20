@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Colon
   m_EditorClassIdentifier: 
   dialog:
-  - (Art by @Holidalo/Twitter)
+  - Dev:Colon
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
