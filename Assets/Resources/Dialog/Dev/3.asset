@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - Dev:Three
+  - Dev:Three1
   - Dev:Three2
   - Dev:Three3
   - Dev:Three4
   - Dev:Three5
   - Dev:Three6
   - Dev:Three7
-  - Dev:Three8
   events: []
   exhaustDialog: {fileID: 0}
   textSpeed: 0.05
