@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Animator))]
 public class TransitionManager : MonoBehaviour
 {
     [HideInInspector] public static TransitionManager I;

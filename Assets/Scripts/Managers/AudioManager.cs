@@ -50,6 +50,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfx;
     [SerializeField] private AudioSource sfxPitch;
 
+    private readonly static WaitForSeconds waitVolume = new(0.01f);
+    
     void Awake()
     {
         // Singleton (AudioManager has persistence)
@@ -172,7 +174,7 @@ public class AudioManager : MonoBehaviour
         while (down)
         {
             master.volume -= 0.02f;
-            yield return new WaitForSeconds(0.01f);
+            yield return waitVolume;
             if (master.volume <= 0) { master.volume = 0; down = false; }
         }
 
@@ -184,7 +186,7 @@ public class AudioManager : MonoBehaviour
         while (true)
         {
             master.volume += 0.01f;
-            yield return new WaitForSeconds(0.01f);
+            yield return waitVolume;
             if (master.volume >= GameManager.save.preferences.masterVolume)
             {
                 master.volume = GameManager.save.preferences.masterVolume;

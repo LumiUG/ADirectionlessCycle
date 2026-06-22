@@ -10,6 +10,7 @@ using static GameTile;
 
 public class InputManager : MonoBehaviour
 {
+    private readonly static WaitForSeconds outTransitionWait = new(0.5f);
     public static InputManager I;
 
     internal Vector3Int latestMovement = Vector3Int.back;
@@ -530,7 +531,7 @@ public class InputManager : MonoBehaviour
     {
         UI.I.preload.animator.SetTrigger("Out");
 
-        yield return new WaitForSeconds(0.5f);
+        yield return outTransitionWait;
 
         UI.I.preload.Toggle(false);
         if (SceneManager.GetActiveScene().name != "Game") UI.I.ChangeScene("Game", false);

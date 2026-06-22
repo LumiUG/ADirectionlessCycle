@@ -16,5 +16,10 @@ namespace ADC.Localization
         {
             return LocalizationSettings.AvailableLocales.Locales[index];
         }
+
+        public static Locale GetCurrentLocale()
+        {
+            return LocalizationSettings.SelectedLocale;
+        }
     }
 }

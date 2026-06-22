@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Coffee.UIEffects;
+using ADC.Localization;
+using System.Collections;
 
 public class Selectors : MonoBehaviour
 {
@@ -83,7 +85,7 @@ public class Selectors : MonoBehaviour
     }
 
     // Sets the selector to a RectTransform object
-    internal void SetSelector(RectTransform rt, bool forceMove = false)
+    internal void SetSelector(RectTransform rt, bool forceMove = false, bool noRecursion = false)
     {
         if (rt == null || !right || !left) return;
 
@@ -102,6 +104,9 @@ public class Selectors : MonoBehaviour
         {
             right.anchoredPosition = distanceRight;
             left.anchoredPosition = distanceLeft;
+
+            if (Localization.GetCurrentLocale().LocaleName != "English (en)" && !noRecursion)
+                StartCoroutine(WeirdNonStandardLocaleDelay(rt));
         }
     }
 
@@ -148,5 +153,11 @@ public class Selectors : MonoBehaviour
         rightCanvas = right.GetComponent<Canvas>();
         leftEffect = left.GetComponent<UIEffect>();
         rightEffect = right.GetComponent<UIEffect>();
+    }
+
+    private IEnumerator WeirdNonStandardLocaleDelay(RectTransform transform)
+    {
+        yield return 0;
+        SetSelector(transform, true, true);
     }
 }
