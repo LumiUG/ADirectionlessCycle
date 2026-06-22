@@ -685,13 +685,13 @@ public class InputManager : MonoBehaviour
         }
 
         // testing code
-        else if (debugCommand == "end" && GameManager.I.buildDebugMode)
-        {
-            canInputCommands = false;
-            debugCommand = null;
-            TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Ending");
-            return;
-        }
+        // else if (debugCommand == "end" && GameManager.I.buildDebugMode)
+        // {
+        //     canInputCommands = false;
+        //     debugCommand = null;
+        //     TransitionManager.I.TransitionIn(Reveal, Actions.GoScene, "Ending");
+        //     return;
+        // }
 
         // Guests
         else if (debugCommand == "caos" || debugCommand == "UDLRLDUR")
