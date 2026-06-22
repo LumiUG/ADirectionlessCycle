@@ -9165,8 +9165,8 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  m_GradationOffset: -0.3
-  m_GradationScale: 1.5
+  m_GradationOffset: -0.4
+  m_GradationScale: 1.6
   m_GradationRotation: 0
   m_AllowToModifyMeshShape: 1
   m_EdgeMode: 0

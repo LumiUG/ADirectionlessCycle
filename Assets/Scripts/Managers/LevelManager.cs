@@ -1329,6 +1329,6 @@ public class LevelManager : MonoBehaviour
         ClearLevel();
         endingTransition = false;
         GameManager.I.EditAchivement("ACH_DEATH");
-        UI.I.ChangeScene("Ending", false);
+        UI.I.ChangeScene("Credits", false);
     }
 }

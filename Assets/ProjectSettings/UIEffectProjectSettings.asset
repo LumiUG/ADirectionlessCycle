@@ -63,6 +63,8 @@ ShaderVariantCollection:
         passType: 0
       - keywords: COLOR_FILTER TRANSITION_PATTERN
         passType: 0
+      - keywords: COLOR_FILTER TRANSITION_PATTERN UNITY_UI_ALPHACLIP
+        passType: 0
       - keywords: COLOR_FILTER UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: DETAIL_ADDITIVE GRADATION_COLOR2
@@ -114,6 +116,8 @@ ShaderVariantCollection:
       - keywords: GRADATION_GRADIENT
         passType: 0
       - keywords: GRADATION_GRADIENT TONE_SEPIA UNITY_UI_ALPHACLIP
+        passType: 0
+      - keywords: GRADATION_GRADIENT TRANSITION_PATTERN
         passType: 0
       - keywords: GRADATION_GRADIENT UNITY_UI_ALPHACLIP
         passType: 0
@@ -178,6 +182,8 @@ ShaderVariantCollection:
       - keywords: TRANSITION_MELT
         passType: 0
       - keywords: TRANSITION_PATTERN
+        passType: 0
+      - keywords: TRANSITION_PATTERN UNITY_UI_ALPHACLIP
         passType: 0
       - keywords: TRANSITION_SHINY
         passType: 0

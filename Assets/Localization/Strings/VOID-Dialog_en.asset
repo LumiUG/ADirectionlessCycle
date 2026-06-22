@@ -212,8 +212,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1342689631145984
-    m_Localized: Pay attention to your surroundings. Follow that which the light
-      does not pass.
+    m_Localized: '"Pay attention to your surroundings. Follow that which the light
+      does not pass."'
     m_Metadata:
       m_Items: []
   references:

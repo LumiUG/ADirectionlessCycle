@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 69229219024896
-    m_Localized: "Dale ca\xF1a, conf\xEDo en ti."
+    m_Localized: Dale, a por todas.
     m_Metadata:
       m_Items: []
   - m_Id: 71793020899328
@@ -444,7 +444,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1403976629227520
     m_Localized: "Por supuesto, hay m\xFAltiples copias del juego, as\xED que no
-      es super bonito."
+      es muy bonito."
     m_Metadata:
       m_Items: []
   - m_Id: 1403977342259200
@@ -464,8 +464,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1404799706861568
-    m_Localized: "Conseguiste entender los c\xF3digos S\xE9 que tienes logros, pero
-      eso no cuenta."
+    m_Localized: "C-conseguiste entender los c\xF3digos? S\xE9 que tienes logros,
+      pero eso no cuenta."
     m_Metadata:
       m_Items: []
   - m_Id: 1404803985051648
@@ -524,7 +524,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1399096971759616
-    m_Localized: "As\xED que ahora, quiero que los ayudes."
+    m_Localized: "As\xED que ahora... Quiero que los ayudes."
     m_Metadata:
       m_Items: []
   references:

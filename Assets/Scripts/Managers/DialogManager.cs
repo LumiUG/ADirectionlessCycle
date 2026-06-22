@@ -21,6 +21,7 @@ public class DialogManager : MonoBehaviour
 
     readonly string[] locaWorldList = new string[] { "W1", "W2", "W3", "REMIX", "VOID", "HINTS", "FRAGMENTS", "CODE", "ORB" };
     readonly string[] locaMiscList = new string[] { "Empty", "LocaTest", "Dimmed", "Debug" };
+    readonly string[] postgameFadedOverrides = new string[] { "Dialog/1-10/Hello" };
 
     private readonly string[] waitExtraSmall = { ",", "-" }; // "\""
     private readonly string[] waitExtraMedium = { ".", ":", ";" };
@@ -197,7 +198,7 @@ public class DialogManager : MonoBehaviour
         // Postgame changes
         if (GameManager.save.game.hasCompletedGame && !path.Contains("CUSTOM"))
         {
-            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2))
+            if (chat.events.Length == 0 && (chat.sfx == AudioManager.ego1 || chat.sfx == AudioManager.ego2 || postgameFadedOverrides.Contains(path)))
             {
                 if (chat.shouldExhaust && chat.exhaustDialog == null) return (null, null);
                 chat = Resources.Load<DialogScriptable>("Dialog/Empty");

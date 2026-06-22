@@ -270,7 +270,7 @@ public class MainMenu : MonoBehaviour
     public void SetLocale(int index)
     {
         if (TransitionManager.I.inTransition) return;
-        if (LocalizationSettings.SelectedLocale == Localization.GetLocale(index)) { UI.I.BadSound(); return; }
+        if (LocalizationSettings.SelectedLocale == Localization.GetLocale(index)) { AudioManager.I.PlaySFX(AudioManager.uiDeny, 0.15f); return; }
         
         TransitionManager.I.TransitionIn(Load, Actions.SetLocale, $"{index}");
     }
